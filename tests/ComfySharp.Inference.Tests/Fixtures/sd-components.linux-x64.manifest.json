@@ -1,0 +1,118 @@
+{
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "profile": "sd-components-native210-cpu-f32-v1",
+  "target": "linux-x64",
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "discrete": "exact",
+    "nonFinite": "class-and-infinity-sign"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+    "threads": 1,
+    "interopThreads": 1,
+    "build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX512\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "cpuCapability": "AVX512",
+    "nativeLibraries": [
+      {
+        "name": "libaoti_custom_ops.so",
+        "bytes": 339456,
+        "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+      },
+      {
+        "name": "libbackend_with_compiler.so",
+        "bytes": 259008,
+        "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+      },
+      {
+        "name": "libc10.so",
+        "bytes": 1403600,
+        "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+      },
+      {
+        "name": "libgomp.so.1",
+        "bytes": 253849,
+        "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+      },
+      {
+        "name": "libjitbackend_test.so",
+        "bytes": 215736,
+        "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+      },
+      {
+        "name": "libshm.so",
+        "bytes": 41880,
+        "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+      },
+      {
+        "name": "libtorch.so",
+        "bytes": 8032,
+        "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+      },
+      {
+        "name": "libtorch_cpu.so",
+        "bytes": 443509856,
+        "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+      },
+      {
+        "name": "libtorch_global_deps.so",
+        "bytes": 8264,
+        "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+      },
+      {
+        "name": "libtorch_python.so",
+        "bytes": 30844552,
+        "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+      },
+      {
+        "name": "libtorchbind_test.so",
+        "bytes": 915336,
+        "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+      }
+    ]
+  },
+  "syntheticWeights": true,
+  "pretrainedWeightsUsed": false,
+  "parameterRecipe": "sha256-name-lcg-high16-power2-v1",
+  "scripts": {
+    "common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "guidance.py": "a186e29756cdcf8092528efeef58a9e232b3271fd5325aeaaa9e1cce626327be",
+    "reference.py": "3ecf2732f199ed561a753e17f36414d35342e23ca03ea0975c2102833cbebaf8",
+    "sampling.py": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+    "unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "vae.py": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3"
+  },
+  "components": [
+    {
+      "name": "sampling",
+      "file": "sampling.json",
+      "sha256": "9003bd98358e4a940428e62b72fde471ed8bf3c1baf08f4bcc36a4514fec9544",
+      "bytes": 160771,
+      "elapsedSeconds": 0.03202469299999677
+    },
+    {
+      "name": "unet",
+      "file": "unet.json",
+      "sha256": "dc394f14e67e09f34525b2e7094018bd85a6e915035ab4ec2d214a5f94cc8c1c",
+      "bytes": 5892513,
+      "elapsedSeconds": 1.0931606600000094
+    },
+    {
+      "name": "vae",
+      "file": "vae.json",
+      "sha256": "37aea68ae7612940da0c94566bda6576e4502d85bcf27a3781dac49755a1cce4",
+      "bytes": 436403,
+      "elapsedSeconds": 0.28146550600000353
+    },
+    {
+      "name": "guidance",
+      "file": "guidance.json",
+      "sha256": "061bf9f2b5915078a3e465144fcf24e3138b48ead79b1ce4e149ebe008c204a1",
+      "bytes": 218295,
+      "elapsedSeconds": 0.6703877610000006
+    }
+  ]
+}

@@ -13,6 +13,7 @@
     <EmbeddedResource Include="Fixtures/clip-encoders.cpu-f32.json" />
     <EmbeddedResource Include="Fixtures/clip-stock.cpu-f32.json" />
     <EmbeddedResource Include="Fixtures/clip-tiny-*.synthetic.safetensors" />
+    <EmbeddedResource Include="Fixtures/sd-components.*.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/ClipDiagnostic.cs" Link="Diagnostic/ClipDiagnostic.cs" />

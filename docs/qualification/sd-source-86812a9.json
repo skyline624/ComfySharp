@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "scope": "Independent source artifact integrity; no product numerical acceptance or model family qualification",
+  "repositoryCommit": "86812a9dae975a6a59586de87d9d7d3e0bd1ef99",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "profile": "sd-components-native210-cpu-f32-v1",
+  "sourceCi": {
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34632139846",
+    "conclusion": "success",
+    "runCommitAssociationVerified": true
+  },
+  "integrity": {
+    "passed": true,
+    "frozenSourceFilesVerified": 11,
+    "scriptHashesVerifiedPerTarget": 6,
+    "sourceAstRecordsVerifiedPerTarget": 19,
+    "tensorRecordsRehashedPerTarget": 211,
+    "tensorValuesRehashedPerTarget": 189515,
+    "inputsIdenticalAcrossTargets": true,
+    "parameterNamesShapesHashesIdenticalAcrossTargets": true,
+    "parameterPayloadsEmbedded": false,
+    "nativeBinaryHashes": "Recorded by source runner; JSON artifacts do not contain native binaries for independent rehashing",
+    "privateUserOrModelPathsDetected": false
+  },
+  "targets": [
+    {
+      "rid": "win-x64",
+      "manifestSha256": "e40f65335711a33de88acbb787c7eb8e4c3ce04df020b1a3b62c14dda996bab2",
+      "python": "3.12.10",
+      "torch": "2.10.0+cpu",
+      "cpuCapability": "AVX2",
+      "intraThreads": 1,
+      "interThreads": 1,
+      "fourComponentFilesIdenticalToPriorLocalSourceRun": true
+    },
+    {
+      "rid": "linux-x64",
+      "manifestSha256": "53ccb79667d7c5f191d91d4bc62dc70fec7612809836f77fa7e388f334716d9a",
+      "python": "3.12.10",
+      "torch": "2.10.0+cpu",
+      "cpuCapability": "AVX512",
+      "intraThreads": 1,
+      "interThreads": 1
+    },
+    {
+      "rid": "osx-arm64",
+      "manifestSha256": "a6d97ffdb955fb0da7ed4c7319751143bacf3ba74c0dcaac36bf94e4186edde6",
+      "python": "3.12.10",
+      "torch": "2.10.0",
+      "cpuCapability": "DEFAULT",
+      "intraThreads": 1,
+      "interThreads": 1
+    }
+  ],
+  "productAcceptance": "pending separate product CI",
+  "pretrainedWeightsUsed": false,
+  "qualifiedModelFamilies": [],
+  "priorClipProfileChanged": false
+}

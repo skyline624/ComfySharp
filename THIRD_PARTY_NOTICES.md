@@ -16,6 +16,49 @@ The isolated fixture laboratory reports `torch.version.git_version = cf30153c4c1
 
 The `PreviewAny` node in `src/ComfySharp.Nodes.Tensor/TensorNodes.cs` follows [ComfyUI's frozen `comfy_extras/nodes_preview_any.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_preview_any.py), under the project GPLv3 provenance above. That file explicitly credits the original Display Any implementation in **rgthree/rgthree-comfy**. We preserve that attribution to **Regis Gaughan, III (rgthree), copyright (c) 2023**, and its complete MIT notice in [rgthree-comfy-MIT.txt](docs/licenses/rgthree-comfy-MIT.txt). The identified upstream [Display Any source](https://github.com/rgthree/rgthree-comfy/blob/5288408220180af41ce50b0d29135e1ef5f83fdb/py/display_any.py) and [MIT licence](https://github.com/rgthree/rgthree-comfy/blob/5288408220180af41ce50b0d29135e1ef5f83fdb/LICENSE) are pinned at `5288408220180af41ce50b0d29135e1ef5f83fdb` to make this credit verifiable; ComfyUI's frozen node remains the functional reference. No third-party Python or JavaScript extension is executed by this port.
 
+## SD U-Net, classical VAE and sampling
+
+The SD1/SD2 U-Net, classical VAE, discrete sampling and classifier-free guidance ports follow the same frozen ComfyUI GPLv3 reference identified above:
+
+- U-Net and attention: [`comfy/ldm/modules/diffusionmodules/openaimodel.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py), [`comfy/ldm/modules/attention.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py) and [`diffusionmodules/util.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py).
+- VAE encoder, decoder and posterior: [`diffusionmodules/model.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/model.py), [`comfy/ldm/models/autoencoder.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/models/autoencoder.py) and [`distributions/distributions.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/distributions/distributions.py); image conversion follows [`comfy/sd.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py).
+- Prediction conversion, conditioning and latent scaling: [`comfy/model_sampling.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/model_sampling.py), [`comfy/samplers.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py), [`comfy/conds.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/conds.py) and [`comfy/latent_formats.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/latent_formats.py).
+
+These sources retain earlier diffusion and autoencoder code. The frozen `util.py` explicitly credits OpenAI improved-diffusion, OpenAI guided-diffusion and Phil Wang's denoising-diffusion-pytorch; `model.py` credits pytorch_diffusion and its derived encoder/decoder. The CompVis latent-diffusion and taming-transformers implementations, and Stability AI's generative-models autoencoder, are also identified antecedents. Their respective MIT copyright notices and terms are preserved below. The linked revisions make these source notices verifiable; they do not assert the exact revision originally imported by ComfyUI or replace the frozen functional reference.
+
+| Source notice | Copyright notice |
+| --- | --- |
+| [CompVis latent-diffusion, LICENSE at a506df5756472e2ebaf9078affdde2c4f1502cd4](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/LICENSE) | Copyright (c) 2022 Machine Vision and Learning Group, LMU Munich |
+| [CompVis taming-transformers, License.txt at 3ba01b241669f5ade541ce990f7650a3b8f65318](https://github.com/CompVis/taming-transformers/blob/3ba01b241669f5ade541ce990f7650a3b8f65318/License.txt) | Copyright (c) 2020 Patrick Esser and Robin Rombach and Björn Ommer |
+| [pesser/pytorch_diffusion, LICENSE.md at 304bdff2196db604fb66108b0bb2d4a19058b20f](https://github.com/pesser/pytorch_diffusion/blob/304bdff2196db604fb66108b0bb2d4a19058b20f/LICENSE.md) | Copyright (c) 2023 Patrick Esser |
+| [Stability AI generative-models, LICENSE-CODE at e8cd657656fa5d61688191730d0e03242bf4ed44](https://github.com/Stability-AI/generative-models/blob/e8cd657656fa5d61688191730d0e03242bf4ed44/LICENSE-CODE) | Copyright (c) 2023 Stability AI |
+| [OpenAI guided-diffusion, LICENSE at 0ba878e517b276c45d1195eb29f6f5f72659a05b](https://github.com/openai/guided-diffusion/blob/0ba878e517b276c45d1195eb29f6f5f72659a05b/LICENSE) and [improved-diffusion, LICENSE at 1bc7bbbdc414d83d4abf2ad8cc1446dc36c4e4d5](https://github.com/openai/improved-diffusion/blob/1bc7bbbdc414d83d4abf2ad8cc1446dc36c4e4d5/LICENSE) | Copyright (c) 2021 OpenAI |
+| [Phil Wang's denoising-diffusion-pytorch, LICENSE at 7706bdfc6f527f58d33f84b7b522e61e6e3164b3](https://github.com/lucidrains/denoising-diffusion-pytorch/blob/7706bdfc6f527f58d33f84b7b522e61e6e3164b3/LICENSE) | Copyright (c) 2020 Phil Wang |
+
+The following MIT permission and disclaimer apply to each respective copyright notice above:
+
+```text
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+The optional [SD source laboratory](labs/sd-source/README.md) executes selected, hash-verified declarations from that frozen ComfyUI source snapshot, retaining this same provenance. It uses the isolated Python/PyTorch/NumPy/einops dependency closure of the CLIP source laboratory. Those laboratory dependencies and the external source snapshot are not included in the application or distributed .NET tests. The checked-in synthetic inputs and independent reference outputs contain no pretrained model weights. These code notices do not assign a licence to any separately obtained model checkpoint.
+
 ## Distribution dependencies
 
 The C# CLIP transformer, checkpoint key adapters and conditioning wrappers follow the frozen ComfyUI `comfy/clip_model.py`, `comfy/ldm/modules/attention.py`, `comfy/sd1_clip.py`, `comfy/sdxl_clip.py` and `comfy/utils.py` under the ComfyUI GPLv3 provenance above. [CLIP_ENCODERS.md](docs/CLIP_ENCODERS.md) records source, operation and numerical profiles. The small safetensors fixtures are deterministically generated synthetic inputs, not third-party pretrained weights; their independent reference outputs do not imply model-family compatibility. No Python implementation or interpreter is shipped.
