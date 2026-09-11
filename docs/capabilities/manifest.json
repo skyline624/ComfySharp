@@ -32779,9 +32779,10 @@
       "kind": "sampler",
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L971",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "partial-no-churn-cpu-f32-profile",
+      "dependencyProfile": "sd-euler-native210-cpu-f32-v1",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -32792,7 +32793,8 @@
         "osx-arm64-mps": false
       },
       "evidence": [],
-      "scenario": "sampler:euler:reference-workflow"
+      "scenario": "sampler:euler:reference-workflow",
+      "limits": "CPU/F32 no-churn guided trajectory over an already initialized diffusion latent and an explicit complete schedule. Eight reduced synthetic source trajectories and nine ownership/contract tests pass on local Windows. Partial schedules, churn/noise initialization, regional conditioning, stock dimensions, pretrained workflows, device execution and full sampler/platform qualification remain open."
     },
     {
       "id": "sampler:euler_cfg_pp",

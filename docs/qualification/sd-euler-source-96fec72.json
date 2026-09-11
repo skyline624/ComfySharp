@@ -1,0 +1,1683 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "96fec72dd928276fc3f0ddc93a17406ea8249073",
+  "sourceCi": "https://github.com/skyline624/ComfySharp/actions/runs/34650726593",
+  "profile": "sd-euler-native210-cpu-f32-v1",
+  "qualifiedModelFamilies": [],
+  "sourceIntegrityAudit": {
+    "runId": 34650726593,
+    "commit": "96fec72dd928276fc3f0ddc93a17406ea8249073",
+    "conclusion": "success",
+    "stdlibOnly": true,
+    "nativeImports": false,
+    "qualification": "source integrity only; no product result consulted",
+    "targets": {
+      "win-x64": {
+        "valid": true,
+        "parametersVerified": 686,
+        "sourceFiles": 8,
+        "astSelections": 9,
+        "inputRecords": 31,
+        "stepCaptures": 19,
+        "tensorPayloads": 115,
+        "payloadBytes": 31620,
+        "cases": [
+          {
+            "id": "one-step",
+            "steps": 1,
+            "outputSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "three-step-batch",
+            "steps": 3,
+            "outputSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-separate",
+            "steps": 3,
+            "outputSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-concatenated",
+            "steps": 3,
+            "outputSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-null",
+            "steps": 2,
+            "outputSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-present",
+            "steps": 2,
+            "outputSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-disabled",
+            "steps": 2,
+            "outputSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "velocity-three-step",
+            "steps": 3,
+            "outputSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "threeRepeatsExact": true
+          }
+        ],
+        "seconds": 12.167530300000067,
+        "cpuCapability": "AVX2",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "nativeEvidence": "package inventory; not actual loaded mappings",
+        "wheelPackageLibraries": [
+          {
+            "name": "c10.dll",
+            "bytes": 1081344,
+            "sha256": "7871e7c40fb907c75ab8a26e8fd243d58c2664965b9a768adad348dc5b090f86"
+          },
+          {
+            "name": "libiomp5md.dll",
+            "bytes": 1614192,
+            "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+          },
+          {
+            "name": "libiompstubs5md.dll",
+            "bytes": 43888,
+            "sha256": "137dd44f652a926eb540861994c58ea24ebfbf6b45886ac964a68c5742549c47"
+          },
+          {
+            "name": "shm.dll",
+            "bytes": 15360,
+            "sha256": "4802d8bfa8af83222ef8e0116c2258c617e56668c0415dd33b8f545fd2e884fa"
+          },
+          {
+            "name": "torch.dll",
+            "bytes": 9728,
+            "sha256": "7aeee15bac02856902d3f0709d22fbbee668cb05dffd3f347939962ecb93dcbd"
+          },
+          {
+            "name": "torch_cpu.dll",
+            "bytes": 264942080,
+            "sha256": "78542eb53af452d841b1b24645f90d25009679731c745e4357ae39c8d312eab7"
+          },
+          {
+            "name": "torch_global_deps.dll",
+            "bytes": 9728,
+            "sha256": "eb2389594aca849a9cc9a1d3af4acbb7ea2dbbacb3d50d887aa2d6b68ddb408d"
+          },
+          {
+            "name": "torch_python.dll",
+            "bytes": 18705920,
+            "sha256": "cedb370caeaabd220509c5a163645db214cbe3fe303fe5296afbbc1b86abc92f"
+          },
+          {
+            "name": "uv.dll",
+            "bytes": 195072,
+            "sha256": "fa569e682fc5fb7a8eb94c6829af9f30a569748dbbc6bce39735d48bc960bcf8"
+          }
+        ],
+        "files": {
+          "euler.json": {
+            "bytes": 444992,
+            "sha256": "d6939728fc1b29eb2af30397ff6593aa4f75129370d9223c2b9132a34878245c"
+          },
+          "manifest.json": {
+            "bytes": 9568,
+            "sha256": "b528a5f0055ddbae5dad409dffc1bac7a74d08295b638920165791441eaf17a8"
+          },
+          "prospective-protocol.json": {
+            "bytes": 11760,
+            "sha256": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05"
+          }
+        }
+      },
+      "linux-x64": {
+        "valid": true,
+        "parametersVerified": 686,
+        "sourceFiles": 8,
+        "astSelections": 9,
+        "inputRecords": 31,
+        "stepCaptures": 19,
+        "tensorPayloads": 115,
+        "payloadBytes": 31620,
+        "cases": [
+          {
+            "id": "one-step",
+            "steps": 1,
+            "outputSha256": "d4204875f7b5e7b0c24105e72607b4c9c9c67cc5bbd16b76c0fa1ee5320e6637",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "three-step-batch",
+            "steps": 3,
+            "outputSha256": "92373b7142ea8dfa6fbb8049ac150a64f848f2e7e02b68054ad0457961b44272",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-separate",
+            "steps": 3,
+            "outputSha256": "5906b4b08f2baedf54d2e9a6766f5af95c0a5e9759b3660384a50155274de290",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-concatenated",
+            "steps": 3,
+            "outputSha256": "ecc51af5051835c7ece8b0c547990ce4508143408ce9e6c3dddaefd5faa5856b",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-null",
+            "steps": 2,
+            "outputSha256": "592aecf6b2e93118a8833e40359c84a1335bb84939e52e25bd24b2af0c445587",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-present",
+            "steps": 2,
+            "outputSha256": "592aecf6b2e93118a8833e40359c84a1335bb84939e52e25bd24b2af0c445587",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-disabled",
+            "steps": 2,
+            "outputSha256": "207a6a9a5cdacb0741a35f750e757ea5b00191cdfd3ec4873427db821bfe951b",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "velocity-three-step",
+            "steps": 3,
+            "outputSha256": "8a8b3fa31dbf5e97c78afcce15e7419de9e8baef6d3ded8217fd0cd57c33fff7",
+            "threeRepeatsExact": true
+          }
+        ],
+        "seconds": 10.642354847000007,
+        "cpuCapability": "AVX2",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "nativeEvidence": "package inventory; not actual loaded mappings",
+        "wheelPackageLibraries": [
+          {
+            "name": "libaoti_custom_ops.so",
+            "bytes": 339456,
+            "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+          },
+          {
+            "name": "libbackend_with_compiler.so",
+            "bytes": 259008,
+            "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libjitbackend_test.so",
+            "bytes": 215736,
+            "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+          },
+          {
+            "name": "libshm.so",
+            "bytes": 41880,
+            "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch_global_deps.so",
+            "bytes": 8264,
+            "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+          },
+          {
+            "name": "libtorch_python.so",
+            "bytes": 30844552,
+            "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+          },
+          {
+            "name": "libtorchbind_test.so",
+            "bytes": 915336,
+            "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+          }
+        ],
+        "files": {
+          "euler.json": {
+            "bytes": 445026,
+            "sha256": "264c872242e58a1f4132e763589df3f9508f1e7f8f794fb27e13e69d02d36352"
+          },
+          "manifest.json": {
+            "bytes": 10393,
+            "sha256": "b1aaf6e2e1a6c8d51fe261012cd20257980d8e4a4561f5bbb016c915be72fa1e"
+          },
+          "prospective-protocol.json": {
+            "bytes": 11760,
+            "sha256": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05"
+          }
+        }
+      },
+      "osx-arm64": {
+        "valid": true,
+        "parametersVerified": 686,
+        "sourceFiles": 8,
+        "astSelections": 9,
+        "inputRecords": 31,
+        "stepCaptures": 19,
+        "tensorPayloads": 115,
+        "payloadBytes": 31620,
+        "cases": [
+          {
+            "id": "one-step",
+            "steps": 1,
+            "outputSha256": "bc3ef1eaa38e052c7a9c18a4d1587bee51ac84c495cc03cda70688a8b0bc0b58",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "three-step-batch",
+            "steps": 3,
+            "outputSha256": "173ed21bac633c953565c5755a0f0e06b7e1347e0175b95fd1eabc613a1e4955",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-separate",
+            "steps": 3,
+            "outputSha256": "baeac7a59899a9a6d3105bf48080b0abf4d943d7e4f73e48a2cdbc1622703e30",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "unequal-concatenated",
+            "steps": 3,
+            "outputSha256": "a8c87451dcbf37fab9a8ee48c575e879f66fb307e40e2073fd670ba5c1c26bf4",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-null",
+            "steps": 2,
+            "outputSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-present",
+            "steps": 2,
+            "outputSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "near-one-disabled",
+            "steps": 2,
+            "outputSha256": "4e3e7b14400796930d532e83073501343b99334d5ce02811d92413aa01270d71",
+            "threeRepeatsExact": true
+          },
+          {
+            "id": "velocity-three-step",
+            "steps": 3,
+            "outputSha256": "42f31268e0cde798492ad95c2a7ea50e9fd0ecb90f494c9cf4ddc42836ca5d78",
+            "threeRepeatsExact": true
+          }
+        ],
+        "seconds": 9.988439707999987,
+        "cpuCapability": "DEFAULT",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "nativeEvidence": "package inventory; not actual loaded mappings",
+        "wheelPackageLibraries": [
+          {
+            "name": "libc10.dylib",
+            "bytes": 1084640,
+            "sha256": "f203c171b7a71c742ef4a84bde3af64465e545a4cc3ebfd7f245dca3ebe4e7cf"
+          },
+          {
+            "name": "libomp.dylib",
+            "bytes": 754912,
+            "sha256": "fe0670951c85401421f6cedc91971f28dc870bad4c1f0cfebe2b74dac421e5f0"
+          },
+          {
+            "name": "libshm.dylib",
+            "bytes": 83440,
+            "sha256": "3a6fc248697b8809534e74d9e5fc784b385239d8c7aeef291c3968a73609f7d2"
+          },
+          {
+            "name": "libtorch.dylib",
+            "bytes": 16736,
+            "sha256": "2178657b7eeffc0c0a989889ac3e2b2e3d216073b35f3a291ee89bd65c0fb406"
+          },
+          {
+            "name": "libtorch_cpu.dylib",
+            "bytes": 214082912,
+            "sha256": "941f3e16a8e02b23b99bd2c8693caabaf8df859bfaa293f39a5d7dd8a8f5ca6e"
+          },
+          {
+            "name": "libtorch_global_deps.dylib",
+            "bytes": 16744,
+            "sha256": "6ff1aedff89150170f225ce821dc9355a9d5f9c80a6cc1bb761c8d209638c2c7"
+          },
+          {
+            "name": "libtorch_python.dylib",
+            "bytes": 29689144,
+            "sha256": "cb1d5957b49b8f3c2e4b90de7b99aee835520875bce893b11eb7528a548744fa"
+          }
+        ],
+        "files": {
+          "euler.json": {
+            "bytes": 444960,
+            "sha256": "da664f107458793b4c74e888593d454c8ad17e8b71a5e44c40b3ce6b0b1580ea"
+          },
+          "manifest.json": {
+            "bytes": 9408,
+            "sha256": "002da5ae9cb823cdf88523c9e8a22328cd2305bbafd82620ab708e8eb323292f"
+          },
+          "prospective-protocol.json": {
+            "bytes": 11760,
+            "sha256": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05"
+          }
+        }
+      }
+    },
+    "errors": [],
+    "downloadMetadata": {
+      "artifacts": [
+        {
+          "name": "sd-euler-source-torch210-osx-arm64",
+          "id": 10283891714,
+          "bytes": 102631,
+          "githubArchiveDigest": "sha256:75276b3a2a307095ba2b70aba4fdf54bc26440cd4888b0a43dfd84ff79e6906a"
+        },
+        {
+          "name": "sd-euler-source-torch210-linux-x64",
+          "id": 10283791883,
+          "bytes": 101615,
+          "githubArchiveDigest": "sha256:dd9ea3c9a1b93d3924b7a9eef75f45b0a9f13be9169bee1721c78d352f9db3e8"
+        },
+        {
+          "name": "sd-euler-source-torch210-win-x64",
+          "id": 10283094347,
+          "bytes": 102492,
+          "githubArchiveDigest": "sha256:87a13a0f6a83d9e2326ea4246d1e76b1066c12e9437398bb852dfc90789c185b"
+        }
+      ],
+      "archiveDigestEvidence": "GitHub API declaration; extracted payloads independently hashed below",
+      "files": {
+        "artifacts.json": "eb070dfcbbc7dd67507e9878bce2afcf94f1b029228cde4ba9c4964e38ed487e",
+        "run.json": "41d76061ea87b71698c469bb14533591247287c66299a52cbf3a3ff726980236",
+        "run.log": "b1fe2c38db4eebaacce22704b001db9f9c5d27d0de9ec8d64109b8c30d85a8c4"
+      }
+    },
+    "allSourceIntegrityValid": true,
+    "totals": {
+      "parametersPerTarget": 686,
+      "parametersVerifiedAcrossTargets": 2058,
+      "uniqueRecipeHashesComputed": 686,
+      "tensorPayloads": 345,
+      "stepCaptures": 57
+    }
+  },
+  "immutableFixtureImport": {
+    "commit": "96fec72dd928276fc3f0ddc93a17406ea8249073",
+    "run": 34650726593,
+    "payloadRecordsRehashed": 345,
+    "targets": {
+      "win-x64": {
+        "manifestSha256": "b528a5f0055ddbae5dad409dffc1bac7a74d08295b638920165791441eaf17a8",
+        "payloadSha256": "d6939728fc1b29eb2af30397ff6593aa4f75129370d9223c2b9132a34878245c",
+        "payloadBytes": 444992,
+        "cases": 8,
+        "steps": 19,
+        "cpuCapability": "AVX2"
+      },
+      "linux-x64": {
+        "manifestSha256": "b1aaf6e2e1a6c8d51fe261012cd20257980d8e4a4561f5bbb016c915be72fa1e",
+        "payloadSha256": "264c872242e58a1f4132e763589df3f9508f1e7f8f794fb27e13e69d02d36352",
+        "payloadBytes": 445026,
+        "cases": 8,
+        "steps": 19,
+        "cpuCapability": "AVX2"
+      },
+      "osx-arm64": {
+        "manifestSha256": "002da5ae9cb823cdf88523c9e8a22328cd2305bbafd82620ab708e8eb323292f",
+        "payloadSha256": "da664f107458793b4c74e888593d454c8ad17e8b71a5e44c40b3ce6b0b1580ea",
+        "payloadBytes": 444960,
+        "cases": 8,
+        "steps": 19,
+        "cpuCapability": "DEFAULT"
+      }
+    },
+    "qualification": "source integrity only"
+  },
+  "localProductIntegration": {
+    "scope": "local Windows CPU synthetic integration; not model-family or multiplatform qualification",
+    "uniqueTests": 1297,
+    "inferenceTests": 511,
+    "outcomes": {
+      "Passed": 1297
+    },
+    "trxSha256": [
+      "ae9b4d1eca97cfe81500be676ec22dd40e2eb38763481b99493d988f1b078c66",
+      "7a5d52b94c6a3f0454442323ad765ac642e63d46ca3887ceaf4034bb875c29d2",
+      "8cded10b563fce0e0c3a07c9733d945907ef4f063d40eded7eabea5eabaa0439",
+      "ee33cf22fe9a389d97565020a766164070a9acc609e836087ff9b3ed9b6bf4dc",
+      "efcad1de9037842418434fdaa1d2b89571718a02a7360f1075340fc54adf9552",
+      "0c8329ce5c3cb03410e866b9de16ffcc8182ca4013f6756e8e356bac6c81e76c"
+    ],
+    "comparisonRecords": 81,
+    "exactComparisonRecords": 81,
+    "maximumAbsoluteError": 0.0,
+    "outsideBound": 0,
+    "runtimeIdentity": {
+      "diagnosticOnly": true,
+      "capturePoint": "after_three_complete_euler_trajectories",
+      "dotnet": ".NET 10.0.10",
+      "os": "Microsoft Windows 10.0.26200",
+      "architecture": "X64",
+      "torchSharp": "0.107.0.0",
+      "declaredLibtorchPackage": "2.10.0",
+      "cpu": {
+        "status": "available",
+        "vendor": "AuthenticAMD",
+        "brand": "AMD Eng Sample: 100-000000053-04_32/20_N",
+        "hardwareFeatures": {
+          "sse": true,
+          "sse2": true,
+          "sse3": true,
+          "ssse3": true,
+          "sse41": true,
+          "sse42": true,
+          "avx": true,
+          "fma": true,
+          "osxsave": true,
+          "avx2": true,
+          "avx512F": false,
+          "avx512Dq": false,
+          "avx512Bw": false,
+          "avx512Vl": false
+        },
+        "errorType": null
+      },
+      "cpuFeaturesDotNet": {
+        "scope": "managed_intrinsic_availability_not_aten_dispatch",
+        "sse2": true,
+        "avx": true,
+        "avx2": true,
+        "avx512F": false,
+        "fma": true,
+        "armAdvSimd": false
+      },
+      "threads": {
+        "status": "available",
+        "intraOp": 1,
+        "interOp": 1
+      },
+      "requestedAtenCpuCapability": {
+        "status": "unset",
+        "value": null
+      },
+      "actualAtenCpuCapability": {
+        "status": "unavailable",
+        "value": null,
+        "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+      },
+      "nativeLibraries": {
+        "status": "available",
+        "capturePoint": "process_cache_first_access_after_completed_native_work_may_precede_this_case",
+        "libraries": [
+          {
+            "instance": 1,
+            "name": "torch_cpu.DLL",
+            "status": "available",
+            "bytes": 264955904,
+            "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b",
+            "errorType": null
+          },
+          {
+            "instance": 2,
+            "name": "c10.dll",
+            "status": "available",
+            "bytes": 1081344,
+            "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063",
+            "errorType": null
+          },
+          {
+            "instance": 3,
+            "name": "libiomp5md.dll",
+            "status": "available",
+            "bytes": 1614192,
+            "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4",
+            "errorType": null
+          },
+          {
+            "instance": 4,
+            "name": "LibTorchSharp.DLL",
+            "status": "available",
+            "bytes": 1324984,
+            "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858",
+            "errorType": null
+          }
+        ],
+        "errorType": null
+      }
+    },
+    "sourceCi": 34650726593,
+    "profile": "sd-euler-native210-cpu-f32-v1",
+    "cases": {
+      "near-one-disabled": {
+        "traceSha256": "08971925db6302489c909b943c9c08c4f1a34f5f26c611eda36610260d44e58f",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "sourceSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "16f9b893fa30a1296cdf28e502e1e771b1b9bfc22f6002cac26d6e7a1c339555",
+            "sourceSha256": "16f9b893fa30a1296cdf28e502e1e771b1b9bfc22f6002cac26d6e7a1c339555",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "a097d78e85773e302cc711034845ea1d34d415501ac3e4cadf325a6b00f0e418",
+            "sourceSha256": "a097d78e85773e302cc711034845ea1d34d415501ac3e4cadf325a6b00f0e418",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "sourceSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "sourceSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "sourceSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "sourceSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+          "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+          "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518"
+        ],
+        "inputHashes": {
+          "latent": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+          "sigmas": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2",
+          "positive": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9",
+          "negative": "b4c87e6514e6125ffa34b7767794a1059f0a1179393035dfc7f7ea54b4d65b44"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "near-one-null": {
+        "traceSha256": "84efb5a8774bcfc39b382a66d0e3c09a71cbace040022cea6d7cc15f4bc91970",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "sourceSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "e302cd74c40e1b53f09ee61064803a4d8f976401a327eacd98d06eddf911a0dc",
+            "sourceSha256": "e302cd74c40e1b53f09ee61064803a4d8f976401a327eacd98d06eddf911a0dc",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "2d052e37bec6f4f9c3d83a58c9b5239b93d2bdafb0ead1365d9e66a29ab74a14",
+            "sourceSha256": "2d052e37bec6f4f9c3d83a58c9b5239b93d2bdafb0ead1365d9e66a29ab74a14",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39"
+        ],
+        "inputHashes": {
+          "latent": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+          "sigmas": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2",
+          "positive": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "near-one-present": {
+        "traceSha256": "ff3c3c3a608369bb25ffb596d63be55c4bf105778a5e52ff9b78ff564a0ba00e",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "sourceSha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "e302cd74c40e1b53f09ee61064803a4d8f976401a327eacd98d06eddf911a0dc",
+            "sourceSha256": "e302cd74c40e1b53f09ee61064803a4d8f976401a327eacd98d06eddf911a0dc",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "2d052e37bec6f4f9c3d83a58c9b5239b93d2bdafb0ead1365d9e66a29ab74a14",
+            "sourceSha256": "2d052e37bec6f4f9c3d83a58c9b5239b93d2bdafb0ead1365d9e66a29ab74a14",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+          "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39"
+        ],
+        "inputHashes": {
+          "latent": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26",
+          "sigmas": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2",
+          "positive": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9",
+          "negative": "b4c87e6514e6125ffa34b7767794a1059f0a1179393035dfc7f7ea54b4d65b44"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "one-step": {
+        "traceSha256": "a097ebccc9b67862e5d480947492c40e80cabed2300832824514d3df4c2550f2",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "7ec1234a29e377e81f03ddcf9a4bda6fb20cbf38fb24ca1a88b03d2d0806bb5c",
+            "sourceSha256": "7ec1234a29e377e81f03ddcf9a4bda6fb20cbf38fb24ca1a88b03d2d0806bb5c",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "b03faf70154ed743c4729b8306d3db1a031c34592b7bb2efd7902820bd7b7a98",
+            "sourceSha256": "b03faf70154ed743c4729b8306d3db1a031c34592b7bb2efd7902820bd7b7a98",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "sourceSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "sourceSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "sourceSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              1,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "sourceSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+          "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+          "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d"
+        ],
+        "inputHashes": {
+          "latent": "7ec1234a29e377e81f03ddcf9a4bda6fb20cbf38fb24ca1a88b03d2d0806bb5c",
+          "sigmas": "3c076e693c51f8000439e20c7107a4ee0a0f883f418fd78a2cf66a946a3a8e9c",
+          "positive": "f2806115776586322ed2a268ce16068b14871a544702411e9634d55f7b420653",
+          "negative": "8bd1a72ae12e269a178cd038188556ad1e7454c36a6a948704a27af925eeb650"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "three-step-batch": {
+        "traceSha256": "0f774fe04a5b7d4a48a971fd0a4124405656058e148530b153bc0c139756de2b",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "17be7274548dc462d8a51d17c5a6777c26c5b3fbe23baa35d833c584c786d8f0",
+            "sourceSha256": "17be7274548dc462d8a51d17c5a6777c26c5b3fbe23baa35d833c584c786d8f0",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "a663887b1680de0b1bb27cf892d4e397da6c01d7ffaad2041c5b26228cc2295f",
+            "sourceSha256": "a663887b1680de0b1bb27cf892d4e397da6c01d7ffaad2041c5b26228cc2295f",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "sourceSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "3bf8bda7a6c0853de64c5cc3b5e0402c32520b3c1dc475a5e570ef7a51ff0f64",
+            "sourceSha256": "3bf8bda7a6c0853de64c5cc3b5e0402c32520b3c1dc475a5e570ef7a51ff0f64",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "91d7b18ea46791dac5c4f444125f3a161572386c7d3e437fcc1d469a16941501",
+            "sourceSha256": "91d7b18ea46791dac5c4f444125f3a161572386c7d3e437fcc1d469a16941501",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "9cf2bc05e9207c6da8e95ea9aa0021b14dc89390e34b771d19bb0bcefdfcee8f",
+            "sourceSha256": "9cf2bc05e9207c6da8e95ea9aa0021b14dc89390e34b771d19bb0bcefdfcee8f",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "sourceSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "sourceSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "sourceSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "sourceSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+          "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+          "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54"
+        ],
+        "inputHashes": {
+          "latent": "17be7274548dc462d8a51d17c5a6777c26c5b3fbe23baa35d833c584c786d8f0",
+          "sigmas": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0",
+          "positive": "8d241885c5abeec8a3b44d4ee90b2eba34092b65edec4212f7cb2b0da2a8adf1",
+          "negative": "1b832124b44844683f182f3b1d9607472ee0bf0e125be136c713cc5be4c23516"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "unequal-concatenated": {
+        "traceSha256": "bfbc7a2591da0cec6290a24226befaf94936c33f42ce51da3e3fb1c3349581e7",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+            "sourceSha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "388785b091cb5cf6a09a3f9548996786a2ac944fb4cd75ce14f24e76d6c0b1ce",
+            "sourceSha256": "388785b091cb5cf6a09a3f9548996786a2ac944fb4cd75ce14f24e76d6c0b1ce",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "sourceSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "66aa1f134aecc41148bae9ea44ea32351211e7ca98de8095f30605628c45691e",
+            "sourceSha256": "66aa1f134aecc41148bae9ea44ea32351211e7ca98de8095f30605628c45691e",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "98f702457e39e2df0f9b0909fc87a04463361bfc15f7208efac2c18fff6202c2",
+            "sourceSha256": "98f702457e39e2df0f9b0909fc87a04463361bfc15f7208efac2c18fff6202c2",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "8277729736d9e9a4caf0147e520c308bb6f38302dcfe940b086f9e39c4eef815",
+            "sourceSha256": "8277729736d9e9a4caf0147e520c308bb6f38302dcfe940b086f9e39c4eef815",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "79c3792b2efa17289ffc342a3e252230237dc9c783728c02475d4865a37cb771",
+            "sourceSha256": "79c3792b2efa17289ffc342a3e252230237dc9c783728c02475d4865a37cb771",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "sourceSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "sourceSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "sourceSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+          "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+          "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f"
+        ],
+        "inputHashes": {
+          "latent": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+          "sigmas": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0",
+          "positive": "dd28df0175c3d9d77fbb387d47ae109b702f67e7fbf3fbb82b128fd609808a62",
+          "negative": "6cdc8902c2a6619914e7d3a9d241b55000891722e4c0b7a2cf79d40be70083c3"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "unequal-separate": {
+        "traceSha256": "d277f9a417cb779dcf7b3822e1b2c6b50ed387a188f2a430fffe30540c45fe82",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+            "sourceSha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "f71f9e6d63cc26b070258459524451ab58d73d01f5e46839e42c9c2cf1b154c2",
+            "sourceSha256": "f71f9e6d63cc26b070258459524451ab58d73d01f5e46839e42c9c2cf1b154c2",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "sourceSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "4ed9279da2eddab1f76221af7dbdd701a966452cd2cf85d970f81929facb56d8",
+            "sourceSha256": "4ed9279da2eddab1f76221af7dbdd701a966452cd2cf85d970f81929facb56d8",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "633e17dbf39e88d9ddc0f52d376e565a63922c5ca02b05250ba770f0be108b89",
+            "sourceSha256": "633e17dbf39e88d9ddc0f52d376e565a63922c5ca02b05250ba770f0be108b89",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "4ec596a0e5bea8911336b47e855248e221d8d87ebaa3cf1f51f042dd75e2d1de",
+            "sourceSha256": "4ec596a0e5bea8911336b47e855248e221d8d87ebaa3cf1f51f042dd75e2d1de",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "5f87028c532a671c04867d652f355c6618cdcd6c35ec8b8c140977be437a91f3",
+            "sourceSha256": "5f87028c532a671c04867d652f355c6618cdcd6c35ec8b8c140977be437a91f3",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "sourceSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "sourceSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "sourceSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+          "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+          "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128"
+        ],
+        "inputHashes": {
+          "latent": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe",
+          "sigmas": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0",
+          "positive": "dd28df0175c3d9d77fbb387d47ae109b702f67e7fbf3fbb82b128fd609808a62",
+          "negative": "6cdc8902c2a6619914e7d3a9d241b55000891722e4c0b7a2cf79d40be70083c3"
+        },
+        "parametersBeforeAfterExact": true
+      },
+      "velocity-three-step": {
+        "traceSha256": "d6b18f787c835744b0e539a4219c2d5084fb73077a7c357db1b450eda26fb439",
+        "comparisons": {
+          "step-0/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "709a6371fec1ebdb3c58a8ace7d7b7f309747ebc051406274488bddd573386f0",
+            "sourceSha256": "709a6371fec1ebdb3c58a8ace7d7b7f309747ebc051406274488bddd573386f0",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "16abcd577be20a592a43efe340b15c95f0fef2f4809989ea1d9d8acce27f3383",
+            "sourceSha256": "16abcd577be20a592a43efe340b15c95f0fef2f4809989ea1d9d8acce27f3383",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-0/sigma": {
+            "shape": [],
+            "actualSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "sourceSha256": "c0e336a5f371ef22cd534e094269f2c1a9635cd080b71ffa671086832d3b60b7",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "8cf6b2c853288b36436afa13a9aa86ab6c124e42b7afd878ac552f41faa10868",
+            "sourceSha256": "8cf6b2c853288b36436afa13a9aa86ab6c124e42b7afd878ac552f41faa10868",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "68c467e4b6a885cec40d2da4a0f1d09266a6956c7b6ebac70f8e0b775e050b50",
+            "sourceSha256": "68c467e4b6a885cec40d2da4a0f1d09266a6956c7b6ebac70f8e0b775e050b50",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-1/sigma": {
+            "shape": [],
+            "actualSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "sourceSha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/x": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "446807ee3c414c587c39efb9c06594d24431b02b4c4e423338764db985a5f0de",
+            "sourceSha256": "446807ee3c414c587c39efb9c06594d24431b02b4c4e423338764db985a5f0de",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/denoised": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "d218ab681a55b9147f7851145c47fcf7c0038ce8ac9be1969775415530794b9e",
+            "sourceSha256": "d218ab681a55b9147f7851145c47fcf7c0038ce8ac9be1969775415530794b9e",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "step-2/sigma": {
+            "shape": [],
+            "actualSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "sourceSha256": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-0": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "sourceSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-1": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "sourceSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          },
+          "output-2": {
+            "shape": [
+              2,
+              4,
+              4,
+              5
+            ],
+            "actualSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "sourceSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+            "byteExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideBound": 0
+          }
+        },
+        "repeatHashes": [
+          "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+          "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+          "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709"
+        ],
+        "inputHashes": {
+          "latent": "709a6371fec1ebdb3c58a8ace7d7b7f309747ebc051406274488bddd573386f0",
+          "sigmas": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0",
+          "positive": "605bf47be1b48e3a82d39fe793770a94707e408935d408048a2b14bf14789c4f",
+          "negative": "b4d96585ff0ef93e36ac509c1d5c821c680cc3c2291496e29470b7bc345737a9"
+        },
+        "parametersBeforeAfterExact": true
+      }
+    },
+    "productFilesSha256": {
+      "src/ComfySharp.Inference/SdEulerSampler.cs": "50836178b0bbe42d55cb791361d11d45c2e44e7b7e134dab1c505b3221f8dfe5",
+      "tests/ComfySharp.Inference.Tests/SdEulerSamplerTests.cs": "766439ce4d99f1946318814a6af00fa1c46463e32e3b3fab407a79f8dcc9c37b",
+      "tests/ComfySharp.Inference.Tests/SdEulerReferenceTests.cs": "4b511f924446b2fa7de36e42768332b06b6c5a7a7373d9c4cda355699b05a1a0"
+    }
+  },
+  "limits": [
+    "No pretrained weights, full workflow, GPU or stock-width Euler trajectory.",
+    "The local C# validation does not replace Linux/macOS C# execution or the existing failing profiles.",
+    "Source wheel hashes identify package contents, not actual loaded mappings.",
+    "Parameter after-state equality on the source is an assertion in the verified collector; only initial parameter records are exported.",
+    "Local TRX/trace hashes identify ignored evidence; private testhost paths and original trace payloads are not published here."
+  ]
+}

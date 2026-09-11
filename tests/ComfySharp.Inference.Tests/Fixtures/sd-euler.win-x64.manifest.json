@@ -1,0 +1,205 @@
+{
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "profile": "sd-euler-native210-cpu-f32-v1",
+  "target": "win-x64",
+  "protocolSha256": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05",
+  "scripts": {
+    "protocol.json": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05",
+    "README.md": "9f251f78ffed86f896bd85718afb1b78ec3a07f5df6c48979ea799910982ffd6",
+    "reference.py": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74"
+  },
+  "helpers": {
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f"
+  },
+  "locks": {
+    "requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "requirements-osx-arm64.txt": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
+    "requirements-win-x64.txt": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5"
+  },
+  "sources": [
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "make_beta_schedule"
+      ],
+      "astSha256": "0b80d3e0c2e221f93758eaa7382188ffe146d3727ee7898cd15eafb35374d8b9"
+    },
+    {
+      "source": "comfy/model_sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/model_sampling.py",
+      "fileSha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "symbols": [
+        "reshape_sigma",
+        "EPS",
+        "V_PREDICTION",
+        "ModelSamplingDiscrete"
+      ],
+      "astSha256": "2f77cb26d03343e62379fa92039fce85cf314799cb34dd664c71225c94d2b91b"
+    },
+    {
+      "source": "comfy/samplers.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py",
+      "fileSha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+      "symbols": [
+        "cfg_function",
+        "sampling_function"
+      ],
+      "astSha256": "2261aafd67f4ce604825576a4f6ee7e32a2794e2d128575b269b5de7097a0024"
+    },
+    {
+      "source": "comfy/conds.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/conds.py",
+      "fileSha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0",
+      "symbols": [
+        "CONDRegular",
+        "CONDCrossAttn"
+      ],
+      "astSha256": "7b27caa72534cbb4692e6843e24efbbfcb59c655f8b21af280fa8998fb6cd407"
+    },
+    {
+      "source": "comfy/k_diffusion/utils.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/utils.py",
+      "fileSha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272",
+      "symbols": [
+        "append_dims"
+      ],
+      "astSha256": "8999eb8dd535286ce45efc0c5ff96a664c6a12a87c005d77c0c221d6d6cb0018"
+    },
+    {
+      "source": "comfy/k_diffusion/sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/sampling.py",
+      "fileSha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+      "symbols": [
+        "to_d",
+        "sample_euler"
+      ],
+      "astSha256": "6c9c307427f7e99b89d88b0e620c2652b21b6f711b90475638daf4e724e06ef7"
+    },
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "checkpoint",
+        "timestep_embedding",
+        "avg_pool_nd"
+      ],
+      "astSha256": "46be9aed2a5129acaee45d61938b4cd73fea6512543141e4594db8c9bd8e2f7c"
+    },
+    {
+      "source": "comfy/ldm/modules/attention.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+      "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "default",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "GEGLU",
+        "FeedForward",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic",
+        "CrossAttention",
+        "BasicTransformerBlock",
+        "SpatialTransformer"
+      ],
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "fileSha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "symbols": [
+        "TimestepBlock",
+        "forward_timestep_embed",
+        "TimestepEmbedSequential",
+        "Upsample",
+        "Downsample",
+        "ResBlock",
+        "apply_control",
+        "UNetModel"
+      ],
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    }
+  ],
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "discrete": "exact",
+    "nonFinite": "reject finite-corpus violation"
+  },
+  "parameterRecipe": "sha256-name-lcg-high16-power2-v1",
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+    "threads": 1,
+    "interopThreads": 1,
+    "cpuCapability": "AVX2",
+    "build": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "parallelInfo": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 2019\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : [not set]\n\tMKL_NUM_THREADS : [not set]\nATen parallel backend: OpenMP\n",
+    "wheelPackageLibraries": [
+      {
+        "name": "c10.dll",
+        "bytes": 1081344,
+        "sha256": "7871e7c40fb907c75ab8a26e8fd243d58c2664965b9a768adad348dc5b090f86"
+      },
+      {
+        "name": "libiomp5md.dll",
+        "bytes": 1614192,
+        "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+      },
+      {
+        "name": "libiompstubs5md.dll",
+        "bytes": 43888,
+        "sha256": "137dd44f652a926eb540861994c58ea24ebfbf6b45886ac964a68c5742549c47"
+      },
+      {
+        "name": "shm.dll",
+        "bytes": 15360,
+        "sha256": "4802d8bfa8af83222ef8e0116c2258c617e56668c0415dd33b8f545fd2e884fa"
+      },
+      {
+        "name": "torch.dll",
+        "bytes": 9728,
+        "sha256": "7aeee15bac02856902d3f0709d22fbbee668cb05dffd3f347939962ecb93dcbd"
+      },
+      {
+        "name": "torch_cpu.dll",
+        "bytes": 264942080,
+        "sha256": "78542eb53af452d841b1b24645f90d25009679731c745e4357ae39c8d312eab7"
+      },
+      {
+        "name": "torch_global_deps.dll",
+        "bytes": 9728,
+        "sha256": "eb2389594aca849a9cc9a1d3af4acbb7ea2dbbacb3d50d887aa2d6b68ddb408d"
+      },
+      {
+        "name": "torch_python.dll",
+        "bytes": 18705920,
+        "sha256": "cedb370caeaabd220509c5a163645db214cbe3fe303fe5296afbbc1b86abc92f"
+      },
+      {
+        "name": "uv.dll",
+        "bytes": 195072,
+        "sha256": "fa569e682fc5fb7a8eb94c6829af9f30a569748dbbc6bce39735d48bc960bcf8"
+      }
+    ],
+    "libraryEvidence": "package inventory; not actual loaded mappings"
+  },
+  "syntheticWeights": true,
+  "pretrainedWeightsUsed": false,
+  "qualification": "none; prospective source collection only",
+  "component": {
+    "name": "euler",
+    "file": "euler.json",
+    "bytes": 444992,
+    "sha256": "d6939728fc1b29eb2af30397ff6593aa4f75129370d9223c2b9132a34878245c",
+    "elapsedSeconds": 12.167530300000067
+  }
+}

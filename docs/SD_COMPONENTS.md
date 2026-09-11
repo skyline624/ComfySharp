@@ -86,6 +86,20 @@ Optional compatible concatenation repeats complete text sequences to their least
 common multiple, subject to the source's ratio limit; incompatible lengths use
 separate calls. Hardware-dependent batch planning is not yet reproduced.
 
+`SdEulerSampler` now composes actual guided denoising steps over a caller-supplied
+diffusion latent. It retains its denoiser throughout the trajectory, preserves
+Tensor/F32 arithmetic and returns an independently owned final tensor. The
+explicit no-churn schedule must be nonincreasing, positive before a final zero
+and contain at least two entries. Equal adjacent sigmas still evaluate the model.
+The operation does not initialize noise, select sigmas, encode text or apply VAE
+scales. Partial schedules, stochastic samplers and model workflows remain open.
+
+The [independent Euler profile](qualification/sd-euler-native210-cpu-f32-v1.md)
+fixes eight short reduced-graph trajectories before source collection. The
+[local Windows comparison](qualification/sd-euler-source-96fec72.md) passes all
+eight cases, including every captured pre-update state, alongside nine lifetime
+and contract tests. This does not qualify stock dimensions or other platforms.
+
 ## Ownership and qualification
 
 ### Synthetic stock-width diagnostic
@@ -150,8 +164,16 @@ Metadata, contract, lifetime and numerical tests are separate. The prospective
 [`sd-components-native210-cpu-f32-v1`](qualification/sd-components-native210-cpu-f32-v1.md)
 profile compares independently executed frozen source on each CPU target.
 Reduced-width references exercise the full selected topology, but do not validate
-stock dimensions, real weights, a complete sampler trajectory, installation or
+stock dimensions, real weights, stock-sized sampler trajectories, installation or
 GPU execution. Each of those remains a separate qualification gate.
+
+The [broader native-package diagnostic](qualification/sd-native-suite-6b1347c.md)
+retains all fourteen existing reduced U-Net/CFG cases. On its Linux host, source
+native libraries produce 86 exact captures in automatic mode, while the complete
+experiment still fails accepted-reference assertions in other processes. Input
+layout controls make 22 of 28 package contrasts ineligible for interpretation.
+This observation does not select a replacement product runtime or close the
+[normal Windows/Linux failures](qualification/sd-cpu-variation-6b1347c.md).
 
 Required follow-up includes real model assembly and workflows, CLIP-H, samplers,
 regions/masks, inpainting and other channel variants, controls, hooks/adapters,
