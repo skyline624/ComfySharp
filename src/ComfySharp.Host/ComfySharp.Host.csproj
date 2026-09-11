@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../ComfySharp.Core/ComfySharp.Core.csproj" />
+    <ProjectReference Include="../ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
+    <ProjectReference Include="../ComfySharp.Storage/ComfySharp.Storage.csproj" />
+  </ItemGroup>
+</Project>

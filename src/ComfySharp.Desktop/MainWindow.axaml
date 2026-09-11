@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="ComfySharp.Desktop.MainWindow" Title="ComfySharp — Native workflow editor" Width="1280" Height="820" MinWidth="860" MinHeight="560">
+  <Grid RowDefinitions="Auto,*,Auto,Auto">
+    <WrapPanel Margin="12,8">
+      <TextBlock Text="ComfySharp" FontSize="22" FontWeight="SemiBold" Margin="4,4,24,4" VerticalAlignment="Center"/>
+      <Button Content="New" Click="NewClicked"/><Button Content="Open…" Click="OpenClicked"/><Button Content="Save" Click="SaveClicked"/><Button Content="Save as…" Click="SaveAsClicked"/>
+      <Button Content="Undo" Click="UndoClicked"/><Button Content="Redo" Click="RedoClicked"/>
+      <Button Content="Export prompt…" Click="ExportClicked"/><Button Content="Queue" Click="QueueClicked"/>
+      <Button Content="Queue / history" Click="HistoryClicked"/><Button Content="Interrupt last job" Click="InterruptClicked"/>
+      <Button Content="Restart Host" Click="RestartClicked"/>
+    </WrapPanel>
+    <TabControl x:Name="Documents" Grid.Row="1" Margin="12,0"/>
+    <TextBox x:Name="Messages" Grid.Row="2" IsReadOnly="True" TextWrapping="Wrap" MaxHeight="120" Margin="12,8" Text="Initial native editor. Unsupported nodes and frontend execution features produce explicit diagnostics."/>
+    <TextBlock x:Name="HostStatus" Grid.Row="3" Margin="16,0,16,12" Text="Host stopped"/>
+  </Grid>
+</Window>

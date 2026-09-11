@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ComfySharp.Contracts/ComfySharp.Contracts.csproj" />
+    <Project Path="src/ComfySharp.Core/ComfySharp.Core.csproj" />
+    <Project Path="src/ComfySharp.Desktop/ComfySharp.Desktop.csproj" />
+    <Project Path="src/ComfySharp.Host/ComfySharp.Host.csproj" />
+    <Project Path="src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
+    <Project Path="src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
+    <Project Path="src/ComfySharp.Storage/ComfySharp.Storage.csproj" />
+    <Project Path="src/ComfySharp.Workflow/ComfySharp.Workflow.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj" />
+    <Project Path="tests/ComfySharp.Desktop.Tests/ComfySharp.Desktop.Tests.csproj" />
+    <Project Path="tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj" />
+    <Project Path="tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj" />
+    <Project Path="tests/ComfySharp.Workflow.Tests/ComfySharp.Workflow.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/ComfySharp.Catalog/ComfySharp.Catalog.csproj" />
+    <Project Path="tools/ComfySharp.RuntimeProbe/ComfySharp.RuntimeProbe.csproj" />
+  </Folder>
+</Solution>

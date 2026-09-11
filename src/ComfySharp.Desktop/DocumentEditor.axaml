@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:n="clr-namespace:Nodify.Avalonia;assembly=Nodify.Avalonia" xmlns:c="clr-namespace:Nodify.Avalonia.Connections;assembly=Nodify.Avalonia" x:Class="ComfySharp.Desktop.DocumentEditor">
+  <Grid ColumnDefinitions="*,300">
+    <n:NodifyEditor x:Name="Canvas" Background="#171B25" GridCellSize="10">
+      <n:NodifyEditor.Styles>
+        <Style Selector="n|ItemContainer"><Setter Property="Location" Value="{ReflectionBinding Location, Mode=TwoWay}"/></Style>
+      </n:NodifyEditor.Styles>
+      <n:NodifyEditor.ItemTemplate>
+        <DataTemplate>
+          <Border Background="#283044" BorderBrush="{ReflectionBinding Outline}" BorderThickness="2" CornerRadius="7" Padding="14" Width="230">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{ReflectionBinding Title}" FontWeight="SemiBold" FontSize="15" TextWrapping="Wrap"/>
+              <TextBlock Text="{ReflectionBinding Subtitle}" Foreground="#B9C5DB" TextWrapping="Wrap"/>
+              <TextBlock Text="{ReflectionBinding Ports}" FontSize="12" TextWrapping="Wrap"/>
+            </StackPanel>
+          </Border>
+        </DataTemplate>
+      </n:NodifyEditor.ItemTemplate>
+      <n:NodifyEditor.ConnectionTemplate>
+        <DataTemplate><c:Connection Source="{ReflectionBinding Source}" Target="{ReflectionBinding Target}" Foreground="#8AA9FA"/></DataTemplate>
+      </n:NodifyEditor.ConnectionTemplate>
+    </n:NodifyEditor>
+    <ScrollViewer Grid.Column="1" Background="#202632">
+      <StackPanel Margin="16" Spacing="8">
+        <TextBlock Text="Graph tools" FontSize="18" FontWeight="SemiBold"/>
+        <TextBlock Text="Wheel: zoom · Right-drag: pan&#10;Click / drag: select and move" TextWrapping="Wrap" Foreground="#B9C5DB"/>
+        <ComboBox x:Name="NodeTypes" HorizontalAlignment="Stretch"/>
+        <Button Content="Add node" Click="AddClicked"/>
+        <TextBlock Text="Selected node" FontWeight="SemiBold" Margin="0,12,0,0"/>
+        <Button Content="Inspect selection" Click="InspectClicked"/>
+        <TextBox x:Name="NodeTitle" PlaceholderText="Node title"/>
+        <TextBox x:Name="Widgets" PlaceholderText="Widget values (JSON array / object)" AcceptsReturn="True" MinHeight="90" TextWrapping="Wrap"/>
+        <Button Content="Apply title and widgets" Click="ApplyClicked"/>
+        <Button Content="Delete selection" Click="DeleteClicked"/>
+        <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
+        <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>
+        <TextBox x:Name="SourceId" PlaceholderText="Source node ID"/><TextBox x:Name="SourceSlot" Text="0" PlaceholderText="Output slot"/>
+        <TextBox x:Name="TargetId" PlaceholderText="Target node ID"/><TextBox x:Name="TargetSlot" Text="0" PlaceholderText="Input slot"/>
+        <Button Content="Connect" Click="ConnectClicked"/>
+        <TextBox x:Name="LinkId" PlaceholderText="Link ID to disconnect"/><Button Content="Disconnect" Click="DisconnectClicked"/>
+        <TextBlock x:Name="LinkSummary" TextWrapping="Wrap" FontSize="12"/>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

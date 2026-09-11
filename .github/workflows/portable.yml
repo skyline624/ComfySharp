@@ -1,0 +1,30 @@
+name: Local portable packaging validation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          global-json-file: global.json
+      - name: Build and verify local unsigned archive
+        shell: pwsh
+        run: ./tools/publish.ps1 -Runtime ${{ matrix.runtime }}
+      # No binary artifact upload: exact dependency notices and SBOM are pending.
+      # See docs/packaging.md. Future uploads must use the .tar.gz, never the raw
+      # directory, so Desktop and Host retain executable permissions on Unix.

@@ -1,0 +1,23 @@
+# Architecture
+
+```mermaid
+flowchart LR
+  D[Desktop Avalonia / Nodify] --> W[Workflow : documents et compilation]
+  D <-->|HTTP / WebSocket sur loopback| H[Host ASP.NET Core]
+  H --> Q[File et historique en mémoire]
+  Q --> C[Core : validation et exécution]
+  C --> N[Nodes : catalogue C#]
+  N --> I[Inference : TorchSharp / bibliothèques natives]
+  H --> S[Storage : SQLite / fichiers propres]
+  N --> M[Media : codecs et rendu natifs]
+```
+
+Contracts contient les données échangées par Core et Host. Workflow ne dépend ni de Nodify ni des tenseurs. Le document JSON conserve les champs inconnus et les extensions ; le prompt n'est qu'une projection exécutable. Les erreurs de compilation sont explicites.
+
+Desktop possède les documents et surveille son processus Host. Les modèles, storages natifs et jobs restent dans Host. Un crash du moteur ne doit pas effacer le document ni provoquer de resoumission automatique. La connexion locale n'envoie ni télémétrie ni poids.
+
+Une seule exécution active initialement. Le propriétaire de la file associe chaque annulation à l'identité du job sous verrou ; le moteur observe son jeton. Les événements HTTP/WS sont une adaptation des événements métier, pas une dépendance du moteur au serveur.
+
+Les lecteurs de poids vérifient structure, tailles et offsets avant allocation. Aucune exécution de pickle ou chargement arbitraire de code n'est acceptable. Les formats non encore portés échouent explicitement.
+
+La disponibilité d'un package natif ne vaut pas validation de backend. Chaque opération et famille doit recevoir une preuve versionnée. Les ressources partagées nécessitent une propriété explicite avant l'introduction du cache tensoriel et de l'offload.

@@ -1,0 +1,100 @@
+using System.Text.Json.Nodes;
+
+namespace ComfySharp.Workflow;
+
+public sealed record WidgetBinding(string Name, bool Serialize = true);
+public sealed record NodeDefinition(string ClassType, IReadOnlyList<WidgetBinding> Widgets);
+public sealed record CompilationDiagnostic(string Code, string Message, NodeId? Node = null);
+public sealed record CompilationResult(JsonObject? Prompt, IReadOnlyList<CompilationDiagnostic> Diagnostics)
+{
+    public bool Success => Prompt is not null && Diagnostics.Count == 0;
+}
+public static class PromptCompiler
+{
+    // Positional bindings are explicit: object_info alone cannot describe frontend-only widgets.
+    public static IReadOnlyDictionary<string, NodeDefinition> BaseDefinitions { get; } = new Dictionary<string, NodeDefinition>
+    {
+        ["PrimitiveString"] = new("PrimitiveString", [new("value")]),
+        ["PrimitiveStringMultiline"] = new("PrimitiveStringMultiline", [new("value")]),
+        ["PrimitiveInt"] = new("PrimitiveInt", [new("value"), new("control_after_generate", false)]),
+        ["PrimitiveFloat"] = new("PrimitiveFloat", [new("value")]),
+        ["PrimitiveBoolean"] = new("PrimitiveBoolean", [new("value")]),
+        ["StringConcatenate"] = new("StringConcatenate", [new("string_a"), new("string_b"), new("delimiter")]),
+        ["StringSubstring"] = new("StringSubstring", [new("string"), new("start"), new("end")]),
+        ["StringLength"] = new("StringLength", [new("string")]),
+        ["StringReplace"] = new("StringReplace", [new("string"), new("find"), new("replace")]),
+        ["StringTrim"] = new("StringTrim", [new("string"), new("mode")]),
+        ["JsonExtractString"] = new("JsonExtractString", [new("json_string"), new("key")]),
+        ["ComfyNotNode"] = new("ComfyNotNode", []),
+        ["ComfySwitchNode"] = new("ComfySwitchNode", [new("switch")]),
+        ["CheckpointLoaderSimple"] = new("CheckpointLoaderSimple", [new("ckpt_name")]),
+        ["CLIPTextEncode"] = new("CLIPTextEncode", [new("text")]),
+        ["EmptyLatentImage"] = new("EmptyLatentImage", [new("width"), new("height"), new("batch_size")]),
+        ["KSampler"] = new("KSampler", [new("seed"), new("control_after_generate", false), new("steps"), new("cfg"), new("sampler_name"), new("scheduler"), new("denoise")]),
+        ["VAEDecode"] = new("VAEDecode", []),
+        ["SaveImage"] = new("SaveImage", [new("filename_prefix")])
+    };
+    public static CompilationResult Compile(WorkflowDocument document, IReadOnlyDictionary<string, NodeDefinition>? definitions = null, ISet<string>? availableNodes = null)
+    {
+        definitions ??= BaseDefinitions;
+        var diagnostics = new List<CompilationDiagnostic>(); var prompt = new JsonObject();
+        var root = document.Snapshot(); var nodes = document.Nodes.ToDictionary(n => n.Id);
+        if (root["definitions"] is JsonObject d && d.Count > 0) diagnostics.Add(new("unsupported_subgraphs", "Subgraph definitions are preserved but cannot yet be compiled."));
+        foreach (var node in nodes.Values)
+        {
+            if ((node.Data["mode"]?.GetValue<int>() ?? 0) != 0) diagnostics.Add(new("unsupported_mode", "Muted, bypass and event modes require frontend execution semantics that are not implemented.", node.Id));
+            if (!definitions.TryGetValue(node.Type, out var definition)) { diagnostics.Add(new("unsupported_node", $"No explicit widget/compiler definition exists for {node.Type}.", node.Id)); continue; }
+            if (availableNodes is not null && !availableNodes.Contains(node.Type)) diagnostics.Add(new("unavailable_node", $"The Host does not provide {node.Type}.", node.Id));
+            var inputs = new JsonObject();
+            var values = node.Data["widgets_values"];
+            if (values is JsonArray array)
+            {
+                if (array.Count != definition.Widgets.Count) diagnostics.Add(new("widget_layout", $"Expected {definition.Widgets.Count} persisted widgets, found {array.Count}; refusing positional guessing.", node.Id));
+                for (var i = 0; i < Math.Min(array.Count, definition.Widgets.Count); i++)
+                    if (definition.Widgets[i].Serialize) inputs[definition.Widgets[i].Name] = Literal(array[i]);
+            }
+            else if (values is JsonObject named)
+            {
+                foreach (var pair in named)
+                    if (definition.Widgets.Any(w => w.Name == pair.Key && w.Serialize)) inputs[pair.Key] = Literal(pair.Value);
+                    else if (!definition.Widgets.Any(w => w.Name == pair.Key)) diagnostics.Add(new("unknown_widget", $"Widget {pair.Key} has no serialization contract.", node.Id));
+            }
+            var nodeInputs = node.Data["inputs"] as JsonArray ?? [];
+            for (var slot = 0; slot < nodeInputs.Count; slot++)
+            {
+                var input = nodeInputs[slot];
+                if (input?["link"] is null) continue;
+                var id = input["link"]!.GetValue<long>();
+                var links = document.Links.Where(l => l.Id == id && l.Target == node.Id && l.TargetSlot == slot).ToArray();
+                if (links.Length != 1 || !nodes.TryGetValue(links[0].Source, out var source)) { diagnostics.Add(new("invalid_link", $"Input slot {slot} has a dangling or inconsistent link.", node.Id)); continue; }
+                var link = links[0];
+                if (link.SourceSlot < 0 || link.SourceSlot >= ((source.Data["outputs"] as JsonArray)?.Count ?? 0)) diagnostics.Add(new("invalid_output", "Source output slot does not exist.", node.Id));
+                inputs[input["name"]!.GetValue<string>()] = new JsonArray(link.Source.Value, link.SourceSlot);
+            }
+            foreach (var widget in definition.Widgets.Where(w => w.Serialize))
+                if (!inputs.ContainsKey(widget.Name)) diagnostics.Add(new("missing_widgets", $"Required widget {widget.Name} has neither a persisted value nor an input connection.", node.Id));
+            prompt[node.Id.Value] = new JsonObject { ["class_type"] = definition.ClassType, ["inputs"] = inputs, ["_meta"] = new JsonObject { ["title"] = node.Title } };
+        }
+        var allLinks = document.Links;
+        if (allLinks.Select(l => l.Id).Distinct().Count() != allLinks.Count) diagnostics.Add(new("duplicate_link", "The document contains duplicate link IDs."));
+        foreach (var link in allLinks)
+        {
+            if (!nodes.ContainsKey(link.Source) || !nodes.TryGetValue(link.Target, out var target)) { diagnostics.Add(new("dangling_link", $"Link {link.Id} refers to a missing node.")); continue; }
+            var slots = target.Data["inputs"] as JsonArray;
+            if (slots is null || link.TargetSlot < 0 || link.TargetSlot >= slots.Count || slots[link.TargetSlot]?["link"]?.GetValue<long>() != link.Id)
+                diagnostics.Add(new("inconsistent_link", $"Link {link.Id} is not referenced by its target input."));
+        }
+        var state = new Dictionary<NodeId, int>();
+        bool Visit(NodeId id)
+        {
+            if (state.TryGetValue(id, out var seen)) return seen == 1;
+            state[id] = 1;
+            foreach (var link in allLinks.Where(l => l.Source == id && nodes.ContainsKey(l.Target)))
+                if (Visit(link.Target)) return true;
+            state[id] = 2; return false;
+        }
+        if (nodes.Keys.Any(Visit)) diagnostics.Add(new("cycle", "The executable graph contains a cycle."));
+        return new(diagnostics.Count == 0 ? prompt : null, diagnostics);
+    }
+    private static JsonNode? Literal(JsonNode? value) => value is JsonArray ? new JsonObject { ["__value__"] = value.DeepClone() } : value?.DeepClone();
+}

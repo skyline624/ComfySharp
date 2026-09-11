@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable></PropertyGroup>
+  <PropertyGroup>
+    <NativeBackend Condition="'$(NativeBackend)' == ''">cpu</NativeBackend>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Windows'))">win-x64</NativeRuntime>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Linux'))">linux-x64</NativeRuntime>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('OSX'))">osx-arm64</NativeRuntime>
+    <NuGetLockFilePath>packages.$(NativeRuntime).$(NativeBackend).lock.json</NuGetLockFilePath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" /><PackageReference Include="xunit" /><PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="libtorch-cpu-win-x64" Condition="'$(NativeRuntime)' == 'win-x64'" />
+    <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeRuntime)' == 'linux-x64'" />
+    <PackageReference Include="libtorch-cpu-osx-arm64" Condition="'$(NativeRuntime)' == 'osx-arm64'" />
+  </ItemGroup>
+  <Target Name="ValidateNativeRuntime" BeforeTargets="Restore;PrepareForBuild">
+    <Error Condition="'$(NativeBackend)' != 'cpu'" Text="Inference tests currently supply CPU native packages only." />
+    <Error Condition="'$(NativeRuntime)' != 'win-x64' and '$(NativeRuntime)' != 'linux-x64' and '$(NativeRuntime)' != 'osx-arm64'" Text="NativeRuntime must be win-x64, linux-x64 or osx-arm64." />
+  </Target>
+</Project>

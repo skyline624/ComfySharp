@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>WinExe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ComfySharp.Workflow/ComfySharp.Workflow.csproj" />
+    <PackageReference Include="Avalonia" /><PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Themes.Fluent" /><PackageReference Include="Nodify.Avalonia" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,42 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          global-json-file: global.json
+      - name: Restore locked dependencies
+        run: dotnet restore ComfySharp.slnx --locked-mode -p:NativeRuntime=${{ matrix.runtime }}
+      - name: Build
+        run: dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }}
+      - name: Test managed contracts, UI headless and CPU primitives
+        run: dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --logger trx --results-directory TestResults
+      - name: Check catalogue consistency
+        run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json
+      - name: Exercise actual native CPU operations
+        run: dotnet run --no-build -c Release --project tools/ComfySharp.RuntimeProbe -- --device cpu --repeat 25
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tests-${{ matrix.runtime }}
+          path: TestResults
+          if-no-files-found: ignore
