@@ -1,0 +1,98 @@
+{
+  "runId": 34641013630,
+  "commit": "b3d380f54d0e58258cf78713c4fa3a247cf36fbd",
+  "conclusion": "failure",
+  "classification": "preflight_rejected_no_native_experiment",
+  "plannedProcesses": 6,
+  "startedProcesses": 0,
+  "childStatuses": [],
+  "expectedArtifacts": 3,
+  "actualArtifacts": 0,
+  "originObserved": false,
+  "observerNeutralityObserved": false,
+  "numericalComparisonAvailable": false,
+  "cause": "setup-python defines a nonempty LD_LIBRARY_PATH; published guard rejects it before process execution and output creation",
+  "downloadAttempts": 1,
+  "downloadExitCode": 1,
+  "downloadMessage": "no valid artifacts found to download",
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+      "conclusion": "success"
+    },
+    {
+      "name": "Prepare unchanged hashed CPU laboratory",
+      "conclusion": "success"
+    },
+    {
+      "name": "Fetch pinned U-Net source snapshot subset",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore locked product test dependencies",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build product tests once",
+      "conclusion": "success"
+    },
+    {
+      "name": "Capture six independent native-origin processes",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "evidenceSha256": {
+    "run.json": "9c32c6a81aabb93f8dec65fcc99a0cf027f434898d9cebf71ccddcad717ee354",
+    "artifacts.json": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+    "job.log": "63d683e731a731fbb8f027a506347617a60c1806401729ab600653b948ae479d",
+    "published-run.py": "47ed2c939b80e52603b1dd5399524f72aa64b1a5f5fec4db93bbef8dddd58b78"
+  },
+  "schemaVersion": 1,
+  "diagnosticOnly": true,
+  "qualification": "none",
+  "diagnosticCi": "https://github.com/skyline624/ComfySharp/actions/runs/34641013630",
+  "normalCi": "https://github.com/skyline624/ComfySharp/actions/runs/34641013585",
+  "acceptedFixturesOrProfileChanged": false,
+  "pretrainedWeightsUsed": false,
+  "qualifiedModelFamilies": []
+}

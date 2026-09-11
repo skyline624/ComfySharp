@@ -16,10 +16,16 @@ over the original build.
 For the wheel-native child only, absolute paths to the wheel's `libc10.so`,
 `libtorch_cpu.so`, and `libtorch.so` are supplied through `LD_PRELOAD`, in that order,
 with `LD_LIBRARY_PATH` selecting the wheel's library directory. Neither Python nor
-`libtorch_python` is preloaded. Existing nonempty loader overrides make the
-experiment invalid; they are not silently removed or merged. `PATH` and all
-unrelated environment values remain unchanged. Evidence stores basenames and
-hashes rather than private paths or memory addresses.
+`libtorch_python` is preloaded. Nonempty `LD_PRELOAD` is always rejected.
+The original `LD_LIBRARY_PATH` may be empty or exactly the active interpreter's
+base-prefix `lib` directory installed by setup-python. That directory must have
+verifiable libpython files and no direct core, binding or OpenMP loader candidates.
+Multiple directories, empty path segments, relative paths and other directories
+are rejected. The verified Python directory is preserved unchanged for source and
+NuGet children and appended after wheel/lib for wheel children. `PATH` and all
+unrelated environment values remain unchanged. Evidence stores classification,
+basenames and hashes rather than private paths or memory addresses. Precondition
+rejection writes a status artifact before any child process starts.
 
 ELF SONAME and DT_NEEDED entries are recorded before execution. Environment intent
 is insufficient: the product's actual `Process.Modules` records must contain

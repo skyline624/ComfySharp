@@ -54,6 +54,43 @@ def library_record(path):
             'soname':sonames[0] if len(sonames)==1 else None,'needed':needed}
 
 
+def validate_loader_environment(environment, base_prefix):
+    """Admit only setup-python's single interpreter lib directory, without rewriting it."""
+    require(not environment.get('LD_PRELOAD'), 'Nonempty LD_PRELOAD invalidates the controlled loader experiment.')
+    value=environment.get('LD_LIBRARY_PATH','')
+    if not value:
+        return {'classification':'empty','baselinePythonLibraryPreserved':False,
+                'libraryPathPresent':'LD_LIBRARY_PATH' in environment}
+    require(len(value.split(':'))==1 and bool(value), 'LD_LIBRARY_PATH must be exactly one nonempty directory.')
+    provided=Path(value)
+    require(provided.is_absolute(), 'LD_LIBRARY_PATH must be an absolute interpreter library directory.')
+    try:
+        expected=(Path(base_prefix)/'lib').resolve(strict=True)
+        actual=provided.resolve(strict=True)
+        require(expected.is_dir() and actual.is_dir(), 'Interpreter library directory is unavailable.')
+    except OSError:
+        raise ValueError('Interpreter library directory cannot be resolved.') from None
+    require(actual==expected, 'LD_LIBRARY_PATH is not the active interpreter base-prefix lib directory.')
+    try:
+        entries=list(actual.iterdir())
+        # The ELF loader searches these direct basenames, not nested site-packages.
+        for entry in entries:
+            name=entry.name.casefold()
+            forbidden=any(name==n.casefold() or name.startswith(n.casefold()+'.') for n in (*CORE,BINDING))
+            forbidden=forbidden or any(name.startswith(n) for n in ('libgomp','libiomp','libomp'))
+            require(not forbidden, 'Interpreter library directory contains a core, binding or OpenMP loader candidate.')
+        python_libraries=[{'name':p.name,'sha256':digest(p),'bytes':p.stat().st_size}
+                          for p in entries if p.name.startswith('libpython') and p.is_file()]
+        require(python_libraries, 'Interpreter library directory has no verifiable libpython identity.')
+    except OSError:
+        raise ValueError('Interpreter library identities cannot be inspected.') from None
+    return {'classification':'verifiedInterpreterLib','directoryName':expected.name,
+            'matchesInterpreterBasePrefixLib':True,'baselinePythonLibraryPreserved':True,
+            'directEntryCount':len(entries),'directEntryNamesSha256':hashlib.sha256(
+                json.dumps(sorted(p.name for p in entries)).encode()).hexdigest(),
+            'pythonLibraries':sorted(python_libraries,key=lambda p:p['name'])}
+
+
 def verify_origin(document, expected_core, original_core, original_binding, expected_openmp, original_openmp, origin):
     """Attribution is based on actual Process.Modules, not environment intent."""
     libraries = document['native']['libraries']
@@ -94,9 +131,17 @@ def main():
     require(args.output.is_absolute() and not output.exists(), 'Output must be absolute and absent.')
     for protected in (REPO,source):
         require(not output.is_relative_to(protected) and not protected.is_relative_to(output), 'Output overlaps protected input.')
-    # Preserve ordinary loader state. Existing overrides would confound native-origin attribution.
-    require(not os.environ.get('LD_PRELOAD') and not os.environ.get('LD_LIBRARY_PATH'),
-            'Existing LD_PRELOAD/LD_LIBRARY_PATH makes this controlled loader experiment invalid.')
+    output.mkdir(parents=True)
+    try:
+        loader_precondition=validate_loader_environment(os.environ,sys.base_prefix)
+    except ValueError as error:
+        write(output/'status.json',{'phase':'loader-precondition','complete':False,'runs':[],
+              'plannedProcesses':6,'integrityErrors':[str(error)],'qualification':'none; no child process started'})
+        print('Loader precondition rejected; see status.json.',flush=True)
+        return 1
+    write(output/'precondition.json',{'valid':True,**loader_precondition})
+    write(output/'status.json',{'phase':'preflight','complete':False,'runs':[],'plannedProcesses':6,
+          'integrityErrors':[],'qualification':'none; collection not complete'})
     wheel=Path(importlib.metadata.distribution('torch').locate_file('torch/lib')).resolve(strict=True)
     built=REPO/'tests/ComfySharp.Inference.Tests/bin/native/linux-x64/cpu/Release/net10.0'
     require(built.is_dir(), 'Original product build missing.')
@@ -115,7 +160,9 @@ def main():
     fixtures=REPO/'tests/ComfySharp.Inference.Tests/Fixtures'
     hashes=lambda directory:{str(p.relative_to(directory)):digest(p) for p in directory.rglob('*') if p.is_file()}
     fixture_before=hashes(fixtures); build_before=hashes(built)
-    output.mkdir(parents=True)
+    source_script_hashes=lambda:{p.name:digest(p) for p in (REPO/'labs/sd-source').glob('*.py')}
+    accepted_scripts=json.loads((fixtures/'sd-components.linux-x64.manifest.json').read_text())['scripts']
+    require(source_script_hashes()==accepted_scripts, 'Accepted source script identity changed.')
     cpu={}
     for line in Path('/proc/cpuinfo').read_text().split('\n\n',1)[0].splitlines():
         key,_,value=line.partition(':')
@@ -126,8 +173,14 @@ def main():
           'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),
           'pinnedDiagnosticHelpers':PINS,'diagnosticScriptSha256':digest(Path(__file__)),
           'requirementsSha256':digest(REPO/'labs/clip-source/requirements-linux-x64.txt'),
+          'sourceScripts':accepted_scripts,
+          'originalBuildManifestSha256':hashlib.sha256(json.dumps(build_before,sort_keys=True).encode()).hexdigest(),
+          'originalBuildFileCount':len(build_before),
+          'originalManagedAssemblies':[{'name':Path(n).name,'sha256':h} for n,h in build_before.items() if n.lower().endswith('.dll')],
+          'readelfVersion':subprocess.check_output(['readelf','--version'],text=True).splitlines()[0],
           'originalCoreAndBinding':originals,'wheelCore':wheel_core,'wheelNativeLibraries':wheel_libraries,
           'originalOpenMp':original_openmp,'wheelOpenMp':wheel_openmp,
+          'loaderPrecondition':loader_precondition,
           'originalPathSha256':hashlib.sha256(original_environment.get('PATH','').encode()).hexdigest(),
           'originalLoaderOverrides':{k:{'present':k in original_environment,'empty':not original_environment.get(k)}
                                      for k in ('LD_PRELOAD','LD_LIBRARY_PATH')}})
@@ -149,7 +202,8 @@ def main():
             env['COMFYSHARP_SD_UNET_FINE_TRACE_DIR']=str(directory/'traces')
             if origin=='wheel':
                 env['LD_PRELOAD']=' '.join(str(wheel/name) for name in CORE)
-                env['LD_LIBRARY_PATH']=str(wheel)
+                baseline_library_path=original_environment.get('LD_LIBRARY_PATH','')
+                env['LD_LIBRARY_PATH']=str(wheel)+(':'+baseline_library_path if baseline_library_path else '')
             command=['dotnet','test','tests/ComfySharp.Inference.Tests','--no-build','--no-restore','-c','Release',
                      '-p:NativeRuntime=linux-x64','--filter',
                      'FullyQualifiedName~SdUnetReferenceTests&DisplayName~sd15-reduced&DisplayName~square',
@@ -173,7 +227,8 @@ def main():
         runs.append({'label':label,'exitCode':code,'seconds':time.perf_counter()-start,
                      'environment':{k:env.get(k) for k in ENVIRONMENT},
                      'loader':{'preloadBasenames':list(CORE) if origin=='wheel' else [],
-                               'libraryPath':'pinned CPU wheel lib directory' if origin=='wheel' else 'original',
+                               'libraryPath':'wheel followed by validated original Python library path' if origin=='wheel' else 'original',
+                               'baselinePythonLibraryPreserved':loader_precondition['baselinePythonLibraryPreserved'],
                                'unrelatedEnvironmentUnchanged':True,'pathUnchanged':env.get('PATH')==original_environment.get('PATH')}})
         write(output/'runs.json',runs);print(label+': exit '+str(code),flush=True)
 
@@ -227,12 +282,16 @@ def main():
         require(b['runtime']['cpuCapability'] in ('DEFAULT','NO AVX'), 'Source DEFAULT not observed.')
         report['sourceVsSource']['auto-expected_vs_default']=helpers['comparison'](b,a)
     except Exception as error:errors.append('source/source: '+str(error))
-    if hashes(fixtures)!=fixture_before:errors.append('Accepted fixtures changed.')
-    if hashes(built)!=build_before:errors.append('Original product build changed.')
+    fixtures_unchanged=hashes(fixtures)==fixture_before
+    build_unchanged=hashes(built)==build_before
+    if not fixtures_unchanged:errors.append('Accepted fixtures changed.')
+    if not build_unchanged:errors.append('Original product build changed.')
+    if source_script_hashes()!=accepted_scripts:errors.append('Accepted source scripts changed.')
     try:pinned_helpers()
     except Exception as error:errors.append(str(error))
     write(output/'comparisons.json',report)
-    write(output/'status.json',{'runs':runs,'integrityErrors':errors,
+    write(output/'status.json',{'complete':True,'runs':runs,'integrityErrors':errors,
+          'originalBuildUnchanged':build_unchanged,'acceptedFixturesUnchanged':fixtures_unchanged,
           'failedProcesses':sum(r['exitCode']!=0 for r in runs),'qualification':'none; no adoption or replaced acceptance'})
     return 1 if errors or any(r['exitCode'] for r in runs) else 0
 
