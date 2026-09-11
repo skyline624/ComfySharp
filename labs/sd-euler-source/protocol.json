@@ -1,0 +1,446 @@
+{
+  "schema": 1,
+  "profile": "sd-euler-native210-cpu-f32-v1",
+  "status": "prospective; no collected outputs or qualification",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sources": {
+    "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+    "comfy/ldm/modules/attention.py": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+    "comfy/ldm/modules/diffusionmodules/openaimodel.py": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+    "comfy/model_sampling.py": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+    "comfy/samplers.py": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+    "comfy/conds.py": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0",
+    "comfy/k_diffusion/sampling.py": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+    "comfy/k_diffusion/utils.py": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272"
+  },
+  "helpers": {
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f"
+  },
+  "locks": {
+    "requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "requirements-osx-arm64.txt": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
+    "requirements-win-x64.txt": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "threads": 1,
+    "interopThreads": 1,
+    "device": "cpu",
+    "dtype": "float32",
+    "dispatch": "auto"
+  },
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "discrete": "exact",
+    "nonFinite": "reject finite-corpus violation"
+  },
+  "parameterRecipe": "sha256-name-lcg-high16-power2-v1",
+  "parameterCount": 686,
+  "config": {
+    "baseChannels": 32,
+    "contextSize": 16,
+    "headMode": "fixedCount",
+    "headParameter": 4,
+    "useLinearProjection": false
+  },
+  "repetitions": 3,
+  "observerSequence": [
+    "off",
+    "on",
+    "off"
+  ],
+  "churn": 0,
+  "cases": [
+    {
+      "id": "one-step",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 3.5,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        1.5,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/one-step/latent",
+          "shape": [
+            1,
+            4,
+            4,
+            5
+          ],
+          "sha256": "7ec1234a29e377e81f03ddcf9a4bda6fb20cbf38fb24ca1a88b03d2d0806bb5c"
+        },
+        "positive": {
+          "name": "euler/one-step/positive",
+          "shape": [
+            1,
+            3,
+            16
+          ],
+          "sha256": "f2806115776586322ed2a268ce16068b14871a544702411e9634d55f7b420653"
+        },
+        "negative": {
+          "name": "euler/one-step/negative",
+          "shape": [
+            1,
+            3,
+            16
+          ],
+          "sha256": "8bd1a72ae12e269a178cd038188556ad1e7454c36a6a948704a27af925eeb650"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            2
+          ],
+          "sha256": "3c076e693c51f8000439e20c7107a4ee0a0f883f418fd78a2cf66a946a3a8e9c"
+        }
+      }
+    },
+    {
+      "id": "three-step-batch",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 3.5,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        1.5,
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/three-step-batch/latent",
+          "shape": [
+            2,
+            4,
+            4,
+            5
+          ],
+          "sha256": "17be7274548dc462d8a51d17c5a6777c26c5b3fbe23baa35d833c584c786d8f0"
+        },
+        "positive": {
+          "name": "euler/three-step-batch/positive",
+          "shape": [
+            2,
+            3,
+            16
+          ],
+          "sha256": "8d241885c5abeec8a3b44d4ee90b2eba34092b65edec4212f7cb2b0da2a8adf1"
+        },
+        "negative": {
+          "name": "euler/three-step-batch/negative",
+          "shape": [
+            2,
+            3,
+            16
+          ],
+          "sha256": "1b832124b44844683f182f3b1d9607472ee0bf0e125be136c713cc5be4c23516"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            4
+          ],
+          "sha256": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0"
+        }
+      }
+    },
+    {
+      "id": "unequal-separate",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 3.5,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        1.5,
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/unequal/latent",
+          "shape": [
+            2,
+            4,
+            4,
+            5
+          ],
+          "sha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe"
+        },
+        "positive": {
+          "name": "euler/unequal/positive",
+          "shape": [
+            2,
+            2,
+            16
+          ],
+          "sha256": "dd28df0175c3d9d77fbb387d47ae109b702f67e7fbf3fbb82b128fd609808a62"
+        },
+        "negative": {
+          "name": "euler/unequal/negative",
+          "shape": [
+            2,
+            3,
+            16
+          ],
+          "sha256": "6cdc8902c2a6619914e7d3a9d241b55000891722e4c0b7a2cf79d40be70083c3"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            4
+          ],
+          "sha256": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0"
+        }
+      }
+    },
+    {
+      "id": "unequal-concatenated",
+      "predictionKind": "epsilon",
+      "policy": "concatenateCompatible",
+      "scale": 3.5,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        1.5,
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/unequal/latent",
+          "shape": [
+            2,
+            4,
+            4,
+            5
+          ],
+          "sha256": "046c43fb050e4c53026774a911f391fbbf68698a45864d559d01953d30653ebe"
+        },
+        "positive": {
+          "name": "euler/unequal/positive",
+          "shape": [
+            2,
+            2,
+            16
+          ],
+          "sha256": "dd28df0175c3d9d77fbb387d47ae109b702f67e7fbf3fbb82b128fd609808a62"
+        },
+        "negative": {
+          "name": "euler/unequal/negative",
+          "shape": [
+            2,
+            3,
+            16
+          ],
+          "sha256": "6cdc8902c2a6619914e7d3a9d241b55000891722e4c0b7a2cf79d40be70083c3"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            4
+          ],
+          "sha256": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0"
+        }
+      }
+    },
+    {
+      "id": "near-one-null",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 1.0000000005,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/near-one/latent",
+          "shape": [
+            1,
+            4,
+            4,
+            5
+          ],
+          "sha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26"
+        },
+        "positive": {
+          "name": "euler/near-one/positive",
+          "shape": [
+            1,
+            2,
+            16
+          ],
+          "sha256": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            3
+          ],
+          "sha256": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2"
+        }
+      }
+    },
+    {
+      "id": "near-one-present",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 1.0000000005,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/near-one/latent",
+          "shape": [
+            1,
+            4,
+            4,
+            5
+          ],
+          "sha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26"
+        },
+        "positive": {
+          "name": "euler/near-one/positive",
+          "shape": [
+            1,
+            2,
+            16
+          ],
+          "sha256": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9"
+        },
+        "negative": {
+          "name": "euler/near-one/negative",
+          "shape": [
+            1,
+            3,
+            16
+          ],
+          "sha256": "b4c87e6514e6125ffa34b7767794a1059f0a1179393035dfc7f7ea54b4d65b44"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            3
+          ],
+          "sha256": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2"
+        }
+      }
+    },
+    {
+      "id": "near-one-disabled",
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 1.0000000005,
+      "disableScaleOneOptimization": true,
+      "sigmas": [
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/near-one/latent",
+          "shape": [
+            1,
+            4,
+            4,
+            5
+          ],
+          "sha256": "8636cfa3b7d03767964b32e7b3cbf65994c7da8f2dda28615944936622f92c26"
+        },
+        "positive": {
+          "name": "euler/near-one/positive",
+          "shape": [
+            1,
+            2,
+            16
+          ],
+          "sha256": "0e954f9c664eea6e273bef809886f5a430537da18f28b8ce8d628ae192c1d0b9"
+        },
+        "negative": {
+          "name": "euler/near-one/negative",
+          "shape": [
+            1,
+            3,
+            16
+          ],
+          "sha256": "b4c87e6514e6125ffa34b7767794a1059f0a1179393035dfc7f7ea54b4d65b44"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            3
+          ],
+          "sha256": "6d800fadef24ab68bfe62e8ee1f381618824d4b3d5a19569ca3e1f24d75c0de2"
+        }
+      }
+    },
+    {
+      "id": "velocity-three-step",
+      "predictionKind": "velocity",
+      "policy": "separate",
+      "scale": 3.5,
+      "disableScaleOneOptimization": false,
+      "sigmas": [
+        1.5,
+        0.5,
+        0.125,
+        0
+      ],
+      "inputs": {
+        "latent": {
+          "name": "euler/velocity/latent",
+          "shape": [
+            2,
+            4,
+            4,
+            5
+          ],
+          "sha256": "709a6371fec1ebdb3c58a8ace7d7b7f309747ebc051406274488bddd573386f0"
+        },
+        "positive": {
+          "name": "euler/velocity/positive",
+          "shape": [
+            2,
+            2,
+            16
+          ],
+          "sha256": "605bf47be1b48e3a82d39fe793770a94707e408935d408048a2b14bf14789c4f"
+        },
+        "negative": {
+          "name": "euler/velocity/negative",
+          "shape": [
+            2,
+            3,
+            16
+          ],
+          "sha256": "b4d96585ff0ef93e36ac509c1d5c821c680cc3c2291496e29470b7bc345737a9"
+        },
+        "sigmas": {
+          "name": "literal",
+          "shape": [
+            4
+          ],
+          "sha256": "a8a67be2a661b9959e58a72ae11e37f7f8b4029380f3f9d6553aa12eef138cc0"
+        }
+      }
+    }
+  ]
+}
