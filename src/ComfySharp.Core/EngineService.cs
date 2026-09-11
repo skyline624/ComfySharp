@@ -154,6 +154,7 @@ public sealed class EngineService(NodeRegistry registry)
             var data = prompt[id]!.AsObject();
             Registry.TryGet(data["class_type"]!.GetValue<string>(), out var node);
             var rawInputs = data["inputs"]!.AsObject();
+            var promptInputOrder = rawInputs.Select(p => p.Key).ToArray();
             using var nodeScope = new RuntimeNodeContext();
             var resolved = new Dictionary<string, IReadOnlyList<RuntimeValue>>(StringComparer.Ordinal);
             async Task Resolve(InputSchema input)
@@ -165,12 +166,12 @@ public sealed class EngineService(NodeRegistry registry)
             try
             {
                 foreach (var input in node.Schema.Inputs.Where(i => !i.Lazy)) await Resolve(input);
+                cancellationToken.ThrowIfCancellationRequested();
                 IReadOnlyCollection<string> lazyNames;
                 using (var lazyScope = new RuntimeNodeContext())
                 {
-                    var lazySnapshot = resolved.ToDictionary(p => p.Key,
-                        p => (IReadOnlyList<RuntimeValue>)Array.AsReadOnly(p.Value.Select(lazyScope.Retain).ToArray()), StringComparer.Ordinal);
-                    lazyNames = node.GetRequiredLazyInputs(lazySnapshot).ToArray();
+                    var lazySnapshot = LazySnapshot(lazyScope, resolved, node.Schema.InputIsList);
+                    lazyNames = lazySnapshot is null ? [] : node.GetRequiredLazyInputs(lazySnapshot).ToArray();
                 }
                 foreach (var name in lazyNames.Distinct(StringComparer.Ordinal))
                 {
@@ -195,18 +196,35 @@ public sealed class EngineService(NodeRegistry registry)
                         else if (values.Count != 0) invocation[name] = invocationScope.Retain(values[Math.Min(index, values.Count - 1)]);
                         else if (resolved.Values.Any(v => v.Count != 0)) throw new InvalidOperationException("Cannot repeat the last item of an empty execution list.");
                     }
-                    var returned = await node.ExecuteAsync(invocationScope, invocation, cancellationToken);
+                    var block = FirstBlocker(invocation, promptInputOrder, node.Schema.InputIsList);
+                    NodeExecutionOutput returned;
+                    if (block is not null)
+                    {
+                        if (block.Message is not null)
+                        {
+                            string message = $"Execution Blocked: {block.Message}";
+                            diagnostics.Add(new("execution_blocked", message, id));
+                            await Emit("execution_error", id, message);
+                        }
+                        cancellationToken.ThrowIfCancellationRequested();
+                        // Consume a message at this invocation, never mutate the memoized producer.
+                        returned = NodeExecutionOutput.Blocked();
+                    }
+                    else returned = await node.ExecuteAsync(invocationScope, invocation, cancellationToken);
                     if (returned.Ui is not null) invocationUis.Add(UiDocument.Snapshot(returned.Ui));
                     cancellationToken.ThrowIfCancellationRequested();
-                    if (returned.Result.Count != output.Length) throw new InvalidOperationException("Node returned an incorrect output count.");
+                    var returnedValues = returned.BlockExecution is { } wholeCall
+                        ? Enumerable.Range(0, output.Length).Select(_ => invocationScope.Blocker(wholeCall.Message)).ToArray()
+                        : returned.Result;
+                    if (returnedValues.Count != output.Length) throw new InvalidOperationException("Node returned an incorrect output count.");
                     for (var slot = 0; slot < output.Length; slot++)
                     {
-                        if (node.Schema.Outputs[slot].IsList)
+                        if (node.Schema.Outputs[slot].IsList && returnedValues[slot].Kind != RuntimeValueKind.Blocker)
                         {
-                            if (returned.Result[slot].Kind != RuntimeValueKind.List) throw new InvalidOperationException("List output must be an execution list.");
-                            foreach (var value in returned.Result[slot].Items) output[slot].Add(nodeScope.Retain(value));
+                            if (returnedValues[slot].Kind != RuntimeValueKind.List) throw new InvalidOperationException("List output must be an execution list.");
+                            foreach (var value in returnedValues[slot].Items) output[slot].Add(nodeScope.Retain(value));
                         }
-                        else output[slot].Add(nodeScope.Retain(returned.Result[slot]));
+                        else output[slot].Add(nodeScope.Retain(returnedValues[slot]));
                     }
                 }
                 var ui = MergeUi(invocationUis);
@@ -253,6 +271,40 @@ public sealed class EngineService(NodeRegistry registry)
         // cannot attempt a second handoff from leases that were already transferred and released.
         return await CompleteWithEvent(status, status == "cancelled" ? "execution_interrupted"
             : status == "success" ? "execution_success" : "execution_failed");
+    }
+
+    private static ExecutionBlocker? FirstBlocker(IReadOnlyDictionary<string, RuntimeValue> inputs,
+        IReadOnlyList<string> promptOrder, bool inputIsList)
+    {
+        foreach (var name in promptOrder)
+        {
+            if (!inputs.TryGetValue(name, out var value)) continue;
+            if (value.Kind == RuntimeValueKind.Blocker) return value.Blocker;
+            if (inputIsList && value.Kind == RuntimeValueKind.List)
+                foreach (var item in value.Items)
+                    if (item.Kind == RuntimeValueKind.Blocker) return item.Blocker;
+        }
+        return null;
+    }
+
+    private static IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>>? LazySnapshot(RuntimeNodeContext scope,
+        IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolved, bool inputIsList)
+    {
+        bool hasBlocker = resolved.Values.Any(values => values.Any(v => v.Kind == RuntimeValueKind.Blocker));
+        if (!hasBlocker)
+            return resolved.ToDictionary(p => p.Key,
+                p => (IReadOnlyList<RuntimeValue>)Array.AsReadOnly(p.Value.Select(scope.Retain).ToArray()), StringComparer.Ordinal);
+        if (inputIsList) return null;
+        int count = resolved.Values.Max(values => values.Count);
+        if (resolved.Values.Any(values => values.Count == 0))
+            throw new InvalidOperationException("Cannot repeat the last item of an empty execution list.");
+        // Slice all inputs together before removing blocked rows. Independent list
+        // filtering would shift pairings and could request an unrelated lazy branch.
+        var activeRows = Enumerable.Range(0, count).Where(index => resolved.Values.All(values =>
+            values[Math.Min(index, values.Count - 1)].Kind != RuntimeValueKind.Blocker)).ToArray();
+        if (activeRows.Length == 0) return null;
+        return resolved.ToDictionary(p => p.Key, p => (IReadOnlyList<RuntimeValue>)Array.AsReadOnly(activeRows
+            .Select(index => scope.Retain(p.Value[Math.Min(index, p.Value.Count - 1)])).ToArray()), StringComparer.Ordinal);
     }
 
     private static JsonObject MergeUi(IReadOnlyList<JsonObject> invocations)

@@ -3,11 +3,15 @@ using System.Text.Json.Nodes;
 
 namespace ComfySharp.Contracts;
 
-public enum RuntimeValueKind { Json, Native, List, Map }
+public enum RuntimeValueKind { Json, Native, List, Map, Blocker }
+
+/// <summary>A control value, distinct from JSON null. A null message blocks silently.</summary>
+public sealed record ExecutionBlocker(string? Message = null);
 
 public sealed class RuntimeValueProjectionException : InvalidOperationException
 {
     public RuntimeValueProjectionException() : base("Native execution values cannot be projected to JSON. Select a node that produces JSON output.") { }
+    public RuntimeValueProjectionException(string message) : base(message) { }
 }
 
 /// <summary>A disposable lease. JSON snapshots are copied; native resources are shared until the final lease is disposed.</summary>
@@ -17,16 +21,19 @@ public sealed class RuntimeValue : IDisposable
     private readonly RuntimeValueKind kind;
     private readonly JsonNode? json;
     private readonly NativeOwner? native;
+    private readonly ExecutionBlocker? blocker;
     private readonly IReadOnlyList<RuntimeValue>? items;
     private readonly IReadOnlyDictionary<string, RuntimeValue>? properties;
     private bool disposed;
 
     private RuntimeValue(JsonNode? value) { kind = RuntimeValueKind.Json; json = value?.DeepClone(); }
     private RuntimeValue(NativeOwner value) { kind = RuntimeValueKind.Native; native = value; }
+    private RuntimeValue(ExecutionBlocker value) { kind = RuntimeValueKind.Blocker; blocker = value; }
     private RuntimeValue(IReadOnlyList<RuntimeValue> value) { kind = RuntimeValueKind.List; items = value; }
     private RuntimeValue(IReadOnlyDictionary<string, RuntimeValue> value) { kind = RuntimeValueKind.Map; properties = value; }
 
     public RuntimeValueKind Kind { get { lock (gate) { ThrowIfDisposed(); return kind; } } }
+    public ExecutionBlocker Blocker { get { lock (gate) { ThrowIfDisposed(); return blocker ?? throw new InvalidOperationException("Value is not an execution blocker."); } } }
     /// <summary>Borrowed child leases, valid while this container is alive. Retain a child to keep it separately.</summary>
     public IReadOnlyList<RuntimeValue> Items { get { lock (gate) { ThrowIfDisposed(); return items ?? throw new InvalidOperationException("Value is not an execution list."); } } }
     public IReadOnlyDictionary<string, RuntimeValue> Properties { get { lock (gate) { ThrowIfDisposed(); return properties ?? throw new InvalidOperationException("Value is not a map."); } } }
@@ -46,6 +53,7 @@ public sealed class RuntimeValue : IDisposable
                 RuntimeValueKind.Json => json?.DeepClone(),
                 RuntimeValueKind.List => new JsonArray(items!.Select(v => v.ToJson()).ToArray()),
                 RuntimeValueKind.Map => new JsonObject(properties!.Select(p => new KeyValuePair<string, JsonNode?>(p.Key, p.Value.ToJson()))),
+                RuntimeValueKind.Blocker => throw new RuntimeValueProjectionException("Execution blockers cannot be projected to JSON. Use typed execution values or UI execution."),
                 _ => throw new RuntimeValueProjectionException()
             };
         }
@@ -59,6 +67,7 @@ public sealed class RuntimeValue : IDisposable
             if (native is not null) { native.Retain(); return new(native); }
             if (items is not null) return FromList(items);
             if (properties is not null) return FromMap(properties);
+            if (blocker is not null) return FromBlocker(blocker.Message);
             return FromJson(json);
         }
     }
@@ -76,6 +85,7 @@ public sealed class RuntimeValue : IDisposable
     }
 
     internal static RuntimeValue FromJson(JsonNode? value) => new(value);
+    internal static RuntimeValue FromBlocker(string? message) => new(new ExecutionBlocker(message));
     internal static RuntimeValue Own(IDisposable value) => new(new NativeOwner(value));
     internal static RuntimeValue FromList(IEnumerable<RuntimeValue> values)
     {
@@ -130,6 +140,7 @@ public sealed class RuntimeNodeContext : IDisposable
     private bool disposed;
 
     public RuntimeValue Json(JsonNode? value) { lock (gate) { ThrowIfDisposed(); return Track(RuntimeValue.FromJson(value)); } }
+    public RuntimeValue Blocker(string? message = null) { lock (gate) { ThrowIfDisposed(); return Track(RuntimeValue.FromBlocker(message)); } }
     /// <summary>Transfers sole resource ownership to this scope. Register allocations immediately, before any await or operation that can fail.</summary>
     public RuntimeValue Own<T>(T resource) where T : class, IDisposable
     {

@@ -21,7 +21,14 @@ public sealed record ExecutionResult(string Status,
 public sealed record UiExecutionResult(string Status, Dictionary<string, JsonObject> Outputs,
     Dictionary<string, NodeExecutionIdentity> Meta, IReadOnlyList<EngineDiagnostic> Diagnostics);
 /// <summary>Borrowed execution slots and an explicit UI document. The engine copies the UI on receipt.</summary>
-public sealed record NodeExecutionOutput(IReadOnlyList<RuntimeValue> Result, JsonObject? Ui = null);
+public sealed record NodeExecutionOutput(IReadOnlyList<RuntimeValue> Result, JsonObject? Ui = null)
+{
+    /// <summary>When present, replaces Result with a blocker in every declared output slot.
+    /// Its null Message is a silent block, not absence of this control value.</summary>
+    public ExecutionBlocker? BlockExecution { get; init; }
+    public static NodeExecutionOutput Blocked(string? message = null, JsonObject? ui = null) =>
+        new([], ui) { BlockExecution = new(message) };
+}
 
 /// <summary>Inputs and returned values are borrowed for the invocation. Allocate resources through the supplied context.</summary>
 public interface IRuntimeNode
@@ -29,7 +36,9 @@ public interface IRuntimeNode
     NodeSchema Schema { get; }
     ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
         IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken);
-    /// <summary>Resolved values are execution lists, not literal arrays. All values are borrowed for this call.</summary>
+    /// <summary>Resolved values are execution lists, not literal arrays. All values are borrowed for this call.
+    /// When mapped rows are blocked, only jointly sliced unblocked rows are supplied; an entirely
+    /// blocked call skips this hook. Return the union of lazy names required by the supplied rows.</summary>
     IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) => [];
 }
 
