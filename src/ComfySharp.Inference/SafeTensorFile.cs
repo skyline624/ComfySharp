@@ -115,6 +115,7 @@ public sealed class SafeTensorFile : IDisposable
             var values = new float[bytes.Length / 4];
             for (int i = 0; i < values.Length; i++) values[i] = BinaryPrimitives.ReadSingleLittleEndian(bytes.AsSpan(i * 4, 4));
             cancellationToken.ThrowIfCancellationRequested();
+            NativeRuntimeBootstrap.Initialize();
             using var scope = torch.NewDisposeScope();
             var result = materialize(values, info.Shape.ToArray());
             cancellationToken.ThrowIfCancellationRequested();

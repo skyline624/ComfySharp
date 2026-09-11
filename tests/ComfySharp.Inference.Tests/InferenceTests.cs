@@ -66,8 +66,24 @@ public sealed class InferenceTests
     }
 
     [Fact]
+    public void MetadataAndCancelledReadsDoNotRequireNativeInitialization()
+    {
+        string path = Fixture("{\"__metadata__\":{\"format\":\"pt\"},\"a\":{\"dtype\":\"F32\",\"shape\":[1],\"data_offsets\":[0,4]}}");
+        try
+        {
+            using var file = new SafeTensorFile(path);
+            Assert.Equal("pt", file.Metadata["format"]);
+            Assert.Equal("F32", file.Tensors["a"].DType);
+            Assert.Equal(new long[] { 1 }, file.Tensors["a"].Shape);
+            Assert.Throws<OperationCanceledException>(() => file.ReadFloat32("a", new(true)));
+        }
+        finally { File.Delete(path); }
+    }
+
+    [Fact]
     public void Float32TensorOwnsStorageAfterFileDisposal()
     {
+        NativeRuntimeBootstrap.Initialize();
         var bytes = new byte[8];
         BinaryPrimitives.WriteSingleLittleEndian(bytes, 1.25f);
         BinaryPrimitives.WriteSingleLittleEndian(bytes.AsSpan(4), -3.5f);
@@ -90,6 +106,7 @@ public sealed class InferenceTests
     [Fact]
     public void EmptyAndScalarTensorsAreValidAndCancellationIsHonored()
     {
+        NativeRuntimeBootstrap.Initialize();
         string path = Fixture("{\"empty\":{\"dtype\":\"F32\",\"shape\":[0],\"data_offsets\":[0,0]},\"scalar\":{\"dtype\":\"F32\",\"shape\":[],\"data_offsets\":[0,4]}}");
         try
         {
@@ -105,6 +122,7 @@ public sealed class InferenceTests
     [Fact]
     public void CancellationDuringMaterializationDisposesNativeResult()
     {
+        NativeRuntimeBootstrap.Initialize();
         string path = Fixture("{\"a\":{\"dtype\":\"F32\",\"shape\":[1],\"data_offsets\":[0,4]}}");
         try
         {
@@ -128,6 +146,7 @@ public sealed class InferenceTests
     [Fact]
     public void NativeRngIsRepeatableAndSeedSensitive()
     {
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         var a = NativeMath.CpuNoise(new long[] { 32 }, 123);
         var b = NativeMath.CpuNoise(new long[] { 32 }, 123);
@@ -140,6 +159,7 @@ public sealed class InferenceTests
     [Fact]
     public void EulerHasKnownValuesAndDoesNotMutateInputs()
     {
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         var x = tensor(new float[] { 4, 8 }); var denoised = tensor(new float[] { 2, 4 });
         Assert.Equal(new float[] { 3, 6 }, NativeMath.EulerStep(x, denoised, 2, 1).data<float>().ToArray());
@@ -153,6 +173,7 @@ public sealed class InferenceTests
     [Fact]
     public void NativeGradientOptimizerAndViewLifetime()
     {
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         var p = nn.Parameter(tensor(new float[] { 2 }));
         using var optimizer = optim.SGD(new[] { p }, 0.1);

@@ -11,6 +11,7 @@ public static class NativeMath
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(shape);
         if (shape.Any(d => d < 0)) throw new ArgumentOutOfRangeException(nameof(shape));
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         using var generator = new Generator(seed, CPU);
         var result = randn(shape, generator: generator, dtype: ScalarType.Float32, device: CPU);
@@ -26,6 +27,7 @@ public static class NativeMath
         cancellationToken.ThrowIfCancellationRequested();
         if (!double.IsFinite(sigma) || sigma <= 0 || !double.IsFinite(nextSigma) || nextSigma < 0 || nextSigma > sigma)
             throw new ArgumentOutOfRangeException(nameof(sigma));
+        NativeRuntimeBootstrap.Initialize();
         if (!x.shape.SequenceEqual(denoised.shape) || x.dtype != denoised.dtype || x.device.ToString() != denoised.device.ToString())
             throw new ArgumentException("Inputs must have matching shapes, dtype and device.");
         if (x.dtype is not (ScalarType.Float32 or ScalarType.Float64)) throw new NotSupportedException("Euler foundation supports F32/F64.");

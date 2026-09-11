@@ -4,7 +4,7 @@
 
 | Composant | Disponible | Limites |
 |---|---|---|
-| Dépôt/socle | Solution .NET 10, paquets centralisés, verrous, GPLv3, CI proposée trois OS | Compilation Windows vérifiée ; résultats CI distants à confirmer |
+| Dépôt/socle | Dépôt public indépendant, solution .NET 10, paquets centralisés, verrous, GPLv3, CI trois OS | Clone propre vérifié ; CI Windows/Linux réussie, qualification native macOS en cours |
 | Moteur | Validation/diagnostics, cibles indépendantes, listes/repeat-last, async, lazy initial, annulation et mémoïsation isolée par job | Valeurs actuellement JSON ; expansion, bloqueurs, sous-graphes et caches persistants à porter |
 | Nœuds | 5 Primitive*, 6 fonctions String/JSON, ComfyNotNode, ComfySwitchNode | 13 identifiants sur le catalogue ; aucun nœud modèle |
 | Documents | Import/export préservant champs inconnus, édition/undo, compilation conservatrice | Cas non pris en charge refusés explicitement ; pas de compilateur frontend complet |

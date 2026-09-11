@@ -7,7 +7,8 @@ Campagne du 11 septembre 2026, sources de la première tranche 0.1.0-dev. Ces r�
 | Windows x64, SDK .NET 10.0.300 | Compilation Host, Core, Workflow, Inference, Desktop et tests |
 | TorchSharp 0.107.0.0 / libtorch CPU 2.10.0 | Opérations natives, lecteur F32, RNG par générateur, Euler élémentaire, gradients et mise à jour SGD |
 | NVIDIA GeForce RTX 3090, 24 576 MiB, pilote 610.88, libtorch CUDA 12.8 / 2.10.0 | 25 répétitions GPU réelles, résultats ci-dessous |
-| Linux x64 CPU et macOS arm64 CPU | Verrous de dépendances restaurés depuis Windows ; aucune exécution locale sur ces OS |
+| Linux x64 CPU | Tests et probe natif exécutés avec succès sur le runner Ubuntu 24.04 |
+| macOS 14 ARM64 CPU | Compilation réussie ; défaut de chargement OpenMP identifié, correction et tests de calcul en cours |
 | Linux NVIDIA et macOS MPS | Non qualifiés |
 
 Commande de probe : `dotnet run --project tools/ComfySharp.RuntimeProbe -p:NativeBackend=cuda --artifacts-path artifacts/cuda -- --device cuda --repeat 25`. Pour CPU : omettre la propriété CUDA et employer `--device cpu`. Le test vérifie l'emplacement GPU réel des tenseurs et synchronise CUDA avant observation mémoire.
@@ -34,3 +35,11 @@ Les verrous `packages.<runtime>.cpu.lock.json` existent pour les deux projets na
 Après revue et corrections, les suites locales comptent **164 tests réussis, aucun ignoré** : Core 47, Host/Catalog 71, Inference 23, Workflow 17, Desktop Headless 6. Elles couvrent notamment les régressions d'annulation HTTP chunked, de conservation des valeurs lazy, de clés JSON dupliquées, d'annulation après allocation native, de sauvegarde asynchrone et d'IDs numériques équivalents.
 
 Une construction Windows autonome de Desktop et Host a aussi réussi son `--smoke-test` avec `PATH` limité à `Windows/System32`, sans override du chemin Host : lancement du Host voisin, health/catalogue, exécution réelle d'un nœud texte, lecture du résultat, fermeture. Cela prouve ce parcours local du socle ; une installation sur machine propre et la qualification V1 restent à faire. La publication des binaires attend la clôture des notices et de l'inventaire de leurs composants.
+
+Le premier commit public [`b0a299c`](https://github.com/skyline624/ComfySharp/commit/b0a299c460b01de5bc486ec06d4e5a550dec338b) a été cloné dans un dossier indépendant, sans lien vers le dépôt parent. Ce clone a restauré les dépendances verrouillées, compilé la solution sans avertissement, passé les 164 tests et exécuté le parcours Desktop → Host → résultat texte. Son état Git est resté propre.
+
+La [campagne CI `c790c79`](https://github.com/skyline624/ComfySharp/actions/runs/34601071274) a passé les 164 tests, le contrôle du catalogue et 25 répétitions du probe CPU sur Windows Server 2025 et Ubuntu 24.04. Windows Server en CI complète la vérification locale Windows 11 ; il ne remplace pas les tests d'installation sur la plateforme cible. macOS 14 a restauré et compilé, puis échoué sur six tests natifs : `libtorch_cpu.dylib` recherchait OpenMP au chemin absolu `/opt/homebrew/opt/libomp/lib/libomp.dylib`.
+
+Dans la [campagne de diagnostic `295ad14`](https://github.com/skyline624/ComfySharp/actions/runs/34601732349), le préchargement explicite de la copie fournie de `libomp.dylib`, suivi du bridge, a réussi sur macOS 14.8.9 ARM64 sans installation Homebrew. Cette expérience ne qualifie que le chargement des bibliothèques ; les tests de calcul restent obligatoires après intégration. Le bridge NuGet porte une cible minimale macOS 15 dans ses métadonnées : ce point reste à traiter pour une distribution officiellement qualifiée macOS 14, même si le chargeur a accepté ce binaire pendant l'expérience.
+
+La [construction des archives du premier commit](https://github.com/skyline624/ComfySharp/actions/runs/34602207188) a réussi sur les trois runners : restaurations verrouillées, publication autonome du Host et de Desktop, sommes SHA-256, archives `tar.gz` et contrôle des permissions exécutables Unix. Aucun binaire n'a été téléversé. Ce contrôle ne lance pas les applications sur Linux/macOS et ne contient aucun moteur de modèle ; il ne vaut pas qualification d'installation ou de génération.

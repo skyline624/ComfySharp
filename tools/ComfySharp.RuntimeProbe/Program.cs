@@ -18,6 +18,7 @@ try
     if (repeats is < 1 or > 1000) throw new ArgumentOutOfRangeException(nameof(repeats));
     if (requested is not ("cpu" or "cuda" or "mps")) throw new ArgumentException("Unknown backend.");
     if (requested == "mps") throw new PlatformNotSupportedException("MPS has not been implemented or qualified in this probe.");
+    NativeRuntimeBootstrap.Initialize();
     if (requested == "cuda" && !cuda.is_available()) throw new PlatformNotSupportedException("CUDA unavailable; this probe ships CPU libtorch by default.");
     var device = requested == "cpu" ? CPU : CUDA;
     var memory = new List<long>();
