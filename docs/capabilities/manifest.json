@@ -7,6 +7,75 @@
   "method": "Pinned source catalogue: original static declarations retained with their implementation/evidence statuses; ordered built-in loader paths, legacy mapping mutations, entrypoints and inherited/mutated schemas reconciled as source candidates in companion JSON. Runtime import/finalization, dynamic parameter providers, model/encoder/VAE/widget variants and reference scenarios remain unqualified. Remote nodes remain excluded.",
   "capabilities": [
     {
+      "id": "text-tokenizer:clip-sd1-l",
+      "name": "SD1 CLIP-L text tokenization",
+      "kind": "text-tokenizer",
+      "scope": "local",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_clip.py#L486",
+      "parametersStatus": "text-profile-specified",
+      "dependencyProfile": "clip-transformers-5.14.1-tokenizers-0.22.2",
+      "implementation": "implemented",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "scenario": "text-reference:clip-sd1-l",
+      "limits": "Text IDs, weights, word IDs and packing only. Textual inversion, encoder states and model workflows remain separate unqualified capabilities."
+    },
+    {
+      "id": "text-tokenizer:clip-sdxl-l",
+      "name": "SDXL CLIP-L text tokenization",
+      "kind": "text-tokenizer",
+      "scope": "local",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sdxl_clip.py#L24",
+      "parametersStatus": "text-profile-specified",
+      "dependencyProfile": "clip-transformers-5.14.1-tokenizers-0.22.2",
+      "implementation": "implemented",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "scenario": "text-reference:clip-sdxl-l",
+      "limits": "Text-only L profile and G/L composition; no encoder, textual inversion or SDXL model qualification."
+    },
+    {
+      "id": "text-tokenizer:clip-sdxl-g",
+      "name": "SDXL CLIP-G text tokenization",
+      "kind": "text-tokenizer",
+      "scope": "local",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sdxl_clip.py#L19",
+      "parametersStatus": "text-profile-specified",
+      "dependencyProfile": "clip-transformers-5.14.1-tokenizers-0.22.2",
+      "implementation": "implemented",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "scenario": "text-reference:clip-sdxl-g",
+      "limits": "Text-only G profile with zero padding and G/L composition; no encoder, textual inversion or SDXL model qualification."
+    },
+    {
       "id": "node:ClaudeNode:comfy_api_nodes/nodes_anthropic.py:153",
       "name": "ClaudeNode",
       "kind": "node",

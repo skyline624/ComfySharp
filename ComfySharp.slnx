@@ -8,6 +8,7 @@
     <Project Path="src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
     <Project Path="src/ComfySharp.Nodes.Tensor/ComfySharp.Nodes.Tensor.csproj" />
     <Project Path="src/ComfySharp.Storage/ComfySharp.Storage.csproj" />
+    <Project Path="src/ComfySharp.Tokenization/ComfySharp.Tokenization.csproj" />
     <Project Path="src/ComfySharp.Workflow/ComfySharp.Workflow.csproj" />
   </Folder>
   <Folder Name="/tests/">
@@ -15,6 +16,7 @@
     <Project Path="tests/ComfySharp.Desktop.Tests/ComfySharp.Desktop.Tests.csproj" />
     <Project Path="tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj" />
     <Project Path="tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj" />
+    <Project Path="tests/ComfySharp.Tokenization.Tests/ComfySharp.Tokenization.Tests.csproj" />
     <Project Path="tests/ComfySharp.Workflow.Tests/ComfySharp.Workflow.Tests.csproj" />
   </Folder>
   <Folder Name="/tools/">
@@ -22,5 +24,6 @@
     <Project Path="tools/ComfySharp.ModelInspect/ComfySharp.ModelInspect.csproj" />
     <Project Path="tools/ComfySharp.NativeLoader/ComfySharp.NativeLoader.csproj" />
     <Project Path="tools/ComfySharp.RuntimeProbe/ComfySharp.RuntimeProbe.csproj" />
+    <Project Path="tools/ComfySharp.Tokenize/ComfySharp.Tokenize.csproj" />
   </Folder>
 </Solution>

@@ -61,6 +61,23 @@ jobs:
               $report.sha256 -ne '2d8ae1aabaeaad341c2fc30cfd9af025506805fb6e83a70c3be61dbec952c47a') {
             throw 'Metadata inspection did not reproduce the fixture contract.'
           }
+      # The text tokenizer is exercised separately so its embedded resources and
+      # dependency isolation are checked outside a testhost and tensor runtime.
+      - name: Tokenize CLIP text in a fresh process without libtorch
+        shell: pwsh
+        run: |
+          $cli = Join-Path $env:GITHUB_WORKSPACE 'tools/ComfySharp.Tokenize/bin/Release/net10.0/ComfySharp.Tokenize.dll'
+          $torch = Get-ChildItem -LiteralPath (Split-Path -Parent $cli) -File -Recurse | Where-Object Name -Match 'torch'
+          if ($torch) { throw 'Text tokenizer unexpectedly contains Torch dependencies.' }
+          $output = & dotnet $cli --text a --profile sdxl
+          if ($LASTEXITCODE -ne 0) { throw 'CLIP text diagnostic failed.' }
+          $report = $output | ConvertFrom-Json
+          if ($report.status -ne 'ok' -or ($report.ids -join ',') -ne '49406,320,49407' -or
+              $report.outputs.g[0].Count -ne 77 -or $report.outputs.g[0][76].id -ne 0 -or
+              $report.outputs.l[0][76].id -ne 49407 -or $report.modelCompatibility -ne 'not_assessed') {
+            throw 'CLIP text diagnostic did not reproduce the source contract.'
+          }
+          Write-Output 'CLIP text diagnostic passed: exact IDs, SDXL G/L padding, no Torch dependencies.'
       - name: Start native Desktop and its supervised Host
         timeout-minutes: 3
         shell: pwsh

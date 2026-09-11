@@ -1,0 +1,2185 @@
+{
+  "schemaVersion": 1,
+  "profile": "clip-transformers-5.14.1-tokenizers-0.22.2",
+  "source": "https://github.com/huggingface/transformers/blob/a08ace4bbd97e721c98751deec37d87b026acadc/src/transformers/models/clip/tokenization_clip.py",
+  "vocabularySha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349",
+  "method": "Decode valid vocabulary IDs using the exact reference dependency with local assets. Byte-level IDs deliberately include incomplete or invalid UTF-8 sequences.",
+  "cases": [
+    {
+      "id": "byte-00",
+      "ids": [
+        188
+      ],
+      "decode": "\u0000",
+      "decodeWithSpecial": "\u0000"
+    },
+    {
+      "id": "byte-01",
+      "ids": [
+        189
+      ],
+      "decode": "\u0001",
+      "decodeWithSpecial": "\u0001"
+    },
+    {
+      "id": "byte-02",
+      "ids": [
+        190
+      ],
+      "decode": "\u0002",
+      "decodeWithSpecial": "\u0002"
+    },
+    {
+      "id": "byte-03",
+      "ids": [
+        191
+      ],
+      "decode": "\u0003",
+      "decodeWithSpecial": "\u0003"
+    },
+    {
+      "id": "byte-04",
+      "ids": [
+        192
+      ],
+      "decode": "\u0004",
+      "decodeWithSpecial": "\u0004"
+    },
+    {
+      "id": "byte-05",
+      "ids": [
+        193
+      ],
+      "decode": "\u0005",
+      "decodeWithSpecial": "\u0005"
+    },
+    {
+      "id": "byte-06",
+      "ids": [
+        194
+      ],
+      "decode": "\u0006",
+      "decodeWithSpecial": "\u0006"
+    },
+    {
+      "id": "byte-07",
+      "ids": [
+        195
+      ],
+      "decode": "\u0007",
+      "decodeWithSpecial": "\u0007"
+    },
+    {
+      "id": "byte-08",
+      "ids": [
+        196
+      ],
+      "decode": "\b",
+      "decodeWithSpecial": "\b"
+    },
+    {
+      "id": "byte-09",
+      "ids": [
+        197
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-0a",
+      "ids": [
+        198
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-0b",
+      "ids": [
+        199
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-0c",
+      "ids": [
+        200
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-0d",
+      "ids": [
+        201
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-0e",
+      "ids": [
+        202
+      ],
+      "decode": "\u000e",
+      "decodeWithSpecial": "\u000e"
+    },
+    {
+      "id": "byte-0f",
+      "ids": [
+        203
+      ],
+      "decode": "\u000f",
+      "decodeWithSpecial": "\u000f"
+    },
+    {
+      "id": "byte-10",
+      "ids": [
+        204
+      ],
+      "decode": "\u0010",
+      "decodeWithSpecial": "\u0010"
+    },
+    {
+      "id": "byte-11",
+      "ids": [
+        205
+      ],
+      "decode": "\u0011",
+      "decodeWithSpecial": "\u0011"
+    },
+    {
+      "id": "byte-12",
+      "ids": [
+        206
+      ],
+      "decode": "\u0012",
+      "decodeWithSpecial": "\u0012"
+    },
+    {
+      "id": "byte-13",
+      "ids": [
+        207
+      ],
+      "decode": "\u0013",
+      "decodeWithSpecial": "\u0013"
+    },
+    {
+      "id": "byte-14",
+      "ids": [
+        208
+      ],
+      "decode": "\u0014",
+      "decodeWithSpecial": "\u0014"
+    },
+    {
+      "id": "byte-15",
+      "ids": [
+        209
+      ],
+      "decode": "\u0015",
+      "decodeWithSpecial": "\u0015"
+    },
+    {
+      "id": "byte-16",
+      "ids": [
+        210
+      ],
+      "decode": "\u0016",
+      "decodeWithSpecial": "\u0016"
+    },
+    {
+      "id": "byte-17",
+      "ids": [
+        211
+      ],
+      "decode": "\u0017",
+      "decodeWithSpecial": "\u0017"
+    },
+    {
+      "id": "byte-18",
+      "ids": [
+        212
+      ],
+      "decode": "\u0018",
+      "decodeWithSpecial": "\u0018"
+    },
+    {
+      "id": "byte-19",
+      "ids": [
+        213
+      ],
+      "decode": "\u0019",
+      "decodeWithSpecial": "\u0019"
+    },
+    {
+      "id": "byte-1a",
+      "ids": [
+        214
+      ],
+      "decode": "\u001a",
+      "decodeWithSpecial": "\u001a"
+    },
+    {
+      "id": "byte-1b",
+      "ids": [
+        215
+      ],
+      "decode": "\u001b",
+      "decodeWithSpecial": "\u001b"
+    },
+    {
+      "id": "byte-1c",
+      "ids": [
+        216
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-1d",
+      "ids": [
+        217
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-1e",
+      "ids": [
+        218
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-1f",
+      "ids": [
+        219
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-20",
+      "ids": [
+        220
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-21",
+      "ids": [
+        0
+      ],
+      "decode": "!",
+      "decodeWithSpecial": "!"
+    },
+    {
+      "id": "byte-22",
+      "ids": [
+        1
+      ],
+      "decode": "\"",
+      "decodeWithSpecial": "\""
+    },
+    {
+      "id": "byte-23",
+      "ids": [
+        2
+      ],
+      "decode": "#",
+      "decodeWithSpecial": "#"
+    },
+    {
+      "id": "byte-24",
+      "ids": [
+        3
+      ],
+      "decode": "$",
+      "decodeWithSpecial": "$"
+    },
+    {
+      "id": "byte-25",
+      "ids": [
+        4
+      ],
+      "decode": "%",
+      "decodeWithSpecial": "%"
+    },
+    {
+      "id": "byte-26",
+      "ids": [
+        5
+      ],
+      "decode": "&",
+      "decodeWithSpecial": "&"
+    },
+    {
+      "id": "byte-27",
+      "ids": [
+        6
+      ],
+      "decode": "'",
+      "decodeWithSpecial": "'"
+    },
+    {
+      "id": "byte-28",
+      "ids": [
+        7
+      ],
+      "decode": "(",
+      "decodeWithSpecial": "("
+    },
+    {
+      "id": "byte-29",
+      "ids": [
+        8
+      ],
+      "decode": ")",
+      "decodeWithSpecial": ")"
+    },
+    {
+      "id": "byte-2a",
+      "ids": [
+        9
+      ],
+      "decode": "*",
+      "decodeWithSpecial": "*"
+    },
+    {
+      "id": "byte-2b",
+      "ids": [
+        10
+      ],
+      "decode": "+",
+      "decodeWithSpecial": "+"
+    },
+    {
+      "id": "byte-2c",
+      "ids": [
+        11
+      ],
+      "decode": ",",
+      "decodeWithSpecial": ","
+    },
+    {
+      "id": "byte-2d",
+      "ids": [
+        12
+      ],
+      "decode": "-",
+      "decodeWithSpecial": "-"
+    },
+    {
+      "id": "byte-2e",
+      "ids": [
+        13
+      ],
+      "decode": ".",
+      "decodeWithSpecial": "."
+    },
+    {
+      "id": "byte-2f",
+      "ids": [
+        14
+      ],
+      "decode": "/",
+      "decodeWithSpecial": "/"
+    },
+    {
+      "id": "byte-30",
+      "ids": [
+        15
+      ],
+      "decode": "0",
+      "decodeWithSpecial": "0"
+    },
+    {
+      "id": "byte-31",
+      "ids": [
+        16
+      ],
+      "decode": "1",
+      "decodeWithSpecial": "1"
+    },
+    {
+      "id": "byte-32",
+      "ids": [
+        17
+      ],
+      "decode": "2",
+      "decodeWithSpecial": "2"
+    },
+    {
+      "id": "byte-33",
+      "ids": [
+        18
+      ],
+      "decode": "3",
+      "decodeWithSpecial": "3"
+    },
+    {
+      "id": "byte-34",
+      "ids": [
+        19
+      ],
+      "decode": "4",
+      "decodeWithSpecial": "4"
+    },
+    {
+      "id": "byte-35",
+      "ids": [
+        20
+      ],
+      "decode": "5",
+      "decodeWithSpecial": "5"
+    },
+    {
+      "id": "byte-36",
+      "ids": [
+        21
+      ],
+      "decode": "6",
+      "decodeWithSpecial": "6"
+    },
+    {
+      "id": "byte-37",
+      "ids": [
+        22
+      ],
+      "decode": "7",
+      "decodeWithSpecial": "7"
+    },
+    {
+      "id": "byte-38",
+      "ids": [
+        23
+      ],
+      "decode": "8",
+      "decodeWithSpecial": "8"
+    },
+    {
+      "id": "byte-39",
+      "ids": [
+        24
+      ],
+      "decode": "9",
+      "decodeWithSpecial": "9"
+    },
+    {
+      "id": "byte-3a",
+      "ids": [
+        25
+      ],
+      "decode": ":",
+      "decodeWithSpecial": ":"
+    },
+    {
+      "id": "byte-3b",
+      "ids": [
+        26
+      ],
+      "decode": ";",
+      "decodeWithSpecial": ";"
+    },
+    {
+      "id": "byte-3c",
+      "ids": [
+        27
+      ],
+      "decode": "<",
+      "decodeWithSpecial": "<"
+    },
+    {
+      "id": "byte-3d",
+      "ids": [
+        28
+      ],
+      "decode": "=",
+      "decodeWithSpecial": "="
+    },
+    {
+      "id": "byte-3e",
+      "ids": [
+        29
+      ],
+      "decode": ">",
+      "decodeWithSpecial": ">"
+    },
+    {
+      "id": "byte-3f",
+      "ids": [
+        30
+      ],
+      "decode": "?",
+      "decodeWithSpecial": "?"
+    },
+    {
+      "id": "byte-40",
+      "ids": [
+        31
+      ],
+      "decode": "@",
+      "decodeWithSpecial": "@"
+    },
+    {
+      "id": "byte-41",
+      "ids": [
+        32
+      ],
+      "decode": "A",
+      "decodeWithSpecial": "A"
+    },
+    {
+      "id": "byte-42",
+      "ids": [
+        33
+      ],
+      "decode": "B",
+      "decodeWithSpecial": "B"
+    },
+    {
+      "id": "byte-43",
+      "ids": [
+        34
+      ],
+      "decode": "C",
+      "decodeWithSpecial": "C"
+    },
+    {
+      "id": "byte-44",
+      "ids": [
+        35
+      ],
+      "decode": "D",
+      "decodeWithSpecial": "D"
+    },
+    {
+      "id": "byte-45",
+      "ids": [
+        36
+      ],
+      "decode": "E",
+      "decodeWithSpecial": "E"
+    },
+    {
+      "id": "byte-46",
+      "ids": [
+        37
+      ],
+      "decode": "F",
+      "decodeWithSpecial": "F"
+    },
+    {
+      "id": "byte-47",
+      "ids": [
+        38
+      ],
+      "decode": "G",
+      "decodeWithSpecial": "G"
+    },
+    {
+      "id": "byte-48",
+      "ids": [
+        39
+      ],
+      "decode": "H",
+      "decodeWithSpecial": "H"
+    },
+    {
+      "id": "byte-49",
+      "ids": [
+        40
+      ],
+      "decode": "I",
+      "decodeWithSpecial": "I"
+    },
+    {
+      "id": "byte-4a",
+      "ids": [
+        41
+      ],
+      "decode": "J",
+      "decodeWithSpecial": "J"
+    },
+    {
+      "id": "byte-4b",
+      "ids": [
+        42
+      ],
+      "decode": "K",
+      "decodeWithSpecial": "K"
+    },
+    {
+      "id": "byte-4c",
+      "ids": [
+        43
+      ],
+      "decode": "L",
+      "decodeWithSpecial": "L"
+    },
+    {
+      "id": "byte-4d",
+      "ids": [
+        44
+      ],
+      "decode": "M",
+      "decodeWithSpecial": "M"
+    },
+    {
+      "id": "byte-4e",
+      "ids": [
+        45
+      ],
+      "decode": "N",
+      "decodeWithSpecial": "N"
+    },
+    {
+      "id": "byte-4f",
+      "ids": [
+        46
+      ],
+      "decode": "O",
+      "decodeWithSpecial": "O"
+    },
+    {
+      "id": "byte-50",
+      "ids": [
+        47
+      ],
+      "decode": "P",
+      "decodeWithSpecial": "P"
+    },
+    {
+      "id": "byte-51",
+      "ids": [
+        48
+      ],
+      "decode": "Q",
+      "decodeWithSpecial": "Q"
+    },
+    {
+      "id": "byte-52",
+      "ids": [
+        49
+      ],
+      "decode": "R",
+      "decodeWithSpecial": "R"
+    },
+    {
+      "id": "byte-53",
+      "ids": [
+        50
+      ],
+      "decode": "S",
+      "decodeWithSpecial": "S"
+    },
+    {
+      "id": "byte-54",
+      "ids": [
+        51
+      ],
+      "decode": "T",
+      "decodeWithSpecial": "T"
+    },
+    {
+      "id": "byte-55",
+      "ids": [
+        52
+      ],
+      "decode": "U",
+      "decodeWithSpecial": "U"
+    },
+    {
+      "id": "byte-56",
+      "ids": [
+        53
+      ],
+      "decode": "V",
+      "decodeWithSpecial": "V"
+    },
+    {
+      "id": "byte-57",
+      "ids": [
+        54
+      ],
+      "decode": "W",
+      "decodeWithSpecial": "W"
+    },
+    {
+      "id": "byte-58",
+      "ids": [
+        55
+      ],
+      "decode": "X",
+      "decodeWithSpecial": "X"
+    },
+    {
+      "id": "byte-59",
+      "ids": [
+        56
+      ],
+      "decode": "Y",
+      "decodeWithSpecial": "Y"
+    },
+    {
+      "id": "byte-5a",
+      "ids": [
+        57
+      ],
+      "decode": "Z",
+      "decodeWithSpecial": "Z"
+    },
+    {
+      "id": "byte-5b",
+      "ids": [
+        58
+      ],
+      "decode": "[",
+      "decodeWithSpecial": "["
+    },
+    {
+      "id": "byte-5c",
+      "ids": [
+        59
+      ],
+      "decode": "\\",
+      "decodeWithSpecial": "\\"
+    },
+    {
+      "id": "byte-5d",
+      "ids": [
+        60
+      ],
+      "decode": "]",
+      "decodeWithSpecial": "]"
+    },
+    {
+      "id": "byte-5e",
+      "ids": [
+        61
+      ],
+      "decode": "^",
+      "decodeWithSpecial": "^"
+    },
+    {
+      "id": "byte-5f",
+      "ids": [
+        62
+      ],
+      "decode": "_",
+      "decodeWithSpecial": "_"
+    },
+    {
+      "id": "byte-60",
+      "ids": [
+        63
+      ],
+      "decode": "`",
+      "decodeWithSpecial": "`"
+    },
+    {
+      "id": "byte-61",
+      "ids": [
+        64
+      ],
+      "decode": "a",
+      "decodeWithSpecial": "a"
+    },
+    {
+      "id": "byte-62",
+      "ids": [
+        65
+      ],
+      "decode": "b",
+      "decodeWithSpecial": "b"
+    },
+    {
+      "id": "byte-63",
+      "ids": [
+        66
+      ],
+      "decode": "c",
+      "decodeWithSpecial": "c"
+    },
+    {
+      "id": "byte-64",
+      "ids": [
+        67
+      ],
+      "decode": "d",
+      "decodeWithSpecial": "d"
+    },
+    {
+      "id": "byte-65",
+      "ids": [
+        68
+      ],
+      "decode": "e",
+      "decodeWithSpecial": "e"
+    },
+    {
+      "id": "byte-66",
+      "ids": [
+        69
+      ],
+      "decode": "f",
+      "decodeWithSpecial": "f"
+    },
+    {
+      "id": "byte-67",
+      "ids": [
+        70
+      ],
+      "decode": "g",
+      "decodeWithSpecial": "g"
+    },
+    {
+      "id": "byte-68",
+      "ids": [
+        71
+      ],
+      "decode": "h",
+      "decodeWithSpecial": "h"
+    },
+    {
+      "id": "byte-69",
+      "ids": [
+        72
+      ],
+      "decode": "i",
+      "decodeWithSpecial": "i"
+    },
+    {
+      "id": "byte-6a",
+      "ids": [
+        73
+      ],
+      "decode": "j",
+      "decodeWithSpecial": "j"
+    },
+    {
+      "id": "byte-6b",
+      "ids": [
+        74
+      ],
+      "decode": "k",
+      "decodeWithSpecial": "k"
+    },
+    {
+      "id": "byte-6c",
+      "ids": [
+        75
+      ],
+      "decode": "l",
+      "decodeWithSpecial": "l"
+    },
+    {
+      "id": "byte-6d",
+      "ids": [
+        76
+      ],
+      "decode": "m",
+      "decodeWithSpecial": "m"
+    },
+    {
+      "id": "byte-6e",
+      "ids": [
+        77
+      ],
+      "decode": "n",
+      "decodeWithSpecial": "n"
+    },
+    {
+      "id": "byte-6f",
+      "ids": [
+        78
+      ],
+      "decode": "o",
+      "decodeWithSpecial": "o"
+    },
+    {
+      "id": "byte-70",
+      "ids": [
+        79
+      ],
+      "decode": "p",
+      "decodeWithSpecial": "p"
+    },
+    {
+      "id": "byte-71",
+      "ids": [
+        80
+      ],
+      "decode": "q",
+      "decodeWithSpecial": "q"
+    },
+    {
+      "id": "byte-72",
+      "ids": [
+        81
+      ],
+      "decode": "r",
+      "decodeWithSpecial": "r"
+    },
+    {
+      "id": "byte-73",
+      "ids": [
+        82
+      ],
+      "decode": "s",
+      "decodeWithSpecial": "s"
+    },
+    {
+      "id": "byte-74",
+      "ids": [
+        83
+      ],
+      "decode": "t",
+      "decodeWithSpecial": "t"
+    },
+    {
+      "id": "byte-75",
+      "ids": [
+        84
+      ],
+      "decode": "u",
+      "decodeWithSpecial": "u"
+    },
+    {
+      "id": "byte-76",
+      "ids": [
+        85
+      ],
+      "decode": "v",
+      "decodeWithSpecial": "v"
+    },
+    {
+      "id": "byte-77",
+      "ids": [
+        86
+      ],
+      "decode": "w",
+      "decodeWithSpecial": "w"
+    },
+    {
+      "id": "byte-78",
+      "ids": [
+        87
+      ],
+      "decode": "x",
+      "decodeWithSpecial": "x"
+    },
+    {
+      "id": "byte-79",
+      "ids": [
+        88
+      ],
+      "decode": "y",
+      "decodeWithSpecial": "y"
+    },
+    {
+      "id": "byte-7a",
+      "ids": [
+        89
+      ],
+      "decode": "z",
+      "decodeWithSpecial": "z"
+    },
+    {
+      "id": "byte-7b",
+      "ids": [
+        90
+      ],
+      "decode": "{",
+      "decodeWithSpecial": "{"
+    },
+    {
+      "id": "byte-7c",
+      "ids": [
+        91
+      ],
+      "decode": "|",
+      "decodeWithSpecial": "|"
+    },
+    {
+      "id": "byte-7d",
+      "ids": [
+        92
+      ],
+      "decode": "}",
+      "decodeWithSpecial": "}"
+    },
+    {
+      "id": "byte-7e",
+      "ids": [
+        93
+      ],
+      "decode": "~",
+      "decodeWithSpecial": "~"
+    },
+    {
+      "id": "byte-7f",
+      "ids": [
+        221
+      ],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "byte-80",
+      "ids": [
+        222
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-81",
+      "ids": [
+        223
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-82",
+      "ids": [
+        224
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-83",
+      "ids": [
+        225
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-84",
+      "ids": [
+        226
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-85",
+      "ids": [
+        227
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-86",
+      "ids": [
+        228
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-87",
+      "ids": [
+        229
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-88",
+      "ids": [
+        230
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-89",
+      "ids": [
+        231
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8a",
+      "ids": [
+        232
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8b",
+      "ids": [
+        233
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8c",
+      "ids": [
+        234
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8d",
+      "ids": [
+        235
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8e",
+      "ids": [
+        236
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-8f",
+      "ids": [
+        237
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-90",
+      "ids": [
+        238
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-91",
+      "ids": [
+        239
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-92",
+      "ids": [
+        240
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-93",
+      "ids": [
+        241
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-94",
+      "ids": [
+        242
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-95",
+      "ids": [
+        243
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-96",
+      "ids": [
+        244
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-97",
+      "ids": [
+        245
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-98",
+      "ids": [
+        246
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-99",
+      "ids": [
+        247
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9a",
+      "ids": [
+        248
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9b",
+      "ids": [
+        249
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9c",
+      "ids": [
+        250
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9d",
+      "ids": [
+        251
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9e",
+      "ids": [
+        252
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-9f",
+      "ids": [
+        253
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a0",
+      "ids": [
+        254
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a1",
+      "ids": [
+        94
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a2",
+      "ids": [
+        95
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a3",
+      "ids": [
+        96
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a4",
+      "ids": [
+        97
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a5",
+      "ids": [
+        98
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a6",
+      "ids": [
+        99
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a7",
+      "ids": [
+        100
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a8",
+      "ids": [
+        101
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-a9",
+      "ids": [
+        102
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-aa",
+      "ids": [
+        103
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ab",
+      "ids": [
+        104
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ac",
+      "ids": [
+        105
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ad",
+      "ids": [
+        255
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ae",
+      "ids": [
+        106
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-af",
+      "ids": [
+        107
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b0",
+      "ids": [
+        108
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b1",
+      "ids": [
+        109
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b2",
+      "ids": [
+        110
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b3",
+      "ids": [
+        111
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b4",
+      "ids": [
+        112
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b5",
+      "ids": [
+        113
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b6",
+      "ids": [
+        114
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b7",
+      "ids": [
+        115
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b8",
+      "ids": [
+        116
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-b9",
+      "ids": [
+        117
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ba",
+      "ids": [
+        118
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-bb",
+      "ids": [
+        119
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-bc",
+      "ids": [
+        120
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-bd",
+      "ids": [
+        121
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-be",
+      "ids": [
+        122
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-bf",
+      "ids": [
+        123
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c0",
+      "ids": [
+        124
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c1",
+      "ids": [
+        125
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c2",
+      "ids": [
+        126
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c3",
+      "ids": [
+        127
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c4",
+      "ids": [
+        128
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c5",
+      "ids": [
+        129
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c6",
+      "ids": [
+        130
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c7",
+      "ids": [
+        131
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c8",
+      "ids": [
+        132
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-c9",
+      "ids": [
+        133
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ca",
+      "ids": [
+        134
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-cb",
+      "ids": [
+        135
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-cc",
+      "ids": [
+        136
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-cd",
+      "ids": [
+        137
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ce",
+      "ids": [
+        138
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-cf",
+      "ids": [
+        139
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d0",
+      "ids": [
+        140
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d1",
+      "ids": [
+        141
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d2",
+      "ids": [
+        142
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d3",
+      "ids": [
+        143
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d4",
+      "ids": [
+        144
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d5",
+      "ids": [
+        145
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d6",
+      "ids": [
+        146
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d7",
+      "ids": [
+        147
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d8",
+      "ids": [
+        148
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-d9",
+      "ids": [
+        149
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-da",
+      "ids": [
+        150
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-db",
+      "ids": [
+        151
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-dc",
+      "ids": [
+        152
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-dd",
+      "ids": [
+        153
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-de",
+      "ids": [
+        154
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-df",
+      "ids": [
+        155
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e0",
+      "ids": [
+        156
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e1",
+      "ids": [
+        157
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e2",
+      "ids": [
+        158
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e3",
+      "ids": [
+        159
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e4",
+      "ids": [
+        160
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e5",
+      "ids": [
+        161
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e6",
+      "ids": [
+        162
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e7",
+      "ids": [
+        163
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e8",
+      "ids": [
+        164
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-e9",
+      "ids": [
+        165
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ea",
+      "ids": [
+        166
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-eb",
+      "ids": [
+        167
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ec",
+      "ids": [
+        168
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ed",
+      "ids": [
+        169
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ee",
+      "ids": [
+        170
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ef",
+      "ids": [
+        171
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f0",
+      "ids": [
+        172
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f1",
+      "ids": [
+        173
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f2",
+      "ids": [
+        174
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f3",
+      "ids": [
+        175
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f4",
+      "ids": [
+        176
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f5",
+      "ids": [
+        177
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f6",
+      "ids": [
+        178
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f7",
+      "ids": [
+        179
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f8",
+      "ids": [
+        180
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-f9",
+      "ids": [
+        181
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-fa",
+      "ids": [
+        182
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-fb",
+      "ids": [
+        183
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-fc",
+      "ids": [
+        184
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-fd",
+      "ids": [
+        185
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-fe",
+      "ids": [
+        186
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "byte-ff",
+      "ids": [
+        187
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "overlong-two",
+      "ids": [
+        124,
+        107
+      ],
+      "decode": "��",
+      "decodeWithSpecial": "��"
+    },
+    {
+      "id": "overlong-three",
+      "ids": [
+        156,
+        222,
+        222
+      ],
+      "decode": "���",
+      "decodeWithSpecial": "���"
+    },
+    {
+      "id": "surrogate",
+      "ids": [
+        169,
+        254,
+        222
+      ],
+      "decode": "���",
+      "decodeWithSpecial": "���"
+    },
+    {
+      "id": "out-of-range",
+      "ids": [
+        176,
+        238,
+        222,
+        222
+      ],
+      "decode": "����",
+      "decodeWithSpecial": "����"
+    },
+    {
+      "id": "truncated-four",
+      "ids": [
+        172,
+        253,
+        240
+      ],
+      "decode": "�",
+      "decodeWithSpecial": "�"
+    },
+    {
+      "id": "bad-continuation",
+      "ids": [
+        158,
+        7,
+        94
+      ],
+      "decode": "�(�",
+      "decodeWithSpecial": "�(�"
+    },
+    {
+      "id": "valid-emoji",
+      "ids": [
+        172,
+        253,
+        234,
+        235
+      ],
+      "decode": "🌍",
+      "decodeWithSpecial": "🌍"
+    },
+    {
+      "id": "truncated-plus-valid",
+      "ids": [
+        127,
+        127,
+        102
+      ],
+      "decode": "�é",
+      "decodeWithSpecial": "�é"
+    },
+    {
+      "id": "embedded-control",
+      "ids": [
+        64,
+        188,
+        65
+      ],
+      "decode": "a\u0000b",
+      "decodeWithSpecial": "a\u0000b"
+    },
+    {
+      "id": "c0-separators",
+      "ids": [
+        216,
+        64,
+        219
+      ],
+      "decode": "a",
+      "decodeWithSpecial": "a"
+    },
+    {
+      "id": "empty",
+      "ids": [],
+      "decode": "",
+      "decodeWithSpecial": ""
+    },
+    {
+      "id": "only-specials",
+      "ids": [
+        49406,
+        49407,
+        49406
+      ],
+      "decode": "",
+      "decodeWithSpecial": "<|startoftext|><|endoftext|><|startoftext|>"
+    },
+    {
+      "id": "suffix-and-special",
+      "ids": [
+        49406,
+        3306,
+        49407,
+        1002
+      ],
+      "decode": "hello world",
+      "decodeWithSpecial": "<|startoftext|>hello <|endoftext|>world"
+    }
+  ]
+}

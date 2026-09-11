@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><EmbeddedResource Include="Resources/Clip/*" /><EmbeddedResource Include="Resources/ClipUnicode/*" /></ItemGroup>
+</Project>

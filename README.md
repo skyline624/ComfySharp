@@ -57,6 +57,14 @@ dotnet run --project tools/ComfySharp.ModelInspect -- chemin/vers/modele.safeten
 
 Ajouter `--sha256` pour lire le fichier entier et calculer son empreinte, ou `--tensors 10` pour afficher au plus dix noms/formes de tenseurs. Le résultat par défaut contient seulement des agrégats. Un en-tête valide n'établit pas la compatibilité du modèle. Le lecteur tensoriel prend en charge dix dtypes CPU ; les types non pris en charge produisent une erreur explicite.
 
+Le diagnostic CLIP produit des IDs, poids et séquences SD1/SDXL avec ses ressources embarquées, sans modèle ni libtorch :
+
+```sh
+dotnet run --project tools/ComfySharp.Tokenize -- --text "a (cat:1.5)" --profile sdxl
+```
+
+Il accepte aussi `--file` pour un fichier UTF-8 ou `--stdin`, et `--disable-weights`. Les profils disponibles sont `sd1-l`, `sdxl-l`, `sdxl-g` et `sdxl`. Les [règles de tokenisation et leurs références](docs/CLIP_TOKENIZATION.md) sont figées ; ce diagnostic ne calcule aucun embedding d'encodeur.
+
 - [Architecture](docs/ARCHITECTURE.md), [backlog](docs/BACKLOG.md), [validation numérique](docs/NUMERICAL_VALIDATION.md).
 - [Contrat des valeurs natives](docs/RUNTIME_VALUES.md) et [réconciliation des nœuds](docs/audit/05-RECONCILIATION-NOEUDS.md).
 - [Générateurs de niveaux de bruit et corpus de référence](docs/SIGMA_SCHEDULES.md).

@@ -5,12 +5,12 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 | Lot | Livré actuellement | Travail nécessaire avant clôture |
 |---|---|---|
 | 0 | Validé : dépôt public indépendant, clone propre, Host/Desktop, tests et probe CPU en CI trois OS, fenêtres natives communiquant avec leur Host, archives autonomes construites | Critères du socle satisfaits ; installations et distributions finales suivies au lot 12 |
-| 1 | Manifeste de 1 160 entrées, inscriptions intégrées rapprochées, 663 contrats de source et contrôles .NET | Finalisation des schémas/fournisseurs dynamiques, variantes de modèles/encodeurs/VAE/widgets, corpus, poids/hash, tolérances |
+| 1 | Manifeste de 1 163 entrées, inscriptions intégrées rapprochées, 663 contrats de source, trois profils textuels CLIP et contrôles .NET | Finalisation des schémas/fournisseurs dynamiques, variantes de modèles/encodeurs/VAE/widgets, corpus, poids/hash, tolérances |
 | 2 | Lecteur sûr initial, probe CPU et RTX3090 CUDA, gradients | Primitives complètes, SD1.5 réel, Linux/CUDA, macOS/MPS, médias et longs tests de ressources |
 | 3 | Valeurs natives possédées, UI distincte et snapshots, collecte d'ancêtres, résultats libérables, validation, sorties indépendantes, listes, lazy, async, annulation | Expansion/sous-graphes, bloqueurs, hooks, caches/LRU/pression, concurrence des branches |
 | 4 | JSON préservé, compilation conservatrice, éditions et canvas initial | Compilation complète, sous-graphes, bypass, reroutes, copier/coller, onglets/brouillons et fidélité exhaustive |
 | 5 | API/file/historique UI/meta, ciblage OUTPUT_NODE et sessions WS, SQLite propre/réglages/prune | Contrats amont exacts, négociation/codecs complets, fichiers/profils/userdata, assets/références/imports complets |
-| 6 | Dix dtypes safetensors CPU, inspection/hash, bruit natif, étape Euler, cinq générateurs et six traitements SIGMAS intégrés au Host, corpus source | Schedulers dépendant du modèle, samplers, autres dtypes/quantification, formats historiques sûrs, détection, tokeniseurs, encodeurs et adapters |
+| 6 | Dix dtypes safetensors CPU, inspection/hash, bruit natif, étape Euler, cinq générateurs et six traitements SIGMAS intégrés au Host ; tokenisation textuelle CLIP SD1/SDXL avec corpus exact | Schedulers dépendant du modèle, samplers, autres dtypes/quantification, formats historiques sûrs, détection, textual inversion, autres tokeniseurs/profils, encodeurs et adapters |
 | 7 | Rien annoncé compatible | Chaque famille/variante image avec vrais poids |
 | 8 | Rien annoncé compatible | Vidéo, audio, 3D, codecs et traitements associés |
 | 9 | Gradient et mise à jour SGD élémentaires | Nœuds d'entraînement, optimisateurs/losses complets, adapters, sauvegarde et réutilisation |
