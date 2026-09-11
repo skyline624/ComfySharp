@@ -4,7 +4,7 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 
 | Lot | Livré dans le socle initial | Travail nécessaire avant clôture |
 |---|---|---|
-| 0 | Validé : dépôt public indépendant, clone propre, Host/Desktop, 250 tests et probe CPU en CI trois OS, fenêtres natives communiquant avec leur Host, archives autonomes construites | Critères du socle satisfaits ; installations et distributions finales suivies au lot 12 |
+| 0 | Validé : dépôt public indépendant, clone propre, Host/Desktop, 338 tests et probe CPU en CI trois OS, fenêtres natives communiquant avec leur Host, archives autonomes construites | Critères du socle satisfaits ; installations et distributions finales suivies au lot 12 |
 | 1 | Manifeste de 1 160 entrées, inscriptions intégrées rapprochées, 663 contrats de source et contrôles .NET | Finalisation des schémas/fournisseurs dynamiques, variantes de modèles/encodeurs/VAE/widgets, corpus, poids/hash, tolérances |
 | 2 | Lecteur sûr initial, probe CPU et RTX3090 CUDA, gradients | Primitives complètes, SD1.5 réel, Linux/CUDA, macOS/MPS, médias et longs tests de ressources |
 | 3 | Valeurs natives possédées, conteneurs, résultats libérables, validation, sorties indépendantes, listes, lazy, async, annulation | Expansion/sous-graphes, bloqueurs, hooks, caches/LRU/pression, concurrence des branches |

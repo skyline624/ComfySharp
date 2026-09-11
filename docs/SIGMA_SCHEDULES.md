@@ -35,6 +35,16 @@ Le profil **sigma-cpu-f32-v1** est fixé avant l'acceptation du port :
 - Écart ULP et erreur absolue maximale consignés par cas pour examiner les différences de calcul ; aucun assouplissement automatique du seuil.
 - Domaines invalides vérifiés comme erreurs explicites, avec résultat ou exception amont conservé dans le corpus.
 
-Ce profil encadre les arrondis Float32 de ces opérations élémentaires. Il ne constitue pas une tolérance de modèle, de gradient d'entraînement ou de sampler complet. Toute évolution du corpus ou du profil exige une revue et de nouvelles preuves ; les tests vérifient aussi son hash. La campagne locale passe les 51 tests de corpus et 37 tests comportementaux. La qualification Linux/macOS sera rattachée au commit et à la campagne CI correspondants.
+Ce profil encadre les arrondis Float32 de ces opérations élémentaires. Il ne constitue pas une tolérance de modèle, de gradient d'entraînement ou de sampler complet. Toute évolution du corpus ou du profil exige une revue et de nouvelles preuves ; les tests vérifient aussi son hash.
+
+La [campagne CI `34608289162`](https://github.com/skyline624/ComfySharp/actions/runs/34608289162), au commit [`d5b6a4e`](https://github.com/skyline624/ComfySharp/commit/d5b6a4e7c555776328d38659925d62a2ac3c6d2b), passe les 51 tests de corpus et 37 tests comportementaux sur chaque OS, dans une suite de **338 tests par plateforme**, sans test marqué ignoré. Le [rapport de mesures](qualification/sigma-cpu-f32-d5b6a4e.json) conserve les erreurs par cas, extraites des artefacts TRX.
+
+| Runner CPU | Erreur absolue maximale sur le corpus | Écart ULP maximal |
+|---|---:|---:|
+| Windows Server 2025 x64 | 0 | 0 |
+| Ubuntu 24.04 x64 | 1,9073486328125e-5 | 10 |
+| macOS 14 ARM64 | 2,288818359375e-5 | 10 |
+
+Toutes les valeurs satisfont le seuil absolu **plus relatif** fixé ; ces maxima ne remplacent pas le contrôle par valeur. La référence Windows et les résultats Windows de ce corpus sont identiques bit à bit. Cela ne promet pas une identité pour tous les paramètres, runtimes ou backends possibles. Aucun profil ni vecteur de référence n'a été modifié après la comparaison.
 
 Les neuf schedulers du registre global, les opérations SIGMAS, les tables spécialisées, les contrats de `model_sampling` et leur intégration aux vrais modèles restent au lot 6. Le manifeste ne déclare aucun nœud supplémentaire porté à partir de cette seule API.

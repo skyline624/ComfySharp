@@ -1,0 +1,884 @@
+{
+  "schemaVersion": 1,
+  "portCommit": "d5b6a4e7c555776328d38659925d62a2ac3c6d2b",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "workflowRun": "https://github.com/skyline624/ComfySharp/actions/runs/34608289162",
+  "artifacts": [
+    "tests-win-x64",
+    "tests-linux-x64",
+    "tests-osx-arm64"
+  ],
+  "corpusSha256": "c78e03c13d3feed5aaf876a9efa5cc2f9f53822765be5cb6c97b0469f63412e1",
+  "comparisonProfile": "sigma-cpu-f32-v1",
+  "referenceTorch": "2.13.0+cu130",
+  "productLibtorch": "2.10.0",
+  "modelWeightsUsed": false,
+  "modelFamilyQualified": false,
+  "scope": "Five analytic CPU sigma generators only. Metrics parsed from the successful CI TRX artifacts; the numeric tolerances were not changed.",
+  "platforms": [
+    {
+      "runtime": "win-x64",
+      "backend": "cpu",
+      "dtype": "float32",
+      "totalSolutionTests": 338,
+      "failedTests": 0,
+      "referenceCases": 46,
+      "maxAbsoluteError": 0.0,
+      "maxUlp": 0.0,
+      "cases": [
+        {
+          "id": "exponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/wide-range",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-101",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/high-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/linear-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/zero-minimum",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-101",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/lower-tail",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/upper-tail",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/zero-beta",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/rho-four",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/zero-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-101",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/small-exponent",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/unit-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-betas",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        }
+      ]
+    },
+    {
+      "runtime": "linux-x64",
+      "backend": "cpu",
+      "dtype": "float32",
+      "totalSolutionTests": 338,
+      "failedTests": 0,
+      "referenceCases": 46,
+      "maxAbsoluteError": 1.9073486328125E-05,
+      "maxUlp": 10.0,
+      "cases": [
+        {
+          "id": "exponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 9.5367431640625E-07,
+          "maxUlp": 3
+        },
+        {
+          "id": "exponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 2.384185791015625E-07,
+          "maxUlp": 1
+        },
+        {
+          "id": "exponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/wide-range",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-101",
+          "passed": true,
+          "maxAbsoluteError": 3.5762786865234375E-07,
+          "maxUlp": 8
+        },
+        {
+          "id": "karras/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/high-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/linear-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/zero-minimum",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-101",
+          "passed": true,
+          "maxAbsoluteError": 5.960464477539063E-08,
+          "maxUlp": 1
+        },
+        {
+          "id": "laplace/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/lower-tail",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/upper-tail",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/zero-beta",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 1.9073486328125E-06,
+          "maxUlp": 8
+        },
+        {
+          "id": "polyexponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/rho-four",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/zero-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-101",
+          "passed": true,
+          "maxAbsoluteError": 1.9073486328125E-05,
+          "maxUlp": 10
+        },
+        {
+          "id": "vp/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-20",
+          "passed": true,
+          "maxAbsoluteError": 3.814697265625E-06,
+          "maxUlp": 8
+        },
+        {
+          "id": "vp/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/small-exponent",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/unit-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-betas",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        }
+      ]
+    },
+    {
+      "runtime": "osx-arm64",
+      "backend": "cpu",
+      "dtype": "float32",
+      "totalSolutionTests": 338,
+      "failedTests": 0,
+      "referenceCases": 46,
+      "maxAbsoluteError": 2.288818359375E-05,
+      "maxUlp": 10.0,
+      "cases": [
+        {
+          "id": "exponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 9.5367431640625E-07,
+          "maxUlp": 4
+        },
+        {
+          "id": "exponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 4.76837158203125E-07,
+          "maxUlp": 2
+        },
+        {
+          "id": "exponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 2.384185791015625E-07,
+          "maxUlp": 1
+        },
+        {
+          "id": "exponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "exponential/wide-range",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-101",
+          "passed": true,
+          "maxAbsoluteError": 3.5762786865234375E-07,
+          "maxUlp": 8
+        },
+        {
+          "id": "karras/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-20",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/high-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/linear-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "karras/zero-minimum",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-101",
+          "passed": true,
+          "maxAbsoluteError": 1.1920928955078125E-07,
+          "maxUlp": 1
+        },
+        {
+          "id": "laplace/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/default-20",
+          "passed": true,
+          "maxAbsoluteError": 1.1920928955078125E-07,
+          "maxUlp": 1
+        },
+        {
+          "id": "laplace/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/lower-tail",
+          "passed": true,
+          "maxAbsoluteError": 3.814697265625E-06,
+          "maxUlp": 1
+        },
+        {
+          "id": "laplace/upper-tail",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "laplace/zero-beta",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-101",
+          "passed": true,
+          "maxAbsoluteError": 1.9073486328125E-06,
+          "maxUlp": 8
+        },
+        {
+          "id": "polyexponential/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/default-20",
+          "passed": true,
+          "maxAbsoluteError": 4.76837158203125E-07,
+          "maxUlp": 1
+        },
+        {
+          "id": "polyexponential/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/equal-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/inverted-bounds",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/rho-four",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "polyexponential/zero-rho",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-1",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-101",
+          "passed": true,
+          "maxAbsoluteError": 2.288818359375E-05,
+          "maxUlp": 10
+        },
+        {
+          "id": "vp/default-2",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/default-20",
+          "passed": true,
+          "maxAbsoluteError": 7.62939453125E-06,
+          "maxUlp": 8
+        },
+        {
+          "id": "vp/default-5",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/small-exponent",
+          "passed": true,
+          "maxAbsoluteError": 7.275957614183426E-12,
+          "maxUlp": 1
+        },
+        {
+          "id": "vp/unit-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-betas",
+          "passed": true,
+          "maxAbsoluteError": 0.0,
+          "maxUlp": 0
+        },
+        {
+          "id": "vp/zero-epsilon",
+          "passed": true,
+          "maxAbsoluteError": 1.1920928955078125E-07,
+          "maxUlp": 1
+        }
+      ]
+    }
+  ]
+}
