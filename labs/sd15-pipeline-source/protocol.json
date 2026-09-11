@@ -1,0 +1,3257 @@
+{
+  "schema": 1,
+  "profile": "sd15-pipeline-native210-cpu-f32-v1",
+  "status": "prospective draft; no pipeline forwards or outputs collected",
+  "scope": "four fixed reduced synthetic text-to-image diagnostic cases; no checkpoint/stock mode",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "syntheticWeights": true,
+  "pretrainedWeightsUsed": false,
+  "familyQualification": false,
+  "configs": {
+    "clip": {
+      "_name_or_path": "openai/clip-vit-large-patch14",
+      "architectures": [
+        "CLIPTextModel"
+      ],
+      "attention_dropout": 0.0,
+      "bos_token_id": 0,
+      "dropout": 0.0,
+      "eos_token_id": 49407,
+      "hidden_act": "quick_gelu",
+      "hidden_size": 16,
+      "initializer_factor": 1.0,
+      "initializer_range": 0.02,
+      "intermediate_size": 32,
+      "layer_norm_eps": 1e-05,
+      "max_position_embeddings": 77,
+      "model_type": "clip_text_model",
+      "num_attention_heads": 4,
+      "num_hidden_layers": 2,
+      "pad_token_id": 1,
+      "projection_dim": 768,
+      "torch_dtype": "float32",
+      "transformers_version": "4.24.0",
+      "vocab_size": 49408
+    },
+    "clipProjectionPresent": true,
+    "projectionUsedForConditioning": false,
+    "unet": {
+      "image_size": 32,
+      "in_channels": 4,
+      "model_channels": 32,
+      "out_channels": 4,
+      "num_res_blocks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "dropout": 0.0,
+      "channel_mult": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "conv_resample": true,
+      "dims": 2,
+      "num_classes": null,
+      "use_checkpoint": false,
+      "num_heads": 4,
+      "num_head_channels": -1,
+      "use_scale_shift_norm": false,
+      "resblock_updown": false,
+      "use_spatial_transformer": true,
+      "legacy": false,
+      "context_dim": 16,
+      "transformer_depth": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "transformer_depth_output": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "transformer_depth_middle": 1,
+      "use_linear_in_transformer": false,
+      "use_temporal_resblock": false,
+      "use_temporal_attention": false,
+      "disable_middle_self_attn": false,
+      "heatmap_head": false
+    },
+    "vae": {
+      "double_z": true,
+      "z_channels": 4,
+      "resolution": 256,
+      "in_channels": 3,
+      "out_ch": 3,
+      "ch": 32,
+      "ch_mult": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "num_res_blocks": 2,
+      "attn_resolutions": [],
+      "dropout": 0.0
+    }
+  },
+  "parameterSchemas": {
+    "clip": {
+      "tensorCount": 37,
+      "elements": 796496,
+      "residentBytes": 3185984,
+      "nameShapeSchemaSha256": "e5a0a5b5072818dea0753a7914b8e6bc3908ab0caf94bb52b9b351e9464f21b8",
+      "schemaHashEncoding": "UTF-8/ASCII JSON sort_keys=True separators=(comma,colon), array sorted by canonical name, objects name+shape only"
+    },
+    "unet": {
+      "tensorCount": 686,
+      "elements": 8485476,
+      "residentBytes": 33941904,
+      "nameShapeSchemaSha256": "742b08be069f93c45db0239eb4c942a17f96f9be7ee120f54a14c028c3bc637c",
+      "schemaHashEncoding": "UTF-8/ASCII JSON sort_keys=True separators=(comma,colon), array sorted by canonical name, objects name+shape only"
+    },
+    "vae": {
+      "tensorCount": 248,
+      "elements": 5252487,
+      "residentBytes": 21009948,
+      "nameShapeSchemaSha256": "4a45d278169c6a8f1b77f7c404e6ac4f4790327f7f6f386825fea9fdfc5eb4fb",
+      "schemaHashEncoding": "UTF-8/ASCII JSON sort_keys=True separators=(comma,colon), array sorted by canonical name, objects name+shape only"
+    }
+  },
+  "parameterCount": 971,
+  "parameterBytes": 58137836,
+  "parameterRecipe": {
+    "version": "sha256-name-lcg-high16-power2-v1",
+    "name": "canonical component-local name, no clip/unet/vae or checkpoint prefix",
+    "seed": "uint32 LE first four SHA256(UTF8 name) bytes",
+    "sample": "(((index*1664525 + seed) modulo 2^32) >> 16) - 32768; independent indexed expression, not a recurrent LCG",
+    "rankOneWeight": "1 + sample*2^-18 when rank=1 and name ends .weight",
+    "rankOneOther": "sample*2^-20",
+    "rankAtLeastTwo": "sample * 2^(-15 - ceil(ceil(log2(product(shape[1:]))) / 2))",
+    "storage": "one native contiguous aligned CPU/F32 destination per parameter, recipe fills/copies into it; no unmanaged from_numpy parameter storage",
+    "sourceSchemaRule": "actual source named_parameters names/shapes must match frozen schema digest before filling; parameter hashes computed before/after each case",
+    "projection": "text_projection.weight participates in the same recipe and both selected weight schemas",
+    "wrapperMetadata": "SDClipModel.logit_scale, if constructed, is an unused wrapper-owned constant outside the 37 transformer parameters; report it separately and do not count or use it as a model input"
+  },
+  "sourceParameterSchemaDonors": {
+    "unet": {
+      "file": "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.unet.json",
+      "bytes": 5892406,
+      "sha256": "08f7002b823d2efa14f4f11d20128376c1aa9867127f40f9a1e3c10de7ce975c",
+      "jsonPointer": "/models/sd15-reduced/parameters",
+      "fieldsConsumed": [
+        "name",
+        "shape"
+      ]
+    },
+    "vae": {
+      "file": "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.vae.json",
+      "bytes": 436374,
+      "sha256": "6cc0844de8e82bc23caf15eaae8e9954e1760d4cbe6ab325011a3a80ac103b95",
+      "jsonPointer": "/parameters",
+      "fieldsConsumed": [
+        "name",
+        "shape"
+      ]
+    },
+    "clip": {
+      "source": "comfy/clip_model.py",
+      "method": "declaration-derived fixed H16/I32/N2/head4 schema; independent runtime source named_parameters validation required"
+    }
+  },
+  "sourceFiles": [
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "bytes": 11888,
+      "sha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "checkpoint",
+        "timestep_embedding",
+        "avg_pool_nd",
+        "make_beta_schedule"
+      ],
+      "astSha256": "93393568f05056d4df620dd7515926c7b0aad4e226824b5a079f4fad92deea42"
+    },
+    {
+      "file": "comfy/ldm/modules/attention.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+      "bytes": 51513,
+      "sha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "default",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "GEGLU",
+        "FeedForward",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic",
+        "CrossAttention",
+        "BasicTransformerBlock",
+        "SpatialTransformer"
+      ],
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "bytes": 37937,
+      "sha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "symbols": [
+        "TimestepBlock",
+        "forward_timestep_embed",
+        "TimestepEmbedSequential",
+        "Upsample",
+        "Downsample",
+        "ResBlock",
+        "apply_control",
+        "UNetModel"
+      ],
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/model.py",
+      "bytes": 31484,
+      "sha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867",
+      "symbols": [
+        "torch_cat_if_needed",
+        "nonlinearity",
+        "Normalize",
+        "CarriedConv3d",
+        "conv_carry_causal_3d",
+        "interpolate_up",
+        "Upsample",
+        "Downsample",
+        "ResnetBlock",
+        "slice_attention",
+        "normal_attention",
+        "vae_attention",
+        "AttnBlock",
+        "make_attn",
+        "Encoder",
+        "Decoder"
+      ],
+      "astSha256": "54c55dc20154f7c7dca13e2205430ac0fd6794865ebe347e41d2479fe4bf41f3"
+    },
+    {
+      "file": "comfy/ldm/modules/distributions/distributions.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/distributions/distributions.py",
+      "bytes": 2964,
+      "sha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772",
+      "symbols": [
+        "DiagonalGaussianDistribution"
+      ],
+      "astSha256": "8a5502e38258be44bb1de5f9307b1e87f666f2c05c8be7d670e8d32e6aab4be9"
+    },
+    {
+      "file": "comfy/ldm/models/autoencoder.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/models/autoencoder.py",
+      "bytes": 9782,
+      "sha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0",
+      "symbols": [
+        "DiagonalGaussianRegularizer",
+        "AbstractAutoencoder",
+        "AutoencodingEngine",
+        "AutoencodingEngineLegacy",
+        "AutoencoderKL"
+      ],
+      "astSha256": "48975c664e6086465325e795d75895d206caa437349640dc249088e32f250d9c"
+    },
+    {
+      "file": "comfy/sd.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py",
+      "bytes": 140752,
+      "sha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7",
+      "symbols": [
+        "VAE"
+      ],
+      "astSha256": "3a5e1c6a37d45492216519e5540dc4c272185eb16a3ccf1876b35e01170972c4"
+    },
+    {
+      "file": "comfy/clip_model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/clip_model.py",
+      "bytes": 16546,
+      "sha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d",
+      "symbols": [
+        "CLIPAttention",
+        "ACTIVATIONS",
+        "CLIPMLP",
+        "CLIPLayer",
+        "CLIPEncoder",
+        "CLIPEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextModel"
+      ],
+      "astSha256": "5cdeb4ba168704f3868e01d6811fcaae796a81665a5c3faf3da550dd60599a03"
+    },
+    {
+      "file": "comfy/sd1_clip.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_clip.py",
+      "bytes": 30624,
+      "sha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70",
+      "symbols": [
+        "gen_empty_tokens",
+        "ClipTokenWeightEncoder",
+        "SDClipModel",
+        "SD1CheckpointClipModel"
+      ],
+      "astSha256": "3668087a9e0e0130569e3c4bd918492aaa70ba3c6e72741244daa05054cc77ec"
+    },
+    {
+      "file": "comfy/model_sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/model_sampling.py",
+      "bytes": 15897,
+      "sha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "symbols": [
+        "reshape_sigma",
+        "EPS",
+        "ModelSamplingDiscrete"
+      ],
+      "astSha256": "8a65c67479eaabd3580a124a75cf62a717262fff7880f0dd840dd5494836c430"
+    },
+    {
+      "file": "comfy/samplers.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py",
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+      "symbols": [
+        "cfg_function",
+        "sampling_function",
+        "Sampler"
+      ],
+      "astSha256": "550b38a59b391f92fd2648885afb15f3af80c745e690b86fe2133288c928cef2"
+    },
+    {
+      "file": "comfy/conds.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/conds.py",
+      "bytes": 4522,
+      "sha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0",
+      "symbols": [
+        "CONDRegular",
+        "CONDCrossAttn"
+      ],
+      "astSha256": "7b27caa72534cbb4692e6843e24efbbfcb59c655f8b21af280fa8998fb6cd407"
+    },
+    {
+      "file": "comfy/k_diffusion/utils.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/utils.py",
+      "bytes": 12718,
+      "sha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272",
+      "symbols": [
+        "append_dims"
+      ],
+      "astSha256": "8999eb8dd535286ce45efc0c5ff96a664c6a12a87c005d77c0c221d6d6cb0018"
+    },
+    {
+      "file": "comfy/k_diffusion/sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/sampling.py",
+      "bytes": 93057,
+      "sha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+      "symbols": [
+        "to_d",
+        "sample_euler"
+      ],
+      "astSha256": "6c9c307427f7e99b89d88b0e620c2652b21b6f711b90475638daf4e724e06ef7"
+    },
+    {
+      "file": "comfy/latent_formats.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/latent_formats.py",
+      "bytes": 43438,
+      "sha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4",
+      "symbols": [
+        "LatentFormat",
+        "SD15"
+      ],
+      "astSha256": "e835743658929b537511c32e936e9228527990df3261be86e823df7ed977b0da"
+    }
+  ],
+  "vaeNormalizationAst": {
+    "file": "comfy/sd.py",
+    "symbols": [
+      "VAE.__init__.process_input",
+      "VAE.__init__.process_output"
+    ],
+    "selection": "direct single-target self assignments in VAE.__init__, original AST and order",
+    "astSha256": "a2fca15fb1aea03c29b27511372fe7aa3a5df5ce8af5e342c0864d64cad0a340"
+  },
+  "clipConfigSource": {
+    "file": "comfy/sd1_clip_config.json",
+    "sha256": "c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c",
+    "overrides": {
+      "hidden_size": 16,
+      "intermediate_size": 32,
+      "num_hidden_layers": 2,
+      "num_attention_heads": 4,
+      "hidden_act": "quick_gelu"
+    }
+  },
+  "helpers": [
+    {
+      "file": "labs/sd-source/common.py",
+      "bytes": 3899,
+      "sha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+      "gitCanonicalSha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+      "gitCanonicalBytes": 3899,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    },
+    {
+      "file": "labs/sd-source/unet.py",
+      "bytes": 10157,
+      "sha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+      "gitCanonicalSha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+      "gitCanonicalBytes": 10157,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    },
+    {
+      "file": "labs/sd-source/vae.py",
+      "bytes": 10670,
+      "sha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3",
+      "gitCanonicalSha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3",
+      "gitCanonicalBytes": 10670,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    },
+    {
+      "file": "labs/sd-source/sampling.py",
+      "bytes": 4393,
+      "sha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+      "gitCanonicalSha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+      "gitCanonicalBytes": 4393,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    },
+    {
+      "file": "labs/sd-euler-source/reference.py",
+      "bytes": 12537,
+      "sha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74",
+      "gitCanonicalSha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74",
+      "gitCanonicalBytes": 12537,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    },
+    {
+      "file": "labs/clip-source/reference.py",
+      "bytes": 19329,
+      "sha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536",
+      "gitCanonicalSha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536",
+      "gitCanonicalBytes": 19329,
+      "role": "reviewed source/adapters reference; callable helpers only after collector review; never invoke generate/fill from CLIP stock collector"
+    }
+  ],
+  "locks": [
+    {
+      "target": "win-x64",
+      "file": "labs/clip-source/requirements-win-x64.txt",
+      "gitCanonicalSha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+      "gitCanonicalBytes": 3178,
+      "observedRawSha256": "db3ba7b6998392497b69501a1d72c74499562503b5a41d98d72d9e12ae7794e3",
+      "observedRawBytes": 3209,
+      "observedCrLfCount": 31,
+      "admission": "only literal CRLF-to-LF normalization, no stripping/BOM/other rewrites; normalized bytes must match Git pin",
+      "execution": "capture actual raw sha/bytes before run and require identical raw bytes after; normalization never excuses a runtime mutation"
+    },
+    {
+      "target": "linux-x64",
+      "file": "labs/clip-source/requirements-linux-x64.txt",
+      "gitCanonicalSha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+      "gitCanonicalBytes": 3280,
+      "observedRawSha256": "26243197aa0fbe7b13839f76d26557892d7f91f81e68afd9871f1f486d7c2857",
+      "observedRawBytes": 3311,
+      "observedCrLfCount": 31,
+      "admission": "only literal CRLF-to-LF normalization, no stripping/BOM/other rewrites; normalized bytes must match Git pin",
+      "execution": "capture actual raw sha/bytes before run and require identical raw bytes after; normalization never excuses a runtime mutation"
+    },
+    {
+      "target": "osx-arm64",
+      "file": "labs/clip-source/requirements-osx-arm64.txt",
+      "gitCanonicalSha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
+      "gitCanonicalBytes": 3195,
+      "observedRawSha256": "a4a914bba070c873b69389dd19f25409dbbfb797cfcbd07651c3777faa9bec6c",
+      "observedRawBytes": 3226,
+      "observedCrLfCount": 31,
+      "admission": "only literal CRLF-to-LF normalization, no stripping/BOM/other rewrites; normalized bytes must match Git pin",
+      "execution": "capture actual raw sha/bytes before run and require identical raw bytes after; normalization never excuses a runtime mutation"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0 CPU (+cpu accepted on Windows/Linux)",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 1,
+    "interopThreads": 1,
+    "noGrad": true,
+    "dispatch": "auto, no forced ATEN_CPU_CAPABILITY",
+    "nativeEvidence": "actual loaded module basenames/bytes/SHA separate from package inventory; managed TorchSharp separate from native; actual CPU/capability distinct from requested mode"
+  },
+  "tokenizerProvenance": {
+    "file": "tests/ComfySharp.Tokenization.Tests/Fixtures/clip-text.reference.json",
+    "bytes": 2225425,
+    "sha256": "bc92c74136a6ed38a314029f083305acbe8fae5aa8acb6c0808db3b8237f6cc2",
+    "profile": "clip-transformers-5.14.1-tokenizers-0.22.2",
+    "laboratory": {
+      "python": "3.12.10",
+      "transformers": "5.14.1",
+      "tokenizers": "0.22.2",
+      "modelWeightsUsed": false,
+      "method": "Execute exact frozen ComfyUI AST classes/functions with local canonical tokenizer assets and the pinned dependency profile; no model imports or .NET-derived expected outputs."
+    },
+    "assets": [
+      {
+        "name": "vocab.json",
+        "bytes": 1059962,
+        "sha256": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 524619,
+        "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 808,
+        "sha256": "f37d2056ee9743c44a79b85eb3763b7bab378339e69a4b50f58a37e89066821c"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "bytes": 472,
+        "sha256": "c4864a9376a8401918425bed71fc14fc0e81f9b59ec45c1cf96cccb2df508eac"
+      }
+    ],
+    "effectiveBackendConfigurationSha256": "4a07de0310c7cbeac0fd1ae3193c8240ee7ea16dd0ab94b119d8fd597169feec",
+    "selection": [
+      "packing/empty",
+      "packing/nested",
+      "packing/implicit",
+      "packing/length-76"
+    ],
+    "sourceUsedFor": "texts/chunks/weights only; C# must tokenize texts and match exact bits; torch collector consumes these frozen source tokens, not C# tokens"
+  },
+  "texts": [
+    {
+      "id": "packing/empty",
+      "text": "",
+      "profile": "sd1-l",
+      "sourceChunks": [
+        [
+          [
+            49406,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ]
+        ]
+      ],
+      "chunkEncoding": [
+        "integer token ID",
+        "IEEE754 binary64 bits as 16 hex digits most-significant-byte first",
+        "integer word ID"
+      ],
+      "inputIds": "packing/empty/ids",
+      "inputWeights": "packing/empty/weights",
+      "config": {},
+      "data": {},
+      "options": {},
+      "call": {}
+    },
+    {
+      "id": "packing/nested",
+      "text": "a (b (c:2):3)",
+      "profile": "sd1-l",
+      "sourceChunks": [
+        [
+          [
+            49406,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            321,
+            "4008000000000000",
+            2
+          ],
+          [
+            322,
+            "4000000000000000",
+            3
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ]
+        ]
+      ],
+      "chunkEncoding": [
+        "integer token ID",
+        "IEEE754 binary64 bits as 16 hex digits most-significant-byte first",
+        "integer word ID"
+      ],
+      "inputIds": "packing/nested/ids",
+      "inputWeights": "packing/nested/weights",
+      "config": {},
+      "data": {},
+      "options": {},
+      "call": {}
+    },
+    {
+      "id": "packing/implicit",
+      "text": "a ((b))",
+      "profile": "sd1-l",
+      "sourceChunks": [
+        [
+          [
+            49406,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            321,
+            "3ff35c28f5c28f5d",
+            2
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ]
+        ]
+      ],
+      "chunkEncoding": [
+        "integer token ID",
+        "IEEE754 binary64 bits as 16 hex digits most-significant-byte first",
+        "integer word ID"
+      ],
+      "inputIds": "packing/implicit/ids",
+      "inputWeights": "packing/implicit/weights",
+      "config": {},
+      "data": {},
+      "options": {},
+      "call": {}
+    },
+    {
+      "id": "packing/length-76",
+      "text": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a ",
+      "profile": "sd1-l",
+      "sourceChunks": [
+        [
+          [
+            49406,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ]
+        ],
+        [
+          [
+            49406,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            320,
+            "3ff0000000000000",
+            1
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ],
+          [
+            49407,
+            "3ff0000000000000",
+            0
+          ]
+        ]
+      ],
+      "chunkEncoding": [
+        "integer token ID",
+        "IEEE754 binary64 bits as 16 hex digits most-significant-byte first",
+        "integer word ID"
+      ],
+      "inputIds": "packing/length-76/ids",
+      "inputWeights": "packing/length-76/weights",
+      "config": {},
+      "data": {},
+      "options": {},
+      "call": {}
+    }
+  ],
+  "inputRecords": [
+    {
+      "id": "packing/empty/ids",
+      "dtype": "int64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "ba5bdec5387c8949eb0031a4ec3a0e3565310521e0ad1f3ea6600d24959fcd6d",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/empty/weights",
+      "dtype": "float64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "8495b6259e321e1593d0ad58fb60b7ec29622cdc53b45b58bc32f416fc73e4c0",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/nested/ids",
+      "dtype": "int64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "1c8ba951e2c9937f85b0080d67c90ed3042ac8c9be433b3577961f599eb5d036",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/nested/weights",
+      "dtype": "float64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "afc2135bdce52563ca7bc40858f330b2aa43e74ff51002f8c2fc34de52f0e5f9",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/implicit/ids",
+      "dtype": "int64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "549b05e306b233db3573fd1b07beba66c7152c81959b071bcd78ec78391714b5",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/implicit/weights",
+      "dtype": "float64",
+      "shape": [
+        1,
+        77
+      ],
+      "bytes": 616,
+      "sha256": "929b12441e6a99c79e8138a300a85694b0d16daabd6652fb416b7229f428d070",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/length-76/ids",
+      "dtype": "int64",
+      "shape": [
+        2,
+        77
+      ],
+      "bytes": 1232,
+      "sha256": "fe793f01ef9f5451a7bec1582e87f275191af69e0b6f227c1be25b1df5439aa1",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "packing/length-76/weights",
+      "dtype": "float64",
+      "shape": [
+        2,
+        77
+      ],
+      "bytes": 1232,
+      "sha256": "2489e54d327fb2b2420c8304045a9d3cb2486ad2db429b305a25ac72114ba583",
+      "encoding": "little-endian row-major",
+      "origin": "existing independent tokenizer source chunks; no product tokens",
+      "recipe": "flatten sourceChunks; decode binary64 bits exactly, do not parse or round a decimal weight"
+    },
+    {
+      "id": "empty-one-step/noise",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "52727422e6b362b1568e39c239ef6fc81a336ed85ea48dc45ff3b4127bfa292b",
+      "encoding": "little-endian row-major",
+      "recipe": "sha256-name-lcg-high16-power2-v1",
+      "recipeName": "sd15-pipeline/empty-one-step/noise",
+      "parameter": false,
+      "seed32": 4272910544,
+      "distribution": "deterministic_test_input_not_Gaussian"
+    },
+    {
+      "id": "empty-one-step/emptyLatent",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "7b6436b0c98f62380866d9432c2af0ee08ce16a171bda6951aecd95ee1307d61",
+      "encoding": "little-endian row-major",
+      "recipe": "all-zero F32"
+    },
+    {
+      "id": "empty-one-step/sigmas",
+      "dtype": "float32",
+      "shape": [
+        2
+      ],
+      "bytes": 8,
+      "sha256": "3c076e693c51f8000439e20c7107a4ee0a0f883f418fd78a2cf66a946a3a8e9c",
+      "encoding": "little-endian row-major",
+      "values": [
+        1.5,
+        0.0
+      ],
+      "float32BitsHex": [
+        "3fc00000",
+        "00000000"
+      ],
+      "origin": "literal F32, with maximum-start[0] copied from existing published source schedule endpoint"
+    },
+    {
+      "id": "weighted-three-step/noise",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "69924ea37d7ed7a2fb3f81733f5b9eefef2be39371ff764d30fb8061113a7cdf",
+      "encoding": "little-endian row-major",
+      "recipe": "sha256-name-lcg-high16-power2-v1",
+      "recipeName": "sd15-pipeline/weighted-three-step/noise",
+      "parameter": false,
+      "seed32": 3701892889,
+      "distribution": "deterministic_test_input_not_Gaussian"
+    },
+    {
+      "id": "weighted-three-step/emptyLatent",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "7b6436b0c98f62380866d9432c2af0ee08ce16a171bda6951aecd95ee1307d61",
+      "encoding": "little-endian row-major",
+      "recipe": "all-zero F32"
+    },
+    {
+      "id": "weighted-three-step/sigmas",
+      "dtype": "float32",
+      "shape": [
+        4
+      ],
+      "bytes": 16,
+      "sha256": "3bb2a6233a39c9f1f4bf50e3b0f1849d7e28cb46845ac838a84693ee03bd412a",
+      "encoding": "little-endian row-major",
+      "values": [
+        1.5,
+        0.75,
+        0.25,
+        0.0
+      ],
+      "float32BitsHex": [
+        "3fc00000",
+        "3f400000",
+        "3e800000",
+        "00000000"
+      ],
+      "origin": "literal F32, with maximum-start[0] copied from existing published source schedule endpoint"
+    },
+    {
+      "id": "two-chunks-separate/noise",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "279b573be888c5403a724cb58e24f178dff46055e2f39d36c27bdc49064992d5",
+      "encoding": "little-endian row-major",
+      "recipe": "sha256-name-lcg-high16-power2-v1",
+      "recipeName": "sd15-pipeline/two-chunks-separate/noise",
+      "parameter": false,
+      "seed32": 3326358737,
+      "distribution": "deterministic_test_input_not_Gaussian"
+    },
+    {
+      "id": "two-chunks-separate/emptyLatent",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "7b6436b0c98f62380866d9432c2af0ee08ce16a171bda6951aecd95ee1307d61",
+      "encoding": "little-endian row-major",
+      "recipe": "all-zero F32"
+    },
+    {
+      "id": "two-chunks-separate/sigmas",
+      "dtype": "float32",
+      "shape": [
+        3
+      ],
+      "bytes": 12,
+      "sha256": "c31a22b7f25d8cbe512651e536c7e4d1b1854a84d1429f66aa92c64211d7d057",
+      "encoding": "little-endian row-major",
+      "values": [
+        1.5,
+        0.5,
+        0.0
+      ],
+      "float32BitsHex": [
+        "3fc00000",
+        "3f000000",
+        "00000000"
+      ],
+      "origin": "literal F32, with maximum-start[0] copied from existing published source schedule endpoint"
+    },
+    {
+      "id": "maximum-start/noise",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "67f137d4b7aa75a70c4f9fc6fc46d43144b97672b6b3541b9cd53cd3da53f062",
+      "encoding": "little-endian row-major",
+      "recipe": "sha256-name-lcg-high16-power2-v1",
+      "recipeName": "sd15-pipeline/maximum-start/noise",
+      "parameter": false,
+      "seed32": 2998550111,
+      "distribution": "deterministic_test_input_not_Gaussian"
+    },
+    {
+      "id": "maximum-start/emptyLatent",
+      "dtype": "float32",
+      "shape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "bytes": 320,
+      "sha256": "7b6436b0c98f62380866d9432c2af0ee08ce16a171bda6951aecd95ee1307d61",
+      "encoding": "little-endian row-major",
+      "recipe": "all-zero F32"
+    },
+    {
+      "id": "maximum-start/sigmas",
+      "dtype": "float32",
+      "shape": [
+        3
+      ],
+      "bytes": 12,
+      "sha256": "f5e113d0e100491cb7b74b5dcf9efa8d811db876880c1f36c1c5a50285264470",
+      "encoding": "little-endian row-major",
+      "values": [
+        14.614641189575195,
+        1.5,
+        0.0
+      ],
+      "float32BitsHex": [
+        "4169d592",
+        "3fc00000",
+        "00000000"
+      ],
+      "origin": "literal F32, with maximum-start[0] copied from existing published source schedule endpoint"
+    }
+  ],
+  "inputCounts": {
+    "distinctTextRecords": 8,
+    "distinctDenseRecords": 12,
+    "distinctRecords": 20,
+    "caseBindingsIncludingReusedTextRecords": 28,
+    "uniqueTextChunks": 5,
+    "uniqueTokenTriples": 385,
+    "priorPipelineExpectedOutputRecordsCopied": 0,
+    "existingSourceScheduleScalarsReusedAsInputs": 1
+  },
+  "sigmaMaximum": {
+    "value": 14.614641189575195,
+    "float32BitsHex": "4169d592",
+    "littleEndianHex": "92d56941",
+    "origin": "published source sampling table index999; all three existing payload hashes recalculated with stdlib",
+    "sourceRunId": 34632139846,
+    "sourceCommit": "86812a9dae975a6a59586de87d9d7d3e0bd1ef99",
+    "donors": [
+      {
+        "file": "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.sampling.json",
+        "bytes": 160769,
+        "sha256": "a27c87a953661f8f09d9268ffb4b803a217ed96b0bcd3364e432204f9c65e03d",
+        "target": "win-x64",
+        "jsonPointer": "/schedule/sigmas/values/999",
+        "tableSha256": "187a5a207118003afdd3af1298e04c99829ac795f0b9d658fe5466ac56e06649",
+        "scalarValue": 14.614641189575195,
+        "scalarLittleEndianHex": "92d56941"
+      },
+      {
+        "file": "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.linux-x64.sampling.json",
+        "bytes": 160771,
+        "sha256": "9003bd98358e4a940428e62b72fde471ed8bf3c1baf08f4bcc36a4514fec9544",
+        "target": "linux-x64",
+        "jsonPointer": "/schedule/sigmas/values/999",
+        "tableSha256": "187a5a207118003afdd3af1298e04c99829ac795f0b9d658fe5466ac56e06649",
+        "scalarValue": 14.614641189575195,
+        "scalarLittleEndianHex": "92d56941"
+      },
+      {
+        "file": "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.osx-arm64.sampling.json",
+        "bytes": 160771,
+        "sha256": "8c8b9231640a82b11aabb67d6a1daba15bf0a84e36a36df60007eb2efd9a046d",
+        "target": "osx-arm64",
+        "jsonPointer": "/schedule/sigmas/values/999",
+        "tableSha256": "187a5a207118003afdd3af1298e04c99829ac795f0b9d658fe5466ac56e06649",
+        "scalarValue": 14.614641189575195,
+        "scalarLittleEndianHex": "92d56941"
+      }
+    ],
+    "requiresNewTensorPreparation": false
+  },
+  "pipeline": {
+    "clipProfile": "sd1-l",
+    "clipHidden": "last normalized",
+    "projectPooled": false,
+    "enablePaddingAttentionMasks": false,
+    "zeroOutMasked": false,
+    "returnAttentionMasks": false,
+    "pooledUsedByUnet": false,
+    "sourceAuxiliaryProjection": "unmodified CLIPTextModel computes projected pooled auxiliary; SD1 selects unprojected pooled; product only computes projection when requested. Capture/disclose auxiliary distinction, never use it as conditioning.",
+    "attention": "CLIP/UNet exact attention_basic; VAE exact normal_attention",
+    "prediction": "EPS, sigma_data=1",
+    "schedule": "explicit input F32 sigma vector; not normal_scheduler implementation",
+    "latentScale": 0.18215,
+    "latentScaleFloat64BitsHex": "3fc750b0f27bb2ff",
+    "imageLatent": "all zeros; no img2img or ProcessLatentIn",
+    "maximumDenoiseRule": "math.isclose(float(sigma_max), float(sigmas[0]), rel_tol=1e-5, abs_tol=0) or sigmas[0]>sigma_max",
+    "initial": "EPS.noise_scaling(sigmas[0], noise, emptyLatent, maximumDenoise)",
+    "sampler": "exact sample_euler s_churn=0; (x-denoised)/sigma and x+derivative*(nextSigma-sigma) Tensor/F32",
+    "inverseNoiseScaling": "EPS identity",
+    "rawVaeLatent": "finalDiffusionLatent / binary64 scalar0.18215 using Tensor/F32 arithmetic",
+    "image": "exact classical VAE.decode wrapper; NCHW output buffer, add1/div2/clamp in place, movedim NHWC",
+    "cloning": "no blanket contiguous/clone on compute boundaries; serialization copies must not feed model operations",
+    "noFallback": [
+      "device",
+      "dtype",
+      "CFG concatenation",
+      "VAE tiling",
+      "new shapes",
+      "new sigmas",
+      "different weight recipe"
+    ]
+  },
+  "cases": [
+    {
+      "id": "empty-one-step",
+      "positiveText": "packing/empty",
+      "negativeText": "packing/empty",
+      "negativeContextIsNull": false,
+      "inputs": {
+        "positiveIds": "packing/empty/ids",
+        "positiveWeights": "packing/empty/weights",
+        "negativeIds": "packing/empty/ids",
+        "negativeWeights": "packing/empty/weights",
+        "noise": "empty-one-step/noise",
+        "emptyLatent": "empty-one-step/emptyLatent",
+        "sigmas": "empty-one-step/sigmas"
+      },
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 1.0,
+      "scaleFloat64BitsHex": "3ff0000000000000",
+      "disableScaleOneOptimization": false,
+      "maximumDenoise": false,
+      "steps": 1,
+      "unetCallsPerRun": 1,
+      "positiveContextShape": [
+        1,
+        77,
+        16
+      ],
+      "negativeContextShape": [
+        1,
+        77,
+        16
+      ],
+      "initialDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "finalDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "rawVaeLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "imageShape": [
+        1,
+        32,
+        40,
+        3
+      ]
+    },
+    {
+      "id": "weighted-three-step",
+      "positiveText": "packing/nested",
+      "negativeText": "packing/implicit",
+      "negativeContextIsNull": false,
+      "inputs": {
+        "positiveIds": "packing/nested/ids",
+        "positiveWeights": "packing/nested/weights",
+        "negativeIds": "packing/implicit/ids",
+        "negativeWeights": "packing/implicit/weights",
+        "noise": "weighted-three-step/noise",
+        "emptyLatent": "weighted-three-step/emptyLatent",
+        "sigmas": "weighted-three-step/sigmas"
+      },
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 3.5,
+      "scaleFloat64BitsHex": "400c000000000000",
+      "disableScaleOneOptimization": false,
+      "maximumDenoise": false,
+      "steps": 3,
+      "unetCallsPerRun": 6,
+      "positiveContextShape": [
+        1,
+        77,
+        16
+      ],
+      "negativeContextShape": [
+        1,
+        77,
+        16
+      ],
+      "initialDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "finalDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "rawVaeLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "imageShape": [
+        1,
+        32,
+        40,
+        3
+      ]
+    },
+    {
+      "id": "two-chunks-separate",
+      "positiveText": "packing/length-76",
+      "negativeText": "packing/empty",
+      "negativeContextIsNull": false,
+      "inputs": {
+        "positiveIds": "packing/length-76/ids",
+        "positiveWeights": "packing/length-76/weights",
+        "negativeIds": "packing/empty/ids",
+        "negativeWeights": "packing/empty/weights",
+        "noise": "two-chunks-separate/noise",
+        "emptyLatent": "two-chunks-separate/emptyLatent",
+        "sigmas": "two-chunks-separate/sigmas"
+      },
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 3.5,
+      "scaleFloat64BitsHex": "400c000000000000",
+      "disableScaleOneOptimization": false,
+      "maximumDenoise": false,
+      "steps": 2,
+      "unetCallsPerRun": 4,
+      "positiveContextShape": [
+        1,
+        154,
+        16
+      ],
+      "negativeContextShape": [
+        1,
+        77,
+        16
+      ],
+      "initialDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "finalDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "rawVaeLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "imageShape": [
+        1,
+        32,
+        40,
+        3
+      ]
+    },
+    {
+      "id": "maximum-start",
+      "positiveText": "packing/implicit",
+      "negativeText": "packing/empty",
+      "negativeContextIsNull": false,
+      "inputs": {
+        "positiveIds": "packing/implicit/ids",
+        "positiveWeights": "packing/implicit/weights",
+        "negativeIds": "packing/empty/ids",
+        "negativeWeights": "packing/empty/weights",
+        "noise": "maximum-start/noise",
+        "emptyLatent": "maximum-start/emptyLatent",
+        "sigmas": "maximum-start/sigmas"
+      },
+      "predictionKind": "epsilon",
+      "policy": "separate",
+      "scale": 7.0,
+      "scaleFloat64BitsHex": "401c000000000000",
+      "disableScaleOneOptimization": false,
+      "maximumDenoise": true,
+      "steps": 2,
+      "unetCallsPerRun": 4,
+      "positiveContextShape": [
+        1,
+        77,
+        16
+      ],
+      "negativeContextShape": [
+        1,
+        77,
+        16
+      ],
+      "initialDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "finalDiffusionLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "rawVaeLatentShape": [
+        1,
+        4,
+        4,
+        5
+      ],
+      "imageShape": [
+        1,
+        32,
+        40,
+        3
+      ]
+    }
+  ],
+  "repetitions": 3,
+  "observerSequence": [
+    "off",
+    "on",
+    "off"
+  ],
+  "expectedCounts": {
+    "cases": 4,
+    "stepsPerPass": 8,
+    "unetCallsPerPass": 15,
+    "unetCallsAllRepeats": 45,
+    "clipEncodeCallsAllRepeats": 24,
+    "vaeDecodeCallsAllRepeats": 12
+  },
+  "requiredCaptures": {
+    "perCase": [
+      "positive.hidden",
+      "positive.pooled",
+      "negative.hidden",
+      "negative.pooled",
+      "initialDiffusionLatent",
+      "finalDiffusionLatent",
+      "rawVaeLatent",
+      "image"
+    ],
+    "perEulerStep": [
+      "x",
+      "denoised",
+      "sigma",
+      "sigmaHat"
+    ],
+    "recordsAcrossFourCasesMiddleRepeat": 64,
+    "shapeDtypeStrideAndAlignment": true,
+    "parameterAndInputHashesBeforeAfter": true,
+    "noFinalImageOnlyAcceptance": true,
+    "outputEncoding": "F32 little-endian logical row-major, SHA256, shape, dtype, original stride and aligned64; no PNG golden"
+  },
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "formula": "abs(actual-reference) <= atol + rtol*abs(reference)",
+    "structural": "exact shapes/dtypes/text token IDs/float64 weight bits/parameter-input hashes",
+    "nonFinite": "reject finite-corpus violation",
+    "record": [
+      "maxAbsolute",
+      "maxToleranceFraction",
+      "outsideCount",
+      "firstDivergentBoundary"
+    ],
+    "policy": "no tolerance/fixture replacement after failure; no assumed cross-OS acceptance",
+    "stepScalars": "Euler index exact; sigma and sigmaHat shape=[] dtype=float32 and bits exactly equal input sigmas[index] with churn=0; activation tolerance never applies"
+  },
+  "integrity": {
+    "beforeAfter": [
+      "collector scripts",
+      "protocol",
+      "frozen source blobs",
+      "helper raw bytes",
+      "lock raw bytes",
+      "parameters",
+      "input payloads"
+    ],
+    "output": "new external directory, no overwrite; atomic final manifest only after integrity checks; incomplete/failure stays visible",
+    "sourceIsolation": "Python laboratory only; no product import, checkpoint access, internet, model download, C# expected values or stock mode",
+    "provenance": "capture source/product commits and actual runtime maps; no private paths or filenames in public records"
+  }
+}

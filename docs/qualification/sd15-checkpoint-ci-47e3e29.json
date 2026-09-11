@@ -1,0 +1,961 @@
+{
+  "schemaVersion": 1,
+  "scope": "Cross-platform CI evidence for reduced synthetic SD1.5 checkpoint assembly",
+  "commit": "47e3e2996953e0049e58f8ba345936e11865955e",
+  "runId": 34653895731,
+  "runUrl": "https://github.com/skyline624/ComfySharp/actions/runs/34653895731",
+  "workflow": "Build and test",
+  "conclusion": "failure",
+  "qualifiedModelFamilies": [],
+  "pretrainedCheckpointTested": false,
+  "stockCheckpointLoaded": false,
+  "composedGenerativeWorkflowTested": false,
+  "artifactCount": 18,
+  "trxCount": 41,
+  "countingRule": "Checkpoint and first-use runs repeat existing test IDs. Aggregate totals include ordinary plus separate stock tests and never add repeated executions.",
+  "builds": [
+    {
+      "runtime": "win-x64",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "runtime": "linux-x64",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "runtime": "osx-arm64",
+      "warnings": 0,
+      "errors": 0
+    }
+  ],
+  "targets": [
+    {
+      "runtime": "win-x64",
+      "jobConclusion": "success",
+      "checkpoint": {
+        "Passed": 25,
+        "total": 25,
+        "trxSha256": "60c4c66153e9f3b65db92c77dd81f40e5c05f26c013dfe1424db76c9ad7988da"
+      },
+      "firstUse": {
+        "Passed": 190,
+        "total": 190
+      },
+      "aggregateReached": true,
+      "uniqueAggregateTests": 1322,
+      "aggregate": {
+        "Passed": 1322
+      },
+      "observedUniqueIdsAcrossAllProcesses": 1322,
+      "ignoredAmongExecuted": 0,
+      "firstUseFailedClasses": {},
+      "aggregateFailedClasses": {},
+      "euler": {
+        "firstUse": {
+          "Passed": 8
+        },
+        "behaviorTestsExecuted": 9,
+        "behaviorOutcomes": {
+          "Passed": 9
+        },
+        "comparisonRecords": 81,
+        "bitExact": 81,
+        "outsideBoundIncludingRepeatedOutputs": 0,
+        "finalDistinctOutsideBound": 0,
+        "maximumAbsoluteError": 0.0,
+        "all81PayloadsIdenticalToRun2087602": true,
+        "inputRecordsVerified": 31,
+        "parametersPerCaseVerifiedBeforeAfter": 686,
+        "threeOutputsStablePerCase": true,
+        "sourceManifestSha256": "b528a5f0055ddbae5dad409dffc1bac7a74d08295b638920165791441eaf17a8"
+      },
+      "unet": {
+        "payloadsIdenticalToRun2087602": 80,
+        "finalElementsOutsideBound": 0
+      },
+      "failedOrSkippedSteps": [
+        {
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        }
+      ],
+      "runtimeIdentityFromUnetTraces": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "Microsoft Windows 10.0.26100",
+        "architecture": "X64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "available",
+          "vendor": "AuthenticAMD",
+          "brand": "AMD EPYC 7763 64-Core Processor",
+          "hardwareFeatures": {
+            "sse": true,
+            "sse2": true,
+            "sse3": true,
+            "ssse3": true,
+            "sse41": true,
+            "sse42": true,
+            "avx": true,
+            "fma": true,
+            "osxsave": true,
+            "avx2": true,
+            "avx512F": false,
+            "avx512Dq": false,
+            "avx512Bw": false,
+            "avx512Vl": false
+          },
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": true,
+          "avx": true,
+          "avx2": true,
+          "avx512F": false,
+          "fma": true,
+          "armAdvSimd": false
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "available",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [
+            {
+              "instance": 1,
+              "name": "torch_cpu.DLL",
+              "status": "available",
+              "bytes": 264955904,
+              "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b",
+              "errorType": null
+            },
+            {
+              "instance": 2,
+              "name": "c10.dll",
+              "status": "available",
+              "bytes": 1081344,
+              "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063",
+              "errorType": null
+            },
+            {
+              "instance": 3,
+              "name": "libiomp5md.dll",
+              "status": "available",
+              "bytes": 1614192,
+              "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4",
+              "errorType": null
+            },
+            {
+              "instance": 4,
+              "name": "LibTorchSharp.DLL",
+              "status": "available",
+              "bytes": 1324984,
+              "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858",
+              "errorType": null
+            }
+          ],
+          "errorType": null
+        }
+      }
+    },
+    {
+      "runtime": "linux-x64",
+      "jobConclusion": "failure",
+      "checkpoint": {
+        "Passed": 25,
+        "total": 25,
+        "trxSha256": "9aeee89e12a6f39f345cec523fa90f3ec56aec9c1b8bdb71505cce581b3ad701"
+      },
+      "firstUse": {
+        "Passed": 175,
+        "Failed": 15,
+        "total": 190
+      },
+      "aggregateReached": false,
+      "uniqueAggregateTests": null,
+      "aggregate": {},
+      "observedUniqueIdsAcrossAllProcesses": 215,
+      "ignoredAmongExecuted": 0,
+      "firstUseFailedClasses": {
+        "SdUnetReferenceTests": 2,
+        "SdDenoiserReferenceTests": 6,
+        "SdEulerReferenceTests": 7
+      },
+      "aggregateFailedClasses": {},
+      "euler": {
+        "firstUse": {
+          "Failed": 7,
+          "Passed": 1
+        },
+        "behaviorTestsExecuted": 0,
+        "behaviorOutcomes": {},
+        "comparisonRecords": 81,
+        "bitExact": 27,
+        "outsideBoundIncludingRepeatedOutputs": 1587,
+        "finalDistinctOutsideBound": 260,
+        "maximumAbsoluteError": 0.0021082162857055664,
+        "all81PayloadsIdenticalToRun2087602": true,
+        "inputRecordsVerified": 31,
+        "parametersPerCaseVerifiedBeforeAfter": 686,
+        "threeOutputsStablePerCase": true,
+        "sourceManifestSha256": "b1aaf6e2e1a6c8d51fe261012cd20257980d8e4a4561f5bbb016c915be72fa1e"
+      },
+      "unet": {
+        "payloadsIdenticalToRun2087602": 80,
+        "finalElementsOutsideBound": 42
+      },
+      "failedOrSkippedSteps": [
+        {
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Test managed contracts, UI headless and CPU primitives",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        }
+      ],
+      "runtimeIdentityFromUnetTraces": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "available",
+          "vendor": "AuthenticAMD",
+          "brand": "AMD EPYC 7763 64-Core Processor",
+          "hardwareFeatures": {
+            "sse": true,
+            "sse2": true,
+            "sse3": true,
+            "ssse3": true,
+            "sse41": true,
+            "sse42": true,
+            "avx": true,
+            "fma": true,
+            "osxsave": true,
+            "avx2": true,
+            "avx512F": false,
+            "avx512Dq": false,
+            "avx512Bw": false,
+            "avx512Vl": false
+          },
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": true,
+          "avx": true,
+          "avx2": true,
+          "avx512F": false,
+          "fma": true,
+          "armAdvSimd": false
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "available",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [
+            {
+              "instance": 1,
+              "name": "libtorch_cpu.so",
+              "status": "available",
+              "bytes": 461211481,
+              "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+              "errorType": null
+            },
+            {
+              "instance": 2,
+              "name": "libLibTorchSharp.so",
+              "status": "available",
+              "bytes": 2399008,
+              "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+              "errorType": null
+            },
+            {
+              "instance": 3,
+              "name": "libc10.so",
+              "status": "available",
+              "bytes": 1455496,
+              "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+              "errorType": null
+            },
+            {
+              "instance": 4,
+              "name": "libgomp-98b21ff3.so.1",
+              "status": "available",
+              "bytes": 283265,
+              "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb",
+              "errorType": null
+            },
+            {
+              "instance": 5,
+              "name": "libtorch.so",
+              "status": "available",
+              "bytes": 7584,
+              "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760",
+              "errorType": null
+            }
+          ],
+          "errorType": null
+        }
+      }
+    },
+    {
+      "runtime": "osx-arm64",
+      "jobConclusion": "failure",
+      "checkpoint": {
+        "Passed": 25,
+        "total": 25,
+        "trxSha256": "bf54b0f7a776dc70c67cf1fcb446e0dd9b7a7b3ca3e1793d8a4f67614cbc3553"
+      },
+      "firstUse": {
+        "Passed": 190,
+        "total": 190
+      },
+      "aggregateReached": true,
+      "uniqueAggregateTests": 1322,
+      "aggregate": {
+        "Passed": 1320,
+        "Failed": 2
+      },
+      "observedUniqueIdsAcrossAllProcesses": 1322,
+      "ignoredAmongExecuted": 0,
+      "firstUseFailedClasses": {},
+      "aggregateFailedClasses": {
+        "ClipStockReferenceTests": 2
+      },
+      "euler": {
+        "firstUse": {
+          "Passed": 8
+        },
+        "behaviorTestsExecuted": 9,
+        "behaviorOutcomes": {
+          "Passed": 9
+        },
+        "comparisonRecords": 81,
+        "bitExact": 81,
+        "outsideBoundIncludingRepeatedOutputs": 0,
+        "finalDistinctOutsideBound": 0,
+        "maximumAbsoluteError": 0.0,
+        "all81PayloadsIdenticalToRun2087602": true,
+        "inputRecordsVerified": 31,
+        "parametersPerCaseVerifiedBeforeAfter": 686,
+        "threeOutputsStablePerCase": true,
+        "sourceManifestSha256": "002da5ae9cb823cdf88523c9e8a22328cd2305bbafd82620ab708e8eb323292f"
+      },
+      "unet": {
+        "payloadsIdenticalToRun2087602": 80,
+        "finalElementsOutsideBound": 0
+      },
+      "failedOrSkippedSteps": [
+        {
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        }
+      ],
+      "runtimeIdentityFromUnetTraces": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "macOS 14.8.9",
+        "architecture": "Arm64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "cpuid_unavailable_on_this_architecture",
+          "vendor": null,
+          "brand": null,
+          "hardwareFeatures": {},
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": false,
+          "avx": false,
+          "avx2": false,
+          "avx512F": false,
+          "fma": false,
+          "armAdvSimd": true
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "unavailable",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [],
+          "errorType": "no_matching_loaded_modules"
+        }
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 10285405901,
+      "name": "clip-stock-traces-win-x64",
+      "sizeBytes": 8244840,
+      "digest": "sha256:4dd63f229cfedeb37d753de6b0b9e27f8647d80b4ab0ca4a42301476304b71cf"
+    },
+    {
+      "id": 10285405897,
+      "name": "tests-stock-win-x64",
+      "sizeBytes": 2433,
+      "digest": "sha256:8392680a6c59fb3c47035cad93b17761e39cb197c038a9df2aaca55a8063578f"
+    },
+    {
+      "id": 10285341851,
+      "name": "clip-stock-traces-osx-arm64",
+      "sizeBytes": 8417541,
+      "digest": "sha256:a7fd2b317756291b28ad50fc5c47b910303fc8048861e5508d704a13bcd6f517"
+    },
+    {
+      "id": 10285207184,
+      "name": "tests-checkpoint-win-x64",
+      "sizeBytes": 4767,
+      "digest": "sha256:0a0f8f4685a3b2bd88efc5f5efbeece7d33e2cebd7020bfa49b7b4ac46160a12"
+    },
+    {
+      "id": 10285062372,
+      "name": "sd-component-traces-osx-arm64",
+      "sizeBytes": 796114,
+      "digest": "sha256:7bed31561cde8a73f285a4600211fe7323ba727360affa47dc48e815cfa4c988"
+    },
+    {
+      "id": 10285047378,
+      "name": "tests-first-use-osx-arm64",
+      "sizeBytes": 41791,
+      "digest": "sha256:4af032953d1dc4e8bd70639235a65fbf0f2f5aa87d648ffc088b238034d3fa4f"
+    },
+    {
+      "id": 10284992549,
+      "name": "sd-euler-traces-osx-arm64",
+      "sizeBytes": 521629,
+      "digest": "sha256:7dc9ae661e7df118390fd53989c5e75bf77e5a8b92ebc87b1f57aa2bb0baaa62"
+    },
+    {
+      "id": 10284967463,
+      "name": "tests-checkpoint-osx-arm64",
+      "sizeBytes": 4858,
+      "digest": "sha256:bdb9645071d7a41aa593acedf06c02f0caa7aa95ceb3d0aea66c191143c38ebd"
+    },
+    {
+      "id": 10284862734,
+      "name": "sd-euler-traces-win-x64",
+      "sizeBytes": 524171,
+      "digest": "sha256:60545850f4e6b51b8b491b8d3f755ea1572fb703cdf35220234e65ffc29d15ac"
+    },
+    {
+      "id": 10284852810,
+      "name": "tests-first-use-win-x64",
+      "sizeBytes": 41048,
+      "digest": "sha256:239e29dcb3cb99919402b47e0ade679dbb6065d25fad4f00818a58c9e9d6bd7c"
+    },
+    {
+      "id": 10284817903,
+      "name": "sd-component-traces-win-x64",
+      "sizeBytes": 799324,
+      "digest": "sha256:0f608eca1d6e3d53c37fde23aa954543d7866269afff552e00caee35cabe1518"
+    },
+    {
+      "id": 10284737872,
+      "name": "tests-osx-arm64",
+      "sizeBytes": 289434,
+      "digest": "sha256:df0cbf2247f7b65fe48a9aa7d45384505786f883f425e466f37bc7f1250eea4a"
+    },
+    {
+      "id": 10284727966,
+      "name": "tests-stock-osx-arm64",
+      "sizeBytes": 2838,
+      "digest": "sha256:7b59fbc9354971db5a58085ac6f536add9be753581fa8e39b6529924cac180fd"
+    },
+    {
+      "id": 10284693134,
+      "name": "tests-win-x64",
+      "sizeBytes": 289409,
+      "digest": "sha256:1822ce3e869a8b3db43ccece2d8533987e8b81008b83c5042547f2883328be8c"
+    },
+    {
+      "id": 10284308416,
+      "name": "tests-checkpoint-linux-x64",
+      "sizeBytes": 4712,
+      "digest": "sha256:affba6a1298116fc871dc058c399291c4e6c4194d5436eb160a704169b432e99"
+    },
+    {
+      "id": 10284253552,
+      "name": "tests-first-use-linux-x64",
+      "sizeBytes": 43810,
+      "digest": "sha256:41e193f96f628a3fbea9b3095b454f283a832a538f02856f6c5576c746e8d92c"
+    },
+    {
+      "id": 10284248584,
+      "name": "sd-component-traces-linux-x64",
+      "sizeBytes": 799840,
+      "digest": "sha256:0794d980a0bfd79a6f4bb82b88d9f973aca6c36daff58aace75070a60969ab99"
+    },
+    {
+      "id": 10284218706,
+      "name": "sd-euler-traces-linux-x64",
+      "sizeBytes": 524587,
+      "digest": "sha256:b48175616ee2dc1c49c67c9b9d83eb8a53d5aa305769328dd56952d7ffc8d39a"
+    }
+  ],
+  "trxReports": [
+    {
+      "artifact": "tests-checkpoint-linux-x64",
+      "sha256": "9aeee89e12a6f39f345cec523fa90f3ec56aec9c1b8bdb71505cce581b3ad701",
+      "total": 25,
+      "outcomes": {
+        "Passed": 25
+      }
+    },
+    {
+      "artifact": "tests-checkpoint-osx-arm64",
+      "sha256": "bf54b0f7a776dc70c67cf1fcb446e0dd9b7a7b3ca3e1793d8a4f67614cbc3553",
+      "total": 25,
+      "outcomes": {
+        "Passed": 25
+      }
+    },
+    {
+      "artifact": "tests-checkpoint-win-x64",
+      "sha256": "60c4c66153e9f3b65db92c77dd81f40e5c05f26c013dfe1424db76c9ad7988da",
+      "total": 25,
+      "outcomes": {
+        "Passed": 25
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "44cc2582f40e3033d85c9b9ed98750948cb23be923b17ff892a3b60182af71f2",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "f13a1ac82bb5d734dc28c073b40aa32467c36f02d30d3536673de32d8d386b42",
+      "total": 47,
+      "outcomes": {
+        "Passed": 47
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "a6e8ef33b05d8daa16cd4aee525f11fd414ebb52a27b01fb1e3103968e72ff9a",
+      "total": 59,
+      "outcomes": {
+        "Passed": 59
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "08f54852e47c98935fdfebaf340a21ccbf0e0f442db4caf940616400b6c4792d",
+      "total": 6,
+      "outcomes": {
+        "Failed": 6
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "db5fbb9181bee8781c965859a6e63cbbee88737c5fb8c95c1d780b97534e6c8d",
+      "total": 8,
+      "outcomes": {
+        "Failed": 7,
+        "Passed": 1
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "c7de0537496476300c372e7def5a4816ad7ce43ef51a6c916ffa3a1bbc7fd46f",
+      "total": 3,
+      "outcomes": {
+        "Passed": 3
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "e491ed3c781dd227dbccbaef1221327854f78e0f3ce91385afea9ff11ad7d3ac",
+      "total": 8,
+      "outcomes": {
+        "Passed": 6,
+        "Failed": 2
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "sha256": "ae5461d03a6b445edcecadd1ee155ae9e9bf67cc76d227bb41792709f2b5013e",
+      "total": 51,
+      "outcomes": {
+        "Passed": 51
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "72851465650280f0dc6a1ee55e3ae2366c6b6f09083fb93dd1c1c6a42e60c3dc",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "e4c739c5ded741af31e1ce4513c443f631f9742b805cdf7df3438f770e449623",
+      "total": 47,
+      "outcomes": {
+        "Passed": 47
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "62a486da108005f8d3da384cc7b5cde4eb40ec6c6cd5a6e96c81a5f847fba4f5",
+      "total": 59,
+      "outcomes": {
+        "Passed": 59
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "807a743103848968a49736b425066b3081376d51b2b0f785d0ade5bc2789ede8",
+      "total": 6,
+      "outcomes": {
+        "Passed": 6
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "b8cec3712ab05a41fc5a9851a963d4a563710f417c8b21f41f06765819558db3",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "06b9528e099189e88f808f2d4bde506823e932277a5c34011bde0840afe0ecce",
+      "total": 3,
+      "outcomes": {
+        "Passed": 3
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "585103fe4a1cd6ed09c9cec2bdc89f9efbace3426bc0e10b1ec448c64beb7aca",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "sha256": "8d65852a0f15cc313047795b81a05a9bdb5adeacac2e50d3e8af183ab9246372",
+      "total": 51,
+      "outcomes": {
+        "Passed": 51
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "55d9d2011ed03bdc67f3ece91506e55d48d175f3ae31b126e565ec0fdf212f4c",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "e2f7cdd16b4dd4e69921bf5aebff4626724d25611ec4ebe2ec7a4130893d5a5c",
+      "total": 47,
+      "outcomes": {
+        "Passed": 47
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "0bc95664d43624e46e0c8a4a0d3f16eeb705725dc12af24386c62413ebc32d7c",
+      "total": 59,
+      "outcomes": {
+        "Passed": 59
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "63af6362e6cab968432c6b92b3722ab376567dc9ada56ada277c1f54a49c8149",
+      "total": 6,
+      "outcomes": {
+        "Passed": 6
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "c0349b2b43e4e260abb7b7fb9032516fb1aff25d3f220e183e3b0c209321c27b",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "69740679a7fa9f8924aa662b8be67abbc9476f795718e68e2b2f994fb63011eb",
+      "total": 3,
+      "outcomes": {
+        "Passed": 3
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "2ecd4d3e627a90657cc786457cd3769ff3c3edc45b44d02573d00119a5d8f336",
+      "total": 8,
+      "outcomes": {
+        "Passed": 8
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "sha256": "6b19a077ac301c7db95bd450ea448b16c04a597b54f776a490f9d3966a422dcb",
+      "total": 51,
+      "outcomes": {
+        "Passed": 51
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "357dfb0fffdd0fc24b6c8d25594111ed0482f8fa29b4aaa39647fbe073c19fd3",
+      "total": 88,
+      "outcomes": {
+        "Passed": 88
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "81142b92bb2057f109d52df98add2453fc743f1f87e559b2dcf867e7136e0d63",
+      "total": 109,
+      "outcomes": {
+        "Passed": 109
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "c8fb99d1beb2b8c44616b76ae2a345fe9d98e5ab00277d7b11ee0b6429301bf5",
+      "total": 32,
+      "outcomes": {
+        "Passed": 32
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "c2851fd5468d3be4448c71058a124944717a876ae82ccc123e4552fbaa464b18",
+      "total": 533,
+      "outcomes": {
+        "Passed": 533
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "1212866a45dafd3e9b6613965498a18460d7a1603ac80233ea613405adc57b3d",
+      "total": 540,
+      "outcomes": {
+        "Passed": 540
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "sha256": "5c15ca08fd5aa454a372387f27f77704f1db0f6a6de68e37177a5e2d47ce4b0d",
+      "total": 17,
+      "outcomes": {
+        "Passed": 17
+      }
+    },
+    {
+      "artifact": "tests-stock-osx-arm64",
+      "sha256": "2b1b17be3e55604d62315b232e07870c7c22cbc54f48c103291541c6f4fc7f0b",
+      "total": 3,
+      "outcomes": {
+        "Passed": 1,
+        "Failed": 2
+      }
+    },
+    {
+      "artifact": "tests-stock-win-x64",
+      "sha256": "ebbce3ea38fb99d91bf6a38c1cadf6167b31eaa42657d2e2772cf92fcc6f1193",
+      "total": 3,
+      "outcomes": {
+        "Passed": 3
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "d516ef7dda5c5998455e1de808a9bb4a446ad9476f0ab295f62f9498dc991622",
+      "total": 109,
+      "outcomes": {
+        "Passed": 109
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "b1e859a85e13e326b612777bf0411e0711ec040ba5ac491eec52c644d11338eb",
+      "total": 32,
+      "outcomes": {
+        "Passed": 32
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "97440296cad58a3c337b81a72d7c072effadd8151425579b01c30b846e9f296c",
+      "total": 533,
+      "outcomes": {
+        "Passed": 533
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "413595766e285711aa2be1e51f5228cd24b18e58dafc1b0d169a9c165bfd7ab4",
+      "total": 540,
+      "outcomes": {
+        "Passed": 540
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "426119bca3d131e3c8551697a1d809f2c3e36637a28519f5f46bf718683d9aee",
+      "total": 17,
+      "outcomes": {
+        "Passed": 17
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "sha256": "1cac7ad270172430ad56d789c9c2458f4d9338c4d070e5c06983a450f744ec7c",
+      "total": 88,
+      "outcomes": {
+        "Passed": 88
+      }
+    }
+  ],
+  "eulerPriorEvidence": "sd-euler-ci-2087602.json",
+  "clipWindowsProjectedVariation": {
+    "runtime": "win-x64",
+    "profile": "g",
+    "record": "projected",
+    "elements": 2560,
+    "different": 2029,
+    "maxAbsAgainstPrevious": 4.76837158203125e-07,
+    "actualSha256": "a752541ba423c6fdee686e115595123922b02693c995185a794716a74312198e",
+    "previousSha256": "db6799d5e41bf0f43dc75d9c333a58a3ca53fb5b838a011f1a5407a65fff5e3b",
+    "comparedRunId": 34651839113,
+    "observationKind": "Actual production Forward ProjectedPooled output; not reconstructed first-layer QKV",
+    "stockTestsPassed": 3,
+    "causalAttribution": "not established"
+  },
+  "changedSourceAndTestPathsSince2087602": [
+    "src/ComfySharp.Inference/SafeTensorFile.cs",
+    "src/ComfySharp.Inference/Sd15Checkpoint.cs",
+    "src/ComfySharp.Inference/Sd15CheckpointContracts.cs",
+    "src/ComfySharp.Inference/Sd15CheckpointLoader.cs",
+    "tests/ComfySharp.Inference.Tests/Sd15CheckpointAssemblyTests.cs",
+    "tests/ComfySharp.Inference.Tests/Sd15CheckpointPlanTests.cs",
+    "tests/ComfySharp.Inference.Tests/SdCheckpointTestFile.cs"
+  ],
+  "evidenceHashes": {
+    "ci-34653895731-metadata.json": "1e5ac98078900a355f8289112d13c2229f9f868204bc689cf6b42bd4a0968676",
+    "ci-34653895731-artifacts.json": "688f1534edd432218b14695f9c56474422c4d709fce54488013469e6113d8972",
+    "ci-34653895731.log": "0b032c1fbc002b948035954e3e3797a66b787427c594512327053e39b2ae168e"
+  },
+  "limits": [
+    "Reduced synthetic checkpoint contracts; no pretrained weights or successful stock checkpoint load.",
+    "Assembly cases execute CLIP pooling/projection but only acquire/retain U-Net and VAE factories.",
+    "The metadata-isolation harness remains a separate local Windows observation, not a new three-platform CI gate.",
+    "The first-use reference processes and checkpoint process are distinct. Their repeated test IDs do not increase unique coverage.",
+    "Existing numerical bounds and fixtures are unchanged. Linux/macOS numerical failures remain open.",
+    "Runtime identity is captured in traced U-Net processes, not checkpoint tests; CPUID/.NET ISA availability does not measure actual ATen dispatch.",
+    "Loaded native libraries are process observations; no same-host source/product attribution experiment is performed in this normal CI."
+  ]
+}
