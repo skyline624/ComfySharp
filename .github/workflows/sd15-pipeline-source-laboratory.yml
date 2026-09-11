@@ -1,0 +1,85 @@
+name: Prospective reduced SD1.5 pipeline source laboratory
+on:
+  push:
+    paths:
+      - 'labs/sd15-pipeline-source/**'
+      - 'labs/sd-source/**'
+      - 'labs/sd-euler-source/reference.py'
+      - 'labs/clip-source/reference.py'
+      - 'labs/clip-source/requirements-*.txt'
+      - '.github/workflows/sd15-pipeline-source-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - name: Preserve canonical repository bytes
+        shell: pwsh
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+      - name: Restore unchanged hashed CPU environment
+        shell: pwsh
+        run: |
+          $pipelineEnvironment = Join-Path $env:RUNNER_TEMP 'sd15-pipeline-python'
+          python -m venv $pipelineEnvironment
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create isolated pipeline environment.' }
+          $pipelinePython = if ($IsWindows) { Join-Path $pipelineEnvironment 'Scripts/python.exe' } else { Join-Path $pipelineEnvironment 'bin/python' }
+          & $pipelinePython -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r 'labs/clip-source/requirements-${{ matrix.runtime }}.txt'
+          if ($LASTEXITCODE -ne 0) { throw 'Hashed CPU dependency installation failed.' }
+          & $pipelinePython -I -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency closure check failed.' }
+      - name: Fetch the pinned source blobs
+        shell: pwsh
+        run: |
+          $pipelineProtocol = Get-Content -LiteralPath 'labs/sd15-pipeline-source/protocol.json' -Raw | ConvertFrom-Json -AsHashtable
+          $pipelineSnapshot = Join-Path $env:RUNNER_TEMP 'sd15-pipeline-snapshot'
+          $pipelineFiles = @($pipelineProtocol.sourceFiles) + @($pipelineProtocol.clipConfigSource)
+          foreach ($entry in $pipelineFiles) {
+            $relative = $entry.file
+            if ($relative -notmatch '^comfy/[a-zA-Z0-9_./-]+$' -or $relative.Contains('..')) { throw 'Unapproved source path.' }
+            $target = Join-Path $pipelineSnapshot $relative
+            New-Item -ItemType Directory -Path (Split-Path -Parent $target) -Force | Out-Null
+            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/comfy-org/ComfyUI/$($pipelineProtocol.backendCommit)/$relative" -OutFile $target
+            if ((Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() -ne $entry.sha256) { throw "Frozen source hash mismatch: $relative" }
+          }
+      - name: Validate without native imports then collect four fixed source cases
+        shell: pwsh
+        run: |
+          $pipelineEnvironment = Join-Path $env:RUNNER_TEMP 'sd15-pipeline-python'
+          $pipelinePython = if ($IsWindows) { Join-Path $pipelineEnvironment 'Scripts/python.exe' } else { Join-Path $pipelineEnvironment 'bin/python' }
+          $pipelineSnapshot = Join-Path $env:RUNNER_TEMP 'sd15-pipeline-snapshot'
+          $pipelineOutput = Join-Path $env:RUNNER_TEMP 'sd15-pipeline-evidence'
+          $pipelineRepository = (Get-Location).Path
+          $pipelineWorkflow = Join-Path $pipelineRepository '.github/workflows/sd15-pipeline-source-laboratory.yml'
+          & $pipelinePython -I -S -B 'labs/sd15-pipeline-source/reference.py' --repository-root $pipelineRepository --source-directory $pipelineSnapshot --workflow $pipelineWorkflow --output $pipelineOutput --validate-only
+          if ($LASTEXITCODE -ne 0) { throw 'Prospective pipeline preflight failed.' }
+          & $pipelinePython -I -B 'labs/sd15-pipeline-source/reference.py' --repository-root $pipelineRepository --source-directory $pipelineSnapshot --workflow $pipelineWorkflow --output $pipelineOutput
+          if ($LASTEXITCODE -ne 0) { throw 'Prospective pipeline source collection failed.' }
+      - name: Verify collection did not modify tracked inputs
+        if: always()
+        shell: pwsh
+        run: |
+          git diff --exit-code HEAD
+          if ($LASTEXITCODE -ne 0) { throw 'Collection changed a tracked repository input.' }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sd15-pipeline-source-torch210-${{ matrix.runtime }}
+          path: ${{ runner.temp }}/sd15-pipeline-evidence
+          if-no-files-found: error
