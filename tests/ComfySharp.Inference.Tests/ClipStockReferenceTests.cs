@@ -74,6 +74,8 @@ public sealed class ClipStockReferenceTests(ITestOutputHelper output)
                     NormalizeIntermediate = opts.GetProperty("final_layer_norm_intermediate").GetBoolean(),
                     TokenCounts = opts.GetProperty("num_tokens").EnumerateArray().Select(t => t.GetInt32()).ToArray()
                 };
+                if (ClipStockTrace.CaptureIfRequested(id, weights, encoder, inputs, options.TokenCounts!))
+                    output.WriteLine($"clip-stock-trace: {id["stock/".Length..]}/manifest.json; synthetic observational capture, acceptance assertions unchanged.");
                 var comparison = new ClipReferenceTests(output);
                 var expected = reference.GetProperty("outputs");
                 for (int iteration = 0; iteration < 3; iteration++)
