@@ -54,6 +54,7 @@ public sealed class SigmaScheduleReferenceTests(ITestOutputHelper output)
         var expectedBytes = expectedBits.SelectMany(BitConverter.GetBytes).ToArray();
         Assert.True(BitConverter.IsLittleEndian, "The qualified x64/ARM64 targets are little-endian.");
         Assert.Equal(reference.GetProperty("bytesSha256").GetString(), Convert.ToHexStringLower(SHA256.HashData(expectedBytes)));
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         using var actual = Generate(reference);
         Assert.Equal(ScalarType.Float32, actual.dtype);
@@ -91,6 +92,7 @@ public sealed class SigmaScheduleReferenceTests(ITestOutputHelper output)
     {
         using var document = JsonDocument.Parse(ReadCorpus());
         var reference = document.RootElement.GetProperty("invalidCases").EnumerateArray().Single(c => c.GetProperty("id").GetString() == id);
+        NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         if (parameter is null)
             Assert.Throws<ArithmeticException>(() => { using var result = Generate(reference); });

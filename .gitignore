@@ -2,6 +2,7 @@
 **/obj/
 artifacts/
 TestResults/
+FirstUseResults/
 .vs/
 .idea/
 *.user

@@ -28,6 +28,13 @@ jobs:
         run: dotnet restore ComfySharp.slnx --locked-mode -p:NativeRuntime=${{ matrix.runtime }}
       - name: Build
         run: dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }}
+      - name: Exercise reference fixtures as the first native access in separate processes
+        shell: pwsh
+        run: |
+          foreach ($suite in @('PreviewAnyReferenceTests', 'SigmaScheduleReferenceTests')) {
+            & dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter "FullyQualifiedName~$suite" --logger trx --results-directory "FirstUseResults/$suite"
+            if ($LASTEXITCODE -ne 0) { throw "Native first-use reference suite failed: $suite" }
+          }
       - name: Test managed contracts, UI headless and CPU primitives
         run: dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --logger trx --results-directory TestResults
       - name: Diagnose macOS native loader failures
@@ -76,4 +83,10 @@ jobs:
         with:
           name: tests-${{ matrix.runtime }}
           path: TestResults
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tests-first-use-${{ matrix.runtime }}
+          path: FirstUseResults
           if-no-files-found: ignore

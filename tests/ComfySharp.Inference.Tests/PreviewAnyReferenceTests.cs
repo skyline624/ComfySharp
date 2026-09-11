@@ -49,7 +49,6 @@ public sealed class PreviewAnyReferenceTests
     {
         using var document = JsonDocument.Parse(ReadCorpus());
         var reference = document.RootElement.GetProperty("cases").EnumerateArray().Single(c => c.GetProperty("id").GetString() == id);
-        using var scope = NewDisposeScope();
         using var context = new RuntimeNodeContext();
         RuntimeValue source;
         if (reference.GetProperty("kind").GetString() == "json")
@@ -57,6 +56,7 @@ public sealed class PreviewAnyReferenceTests
         else
         {
             NativeRuntimeBootstrap.Initialize();
+            using var scope = NewDisposeScope();
             byte[] bytes = Convert.FromBase64String(reference.GetProperty("dataBase64").GetString()!);
             Assert.Equal(reference.GetProperty("dataSha256").GetString(), Convert.ToHexStringLower(SHA256.HashData(bytes)));
             Assert.True(BitConverter.IsLittleEndian);
