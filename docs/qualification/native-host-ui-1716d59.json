@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "1716d59c3e5cec2d9e7865f4aa7ca97f837fb336",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "frontendCommit": "e7d1c7fc6823e330fdab524610b0000394cb1dbc",
+  "sourceCi": "https://github.com/skyline624/ComfySharp/actions/runs/34614296728",
+  "evidenceMethod": "Aggregate and first-use counters parsed from the six downloaded TRX artifacts; non-test steps verified in the successful CI run.",
+  "runs": [
+    {
+      "runtime": "win-x64",
+      "backend": "cpu",
+      "aggregateTests": 508,
+      "failed": 0,
+      "skipped": 0,
+      "suites": {
+        "comfysharp.inference.tests": 262,
+        "comfysharp.desktop.tests": 32,
+        "comfysharp.host.tests": 109,
+        "comfysharp.workflow.tests": 17,
+        "comfysharp.core.tests": 88
+      },
+      "exactPreviewCases": 58,
+      "separateFirstUseTests": {
+        "PreviewAnyReferenceTests": 59,
+        "SigmaScheduleReferenceTests": 51
+      },
+      "desktopHostNativeGraphSmoke": "passed",
+      "nativeCpuProbeRepetitions": 25,
+      "sourceCatalogueCheck": "passed",
+      "metadataOnlyFreshProcess": "passed"
+    },
+    {
+      "runtime": "linux-x64",
+      "backend": "cpu",
+      "aggregateTests": 508,
+      "failed": 0,
+      "skipped": 0,
+      "suites": {
+        "comfysharp.core.tests": 88,
+        "comfysharp.host.tests": 109,
+        "comfysharp.inference.tests": 262,
+        "comfysharp.desktop.tests": 32,
+        "comfysharp.workflow.tests": 17
+      },
+      "exactPreviewCases": 58,
+      "separateFirstUseTests": {
+        "PreviewAnyReferenceTests": 59,
+        "SigmaScheduleReferenceTests": 51
+      },
+      "desktopHostNativeGraphSmoke": "passed",
+      "nativeCpuProbeRepetitions": 25,
+      "sourceCatalogueCheck": "passed",
+      "metadataOnlyFreshProcess": "passed"
+    },
+    {
+      "runtime": "osx-arm64",
+      "backend": "cpu",
+      "aggregateTests": 508,
+      "failed": 0,
+      "skipped": 0,
+      "suites": {
+        "comfysharp.core.tests": 88,
+        "comfysharp.host.tests": 109,
+        "comfysharp.desktop.tests": 32,
+        "comfysharp.inference.tests": 262,
+        "comfysharp.workflow.tests": 17
+      },
+      "exactPreviewCases": 58,
+      "separateFirstUseTests": {
+        "PreviewAnyReferenceTests": 59,
+        "SigmaScheduleReferenceTests": 51
+      },
+      "desktopHostNativeGraphSmoke": "passed",
+      "nativeCpuProbeRepetitions": 25,
+      "sourceCatalogueCheck": "passed",
+      "metadataOnlyFreshProcess": "passed"
+    }
+  ],
+  "portable": {
+    "sourceCommit": "af9f2ffc2f1c0d905981e27808b748233a0fac3a",
+    "ci": "https://github.com/skyline624/ComfySharp/actions/runs/34613627767",
+    "runtimes": [
+      "win-x64",
+      "linux-x64",
+      "osx-arm64"
+    ],
+    "bundle": "cpu",
+    "archiveValidation": "passed",
+    "extractedApphostGraphSmoke": "passed",
+    "binaryArtifactUploads": 0,
+    "remoteArchiveChecksums": "not_exposed_in_logs"
+  },
+  "previewCorpusSha256": "d2febc42079e6ba57fa0ae105d7479d19d4ac2e63e8e0a7f354fb5fb7ac76954",
+  "registeredNodeIds": 25,
+  "nodesMarkedImplemented": 24,
+  "partialNodeImplementations": [
+    "PreviewAny"
+  ],
+  "modelWeightsUsed": false,
+  "modelFamilyQualified": false,
+  "linuxCudaQualified": false,
+  "macosMpsQualified": false,
+  "v1Ready": false
+}
