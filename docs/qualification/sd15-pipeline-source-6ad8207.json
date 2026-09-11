@@ -1,0 +1,860 @@
+{
+  "schema": "comfysharp.sd15-pipeline-source-evidence.v1",
+  "status": "source-only-audited",
+  "qualification": false,
+  "productParityAssessed": false,
+  "run": {
+    "id": 34656804132,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34656804132",
+    "sourceCommit": "6ad8207ffe46d3d1e57780b9fc4c7288b686638d",
+    "workflow": "Prospective reduced SD1.5 pipeline source laboratory",
+    "conclusion": "success",
+    "artifactCount": 3,
+    "extractedFileCount": 9
+  },
+  "profile": "sd15-pipeline-native210-cpu-f32-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "collectorFiles": [
+    {
+      "file": "labs/sd15-pipeline-source/reference.py",
+      "bytes": 42884,
+      "sha256": "6ef0485805f9dea2bb5cac0bf593ef2a8bb9f56043a7a71ee2fdfd6c8407a2fb"
+    },
+    {
+      "file": "labs/sd15-pipeline-source/README.md",
+      "bytes": 6477,
+      "sha256": "f9c836d5f0d6e0a594edb4561e8409b1ba16b734ebd442e0d68da5fc23b5c87a"
+    },
+    {
+      "file": ".github/workflows/sd15-pipeline-source-laboratory.yml",
+      "bytes": 4817,
+      "sha256": "d82907b3b3fd0d7a5375334559a1a536036b6f7db613e62d29e555166338d5c1"
+    },
+    {
+      "file": "labs/sd15-pipeline-source/protocol.json",
+      "bytes": 78526,
+      "sha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7"
+    },
+    {
+      "file": "docs/qualification/sd15-pipeline-native210-cpu-f32-v1.md",
+      "bytes": 7128,
+      "sha256": "d56988dd5dfeada0d5e0b7507c68cdc4d1dd53b659f0fcf45565ab9ecd727b32"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "bytes": 11888,
+      "sha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "checkpoint",
+        "timestep_embedding",
+        "avg_pool_nd",
+        "make_beta_schedule"
+      ],
+      "astSha256": "93393568f05056d4df620dd7515926c7b0aad4e226824b5a079f4fad92deea42"
+    },
+    {
+      "file": "comfy/ldm/modules/attention.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+      "bytes": 51513,
+      "sha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "default",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "GEGLU",
+        "FeedForward",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic",
+        "CrossAttention",
+        "BasicTransformerBlock",
+        "SpatialTransformer"
+      ],
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "bytes": 37937,
+      "sha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "symbols": [
+        "TimestepBlock",
+        "forward_timestep_embed",
+        "TimestepEmbedSequential",
+        "Upsample",
+        "Downsample",
+        "ResBlock",
+        "apply_control",
+        "UNetModel"
+      ],
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/model.py",
+      "bytes": 31484,
+      "sha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867",
+      "symbols": [
+        "torch_cat_if_needed",
+        "nonlinearity",
+        "Normalize",
+        "CarriedConv3d",
+        "conv_carry_causal_3d",
+        "interpolate_up",
+        "Upsample",
+        "Downsample",
+        "ResnetBlock",
+        "slice_attention",
+        "normal_attention",
+        "vae_attention",
+        "AttnBlock",
+        "make_attn",
+        "Encoder",
+        "Decoder"
+      ],
+      "astSha256": "54c55dc20154f7c7dca13e2205430ac0fd6794865ebe347e41d2479fe4bf41f3"
+    },
+    {
+      "file": "comfy/ldm/modules/distributions/distributions.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/distributions/distributions.py",
+      "bytes": 2964,
+      "sha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772",
+      "symbols": [
+        "DiagonalGaussianDistribution"
+      ],
+      "astSha256": "8a5502e38258be44bb1de5f9307b1e87f666f2c05c8be7d670e8d32e6aab4be9"
+    },
+    {
+      "file": "comfy/ldm/models/autoencoder.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/models/autoencoder.py",
+      "bytes": 9782,
+      "sha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0",
+      "symbols": [
+        "DiagonalGaussianRegularizer",
+        "AbstractAutoencoder",
+        "AutoencodingEngine",
+        "AutoencodingEngineLegacy",
+        "AutoencoderKL"
+      ],
+      "astSha256": "48975c664e6086465325e795d75895d206caa437349640dc249088e32f250d9c"
+    },
+    {
+      "file": "comfy/sd.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py",
+      "bytes": 140752,
+      "sha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7",
+      "symbols": [
+        "VAE"
+      ],
+      "astSha256": "3a5e1c6a37d45492216519e5540dc4c272185eb16a3ccf1876b35e01170972c4"
+    },
+    {
+      "file": "comfy/clip_model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/clip_model.py",
+      "bytes": 16546,
+      "sha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d",
+      "symbols": [
+        "CLIPAttention",
+        "ACTIVATIONS",
+        "CLIPMLP",
+        "CLIPLayer",
+        "CLIPEncoder",
+        "CLIPEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextModel"
+      ],
+      "astSha256": "5cdeb4ba168704f3868e01d6811fcaae796a81665a5c3faf3da550dd60599a03"
+    },
+    {
+      "file": "comfy/sd1_clip.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_clip.py",
+      "bytes": 30624,
+      "sha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70",
+      "symbols": [
+        "gen_empty_tokens",
+        "ClipTokenWeightEncoder",
+        "SDClipModel",
+        "SD1CheckpointClipModel"
+      ],
+      "astSha256": "3668087a9e0e0130569e3c4bd918492aaa70ba3c6e72741244daa05054cc77ec"
+    },
+    {
+      "file": "comfy/model_sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/model_sampling.py",
+      "bytes": 15897,
+      "sha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "symbols": [
+        "reshape_sigma",
+        "EPS",
+        "ModelSamplingDiscrete"
+      ],
+      "astSha256": "8a65c67479eaabd3580a124a75cf62a717262fff7880f0dd840dd5494836c430"
+    },
+    {
+      "file": "comfy/samplers.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py",
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+      "symbols": [
+        "cfg_function",
+        "sampling_function",
+        "Sampler"
+      ],
+      "astSha256": "550b38a59b391f92fd2648885afb15f3af80c745e690b86fe2133288c928cef2"
+    },
+    {
+      "file": "comfy/conds.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/conds.py",
+      "bytes": 4522,
+      "sha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0",
+      "symbols": [
+        "CONDRegular",
+        "CONDCrossAttn"
+      ],
+      "astSha256": "7b27caa72534cbb4692e6843e24efbbfcb59c655f8b21af280fa8998fb6cd407"
+    },
+    {
+      "file": "comfy/k_diffusion/utils.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/utils.py",
+      "bytes": 12718,
+      "sha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272",
+      "symbols": [
+        "append_dims"
+      ],
+      "astSha256": "8999eb8dd535286ce45efc0c5ff96a664c6a12a87c005d77c0c221d6d6cb0018"
+    },
+    {
+      "file": "comfy/k_diffusion/sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/sampling.py",
+      "bytes": 93057,
+      "sha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+      "symbols": [
+        "to_d",
+        "sample_euler"
+      ],
+      "astSha256": "6c9c307427f7e99b89d88b0e620c2652b21b6f711b90475638daf4e724e06ef7"
+    },
+    {
+      "file": "comfy/latent_formats.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/latent_formats.py",
+      "bytes": 43438,
+      "sha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4",
+      "symbols": [
+        "LatentFormat",
+        "SD15"
+      ],
+      "astSha256": "e835743658929b537511c32e936e9228527990df3261be86e823df7ed977b0da"
+    }
+  ],
+  "sourceConfig": {
+    "file": "comfy/sd1_clip_config.json",
+    "sha256": "c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c",
+    "overrides": {
+      "hidden_size": 16,
+      "intermediate_size": 32,
+      "num_hidden_layers": 2,
+      "num_attention_heads": 4,
+      "hidden_act": "quick_gelu"
+    }
+  },
+  "scope": {
+    "model": "reduced synthetic SD1.5-shaped pipeline",
+    "clipHiddenSize": 16,
+    "unetBaseChannels": 32,
+    "contextSize": 16,
+    "vaeBaseChannels": 32,
+    "selectedParameters": 971,
+    "parameterComponents": {
+      "clip": 37,
+      "unet": 686,
+      "vae": 248
+    },
+    "projectionPresent": true,
+    "projectionUsedForConditioning": false,
+    "predictionKind": "epsilon",
+    "cfgPolicy": "separate",
+    "churn": 0,
+    "latentScale": 0.18215,
+    "latentShape": [
+      1,
+      4,
+      4,
+      5
+    ],
+    "imageShape": [
+      1,
+      32,
+      40,
+      3
+    ],
+    "syntheticWeights": true,
+    "pretrainedWeightsUsed": false,
+    "tokenizerOutputs": "previous independently generated source chunks; no tokenization rerun",
+    "noStockOrCheckpointExecution": true
+  },
+  "independentAudit": {
+    "runtime": "Python standard library only; no collector import, Torch, NumPy, native model call or C# output",
+    "captureRecordsRehashed": 192,
+    "uniqueInputRecipesRecomputed": 20,
+    "uniqueParameterRecipesRecomputed": 971,
+    "parameterRecordsVerifiedAcrossPlatforms": 2913,
+    "rawProtectedGitIdentitiesVerifiedAcrossPlatforms": 108,
+    "exactEulerSigmaRecordsAcrossPlatforms": 48,
+    "repetitionRunsAcrossPlatforms": 36,
+    "privatePathPatternMatchesInNineJsonFiles": 0,
+    "manifestsAndPipelineFilesCopiedUnchanged": 6,
+    "sourceOutputsUsedToClaimProductParity": false
+  },
+  "targets": {
+    "win-x64": {
+      "jobId": 103450881156,
+      "jobUrl": "https://github.com/skyline624/ComfySharp/actions/runs/34656804132/job/103450881156",
+      "jobConclusion": "success",
+      "steps": {
+        "total": 12,
+        "success": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "id": 10285926396,
+        "name": "sd15-pipeline-source-torch210-win-x64",
+        "githubArchiveBytes": 665543,
+        "githubArchiveDigest": "sha256:1aac70971fb0d62da4531b5ac073f4bcd3e23a5ba3acfff5971c1af32c3256b1",
+        "digestScope": "Archive digest supplied by GitHub; all extracted file hashes independently computed."
+      },
+      "files": [
+        {
+          "artifactFile": "pipeline.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.win-x64.json",
+          "bytes": 3983944,
+          "sha256": "976ce52fc5979480d8d069190a57e5f46cb32f14ac37883c7444b19a373563b2",
+          "copy": "exact bytes; no JSON rewriting"
+        },
+        {
+          "artifactFile": "manifest.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.win-x64.manifest.json",
+          "bytes": 21842,
+          "sha256": "41f3b8324ef686ea8d01499083405291cd83bcac6a2b4856b4cc18b159817860",
+          "copy": "exact bytes; no JSON rewriting"
+        }
+      ],
+      "sourceRecords": {
+        "cases": 4,
+        "captureRecords": 64,
+        "uniqueInputRecords": 20,
+        "parameterRecords": 971,
+        "eulerStepsPerPass": 8,
+        "repetitionsPerCase": 3,
+        "unetCallsAcrossRepetitions": 45,
+        "clipEncodingsAcrossRepetitions": 24,
+        "vaeDecodingsAcrossRepetitions": 12,
+        "auxiliaryProjectionCalls": 24,
+        "repetitionHashesEqual": true,
+        "nonfiniteCaptureValues": 0
+      },
+      "integrity": {
+        "rawProtectedFileIdentities": 36,
+        "rawBeforeAfterIdentical": true,
+        "matchedFrozenGitBlobs": true,
+        "sourceAstFiles": 15,
+        "sourceAstExecutionRecords": 18,
+        "sourceConfigFiles": 1,
+        "canonicalAdmissions": 10,
+        "helperCount": 6,
+        "lockCount": 3,
+        "profileCount": 1,
+        "canonicalAdmissionInputsLf": true,
+        "parameterRecipesMatch": 971,
+        "parameterLayoutsContiguousAligned64": true,
+        "nativeInputBitsAndLayoutsUnchanged": true
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "torch": "2.10.0+cpu",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "numpy": "2.2.6",
+        "einops": "0.8.1",
+        "threads": 1,
+        "interopThreads": 1,
+        "requestedCapability": "auto",
+        "actualTorchCapability": "AVX2",
+        "processorIdentifier": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+        "machine": "AMD64",
+        "build": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, build_path=<redacted>, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "parallelInfo": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 2019\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : [not set]\n\tMKL_NUM_THREADS : [not set]\nATen parallel backend: OpenMP\n",
+        "actualLoadedLibraries": [
+          {
+            "name": "_C.cp312-win_amd64.pyd",
+            "bytes": 10752,
+            "sha256": "9493aa72481514f5d7c59a600cdb9168abf5fcb25f0998b008abcc8d5b09c4cc"
+          },
+          {
+            "name": "c10.dll",
+            "bytes": 1081344,
+            "sha256": "7871e7c40fb907c75ab8a26e8fd243d58c2664965b9a768adad348dc5b090f86"
+          },
+          {
+            "name": "libiomp5md.dll",
+            "bytes": 1614192,
+            "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+          },
+          {
+            "name": "libiompstubs5md.dll",
+            "bytes": 43888,
+            "sha256": "137dd44f652a926eb540861994c58ea24ebfbf6b45886ac964a68c5742549c47"
+          },
+          {
+            "name": "torch.dll",
+            "bytes": 9728,
+            "sha256": "7aeee15bac02856902d3f0709d22fbbee668cb05dffd3f347939962ecb93dcbd"
+          },
+          {
+            "name": "torch_cpu.dll",
+            "bytes": 264942080,
+            "sha256": "78542eb53af452d841b1b24645f90d25009679731c745e4357ae39c8d312eab7"
+          },
+          {
+            "name": "torch_global_deps.dll",
+            "bytes": 9728,
+            "sha256": "eb2389594aca849a9cc9a1d3af4acbb7ea2dbbacb3d50d887aa2d6b68ddb408d"
+          },
+          {
+            "name": "torch_python.dll",
+            "bytes": 18705920,
+            "sha256": "cedb370caeaabd220509c5a163645db214cbe3fe303fe5296afbbc1b86abc92f"
+          }
+        ],
+        "wheelPackageInventory": [
+          {
+            "name": "c10.dll",
+            "bytes": 1081344,
+            "sha256": "7871e7c40fb907c75ab8a26e8fd243d58c2664965b9a768adad348dc5b090f86"
+          },
+          {
+            "name": "libiomp5md.dll",
+            "bytes": 1614192,
+            "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+          },
+          {
+            "name": "libiompstubs5md.dll",
+            "bytes": 43888,
+            "sha256": "137dd44f652a926eb540861994c58ea24ebfbf6b45886ac964a68c5742549c47"
+          },
+          {
+            "name": "shm.dll",
+            "bytes": 15360,
+            "sha256": "4802d8bfa8af83222ef8e0116c2258c617e56668c0415dd33b8f545fd2e884fa"
+          },
+          {
+            "name": "torch.dll",
+            "bytes": 9728,
+            "sha256": "7aeee15bac02856902d3f0709d22fbbee668cb05dffd3f347939962ecb93dcbd"
+          },
+          {
+            "name": "torch_cpu.dll",
+            "bytes": 264942080,
+            "sha256": "78542eb53af452d841b1b24645f90d25009679731c745e4357ae39c8d312eab7"
+          },
+          {
+            "name": "torch_global_deps.dll",
+            "bytes": 9728,
+            "sha256": "eb2389594aca849a9cc9a1d3af4acbb7ea2dbbacb3d50d887aa2d6b68ddb408d"
+          },
+          {
+            "name": "torch_python.dll",
+            "bytes": 18705920,
+            "sha256": "cedb370caeaabd220509c5a163645db214cbe3fe303fe5296afbbc1b86abc92f"
+          },
+          {
+            "name": "uv.dll",
+            "bytes": 195072,
+            "sha256": "fa569e682fc5fb7a8eb94c6829af9f30a569748dbbc6bce39735d48bc960bcf8"
+          }
+        ],
+        "libraryEvidence": "actual process mappings and package inventory are separate observations"
+      },
+      "libraryEvidence": {
+        "actuallyMappedCount": 8,
+        "packageInventoryCount": 9,
+        "matchingMappedPackageOverlap": 7,
+        "observation": "Hashes were measured by the source process; binaries were not downloaded or independently rehashed locally."
+      }
+    },
+    "linux-x64": {
+      "jobId": 103450881329,
+      "jobUrl": "https://github.com/skyline624/ComfySharp/actions/runs/34656804132/job/103450881329",
+      "jobConclusion": "success",
+      "steps": {
+        "total": 12,
+        "success": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "id": 10286281818,
+        "name": "sd15-pipeline-source-torch210-linux-x64",
+        "githubArchiveBytes": 666545,
+        "githubArchiveDigest": "sha256:26d829d4dffcc27b5b20cc72b05dc55da242531fe297a403aaf5c0d4fbe9f7e9",
+        "digestScope": "Archive digest supplied by GitHub; all extracted file hashes independently computed."
+      },
+      "files": [
+        {
+          "artifactFile": "pipeline.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.linux-x64.json",
+          "bytes": 3984788,
+          "sha256": "8c06321dac0cbb0fd771770f7d20465fae188b3316c04b10dc1a34888a1d8969",
+          "copy": "exact bytes; no JSON rewriting"
+        },
+        {
+          "artifactFile": "manifest.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.linux-x64.manifest.json",
+          "bytes": 22531,
+          "sha256": "61d83b606620ee68ebcf928564d60fa75359d4d8c6cace2fd31ad7408f97be36",
+          "copy": "exact bytes; no JSON rewriting"
+        }
+      ],
+      "sourceRecords": {
+        "cases": 4,
+        "captureRecords": 64,
+        "uniqueInputRecords": 20,
+        "parameterRecords": 971,
+        "eulerStepsPerPass": 8,
+        "repetitionsPerCase": 3,
+        "unetCallsAcrossRepetitions": 45,
+        "clipEncodingsAcrossRepetitions": 24,
+        "vaeDecodingsAcrossRepetitions": 12,
+        "auxiliaryProjectionCalls": 24,
+        "repetitionHashesEqual": true,
+        "nonfiniteCaptureValues": 0
+      },
+      "integrity": {
+        "rawProtectedFileIdentities": 36,
+        "rawBeforeAfterIdentical": true,
+        "matchedFrozenGitBlobs": true,
+        "sourceAstFiles": 15,
+        "sourceAstExecutionRecords": 18,
+        "sourceConfigFiles": 1,
+        "canonicalAdmissions": 10,
+        "helperCount": 6,
+        "lockCount": 3,
+        "profileCount": 1,
+        "canonicalAdmissionInputsLf": true,
+        "parameterRecipesMatch": 971,
+        "parameterLayoutsContiguousAligned64": true,
+        "nativeInputBitsAndLayoutsUnchanged": true
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "torch": "2.10.0+cpu",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "numpy": "2.2.6",
+        "einops": "0.8.1",
+        "threads": 1,
+        "interopThreads": 1,
+        "requestedCapability": "auto",
+        "actualTorchCapability": "AVX2",
+        "processorIdentifier": "x86_64",
+        "machine": "x86_64",
+        "build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, build_path=<redacted>, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "parallelInfo": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : [not set]\n\tMKL_NUM_THREADS : [not set]\nATen parallel backend: OpenMP\n",
+        "actualLoadedLibraries": [
+          {
+            "name": "_C.cpython-312-x86_64-linux-gnu.so",
+            "bytes": 25137,
+            "sha256": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch_global_deps.so",
+            "bytes": 8264,
+            "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+          },
+          {
+            "name": "libtorch_python.so",
+            "bytes": 30844552,
+            "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+          }
+        ],
+        "wheelPackageInventory": [
+          {
+            "name": "libaoti_custom_ops.so",
+            "bytes": 339456,
+            "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+          },
+          {
+            "name": "libbackend_with_compiler.so",
+            "bytes": 259008,
+            "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libjitbackend_test.so",
+            "bytes": 215736,
+            "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+          },
+          {
+            "name": "libshm.so",
+            "bytes": 41880,
+            "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch_global_deps.so",
+            "bytes": 8264,
+            "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+          },
+          {
+            "name": "libtorch_python.so",
+            "bytes": 30844552,
+            "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+          },
+          {
+            "name": "libtorchbind_test.so",
+            "bytes": 915336,
+            "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+          }
+        ],
+        "libraryEvidence": "actual process mappings and package inventory are separate observations"
+      },
+      "libraryEvidence": {
+        "actuallyMappedCount": 7,
+        "packageInventoryCount": 11,
+        "matchingMappedPackageOverlap": 6,
+        "observation": "Hashes were measured by the source process; binaries were not downloaded or independently rehashed locally."
+      }
+    },
+    "osx-arm64": {
+      "jobId": 103450881370,
+      "jobUrl": "https://github.com/skyline624/ComfySharp/actions/runs/34656804132/job/103450881370",
+      "jobConclusion": "success",
+      "steps": {
+        "total": 12,
+        "success": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      "artifact": {
+        "id": 10285836492,
+        "name": "sd15-pipeline-source-torch210-osx-arm64",
+        "githubArchiveBytes": 665876,
+        "githubArchiveDigest": "sha256:bb508b45835f4b9fd58662a3305a401cfd1cf4632b091bbec6f470b175f18a23",
+        "digestScope": "Archive digest supplied by GitHub; all extracted file hashes independently computed."
+      },
+      "files": [
+        {
+          "artifactFile": "pipeline.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.osx-arm64.json",
+          "bytes": 3983715,
+          "sha256": "ce50568eef84cfa3bbcd5430ed667ab6f0929aa9aa8e3641018b95650fb57899",
+          "copy": "exact bytes; no JSON rewriting"
+        },
+        {
+          "artifactFile": "manifest.json",
+          "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/sd15-pipeline.osx-arm64.manifest.json",
+          "bytes": 21577,
+          "sha256": "7592859e31d9312eaee34043142fd83f8987bfcb0cb8f64fd5238018171c3326",
+          "copy": "exact bytes; no JSON rewriting"
+        }
+      ],
+      "sourceRecords": {
+        "cases": 4,
+        "captureRecords": 64,
+        "uniqueInputRecords": 20,
+        "parameterRecords": 971,
+        "eulerStepsPerPass": 8,
+        "repetitionsPerCase": 3,
+        "unetCallsAcrossRepetitions": 45,
+        "clipEncodingsAcrossRepetitions": 24,
+        "vaeDecodingsAcrossRepetitions": 12,
+        "auxiliaryProjectionCalls": 24,
+        "repetitionHashesEqual": true,
+        "nonfiniteCaptureValues": 0
+      },
+      "integrity": {
+        "rawProtectedFileIdentities": 36,
+        "rawBeforeAfterIdentical": true,
+        "matchedFrozenGitBlobs": true,
+        "sourceAstFiles": 15,
+        "sourceAstExecutionRecords": 18,
+        "sourceConfigFiles": 1,
+        "canonicalAdmissions": 10,
+        "helperCount": 6,
+        "lockCount": 3,
+        "profileCount": 1,
+        "canonicalAdmissionInputsLf": true,
+        "parameterRecipesMatch": 971,
+        "parameterLayoutsContiguousAligned64": true,
+        "nativeInputBitsAndLayoutsUnchanged": true
+      },
+      "runtime": {
+        "python": "3.12.10",
+        "torch": "2.10.0",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "numpy": "2.2.6",
+        "einops": "0.8.1",
+        "threads": 1,
+        "interopThreads": 1,
+        "requestedCapability": "auto",
+        "actualTorchCapability": "DEFAULT",
+        "processorIdentifier": "arm",
+        "machine": "arm64",
+        "build": "PyTorch built with:\n  - GCC 4.2\n  - C++ Version: 201703\n  - clang 15.0.0\n  - OpenMP 201811\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=accelerate, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, build_path=<redacted>, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DAT_BUILD_ARM_VEC256_WITH_SLEEF -DUSE_XNNPACK -DUSE_PYTORCH_METAL_EXPORT -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DUSE_COREML_DELEGATE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=braced-scalar-init -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wvla-extension -Wsuggest-override -Wnewline-eof -Winconsistent-missing-override -Winconsistent-missing-destructor-override -Wno-pass-failed -Wno-error=old-style-cast -Wconstant-conversion -Qunused-arguments -faligned-new -fno-math-errno -fno-trapping-math -Werror=format -DUSE_MPS -Wno-missing-braces, LAPACK_INFO=accelerate, TORCH_VERSION=2.10.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EIGEN_FOR_BLAS=ON, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=OFF, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "parallelInfo": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 201811\n\tomp_get_max_threads() : 1\nMKLDNN not found\nstd::thread::hardware_concurrency() : 3\nEnvironment variables:\n\tOMP_NUM_THREADS : [not set]\nATen parallel backend: OpenMP\n",
+        "actualLoadedLibraries": [
+          {
+            "name": "_C.cpython-312-darwin.so",
+            "bytes": 50248,
+            "sha256": "e10b998a37e6391d80d15390c4e438d31b70b21ad94cd7dd6273f9fc9f51ced9"
+          },
+          {
+            "name": "libc10.dylib",
+            "bytes": 1084640,
+            "sha256": "f203c171b7a71c742ef4a84bde3af64465e545a4cc3ebfd7f245dca3ebe4e7cf"
+          },
+          {
+            "name": "libomp.dylib",
+            "bytes": 754912,
+            "sha256": "fe0670951c85401421f6cedc91971f28dc870bad4c1f0cfebe2b74dac421e5f0"
+          },
+          {
+            "name": "libtorch.dylib",
+            "bytes": 16736,
+            "sha256": "2178657b7eeffc0c0a989889ac3e2b2e3d216073b35f3a291ee89bd65c0fb406"
+          },
+          {
+            "name": "libtorch_cpu.dylib",
+            "bytes": 214082912,
+            "sha256": "941f3e16a8e02b23b99bd2c8693caabaf8df859bfaa293f39a5d7dd8a8f5ca6e"
+          },
+          {
+            "name": "libtorch_global_deps.dylib",
+            "bytes": 16744,
+            "sha256": "6ff1aedff89150170f225ce821dc9355a9d5f9c80a6cc1bb761c8d209638c2c7"
+          },
+          {
+            "name": "libtorch_python.dylib",
+            "bytes": 29689144,
+            "sha256": "cb1d5957b49b8f3c2e4b90de7b99aee835520875bce893b11eb7528a548744fa"
+          }
+        ],
+        "wheelPackageInventory": [
+          {
+            "name": "libc10.dylib",
+            "bytes": 1084640,
+            "sha256": "f203c171b7a71c742ef4a84bde3af64465e545a4cc3ebfd7f245dca3ebe4e7cf"
+          },
+          {
+            "name": "libomp.dylib",
+            "bytes": 754912,
+            "sha256": "fe0670951c85401421f6cedc91971f28dc870bad4c1f0cfebe2b74dac421e5f0"
+          },
+          {
+            "name": "libshm.dylib",
+            "bytes": 83440,
+            "sha256": "3a6fc248697b8809534e74d9e5fc784b385239d8c7aeef291c3968a73609f7d2"
+          },
+          {
+            "name": "libtorch.dylib",
+            "bytes": 16736,
+            "sha256": "2178657b7eeffc0c0a989889ac3e2b2e3d216073b35f3a291ee89bd65c0fb406"
+          },
+          {
+            "name": "libtorch_cpu.dylib",
+            "bytes": 214082912,
+            "sha256": "941f3e16a8e02b23b99bd2c8693caabaf8df859bfaa293f39a5d7dd8a8f5ca6e"
+          },
+          {
+            "name": "libtorch_global_deps.dylib",
+            "bytes": 16744,
+            "sha256": "6ff1aedff89150170f225ce821dc9355a9d5f9c80a6cc1bb761c8d209638c2c7"
+          },
+          {
+            "name": "libtorch_python.dylib",
+            "bytes": 29689144,
+            "sha256": "cb1d5957b49b8f3c2e4b90de7b99aee835520875bce893b11eb7528a548744fa"
+          }
+        ],
+        "libraryEvidence": "actual process mappings and package inventory are separate observations"
+      },
+      "libraryEvidence": {
+        "actuallyMappedCount": 7,
+        "packageInventoryCount": 7,
+        "matchingMappedPackageOverlap": 6,
+        "observation": "Hashes were measured by the source process; binaries were not downloaded or independently rehashed locally."
+      }
+    }
+  },
+  "sourceToSourceHashComparisons": [
+    {
+      "left": "linux-x64",
+      "right": "osx-arm64",
+      "total": 64,
+      "bitExactRecords": 22,
+      "comparison": "source-to-source hash only; no product acceptance or tolerance claim"
+    },
+    {
+      "left": "linux-x64",
+      "right": "win-x64",
+      "total": 64,
+      "bitExactRecords": 24,
+      "comparison": "source-to-source hash only; no product acceptance or tolerance claim"
+    },
+    {
+      "left": "osx-arm64",
+      "right": "win-x64",
+      "total": 64,
+      "bitExactRecords": 22,
+      "comparison": "source-to-source hash only; no product acceptance or tolerance claim"
+    }
+  ],
+  "limits": [
+    "Source collection and artifact integrity only; no C# numerical comparison or pipeline qualification.",
+    "Four reduced synthetic cases, not stock dimensions, pretrained weights, arbitrary prompts or a model family.",
+    "Actual mapped module identities are distinct from the broader wheel inventory.",
+    "Different OS output hashes do not establish a causal explanation; OS-specific references remain separate.",
+    "The fixed prospective comparator is unchanged and has not been applied to product outputs by this audit."
+  ]
+}

@@ -1,0 +1,1764 @@
+{
+  "schema": 1,
+  "evidence": "Observed Windows CPU/F32 reduced SD1.5 pipeline match",
+  "scope": {
+    "platform": "win-x64",
+    "reducedConfigurationsOnly": true,
+    "syntheticWeightsOnly": true,
+    "pretrainedCheckpointQualified": false,
+    "familyCompatibility": false,
+    "crossOsQualification": false,
+    "stockWidthsQualified": false,
+    "gpuQualified": false,
+    "generationNodeQualified": false,
+    "releaseReadinessEstablished": false
+  },
+  "documentation": "../SD15_PIPELINE.md",
+  "compositionEvidence": "sd15-pipeline-composition.json",
+  "source": {
+    "collectorCommit": "6ad8207ffe46d3d1e57780b9fc4c7288b686638d",
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "profile": "sd15-pipeline-native210-cpu-f32-v1",
+    "protocolSha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7",
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34656804132",
+    "pipeline": {
+      "bytes": 3983944,
+      "sha256": "976ce52fc5979480d8d069190a57e5f46cb32f14ac37883c7444b19a373563b2"
+    },
+    "manifest": {
+      "bytes": 21842,
+      "sha256": "41f3b8324ef686ea8d01499083405291cd83bcac6a2b4856b4cc18b159817860"
+    },
+    "selectedFixtureTarget": "win-x64"
+  },
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "formula": "abs(actual-reference) <= 3e-5 + 3e-5*abs(reference)",
+    "finiteOnly": true,
+    "stepScalars": "sigma and sigmaHat shape [] / F32 bytes exactly equal input sigmas[index]; index/order exact",
+    "distinctSourceCaptures": {
+      "records": 64,
+      "elements": 28832,
+      "byteIdenticalRecords": 64,
+      "differentElements": 0,
+      "outsideBound": 0,
+      "maxAbsolute": 0.0,
+      "maxToleranceFraction": 0.0
+    },
+    "repeatedFinalComparisons": {
+      "records": 36,
+      "elements": 48000,
+      "byteIdenticalRecords": 36,
+      "differentElements": 0,
+      "outsideBound": 0,
+      "maxAbsolute": 0.0,
+      "maxToleranceFraction": 0.0
+    },
+    "priorCliVsReferenceTestBoundaries": {
+      "records": 32,
+      "elements": 27536,
+      "byteIdenticalRecords": 32,
+      "differentElements": 0,
+      "outsideBound": 0,
+      "maxAbsolute": 0.0,
+      "maxToleranceFraction": 0.0
+    },
+    "scalarRecordsExact": 16,
+    "normalization": "JSON numeric values decoded to IEEE754 F32, raw payload SHA verified before comparison; CLI payloads read as little-endian F32."
+  },
+  "targetedTestRun": {
+    "tests": 4,
+    "passed": 4,
+    "failed": 0,
+    "notExecuted": 0,
+    "trx": {
+      "bytes": 7859,
+      "sha256": "8e3dc9e6c6a774a7f63bfa0316ee6c8aedc67b11a862cb53977c07a520614cde"
+    },
+    "traces": 4,
+    "testSource": {
+      "bytes": 24245,
+      "sha256": "ca62c3ab17b1b95a024618f8630d7e7534401b05e16a47fb27473ff0cff91127"
+    },
+    "casesInOneTestProcess": 4,
+    "untracedEarlierRun": "Root also reported a separate four-test success without traces; it is not counted as trace evidence here."
+  },
+  "fullSuite": {
+    "status": "passed",
+    "uniqueTestIds": 1363,
+    "passed": 1363,
+    "failed": 0,
+    "notExecuted": 0,
+    "inferenceTests": 577,
+    "trxCount": 6,
+    "trx": [
+      {
+        "assembly": "ComfySharp.Core.Tests",
+        "bytes": 134139,
+        "sha256": "cf6783ed4d41cfaa6d0e3cd8130efb0ce4a0c6d5649b3053d998427617b7296b",
+        "counters": {
+          "total": 88,
+          "executed": 88,
+          "passed": 88,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Desktop.Tests",
+        "bytes": 48689,
+        "sha256": "7d95586360671332f7ba51d6317caabee18021d242932e0ea76d41d2cf7e7120",
+        "counters": {
+          "total": 32,
+          "executed": 32,
+          "passed": 32,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Host.Tests",
+        "bytes": 249440,
+        "sha256": "521886bb2576c19e55bfa48e3153dffe0a04e06a55a5b57ea0e6a9dc5f097dc5",
+        "counters": {
+          "total": 109,
+          "executed": 109,
+          "passed": 109,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Inference.Tests",
+        "bytes": 925919,
+        "sha256": "0de82841e2f194bc02616ec65a229c4738272424bfffb33229f08430846709a8",
+        "counters": {
+          "total": 577,
+          "executed": 577,
+          "passed": 577,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Tokenization.Tests",
+        "bytes": 814012,
+        "sha256": "d21c95f675eccb679d4f7542fc82f9477e51fea59b39b99f561a363e4c633295",
+        "counters": {
+          "total": 540,
+          "executed": 540,
+          "passed": 540,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Workflow.Tests",
+        "bytes": 25754,
+        "sha256": "c872cc19fba099c55f14a3c6db8aca92ddbe84cab0c6c3ef61ad66f56fac229c",
+        "counters": {
+          "total": 17,
+          "executed": 17,
+          "passed": 17,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      }
+    ],
+    "pipelineReferenceTests": [
+      {
+        "testId": "87886de2-8ff7-28d6-9267-d35d6b7c821e",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"weighted-three-step\")",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "1c61a269-91c5-b939-7b7d-c4aff8d18597",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "bcc13e17-cec8-dc32-74f5-5f1847141970",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"empty-one-step\")",
+        "outcome": "Passed"
+      },
+      {
+        "testId": "b79eee2b-6197-ecbe-34cb-b2cd6aab32a2",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"two-chunks-separate\")",
+        "outcome": "Passed"
+      }
+    ],
+    "referenceSourceSha256": "ca62c3ab17b1b95a024618f8630d7e7534401b05e16a47fb27473ff0cff91127",
+    "deduplication": "All six complete-suite TRX testId values counted exactly once; targeted results are not added to this total.",
+    "chronology": "This later complete suite includes the four pipeline reference tests and the separate native-aligned diagnostic changes; the earlier 1351 suite remains a distinct historical observation.",
+    "sourceBindingLimit": "The pipeline reference source remained at its reviewed hash. TRX does not itself bind every working-tree file to a build; this is not a commit-wide source attestation."
+  },
+  "productRuntime": {
+    "dotnet": ".NET 10.0.10",
+    "os": "Microsoft Windows 10.0.26200",
+    "architecture": "X64",
+    "torchSharp": "0.107.0.0",
+    "declaredLibtorchPackage": "2.10.0",
+    "threads": {
+      "status": "available",
+      "intraOp": 1,
+      "interOp": 1
+    },
+    "cpuFeaturesDotNet": {
+      "scope": "managed_intrinsic_availability_not_aten_dispatch",
+      "sse2": true,
+      "avx": true,
+      "avx2": true,
+      "avx512F": false,
+      "fma": true,
+      "armAdvSimd": false
+    },
+    "requestedAtenCpuCapability": {
+      "status": "unset",
+      "value": null
+    },
+    "actualAtenCpuCapability": {
+      "status": "unavailable",
+      "value": null,
+      "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+    },
+    "mappedLibraries": [
+      {
+        "instance": 1,
+        "name": "torch_cpu.DLL",
+        "bytes": 264955904,
+        "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+      },
+      {
+        "instance": 2,
+        "name": "c10.dll",
+        "bytes": 1081344,
+        "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+      },
+      {
+        "instance": 3,
+        "name": "libiomp5md.dll",
+        "bytes": 1614192,
+        "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+      },
+      {
+        "instance": 4,
+        "name": "LibTorchSharp.DLL",
+        "bytes": 1324984,
+        "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+      }
+    ],
+    "nativeMapCapture": "process cache first accessed after completed native work; may precede this case"
+  },
+  "sourceRuntime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+    "threads": 1,
+    "interopThreads": 1,
+    "actualTorchCapability": "AVX2",
+    "mappedTorchCpu": {
+      "name": "torch_cpu.dll",
+      "bytes": 264942080,
+      "sha256": "78542eb53af452d841b1b24645f90d25009679731c745e4357ae39c8d312eab7"
+    }
+  },
+  "cases": [
+    {
+      "id": "empty-one-step",
+      "trace": {
+        "bytes": 606183,
+        "sha256": "268335dae0743184a3218bbf770edcd118ab67e944a30087fbc4b93e3039dd17"
+      },
+      "cliManifest": {
+        "bytes": 217735,
+        "sha256": "de6c3e02a80f003177fd375af7f8938bda0e72d6f1c98b5300df3ebb1719e622"
+      },
+      "parametersComparedBeforeAndAfter": 971,
+      "inputsComparedBeforeAndAfter": [
+        "noise",
+        "sigmas"
+      ],
+      "tokenizationSourceRecordsExact": true,
+      "gradRestoredAllRuns": true,
+      "capturedGradDisabled": true,
+      "captures": [
+        {
+          "label": "empty-one-step/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/step-0/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/step-0/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/step-0/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "empty-one-step/step-0/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        }
+      ],
+      "repeatedFinalComparisons": [
+        {
+          "label": "empty-one-step/repeat-0/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-0/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-0/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-1/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-1/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-1/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-2/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-2/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/repeat-2/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ],
+      "cliBoundaryComparisons": [
+        {
+          "label": "empty-one-step/cli/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "empty-one-step/cli/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ]
+    },
+    {
+      "id": "weighted-three-step",
+      "trace": {
+        "bytes": 610885,
+        "sha256": "00ff4e69cbeb75c8d58987c359c63b2d904815be0b403871a76097171be12ee4"
+      },
+      "cliManifest": {
+        "bytes": 217745,
+        "sha256": "52f1fb47e558bc8cae4269c25a0d827f0bc95031590bb0ac7fd4222c6e68820f"
+      },
+      "parametersComparedBeforeAndAfter": 971,
+      "inputsComparedBeforeAndAfter": [
+        "noise",
+        "sigmas"
+      ],
+      "tokenizationSourceRecordsExact": true,
+      "gradRestoredAllRuns": true,
+      "capturedGradDisabled": true,
+      "captures": [
+        {
+          "label": "weighted-three-step/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-0/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-0/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-0/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "weighted-three-step/step-0/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "weighted-three-step/step-1/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-1/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-1/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "weighted-three-step/step-1/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "weighted-three-step/step-2/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-2/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/step-2/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "weighted-three-step/step-2/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        }
+      ],
+      "repeatedFinalComparisons": [
+        {
+          "label": "weighted-three-step/repeat-0/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-0/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-0/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-1/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-1/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-1/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-2/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-2/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/repeat-2/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ],
+      "cliBoundaryComparisons": [
+        {
+          "label": "weighted-three-step/cli/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "weighted-three-step/cli/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ]
+    },
+    {
+      "id": "two-chunks-separate",
+      "trace": {
+        "bytes": 621699,
+        "sha256": "d3f4ff2cbee05fcd09e02c070e12b4a74a433d502ec293ccdf56d9929f984152"
+      },
+      "cliManifest": {
+        "bytes": 217746,
+        "sha256": "411cf663d864a923e7a001a0cde92197a7cbcc26f1cbe8a02ca43aa251158cb6"
+      },
+      "parametersComparedBeforeAndAfter": 971,
+      "inputsComparedBeforeAndAfter": [
+        "noise",
+        "sigmas"
+      ],
+      "tokenizationSourceRecordsExact": true,
+      "gradRestoredAllRuns": true,
+      "capturedGradDisabled": true,
+      "captures": [
+        {
+          "label": "two-chunks-separate/positive.hidden",
+          "elements": 2464,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/step-0/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/step-0/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/step-0/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "two-chunks-separate/step-0/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "two-chunks-separate/step-1/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/step-1/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/step-1/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "two-chunks-separate/step-1/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        }
+      ],
+      "repeatedFinalComparisons": [
+        {
+          "label": "two-chunks-separate/repeat-0/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-0/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-0/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-1/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-1/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-1/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-2/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-2/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/repeat-2/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ],
+      "cliBoundaryComparisons": [
+        {
+          "label": "two-chunks-separate/cli/positive.hidden",
+          "elements": 2464,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "two-chunks-separate/cli/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ]
+    },
+    {
+      "id": "maximum-start",
+      "trace": {
+        "bytes": 608739,
+        "sha256": "bc5dc96bab58f31c82df00897d8c96d7a2b97240f02cd42eae584e38d953aada"
+      },
+      "cliManifest": {
+        "bytes": 217736,
+        "sha256": "ddd4da31f5b3c5bb6635a897a6f867a97647b53635736b5e8f7876471c84a53b"
+      },
+      "parametersComparedBeforeAndAfter": 971,
+      "inputsComparedBeforeAndAfter": [
+        "noise",
+        "sigmas"
+      ],
+      "tokenizationSourceRecordsExact": true,
+      "gradRestoredAllRuns": true,
+      "capturedGradDisabled": true,
+      "captures": [
+        {
+          "label": "maximum-start/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/step-0/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/step-0/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/step-0/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "maximum-start/step-0/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "maximum-start/step-1/x",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/step-1/denoised",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/step-1/sigma",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        },
+        {
+          "label": "maximum-start/step-1/sigmaHat",
+          "elements": 1,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": true
+        }
+      ],
+      "repeatedFinalComparisons": [
+        {
+          "label": "maximum-start/repeat-0/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-0/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-0/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-1/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-1/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-1/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-2/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-2/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/repeat-2/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ],
+      "cliBoundaryComparisons": [
+        {
+          "label": "maximum-start/cli/positive.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/positive.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/negative.hidden",
+          "elements": 1232,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/negative.pooled",
+          "elements": 16,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/initialDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/finalDiffusionLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/rawVaeLatent",
+          "elements": 80,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        },
+        {
+          "label": "maximum-start/cli/image",
+          "elements": 3840,
+          "byteIdentical": true,
+          "differentElements": 0,
+          "outsideBound": 0,
+          "maxAbsolute": 0.0,
+          "maxToleranceFraction": 0.0,
+          "scalarExactRequired": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Source collection ran in CI and product ran locally; this is not a same-host or identical-native-binary experiment.",
+    "Source torch_cpu SHA differs from product torch_cpu SHA. Equality here is an observed numerical result, not proof of identical implementations or future runs.",
+    "Product actual ATen dispatch is not exposed; .NET intrinsic availability is not an ATen dispatch measurement.",
+    "The 64 captures include the 32 boundaries also checked through CLI; these categories must not be added as independent unique capture coverage.",
+    "The 36 final comparisons repeat 12 semantic final tensors three times; they do not add 36 distinct pipeline boundaries.",
+    "Source auxiliary CLIP projection is executed; this product path requests unprojected pooling. Projection absence is not tested.",
+    "Only borrowed noise/sigmas are captured directly by these tests; the internal zero latent is not claimed as an observed borrowed input.",
+    "No accepted tolerance, source fixture or product math was changed to obtain this result."
+  ]
+}

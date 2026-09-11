@@ -31,16 +31,17 @@ jobs:
       - name: Exercise SD1.5 checkpoint assembly contracts
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reduced SD1.5 pipeline contracts
-        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15Pipeline' --logger trx --results-directory PipelineResults
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15Pipeline&FullyQualifiedName!~Sd15PipelineReferenceTests' --logger trx --results-directory PipelineResults
       - name: Exercise reference fixtures as the first native access in separate processes
         shell: pwsh
         env:
           COMFYSHARP_SD_UNET_TRACE_DIR: ${{ github.workspace }}/SdTraces/${{ matrix.runtime }}
           COMFYSHARP_SD_EULER_TRACE_DIR: ${{ github.workspace }}/EulerTraces/${{ matrix.runtime }}
+          COMFYSHARP_SD15_PIPELINE_TRACE_DIR: ${{ github.workspace }}/PipelineSourceTraces/${{ matrix.runtime }}
         run: |
           $failedSuites = @()
           foreach ($suite in @('PreviewAnyReferenceTests', 'SigmaScheduleReferenceTests', 'ClipReferenceTests',
-              'SdSamplingReferenceTests', 'SdUnetReferenceTests', 'ClassicalVaeReferenceTests', 'SdDenoiserReferenceTests', 'SdEulerReferenceTests')) {
+              'SdSamplingReferenceTests', 'SdUnetReferenceTests', 'ClassicalVaeReferenceTests', 'SdDenoiserReferenceTests', 'SdEulerReferenceTests', 'Sd15PipelineReferenceTests')) {
             & dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter "FullyQualifiedName~$suite" --logger trx --results-directory "FirstUseResults/$suite"
             if ($LASTEXITCODE -ne 0) { $failedSuites += $suite }
           }
@@ -154,6 +155,12 @@ jobs:
           name: tests-pipeline-${{ matrix.runtime }}
           path: PipelineResults
           if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sd15-pipeline-traces-${{ matrix.runtime }}
+          path: PipelineSourceTraces
+          if-no-files-found: error
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

@@ -15,6 +15,7 @@
     <EmbeddedResource Include="Fixtures/clip-tiny-*.synthetic.safetensors" />
     <EmbeddedResource Include="Fixtures/sd-components.*.json" />
     <EmbeddedResource Include="Fixtures/sd-euler.*.json" />
+    <EmbeddedResource Include="Fixtures/sd15-pipeline.*.json" />
     <EmbeddedResource Include="../../tools/ComfySharp.RuntimeProbe/Fixtures/sd15-pipeline.protocol.json"
       Link="Fixtures/sd15-pipeline.protocol.json"
       LogicalName="ComfySharp.RuntimeProbe.Fixtures.sd15-pipeline.protocol.json" />

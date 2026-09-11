@@ -93,6 +93,23 @@ zéro import natif tenté et zéro bibliothèque native Torch observée avant/ap
 Le refus d'un budget de 1 Mio et celui d'une exécution incomplètement configurée
 passent dans ce même processus.
 
+La [CI de cette tranche](https://github.com/skyline624/ComfySharp/actions/runs/34657528312)
+passe ses 29 nouveaux tests sur Windows, Linux et macOS. La suite globale de cette
+révision conserve deux échecs CLIP macOS et quatorze échecs numériques Linux ;
+la suite agrégée Linux n'est pas exécutée après ces échecs. Le succès des nouveaux
+contrats ne résout pas ces comparaisons antérieures.
+
+Les [références source collectées séparément](qualification/sd15-pipeline-source-6ad8207.md)
+sont ensuite consommées par quatre tests .NET, sans Python. Sur le CPU Windows
+local, les [64 captures du parcours](qualification/sd15-pipeline-integration.md)
+correspondent bit pour bit à la source Windows, y compris les états et scalaires
+Euler : 28 832 valeurs F32 comparées, avec les trois sorties finales vérifiées à
+chaque répétition. Le vrai CLI, lancé dans quatre processus séparés, produit aussi
+les 32 frontières identiques à cette source. La suite locale suivante passe
+**1 363 tests**, incluant ces quatre références et huit tests de propriété et
+d'intégrité des buffers du diagnostic natif. La campagne CI de cette nouvelle
+comparaison reste distincte de celle des 29 contrats.
+
 La qualification numérique sur les trois OS, les dimensions complètes, les vrais poids,
 le GPU et l'intégration aux nœuds de génération restent ouvertes. Cette tranche n'ajoute
 aucun identifiant de nœud au catalogue et ne clôture aucun critère de publication V1.

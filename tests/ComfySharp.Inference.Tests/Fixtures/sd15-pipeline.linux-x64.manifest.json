@@ -1,0 +1,517 @@
+{
+  "status": "completed",
+  "profile": "sd15-pipeline-native210-cpu-f32-v1",
+  "target": "linux-x64",
+  "collectorCommit": "6ad8207ffe46d3d1e57780b9fc4c7288b686638d",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "protocolSha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7",
+  "qualification": "none",
+  "inputIntegrityBefore": {
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.linux-x64.sampling.json": {
+      "bytes": 160771,
+      "sha256": "9003bd98358e4a940428e62b72fde471ed8bf3c1baf08f4bcc36a4514fec9544"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.osx-arm64.sampling.json": {
+      "bytes": 160771,
+      "sha256": "8c8b9231640a82b11aabb67d6a1daba15bf0a84e36a36df60007eb2efd9a046d"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.sampling.json": {
+      "bytes": 160769,
+      "sha256": "a27c87a953661f8f09d9268ffb4b803a217ed96b0bcd3364e432204f9c65e03d"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.unet.json": {
+      "bytes": 5892406,
+      "sha256": "08f7002b823d2efa14f4f11d20128376c1aa9867127f40f9a1e3c10de7ce975c"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.vae.json": {
+      "bytes": 436374,
+      "sha256": "6cc0844de8e82bc23caf15eaae8e9954e1760d4cbe6ab325011a3a80ac103b95"
+    },
+    "donor/tests/ComfySharp.Tokenization.Tests/Fixtures/clip-text.reference.json": {
+      "bytes": 2225425,
+      "sha256": "bc92c74136a6ed38a314029f083305acbe8fae5aa8acb6c0808db3b8237f6cc2"
+    },
+    "laboratory/README.md": {
+      "bytes": 6477,
+      "sha256": "f9c836d5f0d6e0a594edb4561e8409b1ba16b734ebd442e0d68da5fc23b5c87a"
+    },
+    "laboratory/protocol.json": {
+      "bytes": 78526,
+      "sha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7"
+    },
+    "laboratory/reference.py": {
+      "bytes": 42884,
+      "sha256": "6ef0485805f9dea2bb5cac0bf593ef2a8bb9f56043a7a71ee2fdfd6c8407a2fb"
+    },
+    "repository/docs/qualification/sd15-pipeline-native210-cpu-f32-v1.md": {
+      "bytes": 7128,
+      "sha256": "d56988dd5dfeada0d5e0b7507c68cdc4d1dd53b659f0fcf45565ab9ecd727b32"
+    },
+    "repository/labs/clip-source/reference.py": {
+      "bytes": 19329,
+      "sha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536"
+    },
+    "repository/labs/clip-source/requirements-linux-x64.txt": {
+      "bytes": 3280,
+      "sha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719"
+    },
+    "repository/labs/clip-source/requirements-osx-arm64.txt": {
+      "bytes": 3195,
+      "sha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+    },
+    "repository/labs/clip-source/requirements-win-x64.txt": {
+      "bytes": 3178,
+      "sha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5"
+    },
+    "repository/labs/sd-euler-source/reference.py": {
+      "bytes": 12537,
+      "sha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74"
+    },
+    "repository/labs/sd-source/common.py": {
+      "bytes": 3899,
+      "sha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3"
+    },
+    "repository/labs/sd-source/sampling.py": {
+      "bytes": 4393,
+      "sha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b"
+    },
+    "repository/labs/sd-source/unet.py": {
+      "bytes": 10157,
+      "sha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f"
+    },
+    "repository/labs/sd-source/vae.py": {
+      "bytes": 10670,
+      "sha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3"
+    },
+    "source/comfy/clip_model.py": {
+      "bytes": 16546,
+      "sha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d"
+    },
+    "source/comfy/conds.py": {
+      "bytes": 4522,
+      "sha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0"
+    },
+    "source/comfy/k_diffusion/sampling.py": {
+      "bytes": 93057,
+      "sha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce"
+    },
+    "source/comfy/k_diffusion/utils.py": {
+      "bytes": 12718,
+      "sha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272"
+    },
+    "source/comfy/latent_formats.py": {
+      "bytes": 43438,
+      "sha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4"
+    },
+    "source/comfy/ldm/models/autoencoder.py": {
+      "bytes": 9782,
+      "sha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0"
+    },
+    "source/comfy/ldm/modules/attention.py": {
+      "bytes": 51513,
+      "sha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/model.py": {
+      "bytes": 31484,
+      "sha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/openaimodel.py": {
+      "bytes": 37937,
+      "sha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/util.py": {
+      "bytes": 11888,
+      "sha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e"
+    },
+    "source/comfy/ldm/modules/distributions/distributions.py": {
+      "bytes": 2964,
+      "sha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772"
+    },
+    "source/comfy/model_sampling.py": {
+      "bytes": 15897,
+      "sha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd"
+    },
+    "source/comfy/samplers.py": {
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f"
+    },
+    "source/comfy/sd.py": {
+      "bytes": 140752,
+      "sha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7"
+    },
+    "source/comfy/sd1_clip.py": {
+      "bytes": 30624,
+      "sha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70"
+    },
+    "source/comfy/sd1_clip_config.json": {
+      "bytes": 616,
+      "sha256": "c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c"
+    },
+    "workflow": {
+      "bytes": 4817,
+      "sha256": "d82907b3b3fd0d7a5375334559a1a536036b6f7db613e62d29e555166338d5c1"
+    }
+  },
+  "inputIntegrityAfter": {
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.linux-x64.sampling.json": {
+      "bytes": 160771,
+      "sha256": "9003bd98358e4a940428e62b72fde471ed8bf3c1baf08f4bcc36a4514fec9544"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.osx-arm64.sampling.json": {
+      "bytes": 160771,
+      "sha256": "8c8b9231640a82b11aabb67d6a1daba15bf0a84e36a36df60007eb2efd9a046d"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.sampling.json": {
+      "bytes": 160769,
+      "sha256": "a27c87a953661f8f09d9268ffb4b803a217ed96b0bcd3364e432204f9c65e03d"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.unet.json": {
+      "bytes": 5892406,
+      "sha256": "08f7002b823d2efa14f4f11d20128376c1aa9867127f40f9a1e3c10de7ce975c"
+    },
+    "donor/tests/ComfySharp.Inference.Tests/Fixtures/sd-components.win-x64.vae.json": {
+      "bytes": 436374,
+      "sha256": "6cc0844de8e82bc23caf15eaae8e9954e1760d4cbe6ab325011a3a80ac103b95"
+    },
+    "donor/tests/ComfySharp.Tokenization.Tests/Fixtures/clip-text.reference.json": {
+      "bytes": 2225425,
+      "sha256": "bc92c74136a6ed38a314029f083305acbe8fae5aa8acb6c0808db3b8237f6cc2"
+    },
+    "laboratory/README.md": {
+      "bytes": 6477,
+      "sha256": "f9c836d5f0d6e0a594edb4561e8409b1ba16b734ebd442e0d68da5fc23b5c87a"
+    },
+    "laboratory/protocol.json": {
+      "bytes": 78526,
+      "sha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7"
+    },
+    "laboratory/reference.py": {
+      "bytes": 42884,
+      "sha256": "6ef0485805f9dea2bb5cac0bf593ef2a8bb9f56043a7a71ee2fdfd6c8407a2fb"
+    },
+    "repository/docs/qualification/sd15-pipeline-native210-cpu-f32-v1.md": {
+      "bytes": 7128,
+      "sha256": "d56988dd5dfeada0d5e0b7507c68cdc4d1dd53b659f0fcf45565ab9ecd727b32"
+    },
+    "repository/labs/clip-source/reference.py": {
+      "bytes": 19329,
+      "sha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536"
+    },
+    "repository/labs/clip-source/requirements-linux-x64.txt": {
+      "bytes": 3280,
+      "sha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719"
+    },
+    "repository/labs/clip-source/requirements-osx-arm64.txt": {
+      "bytes": 3195,
+      "sha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+    },
+    "repository/labs/clip-source/requirements-win-x64.txt": {
+      "bytes": 3178,
+      "sha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5"
+    },
+    "repository/labs/sd-euler-source/reference.py": {
+      "bytes": 12537,
+      "sha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74"
+    },
+    "repository/labs/sd-source/common.py": {
+      "bytes": 3899,
+      "sha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3"
+    },
+    "repository/labs/sd-source/sampling.py": {
+      "bytes": 4393,
+      "sha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b"
+    },
+    "repository/labs/sd-source/unet.py": {
+      "bytes": 10157,
+      "sha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f"
+    },
+    "repository/labs/sd-source/vae.py": {
+      "bytes": 10670,
+      "sha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3"
+    },
+    "source/comfy/clip_model.py": {
+      "bytes": 16546,
+      "sha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d"
+    },
+    "source/comfy/conds.py": {
+      "bytes": 4522,
+      "sha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0"
+    },
+    "source/comfy/k_diffusion/sampling.py": {
+      "bytes": 93057,
+      "sha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce"
+    },
+    "source/comfy/k_diffusion/utils.py": {
+      "bytes": 12718,
+      "sha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272"
+    },
+    "source/comfy/latent_formats.py": {
+      "bytes": 43438,
+      "sha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4"
+    },
+    "source/comfy/ldm/models/autoencoder.py": {
+      "bytes": 9782,
+      "sha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0"
+    },
+    "source/comfy/ldm/modules/attention.py": {
+      "bytes": 51513,
+      "sha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/model.py": {
+      "bytes": 31484,
+      "sha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/openaimodel.py": {
+      "bytes": 37937,
+      "sha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96"
+    },
+    "source/comfy/ldm/modules/diffusionmodules/util.py": {
+      "bytes": 11888,
+      "sha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e"
+    },
+    "source/comfy/ldm/modules/distributions/distributions.py": {
+      "bytes": 2964,
+      "sha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772"
+    },
+    "source/comfy/model_sampling.py": {
+      "bytes": 15897,
+      "sha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd"
+    },
+    "source/comfy/samplers.py": {
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f"
+    },
+    "source/comfy/sd.py": {
+      "bytes": 140752,
+      "sha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7"
+    },
+    "source/comfy/sd1_clip.py": {
+      "bytes": 30624,
+      "sha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70"
+    },
+    "source/comfy/sd1_clip_config.json": {
+      "bytes": 616,
+      "sha256": "c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c"
+    },
+    "workflow": {
+      "bytes": 4817,
+      "sha256": "d82907b3b3fd0d7a5375334559a1a536036b6f7db613e62d29e555166338d5c1"
+    }
+  },
+  "canonicalAdmission": {
+    "labs/sd-source/common.py": {
+      "rawSha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+      "rawBytes": 3899,
+      "canonicalSha256": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+      "canonicalBytes": 3899,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/sd-source/unet.py": {
+      "rawSha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+      "rawBytes": 10157,
+      "canonicalSha256": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+      "canonicalBytes": 10157,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/sd-source/vae.py": {
+      "rawSha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3",
+      "rawBytes": 10670,
+      "canonicalSha256": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3",
+      "canonicalBytes": 10670,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/sd-source/sampling.py": {
+      "rawSha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+      "rawBytes": 4393,
+      "canonicalSha256": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+      "canonicalBytes": 4393,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/sd-euler-source/reference.py": {
+      "rawSha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74",
+      "rawBytes": 12537,
+      "canonicalSha256": "ed8efac6d61b8e4dd4305048fffd514fcfa588d728393d1d203cfcfc03b45b74",
+      "canonicalBytes": 12537,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/clip-source/reference.py": {
+      "rawSha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536",
+      "rawBytes": 19329,
+      "canonicalSha256": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536",
+      "canonicalBytes": 19329,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/clip-source/requirements-win-x64.txt": {
+      "rawSha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+      "rawBytes": 3178,
+      "canonicalSha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+      "canonicalBytes": 3178,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/clip-source/requirements-linux-x64.txt": {
+      "rawSha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+      "rawBytes": 3280,
+      "canonicalSha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+      "canonicalBytes": 3280,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "labs/clip-source/requirements-osx-arm64.txt": {
+      "rawSha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
+      "rawBytes": 3195,
+      "canonicalSha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
+      "canonicalBytes": 3195,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    },
+    "docs/qualification/sd15-pipeline-native210-cpu-f32-v1.md": {
+      "rawSha256": "d56988dd5dfeada0d5e0b7507c68cdc4d1dd53b659f0fcf45565ab9ecd727b32",
+      "rawBytes": 7128,
+      "canonicalSha256": "d56988dd5dfeada0d5e0b7507c68cdc4d1dd53b659f0fcf45565ab9ecd727b32",
+      "canonicalBytes": 7128,
+      "normalization": "literal CRLF-to-LF only",
+      "crlfCount": 0
+    }
+  },
+  "component": {
+    "file": "pipeline.json",
+    "bytes": 3984788,
+    "sha256": "8c06321dac0cbb0fd771770f7d20465fae188b3316c04b10dc1a34888a1d8969"
+  },
+  "elapsedSeconds": 5.640880174999992,
+  "cases": 4,
+  "captureRecords": 64,
+  "selectedParameters": 971,
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "formula": "abs(actual-reference) <= atol + rtol*abs(reference)",
+    "structural": "exact shapes/dtypes/text token IDs/float64 weight bits/parameter-input hashes",
+    "nonFinite": "reject finite-corpus violation",
+    "record": [
+      "maxAbsolute",
+      "maxToleranceFraction",
+      "outsideCount",
+      "firstDivergentBoundary"
+    ],
+    "policy": "no tolerance/fixture replacement after failure; no assumed cross-OS acceptance",
+    "stepScalars": "Euler index exact; sigma and sigmaHat shape=[] dtype=float32 and bits exactly equal input sigmas[index] with churn=0; activation tolerance never applies"
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "threads": 1,
+    "interopThreads": 1,
+    "requestedCapability": "auto",
+    "actualTorchCapability": "AVX2",
+    "processorIdentifier": "x86_64",
+    "machine": "x86_64",
+    "build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, build_path=<redacted>, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "parallelInfo": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : [not set]\n\tMKL_NUM_THREADS : [not set]\nATen parallel backend: OpenMP\n",
+    "actualLoadedLibraries": [
+      {
+        "name": "_C.cpython-312-x86_64-linux-gnu.so",
+        "bytes": 25137,
+        "sha256": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8"
+      },
+      {
+        "name": "libc10.so",
+        "bytes": 1403600,
+        "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+      },
+      {
+        "name": "libgomp.so.1",
+        "bytes": 253849,
+        "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+      },
+      {
+        "name": "libtorch.so",
+        "bytes": 8032,
+        "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+      },
+      {
+        "name": "libtorch_cpu.so",
+        "bytes": 443509856,
+        "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+      },
+      {
+        "name": "libtorch_global_deps.so",
+        "bytes": 8264,
+        "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+      },
+      {
+        "name": "libtorch_python.so",
+        "bytes": 30844552,
+        "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+      }
+    ],
+    "wheelPackageInventory": [
+      {
+        "name": "libaoti_custom_ops.so",
+        "bytes": 339456,
+        "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+      },
+      {
+        "name": "libbackend_with_compiler.so",
+        "bytes": 259008,
+        "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+      },
+      {
+        "name": "libc10.so",
+        "bytes": 1403600,
+        "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+      },
+      {
+        "name": "libgomp.so.1",
+        "bytes": 253849,
+        "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+      },
+      {
+        "name": "libjitbackend_test.so",
+        "bytes": 215736,
+        "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+      },
+      {
+        "name": "libshm.so",
+        "bytes": 41880,
+        "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+      },
+      {
+        "name": "libtorch.so",
+        "bytes": 8032,
+        "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+      },
+      {
+        "name": "libtorch_cpu.so",
+        "bytes": 443509856,
+        "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+      },
+      {
+        "name": "libtorch_global_deps.so",
+        "bytes": 8264,
+        "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+      },
+      {
+        "name": "libtorch_python.so",
+        "bytes": 30844552,
+        "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+      },
+      {
+        "name": "libtorchbind_test.so",
+        "bytes": 915336,
+        "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+      }
+    ],
+    "libraryEvidence": "actual process mappings and package inventory are separate observations"
+  }
+}
