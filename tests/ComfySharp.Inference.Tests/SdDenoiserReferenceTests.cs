@@ -69,6 +69,8 @@ public sealed class SdDenoiserReferenceTests : IDisposable
             Scale = reference.GetProperty("scale").GetDouble(),
             BatchMode = policy == "separate" ? SdGuidanceBatchMode.Separate : SdGuidanceBatchMode.ConcatenateCompatible
         };
+        if (SdNativeSuiteDiagnostic.Guidance(denoiser, bank, latent, sigma, positive, negative, options, policy,
+            reference, root.GetProperty("parameters"), referenceConfig)) return;
         string? firstHash = null;
         for (int repeat = 0; repeat < 3; repeat++)
         {

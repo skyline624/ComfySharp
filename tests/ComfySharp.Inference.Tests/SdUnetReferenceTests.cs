@@ -90,6 +90,8 @@ public sealed class SdUnetReferenceTests : IDisposable
             latent = copied;
         }
         string? fineTraceDirectory = Environment.GetEnvironmentVariable("COMFYSHARP_SD_UNET_FINE_TRACE_DIR");
+        if (SdNativeSuiteDiagnostic.Unet(model, bank, latent, timesteps, context, reference,
+            modelReference.GetProperty("parameters"), modelReference.GetProperty("config"))) return;
         if (!string.IsNullOrWhiteSpace(fineTraceDirectory) && modelId == "sd15-reduced" && caseName == "square")
         {
             SdUnetFineDiagnostic.Run(fineTraceDirectory, model, bank, latent, timesteps, context,

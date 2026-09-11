@@ -127,10 +127,14 @@ An independently generated source comparison, pretrained weights and a complete
 workflow remain separate requirements.
 
 The [first local stock-width execution](qualification/sd-stock-diagnostic-2ee03aa.md)
-subsequently completed three forwards each for SD15 and SD2 with small 16×16
-latents and synthetic parameters. Parameter/input hashes were independently
-recomputed. Source agreement, long-running memory behavior, pretrained weights
-and full workflows remain unqualified.
+completed three forwards each for SD15 and SD2 with small 16×16 latents and
+synthetic parameters. The subsequent
+[independent source comparison](qualification/sd-stock-source-babb14b.md)
+matches all 686 parameter records, three input files and 1,024 output scalars
+per model exactly on this Windows CPU. Long-running memory behavior, additional
+sizes/batches, pretrained weights, full workflows and other platforms remain
+unqualified. The source collection's corrected canonical/raw dependency-lock
+attestation and the missing stock product native map are documented explicitly.
 
 ### Tensor lifetime
 

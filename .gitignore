@@ -8,6 +8,9 @@ FirstUseResults/
 *.user
 *.suo
 .superpowers/
+# Generated caches from the separate source laboratories.
+__pycache__/
+*.pyc
 models/
 input/
 output/
