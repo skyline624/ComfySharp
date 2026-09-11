@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "name": "execution-blocker-v1-mapper",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceFiles": {
+    "execution.py": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+    "comfy_execution/graph_utils.py": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d"
+  },
+  "scope": "Exact V1 list mapper, async result resolver, return merger and reporting callback; not PromptExecutor or whole-job scheduling.",
+  "fixtureEncoding": "An object whose sole key is $blocker represents a laboratory control value. This is not a product prompt or JSON serialization contract.",
+  "cases": [
+    {"id":"silent-middle","inputs":{"x":[1,{"$blocker":null},3]},"body":"echo"},
+    {"id":"message-middle","inputs":{"x":[1,{"$blocker":"stop"},3]},"body":"echo"},
+    {"id":"empty-message","inputs":{"x":[{"$blocker":""}]},"body":"echo"},
+    {"id":"prompt-order","inputs":{"y":[{"$blocker":"first"}],"x":[{"$blocker":"second"}]},"body":"echo"},
+    {"id":"silent-first","inputs":{"y":[{"$blocker":null}],"x":[{"$blocker":"second"}]},"body":"echo"},
+    {"id":"repeat-last-blocker","inputs":{"x":[1,2,3],"gate":[{"$blocker":null}]},"body":"echo"},
+    {"id":"input-is-list","inputs":{"x":[1,{"$blocker":"stop"},3]},"body":"echo","inputIsList":true},
+    {"id":"nested-list","inputs":{"x":[[1,{"$blocker":null},3]]},"body":"echo"},
+    {"id":"nested-map","inputs":{"x":[{"inside":{"$blocker":null}}]},"body":"echo"},
+    {"id":"output-is-list","inputs":{"x":[1,{"$blocker":null},3]},"body":"list","outputIsList":[true]},
+    {"id":"partial-slot","inputs":{"x":[7]},"body":"partial","outputIsList":[false,false],"message":"slot"},
+    {"id":"whole-producer","inputs":{"x":[1]},"body":"block","outputIsList":[false,false],"message":"producer"},
+    {"id":"list-producer-block","inputs":{"x":[1]},"body":"block","outputIsList":[true],"message":null},
+    {"id":"lazy-mixed-rows","inputs":{"select":[false,{"$blocker":null},true],"value":[10,20]},"body":"lazy","callback":false},
+    {"id":"lazy-all-blocked","inputs":{"select":[{"$blocker":"later"}]},"body":"lazy","callback":false},
+    {"id":"async-middle","inputs":{"x":[1,{"$blocker":null},3]},"body":"echo","async":true},
+    {"id":"input-list-nested","inputs":{"x":[[{"$blocker":null}]]},"body":"echo","inputIsList":true},
+    {"id":"all-empty","inputs":{"x":[],"y":[]},"body":"constant"},
+    {"id":"mixed-empty","inputs":{"x":[],"gate":[{"$blocker":null}]},"body":"echo"},
+    {"id":"input-list-mixed-empty","inputs":{"x":[],"gate":[{"$blocker":null}]},"body":"echo","inputIsList":true},
+    {"id":"interrupt-before-block","inputs":{"x":[1,{"$blocker":"unreached"},3]},"body":"echo","interruptAt":2},
+    {"id":"ui-survivors","inputs":{"x":[1,{"$blocker":null},3]},"body":"ui"},
+    {"id":"producer-block-ui","inputs":{"x":[1]},"body":"blockUi","message":"producer"},
+    {"id":"ordinary-error","inputs":{"x":[1]},"body":"throw"}
+  ]
+}
