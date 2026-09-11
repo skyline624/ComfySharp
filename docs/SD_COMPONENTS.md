@@ -31,6 +31,13 @@ components outside an explicit selected namespace are not loaded. The plan is
 bound to the same open safetensors reader used for loading. Stored F32, F16 and
 BF16 parameters become CPU/F32; prediction mode and architecture are not guessed.
 
+`Sd15CheckpointLoader` now composes the CLIP-L, SD1.5 U-Net and classical VAE
+loaders into one transaction. The [assembly contract](qualification/sd15-checkpoint-assembly.md)
+describes strict namespaces, metadata admission, the explicit weight budget,
+rollback and independently retained graph factories. Its public configurations
+are fixed at stock dimensions. Native ownership tests use reduced synthetic files;
+a successful stock checkpoint load and composed generation remain unverified.
+
 Weight banks normalize misaligned storage to native allocations aligned on 64
 bytes, preserving every parameter bit. A controlled comparison found that buffer
 allocation could change CPU linear reductions enough to exceed the fixed profile.
@@ -98,7 +105,10 @@ The [independent Euler profile](qualification/sd-euler-native210-cpu-f32-v1.md)
 fixes eight short reduced-graph trajectories before source collection. The
 [local Windows comparison](qualification/sd-euler-source-96fec72.md) passes all
 eight cases, including every captured pre-update state, alongside nine lifetime
-and contract tests. This does not qualify stock dimensions or other platforms.
+and contract tests. The [subsequent three-platform CI](qualification/sd-euler-ci-2087602.md)
+passes those references on Windows and macOS, while seven fail on Linux.
+No bound or accepted output was changed. Stock dimensions and real workflows
+remain separate qualification gates.
 
 ## Ownership and qualification
 
@@ -175,7 +185,7 @@ layout controls make 22 of 28 package contrasts ineligible for interpretation.
 This observation does not select a replacement product runtime or close the
 [normal Windows/Linux failures](qualification/sd-cpu-variation-6b1347c.md).
 
-Required follow-up includes real model assembly and workflows, CLIP-H, samplers,
+Required follow-up includes pretrained checkpoint loading and composed workflows, CLIP-H, samplers,
 regions/masks, inpainting and other channel variants, controls, hooks/adapters,
 VAE tiling, device execution/offload, training and all remaining families. The full
 [migration plan](MIGRATION.md) remains the release contract.

@@ -28,6 +28,8 @@ jobs:
         run: dotnet restore ComfySharp.slnx --locked-mode -p:NativeRuntime=${{ matrix.runtime }}
       - name: Build
         run: dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }}
+      - name: Exercise SD1.5 checkpoint assembly contracts
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reference fixtures as the first native access in separate processes
         shell: pwsh
         env:
@@ -138,6 +140,12 @@ jobs:
           otool -L "$HOME/.nuget/packages/libtorch-cpu-osx-arm64/2.10.0/runtimes/osx-arm64/native/libtorch_cpu.dylib"
           native_dir="$PWD/tests/ComfySharp.Inference.Tests/bin/native/osx-arm64/cpu/Release/net10.0/runtimes/osx-arm64/native"
           dotnet run --no-build -c Release --project tools/ComfySharp.NativeLoader -- "$native_dir/libomp.dylib" "$native_dir/libLibTorchSharp.dylib"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tests-checkpoint-${{ matrix.runtime }}
+          path: CheckpointResults
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

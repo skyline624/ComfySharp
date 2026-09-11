@@ -241,5 +241,17 @@ public sealed class SafeTensorFile : IDisposable
         }
     }
 
+    // Metadata-only admission guard. The caller must still keep the reader open and the
+    // file unchanged during loading; length equality does not attest same-length rewrites.
+    internal void VerifyOpenSnapshotLength()
+    {
+        lock (gate)
+        {
+            ObjectDisposedException.ThrowIf(disposed, this);
+            if (stream.Length != FileSizeBytes)
+                throw new InvalidDataException("Safetensors file length changed after inspection.");
+        }
+    }
+
     public void Dispose() { lock (gate) { if (!disposed) { disposed = true; stream.Dispose(); } } }
 }

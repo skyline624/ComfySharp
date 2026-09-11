@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "scope": "Single-file SD1.5 component planning, atomic loading and deterministic ownership",
+  "parentCommit": "2087602a4865cd9e074d20a04ff32ce9f5324950",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "qualifiedModelFamilies": [],
+  "testedFilesSha256": {
+    "src/ComfySharp.Inference/SafeTensorFile.cs": "2a3dd68721bef27af41b953a3bd4efdb3c82d632bafc7ad597e8bc7cd0f6a169",
+    "src/ComfySharp.Inference/Sd15Checkpoint.cs": "1f1d6389008115a1f5926f45c53adcf0d9bb8d252df3324a356aff1624e41c73",
+    "src/ComfySharp.Inference/Sd15CheckpointContracts.cs": "03e53de5454c868aed45f61861619295539c7a27a538b8e3de0c0c69acb999b0",
+    "src/ComfySharp.Inference/Sd15CheckpointLoader.cs": "6609ef5ad2956157ee66996ac1ca272ee44f047c62f58bb0dcea854253d7ea48",
+    "tests/ComfySharp.Inference.Tests/Sd15CheckpointAssemblyTests.cs": "1209c440721e4bd7e807fcdeaf23c3700e0822d38d1358e87e0db8d545a3629e",
+    "tests/ComfySharp.Inference.Tests/Sd15CheckpointPlanTests.cs": "34cefe3a4abfc7fa964213ecbe37470c37526cbdefee151125631b0e66a06614",
+    "tests/ComfySharp.Inference.Tests/SdCheckpointTestFile.cs": "b188726dadeb50332fe9417519afd4f25ab93cfadf0023c43b0b8a46a0202092"
+  },
+  "localTests": {
+    "runtime": "win-x64",
+    "device": "cpu",
+    "configuration": "Release",
+    "command": "dotnet test ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64 --logger trx",
+    "exitCode": 0,
+    "uniquePassed": 1322,
+    "failed": 0,
+    "ignored": 0,
+    "inferencePassed": 536,
+    "newAssemblyTests": 16,
+    "newPlanTests": 9,
+    "uniqueTestIds": 1322,
+    "distinctDisplayNames": 1319,
+    "identityNote": "Some older data-driven malformed-file cases share truncated display names; all 1322 TRX test IDs are distinct.",
+    "newTestNames": [
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.BarrierRacesEitherReturnIndependentOwnersOrRejectDisposedAssembly",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.CompleteLoadPreservesValuesAcrossReaderScopeAndOptionalProjection(projection: False, mixed: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.CompleteLoadPreservesValuesAcrossReaderScopeAndOptionalProjection(projection: True, mixed: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-commit\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-commit\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-unet\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-unet\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-vae\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"before-vae\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"last-vae-tensor\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"last-vae-tensor\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"partial-unet\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"partial-unet\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"partial-vae\", cancel: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.FailureAndCancellationRollBackCompletedAndPartialComponents(point: \"partial-vae\", cancel: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests.RetainedAssemblyAndIndependentFactoriesReleaseOnlyTheirLastComponentOwner",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.CombinedPlanAccountsForEverySelectedTensorWithoutCreatingAStockPlan(projection: False)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.CombinedPlanAccountsForEverySelectedTensorWithoutCreatingAStockPlan(projection: True)",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.MissingOrMalformedComponentCannotProduceAnAssemblyPlan(prefix: \"cond_stage_model.\")",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.MissingOrMalformedComponentCannotProduceAnAssemblyPlan(prefix: \"first_stage_model.\")",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.MissingOrMalformedComponentCannotProduceAnAssemblyPlan(prefix: \"model.diffusion_model.\")",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.OptionalProjectionStillRejectsWrongShapeAndDuplicateAliases",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.OutsideNamespaceExceptionReportsEveryOmissionAndNeverHidesAnActiveNamespaceError",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.ReaderIdentityBudgetAndCancellationAreRejectedBeforeAnyComponentLoad",
+      "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests.StockFacadeUsesExplicitConfigurationsAndKnownWeightBudgetWithoutAllocatingThem"
+    ],
+    "reports": [
+      {
+        "assembly": "ComfySharp.Workflow.Tests.dll",
+        "sha256": "4b84ef70cf9c2ba69d56215890b330d18097e23cc56f9701b79a30a5dfe91930",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "assembly": "ComfySharp.Core.Tests.dll",
+        "sha256": "ddcab74fe727109c1c91e9f087370b9e00ce3b701925590d106220af9e7fd370",
+        "passed": 88,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "assembly": "ComfySharp.Inference.Tests.dll",
+        "sha256": "8e2a47700f56123e13cac6832872e6b0dda8e68edb74b2afe102e970e56377f9",
+        "passed": 536,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "assembly": "ComfySharp.Tokenization.Tests.dll",
+        "sha256": "9fa2b86fa268268ab6fe2f0ccdb37e869906ddb41b60c7178a12059433537e9d",
+        "passed": 540,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "assembly": "ComfySharp.Host.Tests.dll",
+        "sha256": "d29362c03b4522db49526250f3843c5f0d80d95f6eea902c146c5959e111da09",
+        "passed": 109,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "assembly": "ComfySharp.Desktop.Tests.dll",
+        "sha256": "13515b99b9316e6b144d64b073fafcf458ad700d0bbfd67e23ce37d4c8f4f340",
+        "passed": 32,
+        "failed": 0,
+        "ignored": 0
+      }
+    ],
+    "targetedFinalRaceCheck": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "trxSha256": "17e5041cbd1caa03937f39a421c527d0eb573f6f27527b3b5d55cdfce7d332b8",
+      "includedInFullSuite": true
+    },
+    "nativeMapsCapturedForTheseTests": false
+  },
+  "metadataOnlyProbe": {
+    "runtime": "win-x64",
+    "localHarnessNotDistributed": true,
+    "hashCaptureScope": "Current harness and retained output hashes checked after the recorded execution; no separate before-execution hash attestation was captured.",
+    "executionEvidence": "Observed fresh dotnet process with direct managed assembly references, throwing TorchSharp import resolver, and native module/output-directory checks",
+    "exitCode": 0,
+    "resultSha256": "e00f8d327b7b26fbf52a99b8eb060df71d98ea48062ed9de8c623f73fe613993",
+    "harnessFilesSha256": {
+      "Program.cs": "a91563d1dfa51215adca8436e10f94c75cb14333a826f45e202c3a957d224090",
+      "MetadataProbe.csproj": "d1ecc5932441c2633f012737eca54cab794845012fb52b5700035e3c82ddfb7f",
+      "NuGet.Config": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+    },
+    "observations": {
+      "status": "ok",
+      "scope": "reduced combined metadata inspection and rejected admissions",
+      "selectedTensors": 970,
+      "SourceBytes": 39573380,
+      "ResidentBytes": 58136812,
+      "TemporaryBytes": 4743168,
+      "EstimatedPeakWeightBytes": 62879980,
+      "nativeImportAttempts": 0,
+      "loadedNativeImages": [],
+      "bundledNativeImages": [],
+      "componentLoadCallbacks": 0,
+      "stockCheckpointLoaded": false
+    },
+    "limits": "Reduced profile only; checks selected native basenames and TorchSharp imports, not an OS-wide native load trace. This is a local additional diagnostic, not a stock load or three-platform gate."
+  },
+  "fixedStockSchema": {
+    "clipWeightsWithoutProjection": 196,
+    "unetWeights": 686,
+    "vaeWeights": 248,
+    "totalWithoutProjection": 1130,
+    "residentF32BytesWithoutProjection": 4264941228,
+    "stockWeightsAllocatedOrLoadedByThisEvidence": false
+  },
+  "limits": [
+    "Native assembly tests load synthetic reduced profiles through the same internal orchestration used by the fixed stock public facade.",
+    "Assembly tests execute CLIP pooling/projection; they create and retain U-Net/VAE graphs but do not execute their forwards.",
+    "The peak admission estimate covers selected weights and a conservative conversion temporary, not activations, allocator overhead, process RSS or available RAM.",
+    "Reader identity and length checks do not attest immutable contents or detect same-length rewrites.",
+    "Short release/rollback/race tests do not prove sustained leak-free behavior or every possible interleaving.",
+    "No pretrained checkpoint, complete generative workflow, stock checkpoint load, GPU or model family is qualified.",
+    "Linux/macOS assembly execution is pending this revision. Existing numerical CI failures remain open and references/tolerances are unchanged."
+  ]
+}

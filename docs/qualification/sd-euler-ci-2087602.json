@@ -1,0 +1,1612 @@
+{
+  "schemaVersion": 1,
+  "commit": "2087602a4865cd9e074d20a04ff32ce9f5324950",
+  "runId": 34651839113,
+  "ci": "https://github.com/skyline624/ComfySharp/actions/runs/34651839113",
+  "workflow": "Build and test",
+  "conclusion": "failure",
+  "profile": "sd-euler-native210-cpu-f32-v1",
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "sigmaValues": "exact"
+  },
+  "sourceCommit": "96fec72dd928276fc3f0ddc93a17406ea8249073",
+  "sourceCi": "https://github.com/skyline624/ComfySharp/actions/runs/34650726593",
+  "protocolSha256": "7868368a38fdf895fbe8698d4ab5bbbea1352a11df6dd7b3bd6c1e776c55cd05",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "qualifiedModelFamilies": [],
+  "audit": {
+    "stdlibOnly": true,
+    "nativeExecutions": 0,
+    "artifactsDownloaded": 15,
+    "trxReports": 38,
+    "ignoredTrxResults": 0,
+    "normalFirstUseExpectedCases": 190,
+    "normalAggregateExpectedUniqueTests": 1297,
+    "metadataSha256": {
+      "ci-34651839113-metadata.json": "09e825f919b1da367b09dc255bf8a0e1559effa64fafeef334a2c02f07e507cc",
+      "ci-34651839113-artifacts.json": "d1b6b5c7de2f9a1db9310fdf0fea7a7a64b36963b3c38cde74a14ed5d0b2d45f",
+      "ci-34651839113.log": "ce88884c8d45a5be4395fa11eb9ae9892e88aade660a4ec7adc36231a4096415"
+    },
+    "auditFilesSha256": {
+      "audit-normal-34651839113.json": "a728fa9c72c5fdba86f04c9d88ef7c84b75ca5bda52e31774da5d2fff91f5453",
+      "audit-normal-34651839113-euler.json": "16388f9a1d33b93a9b7284960b1f86993a1cb75d74643ecfa7ad7f07c0a3b588",
+      "audit-normal-34651839113-extra.json": "842aa1498bf93ac69a62fc5243b205a850a89a358a4b3f2f946a221ed53c4e9f"
+    },
+    "archiveDigestEvidence": "GitHub API declared archive identities; extracted payloads were independently rehashed",
+    "artifacts": [
+      {
+        "name": "clip-stock-traces-win-x64",
+        "bytes": 8244841,
+        "githubArchiveDigest": "sha256:fe5ec1802216044e22caf9e8030dee50d1ac8f0529773fccd72acab7abba7e22"
+      },
+      {
+        "name": "sd-component-traces-win-x64",
+        "bytes": 799342,
+        "githubArchiveDigest": "sha256:e43e0e02be799e58286a68b9558283eabeb4b27202e2ca167364790d41d8e729"
+      },
+      {
+        "name": "tests-stock-win-x64",
+        "bytes": 2428,
+        "githubArchiveDigest": "sha256:b11a6f5d2dd8db29fed50d79e574560488891bcb80274a75008f628ee40a4985"
+      },
+      {
+        "name": "sd-euler-traces-win-x64",
+        "bytes": 524188,
+        "githubArchiveDigest": "sha256:f9d59c2dac1c42abc29e1d3757de81e15d60a858ad2e969cae0d67c69cd0d7cb"
+      },
+      {
+        "name": "tests-win-x64",
+        "bytes": 282995,
+        "githubArchiveDigest": "sha256:14bea65b2677149d072674aa401fb64cf3b8c12c92aace3cf52af365cdf37fe0"
+      },
+      {
+        "name": "tests-first-use-win-x64",
+        "bytes": 41001,
+        "githubArchiveDigest": "sha256:30e0802faecc56511361f1004eef374bdffd14c8250445369daeb14e1a73a7d7"
+      },
+      {
+        "name": "tests-osx-arm64",
+        "bytes": 282084,
+        "githubArchiveDigest": "sha256:202e936aadc1c93738fe0b02359dd6567928a1fcf0d038c7719eee9afc72fe64"
+      },
+      {
+        "name": "tests-stock-osx-arm64",
+        "bytes": 2842,
+        "githubArchiveDigest": "sha256:627e19b4e002400c7bdb2b95fbe4c123624b11854af17b65fb35d9e2ad1c4835"
+      },
+      {
+        "name": "tests-first-use-linux-x64",
+        "bytes": 43755,
+        "githubArchiveDigest": "sha256:1c2a00d1f54352965e0afe7128af7555936c31e4e6bc041fcbf4eaa4841ffc24"
+      },
+      {
+        "name": "clip-stock-traces-osx-arm64",
+        "bytes": 8417540,
+        "githubArchiveDigest": "sha256:60ed200babd48674c2f114bea6409b9915657ee36f31b9060d5d488c46070785"
+      },
+      {
+        "name": "tests-first-use-osx-arm64",
+        "bytes": 42124,
+        "githubArchiveDigest": "sha256:6a8a51994e95379669e701bb17c7f4edf2618db45030a8a39ab823561031fc22"
+      },
+      {
+        "name": "sd-euler-traces-osx-arm64",
+        "bytes": 521629,
+        "githubArchiveDigest": "sha256:d44aebd0bc585ff020f4111383a1878588fadbe63d6b49c144d9754901ed4818"
+      },
+      {
+        "name": "sd-component-traces-linux-x64",
+        "bytes": 799839,
+        "githubArchiveDigest": "sha256:370e99102909409408730ef46325e41ceccb4147b98645d89b418ec73ffe6df8"
+      },
+      {
+        "name": "sd-euler-traces-linux-x64",
+        "bytes": 524587,
+        "githubArchiveDigest": "sha256:b475acfdf513a5e9f2a83fbdac6313a77d0fdc4b8cef4569bb57e73d7970f8b5"
+      },
+      {
+        "name": "sd-component-traces-osx-arm64",
+        "bytes": 796114,
+        "githubArchiveDigest": "sha256:6b2ef37f75acac31e22e6819a9842d74815a35ca2d5a4f8d10f68870870ad9d7"
+      }
+    ]
+  },
+  "targets": [
+    {
+      "runtime": "win-x64",
+      "jobConclusion": "success",
+      "build": {
+        "runtime": "win-x64",
+        "warnings": 0,
+        "errors": 0
+      },
+      "firstUse": {
+        "Passed": 190
+      },
+      "uniqueAggregateTests": 1297,
+      "aggregateReached": true,
+      "aggregate": {
+        "Passed": 1297
+      },
+      "inferenceAggregateTests": 511,
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Test managed contracts, UI headless and CPU primitives",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 16,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 41,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 42,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 43,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "euler": {
+        "sourceManifestSha256": "b528a5f0055ddbae5dad409dffc1bac7a74d08295b638920165791441eaf17a8",
+        "sourcePayloadSha256": "d6939728fc1b29eb2af30397ff6593aa4f75129370d9223c2b9132a34878245c",
+        "firstUse": {
+          "count": 8,
+          "outcomes": {
+            "Passed": 8
+          },
+          "failures": []
+        },
+        "behaviorAggregate": {
+          "count": 9,
+          "outcomes": {
+            "Passed": 9
+          },
+          "failures": []
+        },
+        "referenceAggregate": {
+          "count": 8,
+          "outcomes": {
+            "Passed": 8
+          },
+          "failures": []
+        },
+        "traceCases": 8,
+        "inputRecordsExact": 31,
+        "parameterRecordsPerCaseBeforeAfterExact": 686,
+        "optionsAndScalarSigmasExact": true,
+        "callerGradRestored": true,
+        "observedGradDisabled": true,
+        "inputPreservationVerified": true,
+        "comparisonRecords": 81,
+        "exactComparisonRecords": 81,
+        "maximumAbsoluteError": 0.0,
+        "outsideBoundObservationsIncludingRepeatedFinals": 0,
+        "finalElementsOutsideBoundOneRepeatPerCase": 0,
+        "cases": [
+          {
+            "id": "near-one-disabled",
+            "traceSha256": "20545df6a40ec36b9405d00eccbc9a131ff56e1d4c169aed6066ca4d19d60cce",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+              "sourceSha256": "fdd2a2f3a5f099f2b9cc1422e1b11dd32601d5c4933f589273a3aa967e45e518",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "near-one-null",
+            "traceSha256": "423a85db8402f03cee907b79ab42d638a7fcc4a1969f5bbb1a77be8a3c22e547",
+            "inputRecordsExact": 3,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+              "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "near-one-present",
+            "traceSha256": "9c19f811c05f6988a9fd3fc9de3fe50771c3f8e71f3f6432b89fbab18155599d",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+              "sourceSha256": "cba7457269f7eae2b23be6dfea74e29dcd359cc4667a3a2532a8c037da3e0a39",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "one-step",
+            "traceSha256": "b98843444e40778cab43fdba75a76eccd971205a1421ea06d26e90ab6794558c",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+              "sourceSha256": "7e042fb5506b9f5546ac442843921ef5e7f0100fb3d667b2e872954ea1cd099d",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "three-step-batch",
+            "traceSha256": "e95bb87b938f294351c89aeba09355d433cf5c4967c35e47837a9d5cd915a480",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+              "sourceSha256": "5955aa40a69c752f1aa029c2dfee240f75b868741e30d0f07b5dd461d6c37c54",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "unequal-concatenated",
+            "traceSha256": "237bbceeb842eb043c389d4dbe64bcea4688693504deabfefd8f8c02f03dbe19",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+              "sourceSha256": "b89e60a6c7c9755aa1e794dc02c0b8dd957fc893e09af14d09ccd2369cc0989f",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "unequal-separate",
+            "traceSha256": "561d086896b9c14a8e2118de66293028ef2cf17224f9601e1c947140e39d10ab",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+              "sourceSha256": "9b5c4a9056891a846840b36563d691bb3f69b743f2a038133b150dc15525a128",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "velocity-three-step",
+            "traceSha256": "ea1487c3b5e4ce8ad2f512598c3bba081cae8be006f21e0058d4e6f688aeab0d",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+              "sourceSha256": "a0773f07cb6a707dce0e7db6cdbb9beea79bc8bf3f204078e3154cb1a3fe5709",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          }
+        ],
+        "runtimeIdentity": {
+          "diagnosticOnly": true,
+          "capturePoint": "after_three_complete_euler_trajectories",
+          "dotnet": ".NET 10.0.12",
+          "os": "Microsoft Windows 10.0.26100",
+          "architecture": "X64",
+          "torchSharp": "0.107.0.0",
+          "declaredLibtorchPackage": "2.10.0",
+          "cpu": {
+            "status": "available",
+            "vendor": "AuthenticAMD",
+            "brand": "AMD EPYC 9V74 80-Core Processor",
+            "hardwareFeatures": {
+              "sse": true,
+              "sse2": true,
+              "sse3": true,
+              "ssse3": true,
+              "sse41": true,
+              "sse42": true,
+              "avx": true,
+              "fma": true,
+              "osxsave": true,
+              "avx2": true,
+              "avx512F": false,
+              "avx512Dq": false,
+              "avx512Bw": false,
+              "avx512Vl": false
+            },
+            "errorType": null
+          },
+          "cpuFeaturesDotNet": {
+            "scope": "managed_intrinsic_availability_not_aten_dispatch",
+            "sse2": true,
+            "avx": true,
+            "avx2": true,
+            "avx512F": false,
+            "fma": true,
+            "armAdvSimd": false
+          },
+          "threads": {
+            "status": "available",
+            "intraOp": 1,
+            "interOp": 1
+          },
+          "requestedAtenCpuCapability": {
+            "status": "unset",
+            "value": null
+          },
+          "actualAtenCpuCapability": {
+            "status": "unavailable",
+            "value": null,
+            "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+          },
+          "nativeLibraries": {
+            "status": "available",
+            "capturePoint": "process_cache_first_access_after_completed_native_work_may_precede_this_case",
+            "libraries": [
+              {
+                "instance": 1,
+                "name": "torch_cpu.DLL",
+                "status": "available",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b",
+                "errorType": null
+              },
+              {
+                "instance": 2,
+                "name": "c10.dll",
+                "status": "available",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063",
+                "errorType": null
+              },
+              {
+                "instance": 3,
+                "name": "libiomp5md.dll",
+                "status": "available",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4",
+                "errorType": null
+              },
+              {
+                "instance": 4,
+                "name": "LibTorchSharp.DLL",
+                "status": "available",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858",
+                "errorType": null
+              }
+            ],
+            "errorType": null
+          }
+        }
+      },
+      "existingUnet": {
+        "comparisonRecords": 80,
+        "bitExactRecords": 80,
+        "finalElementsOutsideBound": 0,
+        "hashComparisonToPriorRuns": {
+          "34649263342": {
+            "records": 80,
+            "equalSha256": 0
+          },
+          "34647655904": {
+            "records": 80,
+            "equalSha256": 80
+          }
+        }
+      },
+      "existingClip": [
+        {
+          "runtime": "win-x64",
+          "profile": "g",
+          "payloadsRehashed": 9,
+          "parametersExactPrevious": 517,
+          "samePayloadShaPrevious": 9
+        },
+        {
+          "runtime": "win-x64",
+          "profile": "l",
+          "payloadsRehashed": 9,
+          "parametersExactPrevious": 197,
+          "samePayloadShaPrevious": 9
+        }
+      ]
+    },
+    {
+      "runtime": "linux-x64",
+      "jobConclusion": "failure",
+      "build": {
+        "runtime": "linux-x64",
+        "warnings": 0,
+        "errors": 0
+      },
+      "firstUse": {
+        "Passed": 175,
+        "Failed": 15
+      },
+      "uniqueAggregateTests": null,
+      "aggregateReached": false,
+      "aggregate": {},
+      "inferenceAggregateTests": null,
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "failure"
+        },
+        {
+          "number": 7,
+          "name": "Test managed contracts, UI headless and CPU primitives",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 8,
+          "name": "Check catalogue consistency",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 9,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 10,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 11,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 12,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 13,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 14,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 15,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 16,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "failure"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 41,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 42,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 43,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "euler": {
+        "sourceManifestSha256": "b1aaf6e2e1a6c8d51fe261012cd20257980d8e4a4561f5bbb016c915be72fa1e",
+        "sourcePayloadSha256": "264c872242e58a1f4132e763589df3f9508f1e7f8f794fb27e13e69d02d36352",
+        "firstUse": {
+          "count": 8,
+          "outcomes": {
+            "Passed": 1,
+            "Failed": 7
+          },
+          "failures": [
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+              "outcome": "Failed",
+              "failure": "near-one-present/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+              "outcome": "Failed",
+              "failure": "three-step-batch/step-0/denoised[0]: actual=-0.8210226, source=-0.8207963, delta=0.0002263188362121582, bound=5.4623889327049254E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+              "outcome": "Failed",
+              "failure": "unequal-separate/step-0/denoised[2]: actual=-0.8084923, source=-0.8085635, delta=7.11679458618164E-05, bound=5.4256904125213624E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+              "outcome": "Failed",
+              "failure": "unequal-concatenated/step-0/denoised[55]: actual=1.0068393, source=1.0067731, delta=6.61611557006836E-05, bound=6.02031934261322E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+              "outcome": "Failed",
+              "failure": "near-one-disabled/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+              "outcome": "Failed",
+              "failure": "velocity-three-step/step-2/denoised[0]: actual=-0.70408434, source=-0.7042558, delta=0.00017148256301879883, bound=5.112767457962037E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+              "outcome": "Failed",
+              "failure": "near-one-null/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+            }
+          ]
+        },
+        "behaviorAggregate": {
+          "count": 0,
+          "outcomes": {},
+          "failures": []
+        },
+        "referenceAggregate": {
+          "count": 0,
+          "outcomes": {},
+          "failures": []
+        },
+        "traceCases": 8,
+        "inputRecordsExact": 31,
+        "parameterRecordsPerCaseBeforeAfterExact": 686,
+        "optionsAndScalarSigmasExact": true,
+        "callerGradRestored": true,
+        "observedGradDisabled": true,
+        "inputPreservationVerified": true,
+        "comparisonRecords": 81,
+        "exactComparisonRecords": 27,
+        "maximumAbsoluteError": 0.0021082162857055664,
+        "outsideBoundObservationsIncludingRepeatedFinals": 1587,
+        "finalElementsOutsideBoundOneRepeatPerCase": 260,
+        "cases": [
+          {
+            "id": "near-one-disabled",
+            "traceSha256": "46a65f428d7d79481586cb98b884813dbcb14cc52767e8a8a2b2eaeb7490b1bf",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-1/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "b63159578b4bdc0766ab9ea7b44bc5bce659712c1a5205901f84b04c47b44802",
+              "sourceSha256": "207a6a9a5cdacb0741a35f750e757ea5b00191cdfd3ec4873427db821bfe951b",
+              "byteExact": false,
+              "maximumAbsoluteError": 5.18113374710083e-05,
+              "outsideBound": 5,
+              "differentValues": 80,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 20
+          },
+          {
+            "id": "near-one-null",
+            "traceSha256": "763b418f5f826539d11ad93b3e5aa6b7a35defe94ced29b674d89c924ade459c",
+            "inputRecordsExact": 3,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-1/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "e9df7d2adcebfef4b536966533a0617fe4d35e84f3677990b116720c40b5493c",
+              "sourceSha256": "592aecf6b2e93118a8833e40359c84a1335bb84939e52e25bd24b2af0c445587",
+              "byteExact": false,
+              "maximumAbsoluteError": 5.18113374710083e-05,
+              "outsideBound": 5,
+              "differentValues": 80,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 20
+          },
+          {
+            "id": "near-one-present",
+            "traceSha256": "972ccf4ce781e3db80b928c956ef747a533097715815a67583b3cca15e2e9cab",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-1/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "e9df7d2adcebfef4b536966533a0617fe4d35e84f3677990b116720c40b5493c",
+              "sourceSha256": "592aecf6b2e93118a8833e40359c84a1335bb84939e52e25bd24b2af0c445587",
+              "byteExact": false,
+              "maximumAbsoluteError": 5.18113374710083e-05,
+              "outsideBound": 5,
+              "differentValues": 80,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 20
+          },
+          {
+            "id": "one-step",
+            "traceSha256": "47e760732858aabcd62ce97c12cd121381574099d038e63ac7e9dab09e1bd00d",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "b32855522105ad164d098abb1b04304aa539dcb8788bf285d9a70671917c4f90",
+              "sourceSha256": "d4204875f7b5e7b0c24105e72607b4c9c9c67cc5bbd16b76c0fa1ee5320e6637",
+              "byteExact": false,
+              "maximumAbsoluteError": 3.337860107421875e-05,
+              "outsideBound": 0,
+              "differentValues": 79,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "three-step-batch",
+            "traceSha256": "d4c6aa7695342177154f3d4cc32fdbc7eb764862c630b6a3818dac9ad3fab3e8",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-0/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "e79f595ca74888b8923fc8952ed27d68781b01f2a384ad3e94900cdcc009f495",
+              "sourceSha256": "92373b7142ea8dfa6fbb8049ac150a64f848f2e7e02b68054ad0457961b44272",
+              "byteExact": false,
+              "maximumAbsoluteError": 0.00031769275665283203,
+              "outsideBound": 48,
+              "differentValues": 160,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 407
+          },
+          {
+            "id": "unequal-concatenated",
+            "traceSha256": "bb73d42b883ef7781b6ae385f68a5deb9de28e8e894959cba60949c05560b7a1",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-0/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "9e1b4006a7677d56b1c635f20ee05a3f29b139b44957fe3cff14969717dcaef9",
+              "sourceSha256": "ecc51af5051835c7ece8b0c547990ce4508143408ce9e6c3dddaefd5faa5856b",
+              "byteExact": false,
+              "maximumAbsoluteError": 0.00025963783264160156,
+              "outsideBound": 48,
+              "differentValues": 159,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 311
+          },
+          {
+            "id": "unequal-separate",
+            "traceSha256": "1798049e19c27700ccd481f159847fbfb348ddaa102d8d7bf54584782988dad3",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-0/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "aa94fa4764742effcf2d28733e0a1f071ce82d784f64c7602b2b668f9210fbe3",
+              "sourceSha256": "5906b4b08f2baedf54d2e9a6766f5af95c0a5e9759b3660384a50155274de290",
+              "byteExact": false,
+              "maximumAbsoluteError": 0.0013992786407470703,
+              "outsideBound": 72,
+              "differentValues": 160,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 501
+          },
+          {
+            "id": "velocity-three-step",
+            "traceSha256": "86867a54742ae23b223ecf6e2ea9f7d0a6d23fb810a386cbfa26b93b2fd1fdee",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": "step-0/denoised",
+            "firstOutsideBound": "step-2/denoised",
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "4028260d88ea22268995cf987a8563bbac949bacdcd15c34ad9afdcb0ebe5af1",
+              "sourceSha256": "8a8b3fa31dbf5e97c78afcce15e7419de9e8baef6d3ded8217fd0cd57c33fff7",
+              "byteExact": false,
+              "maximumAbsoluteError": 0.0005751848220825195,
+              "outsideBound": 77,
+              "differentValues": 158,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 308
+          }
+        ],
+        "runtimeIdentity": {
+          "diagnosticOnly": true,
+          "capturePoint": "after_three_complete_euler_trajectories",
+          "dotnet": ".NET 10.0.12",
+          "os": "Ubuntu 24.04.5 LTS",
+          "architecture": "X64",
+          "torchSharp": "0.107.0.0",
+          "declaredLibtorchPackage": "2.10.0",
+          "cpu": {
+            "status": "available",
+            "vendor": "AuthenticAMD",
+            "brand": "AMD EPYC 7763 64-Core Processor",
+            "hardwareFeatures": {
+              "sse": true,
+              "sse2": true,
+              "sse3": true,
+              "ssse3": true,
+              "sse41": true,
+              "sse42": true,
+              "avx": true,
+              "fma": true,
+              "osxsave": true,
+              "avx2": true,
+              "avx512F": false,
+              "avx512Dq": false,
+              "avx512Bw": false,
+              "avx512Vl": false
+            },
+            "errorType": null
+          },
+          "cpuFeaturesDotNet": {
+            "scope": "managed_intrinsic_availability_not_aten_dispatch",
+            "sse2": true,
+            "avx": true,
+            "avx2": true,
+            "avx512F": false,
+            "fma": true,
+            "armAdvSimd": false
+          },
+          "threads": {
+            "status": "available",
+            "intraOp": 1,
+            "interOp": 1
+          },
+          "requestedAtenCpuCapability": {
+            "status": "unset",
+            "value": null
+          },
+          "actualAtenCpuCapability": {
+            "status": "unavailable",
+            "value": null,
+            "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+          },
+          "nativeLibraries": {
+            "status": "available",
+            "capturePoint": "process_cache_first_access_after_completed_native_work_may_precede_this_case",
+            "libraries": [
+              {
+                "instance": 1,
+                "name": "libtorch_cpu.so",
+                "status": "available",
+                "bytes": 461211481,
+                "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+                "errorType": null
+              },
+              {
+                "instance": 2,
+                "name": "libLibTorchSharp.so",
+                "status": "available",
+                "bytes": 2399008,
+                "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+                "errorType": null
+              },
+              {
+                "instance": 3,
+                "name": "libc10.so",
+                "status": "available",
+                "bytes": 1455496,
+                "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+                "errorType": null
+              },
+              {
+                "instance": 4,
+                "name": "libgomp-98b21ff3.so.1",
+                "status": "available",
+                "bytes": 283265,
+                "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb",
+                "errorType": null
+              },
+              {
+                "instance": 5,
+                "name": "libtorch.so",
+                "status": "available",
+                "bytes": 7584,
+                "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760",
+                "errorType": null
+              }
+            ],
+            "errorType": null
+          }
+        }
+      },
+      "existingUnet": {
+        "comparisonRecords": 80,
+        "bitExactRecords": 0,
+        "finalElementsOutsideBound": 42,
+        "hashComparisonToPriorRuns": {
+          "34649263342": {
+            "records": 80,
+            "equalSha256": 80
+          },
+          "34647655904": {
+            "records": 80,
+            "equalSha256": 80
+          }
+        }
+      },
+      "existingClip": []
+    },
+    {
+      "runtime": "osx-arm64",
+      "jobConclusion": "failure",
+      "build": {
+        "runtime": "osx-arm64",
+        "warnings": 0,
+        "errors": 0
+      },
+      "firstUse": {
+        "Passed": 190
+      },
+      "uniqueAggregateTests": 1297,
+      "aggregateReached": true,
+      "aggregate": {
+        "Passed": 1295,
+        "Failed": 2
+      },
+      "inferenceAggregateTests": 511,
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Test managed contracts, UI headless and CPU primitives",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "failure"
+        },
+        {
+          "number": 15,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "success"
+        },
+        {
+          "number": 16,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 41,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 42,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 43,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "euler": {
+        "sourceManifestSha256": "002da5ae9cb823cdf88523c9e8a22328cd2305bbafd82620ab708e8eb323292f",
+        "sourcePayloadSha256": "da664f107458793b4c74e888593d454c8ad17e8b71a5e44c40b3ce6b0b1580ea",
+        "firstUse": {
+          "count": 8,
+          "outcomes": {
+            "Passed": 8
+          },
+          "failures": []
+        },
+        "behaviorAggregate": {
+          "count": 9,
+          "outcomes": {
+            "Passed": 9
+          },
+          "failures": []
+        },
+        "referenceAggregate": {
+          "count": 8,
+          "outcomes": {
+            "Passed": 8
+          },
+          "failures": []
+        },
+        "traceCases": 8,
+        "inputRecordsExact": 31,
+        "parameterRecordsPerCaseBeforeAfterExact": 686,
+        "optionsAndScalarSigmasExact": true,
+        "callerGradRestored": true,
+        "observedGradDisabled": true,
+        "inputPreservationVerified": true,
+        "comparisonRecords": 81,
+        "exactComparisonRecords": 81,
+        "maximumAbsoluteError": 0.0,
+        "outsideBoundObservationsIncludingRepeatedFinals": 0,
+        "finalElementsOutsideBoundOneRepeatPerCase": 0,
+        "cases": [
+          {
+            "id": "near-one-disabled",
+            "traceSha256": "f51e97fb7c437d43a566e7b5055ed0229e88c87971e1ba9a8d17dd9081a678a8",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "4e3e7b14400796930d532e83073501343b99334d5ce02811d92413aa01270d71",
+              "sourceSha256": "4e3e7b14400796930d532e83073501343b99334d5ce02811d92413aa01270d71",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "near-one-null",
+            "traceSha256": "9dceac6ac7ef47f388552fdc9b95d5b56594dc9f237879ce624c8df8e8f2eed3",
+            "inputRecordsExact": 3,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+              "sourceSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "near-one-present",
+            "traceSha256": "acf3d56eda39da6592479544de6350d9038a7f4fc691a6106300fe93db51dc6c",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+              "sourceSha256": "a02f482ebac8da8cce08cdd8148bd5cc9b73f71127cede228e1dcbffdea1cc94",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "one-step",
+            "traceSha256": "9b3c6d80bb369ed753f2429a6c178cb4d74d9bf827f9c07c0329de113349e737",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                1,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "bc3ef1eaa38e052c7a9c18a4d1587bee51ac84c495cc03cda70688a8b0bc0b58",
+              "sourceSha256": "bc3ef1eaa38e052c7a9c18a4d1587bee51ac84c495cc03cda70688a8b0bc0b58",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "three-step-batch",
+            "traceSha256": "e58755507eb7aa8db37e384b6fd533bce507cceb2cd1876bf016e0dd6329969b",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "173ed21bac633c953565c5755a0f0e06b7e1347e0175b95fd1eabc613a1e4955",
+              "sourceSha256": "173ed21bac633c953565c5755a0f0e06b7e1347e0175b95fd1eabc613a1e4955",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "unequal-concatenated",
+            "traceSha256": "65ddb850c37381018506dfd2ef71711f9eb8f83f83fbcf51b5e16013cdd295a6",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "a8c87451dcbf37fab9a8ee48c575e879f66fb307e40e2073fd670ba5c1c26bf4",
+              "sourceSha256": "a8c87451dcbf37fab9a8ee48c575e879f66fb307e40e2073fd670ba5c1c26bf4",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "unequal-separate",
+            "traceSha256": "a8ba7eea13291fc0bea14f362c89f39763a7c67d93b79333b9a6281286e6fed7",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "baeac7a59899a9a6d3105bf48080b0abf4d943d7e4f73e48a2cdbc1622703e30",
+              "sourceSha256": "baeac7a59899a9a6d3105bf48080b0abf4d943d7e4f73e48a2cdbc1622703e30",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          },
+          {
+            "id": "velocity-three-step",
+            "traceSha256": "545e2c3f26fb0780c4dbea53af7b2bc9a72d8854913ec8daa22f6c728ef97566",
+            "inputRecordsExact": 4,
+            "parameterRecordsBeforeAfterExact": 686,
+            "repeatedOutputsExact": true,
+            "firstDataDifference": null,
+            "firstOutsideBound": null,
+            "finalOneRepeat": {
+              "shape": [
+                2,
+                4,
+                4,
+                5
+              ],
+              "actualSha256": "42f31268e0cde798492ad95c2a7ea50e9fd0ecb90f494c9cf4ddc42836ca5d78",
+              "sourceSha256": "42f31268e0cde798492ad95c2a7ea50e9fd0ecb90f494c9cf4ddc42836ca5d78",
+              "byteExact": true,
+              "maximumAbsoluteError": 0.0,
+              "outsideBound": 0,
+              "differentValues": 0,
+              "strideEqual": true
+            },
+            "outsideBoundObservationsIncludingRepeatedFinals": 0
+          }
+        ],
+        "runtimeIdentity": {
+          "diagnosticOnly": true,
+          "capturePoint": "after_three_complete_euler_trajectories",
+          "dotnet": ".NET 10.0.12",
+          "os": "macOS 14.8.9",
+          "architecture": "Arm64",
+          "torchSharp": "0.107.0.0",
+          "declaredLibtorchPackage": "2.10.0",
+          "cpu": {
+            "status": "cpuid_unavailable_on_this_architecture",
+            "vendor": null,
+            "brand": null,
+            "hardwareFeatures": {},
+            "errorType": null
+          },
+          "cpuFeaturesDotNet": {
+            "scope": "managed_intrinsic_availability_not_aten_dispatch",
+            "sse2": false,
+            "avx": false,
+            "avx2": false,
+            "avx512F": false,
+            "fma": false,
+            "armAdvSimd": true
+          },
+          "threads": {
+            "status": "available",
+            "intraOp": 1,
+            "interOp": 1
+          },
+          "requestedAtenCpuCapability": {
+            "status": "unset",
+            "value": null
+          },
+          "actualAtenCpuCapability": {
+            "status": "unavailable",
+            "value": null,
+            "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+          },
+          "nativeLibraries": {
+            "status": "unavailable",
+            "capturePoint": "process_cache_first_access_after_completed_native_work_may_precede_this_case",
+            "libraries": [],
+            "errorType": "no_matching_loaded_modules"
+          }
+        }
+      },
+      "existingUnet": {
+        "comparisonRecords": 80,
+        "bitExactRecords": 80,
+        "finalElementsOutsideBound": 0,
+        "hashComparisonToPriorRuns": {
+          "34649263342": {
+            "records": 80,
+            "equalSha256": 80
+          },
+          "34647655904": {
+            "records": 80,
+            "equalSha256": 80
+          }
+        }
+      },
+      "existingClip": [
+        {
+          "runtime": "osx-arm64",
+          "profile": "g",
+          "payloadsRehashed": 9,
+          "parametersExactPrevious": 517,
+          "samePayloadShaPrevious": 9
+        },
+        {
+          "runtime": "osx-arm64",
+          "profile": "l",
+          "payloadsRehashed": 9,
+          "parametersExactPrevious": 197,
+          "samePayloadShaPrevious": 9
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic reduced graphs and short trajectories only; no model-family or full-workflow qualification.",
+    "Each target uses its own committed source references from a separate source CI host; this is not a same-host native-package experiment.",
+    "Actual ATen dispatch is not measured by the product; CPU flags do not establish operator dispatch or numerical causality.",
+    "Native library identities use a process cache which may predate the Euler case; macOS loaded maps are explicitly unavailable.",
+    "Existing component and CLIP profiles remain open; no tolerance, fixture or runtime dependency was changed to obtain agreement."
+  ]
+}
