@@ -10,7 +10,7 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 | 3 | Valeurs natives possédées, conteneurs, résultats libérables, validation, sorties indépendantes, listes, lazy, async, annulation | Expansion/sous-graphes, bloqueurs, hooks, caches/LRU/pression, concurrence des branches |
 | 4 | JSON préservé, compilation conservatrice, éditions et canvas initial | Compilation complète, sous-graphes, bypass, reroutes, copier/coller, onglets/brouillons et fidélité exhaustive |
 | 5 | API/file/historique/WS de base, SQLite propre/réglages/prune | Contrats amont exacts, négociation/codecs complets, fichiers/profils/userdata, assets/références/imports complets |
-| 6 | Dix dtypes safetensors CPU, inspection indépendante et hash, bruit natif, étape Euler | Autres dtypes/quantification, formats historiques sûrs, détection, tokeniseurs, encodeurs, sampling et adapters complets |
+| 6 | Dix dtypes safetensors CPU, inspection indépendante et hash, bruit natif, étape Euler, cinq générateurs de sigmas et corpus source | Intégration des nœuds SIGMAS et packages du Host, schedulers dépendant du modèle, samplers, autres dtypes/quantification, formats historiques sûrs, détection, tokeniseurs, encodeurs et adapters |
 | 7 | Rien annoncé compatible | Chaque famille/variante image avec vrais poids |
 | 8 | Rien annoncé compatible | Vidéo, audio, 3D, codecs et traitements associés |
 | 9 | Gradient et mise à jour SGD élémentaires | Nœuds d'entraînement, optimisateurs/losses complets, adapters, sauvegarde et réutilisation |

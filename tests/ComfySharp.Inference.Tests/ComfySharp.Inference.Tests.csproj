@@ -16,6 +16,9 @@
     <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeRuntime)' == 'linux-x64'" />
     <PackageReference Include="libtorch-cpu-osx-arm64" Condition="'$(NativeRuntime)' == 'osx-arm64'" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fixtures/sigma-schedules.cpu-f32.json" />
+  </ItemGroup>
   <Target Name="ValidateNativeRuntime" BeforeTargets="Restore;PrepareForBuild">
     <Error Condition="'$(NativeBackend)' != 'cpu'" Text="Inference tests currently supply CPU native packages only." />
     <Error Condition="'$(NativeRuntime)' != 'win-x64' and '$(NativeRuntime)' != 'linux-x64' and '$(NativeRuntime)' != 'osx-arm64'" Text="NativeRuntime must be win-x64, linux-x64 or osx-arm64." />

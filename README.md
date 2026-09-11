@@ -57,6 +57,7 @@ Ajouter `--sha256` pour lire le fichier entier et calculer son empreinte, ou `--
 
 - [Architecture](docs/ARCHITECTURE.md), [backlog](docs/BACKLOG.md), [validation numérique](docs/NUMERICAL_VALIDATION.md).
 - [Contrat des valeurs natives](docs/RUNTIME_VALUES.md) et [réconciliation des nœuds](docs/audit/05-RECONCILIATION-NOEUDS.md).
+- [Générateurs de niveaux de bruit et corpus de référence](docs/SIGMA_SCHEDULES.md).
 - [Audits source](docs/audit/02-MOTEUR-WORKFLOWS.md) avec liens vers les révisions amont figées.
 - [Notices](THIRD_PARTY_NOTICES.md), versions centralisées et verrous par projet/runtime.
 - `tools/publish.ps1` prépare un dossier portable de développement non signé ; une V1 exige la fermeture de toute la matrice.
