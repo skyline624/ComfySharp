@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text.Json;
 using ComfySharp.Inference;
@@ -72,6 +73,8 @@ public sealed class SdDenoiserReferenceTests : IDisposable
         for (int repeat = 0; repeat < 3; repeat++)
         {
             using var actual = denoiser.DenoiseGuided(latent, sigma, positive, negative, options);
+            if (repeat == 0)
+                TraceIfRequested(identifier, policy, actual, latent, sigma, positive, negative, root.GetProperty("parameters"));
             SdSamplingReferenceTests.Compare(actual, expected);
             string hash = Hash(actual);
             if (firstHash is null) firstHash = hash;
@@ -104,6 +107,52 @@ public sealed class SdDenoiserReferenceTests : IDisposable
         using var contiguous = value.contiguous();
         float[] values = contiguous.data<float>().ToArray();
         return Convert.ToHexStringLower(SHA256.HashData(MemoryMarshal.AsBytes(values.AsSpan())));
+    }
+
+    private static readonly Lazy<object> nativeEvidence = new(() =>
+    {
+        using var process = Process.GetCurrentProcess();
+        var libraries = new List<object>();
+        foreach (ProcessModule module in process.Modules)
+        {
+            string name = Path.GetFileName(module.FileName);
+            if (!new[] { "torch", "c10", "libomp", "libgomp", "libshm" }
+                .Any(part => name.Contains(part, StringComparison.OrdinalIgnoreCase))) continue;
+            using var stream = File.OpenRead(module.FileName);
+            libraries.Add(new { name, bytes = stream.Length, sha256 = Convert.ToHexStringLower(SHA256.HashData(stream)) });
+        }
+        return new
+        {
+            torchSharp = typeof(Tensor).Assembly.GetName().Version?.ToString(),
+            declaredLibtorchPackage = "2.10.0", dotNet = RuntimeInformation.FrameworkDescription,
+            architecture = RuntimeInformation.ProcessArchitecture.ToString(),
+            threads = get_num_threads(), interopThreads = get_num_interop_threads(),
+            requestedAtenCpuCapability = Environment.GetEnvironmentVariable("ATEN_CPU_CAPABILITY"),
+            observedAtenCpuCapability = "Not exposed by the public TorchSharp API; requested mode is not proof of dispatch.",
+            libraries
+        };
+    });
+
+    private static void TraceIfRequested(string identifier, string policy, Tensor output, Tensor latent, Tensor sigma,
+        Tensor positive, Tensor negative, JsonElement verifiedParameters)
+    {
+        string? directory = Environment.GetEnvironmentVariable("COMFYSHARP_SD_GUIDANCE_TRACE_DIR");
+        if (string.IsNullOrWhiteSpace(directory)) return;
+        using var contiguous = output.contiguous();
+        float[] values = contiguous.data<float>().ToArray();
+        var record = new
+        {
+            id = identifier + "/" + policy, synthetic = true, policy,
+            parameters = verifiedParameters,
+            inputHashes = new { latent = Hash(latent), sigma = Hash(sigma), positive = Hash(positive), negative = Hash(negative) },
+            native = nativeEvidence.Value,
+            tensors = new { output = new { shape = output.shape, dtype = "float32", stride = output.stride(), values,
+                sha256 = Convert.ToHexStringLower(SHA256.HashData(MemoryMarshal.AsBytes(values.AsSpan()))) } }
+        };
+        Directory.CreateDirectory(directory);
+        string path = Path.Combine(directory, identifier + "--" + policy + ".json");
+        File.WriteAllText(path + ".tmp", JsonSerializer.Serialize(record));
+        File.Move(path + ".tmp", path, overwrite: false);
     }
 
     public void Dispose() => set_num_threads(previousThreads);

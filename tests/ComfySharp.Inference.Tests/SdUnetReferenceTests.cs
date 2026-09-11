@@ -33,6 +33,15 @@ public sealed class SdUnetReferenceTests : IDisposable
     [InlineData("sd2-reduced", "batch-shared-time-odd")]
     public void FullGraphMatchesSamePlatformFrozenSource(string modelId, string caseName)
     {
+        string? offsetText = Environment.GetEnvironmentVariable("COMFYSHARP_SD_LATENT_OFFSET");
+        int? latentOffset = null;
+        if (offsetText is not null)
+        {
+            Assert.True(int.TryParse(offsetText, System.Globalization.NumberStyles.None,
+                System.Globalization.CultureInfo.InvariantCulture, out int parsedOffset) && parsedOffset is >= 0 and <= 15,
+                "COMFYSHARP_SD_LATENT_OFFSET must be an integer from 0 through 15.");
+            latentOffset = parsedOffset;
+        }
         using var document = SdSamplingReferenceTests.Corpus("unet");
         var root = document.RootElement;
         var modelReference = root.GetProperty("models").GetProperty(modelId);
@@ -63,6 +72,23 @@ public sealed class SdUnetReferenceTests : IDisposable
         var latent = SdSamplingReferenceTests.Input(reference.GetProperty("latent"));
         var timesteps = SdSamplingReferenceTests.Input(reference.GetProperty("timesteps"));
         var context = SdSamplingReferenceTests.Input(reference.GetProperty("context"));
+        if (latentOffset is int offset)
+        {
+            // Diagnostic allocation control only. Keep input values, shape and strides;
+            // the ordinary fixtureTensor path is unchanged when the option is absent.
+            string inputHash = TensorHash(latent);
+            Assert.Equal(reference.GetProperty("latent").GetProperty("sha256").GetString(), inputHash);
+            long elements = latent.numel();
+            var backing = empty(new long[] { checked(elements + offset) }, dtype: ScalarType.Float32, device: CPU);
+            using (var firstBackingValue = backing[0])
+                Assert.True(CpuModelWeightBank.IsAligned(firstBackingValue), "Native diagnostic backing must be aligned to 64 bytes.");
+            var copied = backing.narrow(0, offset, elements).reshape(latent.shape);
+            copied.copy_(latent);
+            Assert.Equal(latent.stride(), copied.stride());
+            Assert.Equal(inputHash, TensorHash(copied));
+            Assert.Equal(inputHash, TensorHash(latent));
+            latent = copied;
+        }
         string? firstHash = null;
         for (int repetition = 0; repetition < 3; repetition++)
         {
@@ -70,9 +96,25 @@ public sealed class SdUnetReferenceTests : IDisposable
             if (repetition == 0 && traces is not null)
             {
                 traces["output"] = TraceRecord(output);
+                // Observe after the first forward so the baseline's allocation order is
+                // not changed by an extra scalar-view/hash capture before graph execution.
+                using var firstLatentValue = latent[0, 0, 0, 0];
+                string latentHash = TensorHash(latent);
+                string? fixtureHash = reference.GetProperty("latent").GetProperty("sha256").GetString();
+                Assert.Equal(fixtureHash, latentHash);
+                var latentInput = new
+                {
+                    allocation = latentOffset.HasValue ? "nativeOffset" : "fixtureTensor",
+                    offsetElements = latentOffset,
+                    fixtureSha256 = fixtureHash,
+                    sha256 = latentHash,
+                    shape = latent.shape,
+                    stride = latent.stride(),
+                    aligned64 = CpuModelWeightBank.IsAligned(firstLatentValue)
+                };
                 Directory.CreateDirectory(traceDirectory!);
                 File.WriteAllText(Path.Combine(traceDirectory!, modelId + "--" + caseName + ".json"),
-                    JsonSerializer.Serialize(new { id = modelId + "/" + caseName, synthetic = true, tensors = traces }));
+                    JsonSerializer.Serialize(new { id = modelId + "/" + caseName, synthetic = true, latentInput, tensors = traces }));
                 model.DiagnosticObserver = null;
             }
             SdSamplingReferenceTests.Compare(output, reference.GetProperty("output"));
