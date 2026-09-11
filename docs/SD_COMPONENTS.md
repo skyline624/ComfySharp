@@ -123,8 +123,14 @@ and `numericalQualification=not_performed`.
 The tool's execution test uses a reduced channel configuration with the actual
 graph; stock plans are additionally checked in a copy containing only managed
 assemblies. Those checks do not prove a stock-width forward or source agreement.
-Real stock execution, an independently generated source comparison, pretrained
-weights and a complete workflow remain separate requirements.
+An independently generated source comparison, pretrained weights and a complete
+workflow remain separate requirements.
+
+The [first local stock-width execution](qualification/sd-stock-diagnostic-2ee03aa.md)
+subsequently completed three forwards each for SD15 and SD2 with small 16×16
+latents and synthetic parameters. Parameter/input hashes were independently
+recomputed. Source agreement, long-running memory behavior, pretrained weights
+and full workflows remain unqualified.
 
 ### Tensor lifetime
 
