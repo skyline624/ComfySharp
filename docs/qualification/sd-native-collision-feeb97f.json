@@ -1,0 +1,1612 @@
+{
+  "commit": "feeb97f3a126f1bf5295cd76a9ce07054cdb615b",
+  "classification": "wheel_loading_failed_origin_invalid_before_numerics",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "sourceCapabilities": {
+    "auto": "AVX2",
+    "default": "DEFAULT"
+  },
+  "sourceRuntime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+    "threads": 1,
+    "interopThreads": 1
+  },
+  "precondition": {
+    "classification": "verifiedInterpreterLib",
+    "directoryName": "lib",
+    "matchesInterpreterBasePrefixLib": true,
+    "baselinePythonLibraryPreserved": true,
+    "directEntryCount": 5,
+    "directEntryNamesSha256": "0eecd03711915840dd6e96394a540e09978f3871a6b9a02bf5fd67ae51591046",
+    "pythonLibraries": [
+      {
+        "name": "libpython3.12.so",
+        "sha256": "5a7536ea0859ddd06a53daddd0c83ce72cda5ac07f14d5e2acffe13f3bce0c3a",
+        "bytes": 29801232
+      },
+      {
+        "name": "libpython3.12.so.1.0",
+        "sha256": "5a7536ea0859ddd06a53daddd0c83ce72cda5ac07f14d5e2acffe13f3bce0c3a",
+        "bytes": 29801232
+      },
+      {
+        "name": "libpython3.so",
+        "sha256": "5a41254e8f638c7ab1c573e167e916f22eb9d7811d85b126ef3f557559a69ebb",
+        "bytes": 15096
+      }
+    ]
+  },
+  "processes": [
+    {
+      "label": "auto/source",
+      "exitCode": 0,
+      "seconds": 2.8344995799999992,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "original",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    },
+    {
+      "label": "auto/product/nuget",
+      "exitCode": 0,
+      "seconds": 3.5434634380000034,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "original",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    },
+    {
+      "label": "auto/product/wheel",
+      "exitCode": 1,
+      "seconds": 3.2996613389999965,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [
+          "libc10.so",
+          "libtorch_cpu.so",
+          "libtorch.so"
+        ],
+        "libraryPath": "wheel followed by validated original Python library path",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    },
+    {
+      "label": "default/source",
+      "exitCode": 0,
+      "seconds": 2.846309943999998,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "original",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    },
+    {
+      "label": "default/product/nuget",
+      "exitCode": 0,
+      "seconds": 2.7349001660000027,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "original",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    },
+    {
+      "label": "default/product/wheel",
+      "exitCode": 1,
+      "seconds": 3.1987007369999816,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [
+          "libc10.so",
+          "libtorch_cpu.so",
+          "libtorch.so"
+        ],
+        "libraryPath": "wheel followed by validated original Python library path",
+        "baselinePythonLibraryPreserved": true,
+        "unrelatedEnvironmentUnchanged": true,
+        "pathUnchanged": true
+      }
+    }
+  ],
+  "originVerified": {
+    "auto/nuget": {
+      "verified": true,
+      "cores": {
+        "libc10.so": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+        "libtorch_cpu.so": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+        "libtorch.so": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+      },
+      "binding": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+      "openmp": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+    },
+    "default/nuget": {
+      "verified": true,
+      "cores": {
+        "libc10.so": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+        "libtorch_cpu.so": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+        "libtorch.so": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+      },
+      "binding": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+      "openmp": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+    }
+  },
+  "wheelFailure": {
+    "auto": {
+      "classification": "loader_crash_before_origin_map",
+      "duplicateRegistration": "Conjugate",
+      "preloadedAndNuGetCpuFramesObserved": true,
+      "traceAvailable": false,
+      "originValid": false
+    },
+    "default": {
+      "classification": "loader_crash_before_origin_map",
+      "duplicateRegistration": "Conjugate",
+      "preloadedAndNuGetCpuFramesObserved": true,
+      "traceAvailable": false,
+      "originValid": false
+    }
+  },
+  "trx": [
+    {
+      "mode": "auto",
+      "origin": "nuget",
+      "summary": {
+        "outcome": "Completed"
+      },
+      "executedResults": [
+        "Passed"
+      ]
+    },
+    {
+      "mode": "auto",
+      "origin": "wheel",
+      "summary": {
+        "outcome": "Failed"
+      },
+      "executedResults": []
+    },
+    {
+      "mode": "default",
+      "origin": "nuget",
+      "summary": {
+        "outcome": "Completed"
+      },
+      "executedResults": [
+        "Passed"
+      ]
+    },
+    {
+      "mode": "default",
+      "origin": "wheel",
+      "summary": {
+        "outcome": "Failed"
+      },
+      "executedResults": []
+    }
+  ],
+  "scriptsVerified": {
+    "labs/sd-operator-diagnostic/source.py": "d269a0fe63530e10f7397d0071bb4391518ff6200d1b892b842b9380f58237ab",
+    "labs/sd-operator-diagnostic/run.py": "a9bce23f9c2ac1d600f0b297a8f38e38cd2effbfd83caba0dde52d8d680d435a",
+    "labs/sd-diagnostic/run.py": "ddd56f206e1642156d8748d23409a504baabfe218cc3e4979797f46c29544e57",
+    "labs/sd-native-diagnostic/run.py": "6ffa862eb73757e6c9d8fdf664a54724e414bf10fd648007790c4713ca13a7f1",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/guidance.py": "a186e29756cdcf8092528efeef58a9e232b3271fd5325aeaaa9e1cce626327be",
+    "labs/sd-source/reference.py": "3ecf2732f199ed561a753e17f36414d35342e23ca03ea0975c2102833cbebaf8",
+    "labs/sd-source/sampling.py": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/sd-source/vae.py": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3"
+  },
+  "payloadsRehashed": 184,
+  "parameterIdentities": 686,
+  "parameterLayoutsAcrossAvailableFourEqual": true,
+  "recalculatedComparisons": 129,
+  "availableObserversOffOnOffBitExact": true,
+  "nugetVsSource": {
+    "auto": {
+      "records": {
+        "timeEmbedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "elements": 512,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "elements": 512,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 20,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 20,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 3.5762786865234375e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 15,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 3.5762786865234375e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 15,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 2.9802322387695312e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 56,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 13,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.0728836059570312e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 35,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.0728836059570312e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 35,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 4.76837158203125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 29,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 4.76837158203125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 29,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 3.3527612686157227e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 69,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 5.960464477539063e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 44,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 5.960464477539063e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 44,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 5.960464477539063e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 44,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.7881393432617188e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 56,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.7881393432617188e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 56,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 44,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 44,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 2.9802322387695312e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 68,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 17,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 8.046627044677734e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 24,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 8.046627044677734e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 24,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 4.76837158203125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 23,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 4.76837158203125e-07,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 23,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 5.21540641784668e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 77,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "elements": 128,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 5.960464477539063e-08,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 73,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "elements": 256,
+          "byteIdentical": false,
+          "maximumFiniteAbsoluteError": 4.437565803527832e-05,
+          "outsideBound": 2,
+          "firstViolation": 103,
+          "changedElements": 255,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "exact": 16,
+      "outside": 2,
+      "firstDifference": "input_blocks.10.0.in_layers.0.output"
+    },
+    "default": {
+      "records": {
+        "timeEmbedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "elements": 512,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "elements": 512,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "elements": 128,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "elements": 256,
+          "byteIdentical": true,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "changedElements": 0,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "exact": 43,
+      "outside": 0,
+      "firstDifference": null
+    }
+  },
+  "sourceVsSource": {
+    "timeEmbedding": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 4,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "down2": {
+      "elements": 512,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.86102294921875e-06,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 493,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.9.0.op.input": {
+      "elements": 512,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.86102294921875e-06,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 493,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.9.0.op.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.427267074584961e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 120,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.427267074584961e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 120,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.embedding": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 4,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.427267074584961e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 120,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.6033649444580078e-05,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 121,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.6033649444580078e-05,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 121,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.2248754501342773e-05,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 111,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.2.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.2248754501342773e-05,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 111,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.in_layers.2.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 5.960464477539063e-08,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 78,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.emb_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 4,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.emb_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 9,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.emb_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 9,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.emb_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 18,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 35,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 5.960464477539062e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 82,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.3.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 5.960464477539062e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 82,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.out_layers.3.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 4.470348358154297e-08,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 88,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.10.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.2782554626464844e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 123,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.2782554626464844e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 123,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.embedding": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 4,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.2782554626464844e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 123,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.4454126358032227e-06,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 119,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.4454126358032227e-06,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 119,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 5.960464477539062e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.2.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 5.960464477539062e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.in_layers.2.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.9802322387695312e-08,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 80,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.emb_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 4,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.emb_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 9,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.emb_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 1.1920928955078125e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 9,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.emb_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 14,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.0.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 2.384185791015625e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 34,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.1.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 100,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.1.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 78,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.3.input": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.152557373046875e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 78,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.out_layers.3.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 6.705522537231445e-08,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 83,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "input_blocks.11.0.output": {
+      "elements": 128,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 3.2782554626464844e-07,
+      "outsideBound": 0,
+      "firstViolation": null,
+      "changedElements": 119,
+      "strideEqual": true,
+      "aligned64Equal": true
+    },
+    "output": {
+      "elements": 256,
+      "byteIdentical": false,
+      "maximumFiniteAbsoluteError": 7.304549217224121e-05,
+      "outsideBound": 13,
+      "firstViolation": 55,
+      "changedElements": 256,
+      "strideEqual": true,
+      "aligned64Equal": true
+    }
+  },
+  "originalBuildUnchanged": true,
+  "acceptedFixturesUnchanged": true,
+  "evidenceFileSha256": {
+    "artifacts.json": "19378b83e3a19395138b5b2db8b47211d2faad3bd63df8762433808b5f3e37b6",
+    "job.log": "6e131395a6ec6d4ca19e48d6567e24ff645f2112b7ba4adb7ef3b94bb44b5bd1",
+    "run.json": "151466c66a1bc43f879cb015574f69124f8694667afcff89daaaa756bdea6cb1",
+    "sd-native-control-linux-x64/comparisons.json": "91000803e6dc5efe6e93b4766f81892d91bd2e81d0ed43e7a84e423d0fd04280",
+    "sd-native-control-linux-x64/host.json": "0b24c1d3e7035a101802f7a5326ab16bfb09c254c6cc7ff8b890116988268c1f",
+    "sd-native-control-linux-x64/precondition.json": "71a5d43882a0db18b92f16d237fc6b1e07484dcb8f7826cd8ff3a8efc7fae807",
+    "sd-native-control-linux-x64/runs.json": "b2294b6f059e347505fecd0e3eaba830eed7c1fe3c77f96dbbeda1f1f08e1bee",
+    "sd-native-control-linux-x64/status.json": "10bef495bb419d959ac9ff84fcc7e9691ee8e2fd44ca49421bd5ba968d7ffdae",
+    "sd-native-auto-linux-x64/nuget/process.log": "60fa375b188f5a2c849dcf8ac7ab4526fc63ff2077e73001e6d87da6c2386f22",
+    "sd-native-auto-linux-x64/source/operators.json": "9a4c12256b3c0844a8ed7970914aebd1fab730c1a7d46eb14b50c5c02c6ba027",
+    "sd-native-auto-linux-x64/source-process/process.log": "5a69b3174739ba0a46ceddade9073f7edd39bd39d1b3b073af1cba90fb0b2086",
+    "sd-native-auto-linux-x64/wheel/process.log": "3787f3c42c82726e7da43059f99cd6e6bc8b69927933367b67126f5c018df8b2",
+    "sd-native-auto-linux-x64/nuget/results/reference-test.trx": "3f7cb7373cba2e0b80bec2cc7e6ff69c5a2d41bd9549b5b9949abe891633e548",
+    "sd-native-auto-linux-x64/nuget/traces/sd15-reduced--square.json": "e62d9e614fe6d881271edf951b53041849d54fc46dc6e0518fa8047ad5ea7aeb",
+    "sd-native-auto-linux-x64/wheel/results/reference-test.trx": "219ec8c490da88abcfa26670d6766f55ebed4ce9e57273affbb36413751abbfa",
+    "sd-native-default-linux-x64/nuget/process.log": "71442918c318f06f8829b29bdd7e31adad02233fef4e24b284621bc71036429b",
+    "sd-native-default-linux-x64/source/operators.json": "3baba17746885c1393bc657a284853c295fdf37051f42174db413083e643c8c4",
+    "sd-native-default-linux-x64/source-process/process.log": "5a69b3174739ba0a46ceddade9073f7edd39bd39d1b3b073af1cba90fb0b2086",
+    "sd-native-default-linux-x64/wheel/process.log": "14653265e6c57dca35a30ae5d840b5facf2d846060c4ab0ddfdff07a8eedf33c",
+    "sd-native-default-linux-x64/nuget/results/reference-test.trx": "317e5d0b5ed32795a40213221de22b8613f1b6844f4389f499b95d4bf3bcd2de",
+    "sd-native-default-linux-x64/nuget/traces/sd15-reduced--square.json": "bb49406dd783d6a755b1bf1019f66c07a28d0d52784b16d0294a624b00462d6d",
+    "sd-native-default-linux-x64/wheel/results/reference-test.trx": "4253d7206eea7637029387bb74d9fa3dbe371b800420faf740946f6eee8585f0"
+  },
+  "schemaVersion": 1,
+  "diagnosticOnly": true,
+  "qualification": "none",
+  "diagnosticCi": "https://github.com/skyline624/ComfySharp/actions/runs/34642167261",
+  "acceptedFixturesOrProfileChanged": false,
+  "pretrainedWeightsUsed": false,
+  "qualifiedModelFamilies": [],
+  "independentSecondaryAudit": {
+    "f32PayloadsRehashed": 184,
+    "sameModeTensorComparisonsRecalculated": 86,
+    "parameterAndInputIdentitiesMatched": true,
+    "nugetLoadedMapsVerified": 2,
+    "wheelAttribution": "invalid; both processes aborted before capture"
+  }
+}

@@ -121,7 +121,8 @@ public sealed class SdUnetReferenceTests : IDisposable
                 };
                 Directory.CreateDirectory(traceDirectory!);
                 File.WriteAllText(Path.Combine(traceDirectory!, modelId + "--" + caseName + ".json"),
-                    JsonSerializer.Serialize(new { id = modelId + "/" + caseName, synthetic = true, latentInput, tensors = traces }));
+                    JsonSerializer.Serialize(new { id = modelId + "/" + caseName, synthetic = true, latentInput,
+                        runtimeIdentity = SdRuntimeIdentity.CaptureAfterForward(), tensors = traces }));
                 model.DiagnosticObserver = null;
             }
             SdSamplingReferenceTests.Compare(output, reference.GetProperty("output"));

@@ -88,6 +88,46 @@ separate calls. Hardware-dependent batch planning is not yet reproduced.
 
 ## Ownership and qualification
 
+### Synthetic stock-width diagnostic
+
+The existing RuntimeProbe now accepts `sd --model sd15|sd2`. Its default mode
+only describes the 686-parameter U-Net schema and memory estimate, without
+initializing libtorch. For example, from an independently cloned repository:
+
+```sh
+dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd --model sd15
+```
+
+An actual diagnostic requires `--synthetic --execute`, a positive
+`--memory-budget-mib` and `--output` naming a new absolute directory. It uses
+stock channel widths, a small `[1,4,16,16]` latent and 77 context tokens. It fills
+one native allocation per parameter in chunks of at most 1 MiB, using the named
+input recipe, and reuses that bank for one to three forwards. There is no model
+download or pretrained checkpoint input in this command. SD2 here is a U-Net
+component diagnostic; its text encoder is not supplied.
+
+The plan includes resident weights (3,438,083,856 bytes for SD1.5 or
+3,463,642,896 bytes for SD2), inputs and explicit allowances for runtime,
+temporaries and headroom. Execution also checks the process working set before
+generation and between forwards. These estimates and observations do not bound
+every transient peak. A budget is an admission check, not a request to allocate
+that amount of memory. Existing native allocator caches count toward it.
+
+Output contains input/output F32 files, parameter hashes without weight payloads,
+repeat hashes, timings and process memory observations. Files are created without
+overwriting existing evidence. `manifest.json` is written atomically after the
+forwards; a failed or cancelled operation can leave partial files without a
+completed manifest. Evidence explicitly reports `modelCompatibility=not_assessed`
+and `numericalQualification=not_performed`.
+
+The tool's execution test uses a reduced channel configuration with the actual
+graph; stock plans are additionally checked in a copy containing only managed
+assemblies. Those checks do not prove a stock-width forward or source agreement.
+Real stock execution, an independently generated source comparison, pretrained
+weights and a complete workflow remain separate requirements.
+
+### Tensor lifetime
+
 Weight banks have shared deterministic ownership. A model or wrapper retains an
 independent owner; a forward retains the bank throughout execution. Disposing one
 owner does not invalidate active consumers. Returned tensors have independent

@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable></PropertyGroup>
+  <PropertyGroup><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
     <ProjectReference Include="../../src/ComfySharp.Core/ComfySharp.Core.csproj" />
@@ -17,5 +17,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/ClipDiagnostic.cs" Link="Diagnostic/ClipDiagnostic.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdSyntheticRecipe.cs" Link="Diagnostic/SdSyntheticRecipe.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdSyntheticWeightBuilder.cs" Link="Diagnostic/SdSyntheticWeightBuilder.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdDiagnostic.cs" Link="Diagnostic/SdDiagnostic.cs" />
   </ItemGroup>
 </Project>
