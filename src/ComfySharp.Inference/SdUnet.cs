@@ -24,6 +24,10 @@ public sealed class SdUnet : IDisposable
     // they keep and must not dispose or mutate tensors. Null adds no tensor allocations.
     internal Action<string, Tensor>? DiagnosticObserver { get; set; }
 
+    // Opt-in primitive capture for the last downsample and its two residual blocks.
+    // The same borrowing rules apply; observers must not allocate native tensors.
+    internal Action<string, Tensor>? FineDiagnosticObserver { get; set; }
+
     public SdUnet Retain()
     {
         lock (gate)
@@ -48,6 +52,7 @@ public sealed class SdUnet : IDisposable
         using var noGrad = no_grad();
         cancellationToken.ThrowIfCancellationRequested();
         var observer = DiagnosticObserver;
+        var fineObserver = FineDiagnosticObserver;
 
         // Borrowed managed buffers and offset views can select a different CPU linear
         // reduction path. Canonicalize only unaligned context storage, without changing
@@ -71,7 +76,7 @@ public sealed class SdUnet : IDisposable
                 cancellationToken.ThrowIfCancellationRequested();
                 using var blockScope = NewDisposeScope();
                 string prefix = $"input_blocks.{inputBlock++}";
-                current = Residual(current, embedding, operation, prefix + ".0");
+                current = Residual(current, embedding, operation, prefix + ".0", level == 3 ? fineObserver : null);
                 if (level < 3)
                     current = SpatialTransformer(current, context, operation, prefix + ".1", cancellationToken);
                 current.MoveToOuterDisposeScope();
@@ -81,7 +86,11 @@ public sealed class SdUnet : IDisposable
             if (level < 3)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                if (fineObserver is not null && level == 2)
+                    fineObserver("input_blocks.9.0.op.input", current);
                 current = Conv(current, operation, $"input_blocks.{inputBlock++}.0.op", stride: 2);
+                if (fineObserver is not null && level == 2)
+                    fineObserver("input_blocks.9.0.op.output", current);
                 skips.Push(current);
             }
         }
@@ -141,15 +150,44 @@ public sealed class SdUnet : IDisposable
         return embedded.MoveToOuterDisposeScope();
     }
 
-    private static Tensor Residual(Tensor input, Tensor embedding, UnetWeightSet bank, string prefix)
+    private static Tensor Residual(Tensor input, Tensor embedding, UnetWeightSet bank,
+        string prefix, Action<string, Tensor>? observe = null)
     {
+        // All captures observe this same implementation, including the sums. Null
+        // callbacks add no native tensors or stage strings; operation order is unchanged.
         using var scope = NewDisposeScope();
-        var hidden = Conv(nn.functional.silu(GroupNorm(input, bank, prefix + ".in_layers.0", 1e-5)), bank, prefix + ".in_layers.2");
-        var projectedTime = Linear(nn.functional.silu(embedding), bank, prefix + ".emb_layers.1").unsqueeze(-1).unsqueeze(-1);
+        observe?.Invoke(prefix + ".input", input);
+        observe?.Invoke(prefix + ".embedding", embedding);
+        observe?.Invoke(prefix + ".in_layers.0.input", input);
+        var normalized = GroupNorm(input, bank, prefix + ".in_layers.0", 1e-5);
+        observe?.Invoke(prefix + ".in_layers.0.output", normalized);
+        observe?.Invoke(prefix + ".in_layers.1.input", normalized);
+        var activated = nn.functional.silu(normalized);
+        observe?.Invoke(prefix + ".in_layers.1.output", activated);
+        observe?.Invoke(prefix + ".in_layers.2.input", activated);
+        var hidden = Conv(activated, bank, prefix + ".in_layers.2");
+        observe?.Invoke(prefix + ".in_layers.2.output", hidden);
+        observe?.Invoke(prefix + ".emb_layers.0.input", embedding);
+        var activatedTime = nn.functional.silu(embedding);
+        observe?.Invoke(prefix + ".emb_layers.0.output", activatedTime);
+        observe?.Invoke(prefix + ".emb_layers.1.input", activatedTime);
+        var time = Linear(activatedTime, bank, prefix + ".emb_layers.1");
+        observe?.Invoke(prefix + ".emb_layers.1.output", time);
+        var projectedTime = time.unsqueeze(-1).unsqueeze(-1);
         hidden = hidden + projectedTime;
-        hidden = Conv(nn.functional.silu(GroupNorm(hidden, bank, prefix + ".out_layers.0", 1e-5)), bank, prefix + ".out_layers.3");
+        observe?.Invoke(prefix + ".out_layers.0.input", hidden);
+        normalized = GroupNorm(hidden, bank, prefix + ".out_layers.0", 1e-5);
+        observe?.Invoke(prefix + ".out_layers.0.output", normalized);
+        observe?.Invoke(prefix + ".out_layers.1.input", normalized);
+        activated = nn.functional.silu(normalized);
+        observe?.Invoke(prefix + ".out_layers.1.output", activated);
+        observe?.Invoke(prefix + ".out_layers.3.input", activated);
+        hidden = Conv(activated, bank, prefix + ".out_layers.3");
+        observe?.Invoke(prefix + ".out_layers.3.output", hidden);
         var residual = input.shape[1] == hidden.shape[1] ? input : Conv(input, bank, prefix + ".skip_connection");
-        return (residual + hidden).MoveToOuterDisposeScope();
+        var output = residual + hidden;
+        observe?.Invoke(prefix + ".output", output);
+        return output.MoveToOuterDisposeScope();
     }
 
     private Tensor SpatialTransformer(Tensor input, Tensor context, UnetWeightSet bank, string prefix,

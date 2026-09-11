@@ -89,6 +89,13 @@ public sealed class SdUnetReferenceTests : IDisposable
             Assert.Equal(inputHash, TensorHash(latent));
             latent = copied;
         }
+        string? fineTraceDirectory = Environment.GetEnvironmentVariable("COMFYSHARP_SD_UNET_FINE_TRACE_DIR");
+        if (!string.IsNullOrWhiteSpace(fineTraceDirectory) && modelId == "sd15-reduced" && caseName == "square")
+        {
+            SdUnetFineDiagnostic.Run(fineTraceDirectory, model, bank, latent, timesteps, context,
+                reference, modelReference.GetProperty("parameters"));
+            return;
+        }
         string? firstHash = null;
         for (int repetition = 0; repetition < 3; repetition++)
         {

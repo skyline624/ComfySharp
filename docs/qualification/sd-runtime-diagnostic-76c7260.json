@@ -1,0 +1,1082 @@
+{
+  "schemaVersion": 1,
+  "diagnosticOnly": true,
+  "qualification": "none",
+  "repositoryCommit": "76c726023ab5f0f5868eb3439d895fc79cf53c2c",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "diagnosticCi": "https://github.com/skyline624/ComfySharp/actions/runs/34637495790",
+  "normalCi": "https://github.com/skyline624/ComfySharp/actions/runs/34637495740",
+  "acceptedSourceCi": "https://github.com/skyline624/ComfySharp/actions/runs/34632139846",
+  "overallCiConclusion": "failure",
+  "profile": "sd-components-native210-cpu-f32-v1",
+  "absoluteTolerance": 3e-05,
+  "relativeTolerance": 3e-05,
+  "profileAndAcceptedFixturesChanged": false,
+  "pretrainedWeightsUsed": false,
+  "qualifiedModelFamilies": [],
+  "host": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "avx512flags": [],
+    "commit": "76c726023ab5f0f5868eb3439d895fc79cf53c2c"
+  },
+  "sourceRuntime": {
+    "auto": {
+      "python": "3.12.10",
+      "torch": "2.10.0+cpu",
+      "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "threads": 1,
+      "interopThreads": 1,
+      "cpuCapability": "AVX2"
+    },
+    "avx2": {
+      "python": "3.12.10",
+      "torch": "2.10.0+cpu",
+      "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "threads": 1,
+      "interopThreads": 1,
+      "cpuCapability": "AVX2"
+    },
+    "default": {
+      "python": "3.12.10",
+      "torch": "2.10.0+cpu",
+      "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+      "threads": 1,
+      "interopThreads": 1,
+      "cpuCapability": "DEFAULT"
+    }
+  },
+  "processes": {
+    "total": 31,
+    "exits": {
+      "0": 9,
+      "1": 22
+    },
+    "seconds": 134.13113651399988,
+    "errors": []
+  },
+  "integrityAudit": {
+    "independentlyVerified": true,
+    "rawTensorPayloadsRehashed": 2171,
+    "sourceComponentFilesRehashed": 12,
+    "productTraceFiles": 170,
+    "trxReports": 28,
+    "productSourceComparisonsRecalculated": 2054,
+    "sourceSourceComparisonsRecalculated": 633,
+    "sourceScriptsUnchanged": true,
+    "sourceParameterAndConfigurationIdentityVerified": true,
+    "offsetMetadataAndPayloadsVerified": true
+  },
+  "sourceSource": {
+    "auto-expected_vs_avx2": {
+      "sampling": {
+        "records": 71,
+        "exact": 71,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "unet": {
+        "records": 104,
+        "exact": 104,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "vae": {
+        "records": 18,
+        "exact": 18,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "guidance": {
+        "records": 18,
+        "exact": 18,
+        "outside": 0,
+        "maxAbs": 0
+      }
+    },
+    "auto-expected_vs_default": {
+      "sampling": {
+        "records": 71,
+        "exact": 71,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "unet": {
+        "records": 104,
+        "exact": 24,
+        "outside": 49,
+        "maxAbs": 0.00018034875392913818
+      },
+      "vae": {
+        "records": 18,
+        "exact": 8,
+        "outside": 0,
+        "maxAbs": 1.8596649169921875e-05
+      },
+      "guidance": {
+        "records": 18,
+        "exact": 12,
+        "outside": 176,
+        "maxAbs": 0.00048410892486572266
+      }
+    },
+    "avx2-expected_vs_default": {
+      "sampling": {
+        "records": 71,
+        "exact": 71,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "unet": {
+        "records": 104,
+        "exact": 24,
+        "outside": 49,
+        "maxAbs": 0.00018034875392913818
+      },
+      "vae": {
+        "records": 18,
+        "exact": 8,
+        "outside": 0,
+        "maxAbs": 1.8596649169921875e-05
+      },
+      "guidance": {
+        "records": 18,
+        "exact": 12,
+        "outside": 176,
+        "maxAbs": 0.00048410892486572266
+      }
+    }
+  },
+  "productSourceMatrix": {
+    "auto-product_vs_auto-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 2,
+        "maxAbs": 4.437565803527832e-05
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 19,
+        "outside": 0,
+        "maxAbs": 6.67572021484375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 108,
+        "maxAbs": 0.00030618906021118164
+      },
+      "missing": []
+    },
+    "auto-product_vs_avx2-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 2,
+        "maxAbs": 4.437565803527832e-05
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 19,
+        "outside": 0,
+        "maxAbs": 6.67572021484375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 108,
+        "maxAbs": 0.00030618906021118164
+      },
+      "missing": []
+    },
+    "auto-product_vs_default-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 28,
+        "maxAbs": 0.0001669079065322876
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 0,
+        "outside": 0,
+        "maxAbs": 9.059906005859375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 191,
+        "maxAbs": 0.00039708614349365234
+      },
+      "missing": []
+    },
+    "avx2-product_vs_auto-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 2,
+        "maxAbs": 4.437565803527832e-05
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 19,
+        "outside": 0,
+        "maxAbs": 6.67572021484375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 108,
+        "maxAbs": 0.00030618906021118164
+      },
+      "missing": []
+    },
+    "avx2-product_vs_avx2-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 2,
+        "maxAbs": 4.437565803527832e-05
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 19,
+        "outside": 0,
+        "maxAbs": 6.67572021484375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 108,
+        "maxAbs": 0.00030618906021118164
+      },
+      "missing": []
+    },
+    "avx2-product_vs_default-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 28,
+        "maxAbs": 0.0001669079065322876
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 0,
+        "outside": 0,
+        "maxAbs": 9.059906005859375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 191,
+        "maxAbs": 0.00039708614349365234
+      },
+      "missing": []
+    },
+    "default-product_vs_auto-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 49,
+        "maxAbs": 0.00018034875392913818
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 0,
+        "outside": 0,
+        "maxAbs": 9.059906005859375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 176,
+        "maxAbs": 0.00048410892486572266
+      },
+      "missing": []
+    },
+    "default-product_vs_avx2-source": {
+      "unet": {
+        "records": 8,
+        "exact": 0,
+        "outside": 49,
+        "maxAbs": 0.00018034875392913818
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 0,
+        "outside": 0,
+        "maxAbs": 9.059906005859375e-06
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 0,
+        "outside": 176,
+        "maxAbs": 0.00048410892486572266
+      },
+      "missing": []
+    },
+    "default-product_vs_default-source": {
+      "unet": {
+        "records": 8,
+        "exact": 8,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "boundaries": {
+        "records": 72,
+        "exact": 72,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "guidance": {
+        "records": 6,
+        "exact": 6,
+        "outside": 0,
+        "maxAbs": 0
+      },
+      "missing": []
+    }
+  },
+  "sameModeCases": {
+    "auto": {
+      "unet": {
+        "sd15-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 4.437565803527832e-05,
+          "outsideBound": 2,
+          "firstViolation": 103,
+          "byteIdentical": false,
+          "firstNonExact": "down3"
+        },
+        "sd15-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 2.2411346435546875e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd15-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 1.3083219528198242e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd15-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 2.1457672119140625e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down0"
+        },
+        "sd2-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 5.304813385009766e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down3"
+        },
+        "sd2-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 2.384185791015625e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd2-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 4.112720489501953e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down2"
+        },
+        "sd2-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 2.072751522064209e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down0"
+        }
+      },
+      "guidance": {
+        "guidance-2-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00015550851821899414,
+          "outsideBound": 7,
+          "firstViolation": 96,
+          "byteIdentical": false
+        },
+        "guidance-2-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00030618906021118164,
+          "outsideBound": 43,
+          "firstViolation": 83,
+          "byteIdentical": false
+        },
+        "guidance-3-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0001304149627685547,
+          "outsideBound": 20,
+          "firstViolation": 83,
+          "byteIdentical": false
+        },
+        "guidance-3-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00021839141845703125,
+          "outsideBound": 38,
+          "firstViolation": 82,
+          "byteIdentical": false
+        },
+        "guidance-2-10/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 3.0994415283203125e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false
+        },
+        "guidance-2-10/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 3.0994415283203125e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false
+        }
+      }
+    },
+    "avx2": {
+      "unet": {
+        "sd15-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 4.437565803527832e-05,
+          "outsideBound": 2,
+          "firstViolation": 103,
+          "byteIdentical": false,
+          "firstNonExact": "down3"
+        },
+        "sd15-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 2.2411346435546875e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd15-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 1.3083219528198242e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd15-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 2.1457672119140625e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down0"
+        },
+        "sd2-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 5.304813385009766e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down3"
+        },
+        "sd2-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 2.384185791015625e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down1"
+        },
+        "sd2-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 4.112720489501953e-06,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down2"
+        },
+        "sd2-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 2.072751522064209e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false,
+          "firstNonExact": "down0"
+        }
+      },
+      "guidance": {
+        "guidance-2-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00015550851821899414,
+          "outsideBound": 7,
+          "firstViolation": 96,
+          "byteIdentical": false
+        },
+        "guidance-2-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00030618906021118164,
+          "outsideBound": 43,
+          "firstViolation": 83,
+          "byteIdentical": false
+        },
+        "guidance-3-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0001304149627685547,
+          "outsideBound": 20,
+          "firstViolation": 83,
+          "byteIdentical": false
+        },
+        "guidance-3-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.00021839141845703125,
+          "outsideBound": 38,
+          "firstViolation": 82,
+          "byteIdentical": false
+        },
+        "guidance-2-10/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 3.0994415283203125e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false
+        },
+        "guidance-2-10/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 3.0994415283203125e-05,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": false
+        }
+      }
+    },
+    "default": {
+      "unet": {
+        "sd15-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd15-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd15-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd15-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd2-reduced/square": {
+          "elements": 256,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd2-reduced/odd-rectangle": {
+          "elements": 396,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd2-reduced/batch-distinct-time": {
+          "elements": 640,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        },
+        "sd2-reduced/batch-shared-time-odd": {
+          "elements": 504,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true,
+          "firstNonExact": null
+        }
+      },
+      "guidance": {
+        "guidance-2-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        },
+        "guidance-2-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        },
+        "guidance-3-3/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        },
+        "guidance-3-3/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        },
+        "guidance-2-10/separate": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        },
+        "guidance-2-10/concatenateCompatible": {
+          "elements": 160,
+          "maximumFiniteAbsoluteError": 0.0,
+          "outsideBound": 0,
+          "firstViolation": null,
+          "byteIdentical": true
+        }
+      }
+    }
+  },
+  "productAutoAndAvx2PayloadsIdentical": true,
+  "latentAllocationControl": {
+    "offsetElements": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "requestedMode": "auto",
+    "allFinalAndBoundaryHashesEqualBaseline": true,
+    "onlyOffsetZeroAligned64": true,
+    "perOffsetComparison": {
+      "0": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "1": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "2": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "3": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "4": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "5": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "6": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "7": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "8": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "9": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "10": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "11": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "12": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "13": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "14": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      },
+      "15": {
+        "unet": {
+          "records": 8,
+          "exact": 0,
+          "outside": 2,
+          "maxAbs": 4.437565803527832e-05
+        },
+        "boundaries": {
+          "records": 72,
+          "exact": 19,
+          "outside": 0,
+          "maxAbs": 6.67572021484375e-06
+        },
+        "guidance": {
+          "records": 0,
+          "exact": 0,
+          "outside": 0,
+          "maxAbs": 0
+        },
+        "missing": []
+      }
+    }
+  },
+  "productLoadedNativeLibraries": {
+    "libtorch_cpu.so": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+    "libLibTorchSharp.so": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+    "libc10.so": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+    "libgomp-98b21ff3.so.1": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb",
+    "libtorch.so": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+  },
+  "sourceNativeLibrariesIdenticalToAcceptedSource": true,
+  "sourceAndProductNativeBinariesIdentical": false,
+  "sourceTorchCpuSha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f",
+  "committedReferenceOutcomesEachOrdinaryMode": {
+    "sampling": {
+      "passed": 3,
+      "failed": 0
+    },
+    "vae": {
+      "passed": 8,
+      "failed": 0
+    },
+    "unet": {
+      "passed": 6,
+      "failed": 2
+    },
+    "guidance": {
+      "passed": 0,
+      "failed": 6
+    }
+  },
+  "committedReferenceOutcomesEachOffset": {
+    "unet": {
+      "passed": 6,
+      "failed": 2
+    }
+  },
+  "limits": [
+    "Automatic source capability is AVX2 on this host; AVX512 is not exercised.",
+    "Product requested capability is recorded, not independently measured by the public TorchSharp API.",
+    "DEFAULT same-host correspondence does not pass the unchanged committed-reference tests.",
+    "The first captured difference is a multi-operation boundary; no individual kernel is identified.",
+    "Latent-offset invariance applies only to this experiment and does not test every tensor allocation.",
+    "Reduced synthetic graphs do not qualify stock dimensions, pretrained models, GPU or workflows."
+  ]
+}
