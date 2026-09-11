@@ -1,0 +1,76 @@
+name: CLIP source laboratory
+on:
+  push:
+    paths:
+      - 'labs/clip-source/**'
+      - '.github/workflows/clip-source-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    name: Collect frozen source diagnostics (${{ matrix.runtime }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+      - name: Restore isolated hashed CPU laboratory dependencies
+        shell: pwsh
+        run: |
+          $environment = Join-Path $env:RUNNER_TEMP 'clip-source-python'
+          python -m venv $environment
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create isolated laboratory environment.' }
+          $interpreter = if ($IsWindows) { Join-Path $environment 'Scripts/python.exe' } else { Join-Path $environment 'bin/python' }
+          & $interpreter -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r 'labs/clip-source/requirements-${{ matrix.runtime }}.txt'
+          if ($LASTEXITCODE -ne 0) { throw 'Hashed laboratory dependency restore failed.' }
+          & $interpreter -I -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'Laboratory dependency closure is inconsistent.' }
+      - name: Fetch and verify four frozen public source files
+        shell: pwsh
+        run: |
+          $snapshot = Join-Path $env:RUNNER_TEMP 'clip-source-snapshot'
+          $files = @{
+            'comfy/ldm/modules/attention.py' = '9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960'
+            'comfy/clip_model.py' = 'de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d'
+            'comfy/sd1_clip_config.json' = 'c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c'
+            'comfy/clip_config_bigg.json' = 'c5092eb3e08a7bf9ac1163578629c03ecc6b4fc38c6c1af4f88892d8391fb7d5'
+          }
+          foreach ($relative in $files.Keys) {
+            $target = Join-Path $snapshot $relative
+            New-Item -ItemType Directory -Path (Split-Path -Parent $target) -Force | Out-Null
+            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/comfy-org/ComfyUI/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/$relative" -OutFile $target
+            if ((Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() -ne $files[$relative]) {
+              throw "Frozen source hash mismatch: $relative"
+            }
+          }
+      - name: Collect synthetic source traces without updating acceptance fixtures
+        timeout-minutes: 10
+        shell: pwsh
+        run: |
+          $environment = Join-Path $env:RUNNER_TEMP 'clip-source-python'
+          $interpreter = if ($IsWindows) { Join-Path $environment 'Scripts/python.exe' } else { Join-Path $environment 'bin/python' }
+          $snapshot = Join-Path $env:RUNNER_TEMP 'clip-source-snapshot'
+          $output = Join-Path $env:RUNNER_TEMP 'clip-source-traces'
+          & $interpreter -I -B 'labs/clip-source/reference.py' --source-directory $snapshot --inputs 'tests/ComfySharp.Inference.Tests/Fixtures/clip-stock.cpu-f32.json' --output $output
+          if ($LASTEXITCODE -ne 0) { throw 'Frozen source trace collection failed.' }
+          git diff --exit-code -- tests/ComfySharp.Inference.Tests/Fixtures
+          if ($LASTEXITCODE -ne 0) { throw 'Source laboratory modified an acceptance fixture.' }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: clip-source-torch210-${{ matrix.runtime }}
+          path: ${{ runner.temp }}/clip-source-traces
+          if-no-files-found: error

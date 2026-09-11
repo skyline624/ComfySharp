@@ -45,3 +45,5 @@ The generated Unicode compatibility data records observed scalar classification,
 - **K.Kosako, copyright 2002-2021**, [Oniguruma BSD-style notice](docs/licenses/Oniguruma-BSD.txt), preserved from `oniguruma/COPYING` in the [published onig_sys 69.9.1 crate](https://static.crates.io/crates/onig_sys/onig_sys-69.9.1.crate), whose bundled history identifies the Unicode 16.0 update.
 
 These notices preserve the reference components' attribution. The generated data and C# implementation do not distribute the Python/Rust laboratory binaries. Binary packaging still requires the separate complete dependency notice bundle and SBOM described above.
+
+The optional [isolated CLIP source laboratory](labs/clip-source/README.md) executes selected, hash-verified ComfyUI GPLv3 source definitions in a separate environment. Its Python/PyTorch/NumPy/einops dependencies are pinned for diagnostic collection only and are not included in the application or .NET test distributions. Its synthetic tensor artifacts do not contain pretrained model weights or native dependency binaries.
