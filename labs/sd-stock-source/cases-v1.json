@@ -1,0 +1,62 @@
+{
+  "profile": "sd-unet-stock-small-native210-cpu-f32-v1",
+  "status": "prospective_not_qualified",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "parameterRecipe": "sha256-name-lcg-high16-power2-v1",
+  "comparison": {
+    "absoluteTolerance": 0.00003,
+    "relativeTolerance": 0.00003,
+    "nonFinite": "class-and-infinity-sign",
+    "shapeDtypeByteOrderAndInputs": "exact"
+  },
+  "execution": {
+    "dtype": "float32",
+    "device": "cpu",
+    "layout": "contiguous_nchw",
+    "attention": "frozen_attention_basic",
+    "threads": 1,
+    "interopThreads": 1,
+    "gradEnabled": false,
+    "repeats": 3,
+    "chunkElements": 262144,
+    "fillScratchBytes": 2097152,
+    "parameterCount": 686,
+    "runtimeAllowanceBytes": 536870912,
+    "graphAllowanceBytes": 1073741824,
+    "headroomBytes": 268435456
+  },
+  "cases": {
+    "sd15": {
+      "id": "sd-stock-cpu-f32-cases-v1/sd15/square",
+      "configuration": {
+        "baseChannels": 320,
+        "contextSize": 768,
+        "headMode": "fixedCount",
+        "headParameter": 8,
+        "useLinearProjection": false
+      },
+      "latentShape": [1, 4, 16, 16],
+      "contextShape": [1, 77, 768],
+      "timesteps": [0.125],
+      "outputShape": [1, 4, 16, 16],
+      "expectedWeightBytes": 3438083856,
+      "largestParameterBytes": 117964800
+    },
+    "sd2": {
+      "id": "sd-stock-cpu-f32-cases-v1/sd2/square",
+      "configuration": {
+        "baseChannels": 320,
+        "contextSize": 1024,
+        "headMode": "fixedSize",
+        "headParameter": 64,
+        "useLinearProjection": true
+      },
+      "latentShape": [1, 4, 16, 16],
+      "contextShape": [1, 77, 1024],
+      "timesteps": [0.125],
+      "outputShape": [1, 4, 16, 16],
+      "expectedWeightBytes": 3463642896,
+      "largestParameterBytes": 117964800
+    }
+  }
+}
