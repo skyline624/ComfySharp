@@ -1,22 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <NativeBackend Condition="'$(NativeBackend)' == ''">cpu</NativeBackend>
-    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Windows'))">win-x64</NativeRuntime>
-    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Linux'))">linux-x64</NativeRuntime>
-    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('OSX'))">osx-arm64</NativeRuntime>
-    <NuGetLockFilePath>packages.$(NativeRuntime).$(NativeBackend).lock.json</NuGetLockFilePath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
-    <PackageReference Include="libtorch-cpu-win-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'win-x64'" />
-    <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'linux-x64'" />
-    <PackageReference Include="libtorch-cpu-osx-arm64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'osx-arm64'" />
-    <PackageReference Include="libtorch-cuda-12.8-win-x64" Condition="'$(NativeBackend)' == 'cuda' and '$(NativeRuntime)' == 'win-x64'" />
   </ItemGroup>
-  <Target Name="ValidateNativeBackend" BeforeTargets="Restore;PrepareForBuild">
-    <Error Condition="'$(NativeBackend)' != 'cpu' and '$(NativeBackend)' != 'cuda'" Text="NativeBackend must be cpu or cuda." />
-    <Error Condition="'$(NativeBackend)' == 'cuda' and '$(NativeRuntime)' != 'win-x64'" Text="CUDA package qualification currently targets Windows x64 only." />
-    <Error Condition="'$(NativeRuntime)' != 'win-x64' and '$(NativeRuntime)' != 'linux-x64' and '$(NativeRuntime)' != 'osx-arm64'" Text="NativeRuntime must be win-x64, linux-x64 or osx-arm64." />
-  </Target>
 </Project>

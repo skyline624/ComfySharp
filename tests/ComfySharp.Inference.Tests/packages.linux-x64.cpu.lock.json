@@ -140,6 +140,14 @@
           "ComfySharp.Core": "[0.1.0-dev, )"
         }
       },
+      "comfysharp.nodes.tensor": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Core": "[0.1.0-dev, )",
+          "ComfySharp.Inference": "[0.1.0-dev, )",
+          "ComfySharp.Nodes": "[0.1.0-dev, )"
+        }
+      },
       "SkiaSharp": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",

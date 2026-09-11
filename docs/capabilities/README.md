@@ -4,7 +4,7 @@ Le [manifeste](manifest.json) contient **1 160 entrées de source**, dont 942 li
 
 Chaque ligne garde son identifiant, sa source publique figée, sa catégorie, son périmètre, un identifiant de scénario et des statuts indépendants. [node-registration.json](node-registration.json) conserve l'ordre des modules, les conditions et les inscriptions ; [node-schemas.json](node-schemas.json) décrit 663 contrats locaux/de référence, leurs héritages, paramètres et 281 expressions non résolues. Les fixtures et preuves matérielles restent à compléter. Une case `false` signifie absence de validation, même si une primitive apparentée a passé des tests.
 
-Treize nœuds utilitaires sont présents dans le registre C#. Aucun modèle image, vidéo, audio ou 3D n'est annoncé compatible. La primitive Euler ne valide pas à elle seule le sampler d'un workflow complet. Le probe CUDA ne valide pas le catalogue GPU.
+Vingt-cinq identifiants sont présents dans le registre C# : treize utilitaires, cinq générateurs et six traitements SIGMAS, puis PreviewAny. Ce dernier reste partiellement porté ; ses formats non pris en charge sont explicites. Les preuves de ces [primitives et sorties UI](../NATIVE_NODE_HOST.md) ne valident aucun modèle image, vidéo, audio ou 3D. La primitive Euler ne valide pas à elle seule le sampler d'un workflow complet. Le probe CUDA ne valide pas le catalogue GPU.
 
 ```sh
 dotnet run --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json

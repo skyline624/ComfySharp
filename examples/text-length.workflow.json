@@ -1,6 +1,6 @@
 {
-  "last_node_id": 2,
-  "last_link_id": 1,
+  "last_node_id": 3,
+  "last_link_id": 2,
   "nodes": [
     {
       "id": 1, "type": "PrimitiveString", "pos": [80, 120], "size": [230, 160],
@@ -12,10 +12,17 @@
       "id": 2, "type": "StringLength", "pos": [440, 120], "size": [230, 160],
       "flags": {}, "order": 1, "mode": 0,
       "inputs": [{ "name": "string", "type": "STRING", "link": 1 }],
-      "outputs": [{ "name": "length", "type": "INT", "links": null, "slot_index": 0 }],
+      "outputs": [{ "name": "length", "type": "INT", "links": [2], "slot_index": 0 }],
       "properties": {}, "widgets_values": [""]
+    },
+    {
+      "id": 3, "type": "PreviewAny", "pos": [780, 120], "size": [230, 220],
+      "flags": {}, "order": 2, "mode": 0,
+      "inputs": [{ "name": "source", "type": "*", "link": 2 }],
+      "outputs": [{ "name": "STRING", "type": "STRING", "links": null, "slot_index": 0 }],
+      "properties": {}, "widgets_values": []
     }
   ],
-  "links": [[1, 1, 0, 2, 0, "STRING"]],
+  "links": [[1, 1, 0, 2, 0, "STRING"], [2, 2, 0, 3, 0, "INT"]],
   "groups": [], "config": {}, "extra": {}, "version": 0.4
 }

@@ -36,7 +36,7 @@ jobs:
         run: |
           otool -L "$HOME/.nuget/packages/torchsharp/0.107.0/runtimes/osx-arm64/native/libLibTorchSharp.dylib"
           otool -L "$HOME/.nuget/packages/libtorch-cpu-osx-arm64/2.10.0/runtimes/osx-arm64/native/libtorch_cpu.dylib"
-          native_dir="$PWD/tests/ComfySharp.Inference.Tests/bin/Release/net10.0/runtimes/osx-arm64/native"
+          native_dir="$PWD/tests/ComfySharp.Inference.Tests/bin/native/osx-arm64/cpu/Release/net10.0/runtimes/osx-arm64/native"
           dotnet run --no-build -c Release --project tools/ComfySharp.NativeLoader -- "$native_dir/libomp.dylib" "$native_dir/libLibTorchSharp.dylib"
       - name: Check catalogue consistency
         run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json

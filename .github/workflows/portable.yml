@@ -24,7 +24,30 @@ jobs:
           global-json-file: global.json
       - name: Build and verify local unsigned archive
         shell: pwsh
-        run: ./tools/publish.ps1 -Runtime ${{ matrix.runtime }}
+        run: ./tools/publish.ps1 -Runtime ${{ matrix.runtime }} -NativeBackend cpu
+      - name: Extract archive and start the independent native applications
+        timeout-minutes: 3
+        shell: pwsh
+        run: |
+          $runtime = '${{ matrix.runtime }}'
+          $extracted = Join-Path $env:GITHUB_WORKSPACE 'artifacts/extracted'
+          if (Test-Path -LiteralPath $extracted) { throw 'The archive smoke requires a fresh extraction directory.' }
+          New-Item -ItemType Directory -Path $extracted | Out-Null
+          & tar -xzf "artifacts/portable/$runtime-cpu.tar.gz" -C $extracted
+          if ($LASTEXITCODE -ne 0) { throw 'Archive extraction failed.' }
+          $package = Join-Path $extracted "$runtime-cpu"
+          $desktopName = if ($IsWindows) { 'ComfySharp.Desktop.exe' } else { 'ComfySharp.Desktop' }
+          $hostName = if ($IsWindows) { 'ComfySharp.Host.exe' } else { 'ComfySharp.Host' }
+          $desktop = Join-Path $package $desktopName
+          if (-not (Test-Path -LiteralPath (Join-Path $package "host/$hostName") -PathType Leaf)) { throw 'The extracted Host apphost is missing.' }
+          # Empty the developer override so success proves discovery inside the archive.
+          $env:COMFYSHARP_HOST_PATH = ''
+          [Environment]::SetEnvironmentVariable('data-dir', (Join-Path $extracted 'smoke-data'))
+          if ($IsLinux) { $output = & xvfb-run -a -s '-screen 0 1280x800x24' $desktop --smoke-test 2>&1 }
+          else { $output = & $desktop --smoke-test 2>&1 }
+          $exitCode = $LASTEXITCODE
+          $output | Write-Output
+          if ($exitCode -ne 0 -or ($output -join "`n") -notmatch 'ComfySharp Desktop smoke passed:') { throw "Extracted Desktop / Host smoke failed (exit $exitCode)." }
       # No binary artifact upload: exact dependency notices and SBOM are pending.
       # See docs/packaging.md. Future uploads must use the .tar.gz, never the raw
       # directory, so Desktop and Host retain executable permissions on Unix.

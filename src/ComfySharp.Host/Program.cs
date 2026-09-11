@@ -5,13 +5,13 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using ComfySharp.Core;
 using ComfySharp.Host;
-using ComfySharp.Nodes;
+using ComfySharp.Nodes.Tensor;
 using ComfySharp.Storage;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 if (builder.Configuration["urls"] is null) builder.WebHost.UseUrls("http://127.0.0.1:8189");
-builder.Services.AddSingleton(new EngineService(BuiltInNodes.CreateRegistry()));
+builder.Services.AddSingleton(new EngineService(TensorNodes.CreateRegistry()));
 builder.Services.AddSingleton<EventHub>();
 builder.Services.AddSingleton<JobQueue>();
 builder.Services.AddHostedService(sp => sp.GetRequiredService<JobQueue>());
@@ -54,9 +54,11 @@ foreach (var prefix in new[] { "", "/api" })
         double? number = request.ContainsKey("number") ? RequestFields.Optional<double>(request, "number") : null;
         var front = RequestFields.Optional<bool>(request, "front");
         var extraData = RequestFields.Object(request, "extra_data");
-        var validation = engine.Validate(prompt, targets);
-        var nodeErrors = JsonSerializer.SerializeToNode(validation.Diagnostics);
-        if (!validation.IsValid) return Results.BadRequest(new { error = new { type = "prompt_outputs_failed_validation", message = "Prompt validation failed." }, node_errors = nodeErrors });
+        if (clientId is null && extraData is not null) clientId = RequestFields.Optional<string>(extraData, "client_id");
+        var submission = PromptSubmission.Validate(engine, prompt, targets);
+        var validation = submission.Validation;
+        var nodeErrors = submission.NodeErrors;
+        if (submission.Error is not null) return Results.BadRequest(new { error = submission.Error, node_errors = nodeErrors });
         if (id is not null && (!Guid.TryParseExact(id, "D", out var parsed) || parsed.ToString() != id))
             throw new InvalidDataException("prompt_id must be a canonical UUID.");
         if (number.HasValue && !double.IsFinite(number.Value)) throw new InvalidDataException("number must be finite.");
@@ -108,10 +110,11 @@ app.Map("/ws", async (HttpContext context, EventHub hub, JobQueue queue) =>
     if (!context.WebSockets.IsWebSocketRequest) { context.Response.StatusCode = 400; return; }
     using var socket = await context.WebSockets.AcceptWebSocketAsync();
     using var stop = CancellationTokenSource.CreateLinkedTokenSource(context.RequestAborted);
-    var subscription = hub.Subscribe();
+    var sid = context.Request.Query["clientId"].FirstOrDefault();
+    if (string.IsNullOrEmpty(sid)) sid = Guid.NewGuid().ToString();
+    var subscription = hub.Subscribe(sid);
     try
     {
-        var sid = context.Request.Query["clientId"].FirstOrDefault() ?? Guid.NewGuid().ToString();
         await socket.SendAsync(Encoding.UTF8.GetBytes(new JsonObject { ["type"] = "status", ["data"] = new JsonObject
             { ["sid"] = sid, ["status"] = queue.StatusSnapshot() } }.ToJsonString()), WebSocketMessageType.Text, true, stop.Token);
         var receive = ReceiveUntilClosed(socket, stop.Token);

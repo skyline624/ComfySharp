@@ -15,11 +15,25 @@ public sealed partial class DocumentEditor : UserControl
     public event EventHandler<string>? Error;
     private readonly ObservableCollection<NodeView> nodes = [];
     private readonly ObservableCollection<ConnectionView> connections = [];
+    private readonly Dictionary<string, string> previews = new(StringComparer.Ordinal);
+    private string documentState;
+    private long revision, submissionSequence;
+    public readonly record struct PreviewSubmission(long Revision, long Sequence);
+    public PreviewSubmission BeginSubmission() => new(revision, ++submissionSequence);
     private ISet<string>? availableNodes;
     public DocumentEditor() : this(WorkflowDocument.Create()) { }
     public DocumentEditor(WorkflowDocument document)
     {
         Document = document; InitializeComponent();
+        documentState = document.ToJson();
+        document.Changed += (_, _) =>
+        {
+            var state = document.ToJson();
+            if (state == documentState) return; // Saving the same document does not invalidate a result.
+            documentState = state; revision++;
+            previews.Clear();
+            foreach (var view in nodes) view.PreviewText = "";
+        };
         Canvas.ItemsSource = nodes; Canvas.Connections = connections;
         UpdateNodeChoices();
         Reload();
@@ -33,8 +47,26 @@ public sealed partial class DocumentEditor : UserControl
     public void Reload()
     {
         nodes.Clear();
-        foreach (var node in Document.Nodes) nodes.Add(new NodeView(node, location => { Document.Move(node.Id, location.X, location.Y); RefreshConnections(); }, availableNodes));
+        foreach (var node in Document.Nodes)
+        {
+            var view = new NodeView(node, location => { Document.Move(node.Id, location.X, location.Y); RefreshConnections(); }, availableNodes);
+            if (node.Type == "PreviewAny" && previews.TryGetValue(node.Id.Value, out var text)) view.PreviewText = text;
+            nodes.Add(view);
+        }
         RefreshConnections();
+    }
+    public bool ApplyUiOutputs(JsonObject outputs, PreviewSubmission? submission = null)
+    {
+        if (submission.HasValue && (submission.Value.Revision != revision || submission.Value.Sequence != submissionSequence)) return false;
+        foreach (var node in Document.Nodes.Where(n => n.Type == "PreviewAny"))
+        {
+            if (outputs[node.Id.Value]?["text"] is not { } value) continue;
+            var text = value is JsonArray array ? string.Join("\n\n", array.Select(v => v!.GetValue<string>())) : value.GetValue<string>();
+            previews[node.Id.Value] = text;
+            var view = nodes.FirstOrDefault(n => n.Id == node.Id);
+            if (view is not null) view.PreviewText = text;
+        }
+        return true;
     }
     private void RefreshConnections()
     {
@@ -66,6 +98,7 @@ public sealed record NodeChoice(string Type, string Label) { public override str
 public sealed class NodeView : INotifyPropertyChanged
 {
     private Point location;
+    private string previewText = "";
     private readonly Action<Point> move;
     public event PropertyChangedEventHandler? PropertyChanged;
     public NodeId Id { get; }
@@ -73,10 +106,13 @@ public sealed class NodeView : INotifyPropertyChanged
     public string Subtitle { get; }
     public string Ports { get; }
     public IBrush Outline { get; }
+    public bool IsPreview { get; }
+    public string PreviewText { get => previewText; set { if (previewText == value) return; previewText = value; PropertyChanged?.Invoke(this, new(nameof(PreviewText))); } }
     public Point Location { get => location; set { if (location == value) return; location = value; PropertyChanged?.Invoke(this, new(nameof(Location))); move(value); } }
     public NodeView(GraphNode node, Action<Point> move, ISet<string>? availableNodes = null)
     {
         this.move = move; location = new(node.X, node.Y); Id = node.Id; Title = node.Title;
+        IsPreview = node.Type == "PreviewAny";
         var known = PromptCompiler.BaseDefinitions.ContainsKey(node.Type);
         var available = availableNodes?.Contains(node.Type) == true;
         Subtitle = $"#{node.Id} · {node.Type}" + (!known ? "\nUnsupported / preserved" : available ? "\nAvailable in Host" : availableNodes is null ? "\nHost availability unchecked" : "\nUnavailable in Host / preserved"); Outline = known && available ? Brushes.SlateBlue : Brushes.Orange;
@@ -104,6 +140,18 @@ internal static class NodeTemplates
             case "JsonExtractString": widgets = new("{}", "key"); In("json_string", "STRING"); Out("STRING", "STRING"); break;
             case "ComfyNotNode": In("value", "*"); Out("BOOLEAN", "BOOLEAN"); break;
             case "ComfySwitchNode": widgets = new(false); In("on_false", "*"); In("on_true", "*"); Out("output", "*"); break;
+            case "KarrasScheduler": widgets = new(20, 14.614642, .0291675, 7.0); Out("SIGMAS", "SIGMAS"); break;
+            case "ExponentialScheduler": widgets = new(20, 14.614642, .0291675); Out("SIGMAS", "SIGMAS"); break;
+            case "PolyexponentialScheduler": widgets = new(20, 14.614642, .0291675, 1.0); Out("SIGMAS", "SIGMAS"); break;
+            case "LaplaceScheduler": widgets = new(20, 14.614642, .0291675, 0.0, .5); Out("SIGMAS", "SIGMAS"); break;
+            case "VPScheduler": widgets = new(20, 19.9, .1, .001); Out("SIGMAS", "SIGMAS"); break;
+            case "SplitSigmas": widgets = new(0); In("sigmas", "SIGMAS"); Out("high_sigmas", "SIGMAS"); Out("low_sigmas", "SIGMAS"); break;
+            case "SplitSigmasDenoise": widgets = new(1.0); In("sigmas", "SIGMAS"); Out("high_sigmas", "SIGMAS"); Out("low_sigmas", "SIGMAS"); break;
+            case "FlipSigmas": In("sigmas", "SIGMAS"); Out("SIGMAS", "SIGMAS"); break;
+            case "SetFirstSigma": widgets = new(136.0); In("sigmas", "SIGMAS"); Out("SIGMAS", "SIGMAS"); break;
+            case "ExtendIntermediateSigmas": widgets = new(2, -1.0, 12.0, "linear"); In("sigmas", "SIGMAS"); Out("SIGMAS", "SIGMAS"); break;
+            case "ManualSigmas": widgets = new("1, 0.5"); Out("SIGMAS", "SIGMAS"); break;
+            case "PreviewAny": In("source", "*"); Out("STRING", "STRING"); break;
             case "CheckpointLoaderSimple": widgets = new("select-checkpoint.safetensors"); Out("MODEL", "MODEL"); Out("CLIP", "CLIP"); Out("VAE", "VAE"); break;
             case "CLIPTextEncode": widgets = new(""); In("clip", "CLIP"); Out("CONDITIONING", "CONDITIONING"); break;
             case "EmptyLatentImage": widgets = new(512, 512, 1); Out("LATENT", "LATENT"); break;

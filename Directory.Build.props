@@ -13,4 +13,6 @@
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/skyline624/ComfySharp</RepositoryUrl>
   </PropertyGroup>
+  <!-- Configure native consumers before the SDK chooses obj/assets and bin paths. -->
+  <Import Project="build/ComfySharp.Native.props" Condition="'$(MSBuildProjectName)' == 'ComfySharp.Host' or '$(MSBuildProjectName)' == 'ComfySharp.Host.Tests' or '$(MSBuildProjectName)' == 'ComfySharp.Inference.Tests' or '$(MSBuildProjectName)' == 'ComfySharp.RuntimeProbe'" />
 </Project>

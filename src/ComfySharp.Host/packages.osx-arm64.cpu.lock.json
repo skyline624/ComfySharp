@@ -2,6 +2,17 @@
   "version": 2,
   "dependencies": {
     "net10.0": {
+      "libtorch-cpu-osx-arm64": {
+        "type": "Direct",
+        "requested": "[2.10.0, )",
+        "resolved": "2.10.0",
+        "contentHash": "i8aTC3F+7JI65Jdr4MfgdVdZpFU/FCn2G1b/yc4Z8FauDgpc2cji3mwDfQy+3KdD+rpDBgCiAdqs8o0v7mDNXw=="
+      },
+      "Google.Protobuf": {
+        "type": "Transitive",
+        "resolved": "3.21.9",
+        "contentHash": "OTpFujTgkmqMLbg3KT7F/iuKi1rg6s5FCS2M9XcVLDn40zL8wgXm37CY/F6MeOEXKjdcnXGCN/h7oyMkVydVsg=="
+      },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
         "resolved": "10.0.9",
@@ -9,6 +20,21 @@
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.11"
         }
+      },
+      "SharpZipLib": {
+        "type": "Transitive",
+        "resolved": "1.4.0",
+        "contentHash": "CdkbBSPIpHD8xBlu+8kDJiqc1Tf9iV89BObnqcvEbwysXSj5h1MfaeLgeeaxPZmi7CTJO8FDofBBNxBW0Vml7A=="
+      },
+      "SkiaSharp.NativeAssets.macOS": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "Sko9LFxRXSjb3OGh5/RxrVRXxYo48tr5NKuuSy6jB85GrYt8WRqVY1iLOLwtjPiVAt4cp+pyD4i30azanS64dw=="
+      },
+      "SkiaSharp.NativeAssets.Win32": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ=="
       },
       "SQLite": {
         "type": "Transitive",
@@ -45,10 +71,24 @@
           "ComfySharp.Contracts": "[0.1.0-dev, )"
         }
       },
+      "comfysharp.inference": {
+        "type": "Project",
+        "dependencies": {
+          "TorchSharp": "[0.107.0, )"
+        }
+      },
       "comfysharp.nodes": {
         "type": "Project",
         "dependencies": {
           "ComfySharp.Core": "[0.1.0-dev, )"
+        }
+      },
+      "comfysharp.nodes.tensor": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Core": "[0.1.0-dev, )",
+          "ComfySharp.Inference": "[0.1.0-dev, )",
+          "ComfySharp.Nodes": "[0.1.0-dev, )"
         }
       },
       "comfysharp.storage": {
@@ -69,6 +109,16 @@
           "SQLitePCLRaw.core": "2.1.11"
         }
       },
+      "SkiaSharp": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "2.88.6",
+        "contentHash": "wdfeBAQrEQCbJIRgAiargzP1Uy+0grZiG4CSgBnhAgcJTsPzlifIaO73JRdwIlT3TyBoeU9jEqzwFUhl4hTYnQ==",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "2.88.6",
+          "SkiaSharp.NativeAssets.macOS": "2.88.6"
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3": {
         "type": "CentralTransitive",
         "requested": "[3.0.5, )",
@@ -78,13 +128,17 @@
           "SQLite": "3.53.4",
           "SQLitePCLRaw.config.e_sqlite3": "3.0.5"
         }
-      }
-    },
-    "net10.0/osx-arm64": {
-      "SQLite": {
-        "type": "Transitive",
-        "resolved": "3.53.4",
-        "contentHash": "KN7jeWqgUPeBRe1FlcpZURzxomuKKEKHmBBQfg+Nx7NkY1LjKhzHvH+3ASkNvhayESE34nMBinL9CV21JfPRJw=="
+      },
+      "TorchSharp": {
+        "type": "CentralTransitive",
+        "requested": "[0.107.0, )",
+        "resolved": "0.107.0",
+        "contentHash": "HGxs37FGN+JNuLiSeAqc6jGwjDuZepEkq7+FYv1ideNoYy1VsUpky9JEDKviwbR/vCXHLjOwdzHVzJv/snyLwA==",
+        "dependencies": {
+          "Google.Protobuf": "3.21.9",
+          "SharpZipLib": "1.4.0",
+          "SkiaSharp": "2.88.6"
+        }
       }
     }
   }

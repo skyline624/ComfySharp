@@ -13,8 +13,8 @@ public sealed class RuntimeValueTests
     private static NodeSchema Schema(string name, InputSchema[]? inputs = null, OutputSchema[]? outputs = null, bool inputIsList = false) =>
         new(name, name, "test", inputs ?? [], outputs ?? [new("*")], InputIsList: inputIsList);
     private static RuntimeNode Node(string name, Func<RuntimeNodeContext, IReadOnlyDictionary<string, RuntimeValue>, IReadOnlyList<RuntimeValue>> run,
-        InputSchema[]? inputs = null, OutputSchema[]? outputs = null, bool inputIsList = false) =>
-        new(Schema(name, inputs, outputs, inputIsList), (context, values, _) => ValueTask.FromResult(run(context, values)));
+        InputSchema[]? inputs = null, OutputSchema[]? outputs = null, bool inputIsList = false, JsonObject? ui = null) =>
+        new(Schema(name, inputs, outputs, inputIsList), (context, values, _) => ValueTask.FromResult(run(context, values)), ui: ui);
 
     [Fact]
     public void Literal_arrays_execution_lists_and_native_maps_have_distinct_kinds_and_independent_leases()
@@ -240,7 +240,7 @@ public sealed class RuntimeValueTests
             var value = c.Own(resource);
             if (failedEvent == "execution_error") throw new InvalidOperationException("node failure");
             return [value];
-        }));
+        }, ui: new() { ["text"] = new JsonArray("resource preview") }));
         var task = new EngineService(registry).ExecuteValuesAsync(Prompt("""{"source":{"class_type":"Source","inputs":{}}}"""), ["source"], e =>
             e.Type == failedEvent ? throw new InvalidOperationException("event failure") : ValueTask.CompletedTask);
         if (failedEvent == "executed")
@@ -364,11 +364,11 @@ public sealed class RuntimeValueTests
     }
     private sealed class RuntimeNode(NodeSchema schema,
         Func<RuntimeNodeContext, IReadOnlyDictionary<string, RuntimeValue>, CancellationToken, ValueTask<IReadOnlyList<RuntimeValue>>> execute,
-        Func<IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>>, IReadOnlyCollection<string>>? lazy = null) : IRuntimeNode
+        Func<IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>>, IReadOnlyCollection<string>>? lazy = null, JsonObject? ui = null) : IRuntimeNode
     {
         public NodeSchema Schema { get; } = schema;
-        public ValueTask<IReadOnlyList<RuntimeValue>> ExecuteAsync(RuntimeNodeContext context, IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken) =>
-            execute(context, inputs, cancellationToken);
+        public async ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context, IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken) =>
+            new(await execute(context, inputs, cancellationToken), ui);
         public IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) => lazy?.Invoke(resolvedInputs) ?? [];
     }
 }

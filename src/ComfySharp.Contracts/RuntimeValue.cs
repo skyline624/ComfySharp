@@ -169,16 +169,24 @@ public sealed class OwnedExecutionResult : IDisposable
     private bool disposed;
     public string Status { get; }
     public IReadOnlyList<EngineDiagnostic> Diagnostics { get; }
+    /// <summary>Managed UI snapshots remain usable after native result disposal.</summary>
+    public IReadOnlyDictionary<string, JsonObject> UiOutputs { get; }
+    public IReadOnlyDictionary<string, NodeExecutionIdentity> Meta { get; }
     public IReadOnlyDictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>> Outputs
     {
         get { ObjectDisposedException.ThrowIf(disposed, this); return outputs; }
     }
     /// <summary>Retains independent result leases; the supplied values remain owned by the caller.</summary>
     public OwnedExecutionResult(string status, IReadOnlyDictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>> values,
-        IReadOnlyList<EngineDiagnostic> diagnostics)
+        IReadOnlyList<EngineDiagnostic> diagnostics, IReadOnlyDictionary<string, JsonObject>? uiOutputs = null,
+        IReadOnlyDictionary<string, NodeExecutionIdentity>? meta = null)
     {
         Status = status;
         Diagnostics = Array.AsReadOnly(diagnostics.ToArray());
+        UiOutputs = new ReadOnlyDictionary<string, JsonObject>((uiOutputs ?? new Dictionary<string, JsonObject>())
+            .ToDictionary(p => p.Key, p => UiDocument.Snapshot(p.Value), StringComparer.Ordinal));
+        Meta = new ReadOnlyDictionary<string, NodeExecutionIdentity>((meta ?? new Dictionary<string, NodeExecutionIdentity>())
+            .ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal));
         try
         {
             outputs = new ReadOnlyDictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(values.ToDictionary(p => p.Key,

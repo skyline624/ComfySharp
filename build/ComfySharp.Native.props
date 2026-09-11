@@ -1,0 +1,35 @@
+<Project>
+  <PropertyGroup>
+    <NativeBackend Condition="'$(NativeBackend)' == ''">cpu</NativeBackend>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and '$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</NativeRuntime>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Windows')) and '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">win-x64</NativeRuntime>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('Linux')) and '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">linux-x64</NativeRuntime>
+    <NativeRuntime Condition="'$(NativeRuntime)' == '' and $([MSBuild]::IsOSPlatform('OSX')) and '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">osx-arm64</NativeRuntime>
+    <ComfySharpNativeGraph Condition="'$(RuntimeIdentifier)' == ''">build</ComfySharpNativeGraph>
+    <ComfySharpNativeGraph Condition="'$(RuntimeIdentifier)' != ''">publish</ComfySharpNativeGraph>
+    <NuGetLockFilePath>packages.$(NativeRuntime).$(NativeBackend).lock.json</NuGetLockFilePath>
+    <NuGetLockFilePath Condition="'$(RuntimeIdentifier)' != ''">packages.$(NativeRuntime).$(NativeBackend).publish.lock.json</NuGetLockFilePath>
+    <BaseIntermediateOutputPath>obj/native/$(NativeRuntime)/$(NativeBackend)/$(ComfySharpNativeGraph)/</BaseIntermediateOutputPath>
+    <BaseOutputPath>bin/native/$(NativeRuntime)/$(NativeBackend)/</BaseOutputPath>
+    <BaseIntermediateOutputPath Condition="'$(ArtifactsPath)' != ''">$(ArtifactsPath)/obj/$(MSBuildProjectName)/$(NativeRuntime)/$(NativeBackend)/$(ComfySharpNativeGraph)/</BaseIntermediateOutputPath>
+    <BaseOutputPath Condition="'$(ArtifactsPath)' != ''">$(ArtifactsPath)/bin/$(MSBuildProjectName)/$(NativeRuntime)/$(NativeBackend)/</BaseOutputPath>
+    <!-- Old/default output trees must never become source inputs after changing paths. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(MSBuildProjectDirectory)/obj/**;$(MSBuildProjectDirectory)/bin/**</DefaultItemExcludes>
+    <ComfySharpIncludeNativePayload Condition="'$(MSBuildProjectName)' != 'ComfySharp.Host.Tests'">true</ComfySharpIncludeNativePayload>
+  </PropertyGroup>
+  <!-- Host.Tests inherits its payload from Host. Pure libraries and metadata tools
+       never import this file and never receive a libtorch package reference. -->
+  <ItemGroup Condition="'$(ComfySharpIncludeNativePayload)' == 'true'">
+    <PackageReference Include="libtorch-cpu-win-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'win-x64'" />
+    <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'linux-x64'" />
+    <PackageReference Include="libtorch-cpu-osx-arm64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'osx-arm64'" />
+    <PackageReference Include="libtorch-cuda-12.8-win-x64" Condition="'$(NativeBackend)' == 'cuda' and '$(NativeRuntime)' == 'win-x64'" />
+  </ItemGroup>
+  <Target Name="ComfySharpValidateNativeSelection" BeforeTargets="_GenerateRestoreGraphProjectEntry;Restore;PrepareForBuild">
+    <Error Condition="'$(ComfySharpNativeGraph)' == 'build' and ('$(RuntimeIdentifier)' != '' or '$(RuntimeIdentifiers)' != '')" Text="For a native RID restore/publish graph, supply the singular -p:RuntimeIdentifier property explicitly. An inferred RID or the plural restore --runtime list cannot select a build lock file." />
+    <Error Condition="'$(RuntimeIdentifier)' != '' and '$(RuntimeIdentifier)' != '$(NativeRuntime)'" Text="RuntimeIdentifier and NativeRuntime must select the same native RID." />
+    <Error Condition="'$(NativeRuntime)' != 'win-x64' and '$(NativeRuntime)' != 'linux-x64' and '$(NativeRuntime)' != 'osx-arm64'" Text="NativeRuntime must be win-x64, linux-x64 or osx-arm64. Other operating-system/architecture pairs have no configured native bundle." />
+    <Error Condition="'$(NativeBackend)' != 'cpu' and '$(NativeBackend)' != 'cuda'" Text="NativeBackend selects a distribution bundle: cpu or cuda. MPS device execution is not qualified yet and is not a bundle selection." />
+    <Error Condition="'$(NativeBackend)' == 'cuda' and '$(NativeRuntime)' != 'win-x64'" Text="The configured CUDA 12.8 bundle currently targets Windows x64 only. Linux CUDA remains required but its native distribution and hardware qualification are pending; no CPU fallback is selected." />
+  </Target>
+</Project>

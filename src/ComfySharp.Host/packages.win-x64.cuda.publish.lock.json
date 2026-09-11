@@ -1,0 +1,321 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "libtorch-cuda-12.8-win-x64": {
+        "type": "Direct",
+        "requested": "[2.10.0, )",
+        "resolved": "2.10.0",
+        "contentHash": "w+TvceTLitFqO0ET356j7i18VsL6zXtMWaxF8QrzHuh1uOHa1v7E6TqXgnBtKNMvJBKsWC+s+PWw/1U2lgeVfA==",
+        "dependencies": {
+          "libtorch-cuda-12.8-win-x64-part1": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part10": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part2": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part3-fragment1": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part3-primary": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part4": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part5-fragment1": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part5-fragment2": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part5-primary": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part6": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part7-fragment1": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part7-primary": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part8": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part9-fragment1": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part9-fragment2": "2.10.0",
+          "libtorch-cuda-12.8-win-x64-part9-primary": "2.10.0"
+        }
+      },
+      "Google.Protobuf": {
+        "type": "Transitive",
+        "resolved": "3.21.9",
+        "contentHash": "OTpFujTgkmqMLbg3KT7F/iuKi1rg6s5FCS2M9XcVLDn40zL8wgXm37CY/F6MeOEXKjdcnXGCN/h7oyMkVydVsg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "5d3j0wlDAMShGHWebgfEHuRZjeM8UELMORfj/mCGY30hqt/vQhgRdpQCwXwYH3Zb7atEJMcUoMsTcjRV0vLINA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part10": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+Ch81/ZLT5FhPmn5kS+bxHacAwAERfeE8TI4r43Rz3ukVQRkJ66+8DDtAVHBqgP1yqrOX3X1ewdkaKqnm2Mpmg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part2": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "KOga2oR8blzpbdiuAYWY0gECOVNzpHK5h+oXLf8Yk0JzjfW/aF2XRihurIQVMYTxH6KAKND4+c3zKHEoJPLagg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part3-fragment1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "RuHDhW+gjBsLf5QGhJTdFnpPmlvnZcWsK51BgBFB1p/rLvFSqslmZf+Vueqj3ebY0VTXT5yEtcfAHgmGpbrJpg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part3-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "w6yA5jKKf1s/iIK1XbHA3IjTMkzg8UFZf6qGOuftwtGOVhU1UtFYhzXT6xU2pDu1S3tEADjam1wpdM9xCHG9jw=="
+      },
+      "libtorch-cuda-12.8-win-x64-part4": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "4Ai7KOmANGXP9mykVnRbIoUQDSDGcAN9UNG0TN2UUlUpXwdDg9c6H2wmeWmQ44NnlIaMNPEy865Qk1CnavU0XQ=="
+      },
+      "libtorch-cuda-12.8-win-x64-part5-fragment1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "6zBrYU1sUas2qdEb1BzSAyjTEmHQKdXLX+rmhm07KksoCmgDz2CHAWuxhwrofwM27k6thgx6HzRBPZikQ0vHXA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part5-fragment2": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "sddwpDDls+YmlWc1IJeenP6dfoyv9cr3SyHM0xkoWxv+Z1DMNGjIwGZItMKQF9ehXR5l4B0C2m+pyqEIrHeHGQ=="
+      },
+      "libtorch-cuda-12.8-win-x64-part5-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+IhpovoMlTTDpfoZom6xmksgJQO6LgqfSjsoGQCnxTcFBQ7RT98EOXIVJQd/MQ6PSEwELbd6atvFazs97co4Bg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part6": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "jfEFRbOlJi3MkTBd/VrAChJgDBLg9q0q/8fXlRjWxwzXtQpevjnSeNrPZQsf2/YVnKgxb3/UfrF2O77MJ02+gA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part7-fragment1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "b4230e/5YxjM5rz8XlxvZXusdCtSR1NBiyhgpDFUyD5L2XEqTp+qIWReIT0l5b5y37plHPaI03MQeDBQ0Bihgg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part7-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "21wWyvL6eEK9fHal2fmhhDqrXKgbgAR5XTWuUWEmS7P7NnvbsGy2+p351KxaUenjpPWi5N4SATmFigEtUtjQ1Q=="
+      },
+      "libtorch-cuda-12.8-win-x64-part8": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+vnb5Th6VJ6Wf7z25NrV+XyvNIITmW1a8PiRcXfmj4eOnIcvt4ZiBHFuGR481pxobfjk1Y7oz6Kb1R7zkhAZow=="
+      },
+      "libtorch-cuda-12.8-win-x64-part9-fragment1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "1y8Q69ONSz6ytEOaFK5ID1mcdCwHWVTLWR4Naz3BEQBy4SwYGCZ5D7Tw6LGeW3Kot/FBuScXJvVe+VeL7OWoJA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part9-fragment2": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "xTeODAJ5bREBYVjOqfAqXb5FpTuoWuzdqBLkvdLSRcSf6mr0vzrSV3vMSwGgU3Onow6jnB4ICudq88CDOJ4deg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part9-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "YM+s6g2BYgKLIyw26Vh985/7NZSa9nKgM+r/wSvXeuJxVWZ3IzcgTBLTLkzY7msdPM7WTfYhSy8oPaBmiu0ksQ=="
+      },
+      "Microsoft.Data.Sqlite.Core": {
+        "type": "Transitive",
+        "resolved": "10.0.9",
+        "contentHash": "iZrONyMKPjxfVZnUktqO30QjzNwAGH+AxM61s8lKQnVhgbQ3bn0hiXI129ZmVicEbIcwljyy2OVsIYUR51ZHKQ==",
+        "dependencies": {
+          "SQLitePCLRaw.core": "2.1.11"
+        }
+      },
+      "SharpZipLib": {
+        "type": "Transitive",
+        "resolved": "1.4.0",
+        "contentHash": "CdkbBSPIpHD8xBlu+8kDJiqc1Tf9iV89BObnqcvEbwysXSj5h1MfaeLgeeaxPZmi7CTJO8FDofBBNxBW0Vml7A=="
+      },
+      "SkiaSharp.NativeAssets.macOS": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "Sko9LFxRXSjb3OGh5/RxrVRXxYo48tr5NKuuSy6jB85GrYt8WRqVY1iLOLwtjPiVAt4cp+pyD4i30azanS64dw=="
+      },
+      "SkiaSharp.NativeAssets.Win32": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ=="
+      },
+      "SQLite": {
+        "type": "Transitive",
+        "resolved": "3.53.4",
+        "contentHash": "KN7jeWqgUPeBRe1FlcpZURzxomuKKEKHmBBQfg+Nx7NkY1LjKhzHvH+3ASkNvhayESE34nMBinL9CV21JfPRJw=="
+      },
+      "SQLitePCLRaw.config.e_sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.0.5",
+        "contentHash": "aSk8WE5tF2MybESMgtZAEyMVCAWA0nBqOMc48HFoa9UoSdtm3goDXVzNRnefeKIwE6bV9NaNXptn1F9ReMQI0Q==",
+        "dependencies": {
+          "SQLitePCLRaw.provider.e_sqlite3": "3.0.5"
+        }
+      },
+      "SQLitePCLRaw.core": {
+        "type": "Transitive",
+        "resolved": "3.0.5",
+        "contentHash": "k81AYXXRCw3Zj8rOhyBoCsx/U97KYDFI2CSKr/ijl5BwpsW/hX/4kBiDmerFaoust8nxBwa0IHQFw8MmSHRtnQ=="
+      },
+      "SQLitePCLRaw.provider.e_sqlite3": {
+        "type": "Transitive",
+        "resolved": "3.0.5",
+        "contentHash": "um8YSWduhhuskTG2bHfZrBqMNQOydfU8pcseT+cu5RivOGyoUbCrGXxgoRNTmRYw2VbMWnEZVVFcneZT/5dsBg==",
+        "dependencies": {
+          "SQLitePCLRaw.core": "3.0.5"
+        }
+      },
+      "comfysharp.contracts": {
+        "type": "Project"
+      },
+      "comfysharp.core": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Contracts": "[0.1.0-dev, )"
+        }
+      },
+      "comfysharp.inference": {
+        "type": "Project",
+        "dependencies": {
+          "TorchSharp": "[0.107.0, )"
+        }
+      },
+      "comfysharp.nodes": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Core": "[0.1.0-dev, )"
+        }
+      },
+      "comfysharp.nodes.tensor": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Core": "[0.1.0-dev, )",
+          "ComfySharp.Inference": "[0.1.0-dev, )",
+          "ComfySharp.Nodes": "[0.1.0-dev, )"
+        }
+      },
+      "comfysharp.storage": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Data.Sqlite": "[10.0.9, )",
+          "SQLitePCLRaw.bundle_e_sqlite3": "[3.0.5, )"
+        }
+      },
+      "Microsoft.Data.Sqlite": {
+        "type": "CentralTransitive",
+        "requested": "[10.0.9, )",
+        "resolved": "10.0.9",
+        "contentHash": "/eBwiZPcNisn0qZX+Zk4YCftlK/vnoWqv7hHnmSk8MjPxFdYYkmPObpogT0MfCCWN6oAIZnMCo0SoOtZlbbmgQ==",
+        "dependencies": {
+          "Microsoft.Data.Sqlite.Core": "10.0.9",
+          "SQLitePCLRaw.bundle_e_sqlite3": "2.1.11",
+          "SQLitePCLRaw.core": "2.1.11"
+        }
+      },
+      "SkiaSharp": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "2.88.6",
+        "contentHash": "wdfeBAQrEQCbJIRgAiargzP1Uy+0grZiG4CSgBnhAgcJTsPzlifIaO73JRdwIlT3TyBoeU9jEqzwFUhl4hTYnQ==",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "2.88.6",
+          "SkiaSharp.NativeAssets.macOS": "2.88.6"
+        }
+      },
+      "SQLitePCLRaw.bundle_e_sqlite3": {
+        "type": "CentralTransitive",
+        "requested": "[3.0.5, )",
+        "resolved": "3.0.5",
+        "contentHash": "SW8iASIyWMrLzqabUHYQRvALhvD4ylSBsj4PgEVGwc36kQjc9xT5kSV/XQ9rU7nIpBWD+LPyX3Hlw5FzyUzGeQ==",
+        "dependencies": {
+          "SQLite": "3.53.4",
+          "SQLitePCLRaw.config.e_sqlite3": "3.0.5"
+        }
+      },
+      "TorchSharp": {
+        "type": "CentralTransitive",
+        "requested": "[0.107.0, )",
+        "resolved": "0.107.0",
+        "contentHash": "HGxs37FGN+JNuLiSeAqc6jGwjDuZepEkq7+FYv1ideNoYy1VsUpky9JEDKviwbR/vCXHLjOwdzHVzJv/snyLwA==",
+        "dependencies": {
+          "Google.Protobuf": "3.21.9",
+          "SharpZipLib": "1.4.0",
+          "SkiaSharp": "2.88.6"
+        }
+      }
+    },
+    "net10.0/win-x64": {
+      "libtorch-cuda-12.8-win-x64-part1": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "5d3j0wlDAMShGHWebgfEHuRZjeM8UELMORfj/mCGY30hqt/vQhgRdpQCwXwYH3Zb7atEJMcUoMsTcjRV0vLINA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part10": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+Ch81/ZLT5FhPmn5kS+bxHacAwAERfeE8TI4r43Rz3ukVQRkJ66+8DDtAVHBqgP1yqrOX3X1ewdkaKqnm2Mpmg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part2": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "KOga2oR8blzpbdiuAYWY0gECOVNzpHK5h+oXLf8Yk0JzjfW/aF2XRihurIQVMYTxH6KAKND4+c3zKHEoJPLagg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part3-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "w6yA5jKKf1s/iIK1XbHA3IjTMkzg8UFZf6qGOuftwtGOVhU1UtFYhzXT6xU2pDu1S3tEADjam1wpdM9xCHG9jw=="
+      },
+      "libtorch-cuda-12.8-win-x64-part4": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "4Ai7KOmANGXP9mykVnRbIoUQDSDGcAN9UNG0TN2UUlUpXwdDg9c6H2wmeWmQ44NnlIaMNPEy865Qk1CnavU0XQ=="
+      },
+      "libtorch-cuda-12.8-win-x64-part5-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+IhpovoMlTTDpfoZom6xmksgJQO6LgqfSjsoGQCnxTcFBQ7RT98EOXIVJQd/MQ6PSEwELbd6atvFazs97co4Bg=="
+      },
+      "libtorch-cuda-12.8-win-x64-part6": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "jfEFRbOlJi3MkTBd/VrAChJgDBLg9q0q/8fXlRjWxwzXtQpevjnSeNrPZQsf2/YVnKgxb3/UfrF2O77MJ02+gA=="
+      },
+      "libtorch-cuda-12.8-win-x64-part7-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "21wWyvL6eEK9fHal2fmhhDqrXKgbgAR5XTWuUWEmS7P7NnvbsGy2+p351KxaUenjpPWi5N4SATmFigEtUtjQ1Q=="
+      },
+      "libtorch-cuda-12.8-win-x64-part8": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "+vnb5Th6VJ6Wf7z25NrV+XyvNIITmW1a8PiRcXfmj4eOnIcvt4ZiBHFuGR481pxobfjk1Y7oz6Kb1R7zkhAZow=="
+      },
+      "libtorch-cuda-12.8-win-x64-part9-primary": {
+        "type": "Transitive",
+        "resolved": "2.10.0",
+        "contentHash": "YM+s6g2BYgKLIyw26Vh985/7NZSa9nKgM+r/wSvXeuJxVWZ3IzcgTBLTLkzY7msdPM7WTfYhSy8oPaBmiu0ksQ=="
+      },
+      "SkiaSharp.NativeAssets.macOS": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "Sko9LFxRXSjb3OGh5/RxrVRXxYo48tr5NKuuSy6jB85GrYt8WRqVY1iLOLwtjPiVAt4cp+pyD4i30azanS64dw=="
+      },
+      "SkiaSharp.NativeAssets.Win32": {
+        "type": "Transitive",
+        "resolved": "2.88.6",
+        "contentHash": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ=="
+      },
+      "SQLite": {
+        "type": "Transitive",
+        "resolved": "3.53.4",
+        "contentHash": "KN7jeWqgUPeBRe1FlcpZURzxomuKKEKHmBBQfg+Nx7NkY1LjKhzHvH+3ASkNvhayESE34nMBinL9CV21JfPRJw=="
+      },
+      "TorchSharp": {
+        "type": "CentralTransitive",
+        "requested": "[0.107.0, )",
+        "resolved": "0.107.0",
+        "contentHash": "HGxs37FGN+JNuLiSeAqc6jGwjDuZepEkq7+FYv1ideNoYy1VsUpky9JEDKviwbR/vCXHLjOwdzHVzJv/snyLwA==",
+        "dependencies": {
+          "Google.Protobuf": "3.21.9",
+          "SharpZipLib": "1.4.0",
+          "SkiaSharp": "2.88.6"
+        }
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
         public JsonObject ExtraData { get; } = extraData;
         public string Status { get; set; } = "pending";
         public JsonNode? Outputs { get; set; }
+        public JsonNode? Meta { get; set; }
         public JsonNode? Diagnostics { get; set; }
         public CancellationTokenSource Cancellation { get; } = new();
     }
@@ -39,8 +40,10 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
             var order = sequence++;
             var priority = number ?? order;
             if (front) priority = -priority;
+            var retainedExtra = (JsonObject?)extraData?.DeepClone() ?? [];
+            if (clientId is not null) retainedExtra["client_id"] = clientId;
             jobs.Add(id, new Job(id, priority, order, (JsonObject)prompt.DeepClone(), targets,
-                clientId, (JsonObject?)extraData?.DeepClone() ?? []));
+                clientId, retainedExtra));
             available.Release();
             PublishStatus();
             return (id, priority);
@@ -120,6 +123,7 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
                 result[job.Id] = new JsonObject
                 {
                     ["prompt"] = QueueEntry(job), ["outputs"] = job.Outputs?.DeepClone() ?? new JsonObject(),
+                    ["meta"] = job.Meta?.DeepClone() ?? new JsonObject(),
                     ["status"] = new JsonObject { ["status_str"] = job.Status == "completed" ? "success" : job.Status,
                         ["completed"] = job.Status == "completed", ["messages"] = job.Diagnostics?.DeepClone() ?? new JsonArray() }
                 };
@@ -155,15 +159,26 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
                 using var linked = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, job.Cancellation.Token);
                 try
                 {
-                    var result = await engine.ExecuteAsync(job.Prompt, job.Targets,
-                        e => { events.Publish(e.Type, new JsonObject { ["prompt_id"] = job.Id,
-                            ["node"] = e.NodeId, ["display_node"] = e.NodeId, ["message"] = e.Message }); return ValueTask.CompletedTask; }, linked.Token);
+                    var terminals = new List<EngineEvent>();
+                    var result = await engine.ExecuteUiAsync(job.Prompt, job.Targets,
+                        e =>
+                        {
+                            if (e.Type is "execution_success" or "execution_failed" or "execution_interrupted") terminals.Add(e);
+                            else PublishExecution(job, e);
+                            return ValueTask.CompletedTask;
+                        }, linked.Token);
                     lock (gate)
                     {
                         job.Status = result.Status switch { "success" => "completed", "cancelled" => "cancelled", _ => "failed" };
                         job.Outputs = System.Text.Json.JsonSerializer.SerializeToNode(result.Outputs);
+                        job.Meta = new JsonObject();
+                        foreach (var (nodeId, identity) in result.Meta)
+                            job.Meta[nodeId] = new JsonObject { ["node_id"] = identity.NodeId, ["display_node"] = identity.DisplayNodeId,
+                                ["parent_node"] = identity.ParentNodeId, ["real_node_id"] = identity.NodeId };
                         job.Diagnostics = System.Text.Json.JsonSerializer.SerializeToNode(result.Diagnostics);
                     }
+                    // Clients observing terminal success can now read the completed managed history.
+                    foreach (var terminal in terminals) PublishExecution(job, terminal);
                 }
                 catch (OperationCanceledException) when (linked.IsCancellationRequested)
                 {
@@ -176,12 +191,14 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
                         job.Status = "failed";
                         job.Diagnostics = new JsonArray(new JsonObject { ["type"] = exception.GetType().Name, ["message"] = exception.Message });
                     }
-                    events.Publish("execution_error", new JsonObject { ["prompt_id"] = job.Id, ["exception_message"] = exception.Message });
+                    if (job.ClientId is not null)
+                        events.Publish("execution_error", new JsonObject { ["prompt_id"] = job.Id, ["exception_message"] = exception.Message }, job.ClientId);
                 }
                 finally
                 {
                     lock (gate) active = null;
-                    events.Publish("executing", new JsonObject { ["prompt_id"] = job.Id, ["node"] = null });
+                    if (job.ClientId is not null)
+                        events.Publish("executing", new JsonObject { ["prompt_id"] = job.Id, ["node"] = null }, job.ClientId);
                     PublishStatus();
                 }
             }
@@ -190,6 +207,21 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
     }
 
     private static bool IsTerminal(string status) => status is "completed" or "failed" or "cancelled";
+    private void PublishExecution(Job job, EngineEvent execution)
+    {
+        // PromptExecutor.add_message permits anonymous interruption broadcasts; other
+        // execution data is delivered only to the submitting session.
+        if (job.ClientId is null && execution.Type != "execution_interrupted") return;
+        var payload = new JsonObject { ["prompt_id"] = job.Id };
+        if (execution.NodeId is not null)
+        {
+            payload["node"] = execution.NodeId;
+            payload["display_node"] = execution.Identity?.DisplayNodeId ?? execution.NodeId;
+        }
+        if (execution.Type == "executed") payload["output"] = execution.Output?.DeepClone();
+        if (execution.Message is not null) payload["message"] = execution.Message;
+        events.Publish(execution.Type, payload, job.ClientId);
+    }
     private void PublishStatus() => events.Publish("status", new JsonObject { ["status"] = StatusSnapshot() });
     private static JsonNode Describe(Job job) => new JsonObject { ["id"] = job.Id, ["prompt_id"] = job.Id,
         ["status"] = job.Status, ["number"] = job.Priority };

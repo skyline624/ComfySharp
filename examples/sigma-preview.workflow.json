@@ -1,0 +1,38 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1, "type": "KarrasScheduler", "pos": [50, 160], "size": [230, 180],
+      "flags": {}, "order": 0, "mode": 0, "inputs": [],
+      "outputs": [{ "name": "SIGMAS", "type": "SIGMAS", "links": [1], "slot_index": 0 }],
+      "properties": {}, "widgets_values": [3, 3.0, 1.0, 1.0]
+    },
+    {
+      "id": 2, "type": "SplitSigmas", "pos": [370, 160], "size": [230, 180],
+      "flags": {}, "order": 1, "mode": 0,
+      "inputs": [{ "name": "sigmas", "type": "SIGMAS", "link": 1 }],
+      "outputs": [
+        { "name": "high_sigmas", "type": "SIGMAS", "links": [2], "slot_index": 0 },
+        { "name": "low_sigmas", "type": "SIGMAS", "links": [3], "slot_index": 1 }
+      ],
+      "properties": {}, "widgets_values": [1]
+    },
+    {
+      "id": 3, "type": "PreviewAny", "pos": [700, 40], "size": [230, 220],
+      "flags": {}, "order": 2, "mode": 0,
+      "inputs": [{ "name": "source", "type": "*", "link": 2 }],
+      "outputs": [{ "name": "STRING", "type": "STRING", "links": null, "slot_index": 0 }],
+      "properties": {}, "widgets_values": []
+    },
+    {
+      "id": 4, "type": "PreviewAny", "pos": [700, 330], "size": [230, 220],
+      "flags": {}, "order": 3, "mode": 0,
+      "inputs": [{ "name": "source", "type": "*", "link": 3 }],
+      "outputs": [{ "name": "STRING", "type": "STRING", "links": null, "slot_index": 0 }],
+      "properties": {}, "widgets_values": []
+    }
+  ],
+  "links": [[1, 1, 0, 2, 0, "SIGMAS"], [2, 2, 0, 3, 0, "SIGMAS"], [3, 2, 1, 4, 0, "SIGMAS"]],
+  "groups": [], "config": {}, "extra": {}, "version": 0.4
+}

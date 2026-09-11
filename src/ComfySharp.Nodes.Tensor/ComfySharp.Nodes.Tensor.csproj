@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../ComfySharp.Core/ComfySharp.Core.csproj" />
+    <ProjectReference Include="../ComfySharp.Inference/ComfySharp.Inference.csproj" />
+    <ProjectReference Include="../ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
+  </ItemGroup>
+</Project>

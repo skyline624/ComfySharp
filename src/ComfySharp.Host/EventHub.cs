@@ -6,26 +6,36 @@ namespace ComfySharp.Host;
 
 public sealed class EventHub
 {
-    private readonly ConcurrentDictionary<Guid, Channel<string>> subscribers = new();
+    private sealed record Subscriber(string? ClientId, Channel<string> Channel);
+    private readonly ConcurrentDictionary<Guid, Subscriber> subscribers = new();
+    private readonly object gate = new();
 
-    public (Guid Id, ChannelReader<string> Reader) Subscribe()
+    public (Guid Id, ChannelReader<string> Reader) Subscribe(string? clientId = null)
     {
         var channel = Channel.CreateBounded<string>(new BoundedChannelOptions(256)
         { SingleReader = true, FullMode = BoundedChannelFullMode.Wait });
         var id = Guid.NewGuid();
-        subscribers[id] = channel;
+        lock (gate)
+        {
+            if (clientId is not null)
+                foreach (var previous in subscribers.Where(s => s.Value.ClientId == clientId).Select(s => s.Key).ToArray()) Remove(previous);
+            subscribers[id] = new(clientId, channel);
+        }
         return (id, channel.Reader);
     }
 
     public void Remove(Guid id)
     {
-        if (subscribers.TryRemove(id, out var channel)) channel.Writer.TryComplete();
+        lock (gate)
+            if (subscribers.TryRemove(id, out var subscriber)) subscriber.Channel.Writer.TryComplete();
     }
 
-    public void Publish(string type, JsonNode data)
+    public void Publish(string type, JsonNode data, string? clientId = null)
     {
         var json = new JsonObject { ["type"] = type, ["data"] = data.DeepClone() }.ToJsonString();
-        foreach (var (id, channel) in subscribers)
-            if (!channel.Writer.TryWrite(json)) Remove(id); // Disconnect a slow client rather than silently losing terminal events.
+        lock (gate)
+            foreach (var (id, subscriber) in subscribers)
+                if ((clientId is null || subscriber.ClientId == clientId) && !subscriber.Channel.Writer.TryWrite(json))
+                    Remove(id); // Disconnect a slow client rather than silently losing terminal events.
     }
 }

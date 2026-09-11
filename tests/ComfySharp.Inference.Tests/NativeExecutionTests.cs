@@ -137,8 +137,8 @@ public sealed class NativeExecutionTests
         Func<RuntimeNodeContext, IReadOnlyDictionary<string, RuntimeValue>, IReadOnlyList<RuntimeValue>> execute) : IRuntimeNode
     {
         public NodeSchema Schema { get; } = new(type, type, "test", inputs, outputs);
-        public ValueTask<IReadOnlyList<RuntimeValue>> ExecuteAsync(RuntimeNodeContext context,
+        public ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
             IReadOnlyDictionary<string, RuntimeValue> values, CancellationToken cancellationToken)
-            => ValueTask.FromResult(execute(context, values));
+            => ValueTask.FromResult(new NodeExecutionOutput(execute(context, values)));
     }
 }

@@ -11,7 +11,11 @@ public sealed partial class MainWindow : Window
     private readonly HostSupervisor host = new();
     private readonly string clientId = Guid.NewGuid().ToString();
     private string? lastPromptId;
+    private long submissionOrder;
     private HashSet<string>? availableNodes;
+    private HashSet<string> outputNodes = new(StringComparer.Ordinal);
+    private readonly CancellationTokenSource lifetime = new();
+    private readonly HostSession hostSession = new();
     public MainWindow() : this(true) { }
     public MainWindow(bool startHost)
     {
@@ -19,7 +23,7 @@ public sealed partial class MainWindow : Window
         host.Changed += (_, _) => Dispatcher.UIThread.Post(() =>
         {
             HostStatus.Text = host.Status;
-            if (!host.Ready) { availableNodes = null; foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).SetAvailability(null); }
+            if (!host.Ready) { availableNodes = null; outputNodes.Clear(); foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).SetAvailability(null); }
         });
         Opened += async (_, _) =>
         {
@@ -36,7 +40,7 @@ public sealed partial class MainWindow : Window
             if (!Program.SmokeTest && Documents.Items.OfType<TabItem>().Any(t => ((DocumentEditor)t.Content!).Document.IsDirty))
             { e.Cancel = true; Messages.Text = "Save all modified tabs before closing. Documents remain open."; }
         };
-        Closed += (_, _) => host.Dispose();
+        Closed += (_, _) => { hostSession.Close(); lifetime.Cancel(); host.Dispose(); };
     }
     public DocumentEditor ActiveEditor => (DocumentEditor)((TabItem)Documents.SelectedItem!).Content!;
     public void AddDocument(WorkflowDocument document, string? path)
@@ -49,33 +53,69 @@ public sealed partial class MainWindow : Window
         editor.Error += (_, message) => Messages.Text = message;
         Documents.Items.Add(tab); Documents.SelectedItem = tab;
     }
-    private async Task RunAsync(Func<Task> action) { try { await action(); } catch (Exception error) { Messages.Text = error.Message; } }
+    private async Task RunAsync(Func<Task> action)
+    {
+        try { await action(); }
+        catch (OperationCanceledException) { }
+        catch (Exception error) { if (!lifetime.IsCancellationRequested) Messages.Text = error.Message; }
+    }
     private async Task StartHostAsync()
     {
-        availableNodes = null; lastPromptId = null;
+        availableNodes = null; lastPromptId = null; var session = hostSession.Restart();
         await host.StartAsync();
-        availableNodes = (await host.GetAsync("/object_info")).Select(p => p.Key).ToHashSet(StringComparer.Ordinal);
+        hostSession.Require(session);
+        var info = await hostSession.ObserveAsync(host.GetAsync("/object_info"), session);
+        hostSession.Require(session);
+        availableNodes = info.Select(p => p.Key).ToHashSet(StringComparer.Ordinal);
+        outputNodes = info.Where(p => p.Value?["output_node"]?.GetValue<bool>() == true).Select(p => p.Key).ToHashSet(StringComparer.Ordinal);
         foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).SetAvailability(availableNodes);
         Messages.Text = $"Host provides {availableNodes.Count} node types. Queue validates the complete document before submission.";
     }
     private async Task SmokeAsync()
     {
         var id = ActiveEditor.AddNode("PrimitiveString");
-        var accepted = await host.SubmitAsync(Compile(true), clientId, [id.Value]);
-        var jobId = accepted["prompt_id"]!.GetValue<string>();
-        for (var attempt = 0; attempt < 50; attempt++)
+        var textPreview = ActiveEditor.AddNode("PreviewAny");
+        ActiveEditor.Document.Connect(id, 0, textPreview, 0);
+        ActiveEditor.Reload();
+        var accepted = await host.SubmitAsync(Compile(true), clientId, [textPreview.Value]);
+        var textEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (textEntry["outputs"]?[textPreview.Value]?["text"]?[0]?.GetValue<string>() != "Hello from ComfySharp")
+            throw new InvalidOperationException("Text preview smoke failed: " + textEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(textEntry["outputs"]!.AsObject());
+
+        var schedule = ActiveEditor.AddNode("KarrasScheduler");
+        ActiveEditor.Document.SetWidgets(schedule, new JsonArray(3, 3.0, 1.0, 1.0));
+        var split = ActiveEditor.AddNode("SplitSigmas");
+        ActiveEditor.Document.SetWidgets(split, new JsonArray(1));
+        var sigmaPreview = ActiveEditor.AddNode("PreviewAny");
+        ActiveEditor.Document.Connect(schedule, 0, split, 0);
+        ActiveEditor.Document.Connect(split, 1, sigmaPreview, 0);
+        ActiveEditor.Reload();
+        accepted = await host.SubmitAsync(Compile(true), clientId, [sigmaPreview.Value]);
+        var sigmaEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (sigmaEntry["outputs"]?[sigmaPreview.Value]?["text"]?[0]?.GetValue<string>() != "tensor([2., 1., 0.])" || sigmaEntry["outputs"]!.AsObject().Count != 1)
+            throw new InvalidOperationException("Native sigma preview smoke failed: " + sigmaEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(sigmaEntry["outputs"]!.AsObject());
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, UI history and native preview.");
+    }
+    private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
+    {
+        for (var attempt = 0; !maxAttempts.HasValue || attempt < maxAttempts.Value; attempt++)
         {
-            var history = await host.GetAsync("/history");
+            lifetime.Token.ThrowIfCancellationRequested();
+            hostSession.Require(session);
+            if (!host.Ready) throw new OperationCanceledException("Host session ended; the job will not be replayed.");
+            var history = await hostSession.ObserveAsync(host.GetAsync("/history"), session);
+            hostSession.Require(session);
             if (history[jobId] is JsonObject entry)
             {
-                if (entry["status"]?["completed"]?.GetValue<bool>() != true || entry["outputs"]?[id.Value]?[0]?[0]?.GetValue<string>() != "Hello from ComfySharp")
-                    throw new InvalidOperationException("Scalar smoke execution failed: " + entry.ToJsonString());
-                Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, compiled prompt and verified scalar result.");
-                return;
+                if (entry["status"]?["completed"]?.GetValue<bool>() != true)
+                    throw new InvalidOperationException("Job failed: " + entry.ToJsonString());
+                return entry;
             }
-            await Task.Delay(100);
+            await Task.Delay(maxAttempts.HasValue ? 100 : 500, lifetime.Token);
         }
-        throw new TimeoutException("Scalar smoke job did not complete.");
+        throw new TimeoutException("Smoke job did not complete.");
     }
     private void NewClicked(object? sender, RoutedEventArgs e) => AddDocument(WorkflowDocument.Create(), null);
     private async void OpenClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () =>
@@ -132,11 +172,22 @@ public sealed partial class MainWindow : Window
     private async void QueueClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () =>
     {
         var prompt = Compile(true);
-        var sources = ActiveEditor.Document.Links.Select(l => l.Source.Value).ToHashSet();
-        var targets = prompt.Select(p => p.Key).Where(id => !sources.Contains(id)).ToArray();
-        if (targets.Length == 0) throw new InvalidOperationException("Add a node before queueing.");
-        var result = await host.SubmitAsync(prompt, clientId, targets); lastPromptId = result["prompt_id"]?.GetValue<string>();
-        Messages.Text = $"Submitted {lastPromptId}. Use Queue / history to inspect completed scalar outputs.";
+        var editor = ActiveEditor;
+        var session = hostSession.Id;
+        var targets = prompt.Where(p => outputNodes.Contains(p.Value!["class_type"]!.GetValue<string>())).Select(p => p.Key).ToArray();
+        if (targets.Length == 0) throw new InvalidOperationException("Connect the result to an available output node, such as PreviewAny, before queueing.");
+        var submission = editor.BeginSubmission();
+        var order = ++submissionOrder;
+        var result = await hostSession.ObserveAsync(host.SubmitAsync(prompt, clientId, targets), session);
+        hostSession.Require(session);
+        var jobId = result["prompt_id"]?.GetValue<string>() ?? throw new InvalidOperationException("Host did not return a prompt ID.");
+        if (order == submissionOrder) lastPromptId = jobId;
+        Messages.Text = $"Submitted {jobId}. Waiting for output…";
+        var entry = await WaitForJobAsync(jobId, session);
+        hostSession.Require(session);
+        Messages.Text = editor.ApplyUiOutputs(entry["outputs"]!.AsObject(), submission)
+            ? $"Completed {jobId}. Outputs are shown in the document that submitted the job."
+            : $"Completed {jobId}. The document changed or a newer job was submitted; this result remains in history.";
     });
     private async void HistoryClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () => Messages.Text = $"Queue: {await host.GetAsync("/queue")}\nHistory: {await host.GetAsync("/history")}");
     private async void InterruptClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () => { if (lastPromptId is null) throw new InvalidOperationException("No job has been submitted in this Host session."); Messages.Text = (await host.InterruptAsync(lastPromptId)).ToJsonString(); });

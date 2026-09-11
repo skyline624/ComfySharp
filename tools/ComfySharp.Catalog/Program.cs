@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using ComfySharp.Nodes;
+using ComfySharp.Nodes.Tensor;
 using ComfySharp.Catalog;
 
 if (args.Length < 1)
@@ -24,7 +25,7 @@ try
     var errors = new List<string>();
     var ids = new HashSet<string>(StringComparer.Ordinal);
     var localNodes = new HashSet<string>(StringComparer.Ordinal);
-    var registry = BuiltInNodes.CreateRegistry().ToObjectInfo();
+    var registry = TensorNodes.CreateRegistry().ToObjectInfo();
     foreach (var row in capabilities)
     {
         var id = row["id"]!.GetValue<string>();

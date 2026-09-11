@@ -107,12 +107,12 @@ public static class BuiltInNodes
             Options: new() { ["template"] = new JsonObject { ["template_id"] = "switch", ["allowed_types"] = "*" } }, Lazy: true);
         public IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) =>
             resolvedInputs["switch"].Select(v => PythonValues.Truth(v.ToJson()) ? "on_true" : "on_false").Distinct().ToArray();
-        public ValueTask<IReadOnlyList<RuntimeValue>> ExecuteAsync(RuntimeNodeContext context,
+        public ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
             IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
             inputs.TryGetValue(PythonValues.Truth(inputs["switch"].ToJson()) ? "on_true" : "on_false", out var selected);
-            return ValueTask.FromResult<IReadOnlyList<RuntimeValue>>([selected ?? context.Json(null)]);
+            return ValueTask.FromResult(new NodeExecutionOutput([selected ?? context.Json(null)]));
         }
     }
 }

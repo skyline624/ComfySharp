@@ -2,6 +2,7 @@
   <ItemGroup>
     <ProjectReference Include="../ComfySharp.Core/ComfySharp.Core.csproj" />
     <ProjectReference Include="../ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
+    <ProjectReference Include="../ComfySharp.Nodes.Tensor/ComfySharp.Nodes.Tensor.csproj" />
     <ProjectReference Include="../ComfySharp.Storage/ComfySharp.Storage.csproj" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ Port indépendant de [ComfyUI](https://github.com/comfy-org/ComfyUI) en C#/.NET 
 
 **État : développement initial 0.1.0-dev. La génération d'images, vidéo, audio et 3D n'est pas encore disponible.** Le périmètre final reste le catalogue local complet, y compris l'entraînement intégré. Voir [l'objectif](docs/OBJECTIF.md), [le plan approuvé](docs/MIGRATION.md), [l'avancement réel](docs/STATUS.md) et [la matrice](docs/capabilities/README.md).
 
-Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte, un moteur de graphes avec valeurs natives et 13 nœuds utilitaires réellement exécutables. Les lecteurs de poids et probes CPU/CUDA sont des fondations techniques, pas une implémentation des modèles.
+Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte et un moteur avec valeurs natives. Son registre fournit 25 identifiants : 13 utilitaires, cinq générateurs de sigmas, six traitements SIGMAS et PreviewAny. Les lecteurs de poids et probes CPU/CUDA sont des fondations techniques, pas une implémentation des modèles.
 
 ## Compiler et lancer
 
@@ -25,9 +25,11 @@ Serveur seul :
 dotnet run --project src/ComfySharp.Host -- --urls http://127.0.0.1:8189
 ```
 
-`GET /health`, `/object_info`, `/queue`, `/history` et `POST /prompt` permettent d'inspecter et d'exécuter le sous-ensemble courant. Les nœuds utilitaires ont besoin de `partial_execution_targets` explicites : aucun faux nœud de sortie n'a été ajouté. Les formats d'API encore incomplets sont indiqués dans [STATUS.md](docs/STATUS.md).
+`GET /health`, `/object_info`, `/queue`, `/history` et `POST /prompt` permettent d'inspecter et d'exécuter le sous-ensemble courant. Relier le résultat à `PreviewAny` : le serveur sélectionne les vrais nœuds de sortie. `partial_execution_targets`, facultatif, filtre uniquement ces sorties. L'historique et les événements UI contiennent les textes de prévisualisation ; les tenseurs restent dans le Host. Les formats d'API encore incomplets sont indiqués dans [STATUS.md](docs/STATUS.md).
 
 Exemple exécutable : ouvrir [text-length.workflow.json](examples/text-length.workflow.json) dans l'éditeur, ou soumettre [text-length.prompt.json](examples/text-length.prompt.json) au Host. Le texte « Bonjour 🌍 » contient neuf caractères Unicode.
+
+[sigma-preview.workflow.json](examples/sigma-preview.workflow.json) et son [prompt](examples/sigma-preview.prompt.json) exécutent `KarrasScheduler → SplitSigmas → PreviewAny` avec de vrais tenseurs CPU. Les deux sorties sont `tensor([3., 2.])` et `tensor([2., 1., 0.])`. Aucun poids de modèle n'est nécessaire à ce calcul. La prévisualisation native est en texte brut ; Markdown et d'autres représentations restent à porter. Voir [les contrats et limites](docs/NATIVE_NODE_HOST.md).
 
 Le SDK sert à construire le projet ; les distributions autonomes futures n'exigeront pas son installation. Aucun Python, pip, Node ou frontend JavaScript n'est utilisé par le produit. NuGet télécharge les bibliothèques de compilation ; le produit ne télécharge aucun modèle et n'appelle aucun service distant.
 
@@ -37,13 +39,13 @@ Le SDK sert à construire le projet ; les distributions autonomes futures n'exig
 dotnet run --project tools/ComfySharp.RuntimeProbe -- --device cpu --repeat 25
 ```
 
-Windows/NVIDIA, avec la variante native CUDA 12.8 (plusieurs Go) et un dossier d'artefacts distinct :
+Windows/NVIDIA, avec la variante native CUDA 12.8 (plusieurs Go) :
 
 ```sh
-dotnet run --project tools/ComfySharp.RuntimeProbe -p:NativeBackend=cuda --artifacts-path artifacts/cuda -- --device cuda --repeat 25
+dotnet run --project tools/ComfySharp.RuntimeProbe -p:NativeBackend=cuda -- --device cuda --repeat 25
 ```
 
-Un backend indisponible retourne une erreur, jamais une réussite simulée. Les preuves locales concernent actuellement Windows CPU et une RTX 3090 ; Linux/NVIDIA et macOS/MPS attendent leur qualification matérielle. Les tests CI CPU ne remplacent pas celle-ci.
+La sélection native isole automatiquement les sorties de compilation et verrous par plateforme et backend. Elle désigne les bibliothèques distribuées ; le paramètre `--device` du probe désigne le calcul. Les générateurs SIGMAS actuels créent des tenseurs CPU, y compris dans un Host distribué avec CUDA. Un backend indisponible retourne une erreur. Les preuves locales concernent actuellement Windows CPU et une RTX 3090 ; Linux/NVIDIA et macOS/MPS attendent leur qualification matérielle. Les tests CI CPU ne remplacent pas celle-ci.
 
 ## Repères
 

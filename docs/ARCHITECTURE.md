@@ -16,6 +16,10 @@ Contracts contient les données JSON échangées par Core et Host ainsi que les 
 
 Desktop possède les documents et surveille son processus Host. Les modèles, storages natifs et jobs restent dans Host. Un crash du moteur ne doit pas effacer le document ni provoquer de resoumission automatique. La connexion locale n'envoie ni télémétrie ni poids.
 
+`Nodes` fournit les utilitaires JSON ; `Nodes.Tensor` compose ce registre avec les générateurs/traitements SIGMAS et PreviewAny. Host et l'outil Catalogue emploient cette même composition. Lire les schémas ne charge pas libtorch. Le Desktop ne référence pas Inference. Les résultats et UI sont séparés par `NodeExecutionOutput` ; l'historique ne possède que des snapshots gérés.
+
+Les distributions placent Desktop à la racine et toutes les dépendances du Host dans `host/`. Cette isolation permet notamment de garder les versions SkiaSharp propres à Avalonia et TorchSharp. Les bibliothèques natives CPU/CUDA et leurs verrous sont sélectionnés au niveau des processus consommateurs, sans injecter ces payloads dans les bibliothèques communes ou l'inspecteur de métadonnées.
+
 Une seule exécution active initialement. Le propriétaire de la file associe chaque annulation à l'identité du job sous verrou ; le moteur observe son jeton. Les événements HTTP/WS sont une adaptation des événements métier, pas une dépendance du moteur au serveur.
 
 Les lecteurs de poids vérifient structure, tailles et offsets avant allocation. Aucune exécution de pickle ou chargement arbitraire de code n'est acceptable. Les formats non encore portés échouent explicitement.

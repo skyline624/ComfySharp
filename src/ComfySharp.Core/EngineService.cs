@@ -68,11 +68,11 @@ public sealed class EngineService(NodeRegistry registry)
     public async Task<ExecutionResult> ExecuteAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
         Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
     {
-        // Project only at the JSON boundary. Delay the final event until projection has also succeeded.
-        var completionPending = false;
+        // Project only at the explicit JSON boundary. Native disposal is part of successful completion.
+        EngineEvent? terminal = null;
         async ValueTask Forward(EngineEvent e)
         {
-            if (e.Type is "execution_success" or "execution_failed") completionPending = true;
+            if (IsTerminal(e)) terminal = e;
             else if (onEvent is not null) await onEvent(e);
         }
         using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken);
@@ -86,13 +86,35 @@ public sealed class EngineService(NodeRegistry registry)
             {
                 diagnostics.Add(new("runtime_value_not_json", e.Message, target, TargetId: target));
                 if (status != "cancelled") status = "error";
-                if (onEvent is not null) await onEvent(new("execution_error", target, e.Message));
+                if (onEvent is not null) await onEvent(new("execution_error", target, e.Message, Identity: new(target, target)));
             }
         }
-        if (onEvent is not null && completionPending)
-            await onEvent(new(status == "success" ? "execution_success" : "execution_failed"));
+        owned.Dispose();
+        if (onEvent is not null && terminal is not null)
+            await onEvent(status == "cancelled" ? terminal : new(status == "success" ? "execution_success" : "execution_failed"));
         return new(status, outputs, diagnostics);
     }
+
+    /// <summary>Returns only explicit UI documents. All native slots are released before the terminal event.</summary>
+    public async Task<UiExecutionResult> ExecuteUiAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
+        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
+    {
+        EngineEvent? terminal = null;
+        async ValueTask Forward(EngineEvent e)
+        {
+            if (IsTerminal(e)) terminal = e;
+            else if (onEvent is not null) await onEvent(e);
+        }
+        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken);
+        var result = new UiExecutionResult(owned.Status,
+            owned.UiOutputs.ToDictionary(p => p.Key, p => UiDocument.Snapshot(p.Value), StringComparer.Ordinal),
+            owned.Meta.ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal), owned.Diagnostics);
+        owned.Dispose();
+        if (onEvent is not null && terminal is not null) await onEvent(terminal);
+        return result;
+    }
+
+    private static bool IsTerminal(EngineEvent e) => e.Type is "execution_success" or "execution_failed" or "execution_interrupted";
 
     public async Task<OwnedExecutionResult> ExecuteValuesAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
         Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
@@ -103,16 +125,27 @@ public sealed class EngineService(NodeRegistry registry)
         var diagnostics = validation.Diagnostics.ToList();
         var results = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
         var memo = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
+        var uiOutputs = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
+        var meta = new Dictionary<string, NodeExecutionIdentity>(StringComparer.Ordinal);
         using var job = new RuntimeNodeContext();
         OwnedExecutionResult Complete(string status)
         {
-            var result = new OwnedExecutionResult(status, results, diagnostics);
+            var result = new OwnedExecutionResult(status, results, diagnostics, uiOutputs, meta);
             try { job.Dispose(); return result; }
             catch { result.Dispose(); throw; }
         }
+        async Task<OwnedExecutionResult> CompleteWithEvent(string status, string type)
+        {
+            var result = Complete(status);
+            try { await Emit(type); return result; }
+            catch { result.Dispose(); throw; }
+        }
         var failed = new HashSet<string>(StringComparer.Ordinal);
-        async ValueTask Emit(string type, string? id = null, string? message = null)
-        { if (onEvent is not null) await onEvent(new(type, id, message)); }
+        async ValueTask Emit(string type, string? id = null, string? message = null, JsonObject? output = null)
+        {
+            if (onEvent is not null) await onEvent(new(type, id, message, output is null ? null : UiDocument.Snapshot(output),
+                id is null ? null : new NodeExecutionIdentity(id, id)));
+        }
         async Task<IReadOnlyList<IReadOnlyList<RuntimeValue>>> Run(string id)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -147,6 +180,7 @@ public sealed class EngineService(NodeRegistry registry)
                 }
                 await Emit("executing", id);
                 var output = node.Schema.Outputs.Select(_ => new List<RuntimeValue>()).ToArray();
+                var invocationUis = new List<JsonObject>();
                 var count = node.Schema.InputIsList ? 1 : resolved.Count == 0 ? 1 : resolved.Values.Max(v => v.Count);
                 // Upstream invokes once with no arguments when every execution list is empty.
                 if (count == 0) count = 1;
@@ -162,20 +196,28 @@ public sealed class EngineService(NodeRegistry registry)
                         else if (resolved.Values.Any(v => v.Count != 0)) throw new InvalidOperationException("Cannot repeat the last item of an empty execution list.");
                     }
                     var returned = await node.ExecuteAsync(invocationScope, invocation, cancellationToken);
+                    if (returned.Ui is not null) invocationUis.Add(UiDocument.Snapshot(returned.Ui));
                     cancellationToken.ThrowIfCancellationRequested();
-                    if (returned.Count != output.Length) throw new InvalidOperationException("Node returned an incorrect output count.");
+                    if (returned.Result.Count != output.Length) throw new InvalidOperationException("Node returned an incorrect output count.");
                     for (var slot = 0; slot < output.Length; slot++)
                     {
                         if (node.Schema.Outputs[slot].IsList)
                         {
-                            if (returned[slot].Kind != RuntimeValueKind.List) throw new InvalidOperationException("List output must be an execution list.");
-                            foreach (var value in returned[slot].Items) output[slot].Add(nodeScope.Retain(value));
+                            if (returned.Result[slot].Kind != RuntimeValueKind.List) throw new InvalidOperationException("List output must be an execution list.");
+                            foreach (var value in returned.Result[slot].Items) output[slot].Add(nodeScope.Retain(value));
                         }
-                        else output[slot].Add(nodeScope.Retain(returned[slot]));
+                        else output[slot].Add(nodeScope.Retain(returned.Result[slot]));
                     }
                 }
-                await Emit("executed", id);
+                var ui = MergeUi(invocationUis);
                 var completed = output.Select(slot => (IReadOnlyList<RuntimeValue>)slot.Select(job.Retain).ToArray()).ToArray();
+                nodeScope.Dispose();
+                if (ui.Count != 0)
+                {
+                    uiOutputs[id] = ui;
+                    meta[id] = new(id, id);
+                    await Emit("executed", id, output: ui);
+                }
                 memo[id] = completed;
                 return completed;
             }
@@ -184,6 +226,7 @@ public sealed class EngineService(NodeRegistry registry)
             catch (Exception e) { failed.Add(id); throw new NodeFailure(id, e.Message); }
         }
         if (!validation.IsValid) return Complete("error");
+        string status;
         try
         {
             await Emit("execution_start");
@@ -200,15 +243,36 @@ public sealed class EngineService(NodeRegistry registry)
                     await Emit("execution_error", e.NodeId, e.Message);
                 }
             }
-            var status = diagnostics.Any(d => d.Code == "execution_error") ? "error" : "success";
-            await Emit(status == "success" ? "execution_success" : "execution_failed");
-            return Complete(status);
+            status = diagnostics.Any(d => d.Code == "execution_error") ? "error" : "success";
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            await Emit("execution_interrupted");
-            return Complete("cancelled");
+            status = "cancelled";
         }
+        // Completion is outside the execution cancellation handler: a terminal transport/disposal exception
+        // cannot attempt a second handoff from leases that were already transferred and released.
+        return await CompleteWithEvent(status, status == "cancelled" ? "execution_interrupted"
+            : status == "success" ? "execution_success" : "execution_failed");
+    }
+
+    private static JsonObject MergeUi(IReadOnlyList<JsonObject> invocations)
+    {
+        var merged = new JsonObject();
+        if (invocations.Count == 0) return merged;
+        // execution.py: the first returned UI determines keys; subsequent lists concatenate.
+        // A later extra key is ignored, while a missing key cannot be silently supplied as an empty list.
+        foreach (var (key, _) in invocations[0])
+        {
+            var items = new JsonArray();
+            foreach (var invocation in invocations)
+            {
+                if (invocation[key] is not JsonArray values)
+                    throw new InvalidOperationException($"UI output '{key}' must contain a JSON array in every UI return.");
+                foreach (var value in values) items.Add(value?.DeepClone());
+            }
+            merged[key] = items;
+        }
+        return merged;
     }
 
     private sealed class NodeFailure(string nodeId, string message) : Exception(message) { public string NodeId { get; } = nodeId; }

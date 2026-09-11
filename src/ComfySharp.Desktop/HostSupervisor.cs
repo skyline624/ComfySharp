@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Json;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text.Json.Nodes;
 
 namespace ComfySharp.Desktop;
@@ -18,17 +19,42 @@ public sealed class HostSupervisor : IDisposable
     public bool Ready { get; private set; }
     public event EventHandler? Changed;
     private void SetStatus(string text) { Status = text; Changed?.Invoke(this, EventArgs.Empty); }
-    public static string? DiscoverHost(string? baseDirectory = null)
+    public static string? DiscoverHost(string? baseDirectory = null, string? configuredHostPath = null)
     {
-        var configured = Environment.GetEnvironmentVariable("COMFYSHARP_HOST_PATH");
+        var configured = configuredHostPath ?? Environment.GetEnvironmentVariable("COMFYSHARP_HOST_PATH");
         if (!string.IsNullOrWhiteSpace(configured)) return Path.GetFullPath(configured);
         var directory = new DirectoryInfo(baseDirectory ?? AppContext.BaseDirectory);
-        foreach (var name in new[] { "ComfySharp.Host.exe", "ComfySharp.Host", "ComfySharp.Host.dll" })
-        { var path = Path.Combine(directory.FullName, name); if (File.Exists(path)) return path; }
+        var names = OperatingSystem.IsWindows()
+            ? new[] { "ComfySharp.Host.exe", "ComfySharp.Host.dll" }
+            : new[] { "ComfySharp.Host", "ComfySharp.Host.dll" };
+        // Published processes have separate dependency closures (including different
+        // SkiaSharp versions). Always prefer host/ over a legacy flat layout.
+        foreach (var folder in new[] { Path.Combine(directory.FullName, "host"), directory.FullName })
+            foreach (var name in names)
+            { var path = Path.Combine(folder, name); if (File.Exists(path)) return path; }
+        var runtime = RuntimeInformation.OSArchitecture switch
+        {
+            Architecture.X64 when OperatingSystem.IsWindows() => "win-x64",
+            Architecture.X64 when OperatingSystem.IsLinux() => "linux-x64",
+            Architecture.Arm64 when OperatingSystem.IsMacOS() => "osx-arm64",
+            _ => null
+        };
+        var configurations = new[] { "Debug", "Release" };
+        for (var ancestor = directory; ancestor is not null; ancestor = ancestor.Parent)
+            if (ancestor.Name is "Debug" or "Release")
+            {
+                configurations = ancestor.Name == "Release" ? ["Release", "Debug"] : ["Debug", "Release"];
+                break;
+            }
         for (var parent = directory; parent is not null; parent = parent.Parent)
-            foreach (var configuration in new[] { "Debug", "Release" })
-                foreach (var name in new[] { "ComfySharp.Host.exe", "ComfySharp.Host", "ComfySharp.Host.dll" })
-                { var path = Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin", configuration, "net10.0", name); if (File.Exists(path)) return path; }
+            foreach (var buildRoot in runtime is null
+                    ? new[] { Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin") }
+                    : new[] {
+                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin", "native", runtime, "cpu"),
+                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin") })
+                foreach (var configuration in configurations)
+                    foreach (var name in names)
+                    { var path = Path.Combine(buildRoot, configuration, "net10.0", name); if (File.Exists(path)) return path; }
         return null;
     }
     public async Task StartAsync(CancellationToken cancellationToken = default)
@@ -70,7 +96,12 @@ public sealed class HostSupervisor : IDisposable
         finally { gate.Release(); }
     }
     public async Task<JsonObject> GetAsync(string route) => await client.GetFromJsonAsync<JsonObject>(Endpoint(route)) ?? new JsonObject();
-    public async Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null) => await PostAsync("/prompt", new JsonObject { ["prompt"] = prompt.DeepClone(), ["client_id"] = clientId, ["partial_execution_targets"] = targets is null ? null : new JsonArray(targets.Select(t => (JsonNode?)JsonValue.Create(t)).ToArray()) });
+    public Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null)
+    {
+        var body = new JsonObject { ["prompt"] = prompt.DeepClone(), ["client_id"] = clientId };
+        if (targets is not null) body["partial_execution_targets"] = new JsonArray(targets.Select(t => (JsonNode?)JsonValue.Create(t)).ToArray());
+        return PostAsync("/prompt", body);
+    }
     public Task<JsonObject> InterruptAsync(string promptId) => PostAsync("/interrupt", new JsonObject { ["prompt_id"] = promptId });
     private Uri Endpoint(string route) => Ready && Address is not null ? new Uri(Address, route) : throw new InvalidOperationException("Host is not ready.");
     private async Task<JsonObject> PostAsync(string route, JsonObject body)

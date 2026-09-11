@@ -106,8 +106,9 @@ public sealed class HostTests
         Assert.Empty(before!["queue_pending"]!.AsArray());
         var response = await client.PostAsJsonAsync("/api/prompt", JsonNode.Parse("""
             {"prompt":{"1":{"class_type":"PrimitiveString","inputs":{"value":"Bonjour 🌍"}},
-                       "2":{"class_type":"StringLength","inputs":{"string":["1",0]}}},
-             "partial_execution_targets":["2"]}
+                       "2":{"class_type":"StringLength","inputs":{"string":["1",0]}},
+                       "3":{"class_type":"PreviewAny","inputs":{"source":["2",0]}}},
+             "partial_execution_targets":["3"]}
             """));
         response.EnsureSuccessStatusCode();
         var accepted = await response.Content.ReadFromJsonAsync<JsonObject>();
@@ -121,7 +122,12 @@ public sealed class HostTests
             await Task.Delay(10, timeout.Token);
         } while (true);
         var history = await client.GetFromJsonAsync<JsonObject>($"/history/{id}");
-        Assert.Equal(9, history![id]!["outputs"]!["2"]![0]![0]!.GetValue<int>());
+        Assert.Equal("9", history![id]!["outputs"]!["3"]!["text"]![0]!.GetValue<string>());
+        Assert.Equal("3", Assert.Single(history[id]!["outputs"]!.AsObject()).Key);
+        Assert.Equal("3", history[id]!["meta"]!["3"]!["node_id"]!.GetValue<string>());
+        Assert.Equal("3", history[id]!["meta"]!["3"]!["display_node"]!.GetValue<string>());
+        Assert.Equal("3", history[id]!["meta"]!["3"]!["real_node_id"]!.GetValue<string>());
+        Assert.Null(history[id]!["meta"]!["3"]!["parent_node"]);
         var cancel = await client.PostAsync($"/api/jobs/{id}/cancel", null);
         Assert.False((await cancel.Content.ReadFromJsonAsync<JsonObject>())!["cancelled"]!.GetValue<bool>());
     }
