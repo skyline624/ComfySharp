@@ -1,0 +1,83 @@
+name: SD component source laboratory
+on:
+  push:
+    paths:
+      - 'labs/sd-source/**'
+      - 'labs/clip-source/requirements-*.txt'
+      - '.github/workflows/sd-source-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    name: Frozen SD component reference (${{ matrix.runtime }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+      - name: Restore separate hashed CPU laboratory environment
+        shell: pwsh
+        run: |
+          $laboratory = Join-Path $env:RUNNER_TEMP 'sd-source-python'
+          python -m venv $laboratory
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create laboratory environment.' }
+          $interpreter = if ($IsWindows) { Join-Path $laboratory 'Scripts/python.exe' } else { Join-Path $laboratory 'bin/python' }
+          & $interpreter -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r 'labs/clip-source/requirements-${{ matrix.runtime }}.txt'
+          if ($LASTEXITCODE -ne 0) { throw 'Hashed CPU laboratory restore failed.' }
+          & $interpreter -I -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'Laboratory dependency closure is inconsistent.' }
+      - name: Fetch canonical frozen source blobs and verify SHA256
+        shell: pwsh
+        run: |
+          $snapshot = Join-Path $env:RUNNER_TEMP 'sd-source-snapshot'
+          $files = @{
+            'comfy/conds.py' = '72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0'
+            'comfy/model_sampling.py' = '173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd'
+            'comfy/samplers.py' = 'f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f'
+            'comfy/latent_formats.py' = '8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4'
+            'comfy/ldm/modules/diffusionmodules/util.py' = 'fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e'
+            'comfy/ldm/modules/diffusionmodules/openaimodel.py' = '9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96'
+            'comfy/ldm/modules/attention.py' = '9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960'
+            'comfy/ldm/modules/diffusionmodules/model.py' = 'a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867'
+            'comfy/ldm/models/autoencoder.py' = '24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0'
+            'comfy/ldm/modules/distributions/distributions.py' = '3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772'
+            'comfy/sd.py' = 'ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7'
+          }
+          foreach ($relative in $files.Keys) {
+            $target = Join-Path $snapshot $relative
+            New-Item -ItemType Directory -Path (Split-Path -Parent $target) -Force | Out-Null
+            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/comfy-org/ComfyUI/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/$relative" -OutFile $target
+            if ((Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash.ToLowerInvariant() -ne $files[$relative]) {
+              throw "Frozen source hash mismatch: $relative"
+            }
+          }
+      - name: Execute verified source with synthetic parameters
+        shell: pwsh
+        run: |
+          $laboratory = Join-Path $env:RUNNER_TEMP 'sd-source-python'
+          $interpreter = if ($IsWindows) { Join-Path $laboratory 'Scripts/python.exe' } else { Join-Path $laboratory 'bin/python' }
+          $snapshot = Join-Path $env:RUNNER_TEMP 'sd-source-snapshot'
+          $output = Join-Path $env:RUNNER_TEMP 'sd-source-evidence'
+          & $interpreter -I -B 'labs/sd-source/reference.py' --source-directory $snapshot --output $output --components sampling unet vae guidance
+          if ($LASTEXITCODE -ne 0) { throw 'Independent SD source execution failed.' }
+          git diff --exit-code -- tests/ComfySharp.Inference.Tests/Fixtures
+          if ($LASTEXITCODE -ne 0) { throw 'Source laboratory changed an acceptance fixture.' }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sd-source-torch210-${{ matrix.runtime }}
+          path: ${{ runner.temp }}/sd-source-evidence
+          if-no-files-found: error
