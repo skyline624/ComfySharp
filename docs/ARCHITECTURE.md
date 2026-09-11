@@ -18,6 +18,8 @@ Desktop possède les documents et surveille son processus Host. Les modèles, st
 
 `Nodes` fournit les utilitaires JSON ; `Nodes.Tensor` compose ce registre avec les générateurs/traitements SIGMAS et PreviewAny. Host et l'outil Catalogue emploient cette même composition. Lire les schémas ne charge pas libtorch. Le Desktop ne référence pas Inference. Les résultats et UI sont séparés par `NodeExecutionOutput` ; l'historique ne possède que des snapshots gérés.
 
+`Tokenization` est une bibliothèque C# distincte sans dépendance à Inference ou TorchSharp. Elle possède les ressources CLIP et Unicode figées, les IDs, poids et séquences textuelles ; `tools/ComfySharp.Tokenize` l'utilise pour le diagnostic local. Son intégration aux futurs encodeurs passera par ces contrats textuels, sans déplacer les tenseurs hors du Host.
+
 Les distributions placent Desktop à la racine et toutes les dépendances du Host dans `host/`. Cette isolation permet notamment de garder les versions SkiaSharp propres à Avalonia et TorchSharp. Les bibliothèques natives CPU/CUDA et leurs verrous sont sélectionnés au niveau des processus consommateurs, sans injecter ces payloads dans les bibliothèques communes ou l'inspecteur de métadonnées.
 
 Une seule exécution active initialement. Le propriétaire de la file associe chaque annulation à l'identité du job sous verrou ; le moteur observe son jeton. Les événements HTTP/WS sont une adaptation des événements métier, pas une dépendance du moteur au serveur.
