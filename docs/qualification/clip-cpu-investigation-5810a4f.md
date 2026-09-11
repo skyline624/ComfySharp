@@ -2,6 +2,8 @@
 
 This is a record of partial results and unresolved numerical failures, **not** a cross-platform qualification or a model-compatibility claim. The implementation is on `codex/lot6-clip-encoders`; the integration branch has not been advanced for this tranche.
 
+The subsequent [isolated source 2.10 comparison](clip-source-210-d43ccfb.md) reproduces the product's principal outputs on each platform. It adds diagnostic evidence while preserving the original failures recorded here.
+
 ## Revisions and acceptance
 
 - Implementation: `74261504e62487cc8acaada882c6f1f4789cd7b8`.
