@@ -4,7 +4,7 @@
 
 | Composant | Disponible | Limites |
 |---|---|---|
-| Dépôt/socle | Dépôt public indépendant, clone propre vérifié, .NET 10, verrous, GPLv3 ; base à 177 tests sur les trois OS, nouvelle tranche à 250 tests Windows | Nouvelle campagne CI, démarrage graphique réel Linux/macOS et installations propres à qualifier |
+| Dépôt/socle | Lot 0 validé : dépôt public indépendant, clone propre vérifié, .NET 10, verrous, GPLv3 ; 250 tests, probe CPU et démarrage graphique Desktop/Host sur les trois OS | Installations propres et distributions finales à qualifier au lot 12 |
 | Moteur | Valeurs JSON/natives/listes/maps, propriété partagée déterministe, résultats libérables, validation, cibles indépendantes, listes/repeat-last, async, lazy, annulation et mémoïsation par job | Expansion, bloqueurs, sous-graphes, caches persistants et offload à porter |
 | Nœuds | 5 Primitive*, 6 fonctions String/JSON, ComfyNotNode, ComfySwitchNode | 13 identifiants sur le catalogue ; aucun nœud modèle |
 | Documents | Import/export préservant champs inconnus, édition/undo, compilation conservatrice | Cas non pris en charge refusés explicitement ; pas de compilateur frontend complet |

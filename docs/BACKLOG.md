@@ -4,7 +4,7 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 
 | Lot | Livré dans le socle initial | Travail nécessaire avant clôture |
 |---|---|---|
-| 0 | Dépôt public indépendant, clone propre, Host/Desktop, 177 tests et probe CPU en CI trois OS, archives autonomes construites | Démarrage graphique réel et communication Desktop/Host sur Linux/macOS |
+| 0 | Validé : dépôt public indépendant, clone propre, Host/Desktop, 250 tests et probe CPU en CI trois OS, fenêtres natives communiquant avec leur Host, archives autonomes construites | Critères du socle satisfaits ; installations et distributions finales suivies au lot 12 |
 | 1 | Manifeste de 1 160 entrées, inscriptions intégrées rapprochées, 663 contrats de source et contrôles .NET | Finalisation des schémas/fournisseurs dynamiques, variantes de modèles/encodeurs/VAE/widgets, corpus, poids/hash, tolérances |
 | 2 | Lecteur sûr initial, probe CPU et RTX3090 CUDA, gradients | Primitives complètes, SD1.5 réel, Linux/CUDA, macOS/MPS, médias et longs tests de ressources |
 | 3 | Valeurs natives possédées, conteneurs, résultats libérables, validation, sorties indépendantes, listes, lazy, async, annulation | Expansion/sous-graphes, bloqueurs, hooks, caches/LRU/pression, concurrence des branches |
@@ -18,8 +18,8 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 | 11 | Base native C#/XAML | Widgets/outils locaux avancés, SDK et qualification UI |
 | 12 | Aucune V1 publiée | Toutes preuves, installations propres, distributions, notices/SBOM/checksums |
 
-Ordre suivant : terminer les contrôles de démarrage graphique du socle ; rendre l'inventaire exhaustif et les corpus reproductibles ; porter la détection, la tokenisation et les composants SD1.5 avec vrais poids ; compléter le moteur et le document en parallèle ; avancer par famille dans la matrice. Les preuves Linux/CUDA et Mac/MPS attendent les machines prévues ; les tests CPU en CI ont déjà réussi et les autres travaux continuent.
+Ordre suivant : rendre l'inventaire exhaustif et les corpus reproductibles ; porter la détection, la tokenisation, les schedulers/samplers et les composants SD1.5 avec vrais poids ; compléter le moteur et le document en parallèle ; avancer par famille dans la matrice. Les preuves Linux/CUDA et Mac/MPS attendent les machines prévues ; les tests CPU et le démarrage graphique en CI ont réussi et les autres travaux continuent.
 
-Suivis du lot 2 après revue du bootstrap macOS : prouver en processus neuf que la lecture de métadonnées ne charge aucune bibliothèque native et que les points d'entrée tensoriels s'initialisent seuls ; remplacer les valeurs mémoire macOS non exploitables ; qualifier ou reconstruire le bridge avec une cible macOS 14 explicite avant publication des distributions natives.
+Suivis du lot 2 après revue du bootstrap macOS : l'inspection en processus neuf sans libtorch et les points d'entrée tensoriels initiaux passent en CI ; remplacer les valeurs mémoire macOS non exploitables ; qualifier ou reconstruire le bridge avec une cible macOS 14 explicite avant publication des distributions natives.
 
 Le calendrier complet sera établi à partir du lot 1 et des qualifications du lot 2. Aucune durée artificielle n'est déduite du nombre de fichiers ou des seuls nœuds déjà portés.
