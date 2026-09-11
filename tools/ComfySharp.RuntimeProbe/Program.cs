@@ -4,16 +4,19 @@ using ComfySharp.Inference;
 using TorchSharp;
 using static TorchSharp.torch;
 
-if (args.Length > 0 && args[0] is "clip" or "sd")
+if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline")
 {
     using var cancellation = new CancellationTokenSource();
     ConsoleCancelEventHandler cancel = (_, eventArgs) => { eventArgs.Cancel = true; cancellation.Cancel(); };
     Console.CancelKeyPress += cancel;
     try
     {
-        return args[0] == "clip"
-            ? ComfySharp.RuntimeProbe.ClipDiagnostic.Run(args[1..], Console.Out, cancellation.Token)
-            : ComfySharp.RuntimeProbe.SdDiagnostic.Run(args[1..], Console.Out, cancellation.Token);
+        return args[0] switch
+        {
+            "clip" => ComfySharp.RuntimeProbe.ClipDiagnostic.Run(args[1..], Console.Out, cancellation.Token),
+            "sd" => ComfySharp.RuntimeProbe.SdDiagnostic.Run(args[1..], Console.Out, cancellation.Token),
+            _ => ComfySharp.RuntimeProbe.Sd15PipelineDiagnostic.Run(args[1..], Console.Out, cancellation.Token)
+        };
     }
     finally { Console.CancelKeyPress -= cancel; }
 }

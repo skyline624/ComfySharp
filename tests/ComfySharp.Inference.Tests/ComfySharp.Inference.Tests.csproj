@@ -15,11 +15,17 @@
     <EmbeddedResource Include="Fixtures/clip-tiny-*.synthetic.safetensors" />
     <EmbeddedResource Include="Fixtures/sd-components.*.json" />
     <EmbeddedResource Include="Fixtures/sd-euler.*.json" />
+    <EmbeddedResource Include="../../tools/ComfySharp.RuntimeProbe/Fixtures/sd15-pipeline.protocol.json"
+      Link="Fixtures/sd15-pipeline.protocol.json"
+      LogicalName="ComfySharp.RuntimeProbe.Fixtures.sd15-pipeline.protocol.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/ClipDiagnostic.cs" Link="Diagnostic/ClipDiagnostic.cs" />
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdSyntheticRecipe.cs" Link="Diagnostic/SdSyntheticRecipe.cs" />
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdSyntheticWeightBuilder.cs" Link="Diagnostic/SdSyntheticWeightBuilder.cs" />
     <Compile Include="../../tools/ComfySharp.RuntimeProbe/SdDiagnostic.cs" Link="Diagnostic/SdDiagnostic.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/Sd15PipelineExecution.cs" Link="Diagnostic/Sd15PipelineExecution.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/Sd15PipelineCases.cs" Link="Diagnostic/Sd15PipelineCases.cs" />
+    <Compile Include="../../tools/ComfySharp.RuntimeProbe/Sd15PipelineDiagnostic.cs" Link="Diagnostic/Sd15PipelineDiagnostic.cs" />
   </ItemGroup>
 </Project>

@@ -6,4 +6,8 @@
   <ItemGroup>
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fixtures/sd15-pipeline.protocol.json"
+      LogicalName="ComfySharp.RuntimeProbe.Fixtures.sd15-pipeline.protocol.json" />
+  </ItemGroup>
 </Project>

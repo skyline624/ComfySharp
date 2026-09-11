@@ -1,0 +1,542 @@
+{
+  "schema": 1,
+  "evidence": "SD1.5 reduced pipeline composition and managed plan isolation",
+  "documentation": "../SD15_PIPELINE.md",
+  "prospectiveNumericalProfile": "sd15-pipeline-native210-cpu-f32-v1.md",
+  "protocolSha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "scope": {
+    "platform": "win-x64",
+    "device": "cpu",
+    "configurationKind": "reduced_diagnostic",
+    "syntheticWeights": true,
+    "pretrainedWeightsUsed": false,
+    "modelCompatibility": "not_assessed",
+    "numericalQualification": "not_performed",
+    "familyCompatibility": false,
+    "generationNodeAdded": false,
+    "releaseReadinessEstablished": false,
+    "crossOsPipelineQualification": false
+  },
+  "testedRevision": {
+    "identity": "specific working-tree source hashes below, not a claim about the whole later checkout",
+    "chronology": "The complete 1351-test run preceded application of the separate 12-file native-aligned diagnostic patch. This evidence does not assert a complete suite run after that patch.",
+    "sourceHashes": {
+      "tools/ComfySharp.RuntimeProbe/Sd15PipelineDiagnostic.cs": {
+        "bytes": 21154,
+        "sha256": "141106b5bc360d7139924c67f57fbb6c0f237be2ea2fa4ad84e756667b420228"
+      },
+      "tools/ComfySharp.RuntimeProbe/Program.cs": {
+        "bytes": 5344,
+        "sha256": "b0f8f01d4f83a154ed6d4ff4ecaed8ad49a26086afc611a17f1417007a6ec632"
+      },
+      "tools/ComfySharp.RuntimeProbe/Sd15PipelineExecution.cs": {
+        "bytes": 8698,
+        "sha256": "0dd140d5c28a49d03e22cfa7e9f2710821445b92a3dbc0387fa8ae0eb3ccf7d6"
+      },
+      "tools/ComfySharp.RuntimeProbe/Sd15PipelineCases.cs": {
+        "bytes": 19798,
+        "sha256": "c108a87b0d0b93c55b143bf47440fb49530a41ef2b72ea69be890582486d01b9"
+      },
+      "tools/ComfySharp.RuntimeProbe/SdSyntheticWeightBuilder.cs": {
+        "bytes": 8455,
+        "sha256": "429b54015d13a32490268ed3cced66420b329dab2878412057aa34d2c0a8b4ef"
+      },
+      "tools/ComfySharp.RuntimeProbe/SdSyntheticRecipe.cs": {
+        "bytes": 2381,
+        "sha256": "e9dea1fda83facef3d46c598709075d019e1b814d100371546d52234445934b2"
+      },
+      "tools/ComfySharp.RuntimeProbe/Fixtures/sd15-pipeline.protocol.json": {
+        "bytes": 78526,
+        "sha256": "f0e4f537414c6f8692c852832d040fe3fd5dc23fdc270bb351a16bbba6cd75e7"
+      },
+      "tests/ComfySharp.Inference.Tests/Sd15PipelineExecutionTests.cs": {
+        "bytes": 10531,
+        "sha256": "a8b041d28f1d11ceb61a759675478a7fa58904ecf073c51749a0a3aee6388730"
+      },
+      "tests/ComfySharp.Inference.Tests/Sd15PipelineCasesTests.cs": {
+        "bytes": 7091,
+        "sha256": "d9ad814d2be44d3ee7c05e5e74a4e75206041ae10c836e9175d1d176eb21e168"
+      },
+      "tests/ComfySharp.Inference.Tests/Sd15PipelineDiagnosticTests.cs": {
+        "bytes": 10266,
+        "sha256": "d5f57eee040f810314ddfeba5e5636e535145f65c1e8306a86283a60c752248c"
+      },
+      "tests/ComfySharp.Inference.Tests/SdReferenceRuntime.cs": {
+        "bytes": 752,
+        "sha256": "ce6abf784d65dd85b385d7878ef3dc470005d4e7a4d4d1bf47af2171cac8dd64"
+      }
+    },
+    "sourceHashTiming": "Captured during this audit; the root confirmed these pipeline files were stable during the reported test run. TRX does not itself bind source hashes."
+  },
+  "localSuite": {
+    "status": "passed",
+    "uniqueTestIds": 1351,
+    "executed": 1351,
+    "passed": 1351,
+    "failed": 0,
+    "notExecuted": 0,
+    "trxCount": 6,
+    "inferenceTests": 565,
+    "newPipelineTests": 29,
+    "newTestsByClass": {
+      "Sd15PipelineExecutionTests": 12,
+      "Sd15PipelineCasesTests": 6,
+      "Sd15PipelineDiagnosticTests": 11
+    },
+    "deduplication": "Counted UnitTestResult testId across all six TRX files; no duplicate testId present.",
+    "trx": [
+      {
+        "assembly": "ComfySharp.Core.Tests",
+        "sha256": "90a24f8c627546af09b9884ed397fba338b94d5444592d51551d64678cbfbf00",
+        "bytes": 134139,
+        "counters": {
+          "total": 88,
+          "executed": 88,
+          "passed": 88,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Desktop.Tests",
+        "sha256": "419c8ccf9d660a449df53fe247cc6c4d4a8706c4fc434a507f97393999d51651",
+        "bytes": 48689,
+        "counters": {
+          "total": 32,
+          "executed": 32,
+          "passed": 32,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Host.Tests",
+        "sha256": "81d696af6d0c9c52c10290eb05dd17455aca36ce5da5426facea4f465386d69a",
+        "bytes": 248716,
+        "counters": {
+          "total": 109,
+          "executed": 109,
+          "passed": 109,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Inference.Tests",
+        "sha256": "cac8498cbde5ae4b131c885191f6c0ebd4c9f3646ba90876c24c12602caa4a72",
+        "bytes": 907485,
+        "counters": {
+          "total": 565,
+          "executed": 565,
+          "passed": 565,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Tokenization.Tests",
+        "sha256": "84b43e78e4f958551dce8e38bc4d7031d29c5bfcf8eca447dcb960ffedd6d3f6",
+        "bytes": 814012,
+        "counters": {
+          "total": 540,
+          "executed": 540,
+          "passed": 540,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      },
+      {
+        "assembly": "ComfySharp.Workflow.Tests",
+        "sha256": "ec61739fb7c9ac520541f492253dabaf8a3bbe40b105f2237070fc6593efd1b8",
+        "bytes": 25754,
+        "counters": {
+          "total": 17,
+          "executed": 17,
+          "passed": 17,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        }
+      }
+    ],
+    "newTestResults": [
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 5, cancel: False)",
+        "testId": "65c291db-ae61-2ffd-69f4-676dfaa1cad1",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.EmbeddedProtocolHasTheFrozenBytesAndExactlyFourOrdinalCaseIds",
+        "testId": "44cdd428-4a8e-b383-8667-e2b00fbd61f0",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.RealTokenizationMatchesSourceTriplesAndInputCopiesKeepFrozenBits(id: \"weighted-three-step\", positiveChunks: 1, noiseHash: \"69924ea37d7ed7a2fb3f81733f5b9eefef2be39371ff764d30\"···, sigmaHash: \"3bb2a6233a39c9f1f4bf50e3b0f1849d7e28cb46845ac838a8\"···)",
+        "testId": "857e5582-6428-c753-e1c7-179194b82d83",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 4, cancel: False)",
+        "testId": "b9aed758-3e8e-5890-a0b8-bfbad971dc43",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 6)",
+        "testId": "5a86a171-3e1a-6293-4f2a-923044748648",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.PreCancellationAndInsufficientExecutionBudgetLeaveNoEvidenceDirectory",
+        "testId": "294bd505-5673-706e-e938-4b4c7c878a20",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 0, cancel: False)",
+        "testId": "63f9f660-bd41-8167-4060-4ad1b35b3507",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 1)",
+        "testId": "ca3c0237-759d-ed47-7b9c-1d3ad39f78d3",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.PreCancelledTokenizationPreservesTheCancellationTokenAndCaseInputs",
+        "testId": "7c36191c-c135-9742-0f8f-6793aef9d2ed",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 7, cancel: True)",
+        "testId": "044051f9-860a-1d8b-0bd5-fc482255ebbb",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.ExplicitExecutionRunsTheThreeGraphsAndCommitsOnlyRepeatableCompleteEvidence",
+        "testId": "cb3991fd-83eb-f2bb-04c4-ba7903bdf688",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 6, cancel: False)",
+        "testId": "3da91dba-2559-2462-b67f-7f7072d298dc",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 3)",
+        "testId": "d335da24-298f-90ab-9367-b68b77684c3d",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 6, cancel: True)",
+        "testId": "edf962cb-c4ed-4957-7aee-89071956db64",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 2)",
+        "testId": "f40beafb-c4b5-24a3-8bb1-8491b6c5a92b",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 4)",
+        "testId": "a056a3de-02f8-f8fe-2217-5ce2120eb4f6",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.RealTextAndAllGraphsExecuteWithIndependentResultsAfterCallerDisposal",
+        "testId": "158e5395-9a55-98b6-b1b7-b1ffdf015b1a",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.SnapshotSerializesAViewWithoutChangingItsLayoutOrOwnershipAndRejectsNonfiniteData",
+        "testId": "bc4207fa-1626-44a3-78b6-8d8f4241dcea",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.RejectedInputOrCancelledCallCannotReachEncoderOrChangeTheInputs",
+        "testId": "9807564e-06f1-e0d2-729b-d15091c46ab4",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 0)",
+        "testId": "f3eca250-452b-c469-a26c-70b01fd43dfe",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 4, cancel: True)",
+        "testId": "0a020b3f-4f94-6965-d025-01b5dc373308",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.RealTokenizationMatchesSourceTriplesAndInputCopiesKeepFrozenBits(id: \"maximum-start\", positiveChunks: 1, noiseHash: \"67f137d4b7aa75a70c4f9fc6fc46d43144b97672b6b3541b9c\"···, sigmaHash: \"f5e113d0e100491cb7b74b5dcf9efa8d811db876880c1f36c1\"···)",
+        "testId": "3eff1d14-6fca-f25c-4c78-22e61d1dce5e",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 5, cancel: True)",
+        "testId": "d5678af6-5303-899a-825b-d1286af65497",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.RealTokenizationMatchesSourceTriplesAndInputCopiesKeepFrozenBits(id: \"two-chunks-separate\", positiveChunks: 2, noiseHash: \"279b573be888c5403a724cb58e24f178dff46055e2f39d36c2\"···, sigmaHash: \"c31a22b7f25d8cbe512651e536c7e4d1b1854a84d1429f66aa\"···)",
+        "testId": "88e29ec7-eb17-4a35-bbe2-ced21dc98ebc",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineCasesTests.RealTokenizationMatchesSourceTriplesAndInputCopiesKeepFrozenBits(id: \"empty-one-step\", positiveChunks: 1, noiseHash: \"52727422e6b362b1568e39c239ef6fc81a336ed85ea48dc45f\"···, sigmaHash: \"3c076e693c51f8000439e20c7107a4ee0a0f883f418fd78a2c\"···)",
+        "testId": "50cf78b3-05f0-e066-d482-61c2bdddd439",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.PlanReportsReducedScopeAndBudgetRejectionBeforeNativeInitialization",
+        "testId": "3549f77e-fb8b-e79b-519e-aa2b7d9edf88",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 0, cancel: True)",
+        "testId": "eddb216d-e82b-ffe8-6815-ebdcfe9f69a8",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests.InvalidCommandsDoNotCreateAnOutputOrEchoPrivateArguments(scenario: 5)",
+        "testId": "fc932eab-1f7d-7338-fcc4-24ed0536f193",
+        "outcome": "Passed"
+      },
+      {
+        "class": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests",
+        "test": "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests.BoundaryFailureReleasesAllProducedTensorsAndPreservesCallerGraphs(failAtValue: 7, cancel: False)",
+        "testId": "db075ea9-aeea-b86f-f32f-378326df5a5b",
+        "outcome": "Passed"
+      }
+    ],
+    "rawAuditSha256": "07c95760a3baad27d8e81c67a369da324c254f8bf7849cf4b78d97948cad81ab"
+  },
+  "managedPlanIsolation": {
+    "status": "passed",
+    "execution": "Root built and ran the isolated harness; the independent audit only read files and PE metadata.",
+    "actualProductEntryPoint": "<Main>$",
+    "freshProcess": true,
+    "actualMainCalls": 3,
+    "calls": [
+      {
+        "case": "two-chunks-separate",
+        "operation": "plan",
+        "exitCodeAsserted": 0
+      },
+      {
+        "case": "two-chunks-separate",
+        "operation": "plan with 1 MiB budget",
+        "exitCodeAsserted": 3
+      },
+      {
+        "case": "two-chunks-separate",
+        "operation": "execute without required admissions",
+        "exitCodeAsserted": 2
+      }
+    ],
+    "firstMainCall": "sd15-pipeline --case two-chunks-separate",
+    "nativeImportAttempts": 0,
+    "nativeRuntimeModulesBefore": 0,
+    "nativeRuntimeModulesAfter": 0,
+    "moduleInventoryCounts": {
+      "before": 47,
+      "after": 57
+    },
+    "nativePayloadFiles": 0,
+    "managedIlOnlyDlls": 7,
+    "payloadFiles": 9,
+    "productAssemblies": [
+      {
+        "name": "ComfySharp.RuntimeProbe.dll",
+        "bytes": 240128,
+        "sha256": "bd7c6818e03e1acf6b7689fa3718ed44936edb4af037ca4cc6cf73f3b5ca78ef",
+        "cliFlags": 1,
+        "ilOnly": true
+      },
+      {
+        "name": "ComfySharp.Inference.dll",
+        "bytes": 157184,
+        "sha256": "94908671d447ce72559e4dcc5bdac46584e1689db95ead75c294c08c01561a1a",
+        "cliFlags": 1,
+        "ilOnly": true
+      },
+      {
+        "name": "ComfySharp.Tokenization.dll",
+        "bytes": 2212864,
+        "sha256": "1e537696ece8165fddb6a5a4948f8c1341cfaf5b87f0922095b9f6c410c03eaa",
+        "cliFlags": 1,
+        "ilOnly": true
+      },
+      {
+        "name": "TorchSharp.dll",
+        "bytes": 1556920,
+        "sha256": "4cdbefe569482662109119685a31312c556ce24e67b6daf75eb16cc62264809c",
+        "cliFlags": 9,
+        "ilOnly": true
+      },
+      {
+        "name": "Google.Protobuf.dll",
+        "bytes": 409368,
+        "sha256": "7950bf1bd9a8cbf6b24331eba3aba6104d4583876e7c012752b88f4807addca8",
+        "cliFlags": 9,
+        "ilOnly": true
+      },
+      {
+        "name": "ICSharpCode.SharpZipLib.dll",
+        "bytes": 246272,
+        "sha256": "c788b80b6e047d755b91303b50a908e6a793625639a863e984da3d113e329edb",
+        "cliFlags": 9,
+        "ilOnly": true
+      },
+      {
+        "name": "SkiaSharp.dll",
+        "bytes": 432568,
+        "sha256": "6beeb14c4b6a6943db822e7503d04c4a7e527a48ba8a6f87595ad06f07dc445f",
+        "cliFlags": 9,
+        "ilOnly": true
+      }
+    ],
+    "payloadHashesVerifiedBeforeAfter": true,
+    "managedResolutionRestrictedAndChecked": true,
+    "modelExecutionPerformed": false,
+    "tokenization": {
+      "positiveChunks": 2,
+      "negativeChunks": 1,
+      "idsWeightsWordIdsVerifiedByActualFrozenCaseLoader": true
+    },
+    "parameterCount": 971,
+    "parameterBytes": 58137836,
+    "inputBytes": 4028,
+    "rawResultSha256": "8a3b549c2d68860e4e443a179126055e938766eec18c13b1e2113cc8791aecb3",
+    "rawSnapshotSha256": "3d143ffb0939da66aa4968b79bcc65b7216e5bc243b77f04e92ad78202bc5777",
+    "harnessSources": {
+      "Program.cs": {
+        "bytes": 9808,
+        "sha256": "93ce08f656a851eafe819029cbd23cffae4341fbfd8c6649872f1e3debe17286"
+      },
+      "PlanIsolation.csproj": {
+        "bytes": 483,
+        "sha256": "7df3b0cef5b3578e97fd522d86f07afb23edf4751f0596e3e2bef190b120de79"
+      },
+      "NuGet.Config": {
+        "bytes": 74,
+        "sha256": "9508cae5f76364f56e80eb97cb16493977243cf38e5cca6284e3d74f83b20a2c"
+      },
+      "prepare.py": {
+        "bytes": 2673,
+        "sha256": "5a8d9ae1aea63d178239146ab59339bd78bc33ac858cef809a09bf595a48dc00"
+      },
+      "run-root.ps1": {
+        "bytes": 661,
+        "sha256": "239e68a7ecba415310807566aac1ef62d4c021bed8646d4eee9436a8783b89e8"
+      }
+    },
+    "harnessBinary": {
+      "bytes": 26112,
+      "sha256": "62e89358c5d09b92bf0dc44cb0cc5b6fdb295b442912743e8c583b3a8d46c7fe"
+    },
+    "limits": [
+      "Local Windows metadata/tokenization/rejected-admission paths only; no model forward occurred in this isolation process.",
+      "The resolver refuses TorchSharp DllImports, complemented by payload checks and before/after module maps; this is not an OS sandbox for every possible native-loading mechanism.",
+      "No private module paths, host names or raw module inventories are published here."
+    ]
+  },
+  "remainingGates": [
+    "Independent source comparison of the complete prospective pipeline captures remains separate.",
+    "CLI captures eight boundaries per case and explicitly does not expose Euler step captures; it cannot alone validate the complete 64-record source corpus.",
+    "Repeatable hashes and successful behavior tests do not establish source parity.",
+    "Full widths, pretrained checkpoints, other OS numerical acceptance, GPU, generation-node integration and V1 release criteria remain open."
+  ]
+}
