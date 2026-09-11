@@ -82,6 +82,10 @@ public static class TensorNodes
                 if (value.dim() != 1) throw new ArgumentException("SIGMAS requires a rank-one tensor.");
                 return value;
             }
+            // Opening a TorchSharp scope is itself a first native-runtime access.
+            // Preload the bundled macOS OpenMP dependency before that access, not
+            // only later inside the scheduler/operation that allocates tensors.
+            NativeRuntimeBootstrap.Initialize();
             using var scope = NewDisposeScope();
             IReadOnlyList<RuntimeValue> result;
             if (Schema.ClassType is "SplitSigmas" or "SplitSigmasDenoise")

@@ -43,9 +43,38 @@ jobs:
           # Empty the developer override so success proves discovery inside the archive.
           $env:COMFYSHARP_HOST_PATH = ''
           [Environment]::SetEnvironmentVariable('data-dir', (Join-Path $extracted 'smoke-data'))
-          if ($IsLinux) { $output = & xvfb-run -a -s '-screen 0 1280x800x24' $desktop --smoke-test 2>&1 }
-          else { $output = & $desktop --smoke-test 2>&1 }
-          $exitCode = $LASTEXITCODE
+          if ($IsWindows) {
+            # WinExe apphosts need explicit redirected handles and process waiting.
+            $start = [Diagnostics.ProcessStartInfo]::new()
+            $start.FileName = $desktop
+            $start.WorkingDirectory = $package
+            $start.ArgumentList.Add('--smoke-test')
+            $start.UseShellExecute = $false
+            $start.CreateNoWindow = $true
+            $start.RedirectStandardOutput = $true
+            $start.RedirectStandardError = $true
+            $child = [Diagnostics.Process]::new()
+            $child.StartInfo = $start
+            $limit = [Threading.CancellationTokenSource]::new([TimeSpan]::FromMinutes(2))
+            try {
+              if (-not $child.Start()) { throw 'Extracted Desktop apphost did not start.' }
+              $stdout = $child.StandardOutput.ReadToEndAsync()
+              $stderr = $child.StandardError.ReadToEndAsync()
+              try { [void]$child.WaitForExitAsync($limit.Token).GetAwaiter().GetResult() }
+              catch {
+                if (-not $child.HasExited) { $child.Kill($true); [void]$child.WaitForExit(5000) }
+                throw
+              }
+              $exitCode = $child.ExitCode
+              $output = @($stdout.GetAwaiter().GetResult(), $stderr.GetAwaiter().GetResult())
+            } finally { $limit.Dispose(); $child.Dispose() }
+          } elseif ($IsLinux) {
+            $output = & xvfb-run -a -s '-screen 0 1280x800x24' $desktop --smoke-test 2>&1
+            $exitCode = $LASTEXITCODE
+          } else {
+            $output = & $desktop --smoke-test 2>&1
+            $exitCode = $LASTEXITCODE
+          }
           $output | Write-Output
           if ($exitCode -ne 0 -or ($output -join "`n") -notmatch 'ComfySharp Desktop smoke passed:') { throw "Extracted Desktop / Host smoke failed (exit $exitCode)." }
       # No binary artifact upload: exact dependency notices and SBOM are pending.

@@ -261,7 +261,7 @@ public sealed class HostUiTests
             var kind = message["type"]!.GetValue<string>();
             if (kind == "status") continue;
             Assert.Equal(id, message["data"]!["prompt_id"]!.GetValue<string>());
-            Assert.DoesNotContain(kind, new[] { "execution_error", "execution_failed", "execution_interrupted" });
+            Assert.True(kind is not ("execution_error" or "execution_failed" or "execution_interrupted"), message.ToJsonString());
             if (kind == "executed")
             {
                 var data = message["data"]!.AsObject();
