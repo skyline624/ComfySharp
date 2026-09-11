@@ -5,7 +5,7 @@ namespace ComfySharp.Catalog;
 /// <summary>Cross-checks source evidence documents. It does not establish runtime registration or numerical parity.</summary>
 public static class NodeCatalogueEvidence
 {
-    public static IReadOnlyList<string> Validate(JsonObject manifest, JsonObject registrations, JsonObject schemas)
+    public static IReadOnlyList<string> Validate(JsonObject manifest, JsonObject registrations, JsonObject schemas, JsonObject? staticResolutions = null)
     {
         var errors = new List<string>();
         var revision = Text(manifest["backendCommit"]);
@@ -22,6 +22,19 @@ public static class NodeCatalogueEvidence
             errors.Add("Registration completeness conflicts with unresolved cases.");
         CheckProvenance(registrations, "registrations");
         CheckProvenance(schemas, "schemas");
+        errors.AddRange(NodeSchemaStaticResolution.ValidateAccounting(schemas));
+        bool hasStaticResolutions = schemas.ContainsKey("staticResolution") ||
+            (schemas["records"] as JsonArray)?.OfType<JsonObject>().Any(r => r.ContainsKey("resolvedFields")) == true;
+        if (hasStaticResolutions)
+        {
+            if (staticResolutions is null) errors.Add("Missing reviewed static resolution plan.");
+            else
+            {
+                CheckProvenance(staticResolutions, "staticResolutions");
+                errors.AddRange(NodeSchemaStaticResolution.ValidateApplied(schemas, staticResolutions));
+            }
+        }
+        else if (staticResolutions is not null) errors.Add("Static resolution plan supplied without applied evidence.");
 
         var modules = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
         var orders = new HashSet<int>();

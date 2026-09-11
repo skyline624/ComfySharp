@@ -1,0 +1,872 @@
+{
+  "schemaVersion": 1,
+  "id": "source-static-55-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "interpretation": "Approved literal source declarations only. No Python imports, arbitrary evaluation, runtime schema finalization, node implementation or model qualification.",
+  "sourceBlobs": [
+    {
+      "path": "comfy_api/latest/__init__.py",
+      "bytes": 6307,
+      "sha256": "5d2c1f3e37ecac36d9a4075a644d43ab211d0bbeab4c86698b6c987523ca072d"
+    },
+    {
+      "path": "comfy_api/latest/_io_public.py",
+      "bytes": 33,
+      "sha256": "c805d754d61aba1ea72ed2d9d5c371de35be9affa5305d35426fb298fcb7c046"
+    },
+    {
+      "path": "comfy_api/latest/_io.py",
+      "bytes": 97422,
+      "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080"
+    },
+    {
+      "path": "comfy/comfy_types/__init__.py",
+      "bytes": 1251,
+      "sha256": "da3601f9bf71f36070985bd835df311a06e1c40dbcc86afd13e63cd84ed3054b"
+    },
+    {
+      "path": "comfy/comfy_types/node_typing.py",
+      "bytes": 15221,
+      "sha256": "6bc7906a84333a767e137e89efea041b45966cd589f344a28c14116a2484a7f5"
+    },
+    {
+      "path": "comfy/samplers.py",
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f"
+    },
+    {
+      "path": "comfy_extras/nodes_compositing.py",
+      "bytes": 9367,
+      "sha256": "ef1712ca69ebb1dbd2141bff866674ec73b2ebea757aadf02f7aec59644d9257"
+    },
+    {
+      "path": "nodes.py",
+      "bytes": 108581,
+      "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7"
+    },
+    {
+      "path": "comfy_extras/nodes_custom_sampler.py",
+      "bytes": 49739,
+      "sha256": "b0ba1521c72475e06fed15db004274ed7c8bb2bf73f1d58849faf6f9f9d264fe"
+    }
+  ],
+  "rules": [
+    {
+      "id": "static-01",
+      "expression": "list(SCHEDULER_HANDLERS)",
+      "kind": "ordered-dictionary-keys",
+      "value": [
+        "simple",
+        "sgm_uniform",
+        "karras",
+        "exponential",
+        "ddim_uniform",
+        "beta",
+        "normal",
+        "linear_quadratic",
+        "kl_optimal"
+      ],
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1365",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1376",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1400"
+      ]
+    },
+    {
+      "id": "static-02",
+      "expression": "comfy.comfy_types.IO.STRING",
+      "kind": "string-enum-member",
+      "enumType": "comfy.comfy_types.IO",
+      "member": "STRING",
+      "value": "STRING",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/node_typing.py#L16",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L29",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/__init__.py#L3"
+      ]
+    },
+    {
+      "id": "static-03",
+      "expression": "comfy.comfy_types.IO.CLIP",
+      "kind": "string-enum-member",
+      "enumType": "comfy.comfy_types.IO",
+      "member": "CLIP",
+      "value": "CLIP",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/node_typing.py#L16",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L29",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/__init__.py#L3"
+      ]
+    },
+    {
+      "id": "static-04",
+      "expression": "comfy.comfy_types.IO.CONDITIONING",
+      "kind": "string-enum-member",
+      "enumType": "comfy.comfy_types.IO",
+      "member": "CONDITIONING",
+      "value": "CONDITIONING",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/node_typing.py#L16",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L29",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/comfy_types/__init__.py#L3"
+      ]
+    },
+    {
+      "id": "static-05",
+      "expression": "comfy_api.latest.IO.NumberDisplay.number",
+      "kind": "string-enum-member",
+      "enumType": "NumberDisplay",
+      "member": "number",
+      "value": "number",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L74",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "NumberDisplay"
+    },
+    {
+      "id": "static-06",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "kind": "string-enum-member",
+      "enumType": "Hidden",
+      "member": "prompt",
+      "value": "PROMPT",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L1588",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "Hidden"
+    },
+    {
+      "id": "static-07",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "kind": "string-enum-member",
+      "enumType": "Hidden",
+      "member": "extra_pnginfo",
+      "value": "EXTRA_PNGINFO",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L1588",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "Hidden"
+    },
+    {
+      "id": "static-08",
+      "expression": "[mode.name for mode in PorterDuffMode]",
+      "kind": "enum-names",
+      "value": [
+        "ADD",
+        "CLEAR",
+        "DARKEN",
+        "DST",
+        "DST_ATOP",
+        "DST_IN",
+        "DST_OUT",
+        "DST_OVER",
+        "LIGHTEN",
+        "MULTIPLY",
+        "OVERLAY",
+        "SCREEN",
+        "SRC",
+        "SRC_ATOP",
+        "SRC_IN",
+        "SRC_OUT",
+        "SRC_OVER",
+        "XOR"
+      ],
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L11",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L121"
+      ]
+    },
+    {
+      "id": "static-09",
+      "expression": "PorterDuffMode.DST.name",
+      "kind": "enum-member-name",
+      "value": "DST",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L11",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L121"
+      ],
+      "member": "DST"
+    },
+    {
+      "id": "static-10",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "kind": "string-enum-member",
+      "enumType": "Hidden",
+      "member": "unique_id",
+      "value": "UNIQUE_ID",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L1588",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "Hidden"
+    },
+    {
+      "id": "static-11",
+      "expression": "comfy_api.latest.io.Hidden.prompt",
+      "kind": "string-enum-member",
+      "enumType": "Hidden",
+      "member": "prompt",
+      "value": "PROMPT",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L1588",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "Hidden"
+    },
+    {
+      "id": "static-12",
+      "expression": "comfy_api.latest.io.Hidden.extra_pnginfo",
+      "kind": "string-enum-member",
+      "enumType": "Hidden",
+      "member": "extra_pnginfo",
+      "value": "EXTRA_PNGINFO",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L1588",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "Hidden"
+    },
+    {
+      "id": "static-13",
+      "expression": "comfy_api.latest.IO.UploadType.audio",
+      "kind": "string-enum-member",
+      "enumType": "UploadType",
+      "member": "audio",
+      "value": "audio_upload",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L40",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "UploadType"
+    },
+    {
+      "id": "static-14",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "kind": "string-enum-member",
+      "enumType": "NumberDisplay",
+      "member": "number",
+      "value": "number",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L74",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "NumberDisplay"
+    },
+    {
+      "id": "static-15",
+      "expression": "comfy_api.latest.IO.UploadType.model",
+      "kind": "string-enum-member",
+      "enumType": "UploadType",
+      "member": "model",
+      "value": "file_upload",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L40",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "UploadType"
+    },
+    {
+      "id": "static-16",
+      "expression": "comfy_api.latest.io.UploadType.video",
+      "kind": "string-enum-member",
+      "enumType": "UploadType",
+      "member": "video",
+      "value": "video_upload",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L40",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "UploadType"
+    },
+    {
+      "id": "static-17",
+      "expression": "comfy_api.latest.io.ControlAfterGenerate.fixed",
+      "kind": "string-enum-member",
+      "enumType": "ControlAfterGenerate",
+      "member": "fixed",
+      "value": "fixed",
+      "definitionSource": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io.py#L80",
+      "sources": [
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L9",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/__init__.py#L162",
+        "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_api/latest/_io_public.py#L1"
+      ],
+      "sharedContract": "ControlAfterGenerate"
+    }
+  ],
+  "occurrences": [
+    {
+      "nodeId": "KSampler",
+      "module": "nodes.py",
+      "sourceClass": "KSampler",
+      "path": "inputs/required/scheduler/0",
+      "expression": "list(SCHEDULER_HANDLERS)",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1376",
+      "reason": "runtime-or-unsupported-expression",
+      "rule": "static-01"
+    },
+    {
+      "nodeId": "CLIPTextEncode",
+      "module": "nodes.py",
+      "sourceClass": "CLIPTextEncode",
+      "path": "inputs/required/text/0",
+      "expression": "comfy.comfy_types.IO.STRING",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L61",
+      "reason": "symbolic-reference",
+      "rule": "static-02"
+    },
+    {
+      "nodeId": "CLIPTextEncode",
+      "module": "nodes.py",
+      "sourceClass": "CLIPTextEncode",
+      "path": "inputs/required/clip/0",
+      "expression": "comfy.comfy_types.IO.CLIP",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L62",
+      "reason": "symbolic-reference",
+      "rule": "static-03"
+    },
+    {
+      "nodeId": "CLIPTextEncode",
+      "module": "nodes.py",
+      "sourceClass": "CLIPTextEncode",
+      "path": "outputs/RETURN_TYPES/0",
+      "expression": "comfy.comfy_types.IO.CONDITIONING",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L65",
+      "reason": "symbolic-reference",
+      "rule": "static-04"
+    },
+    {
+      "nodeId": "KSamplerAdvanced",
+      "module": "nodes.py",
+      "sourceClass": "KSamplerAdvanced",
+      "path": "inputs/required/scheduler/0",
+      "expression": "list(SCHEDULER_HANDLERS)",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1376",
+      "reason": "runtime-or-unsupported-expression",
+      "rule": "static-01"
+    },
+    {
+      "nodeId": "ImageColorToMask",
+      "module": "comfy_extras/nodes_mask.py",
+      "sourceClass": "ImageColorToMask",
+      "path": "inputs/1/fields/display_mode",
+      "expression": "comfy_api.latest.IO.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mask.py#L165",
+      "reason": "symbolic-reference",
+      "rule": "static-05"
+    },
+    {
+      "nodeId": "MaskPreview",
+      "module": "comfy_extras/nodes_mask.py",
+      "sourceClass": "MaskPreview",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mask.py#L426",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "MaskPreview",
+      "module": "comfy_extras/nodes_mask.py",
+      "sourceClass": "MaskPreview",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mask.py#L426",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "PorterDuffImageComposite",
+      "module": "comfy_extras/nodes_compositing.py",
+      "sourceClass": "PorterDuffImageComposite",
+      "path": "inputs/4/fields/options",
+      "expression": "[mode.name for mode in PorterDuffMode]",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L121",
+      "reason": "runtime-or-unsupported-expression",
+      "rule": "static-08"
+    },
+    {
+      "nodeId": "PorterDuffImageComposite",
+      "module": "comfy_extras/nodes_compositing.py",
+      "sourceClass": "PorterDuffImageComposite",
+      "path": "inputs/4/fields/default",
+      "expression": "PorterDuffMode.DST.name",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_compositing.py#L121",
+      "reason": "runtime-or-unsupported-expression",
+      "rule": "static-09"
+    },
+    {
+      "nodeId": "BasicScheduler",
+      "module": "comfy_extras/nodes_custom_sampler.py",
+      "sourceClass": "BasicScheduler",
+      "path": "inputs/1/fields/options",
+      "expression": "list(SCHEDULER_HANDLERS)",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1376",
+      "reason": "runtime-or-unsupported-expression",
+      "rule": "static-01"
+    },
+    {
+      "nodeId": "SaveAnimatedWEBP",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveAnimatedWEBP",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L362",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAnimatedWEBP",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveAnimatedWEBP",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L362",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveAnimatedPNG",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveAnimatedPNG",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L397",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAnimatedPNG",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveAnimatedPNG",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L397",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveImageAdvanced",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveImageAdvanced",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L1808",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveImageAdvanced",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveImageAdvanced",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L1808",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveSVGNode",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveSVGNode",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L661",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveSVGNode",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "SaveSVGNode",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L661",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "GetImageSize",
+      "module": "comfy_extras/nodes_images.py",
+      "sourceClass": "GetImageSize",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L733",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "LossGraphNode",
+      "module": "comfy_extras/nodes_train.py",
+      "sourceClass": "LossGraphNode",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.io.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1429",
+      "reason": "symbolic-reference",
+      "rule": "static-11"
+    },
+    {
+      "nodeId": "LossGraphNode",
+      "module": "comfy_extras/nodes_train.py",
+      "sourceClass": "LossGraphNode",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.io.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1429",
+      "reason": "symbolic-reference",
+      "rule": "static-12"
+    },
+    {
+      "nodeId": "SaveAudio",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudio",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L172",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAudio",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudio",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L172",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveAudioMP3",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioMP3",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L202",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAudioMP3",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioMP3",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L202",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveAudioOpus",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioOpus",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L233",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAudioOpus",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioOpus",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L233",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "SaveAudioAdvanced",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioAdvanced",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L281",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveAudioAdvanced",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "SaveAudioAdvanced",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L281",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "LoadAudio",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "LoadAudio",
+      "path": "inputs/0/fields/upload",
+      "expression": "comfy_api.latest.IO.UploadType.audio",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L372",
+      "reason": "symbolic-reference",
+      "rule": "static-13"
+    },
+    {
+      "nodeId": "PreviewAudio",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "PreviewAudio",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L309",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "PreviewAudio",
+      "module": "comfy_extras/nodes_audio.py",
+      "sourceClass": "PreviewAudio",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_audio.py#L309",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "Epsilon Scaling",
+      "module": "comfy_extras/nodes_eps.py",
+      "sourceClass": "EpsilonScaling",
+      "path": "inputs/1/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_eps.py#L30",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "TemporalScoreRescaling",
+      "module": "comfy_extras/nodes_eps.py",
+      "sourceClass": "TemporalScoreRescaling",
+      "path": "inputs/1/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_eps.py#L100",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "TemporalScoreRescaling",
+      "module": "comfy_extras/nodes_eps.py",
+      "sourceClass": "TemporalScoreRescaling",
+      "path": "inputs/2/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_eps.py#L113",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "LTXVEmptyLatentAudio",
+      "module": "comfy_extras/nodes_lt_audio.py",
+      "sourceClass": "LTXVEmptyLatentAudio",
+      "path": "inputs/0/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_lt_audio.py#L107",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "LTXVEmptyLatentAudio",
+      "module": "comfy_extras/nodes_lt_audio.py",
+      "sourceClass": "LTXVEmptyLatentAudio",
+      "path": "inputs/1/arguments/0/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_lt_audio.py#L117",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "LTXVEmptyLatentAudio",
+      "module": "comfy_extras/nodes_lt_audio.py",
+      "sourceClass": "LTXVEmptyLatentAudio",
+      "path": "inputs/2/fields/display_mode",
+      "expression": "comfy_api.latest.io.NumberDisplay.number",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_lt_audio.py#L127",
+      "reason": "symbolic-reference",
+      "rule": "static-14"
+    },
+    {
+      "nodeId": "Load3D",
+      "module": "comfy_extras/nodes_load_3d.py",
+      "sourceClass": "Load3D",
+      "path": "inputs/0/fields/upload",
+      "expression": "comfy_api.latest.IO.UploadType.model",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_load_3d.py#L37",
+      "reason": "symbolic-reference",
+      "rule": "static-15"
+    },
+    {
+      "nodeId": "Load3DAdvanced",
+      "module": "comfy_extras/nodes_load_3d.py",
+      "sourceClass": "Load3DAdvanced",
+      "path": "inputs/0/fields/upload",
+      "expression": "comfy_api.latest.IO.UploadType.model",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_load_3d.py#L356",
+      "reason": "symbolic-reference",
+      "rule": "static-15"
+    },
+    {
+      "nodeId": "SaveWEBM",
+      "module": "comfy_extras/nodes_video.py",
+      "sourceClass": "SaveWEBM",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.io.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_video.py#L29",
+      "reason": "symbolic-reference",
+      "rule": "static-11"
+    },
+    {
+      "nodeId": "SaveWEBM",
+      "module": "comfy_extras/nodes_video.py",
+      "sourceClass": "SaveWEBM",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.io.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_video.py#L29",
+      "reason": "symbolic-reference",
+      "rule": "static-12"
+    },
+    {
+      "nodeId": "SaveVideo",
+      "module": "comfy_extras/nodes_video.py",
+      "sourceClass": "SaveVideo",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.io.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_video.py#L160",
+      "reason": "symbolic-reference",
+      "rule": "static-11"
+    },
+    {
+      "nodeId": "SaveVideo",
+      "module": "comfy_extras/nodes_video.py",
+      "sourceClass": "SaveVideo",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.io.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_video.py#L160",
+      "reason": "symbolic-reference",
+      "rule": "static-12"
+    },
+    {
+      "nodeId": "LoadVideo",
+      "module": "comfy_extras/nodes_video.py",
+      "sourceClass": "LoadVideo",
+      "path": "inputs/0/fields/upload",
+      "expression": "comfy_api.latest.io.UploadType.video",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_video.py#L301",
+      "reason": "symbolic-reference",
+      "rule": "static-16"
+    },
+    {
+      "nodeId": "PrimitiveInt",
+      "module": "comfy_extras/nodes_primitive.py",
+      "sourceClass": "Int",
+      "path": "inputs/0/fields/control_after_generate",
+      "expression": "comfy_api.latest.io.ControlAfterGenerate.fixed",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_primitive.py#L50",
+      "reason": "symbolic-reference",
+      "rule": "static-17"
+    },
+    {
+      "nodeId": "DecimateMesh",
+      "module": "comfy_extras/nodes_mesh_postprocess.py",
+      "sourceClass": "DecimateMesh",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mesh_postprocess.py#L2325",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "RemeshMesh",
+      "module": "comfy_extras/nodes_mesh_postprocess.py",
+      "sourceClass": "RemeshMesh",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mesh_postprocess.py#L2425",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "UnwrapMesh",
+      "module": "comfy_extras/nodes_mesh_postprocess.py",
+      "sourceClass": "UnwrapMesh",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_mesh_postprocess.py#L2743",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "SaveGLB",
+      "module": "comfy_extras/nodes_save_3d.py",
+      "sourceClass": "SaveGLB",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.prompt",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_save_3d.py#L562",
+      "reason": "symbolic-reference",
+      "rule": "static-06"
+    },
+    {
+      "nodeId": "SaveGLB",
+      "module": "comfy_extras/nodes_save_3d.py",
+      "sourceClass": "SaveGLB",
+      "path": "metadata/hidden/1",
+      "expression": "comfy_api.latest.IO.Hidden.extra_pnginfo",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_save_3d.py#L562",
+      "reason": "symbolic-reference",
+      "rule": "static-07"
+    },
+    {
+      "nodeId": "GetMeshInfo",
+      "module": "comfy_extras/nodes_save_3d.py",
+      "sourceClass": "GetMeshInfo",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_save_3d.py#L826",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "GetSplatCount",
+      "module": "comfy_extras/nodes_gaussian_splat.py",
+      "sourceClass": "GetSplatCount",
+      "path": "metadata/hidden/0",
+      "expression": "comfy_api.latest.IO.Hidden.unique_id",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_gaussian_splat.py#L1158",
+      "reason": "symbolic-reference",
+      "rule": "static-10"
+    },
+    {
+      "nodeId": "SeedNode",
+      "module": "comfy_extras/nodes_seed.py",
+      "sourceClass": "SeedNode",
+      "path": "inputs/0/fields/control_after_generate",
+      "expression": "comfy_api.latest.io.ControlAfterGenerate.fixed",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_seed.py#L16",
+      "reason": "symbolic-reference",
+      "rule": "static-17"
+    }
+  ]
+}

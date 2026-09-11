@@ -28,6 +28,8 @@ public sealed class NodeCatalogueEvidenceTests
         var schema = new JsonObject
         {
             ["schemaVersion"] = 1, ["backendCommit"] = Commit, ["unresolvedCases"] = new JsonArray(),
+            ["coverage"] = new JsonObject { ["localNodeRecords"] = 1, ["unresolvedExpressionCount"] = 0,
+                ["statuses"] = new JsonObject { ["resolved-static"] = 1 } },
             ["records"] = new JsonArray(new JsonObject { ["nodeId"] = "Example", ["module"] = "nodes.py", ["sourceClass"] = "Example",
                 ["classSource"] = Source, ["schemaStatus"] = "resolved-static", ["unresolvedFields"] = new JsonArray(),
                 ["schemaSources"] = new JsonArray(Source), ["parameterSources"] = new JsonArray() })
@@ -98,6 +100,8 @@ public sealed class NodeCatalogueEvidenceTests
         var retainedSchema = schema["records"]![0]!.DeepClone().AsObject();
         retainedSchema["nodeId"] = "Unlisted"; retainedSchema["sourceClass"] = "Unlisted";
         schema["records"]!.AsArray().Add(retainedSchema);
+        schema["coverage"]!["localNodeRecords"] = 2;
+        schema["coverage"]!["statuses"]!["resolved-static"] = 2;
         Assert.Empty(Evidence.Validate(manifest, registration, schema));
     }
 

@@ -46,8 +46,16 @@ try
     foreach (var (name, _) in registry)
         if (!localNodes.Contains(name)) errors.Add($"Runtime node missing from manifest: {name}");
     if (registrationPath is not null)
+    {
+        var schemas = JsonNode.Parse(File.ReadAllText(schemaPath!))!.AsObject();
+        JsonObject? staticResolutions = null;
+        if (schemas.ContainsKey("staticResolution") ||
+            (schemas["records"] as JsonArray)?.OfType<JsonObject>().Any(r => r.ContainsKey("resolvedFields")) == true)
+            staticResolutions = JsonNode.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(Path.GetFullPath(schemaPath!))!, NodeSchemaStaticResolution.PlanFileName)))!.AsObject();
         errors.AddRange(NodeCatalogueEvidence.Validate(manifest,
-            JsonNode.Parse(File.ReadAllText(registrationPath))!.AsObject(), JsonNode.Parse(File.ReadAllText(schemaPath!))!.AsObject()));
+            JsonNode.Parse(File.ReadAllText(registrationPath))!.AsObject(), schemas, staticResolutions));
+    }
     if (release) errors.AddRange(ReleaseQualification.Validate(manifest));
     Console.WriteLine(JsonSerializer.Serialize(new
     {
