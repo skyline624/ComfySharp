@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "id": "sd-native-aligned-inputs-v1",
+  "diagnosticOnly": true,
+  "pretrainedWeightsUsed": false,
+  "parentExperiment": "6b1347ccb3f1a4aab96e337925978ea7740992f0",
+  "modes": [
+    "auto",
+    "default"
+  ],
+  "origins": [
+    "source",
+    "original",
+    "nuget-copy",
+    "wheel-copy"
+  ],
+  "cases": 14,
+  "rawUnetCases": 8,
+  "guidancePolicyCases": 6,
+  "repeats": 3,
+  "preparation": "every source and product case unconditionally copies each real input to one native empty CPU/F32 buffer; same copies used for three forwards",
+  "storage": "finite existing corpus, dense contiguous CPU/F32; original and prepared offset=0, exact shape/stride/payload; prepared addressModulo64=0",
+  "order": {
+    "unet": [
+      "latent",
+      "timesteps",
+      "context"
+    ],
+    "guidance": [
+      "latent",
+      "sigma",
+      "positive",
+      "negative"
+    ]
+  },
+  "observation": "metadata from actual forwarded input wrappers immediately before/after each forward; same six observations, no full addresses",
+  "observerSequence": {
+    "unet": [
+      "off",
+      "on",
+      "off"
+    ],
+    "guidance": [
+      "off",
+      "off",
+      "off"
+    ]
+  },
+  "references": "committed expected outputs/tolerance/assertions unchanged; same-host diagnostic sources never replace them",
+  "copyControl": "per-case original/NuGet exact all captures and input/parameter identity/layout/alignment; wheel/NuGet exact input/parameter controls; any mismatch ineligible",
+  "nativeOrigin": "unchanged strict actual unique cores/bridge/OpenMP gate, managed identity, ELF closure, hardlink aliases, inventories and raw lock before/after",
+  "limit": "input allocation changes may change numerical output and internal allocation; bundle contrast only after gates, never primitive/family qualification",
+  "sourceAdapter": "separate prospective orchestration; unchanged frozen operations and exact denoise/separate declarations from pinned guidance helper; no legacy generator modified",
+  "parentFiles": {
+    "labs/sd-native-suite-diagnostic/run.py": "02e74457b40c68a1d6c8a107ed49d4c26ebc7f3170f15c0f10af321e5dcfa1b3",
+    "labs/sd-native-suite-diagnostic/source.py": "14d85c4f525cedd0259eb1fa4449e8ed81ac78779b9ea32868cf8cd1d38c01bf",
+    "labs/sd-native-suite-diagnostic/compare.py": "50bd8c4c4b134dcea03f1bc8ea43cfabd37b181b942886ae7b9b8d8cf5d7e90b",
+    "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.linux-x64.unet.json": "dc394f14e67e09f34525b2e7094018bd85a6e915035ab4ec2d214a5f94cc8c1c",
+    "tests/ComfySharp.Inference.Tests/Fixtures/sd-components.linux-x64.guidance.json": "061bf9f2b5915078a3e465144fcf24e3138b48ead79b1ce4e149ebe008c204a1"
+  }
+}
