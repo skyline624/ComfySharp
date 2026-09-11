@@ -16,8 +16,9 @@ sign must match. This collector does not perform that product comparison and
 does not declare a model or backend qualified.
 
 Stock collection requires a reviewed protocol and explicit resource admission.
-The initial implementation has only been exercised with the bounded self-test;
-do not interpret its existence or `status=ok` as a completed stock qualification.
+This collector version's lock correction has been checked without allocating a
+model. Earlier stock artifacts retain their original collector provenance;
+`status=ok` alone is not a completed stock qualification.
 
 ## Environment and frozen sources
 
@@ -25,9 +26,34 @@ Use a separate Python 3.12.10 environment with the unchanged hashed CPU closure
 in `../clip-source/requirements-<runtime>.txt`, for `win-x64`, `linux-x64`, or
 `osx-arm64`. Install with `pip --isolated --require-hashes --only-binary=:all:`;
 the lock contains direct hashed wheel URLs and disables index resolution.
-The collector checks the lock-file hash and the declared Torch 2.10.0 CPU,
+The collector checks the lock's canonical Git LF content hash and the declared Torch 2.10.0 CPU,
 NumPy 2.2.6 and einops 0.8.1 versions. Runtime-loaded native file fingerprints
 are recorded separately; a version string does not establish binary identity.
+
+Collector version `stock-source-v2-canonical-lock-content` corrects the original
+collector's dependency-lock pins, which used local CRLF bytes. The original
+`4b63561` collection artifacts remain unchanged; this is a new collector version,
+not a retroactive change to their provenance or a new numerical profile.
+
+| Lock target | Canonical Git LF SHA-256 |
+|---|---|
+| `win-x64` | `53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5` |
+| `linux-x64` | `84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719` |
+| `osx-arm64` | `329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4` |
+
+Only dependency-lock validation explicitly replaces CRLF pairs with LF before
+checking these pins. No other bytes, whitespace, encoding, comments or dependency
+content are normalized. LF, CRLF, or mixed LF/CRLF are accepted only when that
+exact substitution yields the canonical pinned content. Source blobs, helpers,
+the collector script and case document retain strict raw-byte hash validation.
+The files themselves are never rewritten.
+
+Both collection and final manifest attest the lock's `rawSha256`, `rawBytes`,
+line-ending form/counts, `canonicalSha256`, `canonicalBytes` and explicit
+`normalizationRule`. Raw size and hash remain fixed across computation: even an
+LF↔CRLF-only change during a run prevents final publication. The legacy
+`dependencyLockSha256` collection field continues to mean the **raw** SHA;
+`dependencyLockAttestation` makes the canonical/raw distinction explicit.
 
 Prepare an external snapshot containing these canonical Git blobs from
 [ComfyUI `1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a`](https://github.com/comfy-org/ComfyUI/tree/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a):

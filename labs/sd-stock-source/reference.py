@@ -16,6 +16,7 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 LAB = Path(__file__).resolve().parent
 PROFILE = "sd-unet-stock-small-native210-cpu-f32-v1"
+COLLECTOR_VERSION = "stock-source-v2-canonical-lock-content"
 CASES_SHA256 = "ed7e18588e3ed6dda90714f0ad41664c33d601bdb68bbac31c8eea5ea9ee3e59"
 RECIPE = "sha256-name-lcg-high16-power2-v1"
 CHUNK = 262144
@@ -25,9 +26,9 @@ HELPERS = {
     "unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
 }
 LOCKS = {
-    "win-x64": "db3ba7b6998392497b69501a1d72c74499562503b5a41d98d72d9e12ae7794e3",
-    "linux-x64": "26243197aa0fbe7b13839f76d26557892d7f91f81e68afd9871f1f486d7c2857",
-    "osx-arm64": "a4a914bba070c873b69389dd19f25409dbbfb797cfcbd07651c3777faa9bec6c",
+    "win-x64": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+    "linux-x64": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "osx-arm64": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4",
 }
 SOURCES = {
     "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
@@ -51,6 +52,29 @@ def canonical_hash(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 
+def lock_attestation(raw, expected_canonical):
+    """Only CRLF pairs become LF. No whitespace, encoding or content normalization."""
+    canonical = raw.replace(b"\r\n", b"\n")
+    canonical_sha = hashlib.sha256(canonical).hexdigest()
+    require(canonical_sha == expected_canonical, "Canonical dependency lock content changed.")
+    crlf = raw.count(b"\r\n")
+    lf = raw.count(b"\n") - crlf
+    bare_cr = raw.count(b"\r") - crlf
+    form = "bare_cr_present" if bare_cr else "mixed_lf_crlf" if crlf and lf else "crlf" if crlf else "lf" if lf else "none"
+    return {"rawSha256": hashlib.sha256(raw).hexdigest(), "rawBytes": len(raw),
+        "lineEndings": {"form": form, "crlfCount": crlf, "lfCount": lf, "bareCrCount": bare_cr},
+        "canonicalSha256": canonical_sha, "canonicalBytes": len(canonical),
+        "normalizationRule": "replace_CRLF_with_LF_only_no_other_byte_changes"}
+
+
+class Provenance(dict):
+    def __init__(self):
+        super().__init__()
+        self.raw_sizes = {}
+        self.lock_before = None
+        self.lock_after = None
+
+
 def capture_provenance(source, target):
     paths = {"reference.py": (Path(__file__), None), "cases-v1.json": (LAB / "cases-v1.json", CASES_SHA256)}
     paths.update({"helpers/" + name: (ROOT / "labs/sd-source" / name, sha) for name, sha in HELPERS.items()})
@@ -59,17 +83,32 @@ def capture_provenance(source, target):
         path = (source / relative).resolve(strict=True)
         require(path.is_relative_to(source), "Source path escapes its snapshot.")
         paths["source/" + relative] = (path, expected)
-    captured = {}
+    captured = Provenance()
     for label, (path, expected) in paths.items():
-        actual = digest(path)
-        require(expected is None or actual == expected, "Provenance hash mismatch: " + label)
+        raw = path.read_bytes()
+        actual = hashlib.sha256(raw).hexdigest()
+        if label.startswith("requirements/"):
+            captured.lock_before = lock_attestation(raw, expected)
+        else:
+            require(expected is None or actual == expected, "Provenance hash mismatch: " + label)
         captured[label] = (path, actual)
+        captured.raw_sizes[label] = len(raw)
     return captured
 
 
 def verify_provenance(captured):
+    lock_after = None
     for label, (path, expected) in captured.items():
-        require(digest(path) == expected, "Provenance changed during collection: " + label)
+        raw = path.read_bytes()
+        require(hashlib.sha256(raw).hexdigest() == expected, "Raw provenance changed during collection: " + label)
+        if isinstance(captured, Provenance):
+            require(len(raw) == captured.raw_sizes[label], "Raw provenance length changed during collection: " + label)
+            if label.startswith("requirements/"):
+                lock_after = lock_attestation(raw, captured.lock_before["canonicalSha256"])
+                require(lock_after == captured.lock_before, "Raw lock attestation changed during collection.")
+    if isinstance(captured, Provenance):
+        require(lock_after is not None, "Dependency lock final attestation is missing.")
+        captured.lock_after = lock_after
     return {label: sha for label, (_, sha) in captured.items()}
 
 
@@ -77,6 +116,8 @@ def publish_manifest(output, document, captured):
     # No final manifest exists until every executed input file has been rehashed.
     try:
         document["provenanceVerifiedAfterExecution"] = verify_provenance(captured)
+        if isinstance(captured, Provenance):
+            document["dependencyLockAttestation"] = {"before": captured.lock_before, "after": captured.lock_after}
         write_json(output / "manifest.json", document)
     except Exception as error:
         try:
@@ -381,7 +422,8 @@ def execute_case(torch, np, helper, source, case, output, budget, reduced=False,
             del result
             executions.append({"iteration": repetition+1, "sha256": sha, **elapsed, "memoryAfterOutputDispose": budget_check(budget)})
         repeated = len({item["sha256"] for item in executions}) == 1
-        document = {"profile": PROFILE, "diagnosticOnly": True, "synthetic": True, "pretrainedWeightsUsed": False,
+        document = {"profile": PROFILE, "collectorVersion": COLLECTOR_VERSION,
+            "diagnosticOnly": True, "synthetic": True, "pretrainedWeightsUsed": False,
             "modelCompatibility": "not_assessed", "numericalQualification": "not_performed",
             "configurationKind": "reduced_self_test" if reduced else "stock",
             "status": "ok" if repeated else "non_repeatable", "caseId": case["id"],
@@ -443,8 +485,10 @@ def bounded_self_test(torch, np, common, helper, source, output, captured):
                                 legacy_recipe=common.synthetic_tensor)
         publish_manifest(directory, document, captured)
     final_provenance = verify_provenance(captured)
-    write_json(output / "self-test.json", {"status": "ok", "configurationKind": "reduced_self_test",
+    write_json(output / "self-test.json", {"status": "ok", "collectorVersion": COLLECTOR_VERSION,
+        "configurationKind": "reduced_self_test",
         "recipeChecks": checks, "reducedGraphs": ["sd15", "sd2"], "stockExecuted": False,
+        "dependencyLockAttestation": {"before": captured.lock_before, "after": captured.lock_after},
         "provenanceVerifiedAfterExecution": final_provenance})
 
 
@@ -487,7 +531,8 @@ def main():
         estimate += sum(protocol["execution"][key] for key in ("runtimeAllowanceBytes", "graphAllowanceBytes", "headroomBytes"))
         if args.memory_budget_mib is not None and estimate > args.memory_budget_mib*1024**2:
             raise MemoryError("Declared budget below planning estimate.")
-        print(json.dumps({"status": "ok", "operation": "plan", "profile": PROFILE, "case": case,
+        print(json.dumps({"status": "ok", "operation": "plan", "profile": PROFILE,
+            "collectorVersion": COLLECTOR_VERSION, "case": case,
             "estimatedProcessBytes": estimate, "estimateIsPeakGuarantee": False,
             "nativeInitialized": False, "weightsGenerated": False, "modelCompatibility": "not_assessed"}))
         return
@@ -508,7 +553,7 @@ def main():
     require(sys.version_info[:3] == (3,12,10), "Use Python 3.12.10.")
     target = {("Windows","AMD64"): "win-x64", ("Linux","x86_64"): "linux-x64", ("Darwin","arm64"): "osx-arm64"}.get((platform.system(),platform.machine()))
     require(target in LOCKS, "Unsupported laboratory platform.")
-    require(digest(ROOT / "labs/clip-source" / ("requirements-"+target+".txt")) == LOCKS[target], "Dependency lock changed.")
+    lock_attestation((ROOT / "labs/clip-source" / ("requirements-"+target+".txt")).read_bytes(), LOCKS[target])
     require(importlib.metadata.version("torch") in ("2.10.0", "2.10.0+cpu"), "Use pinned CPU PyTorch.")
     require(importlib.metadata.version("numpy") == "2.2.6" and importlib.metadata.version("einops") == "0.8.1", "Use pinned dependencies.")
     capability = os.environ.get("ATEN_CPU_CAPABILITY")
@@ -524,10 +569,13 @@ def main():
     torch.backends.cudnn.allow_tf32 = False
     common, helper = verified_helpers()
     output.mkdir(parents=True)
-    write_json(output / "collection.json", {"profile": PROFILE, "status": "collection_started_not_qualified",
+    write_json(output / "collection.json", {"profile": PROFILE, "collectorVersion": COLLECTOR_VERSION,
+        "status": "collection_started_not_qualified",
         "operation": "reduced_self_test" if args.self_test else "stock", "target": target,
         "backendCommit": protocol["backendCommit"], "protocolSha256": digest(LAB / "cases-v1.json"),
-        "scriptSha256": captured["reference.py"][1], "verifiedHelpers": HELPERS, "dependencyLockSha256": LOCKS[target],
+        "scriptSha256": captured["reference.py"][1], "verifiedHelpers": HELPERS,
+        "dependencyLockSha256": captured.lock_before["rawSha256"],
+        "dependencyLockAttestation": captured.lock_before,
         "provenanceBeforeExecution": {label: sha for label, (_, sha) in captured.items()}})
     if args.self_test:
         bounded_self_test(torch,np,common,helper,source,output,captured)

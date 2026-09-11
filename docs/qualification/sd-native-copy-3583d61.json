@@ -1,0 +1,5867 @@
+{
+  "commit": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8",
+  "integrityErrors": [],
+  "runs": [
+    {
+      "label": "auto/source",
+      "exitCode": 0,
+      "seconds": 2.1711854700000117,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "auto/original",
+      "exitCode": 0,
+      "seconds": 2.612308847999998,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "auto/nuget-copy",
+      "exitCode": 0,
+      "seconds": 1.9077208080000219,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "auto/wheel-copy",
+      "exitCode": 0,
+      "seconds": 1.8575247020000063,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": null,
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "default/source",
+      "exitCode": 0,
+      "seconds": 2.1888929430000132,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "default/original",
+      "exitCode": 0,
+      "seconds": 1.9150237279999942,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "default/nuget-copy",
+      "exitCode": 0,
+      "seconds": 1.9043004880000183,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    },
+    {
+      "label": "default/wheel-copy",
+      "exitCode": 0,
+      "seconds": 1.8718249850000177,
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "default",
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "MKL_CBWR": null,
+        "ONEDNN_MAX_CPU_ISA": null,
+        "DNNL_MAX_CPU_ISA": null
+      },
+      "loader": {
+        "preloadBasenames": [],
+        "libraryPath": "unchanged baseline",
+        "pathUnchanged": true,
+        "unrelatedEnvironmentUnchanged": true
+      }
+    }
+  ],
+  "inventories": {
+    "original": {
+      "files": 121,
+      "directories": 26,
+      "bytes": 586513068,
+      "unchanged": true
+    },
+    "nuget-copy": {
+      "files": 121,
+      "directories": 26,
+      "bytes": 586513068,
+      "unchanged": true
+    },
+    "wheel-copy": {
+      "files": 122,
+      "directories": 26,
+      "bytes": 568984428,
+      "unchanged": true
+    },
+    "wheelPackage": {
+      "files": 16,
+      "directories": 2,
+      "bytes": 477807237,
+      "unchanged": true
+    },
+    "source": {
+      "files": 3,
+      "directories": 4,
+      "bytes": 101338,
+      "unchanged": true
+    },
+    "fixtures": {
+      "files": 23,
+      "directories": 0,
+      "bytes": 28428741,
+      "unchanged": true
+    },
+    "substitution": {
+      "changedOrAddedFiles": [
+        "runtimes/linux-x64/native/libc10.so",
+        "runtimes/linux-x64/native/libgomp-98b21ff3.so.1",
+        "runtimes/linux-x64/native/libgomp.so.1",
+        "runtimes/linux-x64/native/libtorch.so",
+        "runtimes/linux-x64/native/libtorch_cpu.so"
+      ],
+      "unchangedFiles": 117,
+      "aliases": {
+        "libc10.so": {
+          "relativePaths": [
+            "runtimes/linux-x64/native/libc10.so"
+          ],
+          "sameInode": true,
+          "independentOfPackage": true
+        },
+        "libtorch_cpu.so": {
+          "relativePaths": [
+            "runtimes/linux-x64/native/libtorch_cpu.so"
+          ],
+          "sameInode": true,
+          "independentOfPackage": true
+        },
+        "libtorch.so": {
+          "relativePaths": [
+            "runtimes/linux-x64/native/libtorch.so"
+          ],
+          "sameInode": true,
+          "independentOfPackage": true
+        },
+        "libgomp.so.1": {
+          "relativePaths": [
+            "runtimes/linux-x64/native/libgomp-98b21ff3.so.1",
+            "runtimes/linux-x64/native/libgomp.so.1"
+          ],
+          "sameInode": true,
+          "independentOfPackage": true
+        }
+      },
+      "limitation": "Inode/copy payload facts are producer-attested; large native files are intentionally absent from artifacts."
+    }
+  },
+  "scripts": {
+    "labs/sd-native-diagnostic/run.py": "6ffa862eb73757e6c9d8fdf664a54724e414bf10fd648007790c4713ca13a7f1",
+    "labs/sd-operator-diagnostic/source.py": "d269a0fe63530e10f7397d0071bb4391518ff6200d1b892b842b9380f58237ab",
+    "labs/sd-operator-diagnostic/run.py": "a9bce23f9c2ac1d600f0b297a8f38e38cd2effbfd83caba0dde52d8d680d435a",
+    "labs/sd-diagnostic/run.py": "ddd56f206e1642156d8748d23409a504baabfe218cc3e4979797f46c29544e57",
+    "labs/sd-native-copy-diagnostic/staging.py": "0ee6a1c95847d0d76d7b99b33e21497096fbe54b0f92a53f2ef943f3ebf326fd",
+    "labs/sd-native-copy-diagnostic/run.py": "7a0741233c1e9b36a4d9ab0d4d4d4570e357745be03bb1e93864b4f93b669c73",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/guidance.py": "a186e29756cdcf8092528efeef58a9e232b3271fd5325aeaaa9e1cce626327be",
+    "labs/sd-source/reference.py": "3ecf2732f199ed561a753e17f36414d35342e23ca03ea0975c2102833cbebaf8",
+    "labs/sd-source/sampling.py": "38b478e5b910bcb55429685fda1019d0a3cf9467df351a234c6935eb65f53e0b",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/sd-source/vae.py": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3",
+    "labs/clip-source/requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719"
+  },
+  "origins": {
+    "auto/source": {
+      "sourceCapability": "AVX512",
+      "requested": null
+    },
+    "auto/original": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1455496,
+          "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+        },
+        {
+          "name": "libgomp-98b21ff3.so.1",
+          "bytes": 283265,
+          "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 7584,
+          "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 461211481,
+          "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+        }
+      ],
+      "testOutcome": "Passed"
+    },
+    "auto/nuget-copy": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1455496,
+          "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+        },
+        {
+          "name": "libgomp-98b21ff3.so.1",
+          "bytes": 283265,
+          "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 7584,
+          "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 461211481,
+          "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+        }
+      ],
+      "testOutcome": "Passed"
+    },
+    "auto/wheel-copy": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1403600,
+          "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+        },
+        {
+          "name": "libgomp.so.1",
+          "bytes": 253849,
+          "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 8032,
+          "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 443509856,
+          "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+        }
+      ],
+      "testOutcome": "Passed"
+    },
+    "default/source": {
+      "sourceCapability": "DEFAULT",
+      "requested": "default"
+    },
+    "default/original": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1455496,
+          "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+        },
+        {
+          "name": "libgomp-98b21ff3.so.1",
+          "bytes": 283265,
+          "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 7584,
+          "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 461211481,
+          "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+        }
+      ],
+      "testOutcome": "Passed"
+    },
+    "default/nuget-copy": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1455496,
+          "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+        },
+        {
+          "name": "libgomp-98b21ff3.so.1",
+          "bytes": 283265,
+          "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 7584,
+          "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 461211481,
+          "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+        }
+      ],
+      "testOutcome": "Passed"
+    },
+    "default/wheel-copy": {
+      "valid": true,
+      "loadedLibraries": [
+        {
+          "name": "libLibTorchSharp.so",
+          "bytes": 2399008,
+          "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+        },
+        {
+          "name": "libc10.so",
+          "bytes": 1403600,
+          "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+        },
+        {
+          "name": "libgomp.so.1",
+          "bytes": 253849,
+          "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+        },
+        {
+          "name": "libtorch.so",
+          "bytes": 8032,
+          "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+        },
+        {
+          "name": "libtorch_cpu.so",
+          "bytes": 443509856,
+          "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+        }
+      ],
+      "testOutcome": "Passed"
+    }
+  },
+  "documents": {
+    "auto/source": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "python": "3.12.10",
+        "torch": "2.10.0+cpu",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "threads": 1,
+        "interopThreads": 1,
+        "build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX512\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "requestedAtenCpuCapability": null,
+        "cpuCapability": "AVX512",
+        "nativeLibraries": [
+          {
+            "name": "libaoti_custom_ops.so",
+            "bytes": 339456,
+            "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+          },
+          {
+            "name": "libbackend_with_compiler.so",
+            "bytes": 259008,
+            "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libjitbackend_test.so",
+            "bytes": 215736,
+            "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+          },
+          {
+            "name": "libshm.so",
+            "bytes": 41880,
+            "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch_global_deps.so",
+            "bytes": 8264,
+            "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+          },
+          {
+            "name": "libtorch_python.so",
+            "bytes": 30844552,
+            "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+          },
+          {
+            "name": "libtorchbind_test.so",
+            "bytes": 915336,
+            "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+          }
+        ]
+      }
+    },
+    "auto/original": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "auto",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1455496,
+            "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+          },
+          {
+            "name": "libgomp-98b21ff3.so.1",
+            "bytes": 283265,
+            "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 7584,
+            "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 461211481,
+            "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+          }
+        ]
+      }
+    },
+    "auto/nuget-copy": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "auto",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1455496,
+            "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+          },
+          {
+            "name": "libgomp-98b21ff3.so.1",
+            "bytes": 283265,
+            "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 7584,
+            "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 461211481,
+            "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+          }
+        ]
+      }
+    },
+    "auto/wheel-copy": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "auto",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          }
+        ]
+      }
+    },
+    "default/source": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "python": "3.12.10",
+        "torch": "2.10.0+cpu",
+        "torchGit": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "threads": 1,
+        "interopThreads": 1,
+        "build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "requestedAtenCpuCapability": "default",
+        "cpuCapability": "DEFAULT",
+        "nativeLibraries": [
+          {
+            "name": "libaoti_custom_ops.so",
+            "bytes": 339456,
+            "sha256": "249a640bf74e8e8ef69fa685b59ae4d46412144d39ffdd94338b729b75b27c7b"
+          },
+          {
+            "name": "libbackend_with_compiler.so",
+            "bytes": 259008,
+            "sha256": "f3b85da9df199c6b735071c8a91278d20c95586f7fc782ac7607049f52334c4a"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libjitbackend_test.so",
+            "bytes": 215736,
+            "sha256": "bb81f643ef833cc5afa3cef29281173c24984c50a8040c94def485db7913456f"
+          },
+          {
+            "name": "libshm.so",
+            "bytes": 41880,
+            "sha256": "6705cdaa351819a15bdbd9688734a658dbf88bbd14224e59eeeaceec081658b3"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch_global_deps.so",
+            "bytes": 8264,
+            "sha256": "2e5d497259a62960d95f4a7719abaeb24745429b49ffdf58e67672140205eb99"
+          },
+          {
+            "name": "libtorch_python.so",
+            "bytes": 30844552,
+            "sha256": "3c30b9ce8bc80e1a58f6c2288309439831b319d5af074bcbdb7c6c9f9d4e0c44"
+          },
+          {
+            "name": "libtorchbind_test.so",
+            "bytes": 915336,
+            "sha256": "0db222a06ea5793086b895191e9857899daf2b3231eb3a865429999c971bb075"
+          }
+        ]
+      }
+    },
+    "default/original": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "default",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1455496,
+            "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+          },
+          {
+            "name": "libgomp-98b21ff3.so.1",
+            "bytes": 283265,
+            "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 7584,
+            "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 461211481,
+            "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+          }
+        ]
+      }
+    },
+    "default/nuget-copy": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "default",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1455496,
+            "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+          },
+          {
+            "name": "libgomp-98b21ff3.so.1",
+            "bytes": 283265,
+            "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 7584,
+            "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 461211481,
+            "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+          }
+        ]
+      }
+    },
+    "default/wheel-copy": {
+      "parameters": 686,
+      "payloads": 46,
+      "observerBitNeutral": true,
+      "runtime": {
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "requestedCapability": "default",
+        "threads": 1,
+        "interopThreads": 1,
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "dotnet": ".NET 10.0.12",
+        "libraries": [
+          {
+            "name": "libLibTorchSharp.so",
+            "bytes": 2399008,
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libc10.so",
+            "bytes": 1403600,
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libgomp.so.1",
+            "bytes": 253849,
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libtorch.so",
+            "bytes": 8032,
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "bytes": 443509856,
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          }
+        ]
+      }
+    }
+  },
+  "comparisons": {
+    "auto/original/vs-source": {
+      "exactRecords": 16,
+      "outsideRecords": 0,
+      "firstDifference": "input_blocks.10.0.in_layers.0.output",
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 15,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 1.4901161193847656e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 7,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 69,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 62,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": false,
+          "maxAbs": 1.239776611328125e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 256,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "auto/nuget-copy/vs-source": {
+      "exactRecords": 16,
+      "outsideRecords": 0,
+      "firstDifference": "input_blocks.10.0.in_layers.0.output",
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 15,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 1.4901161193847656e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 7,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 69,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 62,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": false,
+          "maxAbs": 1.239776611328125e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 256,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "auto/wheel-copy/vs-source": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "auto/nuget-copy/vs-original": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": true
+    },
+    "auto/wheel-copy/vs-nuget-copy": {
+      "exactRecords": 16,
+      "outsideRecords": 0,
+      "firstDifference": "input_blocks.10.0.in_layers.0.output",
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 6,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 15,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 3,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 18,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 34,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.7881393432617188e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 42,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 35,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 1.4901161193847656e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 53,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 7,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 28,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 3.5762786865234375e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 22,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 2.9802322387695312e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 69,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 62,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": false,
+          "maxAbs": 1.239776611328125e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 256,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "default/original/vs-source": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "default/nuget-copy/vs-source": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "default/wheel-copy/vs-source": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": false
+    },
+    "default/nuget-copy/vs-original": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": true
+    },
+    "default/wheel-copy/vs-nuget-copy": {
+      "exactRecords": 43,
+      "outsideRecords": 0,
+      "firstDifference": null,
+      "records": {
+        "timeEmbedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": true,
+          "maxAbs": 0.0,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 0,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": true
+    },
+    "default/source/vs-auto/source": {
+      "exactRecords": 0,
+      "outsideRecords": 0,
+      "firstDifference": "timeEmbedding",
+      "records": {
+        "timeEmbedding": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 5,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "down2": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 496,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 496,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.9.0.op.output": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 124,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.input": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 124,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.embedding": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 5,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 124,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.0013580322265625e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 120,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.0013580322265625e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 120,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 9.059906005859375e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 104,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 9.059906005859375e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 104,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 83,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 5,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 9,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 9,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.emb_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 15,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 27,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1175870895385742e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 94,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1175870895385742e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 94,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 7.152557373046875e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 82,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 7.152557373046875e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 82,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 86,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.10.0.output": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 121,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.input": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 121,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.embedding": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 5,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 4.470348358154297e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 121,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 2.115964889526367e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 118,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 2.115964889526367e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 118,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 8.493661880493164e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 96,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.input": {
+          "bitExact": false,
+          "maxAbs": 8.493661880493164e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 96,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.in_layers.2.output": {
+          "bitExact": false,
+          "maxAbs": 3.725290298461914e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 79,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 5,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 9,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 9,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.emb_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 13,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.input": {
+          "bitExact": false,
+          "maxAbs": 2.384185791015625e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 26,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.0.output": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 90,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.input": {
+          "bitExact": false,
+          "maxAbs": 1.1920928955078125e-06,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 90,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.1.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539062e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 74,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.input": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539062e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 74,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.out_layers.3.output": {
+          "bitExact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 83,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "input_blocks.11.0.output": {
+          "bitExact": false,
+          "maxAbs": 4.3213367462158203e-07,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 117,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        },
+        "output": {
+          "bitExact": false,
+          "maxAbs": 1.9490718841552734e-05,
+          "outside": 0,
+          "firstOutside": null,
+          "differentElements": 256,
+          "shapeEqual": true,
+          "strideEqual": true,
+          "aligned64Equal": true
+        }
+      },
+      "ordering": "source capture order, including product/product contrasts",
+      "parameterLayoutsEqual": true,
+      "inputLayoutsEqual": true
+    }
+  },
+  "artifacts": [
+    {
+      "id": 10281837138,
+      "node_id": "MDg6QXJ0aWZhY3QxMDI4MTgzNzEzOA==",
+      "name": "sd-native-copy-auto-linux-x64",
+      "size_in_bytes": 249303,
+      "url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281837138",
+      "archive_download_url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281837138/zip",
+      "expired": false,
+      "digest": "sha256:c561c89c93d75804861182cde16428c91f599bca605ad79862c4e172a1fe40ef",
+      "created_at": "2026-09-11T20:37:13Z",
+      "updated_at": "2026-09-11T20:37:13Z",
+      "expires_at": "2026-12-10T20:35:23Z",
+      "workflow_run": {
+        "id": 34645018348,
+        "repository_id": 1366090580,
+        "head_repository_id": 1366090580,
+        "head_branch": "codex/lot6-sd-components",
+        "head_sha": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8"
+      }
+    },
+    {
+      "id": 10281697127,
+      "node_id": "MDg6QXJ0aWZhY3QxMDI4MTY5NzEyNw==",
+      "name": "sd-native-copy-default-linux-x64",
+      "size_in_bytes": 249132,
+      "url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281697127",
+      "archive_download_url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281697127/zip",
+      "expired": false,
+      "digest": "sha256:ceaef6e2a1540479d6befd5707daae6fa7a5f0391d2c723f3621a001e0bf508c",
+      "created_at": "2026-09-11T20:37:14Z",
+      "updated_at": "2026-09-11T20:37:14Z",
+      "expires_at": "2026-12-10T20:35:23Z",
+      "workflow_run": {
+        "id": 34645018348,
+        "repository_id": 1366090580,
+        "head_repository_id": 1366090580,
+        "head_branch": "codex/lot6-sd-components",
+        "head_sha": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8"
+      }
+    },
+    {
+      "id": 10281627292,
+      "node_id": "MDg6QXJ0aWZhY3QxMDI4MTYyNzI5Mg==",
+      "name": "sd-native-copy-control-linux-x64",
+      "size_in_bytes": 29494,
+      "url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281627292",
+      "archive_download_url": "https://api.github.com/repos/skyline624/ComfySharp/actions/artifacts/10281627292/zip",
+      "expired": false,
+      "digest": "sha256:1cc6095f87ddea9fde33ce344c0e7952d6c6dbb8dc4cf25a5d443ad9f00434d6",
+      "created_at": "2026-09-11T20:37:15Z",
+      "updated_at": "2026-09-11T20:37:15Z",
+      "expires_at": "2026-12-10T20:35:23Z",
+      "workflow_run": {
+        "id": 34645018348,
+        "repository_id": 1366090580,
+        "head_repository_id": 1366090580,
+        "head_branch": "codex/lot6-sd-components",
+        "head_sha": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8"
+      }
+    }
+  ],
+  "metadataSha256": {
+    "artifacts.json": "de474774bd148954169c4b7735bd5d34ff1a451ca9b04b73d2ca693d3e275841",
+    "job.log": "4263145a38d531c8e0afa692c54870a2b58d6b72ba7825b22eb9d7c104abe497",
+    "run.json": "c2e6047ee8b2d0e22975b389e112476ce96d8c4a2caca88eb4fd2e792323a685"
+  },
+  "hostCpu": {
+    "vendor_id": "GenuineIntel",
+    "cpu family": "6",
+    "model": "207",
+    "model name": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "stepping": "2",
+    "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch tpr_shadow ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx_vnni avx512_bf16 vnmi avx512vbmi umip waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid cldemote movdiri movdir64b fsrm serialize tsxldtrk ibt amx_bf16 avx512_fp16 amx_tile amx_int8 arch_capabilities"
+  },
+  "payloadsRehashed": 368,
+  "sourceAstChecks": [
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/util.py",
+      "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "astSha256": "46be9aed2a5129acaee45d61938b4cd73fea6512543141e4594db8c9bd8e2f7c"
+    },
+    {
+      "source": "comfy/ldm/modules/attention.py",
+      "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "fileSha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    }
+  ],
+  "producerAttribution": {
+    "auto": {
+      "copyControlBitExactAndLayoutsEqual": true,
+      "nativeOriginContrastEligible": true,
+      "causality": "native package contrast only; primitive cause not established"
+    },
+    "default": {
+      "copyControlBitExactAndLayoutsEqual": true,
+      "nativeOriginContrastEligible": true,
+      "causality": "native package contrast only; primitive cause not established"
+    }
+  },
+  "schemaVersion": 1,
+  "diagnosticOnly": true,
+  "diagnosticCi": "https://github.com/skyline624/ComfySharp/actions/runs/34645018348",
+  "profile": "sd-components-native210-cpu-f32-v1",
+  "scope": "One reduced SD15 square case; same managed graph, original and copied native packages on one Linux CPU host",
+  "qualifiedModelFamilies": [],
+  "pretrainedWeightsUsed": false,
+  "independentSecondAudit": {
+    "commit": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8",
+    "payloadsRehashed": 368,
+    "actualNativeMapsVerified": 6,
+    "comparisons": {
+      "auto/original/source": {
+        "exact": 16,
+        "maximum": 1.239776611328125e-05,
+        "outside": 0,
+        "firstDifference": "input_blocks.10.0.in_layers.0.output"
+      },
+      "auto/nuget-copy/source": {
+        "exact": 16,
+        "maximum": 1.239776611328125e-05,
+        "outside": 0,
+        "firstDifference": "input_blocks.10.0.in_layers.0.output"
+      },
+      "auto/wheel-copy/source": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      },
+      "auto/copy-control": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      },
+      "default/original/source": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      },
+      "default/nuget-copy/source": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      },
+      "default/wheel-copy/source": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      },
+      "default/copy-control": {
+        "exact": 43,
+        "maximum": 0,
+        "outside": 0,
+        "firstDifference": null
+      }
+    },
+    "qualification": "none; single reduced case package contrast"
+  },
+  "qualificationLimits": [
+    "The core libraries and OpenMP package change together; no individual binary, compiler flag or primitive implementation is isolated",
+    "Source nativeLibraries fields inventory wheel files; they are not actual loaded-module maps",
+    "Product maps attest the relevant images observed after calculation, not every possible later library load",
+    "Borrowed input alignment differs between source and product and between native packages; intermediate inputs at the first divergence agree",
+    "Large native payload and hardlink facts are producer-attested; those files are not uploaded or independently rehashed after download",
+    "Artifact archive digests are GitHub-reported, not locally rehashed ZIP digests",
+    "First-difference order in this audit follows source captures, correcting only the interpretation of producer product/product ordering",
+    "No native runtime adoption, model compatibility, stock-width, GPU or cross-platform qualification follows"
+  ]
+}

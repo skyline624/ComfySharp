@@ -1,0 +1,2514 @@
+{
+  "schemaVersion": 1,
+  "scope": "Reduced-width CPU/F32 SD components; no pretrained model family qualification",
+  "repositoryCommit": "3583d61a2cef113bf0e1a49fca0b95c704b5c7a8",
+  "commitAssociation": "Verified separately against GitHub run metadata, not inferred from TRX",
+  "productCi": "https://github.com/skyline624/ComfySharp/actions/runs/34645018396",
+  "sourceCi": "https://github.com/skyline624/ComfySharp/actions/runs/34632139846",
+  "profile": "sd-components-native210-cpu-f32-v1",
+  "trxReports": 35,
+  "targets": [
+    {
+      "runtime": "win-x64",
+      "aggregateTestsExecuted": true,
+      "uniqueTests": 1280,
+      "outcomes": {
+        "Passed": 1280
+      },
+      "sdTests": {
+        "ClassicalVaeGraphTests": {
+          "Passed": 11
+        },
+        "SdModelWeightTests": {
+          "Passed": 27
+        },
+        "SdDenoiserTests": {
+          "Passed": 8
+        },
+        "SdSyntheticWeightBuilderTests": {
+          "Passed": 19
+        },
+        "SdSamplingTests": {
+          "Passed": 11
+        },
+        "SdDiagnosticTests": {
+          "Passed": 13
+        },
+        "SdSamplingReferenceTests": {
+          "Passed": 3
+        },
+        "SdDenoiserReferenceTests": {
+          "Passed": 6
+        },
+        "SdUnetReferenceTests": {
+          "Passed": 8
+        },
+        "ClassicalVaeReferenceTests": {
+          "Passed": 8
+        },
+        "SdUnetTests": {
+          "Passed": 10
+        },
+        "SdRuntimeIdentityTests": {
+          "Passed": 3
+        },
+        "SdSourceProvenanceTests": {
+          "Passed": 1
+        }
+      },
+      "firstUseOutcomes": {
+        "Passed": 182
+      },
+      "sdFirstUseTests": {
+        "ClassicalVaeReferenceTests": {
+          "Passed": 8
+        },
+        "SdDenoiserReferenceTests": {
+          "Passed": 6
+        },
+        "SdSamplingReferenceTests": {
+          "Passed": 3
+        },
+        "SdUnetReferenceTests": {
+          "Passed": 8
+        }
+      },
+      "failedTests": [],
+      "failedFirstUseTests": [],
+      "unetTraceComparisons": {
+        "count": 80,
+        "bitExact": 80,
+        "maximumAbsoluteError": 0.0,
+        "outsideToleranceElements": 0,
+        "boundaries": [
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          }
+        ]
+      }
+    },
+    {
+      "runtime": "linux-x64",
+      "aggregateTestsExecuted": false,
+      "uniqueTests": null,
+      "outcomes": {},
+      "sdTests": {},
+      "firstUseOutcomes": {
+        "Passed": 175,
+        "Failed": 7
+      },
+      "sdFirstUseTests": {
+        "ClassicalVaeReferenceTests": {
+          "Passed": 8
+        },
+        "SdDenoiserReferenceTests": {
+          "Failed": 4,
+          "Passed": 2
+        },
+        "SdSamplingReferenceTests": {
+          "Passed": 3
+        },
+        "SdUnetReferenceTests": {
+          "Passed": 5,
+          "Failed": 3
+        }
+      },
+      "failedTests": [],
+      "failedFirstUseTests": [
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")"
+      ],
+      "unetTraceComparisons": {
+        "count": 80,
+        "bitExact": 0,
+        "maximumAbsoluteError": 0.00013725459575653076,
+        "outsideToleranceElements": 42,
+        "boundaries": [
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 2.384185791015625e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": false,
+            "maximumAbsoluteError": 8.106231689453125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.67572021484375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.987022399902344e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 8.344650268554688e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.0728836059570312e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 9.685754776000977e-08,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.2516975402832031e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.0067901611328125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.510185241699219e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.245208740234375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.245208740234375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.76837158203125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.6689300537109375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 2.562999725341797e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.4424086809158325e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.5497207641601562e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.76837158203125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.842613220214844e-05,
+            "outsideToleranceElements": 7
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.814697265625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.814697265625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.7285346984863281e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.172325134277344e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.3113021850585938e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 9.313225746154785e-08,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.5762786865234375e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.0994415283203125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.985664367675781e-05,
+            "outsideToleranceElements": 11
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.7220458984375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.76837158203125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.470348358154297e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.662441253662109e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 2.5033950805664062e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.450580596923828e-08,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.662441253662109e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.337860107421875e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.1113624572753906e-05,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 2.384185791015625e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.152557373046875e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.152557373046875e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.5299530029296875e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.066394805908203e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.152557373046875e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.6391277313232422e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": false,
+            "maximumAbsoluteError": 8.940696716308594e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.198883056640625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.0609626770019531e-05,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.0067901611328125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.198883056640625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.589557647705078e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.4901161193847656e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 2.1457672119140625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.5762786865234375e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.4379620552062988e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.9604644775390625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": false,
+            "maximumAbsoluteError": 4.887580871582031e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.198883056640625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.67572021484375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.4836273193359375e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 6.556510925292969e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.5497207641601562e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.21540641784668e-08,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.450580596923828e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.933906555175781e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.471970558166504e-05,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.1920928955078125e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": false,
+            "maximumAbsoluteError": 5.0067901611328125e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.814697265625e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.769993782043457e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.152557373046875e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": false,
+            "maximumAbsoluteError": 9.5367431640625e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": false,
+            "maximumAbsoluteError": 1.043081283569336e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": false,
+            "maximumAbsoluteError": 7.152557373046875e-07,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": false,
+            "maximumAbsoluteError": 3.2186508178710938e-06,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": false,
+            "maximumAbsoluteError": 0.00013725459575653076,
+            "outsideToleranceElements": 24
+          }
+        ]
+      }
+    },
+    {
+      "runtime": "osx-arm64",
+      "aggregateTestsExecuted": true,
+      "uniqueTests": 1280,
+      "outcomes": {
+        "Passed": 1278,
+        "Failed": 2
+      },
+      "sdTests": {
+        "SdSamplingReferenceTests": {
+          "Passed": 3
+        },
+        "SdSyntheticWeightBuilderTests": {
+          "Passed": 19
+        },
+        "SdModelWeightTests": {
+          "Passed": 27
+        },
+        "ClassicalVaeReferenceTests": {
+          "Passed": 8
+        },
+        "SdDiagnosticTests": {
+          "Passed": 13
+        },
+        "SdUnetTests": {
+          "Passed": 10
+        },
+        "SdUnetReferenceTests": {
+          "Passed": 8
+        },
+        "SdSamplingTests": {
+          "Passed": 11
+        },
+        "SdSourceProvenanceTests": {
+          "Passed": 1
+        },
+        "SdDenoiserReferenceTests": {
+          "Passed": 6
+        },
+        "SdDenoiserTests": {
+          "Passed": 8
+        },
+        "SdRuntimeIdentityTests": {
+          "Passed": 3
+        },
+        "ClassicalVaeGraphTests": {
+          "Passed": 11
+        }
+      },
+      "firstUseOutcomes": {
+        "Passed": 182
+      },
+      "sdFirstUseTests": {
+        "ClassicalVaeReferenceTests": {
+          "Passed": 8
+        },
+        "SdDenoiserReferenceTests": {
+          "Passed": 6
+        },
+        "SdSamplingReferenceTests": {
+          "Passed": 3
+        },
+        "SdUnetReferenceTests": {
+          "Passed": 8
+        }
+      },
+      "failedTests": [
+        "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+        "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)"
+      ],
+      "failedFirstUseTests": [],
+      "unetTraceComparisons": {
+        "count": 80,
+        "bitExact": 80,
+        "maximumAbsoluteError": 0.0,
+        "outsideToleranceElements": 0,
+        "boundaries": [
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd15-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down0",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down1",
+            "elements": 1024,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down2",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "down3",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "middle",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up0",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up1",
+            "elements": 2048,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "up2",
+            "elements": 4096,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/square",
+            "boundary": "output",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down0",
+            "elements": 3168,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down1",
+            "elements": 1920,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down2",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up0",
+            "elements": 1152,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up1",
+            "elements": 3840,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "up2",
+            "elements": 6336,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/odd-rectangle",
+            "boundary": "output",
+            "elements": 396,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "timeEmbedding",
+            "elements": 256,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down0",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "up2",
+            "elements": 10240,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-distinct-time",
+            "boundary": "output",
+            "elements": 640,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "timeEmbedding",
+            "elements": 128,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down0",
+            "elements": 4032,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down1",
+            "elements": 2560,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down2",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "down3",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "middle",
+            "elements": 512,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up0",
+            "elements": 1536,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up1",
+            "elements": 5120,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "up2",
+            "elements": 8064,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          },
+          {
+            "case": "sd2-reduced/batch-shared-time-odd",
+            "boundary": "output",
+            "elements": 504,
+            "bitExact": true,
+            "maximumAbsoluteError": 0.0,
+            "outsideToleranceElements": 0
+          }
+        ]
+      }
+    }
+  ],
+  "qualifiedModelFamilies": [],
+  "pretrainedWeightsUsed": false,
+  "priorClipProfileChanged": false,
+  "overallCiConclusion": "failure",
+  "multiplatformAcceptance": "open",
+  "expectedUniqueTests": 1280,
+  "independentIntegrityAudit": {
+    "artifactsDownloaded": 12,
+    "trxReports": 35,
+    "observedF32PayloadsRehashed": 240,
+    "expectedF32PayloadsRehashed": 240,
+    "skippedOrNotExecutedTestResultsInTrx": 0,
+    "aggregateAndLaterStepsNotExecutedOn": [
+      "linux-x64"
+    ]
+  },
+  "runtimeObservations": [
+    {
+      "runtime": "win-x64",
+      "identityRecords": 8,
+      "identicalAcrossEightCases": true,
+      "identity": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "Microsoft Windows 10.0.26100",
+        "architecture": "X64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "available",
+          "vendor": "AuthenticAMD",
+          "brand": "AMD EPYC 7763 64-Core Processor",
+          "hardwareFeatures": {
+            "sse": true,
+            "sse2": true,
+            "sse3": true,
+            "ssse3": true,
+            "sse41": true,
+            "sse42": true,
+            "avx": true,
+            "fma": true,
+            "osxsave": true,
+            "avx2": true,
+            "avx512F": false,
+            "avx512Dq": false,
+            "avx512Bw": false,
+            "avx512Vl": false
+          },
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": true,
+          "avx": true,
+          "avx2": true,
+          "avx512F": false,
+          "fma": true,
+          "armAdvSimd": false
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "available",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [
+            {
+              "instance": 1,
+              "name": "torch_cpu.DLL",
+              "status": "available",
+              "bytes": 264955904,
+              "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b",
+              "errorType": null
+            },
+            {
+              "instance": 2,
+              "name": "c10.dll",
+              "status": "available",
+              "bytes": 1081344,
+              "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063",
+              "errorType": null
+            },
+            {
+              "instance": 3,
+              "name": "libiomp5md.dll",
+              "status": "available",
+              "bytes": 1614192,
+              "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4",
+              "errorType": null
+            },
+            {
+              "instance": 4,
+              "name": "LibTorchSharp.DLL",
+              "status": "available",
+              "bytes": 1324984,
+              "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858",
+              "errorType": null
+            }
+          ],
+          "errorType": null
+        }
+      },
+      "evidenceRecords": [
+        {
+          "case": "sd15-reduced/batch-distinct-time",
+          "documentSha256": "21c0b6106b16b95887de8a7f2e3f62041ebc714ea43eea716a6eceabf55d63c0"
+        },
+        {
+          "case": "sd15-reduced/batch-shared-time-odd",
+          "documentSha256": "0592059111270d874a6f92bc0b4981a6d6642f32b170d1e1373a492a4afa2510"
+        },
+        {
+          "case": "sd15-reduced/odd-rectangle",
+          "documentSha256": "ea859271603bffd69dde58309ad3ab16fd19d1f68d8a3079e21a8a7f65fa2cb2"
+        },
+        {
+          "case": "sd15-reduced/square",
+          "documentSha256": "a91d9f0c1a181726c8b3191a8c3140f10569aa60baf4072e11a519359b29f9bf"
+        },
+        {
+          "case": "sd2-reduced/batch-distinct-time",
+          "documentSha256": "2ac757de37f417ea3616516e8e58b9d81751f4f50d94ff043360792181dd6e3c"
+        },
+        {
+          "case": "sd2-reduced/batch-shared-time-odd",
+          "documentSha256": "009d097f428d5cab63641cf4a69c01bf7ac6d46d15723a18559fae9d13a6af6e"
+        },
+        {
+          "case": "sd2-reduced/odd-rectangle",
+          "documentSha256": "85dc23035440d8098a87bb705ec5672aedef6051d9edf3ed4c9b1a80b025c6db"
+        },
+        {
+          "case": "sd2-reduced/square",
+          "documentSha256": "fc51fca4b417bb47f38fe1959e88373aea3cb9f9b3e0e53f101345d72a294d91"
+        }
+      ]
+    },
+    {
+      "runtime": "linux-x64",
+      "identityRecords": 8,
+      "identicalAcrossEightCases": true,
+      "identity": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "Ubuntu 24.04.5 LTS",
+        "architecture": "X64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "available",
+          "vendor": "AuthenticAMD",
+          "brand": "AMD EPYC 9V74 80-Core Processor",
+          "hardwareFeatures": {
+            "sse": true,
+            "sse2": true,
+            "sse3": true,
+            "ssse3": true,
+            "sse41": true,
+            "sse42": true,
+            "avx": true,
+            "fma": true,
+            "osxsave": true,
+            "avx2": true,
+            "avx512F": true,
+            "avx512Dq": true,
+            "avx512Bw": true,
+            "avx512Vl": true
+          },
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": true,
+          "avx": true,
+          "avx2": true,
+          "avx512F": true,
+          "fma": true,
+          "armAdvSimd": false
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "available",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [
+            {
+              "instance": 1,
+              "name": "libtorch_cpu.so",
+              "status": "available",
+              "bytes": 461211481,
+              "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+              "errorType": null
+            },
+            {
+              "instance": 2,
+              "name": "libLibTorchSharp.so",
+              "status": "available",
+              "bytes": 2399008,
+              "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+              "errorType": null
+            },
+            {
+              "instance": 3,
+              "name": "libc10.so",
+              "status": "available",
+              "bytes": 1455496,
+              "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+              "errorType": null
+            },
+            {
+              "instance": 4,
+              "name": "libtorch.so",
+              "status": "available",
+              "bytes": 7584,
+              "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760",
+              "errorType": null
+            },
+            {
+              "instance": 5,
+              "name": "libgomp-98b21ff3.so.1",
+              "status": "available",
+              "bytes": 283265,
+              "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb",
+              "errorType": null
+            }
+          ],
+          "errorType": null
+        }
+      },
+      "evidenceRecords": [
+        {
+          "case": "sd15-reduced/batch-distinct-time",
+          "documentSha256": "8cadae1fd08238445daa97b35f65e116a19a963a2a14e35ff697a932af0a2b4c"
+        },
+        {
+          "case": "sd15-reduced/batch-shared-time-odd",
+          "documentSha256": "8438d8579ad346a4f18daad023cfc6ff28bcae9381441ac464eb4d52fb8117a0"
+        },
+        {
+          "case": "sd15-reduced/odd-rectangle",
+          "documentSha256": "f866f43dc6cb12dd5adeb8456436cc620c56bbb93b1aa9c3aee3bf4c4d416e70"
+        },
+        {
+          "case": "sd15-reduced/square",
+          "documentSha256": "1a143c8a6383804157f487062a9b3a002d27a1357b6df4808d387ae37558744e"
+        },
+        {
+          "case": "sd2-reduced/batch-distinct-time",
+          "documentSha256": "c0cae8e1f23c6dd0c09c706b3d97dff2e9f4402b9b0b193bb9fdf9e83e7d9ee8"
+        },
+        {
+          "case": "sd2-reduced/batch-shared-time-odd",
+          "documentSha256": "cddb2a54b09f7fd431ef3d58db4667a3075c08df5138b5ca808b9665d722018e"
+        },
+        {
+          "case": "sd2-reduced/odd-rectangle",
+          "documentSha256": "23a76898be3e437445d1c0af541e009ec5ce5210af8e7841d932cd1693506517"
+        },
+        {
+          "case": "sd2-reduced/square",
+          "documentSha256": "836e81ea802f64be6ce4b942436493fd8c0068b107e9dc3da6d22ac843676e19"
+        }
+      ]
+    },
+    {
+      "runtime": "osx-arm64",
+      "identityRecords": 8,
+      "identicalAcrossEightCases": true,
+      "identity": {
+        "diagnosticOnly": true,
+        "capturePoint": "after_first_forward_of_this_case",
+        "dotnet": ".NET 10.0.12",
+        "os": "macOS 14.8.9",
+        "architecture": "Arm64",
+        "torchSharp": "0.107.0.0",
+        "declaredLibtorchPackage": "2.10.0",
+        "cpu": {
+          "status": "cpuid_unavailable_on_this_architecture",
+          "vendor": null,
+          "brand": null,
+          "hardwareFeatures": {},
+          "errorType": null
+        },
+        "cpuFeaturesDotNet": {
+          "scope": "managed_intrinsic_availability_not_aten_dispatch",
+          "sse2": false,
+          "avx": false,
+          "avx2": false,
+          "avx512F": false,
+          "fma": false,
+          "armAdvSimd": true
+        },
+        "threads": {
+          "status": "available",
+          "intraOp": 1,
+          "interOp": 1
+        },
+        "requestedAtenCpuCapability": {
+          "status": "unset",
+          "value": null
+        },
+        "actualAtenCpuCapability": {
+          "status": "unavailable",
+          "value": null,
+          "reason": "not_exposed_by_public_TorchSharp_API_CPUID_is_not_dispatch_evidence"
+        },
+        "nativeLibraries": {
+          "status": "unavailable",
+          "capturePoint": "cached_once_after_first_traced_unet_forward_in_process",
+          "libraries": [],
+          "errorType": "no_matching_loaded_modules"
+        }
+      },
+      "evidenceRecords": [
+        {
+          "case": "sd15-reduced/batch-distinct-time",
+          "documentSha256": "48d12d042522018f01cfe2be0231727b4f75020db6aea3c9da01bae03a65cfa8"
+        },
+        {
+          "case": "sd15-reduced/batch-shared-time-odd",
+          "documentSha256": "af93f3422452c38acdbed76e81b8a037d96076834f93cb312c80c8bbfdda5875"
+        },
+        {
+          "case": "sd15-reduced/odd-rectangle",
+          "documentSha256": "a40228d47f24e5b70237c1c445368bc6b07c128e2244e532fcd9f3486c46416b"
+        },
+        {
+          "case": "sd15-reduced/square",
+          "documentSha256": "3ad9fa738271aa01783982c5968b372ff8beabd0c5a3aaa662d770c2b6d29d7e"
+        },
+        {
+          "case": "sd2-reduced/batch-distinct-time",
+          "documentSha256": "ea4fd68df646074907e7ccbc15f27612d9ce8cbc7a867573d872b82ecd62b367"
+        },
+        {
+          "case": "sd2-reduced/batch-shared-time-odd",
+          "documentSha256": "c634205b04b268d3c5c6d59ba7e96c9ead441898d6a3c221d508430836890d48"
+        },
+        {
+          "case": "sd2-reduced/odd-rectangle",
+          "documentSha256": "ddf27fc87299e5d5eace41f8ec4055c344da76c91bb03bad5d3d7179a22afa84"
+        },
+        {
+          "case": "sd2-reduced/square",
+          "documentSha256": "feafcc2de80500560bfe435354f7ba080c39e4220fa96302752a4391475dc1d4"
+        }
+      ]
+    }
+  ],
+  "qualificationLimits": [
+    "CPUID and .NET intrinsics do not establish actual ATen dispatch or the cause of numerical differences",
+    "Native maps captured once per process after the first traced forward; macOS map explicitly unavailable",
+    "First-use runs repeat tests and do not add to the 1280 unique cases",
+    "The 128 SD class cases include 35 tool/runtime-identity checks, not 128 source comparisons",
+    "No pretrained workflow or model-family qualification"
+  ]
+}
