@@ -119,10 +119,25 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
+      "comfysharp.contracts": {
+        "type": "Project"
+      },
+      "comfysharp.core": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Contracts": "[0.1.0-dev, )"
+        }
+      },
       "comfysharp.inference": {
         "type": "Project",
         "dependencies": {
           "TorchSharp": "[0.107.0, )"
+        }
+      },
+      "comfysharp.nodes": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Core": "[0.1.0-dev, )"
         }
       },
       "SkiaSharp": {

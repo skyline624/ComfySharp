@@ -12,7 +12,7 @@ flowchart LR
   N --> M[Media : codecs et rendu natifs]
 ```
 
-Contracts contient les données échangées par Core et Host. Workflow ne dépend ni de Nodify ni des tenseurs. Le document JSON conserve les champs inconnus et les extensions ; le prompt n'est qu'une projection exécutable. Les erreurs de compilation sont explicites.
+Contracts contient les données JSON échangées par Core et Host ainsi que les contrats des valeurs d'exécution internes. Workflow ne dépend ni de Nodify ni des tenseurs. Le document JSON conserve les champs inconnus et les extensions ; le prompt n'est qu'une projection exécutable. Les erreurs de compilation sont explicites.
 
 Desktop possède les documents et surveille son processus Host. Les modèles, storages natifs et jobs restent dans Host. Un crash du moteur ne doit pas effacer le document ni provoquer de resoumission automatique. La connexion locale n'envoie ni télémétrie ni poids.
 
@@ -20,4 +20,4 @@ Une seule exécution active initialement. Le propriétaire de la file associe ch
 
 Les lecteurs de poids vérifient structure, tailles et offsets avant allocation. Aucune exécution de pickle ou chargement arbitraire de code n'est acceptable. Les formats non encore portés échouent explicitement.
 
-La disponibilité d'un package natif ne vaut pas validation de backend. Chaque opération et famille doit recevoir une preuve versionnée. Les ressources partagées nécessitent une propriété explicite avant l'introduction du cache tensoriel et de l'offload.
+La disponibilité d'un package natif ne vaut pas validation de backend. Chaque opération et famille doit recevoir une preuve versionnée. Les [valeurs natives](RUNTIME_VALUES.md) utilisent des références possédées par les contextes d'invocation, la mémoïsation du job et les résultats. Leur dernière référence libère la ressource. Le cache tensoriel persistant et l'offload restent à implémenter sur cette base.

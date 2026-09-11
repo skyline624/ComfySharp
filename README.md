@@ -4,7 +4,7 @@ Port indépendant de [ComfyUI](https://github.com/comfy-org/ComfyUI) en C#/.NET 
 
 **État : développement initial 0.1.0-dev. La génération d'images, vidéo, audio et 3D n'est pas encore disponible.** Le périmètre final reste le catalogue local complet, y compris l'entraînement intégré. Voir [l'objectif](docs/OBJECTIF.md), [le plan approuvé](docs/MIGRATION.md), [l'avancement réel](docs/STATUS.md) et [la matrice](docs/capabilities/README.md).
 
-Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte, un moteur de graphes initial et 13 nœuds utilitaires réellement exécutables. Les lecteurs de poids et probes CPU/CUDA sont des fondations techniques, pas une implémentation des modèles.
+Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte, un moteur de graphes avec valeurs natives et 13 nœuds utilitaires réellement exécutables. Les lecteurs de poids et probes CPU/CUDA sont des fondations techniques, pas une implémentation des modèles.
 
 ## Compiler et lancer
 
@@ -47,7 +47,16 @@ Un backend indisponible retourne une erreur, jamais une réussite simulée. Les 
 
 ## Repères
 
+L'inspecteur vérifie un fichier safetensors sans charger les tenseurs ni initialiser libtorch :
+
+```sh
+dotnet run --project tools/ComfySharp.ModelInspect -- chemin/vers/modele.safetensors
+```
+
+Ajouter `--sha256` pour lire le fichier entier et calculer son empreinte, ou `--tensors 10` pour afficher au plus dix noms/formes de tenseurs. Le résultat par défaut contient seulement des agrégats. Un en-tête valide n'établit pas la compatibilité du modèle. Le lecteur tensoriel prend en charge dix dtypes CPU ; les types non pris en charge produisent une erreur explicite.
+
 - [Architecture](docs/ARCHITECTURE.md), [backlog](docs/BACKLOG.md), [validation numérique](docs/NUMERICAL_VALIDATION.md).
+- [Contrat des valeurs natives](docs/RUNTIME_VALUES.md) et [réconciliation des nœuds](docs/audit/05-RECONCILIATION-NOEUDS.md).
 - [Audits source](docs/audit/02-MOTEUR-WORKFLOWS.md) avec liens vers les révisions amont figées.
 - [Notices](THIRD_PARTY_NOTICES.md), versions centralisées et verrous par projet/runtime.
 - `tools/publish.ps1` prépare un dossier portable de développement non signé ; une V1 exige la fermeture de toute la matrice.

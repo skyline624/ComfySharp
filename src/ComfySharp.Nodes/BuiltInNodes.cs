@@ -99,19 +99,20 @@ public static class BuiltInNodes
             return ValueTask.FromResult<IReadOnlyList<JsonNode?>>([execute(inputs)]);
         }
     }
-    private sealed class SwitchNode : INode
+    private sealed class SwitchNode : IRuntimeNode
     {
         public NodeSchema Schema { get; } = new("ComfySwitchNode", "If/Else Switch", "utilities/logic",
             [new("switch", "BOOLEAN"), Match("on_false"), Match("on_true")], [new("COMFY_MATCHTYPE_V3", "output", MatchTemplate: "switch")], Experimental: true);
         private static InputSchema Match(string name) => new(name, "COMFY_MATCHTYPE_V3", Required: false,
             Options: new() { ["template"] = new JsonObject { ["template_id"] = "switch", ["allowed_types"] = "*" } }, Lazy: true);
-        public IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<JsonNode?>> resolvedInputs) =>
-            resolvedInputs["switch"].Select(v => PythonValues.Truth(v) ? "on_true" : "on_false").Distinct().ToArray();
-        public ValueTask<IReadOnlyList<JsonNode?>> ExecuteAsync(IReadOnlyDictionary<string, JsonNode?> inputs, CancellationToken cancellationToken)
+        public IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) =>
+            resolvedInputs["switch"].Select(v => PythonValues.Truth(v.ToJson()) ? "on_true" : "on_false").Distinct().ToArray();
+        public ValueTask<IReadOnlyList<RuntimeValue>> ExecuteAsync(RuntimeNodeContext context,
+            IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            inputs.TryGetValue(PythonValues.Truth(inputs["switch"]) ? "on_true" : "on_false", out var selected);
-            return ValueTask.FromResult<IReadOnlyList<JsonNode?>>([selected?.DeepClone()]);
+            inputs.TryGetValue(PythonValues.Truth(inputs["switch"].ToJson()) ? "on_true" : "on_false", out var selected);
+            return ValueTask.FromResult<IReadOnlyList<RuntimeValue>>([selected ?? context.Json(null)]);
         }
     }
 }

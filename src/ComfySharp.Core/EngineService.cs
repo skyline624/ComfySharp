@@ -4,7 +4,7 @@ using ComfySharp.Contracts;
 
 namespace ComfySharp.Core;
 
-/// <summary>JSON-only DAG executor. Per-run memoization never owns native handles or outlives a job.</summary>
+/// <summary>Typed DAG executor. Each job owns its memo; returned values have independent disposable leases.</summary>
 public sealed class EngineService(NodeRegistry registry)
 {
     public NodeRegistry Registry { get; } = registry;
@@ -68,16 +68,52 @@ public sealed class EngineService(NodeRegistry registry)
     public async Task<ExecutionResult> ExecuteAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
         Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
     {
+        // Project only at the JSON boundary. Delay the final event until projection has also succeeded.
+        var completionPending = false;
+        async ValueTask Forward(EngineEvent e)
+        {
+            if (e.Type is "execution_success" or "execution_failed") completionPending = true;
+            else if (onEvent is not null) await onEvent(e);
+        }
+        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken);
+        var diagnostics = owned.Diagnostics.ToList();
+        var outputs = new Dictionary<string, IReadOnlyList<IReadOnlyList<JsonNode?>>>(StringComparer.Ordinal);
+        var status = owned.Status;
+        foreach (var (target, slots) in owned.Outputs)
+        {
+            try { outputs.Add(target, slots.Select(slot => (IReadOnlyList<JsonNode?>)slot.Select(v => v.ToJson()).ToArray()).ToArray()); }
+            catch (RuntimeValueProjectionException e)
+            {
+                diagnostics.Add(new("runtime_value_not_json", e.Message, target, TargetId: target));
+                if (status != "cancelled") status = "error";
+                if (onEvent is not null) await onEvent(new("execution_error", target, e.Message));
+            }
+        }
+        if (onEvent is not null && completionPending)
+            await onEvent(new(status == "success" ? "execution_success" : "execution_failed"));
+        return new(status, outputs, diagnostics);
+    }
+
+    public async Task<OwnedExecutionResult> ExecuteValuesAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
+        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
+    {
         // Freeze caller-owned JSON before the first await, so validation and execution see the same graph.
         prompt = prompt.DeepClone().AsObject();
         var validation = Validate(prompt, targets);
         var diagnostics = validation.Diagnostics.ToList();
-        var results = new Dictionary<string, IReadOnlyList<IReadOnlyList<JsonNode?>>>(StringComparer.Ordinal);
-        var memo = new Dictionary<string, IReadOnlyList<IReadOnlyList<JsonNode?>>>(StringComparer.Ordinal);
+        var results = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
+        var memo = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
+        using var job = new RuntimeNodeContext();
+        OwnedExecutionResult Complete(string status)
+        {
+            var result = new OwnedExecutionResult(status, results, diagnostics);
+            try { job.Dispose(); return result; }
+            catch { result.Dispose(); throw; }
+        }
         var failed = new HashSet<string>(StringComparer.Ordinal);
         async ValueTask Emit(string type, string? id = null, string? message = null)
         { if (onEvent is not null) await onEvent(new(type, id, message)); }
-        async Task<IReadOnlyList<IReadOnlyList<JsonNode?>>> Run(string id)
+        async Task<IReadOnlyList<IReadOnlyList<RuntimeValue>>> Run(string id)
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (memo.TryGetValue(id, out var previous)) return previous;
@@ -85,74 +121,78 @@ public sealed class EngineService(NodeRegistry registry)
             var data = prompt[id]!.AsObject();
             Registry.TryGet(data["class_type"]!.GetValue<string>(), out var node);
             var rawInputs = data["inputs"]!.AsObject();
-            var resolved = new Dictionary<string, IReadOnlyList<JsonNode?>>(StringComparer.Ordinal);
+            using var nodeScope = new RuntimeNodeContext();
+            var resolved = new Dictionary<string, IReadOnlyList<RuntimeValue>>(StringComparer.Ordinal);
             async Task Resolve(InputSchema input)
             {
                 if (!rawInputs.TryGetPropertyValue(input.Name, out var raw)) return;
                 if (TryLink(raw, out var source, out var index)) resolved[input.Name] = (await Run(source))[index];
-                else resolved[input.Name] = [Normalize(Unwrap(raw), input)];
+                else resolved[input.Name] = [nodeScope.Json(Normalize(Unwrap(raw), input))];
             }
             try
             {
                 foreach (var input in node.Schema.Inputs.Where(i => !i.Lazy)) await Resolve(input);
-                // Read-only interfaces do not make their JSON values immutable. Hooks receive
-                // private containers and deep values, just like ordinary node invocations.
-                var lazySnapshot = resolved.ToDictionary(p => p.Key,
-                    p => (IReadOnlyList<JsonNode?>)p.Value.Select(v => v?.DeepClone()).ToArray(), StringComparer.Ordinal);
-                foreach (var name in node.GetRequiredLazyInputs(lazySnapshot))
+                IReadOnlyCollection<string> lazyNames;
+                using (var lazyScope = new RuntimeNodeContext())
+                {
+                    var lazySnapshot = resolved.ToDictionary(p => p.Key,
+                        p => (IReadOnlyList<RuntimeValue>)Array.AsReadOnly(p.Value.Select(lazyScope.Retain).ToArray()), StringComparer.Ordinal);
+                    lazyNames = node.GetRequiredLazyInputs(lazySnapshot).ToArray();
+                }
+                foreach (var name in lazyNames.Distinct(StringComparer.Ordinal))
                 {
                     var input = node.Schema.Inputs.SingleOrDefault(i => i.Name == name && i.Lazy)
                         ?? throw new InvalidOperationException($"Node requested undeclared lazy input '{name}'.");
                     await Resolve(input);
                 }
                 await Emit("executing", id);
-                var output = node.Schema.Outputs.Select(_ => new List<JsonNode?>()).ToArray();
+                var output = node.Schema.Outputs.Select(_ => new List<RuntimeValue>()).ToArray();
                 var count = node.Schema.InputIsList ? 1 : resolved.Count == 0 ? 1 : resolved.Values.Max(v => v.Count);
                 // Upstream invokes once with no arguments when every execution list is empty.
                 if (count == 0) count = 1;
                 for (var index = 0; index < count; index++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var invocation = new Dictionary<string, JsonNode?>(StringComparer.Ordinal);
+                    using var invocationScope = new RuntimeNodeContext();
+                    var invocation = new Dictionary<string, RuntimeValue>(StringComparer.Ordinal);
                     foreach (var (name, values) in resolved)
                     {
-                        if (node.Schema.InputIsList) invocation[name] = new JsonArray(values.Select(v => v?.DeepClone()).ToArray());
-                        else if (values.Count != 0) invocation[name] = values[Math.Min(index, values.Count - 1)]?.DeepClone();
+                        if (node.Schema.InputIsList) invocation[name] = invocationScope.List(values);
+                        else if (values.Count != 0) invocation[name] = invocationScope.Retain(values[Math.Min(index, values.Count - 1)]);
                         else if (resolved.Values.Any(v => v.Count != 0)) throw new InvalidOperationException("Cannot repeat the last item of an empty execution list.");
                     }
-                    var returned = await node.ExecuteAsync(invocation, cancellationToken);
+                    var returned = await node.ExecuteAsync(invocationScope, invocation, cancellationToken);
                     cancellationToken.ThrowIfCancellationRequested();
                     if (returned.Count != output.Length) throw new InvalidOperationException("Node returned an incorrect output count.");
                     for (var slot = 0; slot < output.Length; slot++)
                     {
                         if (node.Schema.Outputs[slot].IsList)
                         {
-                            if (returned[slot] is not JsonArray list) throw new InvalidOperationException("List output must be a JSON array.");
-                            output[slot].AddRange(list.Select(v => v?.DeepClone()));
+                            if (returned[slot].Kind != RuntimeValueKind.List) throw new InvalidOperationException("List output must be an execution list.");
+                            foreach (var value in returned[slot].Items) output[slot].Add(nodeScope.Retain(value));
                         }
-                        else output[slot].Add(returned[slot]?.DeepClone());
+                        else output[slot].Add(nodeScope.Retain(returned[slot]));
                     }
                 }
-                var completed = output.Cast<IReadOnlyList<JsonNode?>>().ToArray();
-                memo[id] = completed;
                 await Emit("executed", id);
+                var completed = output.Select(slot => (IReadOnlyList<RuntimeValue>)slot.Select(job.Retain).ToArray()).ToArray();
+                memo[id] = completed;
                 return completed;
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
             catch (NodeFailure) { failed.Add(id); throw; }
             catch (Exception e) { failed.Add(id); throw new NodeFailure(id, e.Message); }
         }
-        if (!validation.IsValid) return new("error", results, diagnostics);
-        await Emit("execution_start");
+        if (!validation.IsValid) return Complete("error");
         try
         {
+            await Emit("execution_start");
             foreach (var target in validation.ValidTargets)
             {
                 try
                 {
                     var output = await Run(target);
-                    // Never expose memo entries to an event consumer or another result owner.
-                    results[target] = output.Select(slot => (IReadOnlyList<JsonNode?>)slot.Select(v => v?.DeepClone()).ToArray()).ToArray();
+                    results[target] = output;
                 }
                 catch (NodeFailure e)
                 {
@@ -162,12 +202,12 @@ public sealed class EngineService(NodeRegistry registry)
             }
             var status = diagnostics.Any(d => d.Code == "execution_error") ? "error" : "success";
             await Emit(status == "success" ? "execution_success" : "execution_failed");
-            return new(status, results, diagnostics);
+            return Complete(status);
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
             await Emit("execution_interrupted");
-            return new("cancelled", results, diagnostics);
+            return Complete("cancelled");
         }
     }
 

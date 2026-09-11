@@ -18,6 +18,7 @@
   </Folder>
   <Folder Name="/tools/">
     <Project Path="tools/ComfySharp.Catalog/ComfySharp.Catalog.csproj" />
+    <Project Path="tools/ComfySharp.ModelInspect/ComfySharp.ModelInspect.csproj" />
     <Project Path="tools/ComfySharp.NativeLoader/ComfySharp.NativeLoader.csproj" />
     <Project Path="tools/ComfySharp.RuntimeProbe/ComfySharp.RuntimeProbe.csproj" />
   </Folder>

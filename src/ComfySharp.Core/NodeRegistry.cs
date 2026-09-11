@@ -5,10 +5,10 @@ namespace ComfySharp.Core;
 
 public sealed class NodeRegistry
 {
-    private readonly Dictionary<string, INode> nodes = new(StringComparer.Ordinal);
-    public IEnumerable<INode> Nodes => nodes.Values;
-    public void Register(INode node) => nodes.Add(node.Schema.ClassType, node);
-    public bool TryGet(string classType, out INode node) => nodes.TryGetValue(classType, out node!);
+    private readonly Dictionary<string, IRuntimeNode> nodes = new(StringComparer.Ordinal);
+    public IEnumerable<IRuntimeNode> Nodes => nodes.Values;
+    public void Register(IRuntimeNode node) => nodes.Add(node.Schema.ClassType, node);
+    public bool TryGet(string classType, out IRuntimeNode node) => nodes.TryGetValue(classType, out node!);
     public JsonObject ToObjectInfo()
     {
         var result = new JsonObject();

@@ -70,6 +70,7 @@ public sealed partial class MainWindow : Window
             {
                 if (entry["status"]?["completed"]?.GetValue<bool>() != true || entry["outputs"]?[id.Value]?[0]?[0]?.GetValue<string>() != "Hello from ComfySharp")
                     throw new InvalidOperationException("Scalar smoke execution failed: " + entry.ToJsonString());
+                Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, compiled prompt and verified scalar result.");
                 return;
             }
             await Task.Delay(100);

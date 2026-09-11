@@ -29,4 +29,5 @@ cache/
 *.exe
 *.pdb
 *.nupkg
-!**/fixtures/**
+# Tiny synthetic format fixture; real model weights remain excluded.
+!tests/ComfySharp.Inference.Tests/Fixtures/metadata-contract.safetensors

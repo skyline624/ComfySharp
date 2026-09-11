@@ -9,6 +9,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
+    <ProjectReference Include="../../src/ComfySharp.Core/ComfySharp.Core.csproj" />
+    <ProjectReference Include="../../src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" /><PackageReference Include="xunit" /><PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
     <PackageReference Include="libtorch-cpu-win-x64" Condition="'$(NativeRuntime)' == 'win-x64'" />
     <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeRuntime)' == 'linux-x64'" />

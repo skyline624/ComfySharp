@@ -15,11 +15,32 @@ public sealed record EngineEvent(string Type, string? NodeId = null, string? Mes
 public sealed record ExecutionResult(string Status,
     Dictionary<string, IReadOnlyList<IReadOnlyList<JsonNode?>>> Outputs, IReadOnlyList<EngineDiagnostic> Diagnostics);
 
-/// <summary>Each output slot is one JSON value; slots declared IsList must hold a JsonArray.</summary>
-public interface INode
+/// <summary>Inputs and returned values are borrowed for the invocation. Allocate resources through the supplied context.</summary>
+public interface IRuntimeNode
 {
     NodeSchema Schema { get; }
+    ValueTask<IReadOnlyList<RuntimeValue>> ExecuteAsync(RuntimeNodeContext context,
+        IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken);
+    /// <summary>Resolved values are execution lists, not literal arrays. All values are borrowed for this call.</summary>
+    IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) => [];
+}
+
+/// <summary>JSON node adapter for the typed runtime. Each slot is a JSON value; IsList slots must hold a JsonArray.</summary>
+public interface INode : IRuntimeNode
+{
     ValueTask<IReadOnlyList<JsonNode?>> ExecuteAsync(IReadOnlyDictionary<string, JsonNode?> inputs, CancellationToken cancellationToken);
     /// <summary>Return lazy names needed by any mapped invocation. Resolved values are execution lists, not literal arrays.</summary>
     IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<JsonNode?>> resolvedInputs) => [];
+
+    async ValueTask<IReadOnlyList<RuntimeValue>> IRuntimeNode.ExecuteAsync(RuntimeNodeContext context,
+        IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken)
+    {
+        var snapshot = inputs.ToDictionary(p => p.Key, p => p.Value.ToJson(), StringComparer.Ordinal);
+        var returned = await ExecuteAsync(snapshot, cancellationToken);
+        return returned.Select((value, index) => index < Schema.Outputs.Count && Schema.Outputs[index].IsList && value is JsonArray list
+            ? context.List(list.Select(context.Json)) : context.Json(value)).ToArray();
+    }
+    IReadOnlyCollection<string> IRuntimeNode.GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) =>
+        GetRequiredLazyInputs(resolvedInputs.ToDictionary(p => p.Key,
+            p => (IReadOnlyList<JsonNode?>)p.Value.Select(v => v.ToJson()).ToArray(), StringComparer.Ordinal));
 }

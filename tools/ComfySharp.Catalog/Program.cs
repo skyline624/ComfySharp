@@ -3,13 +3,22 @@ using System.Text.Json.Nodes;
 using ComfySharp.Nodes;
 using ComfySharp.Catalog;
 
-if (args.Length is < 1 or > 2 || args.Length == 2 && args[1] != "--release")
+if (args.Length < 1)
 {
-    Console.Error.WriteLine("Usage: ComfySharp.Catalog <manifest.json> [--release]");
+    Console.Error.WriteLine("Usage: ComfySharp.Catalog <manifest.json> [--release] [--node-evidence <registrations.json> <schemas.json>]");
     return 2;
 }
 try
 {
+    bool release = false;
+    string? registrationPath = null, schemaPath = null;
+    for (int index = 1; index < args.Length; index++)
+    {
+        if (args[index] == "--release" && !release) release = true;
+        else if (args[index] == "--node-evidence" && registrationPath is null && index + 2 < args.Length)
+        { registrationPath = args[++index]; schemaPath = args[++index]; }
+        else throw new InvalidOperationException("Invalid or repeated catalogue command argument.");
+    }
     var manifest = JsonNode.Parse(File.ReadAllText(args[0]))!.AsObject();
     var capabilities = manifest["capabilities"]!.AsArray().Select(n => n!.AsObject()).ToArray();
     var errors = new List<string>();
@@ -35,14 +44,18 @@ try
     }
     foreach (var (name, _) in registry)
         if (!localNodes.Contains(name)) errors.Add($"Runtime node missing from manifest: {name}");
-    if (args.Length == 2) errors.AddRange(ReleaseQualification.Validate(manifest));
+    if (registrationPath is not null)
+        errors.AddRange(NodeCatalogueEvidence.Validate(manifest,
+            JsonNode.Parse(File.ReadAllText(registrationPath))!.AsObject(), JsonNode.Parse(File.ReadAllText(schemaPath!))!.AsObject()));
+    if (release) errors.AddRange(ReleaseQualification.Validate(manifest));
     Console.WriteLine(JsonSerializer.Serialize(new
     {
         rows = capabilities.Length,
         local_node_declarations = capabilities.Count(c => c["scope"]!.GetValue<string>() == "local" && c["kind"]!.GetValue<string>() == "node"),
         registered_nodes = registry.Count,
         catalogue_complete = manifest["catalogueComplete"]!.GetValue<bool>(),
-        release_ready = args.Length == 2 && errors.Count == 0,
+        node_evidence_checked = registrationPath is not null,
+        release_ready = release && errors.Count == 0,
         error_count = errors.Count,
         errors = errors.Take(30)
     }, new JsonSerializerOptions { WriteIndented = true }));
