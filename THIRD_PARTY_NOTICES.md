@@ -18,6 +18,8 @@ The `PreviewAny` node in `src/ComfySharp.Nodes.Tensor/TensorNodes.cs` follows [C
 
 ## Distribution dependencies
 
+The C# CLIP transformer, checkpoint key adapters and conditioning wrappers follow the frozen ComfyUI `comfy/clip_model.py`, `comfy/ldm/modules/attention.py`, `comfy/sd1_clip.py`, `comfy/sdxl_clip.py` and `comfy/utils.py` under the ComfyUI GPLv3 provenance above. [CLIP_ENCODERS.md](docs/CLIP_ENCODERS.md) records source, operation and numerical profiles. The small safetensors fixtures are deterministically generated synthetic inputs, not third-party pretrained weights; their independent reference outputs do not imply model-family compatibility. No Python implementation or interpreter is shipped.
+
 Dependencies retain their own licences: .NET/ASP.NET Core, Avalonia, Nodify.Avalonia and TorchSharp (MIT); libtorch (BSD-style, with additional bundled notices); SQLite (public domain), Microsoft.Data.Sqlite (MIT), SQLitePCLRaw (Apache-2.0); Skia/SkiaSharp (BSD/MIT notices). Exact transitive packages are recorded in packages.lock.json. Packaging must copy every applicable native and managed dependency notice and produce an SBOM before release.
 
 FFmpeg and ANGLE are planned dependencies, not bundled by this bootstrap. Their build configuration, licence obligations and notices must be recorded when integrated. Model weights are not included. The CLIP text resources now included are identified below; each further compatibility record must identify its licence, origin and SHA-256.

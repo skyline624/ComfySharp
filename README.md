@@ -65,6 +65,8 @@ dotnet run --project tools/ComfySharp.Tokenize -- --text "a (cat:1.5)" --profile
 
 Il accepte aussi `--file` pour un fichier UTF-8 ou `--stdin`, et `--disable-weights`. Les profils disponibles sont `sd1-l`, `sdxl-l`, `sdxl-g` et `sdxl`. Les [règles de tokenisation et leurs références](docs/CLIP_TOKENIZATION.md) sont figées ; ce diagnostic ne calcule aucun embedding d'encodeur.
 
+Le [diagnostic expérimental des encodeurs](docs/CLIP_ENCODERS.md) charge un checkpoint safetensors explicitement choisi et calcule le conditioning CLIP en CPU/F32. Son inspection des métadonnées fonctionne sans initialiser libtorch. La qualification numérique aux dimensions complètes est en cours ; aucune compatibilité SD1/SDXL n'est encore annoncée.
+
 - [Architecture](docs/ARCHITECTURE.md), [backlog](docs/BACKLOG.md), [validation numérique](docs/NUMERICAL_VALIDATION.md).
 - [Contrat des valeurs natives](docs/RUNTIME_VALUES.md) et [réconciliation des nœuds](docs/audit/05-RECONCILIATION-NOEUDS.md).
 - [Générateurs de niveaux de bruit et corpus de référence](docs/SIGMA_SCHEDULES.md).

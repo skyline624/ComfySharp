@@ -25,8 +25,12 @@
       "comfysharp.inference": {
         "type": "Project",
         "dependencies": {
+          "ComfySharp.Tokenization": "[0.1.0-dev, )",
           "TorchSharp": "[0.107.0, )"
         }
+      },
+      "comfysharp.tokenization": {
+        "type": "Project"
       },
       "SkiaSharp": {
         "type": "CentralTransitive",

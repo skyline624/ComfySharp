@@ -1,3 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup><PackageReference Include="TorchSharp" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../ComfySharp.Tokenization/ComfySharp.Tokenization.csproj" /></ItemGroup>
 </Project>

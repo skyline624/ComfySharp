@@ -32,3 +32,5 @@ cache/
 *.nupkg
 # Tiny synthetic format fixture; real model weights remain excluded.
 !tests/ComfySharp.Inference.Tests/Fixtures/metadata-contract.safetensors
+!tests/ComfySharp.Inference.Tests/Fixtures/clip-tiny-l.synthetic.safetensors
+!tests/ComfySharp.Inference.Tests/Fixtures/clip-tiny-g.synthetic.safetensors

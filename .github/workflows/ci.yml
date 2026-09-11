@@ -31,12 +31,15 @@ jobs:
       - name: Exercise reference fixtures as the first native access in separate processes
         shell: pwsh
         run: |
-          foreach ($suite in @('PreviewAnyReferenceTests', 'SigmaScheduleReferenceTests')) {
+          foreach ($suite in @('PreviewAnyReferenceTests', 'SigmaScheduleReferenceTests', 'ClipReferenceTests')) {
             & dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter "FullyQualifiedName~$suite" --logger trx --results-directory "FirstUseResults/$suite"
             if ($LASTEXITCODE -ne 0) { throw "Native first-use reference suite failed: $suite" }
           }
       - name: Test managed contracts, UI headless and CPU primitives
-        run: dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --logger trx --results-directory TestResults
+        run: dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName!~ClipStockReferenceTests' --logger trx --results-directory TestResults
+      - name: Compare full CLIP L and G dimensions in a separate CPU process
+        timeout-minutes: 6
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter FullyQualifiedName~ClipStockReferenceTests --logger trx --results-directory StockResults
       - name: Diagnose macOS native loader failures
         if: failure() && matrix.runtime == 'osx-arm64'
         shell: bash
@@ -78,6 +81,38 @@ jobs:
             throw 'CLIP text diagnostic did not reproduce the source contract.'
           }
           Write-Output 'CLIP text diagnostic passed: exact IDs, SDXL G/L padding, no Torch dependencies.'
+      - name: Inspect CLIP metadata without native payload and encode a synthetic fixture
+        shell: pwsh
+        run: |
+          $directory = Join-Path $env:GITHUB_WORKSPACE 'tools/ComfySharp.RuntimeProbe/bin/native/${{ matrix.runtime }}/cpu/Release/net10.0'
+          $managedOnly = Join-Path $env:RUNNER_TEMP 'comfysharp-clip-inspection'
+          New-Item -ItemType Directory -Path $managedOnly -Force | Out-Null
+          $nativePattern = '^(lib)?(LibTorchSharp|torch_cpu|torch|c10|libomp|shm)\.(dll|so|dylib)$'
+          Get-ChildItem -LiteralPath $directory -File | Where-Object {
+            $_.Name -notmatch $nativePattern -and ($_.Extension -eq '.dll' -or $_.Name -match '\.(deps|runtimeconfig)\.json$')
+          } | ForEach-Object { Copy-Item -LiteralPath $_.FullName -Destination $managedOnly }
+          if (Get-ChildItem -LiteralPath $managedOnly -File -Recurse | Where-Object Name -Match $nativePattern) {
+            throw 'Managed-only CLIP inspection unexpectedly contains a tensor native library.'
+          }
+          $fixture = Join-Path $env:GITHUB_WORKSPACE 'tests/ComfySharp.Inference.Tests/Fixtures/clip-tiny-l.synthetic.safetensors'
+          $cli = Join-Path $managedOnly 'ComfySharp.RuntimeProbe.dll'
+          $result = & dotnet $cli clip --weights $fixture --layout canonical --profile sd1-l --synthetic-config '8,20,3,2,quick_gelu' --inspect --sha256
+          if ($LASTEXITCODE -ne 0) { throw 'Managed-only CLIP inspection failed.' }
+          $report = $result | ConvertFrom-Json
+          if ($report.status -ne 'ok' -or $report.nativeInitialized -ne $false -or $report.weightPlan.tensorCount -ne 53 -or
+              $report.fileSha256 -ne '702aff7540e0b417a9f81a36c3978d0e424006baf44d8fcc29f6e79bd8490e1c') {
+            throw 'Managed-only CLIP metadata contract differs.'
+          }
+          $cli = Join-Path $directory 'ComfySharp.RuntimeProbe.dll'
+          $result = & dotnet $cli clip --weights $fixture --layout canonical --profile sd1-l --synthetic-config '8,20,3,2,quick_gelu' --text 'a (cat:1.5)' --repeat 3
+          if ($LASTEXITCODE -ne 0) { throw 'CLIP encoding diagnostic failed.' }
+          $report = $result | ConvertFrom-Json
+          if ($report.status -ne 'ok' -or $report.synthetic -ne $true -or $report.nativeInitialized -ne $true -or
+              $report.outputHashesRepeat -ne $true -or $report.modelCompatibility -ne 'not_assessed' -or
+              ($report.executions[0].hidden.shape -join ',') -ne '1,77,8') {
+            throw 'CLIP diagnostic did not execute the expected synthetic graph.'
+          }
+          Write-Output 'CLIP inspection without native payload and repeated synthetic conditioning passed; no pretrained compatibility claimed.'
       - name: Start native Desktop and its supervised Host
         timeout-minutes: 3
         shell: pwsh
@@ -106,4 +141,10 @@ jobs:
         with:
           name: tests-first-use-${{ matrix.runtime }}
           path: FirstUseResults
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tests-stock-${{ matrix.runtime }}
+          path: StockResults
           if-no-files-found: ignore

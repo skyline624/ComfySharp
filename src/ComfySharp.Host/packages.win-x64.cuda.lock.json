@@ -172,6 +172,7 @@
       "comfysharp.inference": {
         "type": "Project",
         "dependencies": {
+          "ComfySharp.Tokenization": "[0.1.0-dev, )",
           "TorchSharp": "[0.107.0, )"
         }
       },
@@ -195,6 +196,9 @@
           "Microsoft.Data.Sqlite": "[10.0.9, )",
           "SQLitePCLRaw.bundle_e_sqlite3": "[3.0.5, )"
         }
+      },
+      "comfysharp.tokenization": {
+        "type": "Project"
       },
       "Microsoft.Data.Sqlite": {
         "type": "CentralTransitive",

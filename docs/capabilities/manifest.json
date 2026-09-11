@@ -7,6 +7,75 @@
   "method": "Pinned source catalogue: original static declarations retained with their implementation/evidence statuses; ordered built-in loader paths, legacy mapping mutations, entrypoints and inherited/mutated schemas reconciled as source candidates in companion JSON. Runtime import/finalization, dynamic parameter providers, model/encoder/VAE/widget variants and reference scenarios remain unqualified. Remote nodes remain excluded.",
   "capabilities": [
     {
+      "id": "text-encoder:clip-sd1-l",
+      "name": "SD1 CLIP-L CPU Float32 conditioning",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_clip.py",
+      "scenario": "encoder-reference:clip-sd1-l",
+      "kind": "text-encoder",
+      "scope": "local",
+      "parametersStatus": "frozen-integer-token-cpu-f32-inference-profile",
+      "dependencyProfile": "clip-basic-cpu-f32-v1",
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "limits": "Actual unpatched CPU/F32 transformer and conditioning code, strict F32/F16/BF16 safetensors adapters, synthetic reference tests. Full-size synthetic arithmetic passes locally; cross-platform qualification is pending. Pretrained workflows, textual inversion, patches/adapters, training and GPU validation remain open."
+    },
+    {
+      "id": "text-encoder:clip-sdxl-l",
+      "name": "SDXL CLIP-L CPU Float32 conditioning",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sdxl_clip.py",
+      "scenario": "encoder-reference:clip-sdxl-l",
+      "kind": "text-encoder",
+      "scope": "local",
+      "parametersStatus": "frozen-integer-token-cpu-f32-inference-profile",
+      "dependencyProfile": "clip-basic-cpu-f32-v1",
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "limits": "Actual unpatched CPU/F32 transformer and conditioning code, strict F32/F16/BF16 safetensors adapters, synthetic reference tests. Full-size synthetic arithmetic passes locally; cross-platform qualification is pending. Pretrained workflows, textual inversion, patches/adapters, training and GPU validation remain open."
+    },
+    {
+      "id": "text-encoder:clip-sdxl-g",
+      "name": "SDXL CLIP-G CPU Float32 conditioning",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sdxl_clip.py",
+      "scenario": "encoder-reference:clip-sdxl-g",
+      "kind": "text-encoder",
+      "scope": "local",
+      "parametersStatus": "frozen-integer-token-cpu-f32-inference-profile",
+      "dependencyProfile": "clip-basic-cpu-f32-v1",
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": false,
+      "platforms": {
+        "win-x64-cpu": false,
+        "win-x64-cuda": false,
+        "linux-x64-cpu": false,
+        "linux-x64-cuda": false,
+        "osx-arm64-cpu": false,
+        "osx-arm64-mps": false
+      },
+      "evidence": [],
+      "limits": "Actual unpatched CPU/F32 transformer and conditioning code, strict F32/F16/BF16 safetensors adapters, synthetic reference tests. Full-size synthetic arithmetic passes locally; cross-platform qualification is pending. Pretrained workflows, textual inversion, patches/adapters, training and GPU validation remain open."
+    },
+    {
       "id": "text-tokenizer:clip-sd1-l",
       "name": "SD1 CLIP-L text tokenization",
       "kind": "text-tokenizer",

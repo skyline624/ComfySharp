@@ -33,6 +33,9 @@
         "resolved": "2.88.6",
         "contentHash": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ=="
       },
+      "comfysharp.tokenization": {
+        "type": "Project"
+      },
       "SkiaSharp": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",
