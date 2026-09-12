@@ -27,8 +27,12 @@ jobs:
       - name: Restore locked dependencies
         run: dotnet restore ComfySharp.slnx --locked-mode -p:NativeRuntime=${{ matrix.runtime }}
       - name: Build
+        id: build
         run: dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }}
+      # Gather every independent validation result after a successful build.
+      # A failed test still fails the job; cancellation/build failure prevents execution.
       - name: Test Core, Workflow, Tokenization, Desktop headless and Host contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: pwsh
         run: |
           $failedProjects = @()
@@ -38,8 +42,10 @@ jobs:
           }
           if ($failedProjects.Count) { throw "Application contract projects failed: $($failedProjects -join ', ')" }
       - name: Check catalogue consistency
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json
       - name: Start native Desktop and its supervised Host
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         timeout-minutes: 3
         shell: pwsh
         run: |
@@ -55,25 +61,35 @@ jobs:
             throw "Native Desktop / Host smoke did not complete (exit $exitCode)."
           }
       - name: Exercise IMAGE operations and source references in a separate CPU process
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~ImageOperationsTests|FullyQualifiedName~ImageNodeTests|FullyQualifiedName~ImagePrimitiveSourceReferenceTests|FullyQualifiedName~ImageBatchOperationsTests|FullyQualifiedName~ImageBatchNodeTests|FullyQualifiedName~ImageBatchSourceReferenceTests|FullyQualifiedName~ImagePngEncoderTests|FullyQualifiedName~ImageFileNodeTests' --logger trx --results-directory ImageResults
       - name: Exercise SD1.5 checkpoint assembly contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reduced SD1.5 pipeline contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15Pipeline&FullyQualifiedName!~Sd15PipelineReferenceTests' --logger trx --results-directory PipelineResults
       - name: Exercise safetensors export and SaveLoRA contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SafeTensorWriterTests|FullyQualifiedName~SaveLoraNodeTests|FullyQualifiedName~LoraTrainingStateTests|FullyQualifiedName~NativeLoraTensorSourceTests|FullyQualifiedName~LoraModelLoaderNodeTests|FullyQualifiedName~LoraBypassTests|FullyQualifiedName~SdLoraBypassTests' --logger trx --results-directory TestResults/SaveLoRA
       - name: Exercise training bypass source and dataset contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         # Keep the bypass source/loop cases observable even when another numerical gate fails later.
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~LoraTrainingBypassTests|FullyQualifiedName~SdTrainingLoopTests' --logger trx --results-directory TestResults/TrainingBypass
       - name: Exercise LoRA resume source and lifetime contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdLoraResumeTests' --logger trx --results-directory TestResults/LoraResume
       - name: Exercise all-target adapter initialization and mixed gradients
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdAdapterInitializationTests|FullyQualifiedName~TrainableAdapterTests|FullyQualifiedName~TrainingReferenceCorpusTests' --logger trx --results-directory TestResults/TrainingAdapters
       - name: Exercise training datasets, source RNG and training loops
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdTraining' --logger trx --results-directory TestResults/TrainingDatasets
       - name: Exercise sampler trajectories, inpaint masks and LoRA foundations
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdHeunSamplerTests|FullyQualifiedName~SdKarrasScheduleTests|FullyQualifiedName~SdSchedulerTests|FullyQualifiedName~SdDpmpp2MSamplerTests|FullyQualifiedName~SdInpaintMaskTests|FullyQualifiedName~LoraMathTests|FullyQualifiedName~LoraWeightPatchTests|FullyQualifiedName~LoraFileLoaderTests|FullyQualifiedName~LoraDifferenceTests|FullyQualifiedName~LoraModelAliasesTests|FullyQualifiedName~LoraNodeTests|FullyQualifiedName~LoraTrainingTests|FullyQualifiedName~LoraOptimizerTests|FullyQualifiedName~SdLoraObjectiveTests' --logger trx --results-directory TestResults/Heun
       - name: Exercise reference fixtures as the first native access in separate processes
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         id: native_first_use
         shell: pwsh
         env:
@@ -89,8 +105,10 @@ jobs:
           }
           if ($failedSuites.Count) { throw "Native first-use reference suites failed: $($failedSuites -join ', ')" }
       - name: Test inference contracts and CPU primitives
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName!~ClipStockReferenceTests' --logger trx --results-directory TestResults/Inference
       - name: Inspect a safetensors file in a fresh process without libtorch
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: pwsh
         run: |
           $inspector = Join-Path $env:GITHUB_WORKSPACE 'tools/ComfySharp.ModelInspect/bin/Release/net10.0/ComfySharp.ModelInspect.dll'
@@ -107,6 +125,7 @@ jobs:
       # The text tokenizer is exercised separately so its embedded resources and
       # dependency isolation are checked outside a testhost and tensor runtime.
       - name: Tokenize CLIP text in a fresh process without libtorch
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: pwsh
         run: |
           $cli = Join-Path $env:GITHUB_WORKSPACE 'tools/ComfySharp.Tokenize/bin/Release/net10.0/ComfySharp.Tokenize.dll'
@@ -122,6 +141,7 @@ jobs:
           }
           Write-Output 'CLIP text diagnostic passed: exact IDs, SDXL G/L padding, no Torch dependencies.'
       - name: Inspect CLIP metadata without native payload and encode a synthetic fixture
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         shell: pwsh
         run: |
           $directory = Join-Path $env:GITHUB_WORKSPACE 'tools/ComfySharp.RuntimeProbe/bin/native/${{ matrix.runtime }}/cpu/Release/net10.0'
@@ -154,8 +174,10 @@ jobs:
           }
           Write-Output 'CLIP inspection without native payload and repeated synthetic conditioning passed; no pretrained compatibility claimed.'
       - name: Exercise actual native CPU operations
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet run --no-build -c Release --project tools/ComfySharp.RuntimeProbe -- --device cpu --repeat 25
       - name: Compare full CLIP L and G dimensions in a separate CPU process
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         id: clip_stock
         timeout-minutes: 6
         env:

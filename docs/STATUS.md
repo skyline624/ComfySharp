@@ -1,5 +1,15 @@
 # État du port — 0.1.0-dev
 
+La [correction des références de reprise LoRA](LORA_RESUME.md) est vérifiée dans la
+[CI 34725800282](https://github.com/skyline624/ComfySharp/actions/runs/34725800282) :
+**16 tests de reprise passent sur chacun des trois OS**, avec comparaisons exactes
+contre les collectes source indépendantes. Windows passe la CI complète ; Windows
+et macOS passent les 951 tests ordinaires d'inférence. Linux conserve deux échecs
+numériques d'entraînement et macOS deux échecs CLIP. Les suites indépendantes de
+la CI continueront désormais après un échec de test si la compilation a réussi,
+en gardant le statut d'échec global. Cette évolution du workflow reste à vérifier
+sur son prochain run ; elle ne modifie aucune assertion ni qualification.
+
 La [reprise LoRA SD](LORA_RESUME.md) charge les facteurs existants selon les règles source, avec rangs, conversions et RNG vérifiés exactement. **949 tests ordinaires d'inférence passent localement**, dont quatorze nouveaux. Le diagnostic reprend 282 adapters du fichier partagé et effectue deux mises à jour sur 686 cibles/1 250 paramètres, avec base inchangée et rechargement exact en mémoire. Aucun modèle ni adapter n'est écrit. Le compteur du nom est testé séparément ; le nœud public, les autres algorithmes et la précision mixte restent ouverts.
 
 La [CI du bypass d'entraînement `f78d8d2`](qualification/lora-training-bypass.json) valide les **11 tests ciblés, 58 tests d'export/bypass et 315 tests Host sur chacun des trois OS**. macOS passe les 935 tests ordinaires. La CI complète conserve deux échecs de comparaison d'entraînement sur Windows/Linux et deux échecs CLIP sur macOS ; les seuils sont inchangés.

@@ -144,6 +144,34 @@
       "failed": 0,
       "passed": 16
     },
-    "correctedCi": "pending"
+    "correctedCi": {
+      "runId": 34725800282,
+      "commit": "6080c18371ad265fd2dbb3aaa058c7f84061fb04",
+      "conclusion": "failure",
+      "allPlatformsResume": {
+        "passed": 16,
+        "skipped": 0,
+        "failed": 0
+      },
+      "windows": {
+        "jobId": 103639571624,
+        "ordinaryInferencePassed": 951,
+        "conclusion": "success"
+      },
+      "linux": {
+        "jobId": 103639571277,
+        "trainingAdapterFailures": 2,
+        "ordinaryInference": "not executed",
+        "conclusion": "failure"
+      },
+      "macos": {
+        "jobId": 103639571337,
+        "stockClipFailures": 2,
+        "ordinaryInferencePassed": 951,
+        "conclusion": "failure"
+      },
+      "assertionsRelaxed": false,
+      "modelOrPlatformQualification": false
+    }
   }
 }
