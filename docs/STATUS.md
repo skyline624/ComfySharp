@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+La [lecture du JSON Python à l'import](IMPORT_JSON.md) convertit les tokens non finis avec avertissement et permet le repli PNG vers un prompt valide. Elle protège le chemin source des sauvegardes automatiques après conversion. La [campagne locale](qualification/nonfinite-import.json) passe **170 tests Workflow et 82 tests Desktop, dont 46 nouveaux**, le build Release complet et le parcours natif. Aucun autre projet de tests ni nouvelle plateforme n'est qualifié par cette campagne.
+
 L’[import des prompts API](API_PROMPT_IMPORT.md) reconstruit les JSON et les métadonnées PNG en documents éditables, conserve les identifiants et champs inconnus, puis compile les valeurs modifiées. Sa [campagne locale](qualification/api-prompt-import.json) passe **129 tests Workflow et 77 tests Desktop, dont 33 nouveaux**, sans échec ni test ignoré. Le build Release complet et le parcours natif d'import, édition et exécution avec Host séparé passent. Les autres projets de tests n'ont pas été répétés dans cette campagne ; aucun lot ni famille de modèles n'est fermé par ce résultat.
 
 L’[import des workflows PNG](PNG_WORKFLOW_IMPORT.md) ouvre maintenant le document graphique incorporé dans un nouvel onglet et propose une sauvegarde JSON distincte. Cette tranche passe **99 tests Workflow et 74 tests Desktop, dont 22 nouveaux**, ainsi qu’un cycle réel de création puis réimportation PNG avec le Host. Les reconstructions API/A1111, nombres non finis, autres médias et glisser-déposer restent ouverts.

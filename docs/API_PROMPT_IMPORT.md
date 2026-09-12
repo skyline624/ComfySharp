@@ -14,7 +14,7 @@ Le parcours natif importe un prompt texte, modifie sa valeur dans le document, l
 
 L'application fournit les ports typés de ses templates connus. Les sorties absentes du prompt ne sont pas inventées comme capacités : pour un type inconnu, seules les positions nécessaires aux liens présents sont représentées, avec le type `*`. Leur validité d'exécution reste à établir après portage. Les templates sont copiés ; leurs valeurs par défaut ne remplacent pas des entrées absentes du prompt. Les champs inconnus ne servent jamais de copie cachée des entrées à rejouer.
 
-Les liens vers un nœud absent, les cycles et les slots négatifs restent dans le document et reçoivent des diagnostics de compilation. Les slots fractionnaires ou hors Int32 ne sont pas représentables par le contrat GraphLink et font échouer l'import explicitement. L'inférence de sorties sans template est limitée à 4 096 slots par nœud pour éviter une allocation commandée par un index arbitraire. Cette borne n'est pas un plafond global de mémoire. Le JSON doit être strict ; les valeurs non finies du JSON Python restent à adapter.
+Les liens vers un nœud absent, les cycles et les slots négatifs restent dans le document et reçoivent des diagnostics de compilation. Les slots fractionnaires ou hors Int32 ne sont pas représentables par le contrat GraphLink et font échouer l'import explicitement. L'inférence de sorties sans template est limitée à 4 096 slots par nœud pour éviter une allocation commandée par un index arbitraire. Cette borne n'est pas un plafond global de mémoire. Les [tokens non finis du JSON Python](IMPORT_JSON.md) sont convertis en null avec un avertissement à la frontière d’import.
 
 ## Référence et différences explicites
 
@@ -22,7 +22,7 @@ La reconstruction s'appuie sur [`isApiJson` et `loadApiJson`](https://github.com
 
 La distinction lien/littéral suit [`graph_utils.is_link`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_execution/graph_utils.py#L1) : tableau de deux éléments avec ID chaîne et slot numérique, y compris le comportement des booléens Python. Les slots numériques intégraux sont normalisés en entiers. Cette distinction préserve les tableaux qui ne sont pas des liens, alors que le frontend figé tente de traiter tous les tableaux comme des connexions. Les enveloppes littérales suivent le contrat de [`execution.py`](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/execution.py#L983).
 
-Un workflow graphique PNG non vide conserve la priorité sur `prompt`. Un workflow malformé échoue explicitement ; le repli après erreur, A1111, les nombres non finis, le glisser-déposer, les autres médias, les callbacks et le compilateur frontend complet restent ouverts. Aucun modèle, service distant ou interpréteur n'est requis pour cet import.
+Un workflow graphique PNG non vide conserve la priorité sur `prompt`. Un workflow malformé déclenche maintenant un [repli signalé vers le prompt](IMPORT_JSON.md). A1111, le glisser-déposer, les autres médias, les callbacks et le compilateur frontend complet restent ouverts. Aucun modèle, service distant ou interpréteur n'est requis pour cet import.
 
 ## Preuves
 

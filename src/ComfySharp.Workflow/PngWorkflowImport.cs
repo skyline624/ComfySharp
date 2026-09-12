@@ -121,20 +121,34 @@ public static class PngWorkflowImport
 
     private sealed class TextLimitException() : IOException("PNG metadata exceeds the aggregate text size limit.");
 
-    public static WorkflowDocument ReadWorkflow(PngMetadata metadata, Func<string, JsonObject>? templateFactory = null)
+    public static WorkflowDocument ReadWorkflow(PngMetadata metadata, Func<string, JsonObject>? templateFactory = null, Action<string>? reportWarning = null)
     {
+        Exception? failure = null;
         if (metadata.Text.TryGetValue("workflow", out string? workflow) && workflow.Length != 0)
         {
-            var document = JsonNode.Parse(workflow) as JsonObject ?? throw new FormatException("PNG workflow must be a JSON object.");
-            // Older PNG graphs (including the pinned frontend fixture) omit version.
-            // Normalize their legacy document version at the import boundary only.
-            if (!document.ContainsKey("version")) document["version"] = 0.4;
-            return WorkflowDocument.Parse(document.ToJsonString());
+            try
+            {
+                var document = ImportJson.Parse(workflow, reportWarning) as JsonObject ?? throw new FormatException("PNG workflow must be a JSON object.");
+                // Older PNG graphs (including the pinned frontend fixture) omit version.
+                if (!document.ContainsKey("version")) document["version"] = 0.4;
+                return WorkflowDocument.Parse(document.ToJsonString());
+            }
+            catch (Exception error) when (error is System.Text.Json.JsonException or FormatException or InvalidOperationException)
+            {
+                reportWarning?.Invoke("PNG workflow could not be imported; trying API prompt. " + error.Message); failure = error;
+            }
         }
         if (metadata.Text.TryGetValue("prompt", out string? prompt) && prompt.Length != 0)
-            return ApiPromptImport.Parse(prompt, templateFactory);
+        {
+            try { return ApiPromptImport.Parse(prompt, templateFactory, reportWarning); }
+            catch (Exception error) when (error is System.Text.Json.JsonException or FormatException)
+            {
+                reportWarning?.Invoke("PNG API prompt could not be imported. " + error.Message); failure = error;
+            }
+        }
         if (metadata.Text.ContainsKey("parameters"))
             throw new NotSupportedException("This PNG has no workflow or API prompt. A1111 reconstruction is not yet available.");
+        if (failure is not null) System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failure).Throw();
         throw new InvalidDataException("This PNG contains no graphical workflow metadata.");
     }
 }

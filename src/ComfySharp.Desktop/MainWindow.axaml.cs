@@ -281,9 +281,12 @@ public sealed partial class MainWindow : Window
         catch (OperationCanceledException) { }
         if (previews.Any(p => !p!.IsDisposed || p.Image is not null)) throw new InvalidOperationException("Host restart retained old bitmap resources.");
         using (var apiStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("""
-            {"source:01":{"class_type":"PrimitiveString","inputs":{"value":"before editing"}},
+            {"source:01":{"class_type":"PrimitiveString","inputs":{"value":NaN}},
              "preview":{"class_type":"PreviewAny","inputs":{"source":["source:01",0]}}}
             """))) await ImportWorkflowAsync(apiStream, "smoke-api.json");
+        if (ActiveEditor.Document.Nodes.Single(n => n.Id.Value == "source:01").Data["widgets_values"]!["value"] is not null ||
+            Messages.Text?.Contains(ImportJson.NonFiniteWarning, StringComparison.Ordinal) != true)
+            throw new InvalidOperationException("Nonfinite API import did not normalize and warn.");
         ActiveEditor.Document.SetWidgets(new("source:01"), new JsonObject { ["value"] = "API import edited and executed" });
         accepted = await host.SubmitAsync(Compile(true), clientId, ["preview"]);
         var apiEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
@@ -322,19 +325,24 @@ public sealed partial class MainWindow : Window
         if (Path.GetExtension(filename).Equals(".png", StringComparison.OrdinalIgnoreCase))
         {
             var metadata = await PngWorkflowImport.ReadMetadataAsync(stream, lifetime.Token);
-            var document = PngWorkflowImport.ReadWorkflow(metadata, NodeTemplates.Create); lifetime.Token.ThrowIfCancellationRequested();
+            var warnings = metadata.Warnings.ToList();
+            var document = PngWorkflowImport.ReadWorkflow(metadata, NodeTemplates.Create, warnings.Add); lifetime.Token.ThrowIfCancellationRequested();
             AddDocument(document, null, Path.GetFileNameWithoutExtension(filename) + ".json");
-            Messages.Text = metadata.Warnings.Count == 0 ? "Workflow imported from PNG." : string.Join(Environment.NewLine, metadata.Warnings);
+            Messages.Text = warnings.Count == 0 ? "Workflow imported from PNG." : string.Join(Environment.NewLine, warnings);
         }
         else
         {
             using var reader = new StreamReader(stream, leaveOpen: true);
             string json = await reader.ReadToEndAsync(lifetime.Token);
-            bool api = ApiPromptImport.IsPrompt(JsonNode.Parse(json));
-            var document = api ? ApiPromptImport.Parse(json, NodeTemplates.Create) : WorkflowDocument.Parse(json);
+            var warnings = new List<string>(); var parsed = ImportJson.Parse(json, warnings.Add);
+            bool api = ApiPromptImport.IsPrompt(parsed);
+            string normalized = parsed?.ToJsonString() ?? "null";
+            var document = api ? ApiPromptImport.Parse(normalized, NodeTemplates.Create) : WorkflowDocument.Parse(normalized);
             lifetime.Token.ThrowIfCancellationRequested();
-            AddDocument(document, api ? null : localPath, api ? Path.GetFileNameWithoutExtension(filename) + ".workflow.json" : null);
+            bool separateSave = api || warnings.Count > 0;
+            AddDocument(document, separateSave ? null : localPath, separateSave ? Path.GetFileNameWithoutExtension(filename) + ".workflow.json" : null);
             if (api) Messages.Text = "API prompt imported as an editable workflow. Save creates a workflow JSON file.";
+            if (warnings.Count > 0) Messages.Text = string.Join(Environment.NewLine, warnings);
         }
     }
     private static FilePickerFileType JsonType { get; } = new("Workflow JSON") { Patterns = ["*.json"] };

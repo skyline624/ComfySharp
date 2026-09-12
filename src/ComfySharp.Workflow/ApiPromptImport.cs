@@ -14,9 +14,9 @@ public static class ApiPromptImport
         prompt.All(pair => pair.Value is JsonObject node && node["class_type"] is JsonValue type &&
             type.TryGetValue<string>(out _) && node["inputs"] is JsonObject);
 
-    public static WorkflowDocument Parse(string json, Func<string, JsonObject>? templateFactory = null)
+    public static WorkflowDocument Parse(string json, Func<string, JsonObject>? templateFactory = null, Action<string>? reportWarning = null)
     {
-        var prompt = JsonNode.Parse(json);
+        var prompt = ImportJson.Parse(json, reportWarning);
         if (!IsPrompt(prompt)) throw new FormatException("An API prompt must be a nonempty object of nodes with class_type and inputs.");
         var nodes = new JsonArray(); var links = new JsonArray();
         var lookup = new Dictionary<string, JsonObject>(StringComparer.Ordinal);
