@@ -6,4 +6,7 @@
     <PackageReference Include="xunit.runner.visualstudio"><PrivateAssets>all</PrivateAssets></PackageReference>
     <ProjectReference Include="../../src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fixtures/execution-blocker.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.execution-blocker.reference.json" />
+  </ItemGroup>
 </Project>

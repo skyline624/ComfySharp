@@ -1,0 +1,1264 @@
+{
+  "schema": 1,
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "protocolSha256": "861118bdd79dc584185ad6f01fd63d89e5fde8345dd071913469b99ce1e40916",
+  "sourceDeclarations": [
+    {
+      "source": "execution.py",
+      "sourceBytes": 61543,
+      "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declaration": "_async_map_node_over_list",
+      "line": 243,
+      "astSha256": "7abd7cface1f9000da2654a0adaa06a5f19d654d5a9c92dcb37dc95fd7e7ab1b",
+      "segmentSha256": "72efe9f534acaa6dd7f04b95c762c62d663bbb2b9380f5931c8a8860695606cd"
+    },
+    {
+      "source": "execution.py",
+      "sourceBytes": 61543,
+      "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declaration": "resolve_map_node_over_list_results",
+      "line": 231,
+      "astSha256": "614281e252110de2a99b03079c5a82226718d62255977dc173a7a59cb9dd70df",
+      "segmentSha256": "6f46a7a4c9ee8c32b8c6129d988205b5bbf843ab7d15f69f4484feca1dc3e431"
+    },
+    {
+      "source": "execution.py",
+      "sourceBytes": 61543,
+      "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declaration": "merge_result_data",
+      "line": 322,
+      "astSha256": "d892e3c3ac1b91803e26ea09361164a677a80a60cab2809b8723d23b86c5b455",
+      "segmentSha256": "5a7eca11c7639a11260579423d3c6ba59e9380dbfcbd910ab16da86c2753804e"
+    },
+    {
+      "source": "execution.py",
+      "sourceBytes": 61543,
+      "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declaration": "get_output_from_returns",
+      "line": 351,
+      "astSha256": "58991996db4e8025b5a7e2bffa75ac778910dd718e1ea3a1bec8195b668d1a21",
+      "segmentSha256": "b271bc88fd782995961367b9b456b40be1a511afefa6311348deb062eb40dcc7"
+    },
+    {
+      "source": "execution.py",
+      "sourceBytes": 61543,
+      "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declaration": "execution_block_cb",
+      "line": 522,
+      "astSha256": "1f8d95e0ae40599f5c4d0c6175ec8138e6de7c3a97406f51ddccd2e108977090",
+      "segmentSha256": "b3f779281ea43dea85c20bb8fde888e8ae012f3d2a1e5a143d1660e31fa82313"
+    },
+    {
+      "source": "comfy_execution/graph_utils.py",
+      "sourceBytes": 5626,
+      "sourceSha256": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d",
+      "declaration": "ExecutionBlocker",
+      "line": 140,
+      "astSha256": "e0d6980bd7d6981342cd08b708c74655f7ae0f65e063389c7bb00165ec861bb8",
+      "segmentSha256": "0d2e3a3ed9853ea8ab26f5f73a93037e98d97d66f4b792ca46576eaf4f0060f3"
+    }
+  ],
+  "laboratoryFiles": {
+    "labs/execution-blocker-source/protocol.json": {
+      "bytes": 2944,
+      "sha256": "861118bdd79dc584185ad6f01fd63d89e5fde8345dd071913469b99ce1e40916"
+    },
+    "labs/execution-blocker-source/reference.py": {
+      "bytes": 12143,
+      "sha256": "849fe6f300696eaf93c06a0b80c08c92757accd23a9e2939c8425fac600f0b1e"
+    },
+    "labs/execution-blocker-source/README.md": {
+      "bytes": 3641,
+      "sha256": "bbbbd8037e2203b1afbe01ef2a9ccd2d39305870125e58150c2fd71fb22777ef"
+    }
+  },
+  "scope": "Exact V1 list mapper, async result resolver, return merger and reporting callback; not PromptExecutor or whole-job scheduling.",
+  "cases": 24,
+  "executed": true,
+  "collectorCommit": "fffa6b06bbde2a76e2fe40e9097f03c7b169cee8",
+  "python": "3.12.10",
+  "platform": "Windows",
+  "referenceOutputs": [
+    {
+      "id": "silent-middle",
+      "calls": [
+        {
+          "x": 1
+        },
+        {
+          "x": 3
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "silent-middle",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "silent-middle",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          1
+        ],
+        {
+          "$blocker": null
+        },
+        [
+          3
+        ]
+      ],
+      "outputs": [
+        [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "message-middle",
+      "calls": [
+        {
+          "x": 1
+        },
+        {
+          "x": 3
+        }
+      ],
+      "reports": [
+        {
+          "type": "execution_error",
+          "payload": {
+            "prompt_id": "fixture-prompt",
+            "node_id": "message-middle",
+            "node_type": "LaboratoryV1Node",
+            "executed": [
+              "fixture-upstream"
+            ],
+            "exception_message": "Execution Blocked: stop",
+            "exception_type": "ExecutionBlocked",
+            "traceback": [],
+            "current_inputs": [],
+            "current_outputs": []
+          },
+          "client": "fixture-client"
+        }
+      ],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "message-middle",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "message-middle",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          1
+        ],
+        {
+          "$blocker": null
+        },
+        [
+          3
+        ]
+      ],
+      "outputs": [
+        [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": "stop"
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "empty-message",
+      "calls": [],
+      "reports": [
+        {
+          "type": "execution_error",
+          "payload": {
+            "prompt_id": "fixture-prompt",
+            "node_id": "empty-message",
+            "node_type": "LaboratoryV1Node",
+            "executed": [
+              "fixture-upstream"
+            ],
+            "exception_message": "Execution Blocked: ",
+            "exception_type": "ExecutionBlocked",
+            "traceback": [],
+            "current_inputs": [],
+            "current_outputs": []
+          },
+          "client": "fixture-client"
+        }
+      ],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          {
+            "$blocker": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "prompt-order",
+      "calls": [],
+      "reports": [
+        {
+          "type": "execution_error",
+          "payload": {
+            "prompt_id": "fixture-prompt",
+            "node_id": "prompt-order",
+            "node_type": "LaboratoryV1Node",
+            "executed": [
+              "fixture-upstream"
+            ],
+            "exception_message": "Execution Blocked: first",
+            "exception_type": "ExecutionBlocked",
+            "traceback": [],
+            "current_inputs": [],
+            "current_outputs": []
+          },
+          "client": "fixture-client"
+        }
+      ],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "y": [
+          {
+            "$blocker": "first"
+          }
+        ],
+        "x": [
+          {
+            "$blocker": "second"
+          }
+        ]
+      }
+    },
+    {
+      "id": "silent-first",
+      "calls": [],
+      "reports": [],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "y": [
+          {
+            "$blocker": null
+          }
+        ],
+        "x": [
+          {
+            "$blocker": "second"
+          }
+        ]
+      }
+    },
+    {
+      "id": "repeat-last-blocker",
+      "calls": [],
+      "reports": [],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        },
+        {
+          "$blocker": null
+        },
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          },
+          {
+            "$blocker": null
+          },
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          2,
+          3
+        ],
+        "gate": [
+          {
+            "$blocker": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "input-is-list",
+      "calls": [],
+      "reports": [
+        {
+          "type": "execution_error",
+          "payload": {
+            "prompt_id": "fixture-prompt",
+            "node_id": "input-is-list",
+            "node_type": "LaboratoryV1Node",
+            "executed": [
+              "fixture-upstream"
+            ],
+            "exception_message": "Execution Blocked: stop",
+            "exception_type": "ExecutionBlocked",
+            "traceback": [],
+            "current_inputs": [],
+            "current_outputs": []
+          },
+          "client": "fixture-client"
+        }
+      ],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": "stop"
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "nested-list",
+      "calls": [
+        {
+          "x": [
+            1,
+            {
+              "$blocker": null
+            },
+            3
+          ]
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "nested-list",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          [
+            1,
+            {
+              "$blocker": null
+            },
+            3
+          ]
+        ]
+      ],
+      "outputs": [
+        [
+          [
+            1,
+            {
+              "$blocker": null
+            },
+            3
+          ]
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          [
+            1,
+            {
+              "$blocker": null
+            },
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "nested-map",
+      "calls": [
+        {
+          "x": {
+            "inside": {
+              "$blocker": null
+            }
+          }
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "nested-map",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          {
+            "inside": {
+              "$blocker": null
+            }
+          }
+        ]
+      ],
+      "outputs": [
+        [
+          {
+            "inside": {
+              "$blocker": null
+            }
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          {
+            "inside": {
+              "$blocker": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "output-is-list",
+      "calls": [
+        {
+          "x": 1
+        },
+        {
+          "x": 3
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "output-is-list",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "output-is-list",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          [
+            1
+          ]
+        ],
+        {
+          "$blocker": null
+        },
+        [
+          [
+            3
+          ]
+        ]
+      ],
+      "outputs": [
+        [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "partial-slot",
+      "calls": [
+        {
+          "x": 7
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "partial-slot",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          {
+            "$blocker": "slot"
+          },
+          7
+        ]
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": "slot"
+          }
+        ],
+        [
+          7
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          7
+        ]
+      }
+    },
+    {
+      "id": "whole-producer",
+      "calls": [
+        {
+          "x": 1
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "whole-producer",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": "producer"
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": "producer"
+          }
+        ],
+        [
+          {
+            "$blocker": "producer"
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "list-producer-block",
+      "calls": [
+        {
+          "x": 1
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "list-producer-block",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "lazy-mixed-rows",
+      "calls": [
+        {
+          "select": false,
+          "value": 10
+        },
+        {
+          "select": true,
+          "value": 20
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "lazy-mixed-rows",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "lazy-mixed-rows",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          "when_false"
+        ],
+        {
+          "$blocker": null
+        },
+        [
+          "when_true"
+        ]
+      ],
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "select": [
+          false,
+          {
+            "$blocker": null
+          },
+          true
+        ],
+        "value": [
+          10,
+          20
+        ]
+      }
+    },
+    {
+      "id": "lazy-all-blocked",
+      "calls": [],
+      "reports": [],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": "later"
+        }
+      ],
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "select": [
+          {
+            "$blocker": "later"
+          }
+        ]
+      }
+    },
+    {
+      "id": "async-middle",
+      "calls": [
+        {
+          "x": 1
+        },
+        {
+          "x": 3
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "async-middle",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "async-middle",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 1,
+      "mappedReturns": [
+        [
+          1
+        ],
+        {
+          "$blocker": null
+        },
+        [
+          3
+        ]
+      ],
+      "outputs": [
+        [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "input-list-nested",
+      "calls": [
+        {
+          "x": [
+            [
+              {
+                "$blocker": null
+              }
+            ]
+          ]
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "input-list-nested",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          [
+            [
+              {
+                "$blocker": null
+              }
+            ]
+          ]
+        ]
+      ],
+      "outputs": [
+        [
+          [
+            [
+              {
+                "$blocker": null
+              }
+            ]
+          ]
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          [
+            {
+              "$blocker": null
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "id": "all-empty",
+      "calls": [
+        {}
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "all-empty",
+          "index": null
+        }
+      ],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        [
+          1
+        ]
+      ],
+      "outputs": [
+        [
+          1
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [],
+        "y": []
+      }
+    },
+    {
+      "id": "mixed-empty",
+      "calls": [],
+      "reports": [],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "status": "raised",
+      "errorType": "IndexError",
+      "interruptChecks": 0,
+      "inputsAfter": {
+        "x": [],
+        "gate": [
+          {
+            "$blocker": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "input-list-mixed-empty",
+      "calls": [],
+      "reports": [],
+      "contexts": [],
+      "preExecuteIndices": [],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "$blocker": null
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": null
+          }
+        ]
+      ],
+      "ui": {},
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [],
+        "gate": [
+          {
+            "$blocker": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "interrupt-before-block",
+      "calls": [
+        {
+          "x": 1
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "interrupt-before-block",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "status": "raised",
+      "errorType": "InterruptFixture",
+      "interruptChecks": 2,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": "unreached"
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "ui-survivors",
+      "calls": [
+        {
+          "x": 1
+        },
+        {
+          "x": 3
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "ui-survivors",
+          "index": 0
+        },
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "ui-survivors",
+          "index": 2
+        }
+      ],
+      "preExecuteIndices": [
+        0,
+        2
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "result": [
+            1
+          ],
+          "ui": {
+            "values": [
+              1
+            ]
+          }
+        },
+        {
+          "$blocker": null
+        },
+        {
+          "result": [
+            3
+          ],
+          "ui": {
+            "values": [
+              3
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      ],
+      "ui": {
+        "values": [
+          1,
+          3
+        ]
+      },
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 3,
+      "inputsAfter": {
+        "x": [
+          1,
+          {
+            "$blocker": null
+          },
+          3
+        ]
+      }
+    },
+    {
+      "id": "producer-block-ui",
+      "calls": [
+        {
+          "x": 1
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "producer-block-ui",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "pendingTasksBeforeResolution": 0,
+      "mappedReturns": [
+        {
+          "result": {
+            "$blocker": "producer"
+          },
+          "ui": {
+            "values": [
+              "producer"
+            ]
+          }
+        }
+      ],
+      "outputs": [
+        [
+          {
+            "$blocker": "producer"
+          }
+        ]
+      ],
+      "ui": {
+        "values": [
+          "producer"
+        ]
+      },
+      "hasSubgraph": false,
+      "status": "returned",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "ordinary-error",
+      "calls": [
+        {
+          "x": 1
+        }
+      ],
+      "reports": [],
+      "contexts": [
+        {
+          "promptId": "fixture-prompt",
+          "nodeId": "ordinary-error",
+          "index": 0
+        }
+      ],
+      "preExecuteIndices": [
+        0
+      ],
+      "status": "raised",
+      "errorType": "FixtureNodeError",
+      "interruptChecks": 1,
+      "inputsAfter": {
+        "x": [
+          1
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "No PromptExecutor, graph expansion, V3 node execution, persistent cache or model runtime executed.",
+    "Fixture interruption/context/server and V3 sentinel adapters replace infrastructure only.",
+    "Lazy mapped returns are recorded without claiming whole scheduler restaging.",
+    "Fixture blocker tags are laboratory encoding, never product JSON literals."
+  ]
+}

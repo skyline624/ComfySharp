@@ -28,11 +28,23 @@ jobs:
         run: dotnet restore ComfySharp.slnx --locked-mode -p:NativeRuntime=${{ matrix.runtime }}
       - name: Build
         run: dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }}
+      - name: Test Core, Workflow, Tokenization, Desktop headless and Host contracts
+        shell: pwsh
+        run: |
+          $failedProjects = @()
+          foreach ($project in @('Core', 'Workflow', 'Tokenization', 'Desktop', 'Host')) {
+            & dotnet test "tests/ComfySharp.$project.Tests" --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --logger trx --results-directory "TestResults/$project"
+            if ($LASTEXITCODE -ne 0) { $failedProjects += $project }
+          }
+          if ($failedProjects.Count) { throw "Application contract projects failed: $($failedProjects -join ', ')" }
+      - name: Check catalogue consistency
+        run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json
       - name: Exercise SD1.5 checkpoint assembly contracts
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reduced SD1.5 pipeline contracts
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15Pipeline&FullyQualifiedName!~Sd15PipelineReferenceTests' --logger trx --results-directory PipelineResults
       - name: Exercise reference fixtures as the first native access in separate processes
+        id: native_first_use
         shell: pwsh
         env:
           COMFYSHARP_SD_UNET_TRACE_DIR: ${{ github.workspace }}/SdTraces/${{ matrix.runtime }}
@@ -46,10 +58,8 @@ jobs:
             if ($LASTEXITCODE -ne 0) { $failedSuites += $suite }
           }
           if ($failedSuites.Count) { throw "Native first-use reference suites failed: $($failedSuites -join ', ')" }
-      - name: Test managed contracts, UI headless and CPU primitives
-        run: dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName!~ClipStockReferenceTests' --logger trx --results-directory TestResults
-      - name: Check catalogue consistency
-        run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json
+      - name: Test inference contracts and CPU primitives
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName!~ClipStockReferenceTests' --logger trx --results-directory TestResults/Inference
       - name: Inspect a safetensors file in a fresh process without libtorch
         shell: pwsh
         run: |
@@ -131,6 +141,7 @@ jobs:
       - name: Exercise actual native CPU operations
         run: dotnet run --no-build -c Release --project tools/ComfySharp.RuntimeProbe -- --device cpu --repeat 25
       - name: Compare full CLIP L and G dimensions in a separate CPU process
+        id: clip_stock
         timeout-minutes: 6
         env:
           COMFYSHARP_CLIP_TRACE_DIR: ${{ github.workspace }}/StockTraces/${{ matrix.runtime }}
@@ -156,7 +167,7 @@ jobs:
           path: PipelineResults
           if-no-files-found: ignore
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && (steps.native_first_use.outcome == 'success' || steps.native_first_use.outcome == 'failure' || steps.native_first_use.outcome == 'cancelled')
         with:
           name: sd15-pipeline-traces-${{ matrix.runtime }}
           path: PipelineSourceTraces
@@ -168,7 +179,7 @@ jobs:
           path: TestResults
           if-no-files-found: ignore
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && (steps.native_first_use.outcome == 'success' || steps.native_first_use.outcome == 'failure' || steps.native_first_use.outcome == 'cancelled')
         with:
           name: sd-euler-traces-${{ matrix.runtime }}
           path: EulerTraces
@@ -186,7 +197,7 @@ jobs:
           path: StockResults
           if-no-files-found: ignore
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && (steps.clip_stock.outcome == 'success' || steps.clip_stock.outcome == 'failure' || steps.clip_stock.outcome == 'cancelled')
         with:
           name: clip-stock-traces-${{ matrix.runtime }}
           path: StockTraces

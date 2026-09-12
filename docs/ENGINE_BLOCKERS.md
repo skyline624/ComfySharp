@@ -97,10 +97,13 @@ The behavior is based on frozen ComfyUI commit
 - [Upstream blocked-list regression](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/tests/execution/test_execution.py#L648-L672)
   and [asynchronous producer regression](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/tests/execution/test_async_nodes.py#L286-L314).
 
-The added managed tests cover propagation, messages, prompt order, list
+The 25 managed behavior cases cover propagation, messages, prompt order, list
 positions, lazy pairing, UI, cooperative cancellation, exceptions and counting
-resource ownership. They contain no tensors, model weights or expected output
-derived from a new source run. Their build/execution results must be reported
-separately; this document does not assert they have passed or establish full
-source parity. Graph expansion, V3 conversion quirks, custom validation hooks,
-`IS_CHANGED` and persistent caches remain outside this implementation.
+resource ownership. They contain no tensors or model weights. A separate
+[published source corpus](qualification/execution-blocker-source-fffa6b0.md)
+adds 21 direct comparisons and two comparisons of active lazy rows through
+the real engine. All 136 Core tests pass locally on Windows, and the following
+complete solution run passes 1,444 tests without failures or ignored tests.
+These observations do not establish full source parity. Graph expansion,
+V3 conversion quirks, custom validation hooks, `IS_CHANGED` and persistent
+caches remain outside this implementation.

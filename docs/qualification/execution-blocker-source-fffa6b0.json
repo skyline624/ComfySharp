@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "scope": "Frozen V1 blocker mapper observations projected onto the real managed EngineService; not complete PromptExecutor parity.",
+  "source": {
+    "collectorCommit": "fffa6b06bbde2a76e2fe40e9097f03c7b169cee8",
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "protocolSha256": "861118bdd79dc584185ad6f01fd63d89e5fde8345dd071913469b99ce1e40916",
+    "fixture": {
+      "bytes": 25302,
+      "sha256": "062a71742134c9fdc93c78b48348446c077ae5d20c1309772ec3c9b43cba2a72"
+    },
+    "collectedCases": 24,
+    "directComparedCases": 21,
+    "lazyProjectionComparedCases": 2,
+    "excludedCase": {
+      "id": "interrupt-before-block",
+      "reason": "The source adapter interrupts its second internal mapper check; no equivalent public engine hook is compared."
+    },
+    "declarations": [
+      {
+        "source": "execution.py",
+        "sourceBytes": 61543,
+        "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+        "declaration": "_async_map_node_over_list",
+        "line": 243,
+        "astSha256": "7abd7cface1f9000da2654a0adaa06a5f19d654d5a9c92dcb37dc95fd7e7ab1b",
+        "segmentSha256": "72efe9f534acaa6dd7f04b95c762c62d663bbb2b9380f5931c8a8860695606cd"
+      },
+      {
+        "source": "execution.py",
+        "sourceBytes": 61543,
+        "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+        "declaration": "resolve_map_node_over_list_results",
+        "line": 231,
+        "astSha256": "614281e252110de2a99b03079c5a82226718d62255977dc173a7a59cb9dd70df",
+        "segmentSha256": "6f46a7a4c9ee8c32b8c6129d988205b5bbf843ab7d15f69f4484feca1dc3e431"
+      },
+      {
+        "source": "execution.py",
+        "sourceBytes": 61543,
+        "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+        "declaration": "merge_result_data",
+        "line": 322,
+        "astSha256": "d892e3c3ac1b91803e26ea09361164a677a80a60cab2809b8723d23b86c5b455",
+        "segmentSha256": "5a7eca11c7639a11260579423d3c6ba59e9380dbfcbd910ab16da86c2753804e"
+      },
+      {
+        "source": "execution.py",
+        "sourceBytes": 61543,
+        "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+        "declaration": "get_output_from_returns",
+        "line": 351,
+        "astSha256": "58991996db4e8025b5a7e2bffa75ac778910dd718e1ea3a1bec8195b668d1a21",
+        "segmentSha256": "b271bc88fd782995961367b9b456b40be1a511afefa6311348deb062eb40dcc7"
+      },
+      {
+        "source": "execution.py",
+        "sourceBytes": 61543,
+        "sourceSha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+        "declaration": "execution_block_cb",
+        "line": 522,
+        "astSha256": "1f8d95e0ae40599f5c4d0c6175ec8138e6de7c3a97406f51ddccd2e108977090",
+        "segmentSha256": "b3f779281ea43dea85c20bb8fde888e8ae012f3d2a1e5a143d1660e31fa82313"
+      },
+      {
+        "source": "comfy_execution/graph_utils.py",
+        "sourceBytes": 5626,
+        "sourceSha256": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d",
+        "declaration": "ExecutionBlocker",
+        "line": 140,
+        "astSha256": "e0d6980bd7d6981342cd08b708c74655f7ae0f65e063389c7bb00165ec861bb8",
+        "segmentSha256": "0d2e3a3ed9853ea8ab26f5f73a93037e98d97d66f4b792ca46576eaf4f0060f3"
+      }
+    ],
+    "laboratoryFiles": {
+      "labs/execution-blocker-source/protocol.json": {
+        "bytes": 2944,
+        "sha256": "861118bdd79dc584185ad6f01fd63d89e5fde8345dd071913469b99ce1e40916"
+      },
+      "labs/execution-blocker-source/reference.py": {
+        "bytes": 12143,
+        "sha256": "849fe6f300696eaf93c06a0b80c08c92757accd23a9e2939c8425fac600f0b1e"
+      },
+      "labs/execution-blocker-source/README.md": {
+        "bytes": 3641,
+        "sha256": "bbbbd8037e2203b1afbe01ef2a9ccd2d39305870125e58150c2fd71fb22777ef"
+      }
+    }
+  },
+  "reviewedFiles": {
+    "src/ComfySharp.Contracts/RuntimeValue.cs": {
+      "bytes": 10761,
+      "sha256": "1ec6993a0a4150e5179ece1b5fa5bdb546c51cbb6cd226017fb1e93937b55654"
+    },
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 4685,
+      "sha256": "6ed9a04864fbd823651c212ec02ace5a03280de397bba3afd800b68bf43665c9"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "bytes": 22680,
+      "sha256": "f36b4ae6b07d5fb51ddcae2b77ffc1ac8a00d4f0df22ccabe9f60c7fb077cfb0"
+    },
+    "tests/ComfySharp.Core.Tests/ExecutionBlockerReferenceTests.cs": {
+      "bytes": 12861,
+      "sha256": "8c5756dec865e7f7093f66a40aa8ca4067cbd39308bb8daf8546d428f9849764"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/execution-blocker.reference.json": {
+      "bytes": 25302,
+      "sha256": "062a71742134c9fdc93c78b48348446c077ae5d20c1309772ec3c9b43cba2a72"
+    },
+    "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+      "bytes": 654,
+      "sha256": "dabdc5ef97b4843a600918708e7a18879972c47139b8bcc0b213612000e7a0fb"
+    },
+    "tests/ComfySharp.Core.Tests/ExecutionBlockerTests.cs": {
+      "bytes": 26255,
+      "sha256": "e5888e76cd5c8b8220a82b7a84c1db080efeb3024b285a6806d15e958fd4bc8a"
+    }
+  },
+  "fileContinuity": {
+    "productionAndReferenceInputsMatchPreCompilationReviewPins": true,
+    "basis": "Three production files match their implementation freeze; reference test, fixture and embedding project match the independent pre-build review freeze.",
+    "limitation": "Current per-file hashes are compared with pre-build review pins. This is not continuous filesystem monitoring, a global commit attestation, or a reproducible-build proof."
+  },
+  "fullSolution": {
+    "runtime": "win-x64",
+    "configuration": "Release",
+    "passed": 1444,
+    "failed": 0,
+    "ignored": 0,
+    "trxCount": 6,
+    "distinctTestIds": 1444,
+    "distinctDisplayNames": 1441,
+    "blockerBehaviorCases": 25,
+    "blockerReferenceCases": 23,
+    "staticSchemaResolutionCases": 33,
+    "records": [
+      {
+        "assembly": "comfysharp.core.tests.dll",
+        "bytes": 205034,
+        "sha256": "4631af752e928c2533376491d05fddda484e8b9ef32ff6ece5da1ea1c490b440",
+        "summaryOutcome": "Completed",
+        "passed": 136,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.3554282+02:00",
+        "finish": "2026-09-12T02:04:38.5647694+02:00",
+        "blockerReferenceCases": 23
+      },
+      {
+        "assembly": "comfysharp.desktop.tests.dll",
+        "bytes": 48689,
+        "sha256": "2f090e7e708347b752d83f7ec90d69ab736db43b111008e580e7c2fbd223405e",
+        "summaryOutcome": "Completed",
+        "passed": 32,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.4788169+02:00",
+        "finish": "2026-09-12T02:04:41.4763840+02:00",
+        "blockerReferenceCases": 0
+      },
+      {
+        "assembly": "comfysharp.host.tests.dll",
+        "bytes": 299050,
+        "sha256": "f96a7b7335bd0224f05e2799591366d3b03996ddc2051e83bb61dfc94cdea64a",
+        "summaryOutcome": "Completed",
+        "passed": 142,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.6435403+02:00",
+        "finish": "2026-09-12T02:04:48.2750869+02:00",
+        "blockerReferenceCases": 0
+      },
+      {
+        "assembly": "comfysharp.inference.tests.dll",
+        "bytes": 925919,
+        "sha256": "da103590e0f3aec93b64d755cc91fc40fbf5e1f9574b2636f75a7a8619e48f1d",
+        "summaryOutcome": "Completed",
+        "passed": 577,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.4305641+02:00",
+        "finish": "2026-09-12T02:05:24.6909486+02:00",
+        "blockerReferenceCases": 0
+      },
+      {
+        "assembly": "comfysharp.tokenization.tests.dll",
+        "bytes": 814012,
+        "sha256": "35aec5fada0a5d677b85d0f72569b55946c0f83759a8449c43f290e64adef619",
+        "summaryOutcome": "Completed",
+        "passed": 540,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.5252836+02:00",
+        "finish": "2026-09-12T02:04:39.5092570+02:00",
+        "blockerReferenceCases": 0
+      },
+      {
+        "assembly": "comfysharp.workflow.tests.dll",
+        "bytes": 25754,
+        "sha256": "74d58fc6840b2490cb507b6859b96a32a59e83151c6c398c5301b4c7243b4228",
+        "summaryOutcome": "Completed",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0,
+        "start": "2026-09-12T02:04:37.4160521+02:00",
+        "finish": "2026-09-12T02:04:38.6502763+02:00",
+        "blockerReferenceCases": 0
+      }
+    ]
+  },
+  "targetedCore": {
+    "includedInFullTotal": false,
+    "note": "Independent earlier Core run, recorded separately and not added to 1444.",
+    "assembly": "comfysharp.core.tests.dll",
+    "bytes": 205034,
+    "sha256": "59d48238bf13b67ccdaa80cd8a821457364d97a34acede77c032c5e38dd08fbc",
+    "summaryOutcome": "Completed",
+    "passed": 136,
+    "failed": 0,
+    "ignored": 0,
+    "start": "2026-09-12T02:01:01.6183135+02:00",
+    "finish": "2026-09-12T02:01:03.0289063+02:00",
+    "blockerReferenceCases": 23
+  },
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "Root-reported build result; this audit independently reads the TRX files and file hashes, and does not rerun the build."
+  },
+  "audit": {
+    "method": "Read-only stdlib XML/JSON/SHA256 validation; counters cross-checked with every result and definition; no source/.NET/native execution.",
+    "crossChecked": "All six full TRX and the separate targeted Core TRX have only passed results, no skips, no failing summary/global error, and exact reference-case selection."
+  },
+  "limits": [
+    "Only the shared calls, outputs, UI and diagnostic fields of 21 direct cases are compared.",
+    "Two lazy cases compare active rows, repeat-last pairing and requested/resolved dependency names, not final lazy job outputs or messages.",
+    "Python pending-task counts, context/pre-execute counters and unsupported websocket fields are not compared.",
+    "The fixture codec is private to the tests; product prompt JSON is not a blocker sentinel.",
+    "No graph expansion, V3, persistent caching, iterative lazy scheduling, model execution or full V1 parity is established."
+  ]
+}
