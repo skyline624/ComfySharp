@@ -24473,8 +24473,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_string.py#L197",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -24486,6 +24486,7 @@
       },
       "evidence": [],
       "scenario": "contract:StringContains",
+      "limits": "Valid Unicode scalar text only; ordinal comparison after independent whole-string CPython 3.12.10 lowercase when case_sensitive=false. No normalization or casefold; isolated UTF-16 surrogates refused. V3 COMBO retains type, multiselect=false and options; legacy projection unchanged. Local Windows integration: 1976 unique tests passed, including 224 new cases (35 node behavior, 48 Unicode helper, 68 source lower digest plans, 40 source node cases partitioned 36 comparable/2 typed-body errors with distinct engine coercion/2 source-empty versus local COMBO admission refusals, 24 Host, 6 Workflow, 2 Desktop, 1 V3 projection regression). Comparable outputs comprise 39 Boolean values and 1 blocker. Actual compiled Desktop/Host smoke returned True and False. No complete-workflow or platform qualification claimed. See docs/qualification/text-comparison-integration.md and docs/TEXT_COMPARISON.md.",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "StringContains",
       "registrationEvidence": {
@@ -24508,8 +24509,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_string.py#L225",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -24521,6 +24522,7 @@
       },
       "evidence": [],
       "scenario": "contract:StringCompare",
+      "limits": "Valid Unicode scalar text only; ordinal comparison after independent whole-string CPython 3.12.10 lowercase when case_sensitive=false. No normalization or casefold; isolated UTF-16 surrogates refused. V3 COMBO retains type, multiselect=false and options; legacy projection unchanged. Local Windows integration: 1976 unique tests passed, including 224 new cases (35 node behavior, 48 Unicode helper, 68 source lower digest plans, 40 source node cases partitioned 36 comparable/2 typed-body errors with distinct engine coercion/2 source-empty versus local COMBO admission refusals, 24 Host, 6 Workflow, 2 Desktop, 1 V3 projection regression). Comparable outputs comprise 39 Boolean values and 1 blocker. Actual compiled Desktop/Host smoke returned True and False. No complete-workflow or platform qualification claimed. See docs/qualification/text-comparison-integration.md and docs/TEXT_COMPARISON.md.",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "StringCompare",
       "registrationEvidence": {

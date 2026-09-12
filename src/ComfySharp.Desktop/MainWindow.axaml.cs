@@ -123,7 +123,35 @@ public sealed partial class MainWindow : Window
         if (formatOutputs.Count != 1 || formatOutputs["format-preview"]?["text"] is not JsonArray formattedText ||
             formattedText.Count != 1 || formattedText[0]?.GetValue<string>() != "****xy")
             throw new InvalidOperationException("StringFormat Host preview smoke failed: " + formatEntry.ToJsonString());
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview and native preview.");
+        if (availableNodes?.Contains("StringContains") != true || !availableNodes.Contains("StringCompare"))
+            throw new InvalidOperationException("Text comparison smoke requires both registered Host nodes.");
+        var insensitive = ActiveEditor.AddNode("PrimitiveBoolean");
+        ActiveEditor.Document.SetWidgets(insensitive, new JsonArray(false));
+        var expectedComparisons = new Dictionary<string, string>();
+        foreach (var (type, widgets, booleanSlot, expected) in new[]
+        {
+            ("StringContains", new JsonArray("İ", "i\u0307", true), 2, "True"),
+            ("StringCompare", new JsonArray("ΟΣ", "Σ", "Ends With", true), 3, "False")
+        })
+        {
+            var comparison = ActiveEditor.AddNode(type);
+            ActiveEditor.Document.SetWidgets(comparison, widgets);
+            ActiveEditor.Document.Connect(insensitive, 0, comparison, booleanSlot);
+            var preview = ActiveEditor.AddNode("PreviewAny");
+            ActiveEditor.Document.Connect(comparison, 0, preview, 0);
+            expectedComparisons.Add(preview.Value, expected);
+        }
+        ActiveEditor.Reload();
+        var comparisonSession = hostSession.Id;
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(Compile(true), clientId, expectedComparisons.Keys.ToArray()), comparisonSession);
+        var comparisonEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), comparisonSession, 200);
+        hostSession.Require(comparisonSession);
+        var comparisonOutputs = comparisonEntry["outputs"]!.AsObject();
+        if (comparisonOutputs.Count != expectedComparisons.Count || expectedComparisons.Any(pair =>
+            comparisonOutputs[pair.Key]?["text"] is not JsonArray values || values.Count != 1 || values[0]?.GetValue<string>() != pair.Value))
+            throw new InvalidOperationException("Text comparison workflow smoke failed: " + comparisonEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(comparisonOutputs);
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

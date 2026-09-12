@@ -14,5 +14,7 @@
     <EmbeddedResource Include="Fixtures/autogrow-names.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.autogrow-names.protocol.json" />
     <EmbeddedResource Include="Fixtures/string-format.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.string-format.reference.json" />
     <EmbeddedResource Include="Fixtures/string-format.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.string-format.protocol.json" />
+    <EmbeddedResource Include="Fixtures/text-comparison.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.text-comparison.protocol.json" />
+    <EmbeddedResource Include="Fixtures/text-comparison.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.text-comparison.reference.json" />
   </ItemGroup>
 </Project>

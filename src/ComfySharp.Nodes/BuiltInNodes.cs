@@ -73,6 +73,8 @@ public static class BuiltInNodes
         registry.Register(new SwitchNode());
         registry.Register(new CreateListNode());
         registry.Register(new StringFormatNode());
+        registry.Register(new StringContainsNode());
+        registry.Register(new StringCompareNode());
         return registry;
     }
     private static InputSchema Text(string name) => new(name, "STRING", Options: new() { ["multiline"] = true });

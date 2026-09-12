@@ -1,0 +1,635 @@
+{
+  "schema": 1,
+  "id": "text-comparison-local-integration-v1",
+  "auditedAtUtc": "2026-09-12T03:07:16.623058+00:00",
+  "scope": "Local Windows qualification of StringContains/StringCompare and PythonUnicodeLower, observed working files; no global commit or loaded DLL attestation.",
+  "auditMethod": "Read-only stdlib XML/JSON/byte audit and code review. No tests, source execution, native model or lowercase replay performed by this auditor.",
+  "build": {
+    "configuration": "Release",
+    "scope": "Solution",
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "Root runner confirmation; no binary identity inferred."
+  },
+  "fullCampaign": {
+    "passed": 1976,
+    "failed": 0,
+    "notExecuted": 0,
+    "uniqueTestIds": 1976,
+    "uniqueDisplayNames": 1973,
+    "displayNameNote": "Existing Inference malformed-header theory names are truncated: two display names each cover respectively three and two distinct test IDs. Identities remain unique.",
+    "trxCount": 6,
+    "trx": [
+      {
+        "project": "Core",
+        "artifactLabel": "text-comparison-first-full/Core",
+        "bytes": 806610,
+        "sha256": "2ed56a1d44ed7416309e96112f3c073fa5ff93187ee193decf9867025e1c1d98",
+        "resultCount": 525,
+        "passed": 525,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:53:22.2405494+02:00",
+          "queuing": "2026-09-12T04:53:22.2405497+02:00",
+          "start": "2026-09-12T04:53:20.8365936+02:00",
+          "finish": "2026-09-12T04:53:26.1136592+02:00"
+        }
+      },
+      {
+        "project": "Desktop",
+        "artifactLabel": "text-comparison-first-full/Desktop",
+        "bytes": 60457,
+        "sha256": "22b19dffb6e61518a865a1c0779c7c7dd6c559505b23e730e453ab75ed22e934",
+        "resultCount": 40,
+        "passed": 40,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:53:28.9784140+02:00",
+          "queuing": "2026-09-12T04:53:28.9784143+02:00",
+          "start": "2026-09-12T04:53:26.8364249+02:00",
+          "finish": "2026-09-12T04:53:31.2777699+02:00"
+        }
+      },
+      {
+        "project": "Host",
+        "artifactLabel": "text-comparison-first-full/Host",
+        "bytes": 561441,
+        "sha256": "8cf06069b29ad50ed2b51a1dc47ccbb16058aaedf0d62416649fbf94099296da",
+        "resultCount": 225,
+        "passed": 225,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:53:32.7713704+02:00",
+          "queuing": "2026-09-12T04:53:32.7713709+02:00",
+          "start": "2026-09-12T04:53:31.6381113+02:00",
+          "finish": "2026-09-12T04:53:42.3076112+02:00"
+        }
+      },
+      {
+        "project": "Inference",
+        "artifactLabel": "text-comparison-first-full/Inference",
+        "bytes": 925919,
+        "sha256": "4eaa17162db880d60e533324fcc583fd55bbb58bf891285fccdcc601f6c8648b",
+        "resultCount": 577,
+        "passed": 577,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:53:44.6262885+02:00",
+          "queuing": "2026-09-12T04:53:44.6262886+02:00",
+          "start": "2026-09-12T04:53:42.7928740+02:00",
+          "finish": "2026-09-12T04:54:30.2795142+02:00"
+        }
+      },
+      {
+        "project": "Tokenization",
+        "artifactLabel": "text-comparison-first-full/Tokenization",
+        "bytes": 814012,
+        "sha256": "80e9ca47e101f0267d76b528138f778d99eddbdc02bf2b003590c7d9188eac60",
+        "resultCount": 540,
+        "passed": 540,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:54:32.7366802+02:00",
+          "queuing": "2026-09-12T04:54:32.7366803+02:00",
+          "start": "2026-09-12T04:54:30.9176328+02:00",
+          "finish": "2026-09-12T04:54:32.9456740+02:00"
+        }
+      },
+      {
+        "project": "Workflow",
+        "artifactLabel": "text-comparison-first-full/Workflow",
+        "bytes": 106742,
+        "sha256": "7825976bcaba6fbdcec16dc0f001f9f6fc6eb1e6351140e681b0a426c6e186d2",
+        "resultCount": 69,
+        "passed": 69,
+        "failed": 0,
+        "notExecuted": 0,
+        "runInfos": 0,
+        "times": {
+          "creation": "2026-09-12T04:54:34.8411555+02:00",
+          "queuing": "2026-09-12T04:54:34.8411556+02:00",
+          "start": "2026-09-12T04:54:33.6065347+02:00",
+          "finish": "2026-09-12T04:54:34.9159946+02:00"
+        }
+      }
+    ],
+    "globalCommandExitCode": 0,
+    "exitCodeEvidence": "Root runner confirmation, separate from the XML counters."
+  },
+  "newCases": {
+    "total": 224,
+    "groups": [
+      {
+        "testClass": "ComfySharp.Core.Tests.PythonUnicodeLowerTests",
+        "passed": 48,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "2990515071792f15c59e5ab786913621abd1c68fbacb1b2247685190a708f21e"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.PythonUnicodeLowerSourceReferenceTests",
+        "passed": 68,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "0a2b7e7c247b96a966c7f063b31c54c549fb70356392ba93a3088ce754d052eb"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.TextComparisonNodeTests",
+        "passed": 35,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "34942213dd2a000569a9cb1ff9f4eca81d71812c4464e18febbd545415bacdac"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.V3ComboProjectionTests",
+        "passed": 1,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "e67052f64cd6467f65faa54e91eaa888cbe694af7aead8ea1254b5b83647e57e"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.TextComparisonSourceReferenceTests",
+        "passed": 40,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "1eb3d4a47b9270f01fb37ad1be2f14fbc20fa11ca93f102403a43443533a50a8"
+      },
+      {
+        "testClass": "ComfySharp.Workflow.Tests.TextComparisonWorkflowTests",
+        "passed": 6,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "db90e3878e8db9cf91a55cd30e94eb54c9f81a2e68bc92b10aeeee1a1ae26539"
+      },
+      {
+        "testClass": "ComfySharp.Desktop.Tests.TextComparisonEditorTests",
+        "passed": 2,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "9a34d6b0255ac28a13b91cbb7539000b67efa6b9de97bdece4e20bd16c2a9ad4"
+      },
+      {
+        "testClass": "ComfySharp.Host.Tests.TextComparisonHostTests",
+        "passed": 24,
+        "nameListEncoding": "sorted names joined by LF with final LF, UTF-8",
+        "nameListSha256": "81d241f3ff137e6b998a851c41e4ac762def1b17200c06abd9a313f93287a6ef"
+      }
+    ],
+    "notAddedToFullAgain": true
+  },
+  "source": {
+    "collectorCommit": "5466f97312d8dbdbe5c656a6c31061895afc9af3",
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "runtime": "CPython 3.12.10 / Unicode 15.0.0",
+    "publishedBeforeCollection": true,
+    "sourceProof": "text-comparison-source-5466f97.json",
+    "fixture": {
+      "path": "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.reference.json",
+      "bytes": 280652,
+      "sha256": "12935c33d4632a79e499a7c24b052d88036aee8323e45ea92d923443b2b9e04f"
+    },
+    "protocol": {
+      "path": "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.protocol.json",
+      "bytes": 41632,
+      "sha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92"
+    },
+    "embeddedBytesUnchanged": true,
+    "blobs": 10,
+    "astDeclarations": 75,
+    "nodeCases": {
+      "comparable": 36,
+      "comparableBooleanCases": 35,
+      "comparableBlockerCases": 1,
+      "comparableBooleanOutputs": 39,
+      "sourceErrorsWithDistinctLocalAdmission": 2,
+      "sourceOnlyInvalidModes": 2
+    },
+    "lower": {
+      "plans": 68,
+      "planes": 17,
+      "contexts": 4,
+      "validScalars": 1112064,
+      "applicationsPerPass": 4448256,
+      "sourcePasses": 3,
+      "sourceApplications": 13344768,
+      "managedPassesPerTest": 1,
+      "framing": "uint32LE(codepoint) + uint32LE(strict UTF-8 byte length) + UTF-8 bytes",
+      "inputAndOutputHashesCompared": true,
+      "productTableUsedAsExpected": false,
+      "allStringsOrAllContextsProved": false
+    }
+  },
+  "workingFileCapture": {
+    "capturedAtUtc": "2026-09-12T02:54:09.279272+00:00",
+    "timing": "During the full campaign, before its final verdict; not before its start.",
+    "recheckedAtUtc": "2026-09-12T03:07:16.623058+00:00",
+    "unchanged": true,
+    "files": [
+      {
+        "path": "src/ComfySharp.Core/NodeRegistry.cs",
+        "bytes": 4125,
+        "sha256": "92e38d718ba62fbaf164ddebf57dd2bd6f3e92cb3243a04bb5af17331f2956b4"
+      },
+      {
+        "path": "src/ComfySharp.Desktop/DocumentEditor.axaml.cs",
+        "bytes": 13038,
+        "sha256": "2f1731e69946b5b295238770a442b6e8f9dffe40ae8259a79de86e33a164b1c9"
+      },
+      {
+        "path": "src/ComfySharp.Desktop/MainWindow.axaml.cs",
+        "bytes": 16810,
+        "sha256": "7aa4bcbd5d2c5772114e8c4b40d589667536314dd7b80f25c93100c986024c1a"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/BuiltInNodes.cs",
+        "bytes": 7926,
+        "sha256": "d2e00d8da2e7f71a4f711386273dc62f9d75d9f339c94913380cd4e93850fbe3"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/ComfySharp.Nodes.csproj",
+        "bytes": 324,
+        "sha256": "166afc9136469e9cbae287509fa0e67230e34cc8ed2cb9bc9984ad75e8c9f1a3"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/PythonUnicodeLower.cs",
+        "bytes": 11342,
+        "sha256": "be2ab659d7e76818468d1d93eb22603a4bb69a1bef813b025f6306fae4ab540a"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/Resources/PythonUnicode/lower-3.12.10.json",
+        "bytes": 29026,
+        "sha256": "6381d72114b8aa4ee5c0dd04fcbb55395964ab1ca92832e7784f887dfbf8b42c"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/TextComparisonNodes.cs",
+        "bytes": 4425,
+        "sha256": "36dbf68cbc4da45ef1c8f13776692b9ec8c37d21379eee21e2eeb1c9c02bbecf"
+      },
+      {
+        "path": "src/ComfySharp.Workflow/PromptCompiler.cs",
+        "bytes": 12618,
+        "sha256": "89cffaaad79f828b26cc40b0498ba0f00d4316513c7ea4ac64ba77d4ca7a3554"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj",
+        "bytes": 1814,
+        "sha256": "d282824981d20dab0cb5c735ab7624571176ab1f327085c7cf425d0b8d2fd271"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/NodeParityTests.cs",
+        "bytes": 3829,
+        "sha256": "bea3f9be2fb2cd020a441c50b5de8372e34e500914a00bd5aed6a900e5c61410"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/PythonUnicodeLowerSourceReferenceTests.cs",
+        "bytes": 10106,
+        "sha256": "0409b53d8bc0399bbb7307df321de2549bd740cde92487d857c5a9a35b0b3cad"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/PythonUnicodeLowerTests.cs",
+        "bytes": 8792,
+        "sha256": "42e2527987010fc0e7ff3cacac77feec8e06b423c22a643634b565c2bb807f96"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/TextComparisonNodeTests.cs",
+        "bytes": 6762,
+        "sha256": "ce3a77290e3a9a9c75414963bad6c519acca0cc8c82c42f41afaa3f71a946c1d"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/TextComparisonSourceReferenceTests.cs",
+        "bytes": 20519,
+        "sha256": "6894c6b2d3f62b6f0569f5c0c875ae957c4f68be451168b5a7fe42f47b6854fe"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/V3ComboProjectionTests.cs",
+        "bytes": 1136,
+        "sha256": "25f3c2fae96a972c0f85f4652cc0e9ea2640c646811f9ffa894f8a3bf558de9a"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.protocol.json",
+        "bytes": 41632,
+        "sha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.reference.json",
+        "bytes": 280652,
+        "sha256": "12935c33d4632a79e499a7c24b052d88036aee8323e45ea92d923443b2b9e04f"
+      },
+      {
+        "path": "tests/ComfySharp.Desktop.Tests/TextComparisonEditorTests.cs",
+        "bytes": 4364,
+        "sha256": "ef368f8e4dfe5e6f9a21c124f9fb6f38ce5ceda5919166820ac2fdd4e216adf4"
+      },
+      {
+        "path": "tests/ComfySharp.Host.Tests/TextComparisonHostTests.cs",
+        "bytes": 11968,
+        "sha256": "f31e3254d79e912ccdd3feaccdc83252efa9da581acbc577bc3b817d5107df23"
+      },
+      {
+        "path": "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs",
+        "bytes": 10659,
+        "sha256": "1988531ac21405959c96ed213a33f631f8b8519cd12640f7c5da3c772b35322b"
+      },
+      {
+        "path": "tests/ComfySharp.Workflow.Tests/TextComparisonWorkflowTests.cs",
+        "bytes": 3796,
+        "sha256": "a85f5387c54f38eedcee0396bb049130f02b2d6fee4035b07788800a64a39054"
+      },
+      {
+        "path": "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs",
+        "bytes": 12251,
+        "sha256": "a3bf9f222fd8d3ed9fa1f2c8dcf33f47500e078d9681bf8a4e9c82b4a1b01af0"
+      },
+      {
+        "path": "labs/python-unicode-tables/extract.py",
+        "bytes": 7302,
+        "sha256": "d689187a82da946fc0acc61da99026be24488172c666ae7ae32df88ee530162d"
+      },
+      {
+        "path": "labs/python-unicode-tables/provenance.json",
+        "bytes": 2473,
+        "sha256": "8193e086fb80c5597d7fc6c92ffc8749aab78b469b77bcd0681b3da82cb0eff6"
+      },
+      {
+        "path": "labs/text-comparison-source/protocol.json",
+        "bytes": 41632,
+        "sha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92"
+      },
+      {
+        "path": "labs/text-comparison-source/reference.py",
+        "bytes": 16102,
+        "sha256": "df8297425891b959a3a657663ab972700a87792b189bc4644cfae5af6c098584"
+      },
+      {
+        "path": "labs/text-comparison-source/README.md",
+        "bytes": 6066,
+        "sha256": "8ab8beffaf0103e94be4c5128bd2c4c81bb23c19a575f78a3d84fd359a429462"
+      }
+    ]
+  },
+  "targetedAndEarlierCampaigns": [
+    {
+      "campaign": "text-comparison-core-first",
+      "record": 1,
+      "bytes": 628482,
+      "sha256": "e52b7bc7caec9515c75d0ce198226610a75d6ae86b97d64b2c92ab4d3f88f127",
+      "resultCount": 409,
+      "outcomes": {
+        "Failed": 3,
+        "Passed": 406
+      },
+      "runInfoOutcomes": [
+        "Warning",
+        "Error",
+        "Error",
+        "Error"
+      ]
+    },
+    {
+      "campaign": "text-comparison-core-second",
+      "record": 1,
+      "bytes": 633259,
+      "sha256": "f695a6e3c2179fc246505aca32d04031706d4a94f4c9a27f56e9e1076eea210c",
+      "resultCount": 416,
+      "outcomes": {
+        "Passed": 416
+      },
+      "runInfoOutcomes": []
+    },
+    {
+      "campaign": "text-comparison-combo-red",
+      "record": 1,
+      "bytes": 4777,
+      "sha256": "2e1e7d50a1f71e2f50a33507f38e37d509d87560d1eaf3bd8f79bc690a49a3df",
+      "resultCount": 1,
+      "outcomes": {
+        "Failed": 1
+      },
+      "runInfoOutcomes": [
+        "Error"
+      ]
+    },
+    {
+      "campaign": "text-comparison-root-red",
+      "record": 1,
+      "bytes": 110210,
+      "sha256": "cd52636c7e8d8cecfe24c971e0442f35a54657e42c788c881d0f2174333eefba",
+      "resultCount": 29,
+      "outcomes": {
+        "Failed": 29
+      },
+      "runInfoOutcomes": [
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error",
+        "Error"
+      ]
+    },
+    {
+      "campaign": "text-comparison-host-first",
+      "record": 1,
+      "bytes": 563341,
+      "sha256": "cf38b96d8755855ca6ed5d9c7c97bc5d5671971bd3bae04b16b3b6aa6fbd29be",
+      "resultCount": 225,
+      "outcomes": {
+        "Failed": 1,
+        "Passed": 224
+      },
+      "runInfoOutcomes": [
+        "Error"
+      ]
+    },
+    {
+      "campaign": "text-comparison-host-second",
+      "record": 1,
+      "bytes": 561458,
+      "sha256": "5cc48199828391732383b007536b7cb3c9e5d6f5ac2a26c2007984cc364158cd",
+      "resultCount": 225,
+      "outcomes": {
+        "Passed": 225
+      },
+      "runInfoOutcomes": []
+    },
+    {
+      "campaign": "text-comparison-lower-first",
+      "record": 1,
+      "bytes": 108378,
+      "sha256": "0b21e633dd24cdcda0c1ad0d06b6658f79b1f2468d197a83d04a0321cb525fe7",
+      "resultCount": 68,
+      "outcomes": {
+        "Passed": 68
+      },
+      "runInfoOutcomes": []
+    },
+    {
+      "campaign": "text-comparison-nodes-source-first",
+      "record": 1,
+      "bytes": 66866,
+      "sha256": "83f47271d27bfe251aa3c055baf4f567ad9e80e1c23012d058cc67481316c470",
+      "resultCount": 40,
+      "outcomes": {
+        "Passed": 40
+      },
+      "runInfoOutcomes": []
+    },
+    {
+      "campaign": "text-comparison-ui-first",
+      "record": 1,
+      "bytes": 60457,
+      "sha256": "ea0e01af84a0cc96a2dcb5af28bd3a5e7d344378b696b82ebe5b902bb93cb5ee",
+      "resultCount": 40,
+      "outcomes": {
+        "Passed": 40
+      },
+      "runInfoOutcomes": []
+    },
+    {
+      "campaign": "text-comparison-ui-first",
+      "record": 2,
+      "bytes": 106742,
+      "sha256": "e41ec401ea5007d1b9dcdae395392fd24dd22e479ad21694274aff6ca2f9d500",
+      "resultCount": 69,
+      "outcomes": {
+        "Passed": 69
+      },
+      "runInfoOutcomes": []
+    }
+  ],
+  "historyInterpretation": [
+    "The initial 29 node assertions were red before the node implementation; they are retained separately.",
+    "Core first: 406 Passed / 3 Failed among 409 discovered results, plus a duplicate-ID discovery warning. Invalid UTF-16 in InlineData was normalized by metadata; tests now construct invalid code units from integers at runtime. Helper and table remained unchanged.",
+    "Core second: 416 Passed before the V3 projection regression and the 108 source-comparison cases were added.",
+    "The isolated V3 COMBO projection assertion was red before the NodeRegistry fix; final Core verifies exact V3 COMBO options and unchanged legacy projection.",
+    "Host first: 224 Passed / 1 Failed; the StringCompare schema expectation used the legacy shape. Its correction follows the collected source V3 object_info, not a numerical expected-output change. Host second: 225 Passed.",
+    "Targeted 68 Lower and 40 node reference tests, Workflow 69, Desktop 40, and Host 225 are reruns/subsets; they are not added to 1976."
+  ],
+  "desktopSmoke": {
+    "exitCode": 0,
+    "observations": {
+      "exitCode": 0,
+      "caseSensitiveHistory": true,
+      "nativeWindow": true,
+      "supervisedHost": true,
+      "cpuSigmas": true,
+      "textPreview": true,
+      "stringFormatHostPreview": true,
+      "textComparisonWorkflows": true,
+      "dataIsolated": true
+    },
+    "artifacts": [
+      {
+        "label": "result.json",
+        "bytes": 251,
+        "sha256": "d1e25e33bf9d4354b2d4cd7863f96840a253885ac239970976908dd46031ff5d"
+      },
+      {
+        "label": "stdout.txt",
+        "bytes": 193,
+        "sha256": "cb03c21a6a849ee6205fbc6af62ed375dfbee0d800c11d180c9984b8d0039f79"
+      },
+      {
+        "label": "stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "driver": {
+      "path": ".superpowers/sdd/MIGRATION/text-comparison-smoke.ps1",
+      "bytes": 2494,
+      "sha256": "8f74edf91ce456fa683b6090e633acc86210b50d7734aac9579e092b4f58e3cb"
+    },
+    "route": "Real Desktop node templates and Compile(true), supervised Host submission, completed history and PreviewAny UI outputs.",
+    "cases": [
+      {
+        "classType": "StringContains",
+        "input": "U+0130 versus i + U+0307, case_sensitive linked to false",
+        "preview": "True"
+      },
+      {
+        "classType": "StringCompare",
+        "input": "Ends With: Greek ΟΣ versus Σ, case_sensitive linked to false",
+        "preview": "False"
+      }
+    ]
+  },
+  "limits": [
+    "Valid Unicode scalar strings and Boolean case_sensitive; lone surrogate rejection is a local CLR contract.",
+    "36 comparable node records establish their observed metadata, binding and outputs; the two source error records do not establish exception parity.",
+    "Source null/numeric values reach the body and raise TypeError/AttributeError; the ordinary managed engine normalizes them to None/7 strings and returns false for those cases. Direct typed local invocation instead rejects them with ArgumentException.",
+    "Both source-only invalid modes bypassed source COMBO admission and returned no outputs. The managed engine rejects them before executing the node; no synthetic Boolean or equivalent Python exception is claimed.",
+    "Exhaustive scalar coverage in four fixed contexts is not exhaustive coverage of every string or every casing context. No normalization, casefold or locale-dependent casing is performed.",
+    "Source collection and C# comparison are separate phases. The source artifact flag nativeProductOrTableRead=false describes the collector, not the managed comparison.",
+    "The local full suite and smoke do not attest Linux/macOS, all ComfyUI text nodes, complete HTTP parity or a new numerical inference qualification.",
+    "File hashes identify working files and fixture bytes; no loaded binary or interpreter DLL identity is inferred."
+  ],
+  "postCampaignDocumentationPins": {
+    "capturedAtUtc": "2026-09-12T03:07:16.623058+00:00",
+    "scope": "Documentation/evidence/licensing identities, not compilation inputs or test-time snapshots.",
+    "files": [
+      {
+        "path": "docs/TEXT_COMPARISON.md",
+        "bytes": 6646,
+        "sha256": "22024cbc2bea743da2e989a2a04f90734e2778b8cd9607e53adc18e35a2736c9"
+      },
+      {
+        "path": "docs/capabilities/manifest.json",
+        "bytes": 1303294,
+        "sha256": "fa8f0382cfd2b8febc9b90e6e238e22af9185d2e3ed4b9bcdf6a80d74a37ce5c"
+      },
+      {
+        "path": "docs/qualification/text-comparison-source-5466f97.md",
+        "bytes": 6460,
+        "sha256": "c83a2626087cf26ce36ddd6a3928d9b8d26753264591608470fcb6d9b7047509"
+      },
+      {
+        "path": "docs/qualification/text-comparison-source-5466f97.json",
+        "bytes": 67586,
+        "sha256": "45afe591ade5f1c8998a29cb96a915fbf85446ad36834b4c9779488d1751a8e9"
+      },
+      {
+        "path": "labs/python-unicode-tables/README.md",
+        "bytes": 7678,
+        "sha256": "170a0b66a8cfc32d87793f1ea53c76a28ba35b44a0cdfab3cc5f0cc31f5f2b4c"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "bytes": 18184,
+        "sha256": "d696a95421375a9e19630d9890efa6c10933d6bbffa5cc7cea90dc88bdceeadc"
+      },
+      {
+        "path": "docs/licenses/CPython-3.12.10.txt",
+        "bytes": 13936,
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      }
+    ]
+  }
+}

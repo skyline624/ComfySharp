@@ -24,6 +24,8 @@ public static class PromptCompiler
         ["StringLength"] = new("StringLength", [new("string")]),
         ["StringReplace"] = new("StringReplace", [new("string"), new("find"), new("replace")]),
         ["StringTrim"] = new("StringTrim", [new("string"), new("mode")]),
+        ["StringContains"] = new("StringContains", [new("string"), new("substring"), new("case_sensitive")]),
+        ["StringCompare"] = new("StringCompare", [new("string_a"), new("string_b"), new("mode"), new("case_sensitive")]),
         ["JsonExtractString"] = new("JsonExtractString", [new("json_string"), new("key")]),
         ["ComfyNotNode"] = new("ComfyNotNode", []),
         ["ComfySwitchNode"] = new("ComfySwitchNode", [new("switch")]),

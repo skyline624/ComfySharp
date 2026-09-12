@@ -24,7 +24,8 @@ public sealed class NodeRegistry
                 var options = input.Autogrow is not null ? NodeInputExpansion.TemplateOptions(input)
                     : input.Options?.DeepClone().AsObject() ?? new JsonObject();
                 JsonNode type = JsonValue.Create(input.Type)!;
-                if (options.Remove("options", out var choices) && choices is not null) type = choices;
+                if (!(s.V3ObjectInfo && input.Type == "COMBO") && options.Remove("options", out var choices) && choices is not null)
+                    type = choices;
                 if (input.Lazy) options["lazy"] = true;
                 (input.Required ? required : optional)[input.Name] = new JsonArray(type, options);
                 (input.Required ? requiredOrder : optionalOrder).Add(input.Name);
