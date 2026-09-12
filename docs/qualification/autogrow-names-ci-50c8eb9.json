@@ -1,0 +1,1521 @@
+{
+  "schemaVersion": 1,
+  "scope": "Final CI audit of 36 Names contract tests and 28 Prompt Values phase-reference tests, five application suites and early Desktop smoke; no native numerical trace requalification.",
+  "run": {
+    "headSha": "50c8eb9ae1d37d9aa5f9bd8ea9fbdd733513068f",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34665300013",
+    "status": "completed",
+    "conclusion": "failure",
+    "createdAt": "2026-09-12T01:36:02Z",
+    "updatedAt": "2026-09-12T01:40:46Z"
+  },
+  "platforms": {
+    "win-x64": {
+      "jobId": 103475852734,
+      "jobConclusion": "success",
+      "applicationStep": "success",
+      "projects": {
+        "Core": 224,
+        "Desktop": 35,
+        "Host": 189,
+        "Inference": 574,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationCount": 1037,
+      "applicationOutcomes": {
+        "Passed": 1037
+      },
+      "selectedCases": 64,
+      "selectedGroups": {
+        "Names": 36,
+        "PromptValues": 28
+      },
+      "selectedOutcomes": {
+        "Passed": 64
+      },
+      "smoke": {
+        "step": 8,
+        "conclusion": "success",
+        "markers": [
+          "2026-09-12T01:38:23.7403400Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview."
+        ]
+      },
+      "ordinaryPlusStockObservedUnique": 1614,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1614
+      },
+      "ordinaryInferenceExecuted": true,
+      "stockExecuted": true,
+      "failedSteps": [],
+      "skippedSteps": [
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures"
+        }
+      ],
+      "trx": [
+        {
+          "logicalPath": "tests-win-x64/Core/results.trx",
+          "bytes": 326607,
+          "sha256": "3794dcab8486294668440fa8b959994393fe8afafe7a3e1c1d30359a9be68ae1",
+          "counters": {
+            "total": 224,
+            "executed": 224,
+            "passed": 224,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Core"
+        },
+        {
+          "logicalPath": "tests-win-x64/Desktop/results.trx",
+          "bytes": 52368,
+          "sha256": "639ec8a75d6b6614a736fc10da7c6e505d703e92bb56868cbf29b6e72dbc0cc0",
+          "counters": {
+            "total": 35,
+            "executed": 35,
+            "passed": 35,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Desktop"
+        },
+        {
+          "logicalPath": "tests-win-x64/Host/results.trx",
+          "bytes": 414179,
+          "sha256": "ba12db264eb6076d7a3a3a652c8b11c126002366d0533d17a9222ec53a4cc4b1",
+          "counters": {
+            "total": 189,
+            "executed": 189,
+            "passed": 189,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Host"
+        },
+        {
+          "logicalPath": "tests-win-x64/Inference/results.trx",
+          "bytes": 905707,
+          "sha256": "74056327d580f4232d6f8d38b82efb1b3c227a1c19b791be19f1691e13da6922",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Inference"
+        },
+        {
+          "logicalPath": "tests-win-x64/Tokenization/results.trx",
+          "bytes": 803199,
+          "sha256": "03d1996b8d54d20b23f825702fe916dfe0e823bfe9d97d124450268859333f0a",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Tokenization"
+        },
+        {
+          "logicalPath": "tests-win-x64/Workflow/results.trx",
+          "bytes": 75364,
+          "sha256": "626a85017ebf0041fb0239df0797b98d97a91322ade444a644f7b166374e5fd8",
+          "counters": {
+            "total": 49,
+            "executed": 49,
+            "passed": 49,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Workflow"
+        },
+        {
+          "logicalPath": "tests-stock-win-x64/results.trx",
+          "bytes": 10539,
+          "sha256": "860a8f714a791a66054ea6409a3bed369579dc9ac36fbf6e7833851e320367dc",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 3,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed"
+        }
+      ],
+      "stockFailures": [],
+      "firstUseLogEvidence": {
+        "source": "logs.txt (no first-use TRX downloaded)",
+        "processSummaries": 9,
+        "failed": 0,
+        "passed": 194,
+        "skipped": 0,
+        "total": 194,
+        "failedTestNames": []
+      },
+      "buildAndCatalog": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "linux-x64": {
+      "jobId": 103475852508,
+      "jobConclusion": "failure",
+      "applicationStep": "success",
+      "projects": {
+        "Core": 224,
+        "Desktop": 35,
+        "Host": 189,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationCount": 1037,
+      "applicationOutcomes": {
+        "Passed": 1037
+      },
+      "selectedCases": 64,
+      "selectedGroups": {
+        "Names": 36,
+        "PromptValues": 28
+      },
+      "selectedOutcomes": {
+        "Passed": 64
+      },
+      "smoke": {
+        "step": 8,
+        "conclusion": "success",
+        "markers": [
+          "2026-09-12T01:37:25.2120810Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview."
+        ]
+      },
+      "ordinaryPlusStockObservedUnique": 1037,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1037
+      },
+      "ordinaryInferenceExecuted": false,
+      "stockExecuted": false,
+      "failedSteps": [
+        {
+          "number": 11,
+          "name": "Exercise reference fixtures as the first native access in separate processes"
+        }
+      ],
+      "skippedSteps": [
+        {
+          "number": 12,
+          "name": "Test inference contracts and CPU primitives"
+        },
+        {
+          "number": 13,
+          "name": "Inspect a safetensors file in a fresh process without libtorch"
+        },
+        {
+          "number": 14,
+          "name": "Tokenize CLIP text in a fresh process without libtorch"
+        },
+        {
+          "number": 15,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture"
+        },
+        {
+          "number": 16,
+          "name": "Exercise actual native CPU operations"
+        },
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process"
+        },
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures"
+        },
+        {
+          "number": 53,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9"
+        }
+      ],
+      "trx": [
+        {
+          "logicalPath": "tests-linux-x64/Core/results.trx",
+          "bytes": 330982,
+          "sha256": "874ec44c68a92d2194582d32f7b0de1c591f96a370a1da1180ec9d9bbc7c9601",
+          "counters": {
+            "total": 224,
+            "executed": 224,
+            "passed": 224,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Core"
+        },
+        {
+          "logicalPath": "tests-linux-x64/Desktop/results.trx",
+          "bytes": 52963,
+          "sha256": "b4852d5d347ba4e076765c3ddc4881e09a2915a03d6f379fafa2d3f77a6093bc",
+          "counters": {
+            "total": 35,
+            "executed": 35,
+            "passed": 35,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Desktop"
+        },
+        {
+          "logicalPath": "tests-linux-x64/Host/results.trx",
+          "bytes": 409213,
+          "sha256": "d7ee059050594a060da4f3b37e6133cdba55f85a3683ab39af171257e17d86cf",
+          "counters": {
+            "total": 189,
+            "executed": 189,
+            "passed": 189,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Host"
+        },
+        {
+          "logicalPath": "tests-linux-x64/Tokenization/results.trx",
+          "bytes": 813894,
+          "sha256": "ccf3f0d112a1858f9441f41eae9c6e2df3d8a5f38e84042322d38030bdf61d97",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Tokenization"
+        },
+        {
+          "logicalPath": "tests-linux-x64/Workflow/results.trx",
+          "bytes": 76239,
+          "sha256": "08cbfdbe20849bc36ce8f9f07d37766cc2f9451062ade1dc8cc22328ab8465b0",
+          "counters": {
+            "total": 49,
+            "executed": 49,
+            "passed": 49,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Workflow"
+        }
+      ],
+      "stockFailures": [],
+      "firstUseLogEvidence": {
+        "source": "logs.txt (no first-use TRX downloaded)",
+        "processSummaries": 9,
+        "failed": 16,
+        "passed": 178,
+        "skipped": 0,
+        "total": 194,
+        "failedTestNames": [
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")"
+        ]
+      },
+      "buildAndCatalog": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "osx-arm64": {
+      "jobId": 103475852588,
+      "jobConclusion": "failure",
+      "applicationStep": "success",
+      "projects": {
+        "Core": 224,
+        "Desktop": 35,
+        "Host": 189,
+        "Inference": 574,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationCount": 1037,
+      "applicationOutcomes": {
+        "Passed": 1037
+      },
+      "selectedCases": 64,
+      "selectedGroups": {
+        "Names": 36,
+        "PromptValues": 28
+      },
+      "selectedOutcomes": {
+        "Passed": 64
+      },
+      "smoke": {
+        "step": 8,
+        "conclusion": "success",
+        "markers": [
+          "2026-09-12T01:37:03.2627200Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview."
+        ]
+      },
+      "ordinaryPlusStockObservedUnique": 1614,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1612,
+        "Failed": 2
+      },
+      "ordinaryInferenceExecuted": true,
+      "stockExecuted": true,
+      "failedSteps": [
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process"
+        }
+      ],
+      "skippedSteps": [
+        {
+          "number": 53,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9"
+        }
+      ],
+      "trx": [
+        {
+          "logicalPath": "tests-osx-arm64/Core/results.trx",
+          "bytes": 342278,
+          "sha256": "4dae9ea71d7be2bb113a9cd76fe80e690de0f8a905fa977befbd9625aba3b036",
+          "counters": {
+            "total": 224,
+            "executed": 224,
+            "passed": 224,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Core"
+        },
+        {
+          "logicalPath": "tests-osx-arm64/Desktop/results.trx",
+          "bytes": 54809,
+          "sha256": "659412f6077812bb58c2443b60f4c237307a3220ac8d12f44fa4ffe7ac925e06",
+          "counters": {
+            "total": 35,
+            "executed": 35,
+            "passed": 35,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Desktop"
+        },
+        {
+          "logicalPath": "tests-osx-arm64/Host/results.trx",
+          "bytes": 419508,
+          "sha256": "b9c86ff274988dbba8ee79ad5f66531e3ec48eb60598d0a5680fe6f657a2e6d2",
+          "counters": {
+            "total": 189,
+            "executed": 189,
+            "passed": 189,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Host"
+        },
+        {
+          "logicalPath": "tests-osx-arm64/Inference/results.trx",
+          "bytes": 947794,
+          "sha256": "47f6862e5c6137273095f4eaf0099e0e6b2d01be22ce57b8048179f785da1387",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Inference"
+        },
+        {
+          "logicalPath": "tests-osx-arm64/Tokenization/results.trx",
+          "bytes": 840990,
+          "sha256": "c5f7423e3cd45e90ce7495d5bb8a67085b92b1a530c9c56973698a6e78e3a781",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Tokenization"
+        },
+        {
+          "logicalPath": "tests-osx-arm64/Workflow/results.trx",
+          "bytes": 78785,
+          "sha256": "a4f548567dccd2da314e835777675d6bd86117ca8f068c568cd2e61fcea382af",
+          "counters": {
+            "total": 49,
+            "executed": 49,
+            "passed": 49,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Completed",
+          "project": "Workflow"
+        },
+        {
+          "logicalPath": "tests-stock-osx-arm64/results.trx",
+          "bytes": 12902,
+          "sha256": "76e1e099a9a98e2cc37e4e0c01a2fb74aa7186eea1a131eab5eb79adbcd742c7",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 1,
+            "failed": 2,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "outcome": "Failed"
+        }
+      ],
+      "stockFailures": [
+        {
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+          "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+        },
+        {
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+          "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+        }
+      ],
+      "firstUseLogEvidence": {
+        "source": "logs.txt (no first-use TRX downloaded)",
+        "processSummaries": 9,
+        "failed": 0,
+        "passed": 194,
+        "skipped": 0,
+        "total": 194,
+        "failedTestNames": []
+      },
+      "buildAndCatalog": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "selection": {
+    "expectedDistinctCases": 64,
+    "observedDistinctCases": 64,
+    "expectedGroups": {
+      "Names": 36,
+      "PromptValues": 28
+    },
+    "caseExecutionsObserved": 192,
+    "outcomes": {
+      "Passed": 192
+    },
+    "cases": [
+      {
+        "testId": "01df0d7e-8927-5cea-9a2f-b822f2e65be9",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.AliasedMembersAndFanoutSurviveUntilLastIndependentOwner",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "0375217b-07b4-7c48-9945-7ba7e8e204a2",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.StaticLeafCollisionsAndDuplicateGroupsAreRejected",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "07c937c8-4346-cee5-b78e-b913321e4ec3",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnknownFlatNamesAreRejectedBeforeAnyProducerRuns(extra: \"values.a.child\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "083d9aed-6a34-c123-ab73-17482bc8cc03",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.NamesAndPrototypeOptionsAreImmutableSnapshots",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "0b79fe63-5999-f8cc-c77f-77973a8bddbe",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnknownFlatNamesAreRejectedBeforeAnyProducerRuns(extra: \"values.unknown\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "0fdde53f-d2f1-1877-4bb1-42399dd7295c",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.EmptyNamesAreValidAndBindOneEmptyMap(min: 0)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "1037f75a-224d-07e1-93c2-c205e33f8757",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-float-fraction\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "11233e24-c049-3d16-fd5f-f66b8d91e73c",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-null\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "12b3d7f7-580a-f4ff-b18b-7451ab0e6434",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"literal-empty-map\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "140ddd07-18e4-2eeb-ab44-ff7bc75b75e5",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"missing-node\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "145d09ee-3201-2ef4-29b5-ba431bd9be2c",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.EmptyNamesAreValidAndBindOneEmptyMap(min: 1000)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "14650b2f-be4f-f96d-0d7b-2c04ed740ef7",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.CancellationBeforeGroupingReleasesResolvedProducerAndSkipsBody",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "152863d9-e43f-318b-bec8-4163fcca8d2c",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnqualifiedPrototypeAndGroupOptionsAreRejected(option: \"rawLink\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "17071f84-9db1-53ff-231b-6e07d7954f25",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.RequiredPartitionFollowsNamePositionWithoutClampingMinimum(min: 5, required: 3)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "18a355f7-e9b7-8d26-7d5b-3ead18da564d",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"numeric-node-id\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "19ee0f66-9d96-cfa9-6685-be46bb5783ab",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"double-wrapper\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "1f27bc02-f07e-af0b-e9c4-00390b6b234a",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.RequiredPartitionFollowsNamePositionWithoutClampingMinimum(min: 3, required: 3)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "1f934030-488a-73c7-e577-1e3b718ad198",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.NestedBlockersAreKeptAsValuesWithoutRecursiveConsumption",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "21ac79e3-5467-a855-bc60-1114ead14333",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.ScalarMappingUsesNamedOrderHolesRepeatLastAndStaticArguments",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "237cad72-c56d-f5e3-f920-3ecefd5c45c9",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnqualifiedPrototypeAndGroupOptionsAreRejected(option: \"force_input\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "23a85036-38a1-bb71-f744-dc67b7f75dfe",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"literal-nested-map\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "24b588da-3d2a-521c-ecd9-d448365a6b5e",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.RequiredPartitionFollowsNamePositionWithoutClampingMinimum(min: 0, required: 0)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "27997c27-ff50-9eb7-91eb-3e0dc91efb32",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.EmptyNamesAreValidAndBindOneEmptyMap(min: 1)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "2fd5f844-f4be-1ba7-d9db-769ec9c0a212",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-string\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "304936d1-db9e-ca9b-7498-d52a4a4ab15e",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.RequiredMissingIsDistinctFromExplicitNullAndOptionalOmission",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "31bcfe73-4743-d7ca-854b-5d050025ea8e",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"malformed-link-length\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "366dadd3-0afd-83e2-8c82-e20a1682231d",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.BindingFailureReleasesPartialRetainsWithoutStealingCallerOwnership",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "38cfc73d-e69a-b29e-e0a2-42dff1198a55",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.CancelledBinderDoesNotAcquireAnyCallerResource",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "3b350fa8-d3ee-eade-2b3f-38c3d40da46e",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"reserved-key-extra\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "3f8163cc-0f90-8d40-a1ea-fb31897ce47e",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"wrapped-empty-list\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "4bea7738-7fad-7a03-c697-4dd78d983562",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"boolean-from-wrapped-empty\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "4cfea2da-32a5-3cbd-905e-eecc0004d410",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnknownFlatNamesAreRejectedBeforeAnyProducerRuns(extra: \"values\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "6468ccdb-aaa2-5e7a-410b-59aa784ecf0b",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"string-from-null\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "66ccbbf6-28a2-9beb-2bce-79d71562c562",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"float-from-string\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "6ca3df9e-1315-e455-1c08-51387f74e27b",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnsupportedEffectiveNameFailsExplicitly(name: \"\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "6f3e1d15-39f6-17c8-f22f-1d203dac2521",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"int-from-bool\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "7a10c963-07cd-7193-4391-2c8bb02c194b",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.DuplicateEffectiveNamesAreRejectedRatherThanDeduplicated",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "7b329cab-159d-955a-8890-b6561c5d04bf",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnsupportedEffectiveNameFailsExplicitly(name: \"a-b\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "7b91210c-6059-d1e6-4d89-8fa15b7a4107",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"literal-null\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "7d9323a8-e207-0122-8bfc-61d87889d52e",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-float-integral\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "8c7b2f4d-e615-b124-7e07-a0b7b4372182",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.NestedWidgetsLazyAndOptionalGroupsRemainOutsideTheContract",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "907b87e0-0ee8-12f5-a791-90dfae5d3adc",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.TruncationPrecedesValidationAndDoesNotSortOrFoldNames",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "91848c79-8ac3-0b38-9387-3a34eed43f15",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnqualifiedPrototypeAndGroupOptionsAreRejected(option: \"default\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "983db417-8202-07ed-29c0-b3cb64177932",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-out-of-range\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "99352294-f2fa-0d68-1e84-d2cd8607c96f",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"raw-numeric-pair\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "a0783a36-a85f-1d8f-6b42-53ef490277eb",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.FlatBlockerSelectionPrecedesGroupingInPromptOrder(list: False)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "ab7abac9-d94a-6169-9255-7bfaa0f8d0d2",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"wrapped-numeric-pair\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "aed02b95-8b03-408e-9ae1-2d7eec3bc177",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.OptionalPrototypeAndObjectInfoPreserveOriginalNamesTemplate",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "b1699ca6-ed0a-ff5a-144f-10f27c94283a",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-negative\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "b680e14b-4e5e-87ef-2bfb-674ff20fcf11",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"boolean-node-id\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "c9d090df-a056-d5c8-d291-64f5415a1875",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"required-absent\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "cf700964-c488-1b73-b920-17646c7994b6",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"raw-empty-list\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "d09f9b84-5125-e733-44ac-b05675941c03",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnsupportedEffectiveNameFailsExplicitly(name: \"é\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "d0c70a37-0e49-00e7-dd65-32234b9ceef7",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.EmptyMappedListKeepsItsLivePathWithNullValue",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "da1a8d96-6600-a429-0aa4-ccdb5fecea16",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnsupportedEffectiveNameFailsExplicitly(name: \"a.b\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "db051f11-63fc-cebe-59e0-901e1c9d84ce",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"wrapped-link-shaped\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "dcabf02b-ed41-3d0f-f299-fecf4aac592d",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"link-string-id\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "e06b0afb-839c-a73a-7c7c-1ec55806dbd0",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"slot-boolean-false\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "ee8506c2-bba5-58f0-b375-ce921962e151",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.InputIsListBindsWholeExecutionListsWithoutFlatteningLiteralItems",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "eef7b359-c21b-b239-492a-c827819b204b",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.FlatBlockerSelectionPrecedesGroupingInPromptOrder(list: True)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "f20cf8a6-d4ef-4a54-c80e-e35859d15d23",
+        "name": "ComfySharp.Host.Tests.PromptValuesReferenceTests.ValidationAndRealNodeArgumentsRespectTheExplicitSourcePartition(id: \"optional-null\")",
+        "group": "PromptValues",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "f406e2ad-93fd-9b55-c224-7e82816773f5",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnsupportedEffectiveNameFailsExplicitly(name: null)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "f4ccc36c-ddc2-ffb4-ac3b-a76c9fc72d0f",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.RequiredPartitionFollowsNamePositionWithoutClampingMinimum(min: 1, required: 1)",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      },
+      {
+        "testId": "fb48e920-02f1-da39-d77a-50651185c40c",
+        "name": "ComfySharp.Core.Tests.AutogrowNamesTests.UnknownFlatNamesAreRejectedBeforeAnyProducerRuns(extra: \"values.A\")",
+        "group": "Names",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        }
+      }
+    ]
+  },
+  "filesAtRunCommit": {
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 9462,
+      "sha256": "b7b4391a83caf95bf2189f8e81f47cb76abebebb106e68d4dbd0fbae7a0eaf52"
+    },
+    "src/ComfySharp.Core/NodeInputExpansion.cs": {
+      "bytes": 6963,
+      "sha256": "6715917c6f1323c28f8f76c3d36ae0454eeda37bd8436305f4815a1756ee8789"
+    },
+    "src/ComfySharp.Nodes/CreateListNode.cs": {
+      "bytes": 2155,
+      "sha256": "063cebb2af9f195db77156104be9df280d7e892ab2c3199da74d53143a4e1cee"
+    },
+    "tests/ComfySharp.Core.Tests/AutogrowInputTests.cs": {
+      "bytes": 8577,
+      "sha256": "0f4850cbb247e290b5d60a24f2c5e9c91cef9e5484fef201f47cd821056ea208"
+    },
+    "tests/ComfySharp.Core.Tests/AutogrowSourceReferenceTests.cs": {
+      "bytes": 15070,
+      "sha256": "552ecbbd7c6c41b353f7ca6e417129a1173e6b93c73cb12ceecb0d66d128d979"
+    },
+    "tests/ComfySharp.Core.Tests/AutogrowNamesTests.cs": {
+      "bytes": 20405,
+      "sha256": "51034afe59869e09bb34f785ef02ea53784178b8836edd09ee28fcb0702b0809"
+    },
+    "docs/AUTOGROW_NAMES.md": {
+      "bytes": 7821,
+      "sha256": "24a8ff479d1b36d95d629099a4b28a5400bb9464736936aa1dc938d6d033ba85"
+    },
+    "tests/ComfySharp.Host.Tests/PromptValuesReferenceTests.cs": {
+      "bytes": 19286,
+      "sha256": "b94a617966bbfeb2896bc8d89cac2cf2c72a727dbd1d033d4dfdcd1aa14ca767"
+    },
+    "tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj": {
+      "bytes": 1110,
+      "sha256": "76673ffad7a4e228cfc274f012f7bdea1b089e61f8e92070ccf32b9d11b562a2"
+    },
+    "tests/ComfySharp.Host.Tests/Fixtures/prompt-values.reference.json": {
+      "bytes": 677389,
+      "sha256": "04af1fcf3c83c91d70cfd7a1d0b97f51a6eca5bdcf9c612ac9ea29fa420bee3f"
+    },
+    "tests/ComfySharp.Host.Tests/Fixtures/prompt-values.protocol.json": {
+      "bytes": 17911,
+      "sha256": "dbd4038623e3313005cbb29393da978c0d8c9eb49a96860fb765ff217b6fe2ee"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 13573,
+      "sha256": "44bcb4bd6bf4706880f20ccaa67c9454f852c3ed5ccad779f8903e452ad6651a"
+    }
+  },
+  "trxRehashed": 19,
+  "metadataPins": {
+    "run.json": {
+      "bytes": 18474,
+      "sha256": "d2b7e9c14dc8e7aab620e7f0d70ec52bcae8e8cdaa738bf089d1674e48a20ae1"
+    },
+    "artifacts.json": {
+      "bytes": 17890,
+      "sha256": "67c3b625f693cd1e5b2d452f78afc097046479fc3979d1fde1c3106ab6f87a06"
+    },
+    "logs.txt": {
+      "bytes": 469092,
+      "sha256": "ecf4218f1c56270d44774ca80646b0bf0811d43a5104376947bb61765151c418"
+    },
+    "download-inventory.json": {
+      "bytes": 4658,
+      "sha256": "82a5f6622b1f7bd6f7321c96130e424cf15d9eb7f44617897c3fe423fee17a6b"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "tests-stock-win-x64",
+      "id": 10289635306,
+      "bytes": 2439,
+      "githubReportedDigest": "sha256:0a95d15655b76bb8136b7a39c4f869b8868058d34d09175d7350eb9ab308a55e"
+    },
+    {
+      "name": "tests-win-x64",
+      "id": 10289505533,
+      "bytes": 359510,
+      "githubReportedDigest": "sha256:380ee3f04e73ff4418d578eaf6e9fe7f52dec54bda4088ba5556bbd1772fb40d"
+    },
+    {
+      "name": "tests-stock-osx-arm64",
+      "id": 10289325530,
+      "bytes": 2831,
+      "githubReportedDigest": "sha256:1221a627db1baac3ac3a02992fdd4990a435fa9c72e634c36c45c9219f10d940"
+    },
+    {
+      "name": "tests-linux-x64",
+      "id": 10288741291,
+      "bytes": 216952,
+      "githubReportedDigest": "sha256:9f491984d54df4e923d176302ce03f5c483df7c7a96d5466b7b36315c188b3e6"
+    },
+    {
+      "name": "tests-osx-arm64",
+      "id": 10288534659,
+      "bytes": 358725,
+      "githubReportedDigest": "sha256:71827ed83a6c20f1e9c9e07b8783c9c15c0d489530537a3ac6d214842fe3d00d"
+    }
+  ],
+  "relatedEvidence": {
+    "localFull": "autogrow-names-local.json",
+    "promptValuesPhases": "prompt-values-integration.json",
+    "previousLiteralCi": "prompt-literals-ci-4faa2ea.json"
+  },
+  "limits": [
+    "Names tests are managed contracts; the subsequent 25-case source comparator and its root-order correction are outside this commit.",
+    "Prompt Values contains explicit validation and envelope divergences; no source-body or HTTP-wide parity follows from passing its 28 tests.",
+    "Desktop smoke is a separate native process before Inference gates; no smoke success is inferred from headless tests alone.",
+    "Application totals exclude Inference. Ordinary and stock test IDs are checked disjoint; overlapping checkpoint/pipeline/first-use runs are not added.",
+    "Observed partial totals do not mean an unexecuted suite passed. Failed/skipped steps remain recorded.",
+    "Native mathematical traces are not analyzed here and no CPU/runtime cause is attributed. Archive hashes are GitHub-reported, extracted TRX independently rehashed.",
+    "No .NET/native/source execution or CI rerun performed by the auditor."
+  ]
+}
