@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "scope": "Source-only prospective Autogrow.TemplatePrefix / CreateList observations; no C# execution or qualification in this evidence.",
+  "collectorCommit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "protocolId": "autogrow-prefix-createlist-v1",
+  "protocolSha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b",
+  "collection": {
+    "platform": "Windows",
+    "python": "3.12.10",
+    "processExitCode": 0,
+    "exitCodeEvidence": "Reported by root; reference bytes and internal evidence independently audited.",
+    "bytes": 279905,
+    "sha256": "04f2f2d1cea2a66460a832d471f751fcf3effd45ad4bc36a6508d540a02d2924",
+    "cases": 36,
+    "returned": 29,
+    "raisedAsPrescribed": 7
+  },
+  "laboratoryFiles": {
+    "labs/autogrow-source/protocol.json": {
+      "bytes": 39714,
+      "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+    },
+    "labs/autogrow-source/reference.py": {
+      "bytes": 20206,
+      "sha256": "5239b3ffc13c64e583ba6a6c7a185de3264bfe9173d7c3f3a5da3685ec4e5027"
+    },
+    "labs/autogrow-source/README.md": {
+      "bytes": 7388,
+      "sha256": "483dc8ba820eff7409dc4f6618238fa7b41bd526bdc96a45d368e4f18b7e7bd2"
+    }
+  },
+  "sourceFiles": [
+    {
+      "path": "comfy_api/internal/__init__.py",
+      "bytes": 4913,
+      "sha256": "50786f7e2ebc910ed9becddf066e92d7924b7f6080189651067bbcd839e8a410",
+      "selectedDeclarations": 10
+    },
+    {
+      "path": "comfy_execution/graph_utils.py",
+      "bytes": 5626,
+      "sha256": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d",
+      "selectedDeclarations": 2
+    },
+    {
+      "path": "comfy/comfy_types/node_typing.py",
+      "bytes": 15221,
+      "sha256": "6bc7906a84333a767e137e89efea041b45966cd589f344a28c14116a2484a7f5",
+      "selectedDeclarations": 8
+    },
+    {
+      "path": "comfy_api/latest/_io.py",
+      "bytes": 97422,
+      "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080",
+      "selectedDeclarations": 40
+    },
+    {
+      "path": "comfy_execution/graph.py",
+      "bytes": 14857,
+      "sha256": "bb602b45f396a3ca666d2e50af4d4cf542819c427b39ee93f2b4c816cc74d3fa",
+      "selectedDeclarations": 1
+    },
+    {
+      "path": "comfy_execution/utils.py",
+      "bytes": 1529,
+      "sha256": "f80e6020f8f60754ebf15f194670c12ba57a46458b0c185694d8198e428f7be4",
+      "selectedDeclarations": 4
+    },
+    {
+      "path": "execution.py",
+      "bytes": 61543,
+      "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "selectedDeclarations": 6
+    },
+    {
+      "path": "comfy_extras/nodes_toolkit.py",
+      "bytes": 1422,
+      "sha256": "d27a538173a7b75a120aad35047b5b1b36108a927241baa268a3e5938d97edbb",
+      "selectedDeclarations": 1
+    },
+    {
+      "path": "nodes.py",
+      "bytes": 108581,
+      "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7",
+      "selectedDeclarations": 0
+    }
+  ],
+  "astEvidence": {
+    "declarations": 72,
+    "astAndSegmentAndLineCheckedIndividually": true,
+    "selectionCanonicalSha256": "334c083ad285c1868c62d1cdcbe56828f0f2620878f5fbc4f611c0fd469716c3",
+    "detailLocation": "Pinned protocol.json sources[].declarations"
+  },
+  "audit": {
+    "checksPassed": 766,
+    "method": "Stdlib raw bytes, JSON, SHA-256, local immutable Git blobs and AST parsing only; no source declarations imported/executed and no .NET/native calculation.",
+    "promptAndCacheSnapshotsUnchanged": 36,
+    "originalCreateListSchemasIdentical": 20,
+    "schemaCaptures": 31,
+    "observedCreateListCalls": 26,
+    "observedNestedReturns": 28,
+    "blockReports": 2
+  },
+  "repeatEvidence": {
+    "sequence": [
+      "off",
+      "on",
+      "off"
+    ],
+    "cases": 36,
+    "freshCaseExecutionsReported": 108,
+    "retainedRecordsIndependentlyRehashed": 36,
+    "declaredHashesChecked": 108,
+    "result": "The retained middle record hashes to all three declared per-case hashes; every recorded bitIdentical flag is true.",
+    "limit": "Only the observed middle record is stored. Off-run payloads were compared in the pinned collector before writing; they are not independently available for rehash in this artifact."
+  },
+  "comparisonPartition": {
+    "comparable": 18,
+    "unsupported-input": 8,
+    "unsupported-template": 5,
+    "constructor-error": 4,
+    "source-only": 1
+  },
+  "cases": [
+    {
+      "id": "one-port",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "bbde82d4923195928e4c119abf127a83714d03ac8763bf138761662588b28249",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "concat-two",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "80e81709b885362f3e7cc19c66c59947386d301b289871c50334cb1b1b868401",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "reverse-gap",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "9345272e8e2976a059bba4d5de988364f476ed4ae51bd5f27fc70cee0807c0cd",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "ten-ports",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "f7df08f25f60fe3fd2a43c1e11c4c9917b559484bc7199ad3ada2b89def6b7c4",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "empty-execution-list",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "e23587bb0fa92638f294a513bb0efc6af14bcb03b81bf29c98a9f7358f41d4d0",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "literal-empty-item",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "952aa2ff18aa29e02e20ae5daae649abdf8255305011654cacc5a255b79b236c",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "nested-items",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "a4ac968b41d17fca652ee755d4e9c95078ef14a7aa52e1f1c829c13cd61e680c",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "duplicate-link",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "3767611aba504b0b7d15f34c3501f0afb9c23c1cba36ef27af6ce58ebb2eef96",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "missing-all-required",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "0ba7afb01a29b2e00004c01729e90f2ceba78428349310d4e2cf1ae25e8e4cbb",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "missing-input0",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "a4bdfb8f0081489f107b3f13fc8a45c2423de53251bedc2da49330d490b1cc6f",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "extra-input10-literal",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "72f16631b7899a0f2fdf7c549fa23afa2b228b628f1075075e70b6c22c172144",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "extra-input01-literal",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "8911e73a2c83fba288ea74cf91c443b4af65f3efeb123208c9362af1bd0276a3",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "extra-prefix-null",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "1a124935c553de5c8c020d4fd8dd18780b08157f7bb7218f6c5d640a2d02b47a",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "nested-group-literal",
+      "classification": "unsupported-input",
+      "status": "returned",
+      "nonObserverRecordSha256": "8daa4321aeb94713bdec71bff5449337d9eaac31a5fd665e1f77b45216e042b2",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "extra-input10-link",
+      "classification": "unsupported-input",
+      "status": "raised",
+      "nonObserverRecordSha256": "a26da2d0a096e14fea1847f3bf19491692980e9b37719028ae9329cca3605b45",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "extra-link-missing",
+      "classification": "unsupported-input",
+      "status": "raised",
+      "nonObserverRecordSha256": "1c442ecf78f3c60b4fd245427ed2aaa3a7ba3d41cca3fb5daed6bb94a8ec414b",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "blocker-reverse-order",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "ed4652f393c0485b155060af339e27a52b5783883b5efafcd0a9c00428d14eb3",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "blocker-silent-first",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "8c060c2e412d8afed651b2d897a325058f08bd40f50606b08d757fa59b80bf52",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "blocker-empty-message",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "0001ba88defaf9045437c0d2d9ca4c9e441d5b100a8e37db7cca976cdcba14a4",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "nested-blocker-item",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "573fad5881f0387c403c4bb0f16105ca9665f44e35f2eca0e63d6d0ad26e429b",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "prefix-min-zero-empty",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "d83ee41b1f332dd3a569adc35d19d9aba6db2a58f0e7e1296095738a67c5743e",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 0,
+      "optional": 10
+    },
+    {
+      "id": "prefix-max-one",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "cd418c61a805bcf2c0b0c0a9eccdaa3134de16125f91ce47684134f5aafe1cf0",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 0
+    },
+    {
+      "id": "prefix-max-hundred",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "53bc061e438eb152bed46d319aa3668b8b10b3337462add008c826cc05a920cd",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 0,
+      "optional": 100
+    },
+    {
+      "id": "prefix-min-over-max",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "81df0ee94e12aa90e20dbbc79b5aa13d44053192c5888948574d7a6a7fcb61f4",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 2,
+      "optional": 0
+    },
+    {
+      "id": "optional-prototype",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "7c684d96a8d263ae5345fabe823b33ef6bbdf59df61a49aadf46de1b23649892",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 0,
+      "optional": 4
+    },
+    {
+      "id": "optional-group",
+      "classification": "unsupported-template",
+      "status": "returned",
+      "nonObserverRecordSha256": "471a10d6c1bd933815e7f84b17ac173f5e57f8f90d90653b5e177a0bfd3a85b2",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 1
+    },
+    {
+      "id": "widget-force-input",
+      "classification": "unsupported-template",
+      "status": "returned",
+      "nonObserverRecordSha256": "19cd0d74fe565cdc47b2ec683c46c2ada94410463cec214858c599783a4d61d2",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "prototype-presentation",
+      "classification": "unsupported-template",
+      "status": "returned",
+      "nonObserverRecordSha256": "90054874394d1b85f15ad7f4ba1d9470cabbdfc79e7dca4c3dfdd2f114f761f5",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "different-prefix",
+      "classification": "comparable",
+      "status": "returned",
+      "nonObserverRecordSha256": "904164fccee00df32a81ff41c92d808533613f06a3ceb81046821987d5cbcc30",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 2
+    },
+    {
+      "id": "negative-min",
+      "classification": "constructor-error",
+      "status": "raised",
+      "nonObserverRecordSha256": "3f8741099557e9e7fa70f27d1b31dc1bde1f84cf7cf8d3df2014e62d9ea40bb1",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0
+    },
+    {
+      "id": "zero-max",
+      "classification": "constructor-error",
+      "status": "raised",
+      "nonObserverRecordSha256": "55100f98f99710e89bae78a508043c3219df6f83d32677e848fad1fd6abffe1d",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0
+    },
+    {
+      "id": "over-hundred-max",
+      "classification": "constructor-error",
+      "status": "raised",
+      "nonObserverRecordSha256": "bf934132310292b808a719bb57a0b4b843c7e43a24330555f33994f9e92d506b",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0
+    },
+    {
+      "id": "dynamic-prototype",
+      "classification": "unsupported-template",
+      "status": "raised",
+      "nonObserverRecordSha256": "693379ea5ebad0daf5d48d1022995f3de887fc3b43ca1357c30fe73804cd5728",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0
+    },
+    {
+      "id": "match-allowed-types",
+      "classification": "unsupported-template",
+      "status": "returned",
+      "nonObserverRecordSha256": "af16642f15c0f50595cf7eea2c6af6c4055bd2cc60a5eb1a5028776de0410d55",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    },
+    {
+      "id": "match-invalid-type",
+      "classification": "constructor-error",
+      "status": "raised",
+      "nonObserverRecordSha256": "2792c3bc15fa362d88a4f3600d51878869833d988831748eaa80344811311579",
+      "observedCreateListCalls": 0,
+      "observedNestedReturns": 0
+    },
+    {
+      "id": "match-empty-types",
+      "classification": "source-only",
+      "status": "returned",
+      "nonObserverRecordSha256": "cd977a919f27ace1146a2a653c24ba26597928ba0759dac5cfbc88a20a629f48",
+      "observedCreateListCalls": 1,
+      "observedNestedReturns": 1,
+      "required": 1,
+      "optional": 9
+    }
+  ],
+  "prescribedSourceErrors": [
+    {
+      "id": "extra-input10-link",
+      "stage": "mapper",
+      "errorType": "TypeError",
+      "errorMessage": "CreateList.execute() got an unexpected keyword argument 'inputs.input10'"
+    },
+    {
+      "id": "extra-link-missing",
+      "stage": "mapper",
+      "errorType": "TypeError",
+      "errorMessage": "CreateList.execute() got an unexpected keyword argument 'inputs.input10'"
+    },
+    {
+      "id": "negative-min",
+      "stage": "construct",
+      "errorType": "AssertionError",
+      "errorMessage": ""
+    },
+    {
+      "id": "zero-max",
+      "stage": "construct",
+      "errorType": "AssertionError",
+      "errorMessage": ""
+    },
+    {
+      "id": "over-hundred-max",
+      "stage": "construct",
+      "errorType": "AssertionError",
+      "errorMessage": ""
+    },
+    {
+      "id": "dynamic-prototype",
+      "stage": "construct",
+      "errorType": "AssertionError",
+      "errorMessage": ""
+    },
+    {
+      "id": "match-invalid-type",
+      "stage": "construct",
+      "errorType": "ValueError",
+      "errorMessage": "Allowed types must be a ComfyType or a list of ComfyTypes, got str"
+    }
+  ],
+  "createListObjectInfo": {
+    "input": {
+      "required": {
+        "inputs": [
+          "COMFY_AUTOGROW_V3",
+          {
+            "template": {
+              "input": {
+                "required": {
+                  "input": [
+                    "COMFY_MATCHTYPE_V3",
+                    {
+                      "template": {
+                        "template_id": "type",
+                        "allowed_types": "*"
+                      }
+                    }
+                  ]
+                }
+              },
+              "prefix": "input",
+              "min": 1,
+              "max": 10
+            }
+          }
+        ]
+      }
+    },
+    "input_order": {
+      "required": [
+        "inputs"
+      ]
+    },
+    "is_input_list": true,
+    "output": [
+      "COMFY_MATCHTYPE_V3"
+    ],
+    "output_is_list": [
+      true
+    ],
+    "output_name": [
+      "list"
+    ],
+    "output_tooltips": [
+      null
+    ],
+    "output_matchtypes": [
+      "type"
+    ],
+    "name": "CreateList",
+    "display_name": "Create List",
+    "description": "",
+    "python_module": "comfy_extras.nodes_toolkit",
+    "category": "utilities",
+    "output_node": false,
+    "deprecated": false,
+    "experimental": false,
+    "dev_only": false,
+    "api_node": false,
+    "price_badge": null,
+    "search_aliases": [
+      "Image Iterator",
+      "Text Iterator",
+      "Iterator"
+    ],
+    "essentials_category": null,
+    "has_intermediate_output": false
+  },
+  "createListObjectInfoCanonicalSha256": "e3e7acb3cc630c370dc45c0dba3bef33258f32f9bf75aaf37534b2371504cbce",
+  "prospectivePortTests": {
+    "exactDataCandidates": [
+      "one-port",
+      "concat-two",
+      "reverse-gap",
+      "ten-ports",
+      "empty-execution-list",
+      "literal-empty-item",
+      "nested-items",
+      "duplicate-link",
+      "blocker-reverse-order",
+      "blocker-silent-first",
+      "blocker-empty-message",
+      "nested-blocker-item",
+      "prefix-min-zero-empty",
+      "prefix-max-one",
+      "prefix-max-hundred",
+      "prefix-min-over-max",
+      "optional-prototype",
+      "different-prefix"
+    ],
+    "rejectionPolicyCandidates": [
+      "missing-all-required",
+      "missing-input0",
+      "extra-input10-literal",
+      "extra-input01-literal",
+      "extra-prefix-null",
+      "nested-group-literal",
+      "extra-input10-link",
+      "extra-link-missing",
+      "optional-group",
+      "widget-force-input",
+      "prototype-presentation",
+      "negative-min",
+      "zero-max",
+      "over-hundred-max",
+      "dynamic-prototype",
+      "match-allowed-types",
+      "match-invalid-type"
+    ],
+    "retainedWithoutSuccessExpectation": [
+      "match-empty-types"
+    ],
+    "policy": "The port may assert its agreed early diagnostic for unsupported names/templates and invalid constructors. This is not equality with source success or with Python exception class/message."
+  },
+  "limits": [
+    "No C# source or output was used to produce this collection or this source audit.",
+    "Finalization/acquisition do not establish full upstream required-input validation or PromptExecutor scheduling.",
+    "literal-empty-item observes acquisition of an execution item, not raw HTTP admission: upstream validate_inputs rejects bare [] as bad_linked_input and supports __value__ wrappers. No incompatibility of that wrapper is inferred; future tests must compare the resulting execution value.",
+    "Four extra literals including null are ignored here; two extra links become unexpected-keyword TypeError. The bounded port intentionally refuses such names earlier.",
+    "Optional group, widget prototypes, custom extra_dict and non-wildcard MatchType examples remain unsupported-template, despite source success.",
+    "The source module metadata includes the explicitly reproduced loader assignment; generic template fixtures use a separate laboratory module identity.",
+    "No frontend automatic ports/type propagation, DynamicCombo/DynamicSlot behavior, models or full V1 parity is qualified."
+  ]
+}

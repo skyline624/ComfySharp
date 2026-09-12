@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "scope": "Targeted local Windows Core tests; 18 source-reference cases within 188 passing Core tests. No new full-solution campaign.",
+  "productBaseCommit": "3eafec37fd8d76cb4d43c34626224da5a1d3d4f2",
+  "collectorCommit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceEvidence": "autogrow-source-ae241a0.json",
+  "protocolSha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b",
+  "collectionSha256": "04f2f2d1cea2a66460a832d471f751fcf3effd45ad4bc36a6508d540a02d2924",
+  "fixtureBytesIdenticalToCollectedSource": true,
+  "protocolBytesIdenticalToPublishedGitBlob": true,
+  "testedFiles": {
+    "tests/ComfySharp.Core.Tests/AutogrowSourceReferenceTests.cs": {
+      "bytes": 15047,
+      "sha256": "c795b28987612a8d53fd5fae394183997b475711a3202b12d754a19b8799a765"
+    },
+    "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+      "bytes": 926,
+      "sha256": "a9e2152840611c46ac641f79d75c8bea58f332065bac4dbdfd3c38c0227779f9"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/autogrow.reference.json": {
+      "bytes": 279905,
+      "sha256": "04f2f2d1cea2a66460a832d471f751fcf3effd45ad4bc36a6508d540a02d2924"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/autogrow.protocol.json": {
+      "bytes": 39714,
+      "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+    }
+  },
+  "productFilesUnchangedSinceBase": {
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "canonicalSha256": "1e7aab8be4fdbc228b85355caad2d00ba1bf2e49c96186631ef25e656efbc114",
+      "workingSha256": "1e7aab8be4fdbc228b85355caad2d00ba1bf2e49c96186631ef25e656efbc114",
+      "gitBlob": "f83dc06ce5e5160e52431a3cb1535ea629df8889"
+    },
+    "src/ComfySharp.Core/NodeInputExpansion.cs": {
+      "canonicalSha256": "f90c84e3ca06739e005ba9058ad8a84540a36cd7072bcd68e692ac2fbdb8b44e",
+      "workingSha256": "f90c84e3ca06739e005ba9058ad8a84540a36cd7072bcd68e692ac2fbdb8b44e",
+      "gitBlob": "7b83910ad8295cb88541e667d0f395e3649d1eb6"
+    },
+    "src/ComfySharp.Core/NodeRegistry.cs": {
+      "canonicalSha256": "78e27953f40ecebc3da429195d64b054d113d972c078bf393f86d351d668518d",
+      "workingSha256": "78e27953f40ecebc3da429195d64b054d113d972c078bf393f86d351d668518d",
+      "gitBlob": "a5b68d56ca8c94eb878f19fddf3e649202be2e7c"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "canonicalSha256": "29ee66a0cb90b7acbe34b339eea869cc09dcc4a16444bf32063a763be3e20bdb",
+      "workingSha256": "29ee66a0cb90b7acbe34b339eea869cc09dcc4a16444bf32063a763be3e20bdb",
+      "gitBlob": "3811c9e32bb9c77fc23f76519369f7d61f7114ba"
+    },
+    "src/ComfySharp.Nodes/BuiltInNodes.cs": {
+      "canonicalSha256": "36018b6e7f14052bbf27bdc9d7e2cd6a26e0d7349f38332cae4e904678861368",
+      "workingSha256": "36018b6e7f14052bbf27bdc9d7e2cd6a26e0d7349f38332cae4e904678861368",
+      "gitBlob": "21d222847e66b27ed2a0312dc725153ab672e934"
+    },
+    "src/ComfySharp.Nodes/CreateListNode.cs": {
+      "canonicalSha256": "14fb453266148542ec8e445cdb24b38eec69dcbfae616655aa632e13b8804e7e",
+      "workingSha256": "14fb453266148542ec8e445cdb24b38eec69dcbfae616655aa632e13b8804e7e",
+      "gitBlob": "62a2b3b1b34d563f4f2665fdd13d653e8c21e6e4"
+    }
+  },
+  "build": {
+    "project": "ComfySharp.Core.Tests",
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "Root reported completed build; not inferred from TRX."
+  },
+  "testRun": {
+    "platform": "Windows",
+    "targetFramework": "net10.0",
+    "campaign": "autogrow-source-core-first",
+    "trx": {
+      "logicalName": "Core.trx",
+      "bytes": 280274,
+      "sha256": "72dbaae8d76e1812c39f2158f23595461fb1229e90034289eb25d60386dd4da3",
+      "runId": "eb79560d-aadf-4b23-b3e8-9a5897911563"
+    },
+    "total": 188,
+    "executed": 188,
+    "passed": 188,
+    "failed": 0,
+    "ignored": 0,
+    "uniqueTestIds": 188,
+    "autogrowReferenceCases": 18,
+    "otherCoreCases": 170,
+    "counters": {
+      "total": 188,
+      "executed": 188,
+      "passed": 188,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    }
+  },
+  "sourceCasePartition": {
+    "allPreserved": 36,
+    "compared": 18,
+    "createList": 12,
+    "genericPrefix": 6,
+    "excluded": 18
+  },
+  "cases": [
+    {
+      "id": "one-port",
+      "kind": "create-list",
+      "testId": "2011d970-2043-8328-5aca-613122f064bb",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "concat-two",
+      "kind": "create-list",
+      "testId": "68a187be-964d-22f6-1a83-4fc6984067e9",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "reverse-gap",
+      "kind": "create-list",
+      "testId": "ea53d810-4605-d80d-6b70-2e4a1ddd2fc2",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "ten-ports",
+      "kind": "create-list",
+      "testId": "ea7a380f-d0f9-aac0-eca4-536eb00e8019",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "empty-execution-list",
+      "kind": "create-list",
+      "testId": "1a434e7f-c3c6-de8d-f5f7-ed665bfaf607",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "literal-empty-item",
+      "kind": "create-list",
+      "testId": "2b5c91c1-64d8-a9ef-fb8d-0cd02c5d5763",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "nested-items",
+      "kind": "create-list",
+      "testId": "3c8d1a79-54d8-b97b-b156-7262b1d7eeca",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "duplicate-link",
+      "kind": "create-list",
+      "testId": "71a8ffdc-2994-f73f-6716-23f063a82097",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "blocker-reverse-order",
+      "kind": "create-list",
+      "testId": "118c44e0-86d6-0a71-2e23-f0d93b11571e",
+      "outcome": "Passed",
+      "createListCalls": 0,
+      "groupingCaptures": 0,
+      "blockReports": 1
+    },
+    {
+      "id": "blocker-silent-first",
+      "kind": "create-list",
+      "testId": "8917b652-e585-b94c-da15-a74ac28c0857",
+      "outcome": "Passed",
+      "createListCalls": 0,
+      "groupingCaptures": 0,
+      "blockReports": 0
+    },
+    {
+      "id": "blocker-empty-message",
+      "kind": "create-list",
+      "testId": "bfc570b5-e578-ebeb-0f0a-928c38665d4e",
+      "outcome": "Passed",
+      "createListCalls": 0,
+      "groupingCaptures": 0,
+      "blockReports": 1
+    },
+    {
+      "id": "nested-blocker-item",
+      "kind": "create-list",
+      "testId": "c7dd4936-e553-dfbb-ad98-292d82f40de0",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "prefix-min-zero-empty",
+      "kind": "template",
+      "testId": "c7882e85-f211-bad8-88b8-038ab6db11d4",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "prefix-max-one",
+      "kind": "template",
+      "testId": "d5d37a48-e95b-f93c-17e0-6119608e49d2",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "prefix-max-hundred",
+      "kind": "template",
+      "testId": "ec567408-cbad-1803-6aa4-9e1c5378b14e",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "prefix-min-over-max",
+      "kind": "template",
+      "testId": "fa2206a7-1754-beb7-d318-645808aeff90",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "optional-prototype",
+      "kind": "template",
+      "testId": "e2732df3-c333-8a15-d138-6afe895e814b",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    },
+    {
+      "id": "different-prefix",
+      "kind": "template",
+      "testId": "34a4cb82-7943-fbf1-8ab2-8d636da00a64",
+      "outcome": "Passed",
+      "createListCalls": 1,
+      "groupingCaptures": 1,
+      "blockReports": 0
+    }
+  ],
+  "compared": [
+    "Complete original object_info and INPUT_TYPES",
+    "Finalized required/optional schemas, options and order",
+    "Real EngineService node-call argument values and order",
+    "Real public BindArguments on protocol inputs for unblocked cases",
+    "Final output execution lists and preserved nested values",
+    "Blocker event/node/message and diagnostics",
+    "Absence of UI for selected cases",
+    "Unchanged protocol prompt/cache snapshots and unchanged execution prompt"
+  ],
+  "sourceRepeats": {
+    "sequence": [
+      "off",
+      "on",
+      "off"
+    ],
+    "recordsIndependentlyRehashed": 36,
+    "qualification": "Stored neutral records match all three declared hashes; absent off-run payloads rely on the pinned collector guard."
+  },
+  "literalArrayProjection": "The [] get_input_data case uses {__value__: []} for the validated C# prompt. Upstream also supports __value__; no raw HTTP acceptance comparison is claimed.",
+  "notCompared": [
+    "Hidden V3 bookkeeping",
+    "Source cacheReads versus engine dependency-cache calls",
+    "Raw dynamic_paths representation",
+    "Full PromptExecutor/HTTP validation",
+    "Unsupported-input/template and constructor-error/source-only cases",
+    "Frontend automatic ports and MatchType propagation"
+  ],
+  "limits": {
+    "newFullSolutionCampaign": false,
+    "previousFullSolutionContext": 1499,
+    "combined1517CampaignClaimed": false,
+    "otherPlatformsExecutedInThisEvidence": false,
+    "modelsOrNumericalBackendsQualified": false,
+    "fullV1CompatibilityClaimed": false,
+    "sourceExpectedDerivedFromCSharp": false
+  },
+  "audit": {
+    "method": "Read-only stdlib JSON/XML/sha256 and immutable local Git comparisons; no source/.NET/native execution.",
+    "finalTestDelta": "Only xUnit2029 equivalent Empty(Where) -> DoesNotContain assertion change against the B freeze."
+  }
+}

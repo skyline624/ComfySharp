@@ -105,8 +105,18 @@ conteneurs, le fan-out, les leases avec ressources factices, l'annulation et les
 diagnostics HTTP. Ils ne chargent pas de modèle et ne constituent pas un oracle
 source généré par le produit.
 
-La référence indépendante de finalisation utilise un laboratoire séparé avec les
-constructeurs et fonctions AST source exacts. La campagne locale de 1499 tests
-précède la collecte indépendante et n'inclut aucune comparaison à la source.
-Son verdict ne qualifie donc pas la parité, une compatibilité globale V3 ou
-une qualification de plateforme.
+La [campagne locale initiale](qualification/createlist-local.md) passe 1499 tests
+avant la collecte indépendante. Le [laboratoire source](qualification/autogrow-source-ae241a0.md)
+utilise ensuite les constructeurs et fonctions AST exacts et conserve 36 cas.
+Les [18 comparaisons du port](qualification/autogrow-integration.md) passent avec
+les 188 tests Core : 12 cas CreateList et six templates génériques. Les schémas,
+l'ordre, le regroupement, les appels réels, les sorties et les champs communs des
+blockers correspondent exactement. Les autres observations restent conservées
+sans être transformées en attentes de succès C#.
+
+Le cas source du tableau littéral vide observe `get_input_data`, avant la
+validation complète du prompt. Cette validation amont reconnaît aussi
+`__value__` ; la comparaison utilise cette enveloppe pour obtenir la même valeur
+d'exécution. Elle ne prétend pas établir l'acceptation HTTP d'un tableau brut.
+Ces preuves ne qualifient pas la totalité de V3, le frontend complet, les
+plateformes matérielles ni les familles de modèles.
