@@ -1,7 +1,7 @@
 # Les neuf schedulers SD
 
 `KSampler` accepte les neuf identifiants du backend figé avec les samplers
-Euler et Heun sans churn. Les paramètres restent ceux des workflows ComfyUI :
+Euler et Heun sans churn, ainsi que [DPM++ 2M](DPMPLUSPLUS_2M.md). Les paramètres restent ceux des workflows ComfyUI :
 `scheduler`, `steps`, `denoise`, `seed` et `cfg`.
 
 | Scheduler | Calcul porté |

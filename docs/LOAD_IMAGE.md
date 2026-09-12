@@ -44,7 +44,7 @@ Limites actuelles :
 - Les huit transformations EXIF sont implémentées ; seule l'orientation 6 est
   exercée ici. Le décodage n'est pas encore comparé intégralement au chemin
   FFmpeg/PyAV de la référence ComfyUI.
-- Le sampling reste limité à SD1.5, Euler ou [Heun](HEUN.md) avec les [schedulers SD](SD_SCHEDULERS.md), un élément, de 32 à 512 pixels
+- Le sampling reste limité à SD1.5, Euler, [Heun](HEUN.md) ou [DPM++ 2M](DPMPLUSPLUS_2M.md) avec les [schedulers SD](SD_SCHEDULERS.md), un élément, de 32 à 512 pixels
   après recadrage VAE. Le masque produit n'active pas encore l'inpainting.
 - L'essai natif utilise l'option d'import qui partage le traitement du bouton ;
   il ne valide pas l'interaction avec le sélecteur de fichiers de chaque OS.

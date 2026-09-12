@@ -32795,7 +32795,7 @@
       "dependencyProfile": "sd-euler-native210-cpu-f32-v1",
       "implementation": "partial",
       "unitTests": true,
-      "realWorkflow": false,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -32804,9 +32804,16 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd15-cuda.json"
+        }
+      ],
       "scenario": "sampler:euler:reference-workflow",
-      "limits": "CPU/F32 no-churn guided trajectory over an already initialized diffusion latent and an explicit complete schedule. Eight reduced synthetic source trajectories and nine ownership/contract tests pass on local Windows. Partial schedules, churn/noise initialization, regional conditioning, stock dimensions, pretrained workflows, device execution and full sampler/platform qualification remain open."
+      "limits": "CPU/F32 no-churn guided trajectory over an already initialized diffusion latent and an explicit complete schedule. Eight reduced synthetic source trajectories and nine ownership/contract tests pass on local Windows. Partial schedules, churn/noise initialization, regional conditioning, stock dimensions, pretrained workflows, device execution and full sampler/platform qualification remain open.",
+      "implementationScope": "Float32 default SD discrete model path; other model families, device qualification and advanced modes remain pending."
     },
     {
       "id": "sampler:euler_cfg_pp",
@@ -32878,9 +32885,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L971",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -32889,8 +32896,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "sampler:heun:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/heun.json"
+        }
+      ],
+      "scenario": "sampler:heun:reference-workflow",
+      "implementationScope": "Float32 default SD discrete model path; other model families, device qualification and advanced modes remain pending."
     },
     {
       "id": "sampler:heunpp2",
@@ -33151,9 +33165,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L971",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33162,8 +33176,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "sampler:dpmpp_2m:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/dpmpp-2m.json"
+        }
+      ],
+      "scenario": "sampler:dpmpp_2m:reference-workflow",
+      "implementationScope": "Float32 default SD discrete model path; other model families, device qualification and advanced modes remain pending."
     },
     {
       "id": "sampler:dpmpp_2m_cfg_pp",

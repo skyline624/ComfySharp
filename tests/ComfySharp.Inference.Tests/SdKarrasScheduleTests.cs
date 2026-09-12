@@ -43,6 +43,7 @@ public sealed class SdKarrasScheduleTests
 
     [Theory]
     [InlineData("euler", "karras")] [InlineData("heun", "karras")] [InlineData("euler", "normal")]
+    [InlineData("dpmpp_2m", "karras")]
     public async Task Zero_strength_keeps_raw_latent_bits_and_metadata_without_model_or_conditioning_access(string sampler, string scheduler)
     {
         NativeRuntimeBootstrap.Initialize(); long before = Tensor.TotalCount;

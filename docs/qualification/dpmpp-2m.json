@@ -1,0 +1,287 @@
+{
+  "status": "dpmpp-2m-windows-cuda-executed",
+  "familyQualified": false,
+  "modelNumericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "6ac57f8a7be8e53b830fdd17e2f81eed239f9df9",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "Shared checkpoint read directly, no disk copy; hash rechecked after both native runs."
+  },
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/dpmpp-2m.reference.json",
+    "sha256": "dd84e289017c797ea284305e0e897b10463b6b4e582d62b3007f4d95df6983c9",
+    "torch": "2.10.0+cpu",
+    "cases": 6,
+    "finiteCases": 5,
+    "nonfiniteCasesDiagnosed": 1,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Frozen ODE trajectory and model-call inputs with analytical denoiser, not a neural-network numerical reference."
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "componentDevices": [
+      "cuda:0",
+      "cuda:0",
+      "cuda:0"
+    ],
+    "runs": [
+      {
+        "mode": "generation",
+        "exitCode": 0,
+        "elapsedSeconds": 12.6698613,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "92ab38fcf58ad5fb3fad201b508988c24de848944d16c843fb3eccc334f9a474",
+        "pngBytes": 691794,
+        "reportSha256": "adeb6cb21228818489b74314ddb1afc5aebebdee3603917eb3c195cc35525af3",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_DPMpp2M",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "mode": "image-to-image",
+        "exitCode": 0,
+        "elapsedSeconds": 12.2940868,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "f5298c6c3c94d1416ebca20c211ef09aaeaa36134d1080202b26f74a94a5490b",
+        "pngBytes": 707777,
+        "reportSha256": "56b454af7adfa2b0d821121ae4e807e0a6a0da6e5ac3919f2781af1d8d6d1437",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a green apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "LoadImage",
+            "inputs": {
+              "image": "ComfySharp_beta_00001_.png"
+            }
+          },
+          "5": {
+            "class_type": "VAEEncode",
+            "inputs": {
+              "pixels": [
+                "4",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 1,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "normal",
+              "denoise": 0.7,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "5",
+                0
+              ]
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_DPMpp2M_refined",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        },
+        "inputImageSha256": "252b01a99453ed69282a6e2a54bb861c2e5adfe3ed0c9fb24bbdd1fa9fff0493"
+      }
+    ]
+  },
+  "tests": {
+    "total": 55,
+    "passed": 55,
+    "failed": 0,
+    "notExecuted": 0,
+    "trxSha256": "9a0b1652c3ad889a707622d6c91e6fca0b4ad1ed5e3c48e0e3ec0273d788bb18"
+  },
+  "newSamplerTests": 5,
+  "addedZeroDenoiseCase": 1,
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors"
+  },
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "950397fcbbbc899d21ff2ae765655d26f0a5d5359ab965d161857653582305e7",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-dpmpp2m-karras.api.json": "63e8528e6b83808f765eed64012d1f7b67b0b2c06d7c653bdf414a7caddad3e1",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/dpmpp-2m-source/reference.py": "c91d6ea3d50e5604df204ce7947f4113f6ff3ac06f2b0be0dfe11adf4fb643a5",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/SdDpmpp2MSampler.cs": "6ca7b4127d4ac60ae9a86a853d81b6edb2c1d7d100efa41a182128feb2c99926",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "cef7b8f066c0621627203e84f06df4657d78a69deabb03957076fe01bca66546",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "54993a6b249425f3e64a4c2972089d63cf8e52f42eaf31964712fc7e705e8539",
+    "tests/ComfySharp.Inference.Tests/Fixtures/dpmpp-2m.reference.json": "dd84e289017c797ea284305e0e897b10463b6b4e582d62b3007f4d95df6983c9",
+    "tests/ComfySharp.Inference.Tests/SdDpmpp2MSamplerTests.cs": "988e5851daad7d9ac52053fca9ff69173cc8633c1fef9ca0c6ee8ba1d441e2d5",
+    "tests/ComfySharp.Inference.Tests/SdKarrasScheduleTests.cs": "6360bacf290c1a8d50d116b10d896bbdf30d08a2032af33859c1b72bea8a0d44"
+  },
+  "limitations": [
+    "Full pretrained DPM++ 2M numerical comparison with ComfyUI remains pending.",
+    "Image-to-image remains predominantly red despite the green prompt; no semantic fidelity claim.",
+    "Undefined trajectories are diagnosed rather than returning nonfinite source values.",
+    "Host supports SD1.5 Float32, one image up to 512 pixels, without masks; other families and SDE/CFG++ variants remain pending.",
+    "No full Host/Desktop/Workflow suite rerun in this campaign; earlier Windows symbolic-link privilege failure remains open.",
+    "Previous scheduler tests passed on all three CI operating systems; overall Linux/macOS numerical failures remain.",
+    "Linux CUDA and Apple MPS hardware qualification remain pending."
+  ]
+}
