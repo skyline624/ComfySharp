@@ -159,7 +159,11 @@ public sealed class ImageFileStoreTests : IDisposable
             !Path.GetFileName(target).StartsWith("ComfySharp-image-files-", StringComparison.Ordinal))
             throw new InvalidOperationException("Refusing to clean a directory outside the test workspace.");
         // Remove the links themselves while their targets still exist; never recursively traverse them.
-        foreach (string link in directoryLinks.AsEnumerable().Reverse()) Directory.Delete(link);
+        foreach (string link in directoryLinks.AsEnumerable().Reverse())
+        {
+            if (OperatingSystem.IsWindows()) Directory.Delete(link); // Junction handle, including dangling targets.
+            else File.Delete(link); // unlink the Unix symlink itself, including a dangling directory link.
+        }
         Directory.Delete(target, recursive: true);
     }
 }
