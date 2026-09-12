@@ -20,12 +20,30 @@ does not depend on completion of binary packaging.
 
 ## Native bundle selection and process isolation
 
-The optional [offline C# bundle tool](NATIVE_BUNDLES.md) can prepare the pinned
-Linux CPU candidate and compose a new Host/test application directory with its
-notices. It leaves the original NuGet build intact. This is an explicit separate
-operation; `publish.ps1` still uses the package selection below, and the candidate
-has not replaced the default runtime. Compose a Host directory independently of
-the Desktop closure; do not merge their dependencies.
+The optional [offline C# bundle tool](NATIVE_BUNDLES.md) prepares the pinned
+Linux CPU candidate. Packaging can explicitly compose that bundle into the Host:
+
+```powershell
+./tools/publish.ps1 -Runtime linux-x64 -NativeBackend cpu -NativeBundleDirectory /path/to/prepared-bundle -NativeBundleRecipe native/bundles/linux-x64-cpu210-source.json -OutputDirectory /path/to/fresh-output
+```
+
+Both native bundle parameters are required together. This option currently
+supports Linux CPU only and requires a matching recipe runtime. It publishes an
+original Host under the private build root, then uses C# composition to produce
+the package's independent `host/` directory. The original Host remains available
+for inspection; it is not included in the archive. Notices and the composition
+receipt are inside `host/` and covered by the package checksums. An existing
+archive, conflicting staging directory or overlap with the prepared bundle is
+rejected. Without these parameters, the NuGet selection below remains the default.
+Desktop dependencies are published separately in both modes.
+
+`tools/qualify-linux-portable.ps1` verifies extraction/checksums, executes the
+actual self-contained Host with empty PATH and absent SDK roots, submits a native
+sigma graph, and inspects its loaded image hashes through Linux `/proc`. It then
+starts the extracted Desktop under Xvfb with the same application restrictions
+and exercises its supervised Host. The dedicated CI runs both NuGet and composed
+variants and uploads only reports/logs. These checks do not qualify model families
+or remove the binary redistribution gate.
 
 The Desktop dependency closure stays at the archive root; the Host and **all**
 its managed/native dependencies stay in `host/`. In particular, Avalonia currently

@@ -1,0 +1,58 @@
+name: Qualify explicit Linux portable native bundles
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/publish.ps1'
+      - 'tools/qualify-linux-portable.ps1'
+      - '.github/workflows/native-bundle-portable.yml'
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        native: [nuget, composed]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          global-json-file: global.json
+      - name: Prepare explicit native bundle with C#
+        if: matrix.native == 'composed'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet build tools/ComfySharp.NativeBundle -c Release -p:RestoreLockedMode=true
+          curl --fail --location --retry 2 --output "$RUNNER_TEMP/torch-cpu210.whl" 'https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl'
+          dotnet tools/ComfySharp.NativeBundle/bin/Release/net10.0/ComfySharp.NativeBundle.dll prepare \
+            --recipe native/bundles/linux-x64-cpu210-source.json --archive "$RUNNER_TEMP/torch-cpu210.whl" \
+            --output "$RUNNER_TEMP/prepared-native-bundle"
+      - name: Publish independent Desktop and selected Host then verify archive
+        shell: pwsh
+        run: |
+          $publishOptions = @{ Runtime = 'linux-x64'; NativeBackend = 'cpu'; OutputDirectory = "$env:RUNNER_TEMP/portable" }
+          if ('${{ matrix.native }}' -eq 'composed') {
+            $publishOptions.NativeBundleDirectory = "$env:RUNNER_TEMP/prepared-native-bundle"
+            $publishOptions.NativeBundleRecipe = 'native/bundles/linux-x64-cpu210-source.json'
+          }
+          ./tools/publish.ps1 @publishOptions
+      - name: Execute extracted apphosts without SDK or interpreters on PATH
+        timeout-minutes: 5
+        shell: pwsh
+        run: |
+          ./tools/qualify-linux-portable.ps1 -Archive "$env:RUNNER_TEMP/portable/linux-x64-cpu.tar.gz" `
+            -OutputDirectory "$env:RUNNER_TEMP/portable-evidence" `
+            -NativeBundleRecipe native/bundles/linux-x64-cpu210-source.json -NativeSource '${{ matrix.native }}'
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: portable-native-${{ matrix.native }}-evidence
+          path: |
+            ${{ runner.temp }}/portable-evidence/result.json
+            ${{ runner.temp }}/portable-evidence/*.log
+          if-no-files-found: warn
+      # No portable archives, model weights or native libraries are uploaded.
