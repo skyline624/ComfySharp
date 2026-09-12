@@ -38,16 +38,27 @@ public sealed partial class MainWindow : Window
         Opened += async (_, _) =>
         {
             if (startHost) await RunAsync(StartHostAsync);
+            if (Program.InitialWorkflow is not null) await RunAsync(async () =>
+            {
+                await using var stream = File.OpenRead(Program.InitialWorkflow);
+                await ImportWorkflowAsync(stream, Path.GetFileName(Program.InitialWorkflow), Program.InitialWorkflow);
+            });
+            if (Program.Sd15SmokeReport is not null)
+            {
+                try { await Sd15SmokeAsync(Program.Sd15SmokeReport); Program.DiagnosticExitCode = 0; }
+                catch (Exception error) { Messages.Text = error.Message; Console.Error.WriteLine(error); Program.DiagnosticExitCode = 1; }
+                Close();
+            }
             if (Program.SmokeTest)
             {
-                try { await SmokeAsync(); Environment.ExitCode = 0; }
-                catch (Exception error) { Messages.Text = error.Message; Console.Error.WriteLine(error); Environment.ExitCode = 1; }
+                try { await SmokeAsync(); Program.DiagnosticExitCode = 0; }
+                catch (Exception error) { Messages.Text = error.Message; Console.Error.WriteLine(error); Program.DiagnosticExitCode = 1; }
                 Close();
             }
         };
         Closing += (_, e) =>
         {
-            if (!Program.SmokeTest && Documents.Items.OfType<TabItem>().Any(t => ((DocumentEditor)t.Content!).Document.IsDirty))
+            if (!Program.IsDiagnostic && Documents.Items.OfType<TabItem>().Any(t => ((DocumentEditor)t.Content!).Document.IsDirty))
             { e.Cancel = true; Messages.Text = "Save all modified tabs before closing. Documents remain open."; }
         };
         Closed += (_, _) =>
@@ -86,7 +97,7 @@ public sealed partial class MainWindow : Window
     {
         availableNodes = null; lastPromptId = null; var session = hostSession.Restart();
         foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).ClearPreviews();
-        await host.StartAsync(lifetime.Token, smokeDataDirectory);
+        await host.StartAsync(lifetime.Token, smokeDataDirectory ?? Program.DataDirectory, Program.ModelsDirectory);
         hostSession.Require(session);
         var info = await hostSession.ObserveAsync(host.GetAsync("/object_info"), session);
         hostSession.Require(session);

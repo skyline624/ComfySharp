@@ -1,0 +1,130 @@
+{
+  "status": "workflow-verified",
+  "familyQualified": false,
+  "releaseReady": false,
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "baseCommit": "cb2e97dbcd6d2981cb6d7fa283eace86c33dd526",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "existing shared checkpoints directory; no disk copy"
+  },
+  "execution": {
+    "platform": "win-x64",
+    "backend": "cpu",
+    "dtype": "Float32",
+    "threads": 16,
+    "width": 512,
+    "height": 512,
+    "batch": 1,
+    "steps": 20,
+    "sampler": "euler",
+    "scheduler": "karras",
+    "denoise": 1,
+    "cfg": 7,
+    "seed": 0,
+    "elapsedSeconds": 95.1475816
+  },
+  "workflow": "../workflows/sd15-euler-karras.api.json",
+  "verified": [
+    "native Avalonia window",
+    "API prompt import and compilation",
+    "Desktop-launched separate Host",
+    "real CLIP/U-Net/VAE weights",
+    "job completion and PNG persistence",
+    "local HTTP PNG retrieval",
+    "decoded 512x512 bitmap assigned to SaveImage preview"
+  ],
+  "comparison": {
+    "status": "ok",
+    "exactPngScanlines": true,
+    "scanlineBytes": 786944,
+    "scanlineSha256": "f52e3939b39585b0dd83b7e267aa218bd0650ef890c60ce2e464b6bb577c0be1",
+    "pngSha256": "e64dbdeaa542a1b5bee4ef8d2a2e43be5db8bc28fa17a0cb6414837dcd88110e",
+    "pngBytes": 692786,
+    "desktopReportSha256": "082e9c57206a9c15d4b1c7f0aff91fc97233dfaf2fddf23b96b803a6accd88fe",
+    "elapsedSeconds": 95.1475816,
+    "baselinePngSha256": "f76955826888f804d52b937afef81e2d10768da90f8a49fe15152a817673d379",
+    "familyQualified": false
+  },
+  "comparisonReference": "sd15-pretrained-comparison.json",
+  "comparisonScope": "PNG IHDR and CRCs validated; all decompressed IDAT scanline bytes equal the previously source-compared CLI baseline. PNG metadata differs because it embeds the submitted prompt and visual workflow. Intermediate graph tensors were not captured.",
+  "tests": {
+    "core": {
+      "total": 818,
+      "passed": 818,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "desktopHeadless": {
+      "total": 112,
+      "passed": 112,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "sd15Selected": {
+      "total": 91,
+      "passed": 91,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "host": {
+      "total": 300,
+      "passed": 299,
+      "failed": 1,
+      "notExecuted": 0
+    }
+  },
+  "newTests": 26,
+  "releaseBuild": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "registeredNodeTypes": 42,
+  "catalogueAudit": {
+    "rows": 1171,
+    "localNodeDeclarations": 664,
+    "registeredNodes": 42,
+    "errors": 0,
+    "catalogueComplete": false
+  },
+  "failedTest": {
+    "name": "ImageFileStoreTests.File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write",
+    "reason": "Windows denies File.CreateSymbolicLink because the process lacks the necessary privilege. The test remains failed, not skipped."
+  },
+  "previousCi": {
+    "runId": 34688169918,
+    "commit": "cb2e97dbcd6d2981cb6d7fa283eace86c33dd526",
+    "conclusion": "failure",
+    "failedSteps": {
+      "windows-2025": "Exercise reference fixtures as the first native access in separate processes",
+      "ubuntu-24.04": "Exercise reference fixtures as the first native access in separate processes",
+      "macos-14": "Compare full CLIP L and G dimensions in a separate CPU process"
+    }
+  },
+  "limitations": [
+    "one stock SD1.5 CPU workflow only",
+    "CUDA/MPS and other platforms not qualified",
+    "other architectures/samplers/schedulers, fractional denoise, masks, batch indices and regional conditioning unavailable",
+    "model-specific cancellation and long-lived memory-pressure campaigns remain open",
+    "full V1 catalogue remains required"
+  ],
+  "testedSourceSha256": {
+    "docs/workflows/sd15-euler-karras.api.json": "fc4b91e2e80f7fe6222cd4f02640ca8b707af79d24bacb7c42214f09a9895705",
+    "src/ComfySharp.Core/EngineService.cs": "eac71ef44f1fd99c3b52c6d9822f8ff7cb2369bc8bdacf2f820b032de4293f70",
+    "src/ComfySharp.Core/PythonValues.cs": "197c4ed884c4c21ec36077aef94afb5783ab232ddbcdc7fef74743ec6eaaa5a7",
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": "ea89236cb47a7a11e9bee46cbbf0ec7fc7fa23b9e3591e7b966f3c7c39049414",
+    "src/ComfySharp.Desktop/HostSupervisor.cs": "7a2c727b5108105685b41236045fc64d5f6c71b37c40e5ce93199adef0a65518",
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": "b162f1d4e27d69ccd371f686dbce86f482c6771f575723686df4a820d17cb407",
+    "src/ComfySharp.Desktop/Program.cs": "c394f1d049bdc7aadbfc5b75a21ce672b7dff779d321a3491ef8ef2a0a5b393f",
+    "src/ComfySharp.Desktop/Sd15Smoke.cs": "ceaa0e9be9262023cfdcf35fccb61684cf44d6946d36aa8683c9ce45658b51e3",
+    "src/ComfySharp.Host/Program.cs": "0e98ad69ff149a55488814b2f8c37c5937b6505eccbd808840388c91d94e22cd",
+    "src/ComfySharp.Nodes.Tensor/CheckpointFiles.cs": "d2b187baa1a61239465861907ae64b1a2ce280350f9f570b8618de66698abc08",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "1a72e46407b54530d0f9c5bf795a7eb3186a45436adce3460a64b17c4684a589",
+    "tests/ComfySharp.Core.Tests/UnsignedSeedTests.cs": "6a59e6ddd0c42302322a86b4b45c6640de37cc0ff0d7cb16ae7bac14b9fe7ca1",
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": "4680c0ae79a7987acfdbb3d63afbb09fc864b4f81135453d0c13ab8bbe8b40a3",
+    "tests/ComfySharp.Inference.Tests/Sd15NodeTests.cs": "2700f5205141d30ed43200babb85a7ca6e27498d9bf5d023df82ee57fc8a6d44",
+    "tools/ComfySharp.Catalog/Program.cs": "752e1b3b9ef03880cb5fa249b07444afc4cb34d5f59f8a80a2b22d2ddf3c8d3f"
+  }
+}

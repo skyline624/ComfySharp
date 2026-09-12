@@ -375,12 +375,15 @@ public sealed class EngineService(NodeRegistry registry) : IDisposable
         JsonNode? normalized;
         try
         {
+            bool unsigned = input.Type == "INT" && input.Options?["max"] is JsonValue limit &&
+                limit.TryGetValue<ulong>(out var upper) && upper > long.MaxValue &&
+                input.Options?["min"] is { } lower && PythonValues.Float(lower) >= 0;
             normalized = input.Type switch
             {
                 "*" or "COMFY_MATCHTYPE_V3" => value?.DeepClone(),
                 "STRING" => JsonValue.Create(PythonValues.String(value)),
                 "BOOLEAN" => JsonValue.Create(PythonValues.Truth(value)),
-                "INT" => JsonValue.Create(PythonValues.Integer(value)),
+                "INT" => unsigned ? JsonValue.Create(PythonValues.UnsignedInteger(value)) : JsonValue.Create(PythonValues.Integer(value)),
                 "FLOAT" => JsonValue.Create(PythonValues.Float(value)),
                 "ARRAY" when value is JsonArray => value.DeepClone(),
                 "DICT" when value is JsonObject => value.DeepClone(),
@@ -389,7 +392,13 @@ public sealed class EngineService(NodeRegistry registry) : IDisposable
             };
             if (input.Options?["options"] is JsonArray choices && !choices.Any(c => JsonNode.DeepEquals(c, normalized)))
                 throw new FormatException("Value is not an allowed choice.");
-            if (input.Type == "INT")
+            if (unsigned)
+            {
+                var number = PythonValues.UnsignedInteger(normalized);
+                if (input.Options?["min"] is { } min && number < PythonValues.UnsignedInteger(min)) throw new FormatException("Value is below minimum.");
+                if (input.Options?["max"] is { } max && number > PythonValues.UnsignedInteger(max)) throw new FormatException("Value is above maximum.");
+            }
+            else if (input.Type == "INT")
             {
                 var number = PythonValues.Integer(normalized);
                 if (input.Options?["min"] is { } min && number < PythonValues.Integer(min)) throw new FormatException("Value is below minimum.");

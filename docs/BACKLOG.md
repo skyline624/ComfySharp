@@ -23,3 +23,5 @@ Ordre suivant : rendre l'inventaire exhaustif et les corpus reproductibles ; por
 Suivis du lot 2 après revue du bootstrap macOS : l'inspection en processus neuf sans libtorch et les points d'entrée tensoriels initiaux passent en CI ; remplacer les valeurs mémoire macOS non exploitables ; qualifier ou reconstruire le bridge avec une cible macOS 14 explicite avant publication des distributions natives.
 
 Le calendrier complet sera établi à partir du lot 1 et des qualifications du lot 2. Aucune durée artificielle n'est déduite du nombre de fichiers ou des seuls nœuds déjà portés.
+
+Parcours SD1.5 Host/Desktop : cinq nœuds raccordés et une génération CPU 512×512 affichée dans la fenêtre Avalonia, avec pixels identiques au diagnostic CLI comparé à la source. Voir [le parcours](SD15_WORKFLOW.md) et [la preuve](qualification/sd15-desktop-host.json). Les limitations de sampling, CUDA, la qualification des plateformes et l’intégralité du catalogue restent obligatoires. Les tests de liens symboliques Windows et les échecs CI natifs/CLIP restent à résoudre.

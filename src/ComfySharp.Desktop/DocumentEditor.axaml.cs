@@ -310,7 +310,7 @@ internal static class NodeTemplates
             case "CheckpointLoaderSimple": widgets = new("select-checkpoint.safetensors"); Out("MODEL", "MODEL"); Out("CLIP", "CLIP"); Out("VAE", "VAE"); break;
             case "CLIPTextEncode": widgets = new(""); In("clip", "CLIP"); Out("CONDITIONING", "CONDITIONING"); break;
             case "EmptyLatentImage": widgets = new(512, 512, 1); Out("LATENT", "LATENT"); break;
-            case "KSampler": widgets = new(0, "fixed", 20, 8.0, "euler", "normal", 1.0); In("model", "MODEL"); In("positive", "CONDITIONING"); In("negative", "CONDITIONING"); In("latent_image", "LATENT"); Out("LATENT", "LATENT"); break;
+            case "KSampler": widgets = new(0, "fixed", 20, 8.0, "euler", "karras", 1.0); In("model", "MODEL"); In("positive", "CONDITIONING"); In("negative", "CONDITIONING"); In("latent_image", "LATENT"); Out("LATENT", "LATENT"); break;
             case "VAEDecode": In("samples", "LATENT"); In("vae", "VAE"); Out("IMAGE", "IMAGE"); break;
             case "SaveImage": widgets = new("ComfyUI"); In("images", "IMAGE"); In("filename_prefix", "STRING"); Out("images", "IMAGE"); break;
             case "PreviewImage": In("images", "IMAGE"); Out("images", "IMAGE"); break;

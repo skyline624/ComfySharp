@@ -1,0 +1,174 @@
+using System.Text.Json.Nodes;
+using ComfySharp.Contracts;
+using ComfySharp.Core;
+using ComfySharp.Inference;
+using ComfySharp.Tokenization;
+using static TorchSharp.torch;
+using TorchTensor = TorchSharp.torch.Tensor;
+
+namespace ComfySharp.Nodes.Tensor;
+
+/// <summary>First stock SD1.5 CPU/F32 workflow path. Other architectures and sampler modes fail explicitly.</summary>
+public static class Sd15Nodes
+{
+    // Frozen comfy/samplers.py order; retaining identifiers does not announce their execution support.
+    private const string Samplers = "euler euler_cfg_pp euler_ancestral euler_ancestral_cfg_pp heun heunpp2 exp_heun_2_x0 exp_heun_2_x0_sde dpm_2 dpm_2_ancestral lms dpm_fast dpm_adaptive dpmpp_2s_ancestral dpmpp_2s_ancestral_cfg_pp dpmpp_sde dpmpp_sde_gpu dpmpp_2m dpmpp_2m_cfg_pp dpmpp_2m_sde dpmpp_2m_sde_gpu dpmpp_2m_sde_heun dpmpp_2m_sde_heun_gpu dpmpp_3m_sde dpmpp_3m_sde_gpu ddpm lcm ipndm ipndm_v deis cfgpp_ud10_ab res_multistep res_multistep_cfg_pp res_multistep_ancestral res_multistep_ancestral_cfg_pp gradient_estimation gradient_estimation_cfg_pp er_sde seeds_2 seeds_3 sa_solver sa_solver_pece ddim uni_pc uni_pc_bh2";
+    private const string Schedulers = "simple sgm_uniform karras exponential ddim_uniform beta normal linear_quadratic kl_optimal";
+    public static void Register(NodeRegistry registry, CheckpointFiles files, int cpuThreads = 16,
+        long maxEstimatedPeakWeightBytes = 16L * 1024 * 1024 * 1024)
+    {
+        ArgumentNullException.ThrowIfNull(files);
+        if (cpuThreads is < 1 or > 64) throw new ArgumentOutOfRangeException(nameof(cpuThreads));
+        if (maxEstimatedPeakWeightBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxEstimatedPeakWeightBytes));
+        foreach (var schema in Schemas(files.Names())) registry.Register(new Node(schema, files, cpuThreads, maxEstimatedPeakWeightBytes));
+    }
+
+    public static IReadOnlyList<NodeSchema> Schemas(IReadOnlyList<string> checkpointNames) =>
+    [
+        new("CheckpointLoaderSimple", "Load Checkpoint", "model/loaders", [Combo("ckpt_name", checkpointNames)],
+            [new("MODEL"), new("CLIP"), new("VAE")], PythonModule: "nodes",
+            Description: "Stock SD1.5 safetensors, EPS prediction, CPU/Float32. Other architectures remain unavailable."),
+        new("CLIPTextEncode", "CLIP Text Encode (Prompt)", "model/conditioning",
+            [new("text", "STRING", Options: new() { ["multiline"] = true, ["dynamicPrompts"] = true }), new("clip", "CLIP")],
+            [new("CONDITIONING")], PythonModule: "nodes"),
+        new("EmptyLatentImage", "Empty Latent Image", "model/latent",
+            [Integer("width", 512, 16, 16384, 8), Integer("height", 512, 16, 16384, 8), Integer("batch_size", 1, 1, 4096)],
+            [new("LATENT")], PythonModule: "nodes"),
+        new("KSampler", "KSampler", "model/sampling",
+            [new("model", "MODEL"), new("seed", "INT", Options: new() { ["default"] = 0, ["min"] = 0, ["max"] = ulong.MaxValue, ["control_after_generate"] = true }),
+             Integer("steps", 20, 1, 10000), new("cfg", "FLOAT", Options: new() { ["default"] = 8.0, ["min"] = 0.0, ["max"] = 100.0, ["step"] = .1, ["round"] = .01 }),
+             Combo("sampler_name", Samplers.Split(' ')), Combo("scheduler", Schedulers.Split(' ')), new("positive", "CONDITIONING"),
+             new("negative", "CONDITIONING"), new("latent_image", "LATENT"),
+             new("denoise", "FLOAT", Options: new() { ["default"] = 1.0, ["min"] = 0.0, ["max"] = 1.0, ["step"] = .01 })],
+            [new("LATENT")], PythonModule: "nodes",
+            Description: "Available execution: SD1.5 CPU/Float32, Euler/Karras, denoise=1, one image up to 512x512, 1-100 steps. Other modes report an explicit error."),
+        new("VAEDecode", "VAE Decode", "model/latent", [new("samples", "LATENT"), new("vae", "VAE")], [new("IMAGE")], PythonModule: "nodes")
+    ];
+
+    private static InputSchema Combo(string name, IReadOnlyList<string> values) => new(name, "COMBO",
+        Options: new() { ["options"] = new JsonArray(values.Select(v => (JsonNode?)JsonValue.Create(v)).ToArray()) });
+    private static InputSchema Integer(string name, int value, int min, int max, int? step = null)
+    {
+        var options = new JsonObject { ["default"] = value, ["min"] = min, ["max"] = max };
+        if (step is not null) options["step"] = step.Value;
+        return new(name, "INT", Options: options);
+    }
+
+    private sealed class Node(NodeSchema schema, CheckpointFiles files, int threads, long budget) : IRuntimeNode
+    {
+        public NodeSchema Schema => schema;
+        public ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
+            IReadOnlyDictionary<string, RuntimeValue> inputs, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            string S(string key) => inputs[key].ToJson()!.GetValue<string>();
+            int I(string key) => checked((int)PythonValues.Integer(inputs[key].ToJson()));
+            double D(string key) => PythonValues.Float(inputs[key].ToJson());
+            RuntimeValue Own(TorchTensor tensor)
+            {
+                var value = context.Own(tensor); tensor.DetachFromDisposeScope(); return value;
+            }
+            RuntimeValue[] outputs;
+            if (schema.ClassType == "CheckpointLoaderSimple")
+            {
+                string path = files.Resolve(S("ckpt_name"));
+                using var file = new SafeTensorFile(path);
+                var plan = Sd15CheckpointLoader.Inspect(file, new() { UnclaimedTensors = Sd15UnclaimedTensorHandling.ReportAndIgnoreOutsideComponents }, cancellationToken);
+                NativeRuntimeBootstrap.Initialize(); set_num_threads(threads);
+                using var checkpoint = Sd15CheckpointLoader.Load(file, plan, budget, cancellationToken);
+                outputs = [context.Own(checkpoint.CreateUnet()), context.Own(checkpoint.CreateClipEncoder()), context.Own(checkpoint.CreateImageVae())];
+                return ValueTask.FromResult(new NodeExecutionOutput(outputs, new JsonObject
+                {
+                    ["comfysharp_model"] = new JsonArray(new JsonObject { ["architecture"] = "SD1.5", ["backend"] = "cpu", ["dtype"] = "Float32",
+                        ["ignored_auxiliary_tensors"] = new JsonArray(plan.UnclaimedTensorNames.Select(n => (JsonNode?)JsonValue.Create(n)).ToArray()) })
+                }));
+            }
+            NativeRuntimeBootstrap.Initialize();
+            using var scope = NewDisposeScope();
+            using var noGrad = no_grad();
+            switch (schema.ClassType)
+            {
+                case "CLIPTextEncode":
+                {
+                    var clip = inputs["clip"].GetNative<ComfyClipEncoder>();
+                    var tokenizer = new ComfyClipTokenizer(ClipTokenizer.CreateDefault(), clip.Profile);
+                    using var encoded = clip.Encode(tokenizer.Tokenize(S("text"), cancellationToken: cancellationToken), cancellationToken: cancellationToken);
+                    // CONDITIONING is the upstream nested list of [tensor, metadata], not an engine output-list.
+                    outputs = [context.List([context.List([Own(encoded.Hidden.alias()),
+                        context.Map(new Dictionary<string, RuntimeValue> { ["pooled_output"] = Own(encoded.Pooled.alias()) })])])];
+                    break;
+                }
+                case "EmptyLatentImage":
+                {
+                    int width = I("width"), height = I("height"), batch = I("batch_size");
+                    if (width is < 16 or > 16384 || height is < 16 or > 16384 || batch is < 1 or > 4096)
+                        throw new ArgumentOutOfRangeException("LATENT dimensions are outside the upstream schema.");
+                    // Explicit allocation guard before creating potentially multi-gigabyte tensors.
+                    if (checked((long)batch * 4 * (height / 8) * (width / 8) * 4) > 256L * 1024 * 1024)
+                        throw new NotSupportedException("EmptyLatentImage currently limits allocation to 256 MiB.");
+                    outputs = [context.Map(new Dictionary<string, RuntimeValue>
+                    {
+                        ["samples"] = Own(zeros(new long[] { batch, 4, height / 8, width / 8 }, dtype: ScalarType.Float32, device: CPU)),
+                        ["downscale_ratio_spacial"] = context.Json(JsonValue.Create(8))
+                    })];
+                    break;
+                }
+                case "KSampler":
+                {
+                    if (S("sampler_name") != "euler" || S("scheduler") != "karras" || D("denoise") != 1.0)
+                        throw new NotSupportedException("KSampler currently executes Euler/Karras with denoise=1 only.");
+                    int steps = I("steps"); double cfg = D("cfg");
+                    if (steps is < 1 or > 100 || !double.IsFinite(cfg) || cfg is < 0 or > 100)
+                        throw new NotSupportedException("KSampler currently requires 1-100 steps and CFG in [0,100].");
+                    var latent = inputs["latent_image"].Properties;
+                    if (latent.ContainsKey("noise_mask") || latent.ContainsKey("batch_index"))
+                        throw new NotSupportedException("Masked sampling and batch-index noise are not yet ported.");
+                    if (latent.TryGetValue("downscale_ratio_spacial", out var ratio) && PythonValues.Integer(ratio.ToJson()) != 8 ||
+                        latent.ContainsKey("downscale_ratio_temporal"))
+                        throw new NotSupportedException("Only SD1.5 spatial latents with downscale ratio 8 are supported.");
+                    var raw = latent["samples"].GetNative<TorchTensor>(); ValidateShape(raw);
+                    ulong seed = ulong.Parse(inputs["seed"].ToJson()!.ToJsonString(), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
+                    using var noise = NativeMath.CpuNoise(raw.shape, seed, cancellationToken);
+                    using var scaled = SdSamplingMath.ProcessLatentIn(raw, SdSamplingMath.Sd15LatentScale, cancellationToken);
+                    var sampling = SdDiscreteSampling.Default;
+                    using var sigmas = SigmaSchedules.Karras(steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+                    using var first = sigmas[0];
+                    using var initial = SdSamplingMath.NoiseScaling(noise, scaled, first, true, cancellationToken);
+                    using var denoiser = new SdDenoiser(inputs["model"].GetNative<SdUnet>(), SdPredictionKind.Epsilon, sampling);
+                    using var sampler = new SdEulerSampler(denoiser);
+                    using var sampled = sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]),
+                        new SdGuidanceOptions { Scale = cfg, BatchMode = SdGuidanceBatchMode.Separate }, cancellationToken);
+                    var result = latent.Where(p => p.Key is not ("downscale_ratio_spacial" or "downscale_ratio_temporal"))
+                        .ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal);
+                    result["samples"] = Own(SdSamplingMath.ProcessLatentOut(sampled, SdSamplingMath.Sd15LatentScale, cancellationToken));
+                    outputs = [context.Map(result)];
+                    break;
+                }
+                case "VAEDecode":
+                {
+                    var raw = inputs["samples"].Properties["samples"].GetNative<TorchTensor>(); ValidateShape(raw);
+                    outputs = [Own(inputs["vae"].GetNative<ComfyImageVae>().Decode(raw, cancellationToken))];
+                    break;
+                }
+                default: throw new InvalidOperationException("Unregistered SD1.5 operation.");
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            return ValueTask.FromResult(new NodeExecutionOutput(outputs));
+        }
+        private static void ValidateShape(TorchTensor raw)
+        {
+            long[] shape = raw.shape;
+            if (shape.Length != 4 || shape[0] != 1 || shape[1] != 4 || shape[2] is < 4 or > 64 || shape[3] is < 4 or > 64)
+                throw new NotSupportedException("SD1.5 execution currently requires one image, 32-512 pixels per dimension.");
+        }
+        private static TorchTensor Conditioning(RuntimeValue value)
+        {
+            if (value.Kind != RuntimeValueKind.List || value.Items.Count != 1 || value.Items[0].Kind != RuntimeValueKind.List || value.Items[0].Items.Count != 2)
+                throw new NotSupportedException("KSampler currently supports one global conditioning entry per prompt.");
+            var entry = value.Items[0].Items;
+            if (entry[1].Kind != RuntimeValueKind.Map || entry[1].Properties.Keys.Any(k => k != "pooled_output"))
+                throw new NotSupportedException("Regional, masked and scheduled conditioning are not yet ported.");
+            return entry[0].GetNative<TorchTensor>();
+        }
+    }
+}

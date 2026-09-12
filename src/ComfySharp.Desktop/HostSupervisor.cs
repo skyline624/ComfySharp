@@ -59,7 +59,7 @@ public sealed class HostSupervisor : IDisposable
                     { var path = Path.Combine(buildRoot, configuration, "net10.0", name); if (File.Exists(path)) return path; }
         return null;
     }
-    public async Task StartAsync(CancellationToken cancellationToken = default, string? dataDirectory = null)
+    public async Task StartAsync(CancellationToken cancellationToken = default, string? dataDirectory = null, string? modelsDirectory = null)
     {
         await gate.WaitAsync(cancellationToken);
         try
@@ -75,6 +75,7 @@ public sealed class HostSupervisor : IDisposable
             if (path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)) info.ArgumentList.Add(path);
             info.ArgumentList.Add("--urls"); info.ArgumentList.Add(Address.AbsoluteUri);
             if (dataDirectory is not null) { info.ArgumentList.Add("--data-dir"); info.ArgumentList.Add(Path.GetFullPath(dataDirectory)); }
+            if (modelsDirectory is not null) { info.ArgumentList.Add("--models-dir"); info.ArgumentList.Add(Path.GetFullPath(modelsDirectory)); }
             var child = new Process { StartInfo = info, EnableRaisingEvents = true };
             child.Exited += (_, _) => { if (ReferenceEquals(process, child)) { Ready = false; SetStatus("Host exited. Documents are retained; restart is available."); } };
             process = child;

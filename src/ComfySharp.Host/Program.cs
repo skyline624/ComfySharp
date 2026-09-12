@@ -19,6 +19,8 @@ builder.Services.AddSingleton(sp =>
     var registry = TensorNodes.CreateRegistry();
     ImageFileNodes.Register(registry, sp.GetRequiredService<IImageFileStore>(),
         disableMetadata: builder.Configuration.GetValue<bool>("disable-metadata"));
+    Sd15Nodes.Register(registry, new CheckpointFiles(builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]),
+        cpuThreads: builder.Configuration.GetValue<int?>("cpu-threads") ?? Math.Min(16, Environment.ProcessorCount));
     return new EngineService(registry);
 });
 builder.Services.AddSingleton<EventHub>();

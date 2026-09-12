@@ -3,7 +3,7 @@
 La commande `ComfySharp.RuntimeProbe sd15-generate` raccorde le chargeur SD1.5
 aux trois réseaux réels : CLIP-L, U-Net et VAE classique. Elle accepte un
 checkpoint monolithique safetensors au layout SD1.5, sans télécharger ni copier
-les poids. Le diagnostic est distinct des nœuds du Host et de l'éditeur.
+les poids. Le diagnostic reste utilisable séparément du [parcours Host et éditeur](SD15_WORKFLOW.md).
 
 Construire selon le README, puis inspecter le fichier partagé :
 
@@ -52,7 +52,7 @@ pas une preuve de réussite.
 
 Une sortie `status=ok` prouve l'exécution demandée, pas la parité numérique avec
 ComfyUI. `familyQualified=false` reste explicite : comparaison avec références,
-autres workflows, intégration Host/Desktop, CUDA et qualification des plateformes
+autres workflows, CUDA et qualification des plateformes
 restent nécessaires. Le diagnostic réduit antérieur et ses tolérances restent
 inchangés dans [SD15_PIPELINE.md](SD15_PIPELINE.md).
 

@@ -33,6 +33,16 @@ public static class PythonValues
         if (!double.IsFinite(number)) throw new FormatException("Non-finite numbers are unsupported in JSON execution.");
         return number;
     }
+    /// <summary>Exact unsigned seed conversion for schemas declaring a nonnegative UInt64 range.</summary>
+    public static ulong UnsignedInteger(JsonNode? node)
+    {
+        if (node is null) throw new FormatException("Cannot convert null to INT.");
+        if (node is JsonValue v && v.TryGetValue<bool>(out var b)) return b ? 1UL : 0UL;
+        if (node is JsonValue s && s.TryGetValue<string>(out var text)) return ulong.Parse(text, NumberStyles.Integer, CultureInfo.InvariantCulture);
+        if (node is JsonValue i && i.TryGetValue<ulong>(out var integer)) return integer;
+        if (node is JsonValue signed && signed.TryGetValue<long>(out var exact)) return checked((ulong)exact);
+        return checked((ulong)Math.Truncate(Float(node)));
+    }
     public static string String(JsonNode? node) => node switch
     {
         null => "None",

@@ -27,7 +27,8 @@ try
     var ids = new HashSet<string>(StringComparer.Ordinal);
     var localNodes = new HashSet<string>(StringComparer.Ordinal);
     // The Host configures its local image store. Describe these service-backed nodes without opening files in this audit tool.
-    var registry = NodeRegistry.Describe(TensorNodes.CreateRegistry().Nodes.Select(n => n.Schema).Concat(ImageFileNodes.Schemas));
+    var registry = NodeRegistry.Describe(TensorNodes.CreateRegistry().Nodes.Select(n => n.Schema)
+        .Concat(ImageFileNodes.Schemas).Concat(Sd15Nodes.Schemas([])));
     foreach (var row in capabilities)
     {
         var id = row["id"]!.GetValue<string>();
