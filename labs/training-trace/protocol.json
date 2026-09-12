@@ -1,0 +1,12 @@
+{
+  "profile": "linux-training-observation-v1",
+  "baseCommit": "ec02f23a3d7c7b0f24ec88c55965f8301262a261",
+  "purpose": "Diagnostic controls only; no expected tensors or thresholds changed.",
+  "inputs": {
+    "labs/training-trace/source.py": "9d95c5a89e6cba745bf3455b1314f6ce0b85d3cfba5085971c40931e63c846b6",
+    "labs/training-trace/compare.py": "5de09b2b27ff7bfc1dad63bd85ddd7313d7fda3458e2a80f4ddc6a21cdfeb3c7",
+    ".github/workflows/training-trace.yml": "b6005c419da4d3444c9e045fef322d6eac0a6fca13e798996b5f3bd8d5041d08",
+    "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "a4183b2904051a9a40a0aa24ed62bf984cdfb0734c6398a9e2ec5416dbbe59e3",
+    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "9e6ce9ffa30f15047a5eb714037e6f1ee6573cc570f70e45fe2d559fc7afbca1"
+  }
+}

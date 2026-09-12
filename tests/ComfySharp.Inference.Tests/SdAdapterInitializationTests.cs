@@ -31,6 +31,7 @@ public sealed class SdAdapterInitializationTests
         try
         {
             using var scope = NewDisposeScope();
+            using var trace = SdTrainingTrace.Open(caseIndex);
             using var corpus = TrainingReferenceCorpus.Load("adapters");
             var row = corpus.RootElement.GetProperty("cases")[caseIndex]; bool linear = row.GetProperty("linearProjection").GetBoolean();
             var config = new SdUnetConfig(32, 16, linear ? SdAttentionHeadMode.FixedSize : SdAttentionHeadMode.FixedCount, linear ? 8 : 4, linear);
@@ -52,13 +53,19 @@ public sealed class SdAdapterInitializationTests
                 }
             }
             using var bank = SdSyntheticInputs.CreateUnet(config); using var model = new SdUnet(bank);
+            trace?.Weights(bank);
+            model.DiagnosticObserver = trace is null ? null : trace.Capture;
             using var latent = Read(row.GetProperty("latent")); using var time = Read(row.GetProperty("times")); using var context = Read(row.GetProperty("context")); using var targetValues = Read(row.GetProperty("target"));
             using var baseline = model.Forward(latent, time, context);
+            trace?.Capture("baseline",baseline);
+            trace?.Capture("latent",latent);trace?.Capture("times",time);trace?.Capture("context",context);
             using var optimizer = new LoraTrainingOptimizer(adapters.Patches.Values, "SGD", .01);
+            int stepIndex=0;
             foreach (var step in row.GetProperty("steps").EnumerateArray())
             {
                 using var iteration = NewDisposeScope();
-                using var output = model.ForwardForTraining(latent, time, context, adapters.Patches); Near(output, step.GetProperty("output"));
+                trace?.Phase("step-"+stepIndex++);
+                using var output = model.ForwardForTraining(latent, time, context, adapters.Patches); trace?.Capture("output",output);Near(output, step.GetProperty("output"));
                 using var loss = TrainingLoss.Calculate("MSE", output, targetValues); Assert.InRange(Math.Abs(loss.item<float>() - step.GetProperty("loss").GetSingle()), 0, 3e-5);
                 optimizer.Accumulate(loss);
                 foreach (var patch in adapters.Patches.Values) foreach (var parameter in patch.Parameters)
@@ -67,11 +74,12 @@ public sealed class SdAdapterInitializationTests
                 }
                 foreach (var target in step.GetProperty("gradients").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject())
                 {
-                    using var gradient = Named(adapters.Patches[target.Name])[expected.Name].grad; Near(gradient!, expected.Value);
+                    using var gradient = Named(adapters.Patches[target.Name])[expected.Name].grad; trace?.Capture("gradient/"+target.Name+"/"+expected.Name,gradient!);Near(gradient!, expected.Value);
                 }
                 optimizer.Step();
                 foreach (var target in step.GetProperty("updated").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject()) Near(Named(adapters.Patches[target.Name])[expected.Name], expected.Value);
             }
+            model.DiagnosticObserver=null;
             using var unchanged = model.Forward(latent, time, context); Assert.Equal(Hash(baseline), Hash(unchanged));
         }
         finally { set_num_threads(threads); }
