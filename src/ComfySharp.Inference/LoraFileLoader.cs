@@ -186,6 +186,8 @@ public sealed class LoraAdapterSet : IDisposable
     }
     public SdUnet ApplyTo(SdUnet model,string component="model",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
     {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(model);ValidateTargets(component,UnetWeightSchema.Describe(model.Config));return WithPatches(component,p=>model.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
+    public SdUnet ApplyBypassTo(SdUnet model,string component="model",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+    {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(model);ValidateTargets(component,UnetWeightSchema.Describe(model.Config));return WithPatches(component,p=>model.WithBypassLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
     public ComfyClipEncoder ApplyTo(ComfyClipEncoder clip,string component="clip",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
     {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(clip);ValidateTargets(component,ClipWeightSchema.Describe(clip.Config));return WithPatches(component,p=>clip.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
     private void ValidateTargets(string component,IReadOnlyDictionary<string,IReadOnlyList<long>> schema)

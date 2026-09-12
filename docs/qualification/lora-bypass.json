@@ -1,0 +1,59 @@
+{
+  "scope": "Inference LoRA bypass on plain SD Float32 linear and Conv2d layers",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "implementation": "partial",
+  "registeredNodes": 50,
+  "sourceFixture": {
+    "sha256": "7cd58396213b27d4e6ed6963141ab19d4677906ca08e45b2e4c0ce4901aa8519",
+    "cases": 6,
+    "absoluteTolerance": 0.000008,
+    "relativeTolerance": 0.000008,
+    "scope": "Frozen h/g/bypass_forward outputs and gradients, synthetic inputs, scalar inference alpha"
+  },
+  "localTests": {
+    "platform": "win-x64-cpu",
+    "newPassed": 15,
+    "newFailed": 0,
+    "newSkipped": 0,
+    "ordinaryInference": {
+      "passed": 928,
+      "failed": 0,
+      "skipped": 0,
+      "filter": "FullyQualifiedName!~ClipStockReferenceTests"
+    }
+  },
+  "build": { "warnings": 0, "errors": 0 },
+  "pretrainedDiagnostic": {
+    "status": "ok",
+    "checkpointSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "adapterSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+    "device": "cpu",
+    "threads": 16,
+    "matchedTargets": 686,
+    "baselineSha256": "30209e6388e0822283f6ac5e38fe3d76de9bea561479629f7bc2529e4f1e3f75",
+    "ordinarySha256": "cdb8b63997b10f77bb615b1a6ab032058213673039fbe1fba9743c45d6eea18e",
+    "bypassSha256": "b3a39f7934b7bf76a80314271a3fa4f61f2c32ce16eabd7fae6966ee13776701",
+    "repeats": 3,
+    "repeatable": true,
+    "basePredictionUnchanged": true,
+    "adapterChangesPrediction": true,
+    "comparison": {
+      "maxAbsolute": 0.000003933906555175781,
+      "meanAbsolute": 0.0000009658169801696204,
+      "acceptance": "observation_only_no_model_tolerance_acceptance"
+    },
+    "elapsedSeconds": 13.296102,
+    "scope": "Existing pretrained SD1.5 and trained adapter; synthetic 8x8 latent and text context. Raw CPU predictions only, no generation or training rerun."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "realWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "Trainable bypass alpha and full TrainLoraNode options/resume",
+    "Mixed precision, quantized operations and other architectures",
+    "Conv1d/Conv3d",
+    "Full public workflow and platform qualification"
+  ],
+  "ci": "Pending publication; local results do not imply three-platform validation"
+}

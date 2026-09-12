@@ -31,6 +31,12 @@ public sealed class SdUnet : IDisposable
         using var bank=RetainWeights();using var patched=bank.WithLora(patches,maxPatchedWeightBytes,cancellationToken);return new(patched);
     }
 
+    public SdUnet WithBypassLora(IReadOnlyDictionary<string, LoraWeightPatch> patches,
+        long maxPatchedWeightBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default)
+    {
+        using var bank = RetainWeights(); using var patched = bank.WithBypassLora(patches, maxPatchedWeightBytes, cancellationToken); return new(patched);
+    }
+
     // Diagnostic callbacks borrow live tensors synchronously. They must copy any data
     // they keep and must not dispose or mutate tensors. Null adds no tensor allocations.
     internal Action<string, Tensor>? DiagnosticObserver { get; set; }
@@ -273,9 +279,9 @@ public sealed class SdUnet : IDisposable
         using var scope = NewDisposeScope();
         long batch = input.shape[0], queryLength = input.shape[1];
         long width = input.shape[2], headWidth = width / heads;
-        var query = AttentionProjection(input, bank.GetTensor(prefix + ".to_q.weight"), heads, headWidth);
-        var key = AttentionProjection(context, bank.GetTensor(prefix + ".to_k.weight"), heads, headWidth);
-        var value = AttentionProjection(context, bank.GetTensor(prefix + ".to_v.weight"), heads, headWidth);
+        var query = AttentionProjection(input, bank, prefix + ".to_q", heads, headWidth);
+        var key = AttentionProjection(context, bank, prefix + ".to_k", heads, headWidth);
+        var value = AttentionProjection(context, bank, prefix + ".to_v", heads, headWidth);
         Tensor scores;
         using (var scoreScope = NewDisposeScope())
             scores = (einsum("b i d, b j d -> b i j", query, key) * Math.Pow(headWidth, -0.5)).MoveToOuterDisposeScope();
@@ -293,12 +299,13 @@ public sealed class SdUnet : IDisposable
         return Linear(mixed, bank, prefix + ".to_out.0").MoveToOuterDisposeScope();
     }
 
-    private static Tensor AttentionProjection(Tensor input, Tensor weight, int heads, long headWidth)
+    private static Tensor AttentionProjection(Tensor input, UnetWeightSet bank, string prefix, int heads, long headWidth)
     {
         using var scope = NewDisposeScope();
         var shape = input.shape;
         // Source Q/K/V linears have no bias. Preserve that route; do not look up or invent biases.
-        return nn.functional.linear(input, weight).reshape(shape[0], shape[1], heads, headWidth)
+        var projected = nn.functional.linear(input, bank.GetTensor(prefix + ".weight"));
+        return bank.ApplyBypass(prefix, input, projected).reshape(shape[0], shape[1], heads, headWidth)
             .permute(0, 2, 1, 3).reshape(shape[0] * heads, shape[1], headWidth).contiguous().MoveToOuterDisposeScope();
     }
 
@@ -319,23 +326,26 @@ public sealed class SdUnet : IDisposable
 
     private static Tensor Conv(Tensor input, UnetWeightSet bank, string prefix, long stride = 1)
     {
+        using var scope = NewDisposeScope();
         var weight = bank.GetTensor(prefix + ".weight");
         long padding = weight.shape[2] == 3 ? 1 : 0;
-        return nn.functional.conv2d(input, weight, bank.GetTensor(prefix + ".bias"),
+        var original = nn.functional.conv2d(input, weight, bank.GetTensor(prefix + ".bias"),
             strides: new[] { stride, stride }, padding: new[] { padding, padding });
+        return bank.ApplyBypass(prefix, input, original, weight.shape[2..], stride, padding).MoveToOuterDisposeScope();
     }
 
     private static Tensor Linear(Tensor input, UnetWeightSet bank, string prefix)
     {
+        using var scope = NewDisposeScope();
         var weight = bank.GetTensor(prefix + ".weight");
         var bias = bank.GetTensor(prefix + ".bias");
         var shape = input.shape;
         // Match Python aten::linear's fused biased path for contiguous 3D activations;
         // the LibTorch 2.10 C++ frontend otherwise separates matmul and bias addition.
-        if (shape.Length == 3 && input.is_contiguous())
-            return nn.functional.linear(input.reshape(shape[0] * shape[1], shape[2]), weight, bias)
-                .reshape(shape[0], shape[1], weight.shape[0]);
-        return nn.functional.linear(input, weight, bias);
+        var original = shape.Length == 3 && input.is_contiguous()
+            ? nn.functional.linear(input.reshape(shape[0] * shape[1], shape[2]), weight, bias).reshape(shape[0], shape[1], weight.shape[0])
+            : nn.functional.linear(input, weight, bias);
+        return bank.ApplyBypass(prefix, input, original).MoveToOuterDisposeScope();
     }
 
     private void ValidateInputs(Tensor latent, Tensor timesteps, Tensor context)

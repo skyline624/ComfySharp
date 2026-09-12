@@ -1,6 +1,6 @@
 # Backlog de migration
 
-Lot 9 : [LoraModelLoader en mode ordinaire](LORA_MEMORY_LOADING.md) consomme maintenant le `LORA_MODEL` natif, sans sérialisation intermédiaire. Priorités restantes : implémenter les adapters de forward pour le bypass, raccorder le vrai TrainLoraNode et sa reprise, puis valider le parcours complet. Les tests sur modèle réduit ne ferment pas ces exigences.
+Lot 9 : [LoraModelLoader](LORA_MEMORY_LOADING.md) consomme le `LORA_MODEL` natif en mode ordinaire et [bypass pendant le calcul](LORA_BYPASS.md), sans sérialisation intermédiaire, pour les U-Net SD Float32. Priorités restantes : entraînement bypass/alpha, précision mixte, vrai TrainLoraNode et reprise, autres architectures, puis parcours complet. Les 928 tests locaux et le diagnostic sur les poids SD1.5 existants ne ferment pas ces exigences.
 
 Lot 9 : le [pont de sortie d'entraînement](LORA_TRAINING_STATE.md) possède les 1 250 tenseurs des adapters SD, reproduit la conversion finale bf16/fp32 de la source et publie une map consommable par SaveLoRA après libération de l'entraînement. La reprise d'adapters et leur application en mémoire via LoraModelLoader restent à implémenter ; le nœud d'entraînement public et ses options restent ouverts.
 

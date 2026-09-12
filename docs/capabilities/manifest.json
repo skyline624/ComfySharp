@@ -25085,7 +25085,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": ["../LORA_MEMORY_LOADING.md", "../qualification/lora-memory-loading.json"],
+      "evidence": ["../LORA_MEMORY_LOADING.md", "../qualification/lora-memory-loading.json", "../LORA_BYPASS.md", "../qualification/lora-bypass.json"],
       "scenario": "contract:LoraModelLoader",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "LoraModelLoader",

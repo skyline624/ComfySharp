@@ -5,8 +5,8 @@ using System.Text.Json.Nodes;
 
 namespace ComfySharp.Nodes.Tensor;
 
-/// <summary>Applies an in-memory LORA_MODEL to a plain SD model using ordinary weight patches.
-/// Bypass execution remains a separate, explicitly unavailable capability.</summary>
+/// <summary>Applies an in-memory LORA_MODEL to a plain SD model using ordinary weight patches
+/// or retained linear/Conv2d forward adapters.</summary>
 public sealed class LoraModelLoaderNode(long maxPatchedWeightBytes = 4L * 1024 * 1024 * 1024) : IRuntimeNode
 {
     public static NodeSchema Description { get; } = new("LoraModelLoader", "Load LoRA Model", "model/loaders",
@@ -17,7 +17,7 @@ public sealed class LoraModelLoaderNode(long maxPatchedWeightBytes = 4L * 1024 *
          new("bypass", "BOOLEAN", Options: new() { ["default"] = false,
              ["tooltip"] = "When enabled, applies LoRA in bypass mode without modifying base model weights. Useful for training and when model weights are offloaded." })],
         [new("MODEL", "model")], Experimental: true, PythonModule: "comfy_extras.nodes_train", V3ObjectInfo: true, OmitEmptyOptionalInputs: true,
-        Description: "Applies an in-memory adapter to a plain Float32 SD model. Ordinary patch mode only; bypass, quantized models and other model families remain unavailable.");
+        Description: "Applies an in-memory adapter to a plain Float32 SD model, using ordinary patches or linear/Conv2d bypass adapters. Quantized models and other model families remain unavailable.");
     public NodeSchema Schema => Description;
 
     public ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
@@ -27,15 +27,15 @@ public sealed class LoraModelLoaderNode(long maxPatchedWeightBytes = 4L * 1024 *
         double strength = PythonValues.Float(inputs["strength_model"].ToJson());
         if (!double.IsFinite(strength) || strength is < -100 or > 100) throw new ArgumentOutOfRangeException("strength_model");
         if (strength == 0) return ValueTask.FromResult(new NodeExecutionOutput([context.Retain(inputs["model"])]));
-        if (inputs.TryGetValue("bypass", out var bypass) && bypass.ToJson()!.GetValue<bool>())
-            throw new NotSupportedException("LoraModelLoader bypass requires forward adapters and is not implemented; ordinary weight patching was not substituted.");
+        bool useBypass = inputs.TryGetValue("bypass", out var bypass) && bypass.ToJson()!.GetValue<bool>();
         if (inputs["lora"].Kind != RuntimeValueKind.Map) throw new ArgumentException("LORA_MODEL must be a runtime map of tensors.");
         var model = inputs["model"].GetNative<SdUnet>();
         var tensors = inputs["lora"].Properties.ToDictionary(p => p.Key, p => p.Value.GetNative<TorchSharp.torch.Tensor>(), StringComparer.Ordinal);
         using var source = new NativeLoraTensorSource(tensors, cancellationToken: cancellationToken);
         var plan = LoraFileLoader.Inspect(source, LoraModelAliases.ForUnet(model.Config), allowUnclaimedKeys: true, cancellationToken: cancellationToken);
         using var adapter = LoraFileLoader.Load(source, plan, new Dictionary<string, double> { ["model"] = strength }, cancellationToken);
-        var modified = adapter.ApplyTo(model, maxPatchedWeightBytes: maxPatchedWeightBytes, cancellationToken: cancellationToken);
+        var modified = useBypass ? adapter.ApplyBypassTo(model, maxPatchedWeightBytes: maxPatchedWeightBytes, cancellationToken: cancellationToken)
+            : adapter.ApplyTo(model, maxPatchedWeightBytes: maxPatchedWeightBytes, cancellationToken: cancellationToken);
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -43,7 +43,7 @@ public sealed class LoraModelLoaderNode(long maxPatchedWeightBytes = 4L * 1024 *
             {
                 ["comfysharp_lora"] = new JsonArray(new JsonObject
                 {
-                    ["source"] = "LORA_MODEL", ["matched_targets"] = plan.Bindings.Count,
+                    ["source"] = "LORA_MODEL", ["bypass"] = useBypass, ["matched_targets"] = plan.Bindings.Count,
                     ["unclaimed_tensors"] = new JsonArray(plan.UnclaimedKeys.Select(k => (JsonNode?)JsonValue.Create(k)).ToArray()),
                     ["shadowed_prefixes"] = new JsonArray(plan.ShadowedPrefixes.Select(k => (JsonNode?)JsonValue.Create(k)).ToArray())
                 })

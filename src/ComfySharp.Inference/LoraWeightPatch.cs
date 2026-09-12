@@ -9,6 +9,20 @@ public sealed class LoraWeightPatch : IDisposable
     private Tensor? up,down,mid,dora,difference;
     public double Strength { get; }
     public double? Alpha { get; }
+    internal bool IsDifference { get { lock(gate) { ObjectDisposedException.ThrowIf(up is null && difference is null,this); return difference is not null; } } }
+    internal LoraWeightPatch To(Device device)
+    {
+        using var owner = Retain(); using var scope = NewDisposeScope();
+        if (owner.difference is { } diff) return FromDifference(diff.to(device), Strength);
+        return new(owner.up!.to(device), owner.down!.to(device), Strength, Alpha, owner.mid?.to(device), owner.dora?.to(device));
+    }
+    internal Tensor ApplyBypass(Tensor input, Tensor baseOutput, IReadOnlyList<long>? kernelSize = null, long stride = 1, long padding = 0)
+    {
+        using var owner = Retain();
+        if (owner.difference is not null) throw new InvalidOperationException("Additive differences use ordinary weight patching.");
+        // Frozen LoRAAdapter.h uses up/down/alpha/mid; its inherited g is identity, including when a DoRA field is present.
+        return LoraBypassMath.Apply(input, baseOutput, owner.up!, owner.down!, Strength, Alpha, owner.mid, kernelSize, stride, padding);
+    }
     private LoraWeightPatch(Tensor difference,double strength)
     {
         NativeRuntimeBootstrap.Initialize();using var scope=NewDisposeScope();using var noGrad=no_grad();

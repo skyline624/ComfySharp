@@ -20,7 +20,7 @@ modifiés, en plus des poids et allocations déjà présents. Ces budgets ne son
 pas une garantie de mémoire disponible.
 
 Le contrat suit [LoraModelLoader dans la source figée](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1313).
-**Le mode bypass reste à porter et reçoit un diagnostic explicite.** La source
+**Le mode bypass est maintenant disponible pour les couches linéaires/Conv2d des U-Net SD Float32 ; voir [son périmètre et ses preuves](LORA_BYPASS.md).** La source
 [sépare les adapters de calcul des patches ordinaires](https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py#L138) :
 les facteurs LoRA sont appliqués dans les opérations de forward, tandis que les
 différences de poids/biais passent par les patches ordinaires. Une modification
@@ -35,6 +35,8 @@ Quatre parcours sur un U-Net réduit comparent exactement la prédiction d'un
 adapter modifié par SGD, capturé en fp32/bf16 puis chargé avec force positive
 ou négative. Les poids originaux restent inchangés.
 
-Ces scénarios sont synthétiques. Le producteur public `TrainLoraNode`, le bypass
-et le workflow complet restent ouverts ; aucune famille préentraînée n'est
-qualifiée par ce raccordement. Voir [les résultats](qualification/lora-memory-loading.json).
+Ces scénarios du mode ordinaire sont synthétiques. Le producteur public
+`TrainLoraNode` et le workflow complet restent ouverts ; aucune famille
+préentraînée n'est qualifiée par ce raccordement. Voir [les résultats historiques
+du mode ordinaire](qualification/lora-memory-loading.json), puis
+[les résultats du bypass](qualification/lora-bypass.json).
