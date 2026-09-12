@@ -1,0 +1,323 @@
+{
+  "run": "34713594932",
+  "commit": "7c0da9f673b5cfa7940bb4a6853a234523685401",
+  "url": "https://github.com/skyline624/ComfySharp/actions/runs/34713594932",
+  "conclusion": "failure",
+  "purpose": "Locate required training precision failures; not acceptance evidence by itself",
+  "tests": {
+    "tests-baseline": {
+      "total": 3,
+      "passed": 1,
+      "failed": 2,
+      "notExecuted": 0
+    },
+    "tests-default": {
+      "total": 3,
+      "passed": 1,
+      "failed": 2,
+      "notExecuted": 0
+    },
+    "tests-interop-one": {
+      "total": 3,
+      "passed": 1,
+      "failed": 2,
+      "notExecuted": 0
+    },
+    "tests-mixed": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  },
+  "sourceObservationDidNotChangeCorpus": true,
+  "originalSourceCpuCapability": "AVX512",
+  "currentSourceCpuCapability": "AVX2",
+  "sourceArtifactHashes": {
+    "original": "3eb545cfc4c60c08330172693276358083aa55f588ddcc1be9e683471f77088e",
+    "current": "70a2e89d47ab0b0ec7116ad9f7913a5e589ce7db774db9462f57dfd3d5df67c4"
+  },
+  "interopControl": {
+    "default": 4,
+    "controlled": 1,
+    "allCapturedDotNetRecordsIdentical": true,
+    "originalFailedVerdictsUnchanged": true
+  },
+  "sameRunnerComparisons": [
+    {
+      "case": 0,
+      "sourceTarget": "linux-x64",
+      "actualTarget": "linux-x64",
+      "sourceThreads": [
+        1,
+        1
+      ],
+      "actualThreads": [
+        1,
+        4
+      ],
+      "baseWeightDifferences": [],
+      "comparisons": [
+        {
+          "name": "initial/latent",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "initial/times",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "initial/context",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/timeEmbedding",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down0",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down1",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down2",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down3",
+          "exact": false,
+          "maxAbs": 1.1920928955078125e-07,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/middle",
+          "exact": false,
+          "maxAbs": 4.76837158203125e-07,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up0",
+          "exact": false,
+          "maxAbs": 8.195638656616211e-08,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 1,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up1",
+          "exact": false,
+          "maxAbs": 5.662441253662109e-07,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up2",
+          "exact": false,
+          "maxAbs": 2.86102294921875e-06,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/output",
+          "exact": false,
+          "maxAbs": 2.2470951080322266e-05,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 1,
+          "firstOutside": null
+        }
+      ],
+      "firstNonExact": "step-0/down3"
+    },
+    {
+      "case": 1,
+      "sourceTarget": "linux-x64",
+      "actualTarget": "linux-x64",
+      "sourceThreads": [
+        1,
+        1
+      ],
+      "actualThreads": [
+        1,
+        4
+      ],
+      "baseWeightDifferences": [],
+      "comparisons": [
+        {
+          "name": "initial/latent",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "initial/times",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "initial/context",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/timeEmbedding",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down0",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down1",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down2",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/down3",
+          "exact": false,
+          "maxAbs": 5.960464477539063e-08,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 4,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/middle",
+          "exact": false,
+          "maxAbs": 4.76837158203125e-07,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 1,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up0",
+          "exact": false,
+          "maxAbs": 8.195638656616211e-08,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up1",
+          "exact": false,
+          "maxAbs": 4.76837158203125e-07,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/up2",
+          "exact": false,
+          "maxAbs": 3.337860107421875e-06,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/output",
+          "exact": false,
+          "maxAbs": 1.2099742889404297e-05,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": 0,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/gradient/input_blocks.0.0.weight/alpha",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/gradient/input_blocks.0.0.weight/lora_up.weight",
+          "exact": true,
+          "maxAbs": 0.0,
+          "outsideOriginalTolerance": 0,
+          "firstDifferent": null,
+          "firstOutside": null
+        },
+        {
+          "name": "step-0/gradient/input_blocks.0.0.weight/lora_down.weight",
+          "exact": false,
+          "maxAbs": 6.085634231567383e-05,
+          "outsideOriginalTolerance": 15,
+          "firstDifferent": 0,
+          "firstOutside": 14
+        }
+      ],
+      "firstNonExact": "step-0/down3"
+    }
+  ],
+  "interpretation": [
+    "All 686 base weight hashes and early captured inputs/boundaries agree per topology",
+    "First differing coarse boundary is down3 in both topologies",
+    "Source baseline is byte-identical with and without source hooks",
+    "Original committed oracle used a different CPU dispatch capability; platform name alone does not capture that difference",
+    "Same-runner source/.NET gradient divergence also remains; ISA mismatch alone is not established as the complete cause",
+    "No expected corpus or acceptance threshold was changed",
+    "Detailed existing downsample/residual observers are the next localization step"
+  ]
+}

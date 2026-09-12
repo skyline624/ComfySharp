@@ -37,3 +37,16 @@ were exactly equal to the independently observed source for both topologies;
 changing the interop pool from its default 64 to one made no difference there.
 This local control is not evidence of the cause of the Linux failures. No models,
 new native dependencies, or product inference code are included in this change.
+
+The [first Linux campaign](../../docs/qualification/training-coarse-diagnostic.json)
+located the first differing coarse boundary at `down3` for both topologies.
+Changing interop from four threads to one left every captured .NET value and
+both failure verdicts unchanged. All 12 independently run mixed-file/alias tests
+passed. The original source corpus reported AVX-512 dispatch; the source on this
+runner reported AVX2, and its output corpus differed. A same-runner gradient
+discrepancy still exists, so that hardware difference is not the complete diagnosis.
+
+The follow-up enables the already existing detailed observer for the last
+downsample and its two residual blocks. No product operation is modified. The
+comparator restores Float32 values from shortest JSON decimals before computing
+differences, so serialization text precision is not counted as a numerical error.

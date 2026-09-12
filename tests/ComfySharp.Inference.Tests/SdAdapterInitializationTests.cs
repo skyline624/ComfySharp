@@ -55,6 +55,7 @@ public sealed class SdAdapterInitializationTests
             using var bank = SdSyntheticInputs.CreateUnet(config); using var model = new SdUnet(bank);
             trace?.Weights(bank);
             model.DiagnosticObserver = trace is null ? null : trace.Capture;
+            model.FineDiagnosticObserver = trace is null ? null : trace.Capture;
             using var latent = Read(row.GetProperty("latent")); using var time = Read(row.GetProperty("times")); using var context = Read(row.GetProperty("context")); using var targetValues = Read(row.GetProperty("target"));
             using var baseline = model.Forward(latent, time, context);
             trace?.Capture("baseline",baseline);
@@ -80,6 +81,7 @@ public sealed class SdAdapterInitializationTests
                 foreach (var target in step.GetProperty("updated").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject()) Near(Named(adapters.Patches[target.Name])[expected.Name], expected.Value);
             }
             model.DiagnosticObserver=null;
+            model.FineDiagnosticObserver=null;
             using var unchanged = model.Forward(latent, time, context); Assert.Equal(Hash(baseline), Hash(unchanged));
         }
         finally { set_num_threads(threads); }

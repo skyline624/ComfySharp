@@ -3,10 +3,10 @@
   "baseCommit": "ec02f23a3d7c7b0f24ec88c55965f8301262a261",
   "purpose": "Diagnostic controls only; no expected tensors or thresholds changed.",
   "inputs": {
-    "labs/training-trace/source.py": "9d95c5a89e6cba745bf3455b1314f6ce0b85d3cfba5085971c40931e63c846b6",
-    "labs/training-trace/compare.py": "5de09b2b27ff7bfc1dad63bd85ddd7313d7fda3458e2a80f4ddc6a21cdfeb3c7",
-    ".github/workflows/training-trace.yml": "b6005c419da4d3444c9e045fef322d6eac0a6fca13e798996b5f3bd8d5041d08",
-    "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "a4183b2904051a9a40a0aa24ed62bf984cdfb0734c6398a9e2ec5416dbbe59e3",
-    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "9e6ce9ffa30f15047a5eb714037e6f1ee6573cc570f70e45fe2d559fc7afbca1"
+    "labs/training-trace/source.py": "7fb37f5b3de76f7df80343ca851a8c302553cd5e7eb6d5eccb6d5106acf7ac44",
+    "labs/training-trace/compare.py": "f8f7fbf1fe9e088ac2dd2b8ee7cc0aab6d2574d6c53ad52cb96cf0fde5b61f51",
+    ".github/workflows/training-trace.yml": "cdf331ae065cd79d514ed7d600121215bf489f1d59d2d2e7fde81c18c561a471",
+    "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "6638f6e83f5ea1e1a4f747d2c33bb26ee27eb12e58600269109dd428e2eab3a4",
+    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "0ca244a230fd15c36b107bb4daee8475afbad992f7246efda77c8277645e3677"
   }
 }

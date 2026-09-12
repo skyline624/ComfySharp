@@ -28,6 +28,18 @@ def observed(*args,**kwargs):
   if name in boundaries:
    def hook(module,inputs,output,label=boundaries[name]):row['step-'+str(step)+'/'+label]=snap(output)
    handles.append(module.register_forward_hook(hook))
+ def input_hook(name,label,index=0):
+  def hook(module,inputs):row[f'step-{step}/{label}']=snap(inputs[index])
+  handles.append(model.get_submodule(name).register_forward_pre_hook(hook))
+ def output_hook(name,label):
+  def hook(module,inputs,output):row[f'step-{step}/{label}']=snap(output)
+  handles.append(model.get_submodule(name).register_forward_hook(hook))
+ input_hook('input_blocks.9.0.op','input_blocks.9.0.op.input');output_hook('input_blocks.9.0.op','input_blocks.9.0.op.output')
+ for index in [10,11]:
+  prefix=f'input_blocks.{index}.0';input_hook(prefix,prefix+'.input');input_hook(prefix,prefix+'.embedding',1)
+  for child in ['in_layers.0','in_layers.1','in_layers.2','emb_layers.0','emb_layers.1','out_layers.0','out_layers.1','out_layers.3']:
+   input_hook(prefix+'.'+child,prefix+'.'+child+'.input');output_hook(prefix+'.'+child,prefix+'.'+child+'.output')
+  output_hook(prefix,prefix+'.output')
  try:
   result=original(*args,**kwargs);row['step-'+str(step)+'/output']=snap(result);return result
  finally:
@@ -45,6 +57,6 @@ for case,row in records.items():
   for target,parameters in entry['gradients'].items():
    for name,value in parameters.items():row[f'step-{step}/gradient/{target}/{name}']=value
  with (a.output/f'case-{case}.json').open('x',encoding='utf-8',newline='\n') as f:
-  json.dump({'target':preflight.target(),'threads':torch.get_num_threads(),'interopThreads':torch.get_num_interop_threads(),'records':row},f);f.write('\n')
+  json.dump({'target':preflight.target(),'threads':torch.get_num_threads(),'interopThreads':torch.get_num_interop_threads(),'cpuCapability':torch.backends.cpu.get_cpu_capability(),'records':row},f);f.write('\n')
 with (a.output/'manifest.json').open('x',encoding='utf-8',newline='\n') as f:
  json.dump({'sourceUnchangedByObservation':True,'torchBuild':torch.__config__.show(),'protocolSha256':hashlib.sha256((ROOT/'labs/training-trace/protocol.json').read_bytes()).hexdigest(),'sourceHashes':data['sourceHashes'],'baselineSha256':hashlib.sha256((a.output/'baseline.json').read_bytes()).hexdigest()},f,indent=2);f.write('\n')

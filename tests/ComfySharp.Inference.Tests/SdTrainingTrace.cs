@@ -44,6 +44,7 @@ internal sealed class SdTrainingTrace : IDisposable
     {
         using var stream=new FileStream(path,FileMode.CreateNew,FileAccess.Write,FileShare.None);
         JsonSerializer.Serialize(stream,new{target=SdSamplingReferenceTests.Target,processArchitecture=RuntimeInformation.ProcessArchitecture.ToString(),
-            threads=get_num_threads(),interopThreads=get_num_interop_threads(),records});
+            threads=get_num_threads(),interopThreads=get_num_interop_threads(),avx2=System.Runtime.Intrinsics.X86.Avx2.IsSupported,
+            avx512=System.Runtime.Intrinsics.X86.Avx512F.IsSupported,atenCpuCapability=Environment.GetEnvironmentVariable("ATEN_CPU_CAPABILITY"),records});
     }
 }

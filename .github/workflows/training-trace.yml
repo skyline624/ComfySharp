@@ -35,6 +35,7 @@ jobs:
           python -m venv "$RUNNER_TEMP/training-trace-python"
           "$RUNNER_TEMP/training-trace-python/bin/python" -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r labs/clip-source/requirements-linux-x64.txt
           "$RUNNER_TEMP/training-trace-python/bin/python" -I -B labs/training-trace/source.py --source upstream-source --output TrainingTrace/source
+          lscpu --json > TrainingTrace/cpu.json
       - run: dotnet restore tests/ComfySharp.Inference.Tests --locked-mode -p:NativeRuntime=linux-x64
       - run: dotnet build tests/ComfySharp.Inference.Tests -c Release --no-restore -p:NativeRuntime=linux-x64
       - name: Original checks without observation
