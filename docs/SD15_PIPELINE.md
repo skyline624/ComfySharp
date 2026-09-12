@@ -110,6 +110,14 @@ les 32 frontières identiques à cette source. La suite locale suivante passe
 d'intégrité des buffers du diagnostic natif. La campagne CI de cette nouvelle
 comparaison reste distincte de celle des 29 contrats.
 
+La [campagne CI suivante, au commit 8264b88](qualification/sd15-pipeline-ci-8264b88.md),
+passe les quatre cas sur Windows et macOS, avec les 64 captures bit à bit
+identiques à leur référence respective. Linux passe trois cas ; `maximum-start`
+présente une première divergence capturée dans le denoised du premier pas,
+alors que les sorties CLIP, le latent initial et les sigmas sont exacts. Toutes
+les traces sont conservées, y compris celles écrites avant l'assertion en échec.
+Ce résultat ne permet pas encore d'identifier une primitive ou un runtime à corriger.
+
 La qualification numérique sur les trois OS, les dimensions complètes, les vrais poids,
 le GPU et l'intégration aux nœuds de génération restent ouvertes. Cette tranche n'ajoute
 aucun identifiant de nœud au catalogue et ne clôture aucun critère de publication V1.
