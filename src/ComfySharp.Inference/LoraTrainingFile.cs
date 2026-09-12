@@ -4,7 +4,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Exports trained LoRA factors and additive weight/bias differences to a new safetensors file.
+/// <summary>Exports trained LoRA/LoHa factors and additive weight/bias differences to a new safetensors file.
 /// Keys are explicit loader prefixes (without suffixes), not filesystem paths.
 /// The caller serializes parameter updates against export; factor snapshots own their CPU storage.</summary>
 public static class LoraTrainingFile
@@ -55,6 +55,7 @@ public static class LoraTrainingFile
                 {
                     TrainableLoraPatch lora=>checked((lora.Up.numel()+lora.Down.numel())*4+(lora.AlphaParameter is null?8:4)),
                     TrainableDifferencePatch diff=>checked(diff.Difference.numel()*4),
+                    TrainableLohaPatch loha=>checked(loha.Parameters.Sum(p=>p.numel())*4),
                     _=>throw new NotSupportedException("Unknown trainable adapter kind.")
                 }));
                 if (bytes > maxFactorBytes) throw new NotSupportedException("LoRA export snapshots exceed the configured factor allowance.");
@@ -75,6 +76,9 @@ public static class LoraTrainingFile
                     tensors.Add(prefix + ".alpha", lora.AlphaParameter is { } alpha
                         ?alpha.detach().to(CPU,copy:true).contiguous():tensor(lora.Alpha,dtype:ScalarType.Float64));
                 }
+                else if(patch is TrainableLohaPatch loha)
+                    foreach(var (key,value) in loha.NamedParameters)
+                        tensors.Add(prefix+"."+key,value.detach().to(CPU,copy:true).contiguous());
             }
             var header = new Dictionary<string, object>(StringComparer.Ordinal); long offset = 0;
             foreach (var (name, tensor) in tensors)

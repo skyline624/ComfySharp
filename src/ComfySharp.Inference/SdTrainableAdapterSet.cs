@@ -6,8 +6,8 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Owns all ordinary LoRA and BiasDiff targets in the frozen plain SD module traversal order.
-/// New or resumed two-factor Float32 LoRA adapters. Other algorithms remain separate capabilities.</summary>
+/// <summary>Owns LoRA/LoHa and BiasDiff targets in the frozen plain SD module traversal order.
+/// Fresh Float32 LoRA/LoHa and resumed two-factor LoRA; other resume algorithms remain separate capabilities.</summary>
 public sealed class SdTrainableAdapterSet : IDisposable
 {
     private readonly Dictionary<string, TrainableWeightPatch> patches;
@@ -21,10 +21,12 @@ public sealed class SdTrainableAdapterSet : IDisposable
     });
 
     public SdTrainableAdapterSet(SdUnetConfig config, int rank, ulong seed, Device device,
-        long maxParameterBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default, ILoraTensorSource? existing = null)
+        long maxParameterBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default, ILoraTensorSource? existing = null,
+        string algorithm = "LoRA")
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(config);
         if (rank < 1 || rank > 1024) throw new ArgumentOutOfRangeException(nameof(rank));
+        if (algorithm is not ("LoRA" or "LoHa")) throw new NotSupportedException("This SD training adapter algorithm remains unported: " + algorithm);
         if (maxParameterBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxParameterBytes));
         var schema = UnetWeightSchema.Describe(config); var order = Order.Value;
         if (order.Length != schema.Count || !order.ToHashSet(StringComparer.Ordinal).SetEquals(schema.Keys))
@@ -37,7 +39,8 @@ public sealed class SdTrainableAdapterSet : IDisposable
         {
             var shape = schema[name];
             long actualRank = resume?.Targets.GetValueOrDefault(name)?.Rank ?? rank;
-            long count = shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank) + 1);
+            int pairs = algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true ? 2 : 1;
+            long count = shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank * pairs) + 1);
             bytes = checked(bytes + checked(count * sizeof(float)));
         }
         if (bytes > maxParameterBytes) throw new NotSupportedException("Adapter leaves exceed the configured allowance; temporary tensors and optimizer state are additional.");
@@ -57,6 +60,16 @@ public sealed class SdTrainableAdapterSet : IDisposable
                 else
                 {
                     long columns = shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b));
+                    if (algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true)
+                    {
+                        // In source normal_(tensor, 0.1), 0.1 is the mean; std remains 1.
+                        var a = empty([shape[0], rank], device: device).normal_(.1, 1, weightGenerator);
+                        var b = zeros([rank, columns], device: device);
+                        var c = empty([shape[0], rank], device: device).normal_(.1, 1, weightGenerator);
+                        var d = empty([rank, columns], device: device).normal_(.01, 1, weightGenerator);
+                        patches.Add(name, new TrainableLohaPatch(a, b, c, d));
+                        continue; // LohaDiff has no discarded random Linear constructors.
+                    }
                     double alpha = 1;
                     // The source reads module.weight.alpha, not the usual exported module.alpha.
                     if (resume?.Alphas.TryGetValue(name,out string? alphaKey) == true)

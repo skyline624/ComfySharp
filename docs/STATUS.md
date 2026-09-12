@@ -1,5 +1,13 @@
 # État du port — 0.1.0-dev
 
+Les [fondations d'entraînement LoHa](LOHA_TRAINING.md) couvrent les facteurs
+simples/Tucker, les gradients personnalisés de la source, la fabrique SD et
+la sauvegarde. **974 tests ordinaires d'inférence passent localement**, dont
+23 nouveaux tests LoHa. Le vrai SD1.5 CPU effectue deux mises à jour sur
+686 cibles/1 814 paramètres, avec 1 532 gradients finis et 282 gradients alpha
+absents comme dans la source. Aucun modèle/adapter n'est écrit. Chargement,
+reprise LoHa, nœud public et qualification complète restent à réaliser.
+
 La [correction des références de reprise LoRA](LORA_RESUME.md) est vérifiée dans la
 [CI 34725800282](https://github.com/skyline624/ComfySharp/actions/runs/34725800282) :
 **16 tests de reprise passent sur chacun des trois OS**, avec comparaisons exactes
@@ -7,8 +15,11 @@ contre les collectes source indépendantes. Windows passe la CI complète ; Wind
 et macOS passent les 951 tests ordinaires d'inférence. Linux conserve deux échecs
 numériques d'entraînement et macOS deux échecs CLIP. Les suites indépendantes de
 la CI continueront désormais après un échec de test si la compilation a réussi,
-en gardant le statut d'échec global. Cette évolution du workflow reste à vérifier
-sur son prochain run ; elle ne modifie aucune assertion ni qualification.
+en gardant le statut d'échec global. La CI `34726092911` confirme cette exécution
+indépendante : elle révèle **20 échecs dans les 951 tests ordinaires Linux**,
+auparavant masqués par l'arrêt anticipé, ainsi que des échecs de références dans
+d'autres suites. Windows passe la CI complète ; macOS conserve ses deux échecs
+CLIP. Aucune assertion ni qualification n'est modifiée.
 
 La [reprise LoRA SD](LORA_RESUME.md) charge les facteurs existants selon les règles source, avec rangs, conversions et RNG vérifiés exactement. **949 tests ordinaires d'inférence passent localement**, dont quatorze nouveaux. Le diagnostic reprend 282 adapters du fichier partagé et effectue deux mises à jour sur 686 cibles/1 250 paramètres, avec base inchangée et rechargement exact en mémoire. Aucun modèle ni adapter n'est écrit. Le compteur du nom est testé séparément ; le nœud public, les autres algorithmes et la précision mixte restent ouverts.
 

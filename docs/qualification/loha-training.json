@@ -1,0 +1,111 @@
+{
+  "scope": "Fresh SD LoHa factory, first-order plain/Tucker gradients and factor snapshots/export",
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "primitives": {
+    "fixtureSha256": "cfa3149c52cb10031e92cb648543a82d143aa9a81bb94f8110f83e3b61c288db",
+    "cases": 16,
+    "updates": 32,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "sourceBackwardPreserved": true,
+    "alphaGradient": "null"
+  },
+  "factory": {
+    "fixtureSha256": "d81c773f5d714c6e5e5e32bf683ee6d53c71ca8afaae080cb422d5262b2fcd9d",
+    "targets": 686,
+    "parameters": 1814,
+    "sourceFixturePlatform": "win-x64-cpu",
+    "parameterComparison": "atol=rtol=3e-5",
+    "randomStateComparison": "exact SHA256"
+  },
+  "localTests": {
+    "lohaPassed": 23,
+    "failed": 0,
+    "skipped": 0,
+    "ordinaryInferencePassed": 974,
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "pretrainedDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 2,
+    "algorithm": "LoHa",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1814,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 18707960,
+    "changedParameterCount": 1463,
+    "InitialCpuRandomStateSha256": "92d7e2ab9de9e3b5143060f3ca60026d0b51fd0456f40a087e61279f6812e5df",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 1532,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 0.9327829,
+        "finiteGradientLeaves": 1532,
+        "nonzeroGradientLeaves": 1524,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": false,
+    "inMemoryReload": null,
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 31.2385927,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa alpha has no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "adaptersWritten": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "ci": "pending",
+  "remaining": [
+    "LoHa inference loader and DoRA/bypass",
+    "LoHa resume factory",
+    "Full TrainLoraNode and options",
+    "Mixed precision, offload, checkpointing",
+    "Real image datasets and pretrained source-gradient comparisons",
+    "CPU/CUDA/MPS platform qualification"
+  ]
+}

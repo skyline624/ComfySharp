@@ -21,6 +21,8 @@
     <EmbeddedResource Include="Fixtures/lora-loader.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-aliases.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-training.reference.json" />
+    <EmbeddedResource Include="Fixtures/loha-training.reference.json" />
+    <EmbeddedResource Include="Fixtures/loha-factory.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/lora-training-state.json" />
     <EmbeddedResource Include="Fixtures/lora-bypass.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-training-bypass.reference.json" />

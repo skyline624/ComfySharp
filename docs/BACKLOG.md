@@ -1,5 +1,12 @@
 # Backlog de migration
 
+Lot 9 : les [fondations LoHa](LOHA_TRAINING.md) ajoutent la fabrique des 686 cibles
+SD, les gradients simples/Tucker, les snapshots et les exports aux clés Hadamard.
+Priorité suivante pour LoHa : chargeur d'inférence (DoRA/bypass inclus), reprise
+des facteurs existants, puis raccordement au nœud d'entraînement complet.
+Les 23 tests ciblés et le diagnostic préentraîné à entrées synthétiques ne
+qualifient ni une famille ni les plateformes cibles.
+
 Lot 9 : [LoraModelLoader](LORA_MEMORY_LOADING.md) consomme le `LORA_MODEL` natif en modes ordinaire et bypass SD Float32. Le [bypass d'entraînement avec alpha](LORA_TRAINING_BYPASS.md) traverse le débruiteur et les lots ; la [reprise des facteurs LoRA](LORA_RESUME.md) reproduit maintenant les conversions, les règles alpha/différences et le RNG de la source. Priorités restantes : autres algorithmes d'adapters et leur reprise, précision mixte, vrai TrainLoraNode avec compteur, checkpointing/offload, autres architectures et parcours complet. Les 949 tests locaux et le diagnostic à entrées synthétiques ne ferment pas ces exigences.
 
 Lot 9 : le [pont de sortie d'entraînement](LORA_TRAINING_STATE.md) possède les 1 250 tenseurs des adapters SD, reproduit la conversion finale bf16/fp32 de la source et publie une map consommable par SaveLoRA après libération de l'entraînement. La reprise d'adapters et leur application en mémoire via LoraModelLoader restent à implémenter ; le nœud d'entraînement public et ses options restent ouverts.

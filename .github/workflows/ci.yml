@@ -79,7 +79,10 @@ jobs:
       - name: Exercise LoRA resume source and lifetime contracts
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdLoraResumeTests' --logger trx --results-directory TestResults/LoraResume
-      - name: Exercise all-target adapter initialization and mixed gradients
+      - name: Exercise LoHa training source and lifetime contracts
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~LohaTrainingTests' --logger trx --results-directory TestResults/LohaTraining
+      - name: Exercise ordinary LoRA all-target initialization and mixed gradients
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdAdapterInitializationTests|FullyQualifiedName~TrainableAdapterTests|FullyQualifiedName~TrainingReferenceCorpusTests' --logger trx --results-directory TestResults/TrainingAdapters
       - name: Exercise training datasets, source RNG and training loops

@@ -106,6 +106,8 @@ public sealed class UnetWeightSet : IDisposable
                     InferenceDevice.RequireSame(Device, retained.Up, name);
                     factors.Add(name, retained.Retain());
                 }
+                else if (patch is TrainableLohaPatch)
+                    throw new NotSupportedException("The frozen trainable LohaDiff does not implement bypass execution.");
                 else regular.Add(name, patch);
             }
             next = regular.Count == 0 ? bank.Retain() : bank.WithTrainingLora(regular, maxPatchedWeightBytes, cancellationToken);

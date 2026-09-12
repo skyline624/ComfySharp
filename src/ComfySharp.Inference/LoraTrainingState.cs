@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Owns the detached LORA_MODEL output of ordinary LoRA/BiasDiff training.
+/// <summary>Owns the detached LORA_MODEL output of ordinary LoRA/LoHa/BiasDiff training.
 /// Capture must be serialized with training updates. Borrowed tensors remain valid until disposal;
 /// they must not be mutated or disposed by consumers. No file or model weights are involved.</summary>
 public sealed class LoraTrainingState : IDisposable
@@ -62,7 +62,10 @@ public sealed class LoraTrainingState : IDisposable
                         var alpha = lora.AlphaParameter;
                         Add(prefix + ".alpha", alpha, alpha is null ? lora.Alpha : 0, lora.Up.device);
                         break;
-                    default: throw new NotSupportedException("This adapter target is not an ordinary LoRA weight or additive difference.");
+                    case TrainableLohaPatch loha when !bias:
+                        foreach (var (key, value) in loha.NamedParameters) Add(prefix + "." + key, value, 0, value.device);
+                        break;
+                    default: throw new NotSupportedException("This adapter target is not a supported trainable weight or additive difference.");
                 }
             }
             NativeRuntimeBootstrap.Initialize(); using var scope = NewDisposeScope(); using var noGrad = no_grad();
