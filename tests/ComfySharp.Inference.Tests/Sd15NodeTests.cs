@@ -60,7 +60,7 @@ public sealed class Sd15NodeTests
     }
 
     [Theory]
-    [InlineData("heun", "karras", 1.0)]
+    [InlineData("heunpp2", "karras", 1.0)]
     [InlineData("euler", "normal", 1.0)]
     public async Task Unported_sampler_modes_fail_explicitly_without_accessing_model_inputs(string sampler, string scheduler, double denoise)
     {

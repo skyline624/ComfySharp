@@ -1,0 +1,99 @@
+{
+  "status": "heun-windows-cuda-workflow-executed",
+  "familyQualified": false,
+  "modelNumericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "66003d369194fefbf511f4a37c12607bf58bf7fa",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa"
+  },
+  "modelStorage": "Existing shared checkpoint read directly; preceding sd15-img2img campaign established the weight hash. No model copy, download or new whole-file hash in this campaign.",
+  "sourceComparison": {
+    "fixture": "../../tests/ComfySharp.Inference.Tests/Fixtures/heun.reference.json",
+    "sha256": "4eec09aaef2b0041fabe6de377fd088bb1b9626197fdb9f34dcf69d0fbb2ce5b",
+    "cases": 4,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Frozen sample_heun no-churn trajectory, every model call input and output, analytical denoiser only. Not a model-family numerical reference."
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "componentDevices": [
+      "cuda:0",
+      "cuda:0",
+      "cuda:0"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 18.2960745,
+    "dimensions": [
+      512,
+      512
+    ],
+    "steps": 20,
+    "seed": 0,
+    "sampler": "heun",
+    "scheduler": "karras",
+    "denoise": 1,
+    "pngSha256": "9e5550a515d27546cee11e0dbd79d78a3a31e5699185c0c713b9ea9c28d9b935",
+    "pngBytes": 689650,
+    "desktopReportSha256": "61825e71045bb4f4a317506aebd6c88f0256dac5244052314999874d63e89f2a"
+  },
+  "workflow": "../workflows/sd15-heun-karras.api.json",
+  "tests": {
+    "heun": {
+      "total": 46,
+      "passed": 46,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "c6604fe4f1f054d730c5f0b6effc97c6f05d5208cdde1703d8c43a0fcc40172c"
+    },
+    "host": {
+      "total": 311,
+      "passed": 310,
+      "failed": 1,
+      "notExecuted": 0,
+      "trxSha256": "30ff9ac7b105eb32fb2a4d478f08b6834178ca4d24bbae76b5462eb529a50db6"
+    }
+  },
+  "newHeunTests": 5,
+  "addedZeroDenoiseCase": 1,
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors"
+  },
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "b2f35dcf91aa961462d9da1739df696e0fca6fd255f862762352ce8a1fa48ec7",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-heun-karras.api.json": "49e53f5cd163b730af2f18361e7fec18f9e96f95499f9934604b5d2428ef7108",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/heun-source/reference.py": "d62ce91d5751a8e694ec685d34d8ecd39b215b73b472d264a1b31cbd8594b4d1",
+    "src/ComfySharp.Host/packages.win-x64.cpu.lock.json": "1756309bae1a303d9b1a88987506e3819d371bbd1b6a605a7f112557c90feb7d",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/SdHeunSampler.cs": "4552be71ae5a8276fbd175e0738ec54de7c82af6a319d5c7e796c64d35d3ba78",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "80b1c1e0c91ac70de69d8365b5301fe051c062646d6030016dc4bc680d4adc3c",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "863ace9cd38b3a3999acf0e04e192375f7ea64ef6a7eae0e5b47ce0c2d433bed",
+    "tests/ComfySharp.Inference.Tests/Fixtures/heun.reference.json": "4eec09aaef2b0041fabe6de377fd088bb1b9626197fdb9f34dcf69d0fbb2ce5b",
+    "tests/ComfySharp.Inference.Tests/Sd15NodeTests.cs": "bcc9a93eeeb9d262231217c969fef522d5e02eac7dee9452840f603826334f89",
+    "tests/ComfySharp.Inference.Tests/SdHeunSamplerTests.cs": "b379ecff0494ce5c954680bce1e9358c60a59ebbf6ec5819fc0b59960cc5c3ae",
+    "tests/ComfySharp.Inference.Tests/SdKarrasScheduleTests.cs": "0086cfcfc9a05d0f0bf50b86942cc64feb67c7e54f7936fc4f4a87c7a299f398"
+  },
+  "ci": "Heun and partial-denoise tests now run before the pre-existing first-native reference failures; post-push result not yet observed.",
+  "limitations": [
+    "Source comparison uses an analytical denoiser, not pretrained Heun trajectory captures.",
+    "No-churn only, SD1.5 Host path with Karras, one image up to 512 pixels per dimension.",
+    "No new numerical acceptance of Linux/macOS failures; all previous fixtures and bounds retained.",
+    "Windows symbolic-link privilege test remains failed, not skipped.",
+    "Linux CUDA and Apple MPS hardware qualification remain pending."
+  ]
+}

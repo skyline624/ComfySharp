@@ -26,7 +26,7 @@ un workflow JSON distinct du prompt API d'origine. `--data-dir <dossier>` permet
 de choisir les réglages et sorties de ComfySharp séparément des modèles.
 
 Le premier parcours est limité à un checkpoint monolithique stock SD1.5,
-prédiction EPS, CPU ou CUDA/Float32, Euler sans churn, Karras, `denoise` de 0 à 1, un batch de
+prédiction EPS, CPU ou CUDA/Float32, Euler ou [Heun](HEUN.md) sans churn, Karras, `denoise` de 0 à 1, un batch de
 une image de 32 à 512 pixels par dimension et 1 à 100 étapes. Le Host utilise
 au plus 16 threads CPU par défaut ; `--cpu-threads` le configure directement.
 Les masques, batch-index noise, conditionnements régionaux ou programmés, autres

@@ -1,5 +1,10 @@
 # Third-party provenance
 
+`SdHeunSampler.cs` ports `sample_heun` with its default `s_churn=0` and the
+`to_d` / `append_dims` expression from the frozen ComfyUI k-diffusion sources.
+The k-diffusion MIT notice retained below also applies to this adaptation.
+The independent source-function collector is described in [HEUN.md](docs/HEUN.md).
+
 `ImageInputNodes.cs` adapts `LoadImage` from the frozen ComfyUI `nodes.py` and
 its image/mask contract from `comfy_api/latest/_input_impl/video_types.py`, under
 the ComfyUI GPLv3 provenance below. `NativeImageDecoder.cs` uses SkiaSharp and
