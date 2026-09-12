@@ -184,7 +184,9 @@ public static class BundleOperations
         Require(bundleBefore.Files.Keys.ToHashSet(StringComparer.Ordinal).SetEquals(expectedBundle), "Unexpected or missing prepared bundle file.");
         Require(File.ReadAllBytes(Path.Combine(bundle, "bundle.json")).SequenceEqual(Receipt(recipe)), "Prepared bundle receipt does not match the trusted recipe.");
         foreach (var f in recipe.Files) Require(bundleBefore.Files[f.Destination] == new Stamp(f.Bytes, f.Sha256.ToLowerInvariant()), "Prepared payload differs from the recipe.");
-        var before = Snapshot(app, token); Require(!before.Files.ContainsKey(ReceiptName), "Application already has a native bundle composition receipt.");
+        var before = Snapshot(app, token);
+        var existingPaths = before.Files.Keys.Concat(before.Directories).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        Require(!existingPaths.Contains(ReceiptName), "Application already has a native bundle composition receipt destination.");
         var replacements = new Dictionary<string, BundleFile>(StringComparer.Ordinal); HashSet<string>? nativeDirectories = null;
         foreach (var f in recipe.Files.Where(f => f.Role == "native"))
         {
@@ -198,7 +200,12 @@ public static class BundleOperations
                 Require(probe.Value.Sha256.Equals(f.Sha256, StringComparison.OrdinalIgnoreCase) || (f.ReplacesSha256 ?? []).Contains(probe.Value.Sha256, StringComparer.OrdinalIgnoreCase), "Application contains an unqualified native image."); directories.Add(directory);
             }
             if (nativeDirectories is null) nativeDirectories = directories; else Require(nativeDirectories.SetEquals(directories), "Native payload is split across incompatible directories.");
-            foreach (string directory in directories) foreach (string probe in names) replacements.Add(directory.Length == 0 ? probe : directory + "/" + probe, f);
+            foreach (string directory in directories) foreach (string probe in names)
+            {
+                string destination = directory.Length == 0 ? probe : directory + "/" + probe;
+                Require(!existingPaths.Contains(destination) || probes.Any(p => p.Key == destination), "Native alias would overwrite an unqualified or case-conflicting application path.");
+                replacements.Add(destination, f);
+            }
         }
         foreach (string directory in nativeDirectories!)
         {
@@ -206,7 +213,7 @@ public static class BundleOperations
             Require(before.Files.TryGetValue(path, out var binding) && binding.Sha256.Equals(recipe.Binding.Sha256, StringComparison.OrdinalIgnoreCase), "TorchSharp binding is missing or not qualified for this recipe.");
         }
         var notices = recipe.Files.Where(f => f.Role == "notice").ToDictionary(f => "third-party/" + recipe.Id + "/" + f.Destination[9..], f => f, StringComparer.Ordinal);
-        Require(notices.Keys.All(p => !before.Files.ContainsKey(p)), "Application notice destination already exists.");
+        Require(notices.Keys.All(p => !existingPaths.Contains(p)), "Application notice destination already exists.");
         string stage = Begin(output);
         try
         {

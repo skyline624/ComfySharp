@@ -15,7 +15,7 @@
     "native/ComfySharp.NativeGenerator/generator.cpp": "ca16e5847368a545d947a115fafe392b534a63d64c0ba90275e9a990f3415c15",
     "native/ComfySharp.NativeGenerator/CMakeLists.txt": "138dd05df029c37511df201fad3eb796c78245e491fa4206a06323163f7ec96d",
     "src/ComfySharp.Inference/NativeRuntimeBuildInfo.cs": "f6de00ece006c413b21ab399ef557c9a355445d9e0019d720ba12ba81316d7d5",
-    "tools/ComfySharp.NativeBundle/BundleOperations.cs": "93a260b07c82a4fbea9a771f10f9d060f508cadd68228474b339499f623e8f3a",
+    "tools/ComfySharp.NativeBundle/BundleOperations.cs": "43bc80285bbe7a82522602dc902c30297b6df4235df805ae46b3d024ef0e6e3f",
     "tools/ComfySharp.NativeBundle/Program.cs": "31e8978fd549229af17c5c96458a2602432e565df402dc3e3980b6c578ed7d0e",
     "tools/ComfySharp.NativeBundle/ComfySharp.NativeBundle.csproj": "68e564d3988e81391affd33bd68ed9cc9e69408b57058cb8689707c293cf5a5e",
     "tools/ComfySharp.NativeBundle/packages.lock.json": "03eeadc5ef377c17f787ab65f41fb4c8a9c936bb7f7f4171111fdeec8a81cb46",

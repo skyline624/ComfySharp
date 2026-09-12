@@ -160,4 +160,21 @@ public sealed class BundleTests : IDisposable
         Assert.Throws<InvalidDataException>(() => BundleOperations.Compose(recipe, bundle, Application(), PathFor("composed")));
         Assert.False(Directory.Exists(PathFor("composed")));
     }
+
+    [Theory]
+    [InlineData("alias")] [InlineData("notice")] [InlineData("receipt")]
+    public void Composition_rejects_case_conflicting_application_destinations(string conflict)
+    {
+        var archive = Fixture(); var recipe = Recipe(archive); var bundle = PathFor("bundle"); BundleOperations.Prepare(recipe, archive, bundle);
+        var app = Application();
+        string relative = conflict switch
+        {
+            "alias" => "runtimes/linux-x64/native/LIBMODERN.SO",
+            "notice" => "third-party/fixture/notice",
+            _ => "COMFYSHARP-NATIVE-BUNDLE.JSON"
+        };
+        string path = Path.Combine(app, relative); Directory.CreateDirectory(Path.GetDirectoryName(path)!); File.WriteAllText(path, "preserve");
+        Assert.Throws<InvalidDataException>(() => BundleOperations.Compose(recipe, bundle, app, PathFor("composed")));
+        Assert.Equal("preserve", File.ReadAllText(path)); Assert.False(Directory.Exists(PathFor("composed")));
+    }
 }
