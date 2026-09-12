@@ -1,0 +1,46 @@
+{
+  "profile": "lora-resume-source-native210-cpu-f32-v1",
+  "target": "win-x64",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "collectorCommit": "8305bc1ffbb6541478789572e2313035d8c0faf5",
+  "runId": "34725638721",
+  "runAttempt": "1",
+  "protocolSha256": "551eace8ced63805503a1181d02cdf83e3964bafb7e7e2188140b050fe6b16d4",
+  "inputs": {
+    "labs/lora-training-source/resume.py": "5fe851733ced4158f5fcab8488379ecb4276f044a69dc7aa3d88fd636bb901ff",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/lora-resume-source/collect.py": "457976e7ba6041a50a12179cfb7acba4c366a0a63eb93cfddb6b74da0325d839",
+    ".github/workflows/lora-resume-source-laboratory.yml": "f3c313da6d616384810de5b04be55a63094b8f5ed1b333bc0dc38e5d0dfcc9d1",
+    "labs/clip-source/requirements-win-x64.txt": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+    "labs/clip-source/requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "labs/clip-source/requirements-osx-arm64.txt": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+  },
+  "sources": {
+    "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+    "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/ldm/modules/attention.py": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+    "comfy/ldm/modules/diffusionmodules/openaimodel.py": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96"
+  },
+  "artifact": {
+    "file": "resume.json",
+    "sha256": "47bb97f556dbfa0b3e6613e2e2be8613dcc643d3e9d906add15ee58e94268086",
+    "bytes": 676892,
+    "cases": 4
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 1,
+    "system": "Windows",
+    "machine": "AMD64",
+    "torchBuild": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n"
+  },
+  "scope": "Independent frozen Python source only. No model weights or .NET outputs. Not product qualification."
+}

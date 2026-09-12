@@ -31,6 +31,17 @@ constructeurs, même si leurs valeurs initiales sont ensuite remplacées. Quatre
 références SD1/SD2 vérifient exactement tous les paramètres et l'état du générateur,
 avec facteurs F32/F16/BF16, rangs différents et priorités concurrentes.
 
+La première CI a montré que l'empreinte globale d'initialisation de la référence
+Windows ne s'applique pas à Linux/macOS. La [collecte source indépendante
+34725638721](https://github.com/skyline624/ComfySharp/actions/runs/34725638721)
+reproduit exactement les empreintes observées sur ces deux plateformes. Les
+scénarios, facteurs repris et états RNG sont identiques ; l'initialisation des
+nouveaux facteurs dépend du runtime CPU source. Les tests sélectionnent donc
+une référence source immuable par plateforme, vérifiée par SHA256 et provenance,
+et conservent les comparaisons exactes. Deux tests supplémentaires vérifient que
+tous les champs des scénarios sauf l'empreinte globale restent identiques à
+Windows. Aucun changement du moteur ni relâchement numérique n'est effectué.
+
 `SdTrainingResumeSteps.Parse` reproduit séparément le compteur du nom sélectionné :
 `[None]` donne zéro ; sinon la source prend le dernier fragment séparé par `_`
 avant le premier `_steps_` et le convertit en entier. Treize références couvrent

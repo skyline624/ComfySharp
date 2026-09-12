@@ -129,5 +129,21 @@
     },
     "elapsedSeconds": 14.7678084,
     "scope": "Real SD1.5 all-target LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "sourcePlatformInvestigation": {
+    "runId": 34725638721,
+    "collectorCommit": "8305bc1ffbb6541478789572e2313035d8c0faf5",
+    "conclusion": "success",
+    "windowsSha256": "47bb97f556dbfa0b3e6613e2e2be8613dcc643d3e9d906add15ee58e94268086",
+    "linuxAndMacosSha256": "71aae73ffa59a13fe42e42829f5b1fb16b8dc4b3e1ecd3bb830b7ae84ead1eae",
+    "finding": "Frozen source produces the same platform-specific initialization hashes as C#. All scenario fields except the aggregate parameter hash are identical across platforms.",
+    "exactComparisonsPreserved": true,
+    "implementationChanged": false,
+    "newLocalTests": {
+      "skipped": 0,
+      "failed": 0,
+      "passed": 16
+    },
+    "correctedCi": "pending"
   }
 }

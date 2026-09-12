@@ -21,12 +21,20 @@ public sealed class SdLoraResumeTests
             else Assert.Equal(row.GetProperty("steps").GetString(),SdTrainingResumeSteps.Parse(name).ToString(System.Globalization.CultureInfo.InvariantCulture));
         }
     }
-    private static JsonDocument Fixture()
+    [Theory]
+    [InlineData("linux-x64")] [InlineData("osx-arm64")]
+    public void Platform_references_preserve_all_source_inputs_loaded_factors_and_rng(string target)
     {
-        using var stream=typeof(SdLoraResumeTests).Assembly.GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.lora-resume.reference.json")!;
-        Assert.Equal("47bb97f556dbfa0b3e6613e2e2be8613dcc643d3e9d906add15ee58e94268086",Convert.ToHexStringLower(SHA256.HashData(stream)));
-        stream.Position=0; return JsonDocument.Parse(stream);
+        using var windows=LoraResumeReferenceCorpus.Load("win-x64");
+        using var platform=LoraResumeReferenceCorpus.Load(target);
+        foreach(var field in windows.RootElement.EnumerateObject())
+            if(field.Name!="cases") Assert.True(JsonElement.DeepEquals(field.Value,platform.RootElement.GetProperty(field.Name)),field.Name);
+        var left=windows.RootElement.GetProperty("cases");var right=platform.RootElement.GetProperty("cases");
+        for(int i=0;i<left.GetArrayLength();i++)
+            foreach(var field in left[i].EnumerateObject())
+                if(field.Name!="allParameterSha256") Assert.True(JsonElement.DeepEquals(field.Value,right[i].GetProperty(field.Name)),i+"/"+field.Name);
     }
+    private static JsonDocument Fixture() => LoraResumeReferenceCorpus.Load();
     private static Tensor Read(JsonElement value)
     {
         var dtype=value.GetProperty("dtype").GetString() switch {"torch.float16"=>ScalarType.Float16,"torch.bfloat16"=>ScalarType.BFloat16,"torch.int64"=>ScalarType.Int64,_=>ScalarType.Float32};
