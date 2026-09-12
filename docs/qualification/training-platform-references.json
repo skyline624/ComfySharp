@@ -1,0 +1,150 @@
+{
+  "scope": "Independent same-platform CPU training source references; test-only integration",
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "collectorCommit": "cd4d0348642984393aed211cc1f8d781eea7b5be",
+  "sourceRun": {
+    "id": "34711337834",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34711337834",
+    "conclusion": "success",
+    "platforms": [
+      "win-x64",
+      "linux-x64",
+      "osx-arm64"
+    ]
+  },
+  "protocolSha256": "b6b861e2fd482196f18917842282349d4673ca1406014303f4571a090534c790",
+  "artifacts": {
+    "win-x64": {
+      "manifestSha256": "9361d3f035e1b4767b35ad6ae84e6de906497c5a5df13f226783f1f8d9c86660",
+      "artifacts": {
+        "batches": {
+          "file": "batches.json",
+          "sha256": "c4d0696847ab0b770e6068ab9119852d57dabfafb9dcc9a826a603cadfa140f0",
+          "bytes": 125421,
+          "cases": 6
+        },
+        "denoising": {
+          "file": "denoising.json",
+          "sha256": "6a014fc429a878fd4d06ef2832fae574810637c1c01ae4096f2bda9303aa4e0a",
+          "bytes": 1015194,
+          "cases": 6
+        },
+        "adapters": {
+          "file": "adapters.json",
+          "sha256": "ae390cc8351a5070c3355f6c0bc788f4a2309c66b0d0af255ff0bbc738bf0a0a",
+          "bytes": 1276903,
+          "cases": 2
+        }
+      }
+    },
+    "linux-x64": {
+      "manifestSha256": "c5a8d10ae3a6dbb89cdd53f269077112bbca71393ad73e824cb061105951a98a",
+      "artifacts": {
+        "batches": {
+          "file": "batches.json",
+          "sha256": "f5aff3c39c0c7edcfddc2f794938935d1a2d8efd612f40bc77c419c2499894e5",
+          "bytes": 125417,
+          "cases": 6
+        },
+        "denoising": {
+          "file": "denoising.json",
+          "sha256": "dec9afae08208c778902f123d45b997a11b9701a194fdf7f416a646784bb8577",
+          "bytes": 1015149,
+          "cases": 6
+        },
+        "adapters": {
+          "file": "adapters.json",
+          "sha256": "3eb545cfc4c60c08330172693276358083aa55f588ddcc1be9e683471f77088e",
+          "bytes": 1276963,
+          "cases": 2
+        }
+      }
+    },
+    "osx-arm64": {
+      "manifestSha256": "1af19a5d28a758b974466432086bfa5a6595e109b1eafa3eee52326d87eb3709",
+      "artifacts": {
+        "batches": {
+          "file": "batches.json",
+          "sha256": "7b7e7f6bea06061248297eee42e29fc036d7a413ab2d90c654f04db8a3be0e50",
+          "bytes": 125406,
+          "cases": 6
+        },
+        "denoising": {
+          "file": "denoising.json",
+          "sha256": "fed1ce55058ce3deb7b8d3af2bb55d8f71672f7012ade296e6e5d0800aadfea9",
+          "bytes": 1015098,
+          "cases": 6
+        },
+        "adapters": {
+          "file": "adapters.json",
+          "sha256": "e5041fcf444a4c4ce7a4f82bc234d8b2794db40ed321badc630229a8320815dc",
+          "bytes": 1276909,
+          "cases": 2
+        }
+      }
+    }
+  },
+  "localDotNet": {
+    "target": "win-x64",
+    "total": 219,
+    "passed": 219,
+    "failed": 0,
+    "skipped": 0,
+    "trxSha256": "eca45a483b217143f58234c66088f7ea297df7c8468329d2327889a138823b37",
+    "inputs": {
+      "baseCommit": "cd4d0348642984393aed211cc1f8d781eea7b5be",
+      "sourceHashes": {
+        ".github/workflows/ci.yml": "6fa9f42ed10f4e092aad699a3c53067dd84ba38e3710d54dec1e1c45dbf8695a",
+        "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+        "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+        "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+        "labs/training-platform-source/protocol.json": "b6b861e2fd482196f18917842282349d4673ca1406014303f4571a090534c790",
+        "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "6e3ca5f59128aa284b559d0189afbb885e668e34a6f65238406d9b5007aa6197",
+        "tests/ComfySharp.Inference.Tests/Fixtures/lora-denoising.reference.json": "6a014fc429a878fd4d06ef2832fae574810637c1c01ae4096f2bda9303aa4e0a",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-adapters.reference.json": "ae390cc8351a5070c3355f6c0bc788f4a2309c66b0d0af255ff0bbc738bf0a0a",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-batches.reference.json": "c4d0696847ab0b770e6068ab9119852d57dabfafb9dcc9a826a603cadfa140f0",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.linux-x64.adapters.json.gz": "a466f4001ceef5780131b7201e2726340720bcbf5830397f27dd97e90c71491d",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.linux-x64.batches.json.gz": "e5a9f892bf9872920b728807ce7789799fba8aeff532a8f8da5bfbd5b02fe989",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.linux-x64.denoising.json.gz": "de96fc420d7708ecfa8036d63032687e65fb9b27dcb36401bccfa02ec1d8b523",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.linux-x64.manifest.json": "c5a8d10ae3a6dbb89cdd53f269077112bbca71393ad73e824cb061105951a98a",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.osx-arm64.adapters.json.gz": "6eb956b10030eeabdac77cbee5490fe350ae28383f7115650798cf93565240e7",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.osx-arm64.batches.json.gz": "87b23d65485edd1815b1ae0412a1d9e65087700bd73392c0fe7a29a895d57175",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.osx-arm64.denoising.json.gz": "00f99ebc377fd263c5700452b193e432910fe8b9ef70a8325f66801e68d22e86",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.osx-arm64.manifest.json": "1af19a5d28a758b974466432086bfa5a6595e109b1eafa3eee52326d87eb3709",
+        "tests/ComfySharp.Inference.Tests/Fixtures/training-source.win-x64.manifest.json": "9361d3f035e1b4767b35ad6ae84e6de906497c5a5df13f226783f1f8d9c86660",
+        "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "3dc62c00ea83497210dda94dd2af821c0add088a672bd9227fbaeb7eb825270b",
+        "tests/ComfySharp.Inference.Tests/SdLoraObjectiveTests.cs": "a5fda927a25b61e3e66748445de3824908d90665529d775f863a4d2d389b6031",
+        "tests/ComfySharp.Inference.Tests/SdTrainingBatchTests.cs": "5f0b58c1616af348bf81893879536285c00548c0616345851b9efa4b3982a17b",
+        "tests/ComfySharp.Inference.Tests/TrainingReferenceCorpus.cs": "9c45ecac42a3114f02659f107c038fb1839e39fb41ed433e40d27ff2f43d43bf",
+        "tests/ComfySharp.Inference.Tests/TrainingReferenceCorpusTests.cs": "f2771e7a5e67217b74f5ca1037ff9b3107c9b6464a04d51696fb3f1084c129b1"
+      }
+    }
+  },
+  "dotNetCi": {
+    "status": "pending",
+    "note": "Source collection success does not establish .NET comparison success on Linux/macOS."
+  },
+  "invariants": [
+    "Original Windows reference bytes unchanged",
+    "Source recipes, explicit inputs, selections and RNG states unchanged",
+    "Exact comparisons retained",
+    "Absolute and relative bounds both remain 3e-5"
+  ],
+  "sourceObservations": {
+    "largestBatchNoiseSigmaDifferenceFromWindows": {
+      "linux-x64": 2.384185791015625e-07,
+      "osx-arm64": 1.2293457984924316e-06
+    },
+    "differentUpFactorHashesFromWindowsPerPlatform": 282,
+    "firstLinuxAndMacUpFactorSha256": "25e8628c384810845e3afa1bff02877506ee0bbb89610f2491fdd4b479d33aad"
+  },
+  "limitations": [
+    "No new model execution or GPU qualification in this change",
+    "Reduced synthetic source cases do not qualify a model family or complete training nodes",
+    "CPU platform evidence does not prove a specific native kernel/compiler cause"
+  ],
+  "diskUse": {
+    "addedReferenceResourcesBytes": 822345,
+    "modelsDownloadedOrCopied": false
+  }
+}

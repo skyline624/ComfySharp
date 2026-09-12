@@ -1,5 +1,7 @@
 # État du port — 0.1.0-dev
 
+Les [références CPU d’entraînement par plateforme](TRAINING_PLATFORM_REFERENCES.md) sont collectées indépendamment depuis la source figée sur Windows, Linux et macOS. Les trois collectes passent ; les fichiers Windows restent identiques. **219 tests ciblés passent localement sur Windows**, sans assouplir les comparaisons. La nouvelle comparaison .NET Linux/macOS reste en attente de CI. Aucun modèle supplémentaire n’est téléchargé ou copié.
+
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
 L’[initialisation complète des adapters SD ordinaires](TRAINING_ADAPTERS.md) couvre **686 cibles et 1 250 paramètres entraînables**, y compris les normalisations, biais et coefficients alpha. **217 tests ciblés passent**, avec initialisation/RNG exacts et deux mises à jour comparées à la source réduite SD1/SD2. Un pont natif complète le générateur CUDA manquant de TorchSharp : le vrai SD1.5 effectue deux mises à jour sur toutes les cibles avec gradients finis et base inchangée. Aucun modèle/adapter supplémentaire n’est écrit. Voir la [preuve](qualification/training-adapters.json). Sauvegarde/rechargement des adapters mixtes, images réelles et nœud complet restent à intégrer. La [CI précédente](qualification/training-batches-ci-d1626ad.md) passe sur Windows mais échoue sur les six comparaisons exactes de bruit de lots sur Linux/macOS ; aucune assertion n’est assouplie.

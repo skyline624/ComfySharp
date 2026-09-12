@@ -7,7 +7,7 @@ namespace ComfySharp.Inference.Tests;
 [Collection("Classical VAE")]
 public sealed class SdLoraObjectiveTests
 {
-    private static JsonDocument Corpus() => JsonDocument.Parse(typeof(SdLoraObjectiveTests).Assembly.GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.lora-denoising.reference.json")!);
+    private static JsonDocument Corpus() => TrainingReferenceCorpus.Load("denoising");
     private static Tensor Read(JsonElement e) => tensor(e.GetProperty("values").EnumerateArray().Select(v => v.GetSingle()).ToArray(), e.GetProperty("shape").EnumerateArray().Select(v => v.GetInt64()).ToArray()).clone();
     private static void Compare(Tensor actual, JsonElement expected)
     {

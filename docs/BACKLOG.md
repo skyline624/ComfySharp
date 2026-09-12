@@ -1,5 +1,7 @@
 # Backlog de migration
 
+[Références CPU d’entraînement](TRAINING_PLATFORM_REFERENCES.md) : corpus source indépendants Windows/Linux/macOS, vérification SHA-256 et compression des références supplémentaires (< 1 Mo). 219 tests locaux passent ; comparaison .NET sur les autres plateformes encore en attente de CI. Les exigences de qualification complète restent ouvertes.
+
 Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est clos par la seule présence d'un projet ou d'une classe.
 
 | Lot | Livré actuellement | Travail nécessaire avant clôture |

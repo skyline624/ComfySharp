@@ -8,7 +8,7 @@ namespace ComfySharp.Inference.Tests;
 [Collection("Classical VAE")]
 public sealed class SdTrainingBatchTests
 {
-    private static JsonDocument Corpus() => JsonDocument.Parse(typeof(SdTrainingBatchTests).Assembly.GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.training-batches.reference.json")!);
+    private static JsonDocument Corpus() => TrainingReferenceCorpus.Load("batches");
     private static Tensor Read(JsonElement e) => tensor(e.GetProperty("values").EnumerateArray().Select(v => v.GetSingle()).ToArray(), e.GetProperty("shape").EnumerateArray().Select(v => v.GetInt64()).ToArray()).clone();
     private static void Exact(Tensor actual, JsonElement expected)
     {

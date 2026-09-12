@@ -31,7 +31,7 @@ public sealed class SdAdapterInitializationTests
         try
         {
             using var scope = NewDisposeScope();
-            using var corpus = JsonDocument.Parse(typeof(SdAdapterInitializationTests).Assembly.GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.training-adapters.reference.json")!);
+            using var corpus = TrainingReferenceCorpus.Load("adapters");
             var row = corpus.RootElement.GetProperty("cases")[caseIndex]; bool linear = row.GetProperty("linearProjection").GetBoolean();
             var config = new SdUnetConfig(32, 16, linear ? SdAttentionHeadMode.FixedSize : SdAttentionHeadMode.FixedCount, linear ? 8 : 4, linear);
             using var global = manual_seed(771); using var originalState = global.get_state();
