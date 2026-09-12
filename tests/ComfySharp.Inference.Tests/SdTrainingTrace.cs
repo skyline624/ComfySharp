@@ -67,13 +67,14 @@ internal sealed class SdTrainingTrace : IDisposable
     private static object? NativeIdentity()
     {
         if(Environment.GetEnvironmentVariable("COMFYSHARP_TRAINING_NATIVE_IDENTITY")!="1")return null;
+        var buildInfo=NativeRuntimeBuildInfo.Read();
         using var process=Process.GetCurrentProcess();
         string managed=Path.GetFullPath(typeof(Tensor).Assembly.Location);
         var paths=process.Modules.Cast<ProcessModule>().Select(m=>m.FileName).Distinct(StringComparer.Ordinal)
             .Where(p=>!string.Equals(Path.GetFullPath(p),managed,OperatingSystem.IsWindows()?StringComparison.OrdinalIgnoreCase:StringComparison.Ordinal))
-            .Where(p=>new[]{"torch","c10","gomp","iomp","libomp","python"}.Any(s=>Path.GetFileName(p).Contains(s,StringComparison.OrdinalIgnoreCase)))
+            .Where(p=>new[]{"torch","c10","gomp","iomp","libomp","ComfySharp.Native","python"}.Any(s=>Path.GetFileName(p).Contains(s,StringComparison.OrdinalIgnoreCase)))
             .Order(StringComparer.Ordinal);
-        return new{libraries=paths.Select(p=>
+        return new{cpuCapability=buildInfo.CpuCapability,buildConfiguration=buildInfo.BuildConfiguration,libraries=paths.Select(p=>
         {
             using var stream=File.OpenRead(p);
             return new{name=Path.GetFileName(p),bytes=stream.Length,sha256=Convert.ToHexStringLower(SHA256.HashData(stream))};

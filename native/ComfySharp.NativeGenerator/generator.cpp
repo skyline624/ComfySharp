@@ -1,4 +1,5 @@
 #include <ATen/Context.h>
+#include <ATen/Version.h>
 #include <ATen/core/Generator.h>
 #include <torch/version.h>
 #include <cstdint>
@@ -38,3 +39,26 @@ CS_EXPORT const char* CSGenerator_Initialize(void* handle, int deviceType, int d
     }
 }
 CS_EXPORT int CSGenerator_AbiVersion() noexcept { return 210000; }
+
+CS_EXPORT int CSRuntime_AbiVersion() noexcept { return 210000; }
+
+// Copy these UTF-8 strings before calling again on this thread. No tensor or RNG
+// is created, and exceptions never cross the C ABI boundary.
+CS_EXPORT const char* CSRuntime_ReadBuildInfo(const char** capability, const char** configuration) noexcept
+{
+    static thread_local std::string cpu, build, error;
+    if (capability) *capability = nullptr;
+    if (configuration) *configuration = nullptr;
+    try {
+        if (!capability || !configuration) throw std::invalid_argument("Runtime identity outputs must not be null.");
+        cpu = at::get_cpu_capability();
+        build = at::show_config();
+        *capability = cpu.c_str();
+        *configuration = build.c_str();
+        return nullptr;
+    } catch (const std::exception& failure) {
+        error = failure.what(); return error.c_str();
+    } catch (...) {
+        error = "Unknown native runtime identity failure."; return error.c_str();
+    }
+}

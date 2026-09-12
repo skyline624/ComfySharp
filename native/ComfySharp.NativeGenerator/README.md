@@ -1,5 +1,11 @@
 # CUDA generator bridge
 
+The same library now exports `CSRuntime_AbiVersion` and `CSRuntime_ReadBuildInfo`
+for the loaded libtorch CPU dispatch/build configuration. The new exports are
+optional for existing generation; the original generator ABI remains unchanged.
+The C# runtime identity reader requires them and copies thread-local UTF-8 strings
+synchronously. See [runtime identity](../../docs/NATIVE_RUNTIME_IDENTITY.md).
+
 TorchSharp 0.107.0's native generator constructor returns a CPU generator even
 when CUDA is requested; this was reproduced with the pinned Windows CUDA bundle.
 The official [THSTorch.cpp](https://github.com/dotnet/TorchSharp/blob/main/src/Native/LibTorchSharp/THSTorch.cpp)

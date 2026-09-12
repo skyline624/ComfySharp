@@ -7,3 +7,10 @@ target_include_directories(ComfySharp.Native PRIVATE ${TORCH_INCLUDE_DIRS})
 target_link_libraries(ComfySharp.Native PRIVATE ${TORCH_LIBRARIES})
 set_property(TARGET ComfySharp.Native PROPERTY MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+# Copied distributions must resolve their own native siblings, never the SDK or
+# a laboratory interpreter directory retained from the build machine.
+if(APPLE)
+    set_target_properties(ComfySharp.Native PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "@loader_path")
+elseif(UNIX)
+    set_target_properties(ComfySharp.Native PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "$ORIGIN")
+endif()

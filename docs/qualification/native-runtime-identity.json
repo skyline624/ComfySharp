@@ -1,0 +1,61 @@
+{
+  "scope": "Windows CPU native runtime identity; no GPU, model or numerical profile qualification.",
+  "baseCommit": "22958b033f3040aaa99124f4bd1a5e4745c9408f",
+  "sourceInputs": {
+    "native/ComfySharp.NativeGenerator/generator.cpp": "ca16e5847368a545d947a115fafe392b534a63d64c0ba90275e9a990f3415c15",
+    "src/ComfySharp.Inference/NativeRuntimeBuildInfo.cs": "f6de00ece006c413b21ab399ef557c9a355445d9e0019d720ba12ba81316d7d5",
+    "tools/ComfySharp.RuntimeProbe/RuntimeIdentityDiagnostic.cs": "1f9ba9ec1adc3e75badeb9d17d710c5a961bff253a20f91fa628a6409ab0eda6",
+    "tools/ComfySharp.RuntimeProbe/Program.cs": "969167d475724704444aedfcfaa4dbba3afcc702a38c388db17c526263c29209",
+    "tools/build-native-generator.ps1": "fea7f4525dc4d9c5039e142b018d4fca1106386619961d1b59c10ce81594481b",
+    "tests/ComfySharp.Inference.Tests/NativeRuntimeBuildInfoTests.cs": "8274c7f554581b41b19621e4b87d3c27a7945580ea692b7f2aceabf21ca82545"
+  },
+  "localTests": {
+    "passed": 870,
+    "failed": 0,
+    "skipped": 0,
+    "trxSha256": "d2f38b43c05d5c901c00f2930ae815e06b5e4066e5d3ac779e281895fe32e478"
+  },
+  "nativeControls": {
+    "missingBridgeRejected": true,
+    "independentProcessesIdentical": true,
+    "automaticCpuCapability": "AVX2",
+    "requestedDefaultCpuCapability": "DEFAULT",
+    "automaticIdentitySha256": "1e8cbd5fddb4379e4be605c912dbae8376d490aa4249d2f21947dc69fabcd0b7",
+    "defaultIdentitySha256": "8a62da51262adc9add08258e1e366cd09cee54bf72607452bd2a13540eba8bcf",
+    "buildConfigurationSha256": "d40e6aab5fdae11211897b0b5f784fe1f737dc337bb68430e5dcacda25bb2594",
+    "libraries": [
+      {
+        "name": "ComfySharp.Native.dll",
+        "bytes": 25088,
+        "sha256": "e2d054724d2ea414bbd33269165a02c08af9cf9b99bfde211266a051d39546ed"
+      },
+      {
+        "name": "LibTorchSharp.DLL",
+        "bytes": 1324984,
+        "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+      },
+      {
+        "name": "c10.dll",
+        "bytes": 1081344,
+        "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+      },
+      {
+        "name": "libiomp5md.dll",
+        "bytes": 1614192,
+        "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+      },
+      {
+        "name": "torch_cpu.DLL",
+        "bytes": 264955904,
+        "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+      }
+    ],
+    "threads": 64,
+    "interopThreads": 64
+  },
+  "limitations": [
+    "CMake Linux bridge and candidate identity gate await CI.",
+    "The identity hash describes observations, not an accepted reference profile.",
+    "The existing CUDA generator export source is unchanged; CUDA was not executed in this campaign."
+  ]
+}

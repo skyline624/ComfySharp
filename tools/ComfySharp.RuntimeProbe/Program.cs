@@ -4,6 +4,8 @@ using ComfySharp.Inference;
 using TorchSharp;
 using static TorchSharp.torch;
 
+if(args.Length>0&&args[0]=="runtime-info")return ComfySharp.RuntimeProbe.RuntimeIdentityDiagnostic.Run(args[1..],Console.Out);
+
 if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline" or "sd15-generate" or "sd-lora-train" or "sd-all-adapter-train")
 {
     using var cancellation = new CancellationTokenSource();

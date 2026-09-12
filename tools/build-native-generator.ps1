@@ -5,7 +5,7 @@ param(
 $ErrorActionPreference = 'Stop'
 if (-not $IsWindows) { throw 'This build helper requires Windows x64 and Visual Studio C++ Build Tools. Use the CMake project for other toolchains.' }
 $sdk = (Resolve-Path -LiteralPath $TorchSdkRoot).Path
-foreach ($relative in @('include/ATen/Context.h','include/torch/csrc/api/include/torch/version.h','lib/torch_cpu.lib','lib/c10.lib')) {
+foreach ($relative in @('include/ATen/Context.h','include/ATen/Version.h','include/torch/csrc/api/include/torch/version.h','lib/torch_cpu.lib','lib/c10.lib')) {
     if (-not (Test-Path -LiteralPath (Join-Path $sdk $relative))) { throw "Missing libtorch SDK input: $relative" }
 }
 $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'

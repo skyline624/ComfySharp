@@ -42,7 +42,8 @@ def trx(directory, expected):
     root = ET.parse(paths[0]).getroot()
     ns = {'t': root.tag.split('}')[0].lstrip('{')}
     tests = root.findall('.//t:UnitTestResult', ns)
-    require(len(tests) == expected, 'Test count changed or tests did not execute.')
+    require(len(tests) == expected if expected is not None else len(tests) >= 865,
+            'Test count changed or tests did not execute.')
     require(all(t.attrib['outcome'] in ('Passed', 'Failed') for t in tests), 'Tests were skipped or incomplete.')
     failures = []
     for test in tests:
@@ -74,6 +75,11 @@ def main():
     precondition = native['validate_loader_environment'](os.environ, sys.base_prefix)
     inventory = stage['inventory']
     before = inventory(built)
+    bridge = built/'libComfySharp.Native.so'
+    require(bridge.is_file(), 'Runtime identity bridge is missing.')
+    bridge_elf = subprocess.check_output(['readelf','-d',str(bridge)],text=True)
+    require('[$ORIGIN]' in bridge_elf and str(wheel) not in bridge_elf,
+            'Runtime bridge must resolve native siblings without an SDK runpath.')
     wheel_before, source_before = inventory(wheel), inventory(source)
     probes, omps = stage['probe_paths'](before)
     record = native['library_record']
@@ -119,6 +125,12 @@ def main():
             document = json.loads((directory/'traces'/f'case-{case}.json').read_text())
             require(document['completed'], 'Training stopped before both updates and the unchanged base check.')
             require(document['threads'] == document['interopThreads'] == 1, 'Thread control differs.')
+            require(document['native']['cpuCapability'], 'Effective libtorch CPU dispatch is missing.')
+            require(document['native']['buildConfiguration'], 'Loaded libtorch build configuration is missing.')
+            if origin == 'source-native-copy':
+                reference = json.loads((source/f'case-{case}.json').read_text())
+                require(document['native']['cpuCapability'] == reference['cpuCapability'], 'Candidate/source CPU dispatch differs.')
+                require(document['native']['buildConfiguration'] == source_manifest['torchBuild'], 'Candidate/source build configuration differs.')
             require(not any('python' in r['name'].lower() for r in document['native']['libraries']), 'Python loaded in .NET.')
             native['verify_origin'](document, core if origin == 'source-native-copy' else original, original,
                 original[stage['BINDING']], omp if origin == 'source-native-copy' else original_omp, original_omp,
@@ -142,7 +154,8 @@ def main():
         with (directory/'process.log').open('x', encoding='utf-8') as log:
             child = subprocess.run(command, cwd=ROOT, env=os.environ.copy(), stdout=log, stderr=subprocess.STDOUT, timeout=420)
         require(child.returncode in (0, 1), 'Ordinary inference process crashed.')
-        runs[origin+'-ordinary'] = {'exitCode': child.returncode, **trx(directory/'results', 865)}
+        expected_count = None if origin == 'original' else runs['original-ordinary']['executed']
+        runs[origin+'-ordinary'] = {'exitCode': child.returncode, **trx(directory/'results', expected_count)}
     for name, build in builds.items():
         require(inventory(build) == (candidate_inventory if name == 'source-native-copy' else before), 'Build inventory changed.')
     require(inventory(wheel) == wheel_before and inventory(source) == source_before, 'Protected source inputs changed.')
@@ -151,6 +164,7 @@ def main():
     accepted = all(not c['baseWeightDifferences'] and not c['missingCaptures'] and c['completed'] and
                    all(not row['outsideOriginalTolerance'] for row in c['comparisons']) for c in candidate)
     write(output/'result.json', {'scope': 'Reduced SD1/SD2 all-target training only; immutable cross-host oracle verdicts remain separate.',
+        'effectiveCpuDispatch':{name:[d['native']['cpuCapability'] for d in docs] for name,docs in documents.items()},
         'nativeIdentityVerified': True, 'copyControlExact': True, 'protectedInputsUnchanged': True,
         'candidateMatchesSameHostSourceTolerance': accepted, 'runs': runs, 'candidateComparison': candidate})
     # Preserve original verdicts, but gate this candidate experiment on its independently observed same-host source.

@@ -6,6 +6,12 @@ libraries. It reuses the established ELF, copy, inventory and loaded-library
 controls. Only runner temporary copies are modified; no Python interpreter or
 binding is loaded into .NET. The protocol now pins these reused controls too.
 
+The identity bridge is built with CMake and the matching pinned source SDK.
+Candidate CPU dispatch and build configuration must match the source's actual
+reports. The ordinary suite now admits added tests above its established 865-test
+baseline and requires exactly the same executed count for both bundles, without
+skips. Historical reports retain their original counts.
+
 `COMFYSHARP_TRAINING_TRACE_COMPLETE=1`, with capture enabled, defers numerical
 comparison assertions until both updates finish. Every failed assertion is
 retained and the original test still fails. Other exceptions, initialization

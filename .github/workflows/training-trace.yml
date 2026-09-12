@@ -37,7 +37,14 @@ jobs:
           "$RUNNER_TEMP/training-trace-python/bin/python" -I -B labs/training-trace/source.py --source upstream-source --output TrainingTrace/source
           lscpu --json > TrainingTrace/cpu.json
       - run: dotnet restore tests/ComfySharp.Inference.Tests --locked-mode -p:NativeRuntime=linux-x64
-      - run: dotnet build tests/ComfySharp.Inference.Tests -c Release --no-restore -p:NativeRuntime=linux-x64
+      - name: Build the native identity bridge with the matching SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          torchSdk=$("$RUNNER_TEMP/training-trace-python/bin/python" -I -c 'import importlib.metadata; print(importlib.metadata.distribution("torch").locate_file("torch"))')
+          cmake -S native/ComfySharp.NativeGenerator -B "$RUNNER_TEMP/native-runtime-identity" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$torchSdk"
+          cmake --build "$RUNNER_TEMP/native-runtime-identity" --config Release --parallel 2
+      - run: dotnet build tests/ComfySharp.Inference.Tests -c Release --no-restore -p:NativeRuntime=linux-x64 -p:NativeGeneratorBridge=${{ runner.temp }}/native-runtime-identity/libComfySharp.Native.so
       - name: Compare independent native copies with the same-host source
         shell: bash
         run: |
