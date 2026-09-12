@@ -1,0 +1,2524 @@
+{
+  "schemaVersion": 1,
+  "scope": "109 new StringFormat cases, five application suites and actual early Desktop/supervised Host smoke at exact CI head; numerical gates retained without new mathematical audit.",
+  "run": {
+    "headSha": "b62f6286efdd8fa265da8bb798a24f293cb394cf",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34667426207",
+    "status": "completed",
+    "conclusion": "failure",
+    "createdAt": "2026-09-12T02:21:18Z",
+    "updatedAt": "2026-09-12T02:26:24Z"
+  },
+  "platforms": {
+    "win-x64": {
+      "jobId": 103482075280,
+      "jobConclusion": "success",
+      "projects": {
+        "Core": {
+          "total": 333,
+          "outcomes": {
+            "Passed": 333
+          }
+        },
+        "Desktop": {
+          "total": 38,
+          "outcomes": {
+            "Passed": 38
+          }
+        },
+        "Host": {
+          "total": 201,
+          "outcomes": {
+            "Passed": 201
+          }
+        },
+        "Inference": {
+          "total": 574,
+          "outcomes": {
+            "Passed": 574
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 63,
+          "outcomes": {
+            "Passed": 63
+          }
+        },
+        "ClipStock": {
+          "total": 3,
+          "outcomes": {
+            "Passed": 3
+          }
+        }
+      },
+      "applicationObservedTotal": 1175,
+      "applicationOutcomes": {
+        "Passed": 1175
+      },
+      "selectedCasesObserved": 109,
+      "selectedOutcomes": {
+        "Passed": 109
+      },
+      "ordinaryPlusStockObservedUnique": 1752,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1752
+      },
+      "buildCatalogApplications": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ],
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "stdoutMarkers": [
+          "2026-09-12T02:24:05.0591667Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview and native preview."
+        ]
+      },
+      "firstNativeLogEvidence": {
+        "source": "logs.txt; no first-use TRX or mathematical traces downloaded",
+        "processSummaries": 9,
+        "passed": 194,
+        "failed": 0,
+        "total": 194,
+        "failedNames": []
+      },
+      "failedSteps": [],
+      "skippedProductSteps": [
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures"
+        }
+      ],
+      "trx": [
+        {
+          "logicalName": "tests-win-x64/Core.trx",
+          "bytes": 498092,
+          "sha256": "8445785353de15d20b66cd0e04c5cf7b5105532eca2519822ad5a4bd760c2131",
+          "project": "Core",
+          "counters": {
+            "total": 333,
+            "executed": 333,
+            "passed": 333,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Desktop.trx",
+          "bytes": 56733,
+          "sha256": "764cbf8e88259e45162017eef984869744e46d340a97858e8b199eba6cb78227",
+          "project": "Desktop",
+          "counters": {
+            "total": 38,
+            "executed": 38,
+            "passed": 38,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Host.trx",
+          "bytes": 460218,
+          "sha256": "9efd3e6719a70597c5b0e3e2eb1fb066838efee6a0949a76a47d875c3eddb17b",
+          "project": "Host",
+          "counters": {
+            "total": 201,
+            "executed": 201,
+            "passed": 201,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Inference.trx",
+          "bytes": 905707,
+          "sha256": "b4ffcea0b97811efd99960b25dbb3df072e4e3746a91a7de55ef007df466e2f5",
+          "project": "Inference",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Tokenization.trx",
+          "bytes": 803199,
+          "sha256": "6e2fd9466bc57c17ccb2de0d9e9e566c2da75536139e5c6a285814a611a653c6",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Workflow.trx",
+          "bytes": 96127,
+          "sha256": "63631b2b694c1cb5b41dc06762d9fc8420de1470c6855e48948387231f18e44f",
+          "project": "Workflow",
+          "counters": {
+            "total": 63,
+            "executed": 63,
+            "passed": 63,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-stock-win-x64/ClipStock.trx",
+          "bytes": 10539,
+          "sha256": "fd23e2ed21228a83779d92d99d5736500e215e75803394147a856591672d10e1",
+          "project": "ClipStock",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 3,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        }
+      ]
+    },
+    "linux-x64": {
+      "jobId": 103482075279,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": {
+          "total": 333,
+          "outcomes": {
+            "Passed": 333
+          }
+        },
+        "Desktop": {
+          "total": 38,
+          "outcomes": {
+            "Passed": 38
+          }
+        },
+        "Host": {
+          "total": 201,
+          "outcomes": {
+            "Passed": 201
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 63,
+          "outcomes": {
+            "Passed": 63
+          }
+        }
+      },
+      "applicationObservedTotal": 1175,
+      "applicationOutcomes": {
+        "Passed": 1175
+      },
+      "selectedCasesObserved": 109,
+      "selectedOutcomes": {
+        "Passed": 109
+      },
+      "ordinaryPlusStockObservedUnique": 1175,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1175
+      },
+      "buildCatalogApplications": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ],
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "stdoutMarkers": [
+          "2026-09-12T02:22:54.6449107Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview and native preview."
+        ]
+      },
+      "firstNativeLogEvidence": {
+        "source": "logs.txt; no first-use TRX or mathematical traces downloaded",
+        "processSummaries": 9,
+        "passed": 178,
+        "failed": 16,
+        "total": 194,
+        "failedNames": [
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")"
+        ]
+      },
+      "failedSteps": [
+        {
+          "number": 11,
+          "name": "Exercise reference fixtures as the first native access in separate processes"
+        }
+      ],
+      "skippedProductSteps": [
+        {
+          "number": 12,
+          "name": "Test inference contracts and CPU primitives"
+        },
+        {
+          "number": 13,
+          "name": "Inspect a safetensors file in a fresh process without libtorch"
+        },
+        {
+          "number": 14,
+          "name": "Tokenize CLIP text in a fresh process without libtorch"
+        },
+        {
+          "number": 15,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture"
+        },
+        {
+          "number": 16,
+          "name": "Exercise actual native CPU operations"
+        },
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process"
+        },
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures"
+        }
+      ],
+      "trx": [
+        {
+          "logicalName": "tests-linux-x64/Core.trx",
+          "bytes": 504647,
+          "sha256": "f96f86c4568b6762e3a88c565ac2ed8b7f4c4ccf720f31d7919ca9cc9fa83fdc",
+          "project": "Core",
+          "counters": {
+            "total": 333,
+            "executed": 333,
+            "passed": 333,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Desktop.trx",
+          "bytes": 57388,
+          "sha256": "31aee3688d0d4df7adff9aeb0dcd7b80c987ecefa1b3a10864fcf238ba28abf9",
+          "project": "Desktop",
+          "counters": {
+            "total": 38,
+            "executed": 38,
+            "passed": 38,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Host.trx",
+          "bytes": 452863,
+          "sha256": "4cbb68c0c8c7c160b3e4afc92fb18adb859160ddc353a957344fb1c9e7dd90ed",
+          "project": "Host",
+          "counters": {
+            "total": 201,
+            "executed": 201,
+            "passed": 201,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Tokenization.trx",
+          "bytes": 813894,
+          "sha256": "ea0c14be301472ad25cdad706e1ee691ba4bef49430e02779ffe1920a20908ea",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Workflow.trx",
+          "bytes": 97282,
+          "sha256": "ca8fc8b1ff681602a14ff9101f766f93e641326eb8d684c93c62f4209c8081b4",
+          "project": "Workflow",
+          "counters": {
+            "total": 63,
+            "executed": 63,
+            "passed": 63,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        }
+      ]
+    },
+    "osx-arm64": {
+      "jobId": 103482075141,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": {
+          "total": 333,
+          "outcomes": {
+            "Passed": 333
+          }
+        },
+        "Desktop": {
+          "total": 38,
+          "outcomes": {
+            "Passed": 38
+          }
+        },
+        "Host": {
+          "total": 201,
+          "outcomes": {
+            "Passed": 201
+          }
+        },
+        "Inference": {
+          "total": 574,
+          "outcomes": {
+            "Passed": 574
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 63,
+          "outcomes": {
+            "Passed": 63
+          }
+        },
+        "ClipStock": {
+          "total": 3,
+          "outcomes": {
+            "Failed": 2,
+            "Passed": 1
+          }
+        }
+      },
+      "applicationObservedTotal": 1175,
+      "applicationOutcomes": {
+        "Passed": 1175
+      },
+      "selectedCasesObserved": 109,
+      "selectedOutcomes": {
+        "Passed": 109
+      },
+      "ordinaryPlusStockObservedUnique": 1752,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1750,
+        "Failed": 2
+      },
+      "buildCatalogApplications": [
+        {
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        }
+      ],
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "stdoutMarkers": [
+          "2026-09-12T02:22:39.1351400Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview and native preview."
+        ]
+      },
+      "firstNativeLogEvidence": {
+        "source": "logs.txt; no first-use TRX or mathematical traces downloaded",
+        "processSummaries": 9,
+        "passed": 194,
+        "failed": 0,
+        "total": 194,
+        "failedNames": []
+      },
+      "failedSteps": [
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process"
+        }
+      ],
+      "skippedProductSteps": [],
+      "trx": [
+        {
+          "logicalName": "tests-osx-arm64/Core.trx",
+          "bytes": 521393,
+          "sha256": "9caf577df1d796f44bb38e2b1214dad70167b306fc74faeff23ad3958e9faf38",
+          "project": "Core",
+          "counters": {
+            "total": 333,
+            "executed": 333,
+            "passed": 333,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Desktop.trx",
+          "bytes": 59384,
+          "sha256": "8d560b419a2f52c1619624e8e4668909fd563e437e6cc0923654a59b26a3761f",
+          "project": "Desktop",
+          "counters": {
+            "total": 38,
+            "executed": 38,
+            "passed": 38,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Host.trx",
+          "bytes": 463773,
+          "sha256": "15694fab610cc36ff6e4369014286206dafb254aec51d84898d2b0209e2b714b",
+          "project": "Host",
+          "counters": {
+            "total": 201,
+            "executed": 201,
+            "passed": 201,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Inference.trx",
+          "bytes": 947794,
+          "sha256": "a650e7274d83f317cda5b7d9f8d9daeda9b6e6d0aca508e04e4391035041ae33",
+          "project": "Inference",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Tokenization.trx",
+          "bytes": 840990,
+          "sha256": "9cf2c44684593df31f08f7cc3dec77d51932130d783d09a905d600f0670fbcd8",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Workflow.trx",
+          "bytes": 100528,
+          "sha256": "745f6b3cf88bf6878462f9808e4556aaae3a4249321c21159360dc661676dbc3",
+          "project": "Workflow",
+          "counters": {
+            "total": 63,
+            "executed": 63,
+            "passed": 63,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": []
+        },
+        {
+          "logicalName": "tests-stock-osx-arm64/ClipStock.trx",
+          "bytes": 12902,
+          "sha256": "453ccb8eee12b18aab0c0cb18586fa42786f514da86fb786b8cbd8e6bc975f56",
+          "project": "ClipStock",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 1,
+            "failed": 2,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "failures": [
+            {
+              "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+              "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+              "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "selection": {
+    "expectedGroups": {
+      "StringFormatTests": 36,
+      "StringFormatSourceReferenceTests": 44,
+      "StringFormatHostTests": 12,
+      "StringFormatWorkflowTests": 14,
+      "StringFormatEditorTests": 3
+    },
+    "expectedDistinctCases": 109,
+    "observedDistinctCases": 109,
+    "crossPlatformMatching": "Exact full testName including Theory arguments; no name or argument normalization. Each platform raw testId is retained; the three Avalonia cases have platform-specific IDs.",
+    "rawTestIdsAcrossPlatforms": 115,
+    "observedExecutions": 327,
+    "outcomes": {
+      "Passed": 327
+    },
+    "cases": [
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"astral-fill-codepoint\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "32a49ce9-2f0a-8aca-abe9-ab51041038ef",
+          "linux-x64": "32a49ce9-2f0a-8aca-abe9-ab51041038ef",
+          "osx-arm64": "32a49ce9-2f0a-8aca-abe9-ab51041038ef"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"astral-text-precision\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "6d723684-7087-36ca-1444-b7bcc4ef506c",
+          "linux-x64": "6d723684-7087-36ca-1444-b7bcc4ef506c",
+          "osx-arm64": "6d723684-7087-36ca-1444-b7bcc4ef506c"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"bool-convert-before-precision\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "050ab802-daa1-87ab-cef6-2adb172023d2",
+          "linux-x64": "050ab802-daa1-87ab-cef6-2adb172023d2",
+          "osx-arm64": "050ab802-daa1-87ab-cef6-2adb172023d2"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"center-odd-padding\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "ef60503c-47d2-a04b-170b-2394c6d38e35",
+          "linux-x64": "ef60503c-47d2-a04b-170b-2394c6d38e35",
+          "osx-arm64": "ef60503c-47d2-a04b-170b-2394c6d38e35"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"combining-width-precision\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "79e9d5ee-8c9a-4817-dcff-bc43f995ea68",
+          "linux-x64": "79e9d5ee-8c9a-4817-dcff-bc43f995ea68",
+          "osx-arm64": "79e9d5ee-8c9a-4817-dcff-bc43f995ea68"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"constant-empty-group\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "3db00373-8404-4aa5-d0ad-c6c854809800",
+          "linux-x64": "3db00373-8404-4aa5-d0ad-c6c854809800",
+          "osx-arm64": "3db00373-8404-4aa5-d0ad-c6c854809800"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"container-empty-spec\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_value\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "f7710414-0603-696a-2b5c-02739694ca04",
+          "linux-x64": "f7710414-0603-696a-2b5c-02739694ca04",
+          "osx-arm64": "f7710414-0603-696a-2b5c-02739694ca04"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"conversion-before-nested-spec\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "60b7b8b8-b1d0-f64c-43f0-f22011d2966d",
+          "linux-x64": "60b7b8b8-b1d0-f64c-43f0-f22011d2966d",
+          "osx-arm64": "60b7b8b8-b1d0-f64c-43f0-f22011d2966d"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"default-text-width\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "668bb14c-8a45-9ca0-4839-a131fb059695",
+          "linux-x64": "668bb14c-8a45-9ca0-4839-a131fb059695",
+          "osx-arm64": "668bb14c-8a45-9ca0-4839-a131fb059695"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"dictionary-item\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "264656cf-de80-4e6c-b0cf-9f0c9a4beaa3",
+          "linux-x64": "264656cf-de80-4e6c-b0cf-9f0c9a4beaa3",
+          "osx-arm64": "264656cf-de80-4e6c-b0cf-9f0c9a4beaa3"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"escaped-braces\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "187940ef-9867-80a7-2312-f99eb243ca2d",
+          "linux-x64": "187940ef-9867-80a7-2312-f99eb243ca2d",
+          "osx-arm64": "187940ef-9867-80a7-2312-f99eb243ca2d"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"explicit-left-fill\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "1c583e56-134e-52ab-9c5e-b88057aa3928",
+          "linux-x64": "1c583e56-134e-52ab-9c5e-b88057aa3928",
+          "osx-arm64": "1c583e56-134e-52ab-9c5e-b88057aa3928"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"explicit-right-fill\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a5c76c60-c03b-d8d2-40f3-3a115129373e",
+          "linux-x64": "a5c76c60-c03b-d8d2-40f3-3a115129373e",
+          "osx-arm64": "a5c76c60-c03b-d8d2-40f3-3a115129373e"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"explicit-zero-fill\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "ed1ef4b6-b3d9-2969-e0ce-5ea3066010f4",
+          "linux-x64": "ed1ef4b6-b3d9-2969-e0ce-5ea3066010f4",
+          "osx-arm64": "ed1ef4b6-b3d9-2969-e0ce-5ea3066010f4"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"false-empty-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "127a6bd4-91c2-4abb-7b66-56f4b3840498",
+          "linux-x64": "127a6bd4-91c2-4abb-7b66-56f4b3840498",
+          "osx-arm64": "127a6bd4-91c2-4abb-7b66-56f4b3840498"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"float-numeric-spec\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_value\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "1fa501c2-7b0b-af02-90c5-c21e545e9a88",
+          "linux-x64": "1fa501c2-7b0b-af02-90c5-c21e545e9a88",
+          "osx-arm64": "1fa501c2-7b0b-af02-90c5-c21e545e9a88"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"int64-max-empty-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "b64f180f-3499-1fae-eb8c-3fceab264d65",
+          "linux-x64": "b64f180f-3499-1fae-eb8c-3fceab264d65",
+          "osx-arm64": "b64f180f-3499-1fae-eb8c-3fceab264d65"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"int64-min-empty-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e1fa42a3-446a-821d-1a5b-2f083336e96f",
+          "linux-x64": "e1fa42a3-446a-821d-1a5b-2f083336e96f",
+          "osx-arm64": "e1fa42a3-446a-821d-1a5b-2f083336e96f"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"integer-attribute\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "8807de09-fe96-c722-6f50-4e80eb09352c",
+          "linux-x64": "8807de09-fe96-c722-6f50-4e80eb09352c",
+          "osx-arm64": "8807de09-fe96-c722-6f50-4e80eb09352c"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"integer-convert-before-zero-fill\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "54ac3d23-3a3b-98b7-c256-6ed39f611682",
+          "linux-x64": "54ac3d23-3a3b-98b7-c256-6ed39f611682",
+          "osx-arm64": "54ac3d23-3a3b-98b7-c256-6ed39f611682"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"integer-numeric-spec\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "c245b44c-39e1-b3a1-16b6-a53893f69aea",
+          "linux-x64": "c245b44c-39e1-b3a1-16b6-a53893f69aea",
+          "osx-arm64": "c245b44c-39e1-b3a1-16b6-a53893f69aea"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"leading-zero-width\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "0d2d0254-6112-335d-10ae-b412d0956691",
+          "linux-x64": "0d2d0254-6112-335d-10ae-b412d0956691",
+          "osx-arm64": "0d2d0254-6112-335d-10ae-b412d0956691"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"malformed-conversion\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "302efc52-d19c-acfe-f287-83b7d94a80bc",
+          "linux-x64": "302efc52-d19c-acfe-f287-83b7d94a80bc",
+          "osx-arm64": "302efc52-d19c-acfe-f287-83b7d94a80bc"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"malformed-conversion-before-missing\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "73908b4d-d100-98da-51c1-41c5636824f7",
+          "linux-x64": "73908b4d-d100-98da-51c1-41c5636824f7",
+          "osx-arm64": "73908b4d-d100-98da-51c1-41c5636824f7"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"mapped-format-and-values\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "05443592-0ef4-bb2a-097a-fd16a70f2717",
+          "linux-x64": "05443592-0ef4-bb2a-097a-fd16a70f2717",
+          "osx-arm64": "05443592-0ef4-bb2a-097a-fd16a70f2717"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-automatic-position\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "c0550790-fddb-74e8-01f7-b98a5c1bd312",
+          "linux-x64": "c0550790-fddb-74e8-01f7-b98a5c1bd312",
+          "osx-arm64": "c0550790-fddb-74e8-01f7-b98a5c1bd312"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-before-late-syntax\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "41ea3870-28ca-d079-275c-6cd9df669420",
+          "linux-x64": "41ea3870-28ca-d079-275c-6cd9df669420",
+          "osx-arm64": "41ea3870-28ca-d079-275c-6cd9df669420"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-before-unknown-conversion\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "4ce7c598-0e5a-74d2-229c-061acced59dd",
+          "linux-x64": "4ce7c598-0e5a-74d2-229c-061acced59dd",
+          "osx-arm64": "4ce7c598-0e5a-74d2-229c-061acced59dd"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-before-unsupported-spec\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "2a63e484-bf2c-f39f-5851-aee7a9ab6323",
+          "linux-x64": "2a63e484-bf2c-f39f-5851-aee7a9ab6323",
+          "osx-arm64": "2a63e484-bf2c-f39f-5851-aee7a9ab6323"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-explicit-position\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "af4f3e3c-a175-0464-b64d-5fa4cf397bd8",
+          "linux-x64": "af4f3e3c-a175-0464-b64d-5fa4cf397bd8",
+          "osx-arm64": "af4f3e3c-a175-0464-b64d-5fa4cf397bd8"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"missing-named-field\", classification: \"source-error\", localCategory: \"format_missing_field\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "da24fd7b-1068-ea01-1a6e-1c49f2589134",
+          "linux-x64": "da24fd7b-1068-ea01-1a6e-1c49f2589134",
+          "osx-arm64": "da24fd7b-1068-ea01-1a6e-1c49f2589134"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"nested-width\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "fe3b7917-26c8-d9b5-0e1e-1205905f0ec8",
+          "linux-x64": "fe3b7917-26c8-d9b5-0e1e-1205905f0ec8",
+          "osx-arm64": "fe3b7917-26c8-d9b5-0e1e-1205905f0ec8"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"none-convert-before-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e1619179-3183-6ee5-3b30-3c5a58fd1b17",
+          "linux-x64": "e1619179-3183-6ee5-3b30-3c5a58fd1b17",
+          "osx-arm64": "e1619179-3183-6ee5-3b30-3c5a58fd1b17"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"none-empty-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "4d327398-eb6c-0980-fc7b-a645a105925b",
+          "linux-x64": "4d327398-eb6c-0980-fc7b-a645a105925b",
+          "osx-arm64": "4d327398-eb6c-0980-fc7b-a645a105925b"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"repeat-ordinal-fields\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "83578f9b-30d5-1cc4-474f-66ed13e09023",
+          "linux-x64": "83578f9b-30d5-1cc4-474f-66ed13e09023",
+          "osx-arm64": "83578f9b-30d5-1cc4-474f-66ed13e09023"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"repr-and-ascii\", classification: \"unsupported-profile\", localCategory: \"unsupported_format_feature\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "331b76a0-0ac3-626c-d6a7-6d40f661dc7f",
+          "linux-x64": "331b76a0-0ac3-626c-d6a7-6d40f661dc7f",
+          "osx-arm64": "331b76a0-0ac3-626c-d6a7-6d40f661dc7f"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"true-empty-spec\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "6e500472-9942-8a4b-bd8b-7a0fc2550cfc",
+          "linux-x64": "6e500472-9942-8a4b-bd8b-7a0fc2550cfc",
+          "osx-arm64": "6e500472-9942-8a4b-bd8b-7a0fc2550cfc"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"unclosed-field-before-missing\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e13c882b-e55b-a961-f44b-c7c2e314aeec",
+          "linux-x64": "e13c882b-e55b-a961-f44b-c7c2e314aeec",
+          "osx-arm64": "e13c882b-e55b-a961-f44b-c7c2e314aeec"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"unicode-string-conversion\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a9ff0773-bcf0-d383-ee75-2514fcecc480",
+          "linux-x64": "a9ff0773-bcf0-d383-ee75-2514fcecc480",
+          "osx-arm64": "a9ff0773-bcf0-d383-ee75-2514fcecc480"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"unmatched-closing\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "76f0f4cf-7dd5-7733-758f-7aa0ca531181",
+          "linux-x64": "76f0f4cf-7dd5-7733-758f-7aa0ca531181",
+          "osx-arm64": "76f0f4cf-7dd5-7733-758f-7aa0ca531181"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"unmatched-opening\", classification: \"source-error\", localCategory: \"format_syntax\")",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "092c4a18-2ece-f55f-6a24-1f65a5fcd99b",
+          "linux-x64": "092c4a18-2ece-f55f-6a24-1f65a5fcd99b",
+          "osx-arm64": "092c4a18-2ece-f55f-6a24-1f65a5fcd99b"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"unused-unsupported-value\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d022064f-abc5-377c-e53f-35f38a7d097b",
+          "linux-x64": "d022064f-abc5-377c-e53f-35f38a7d097b",
+          "osx-arm64": "d022064f-abc5-377c-e53f-35f38a7d097b"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"zero-precision\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "9517511d-1edb-70d6-8c70-c6f9cb427feb",
+          "linux-x64": "9517511d-1edb-70d6-8c70-c6f9cb427feb",
+          "osx-arm64": "9517511d-1edb-70d6-8c70-c6f9cb427feb"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatSourceReferenceTests.ActualNodeMatchesThePublishedBoundaryOrItsDeclaredProfileRefusal(id: \"zero-width\", classification: \"comparable\", localCategory: null)",
+        "group": "StringFormatSourceReferenceTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "40b8c47a-7016-8cb3-e307-fd3ab78b6579",
+          "linux-x64": "40b8c47a-7016-8cb3-e307-fd3ab78b6579",
+          "osx-arm64": "40b8c47a-7016-8cb3-e307-fd3ab78b6579"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.BooleanNullAndIntegersRemainDistinctAndCultureIndependent",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a8927a34-bec5-7c8c-cef0-3af45d3a322b",
+          "linux-x64": "a8927a34-bec5-7c8c-cef0-3af45d3a322b",
+          "osx-arm64": "a8927a34-bec5-7c8c-cef0-3af45d3a322b"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.CancellationAfterResolutionReleasesNativeProducerWithoutFormatting",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "751d1760-9f06-eabb-6d0f-25145c3d6e23",
+          "linux-x64": "751d1760-9f06-eabb-6d0f-25145c3d6e23",
+          "osx-arm64": "751d1760-9f06-eabb-6d0f-25145c3d6e23"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.CancellationPrecedesReadingAnyBorrowedValue",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "9a2ca508-66c7-b9f5-e53a-aa8c1ab39bbb",
+          "linux-x64": "9a2ca508-66c7-b9f5-e53a-aa8c1ab39bbb",
+          "osx-arm64": "9a2ca508-66c7-b9f5-e53a-aa8c1ab39bbb"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.CodePointBudgetsCountAstralTextAndPrecisionIndependentlyOfUtf16",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "72cbdbc1-69a1-f083-2d05-aa212c6010a5",
+          "linux-x64": "72cbdbc1-69a1-f083-2d05-aa212c6010a5",
+          "osx-arm64": "72cbdbc1-69a1-f083-2d05-aa212c6010a5"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.EveryAdmittedClrIntegerKindPreservesExactValue",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "414cacc3-4ddc-fdf1-3859-8a8f0cd611ce",
+          "linux-x64": "414cacc3-4ddc-fdf1-3859-8a8f0cd611ce",
+          "osx-arm64": "414cacc3-4ddc-fdf1-3859-8a8f0cd611ce"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a!a}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e42eae48-b33a-2348-1f33-ab4cad0612d5",
+          "linux-x64": "e42eae48-b33a-2348-1f33-ab4cad0612d5",
+          "osx-arm64": "e42eae48-b33a-2348-1f33-ab4cad0612d5"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a!qq}\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "1daf90cc-c14b-f1bc-f630-49c0f7f350f4",
+          "linux-x64": "1daf90cc-c14b-f1bc-f630-49c0f7f350f4",
+          "osx-arm64": "1daf90cc-c14b-f1bc-f630-49c0f7f350f4"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a!q}\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "3966e731-0900-93bb-0232-da4cdfe273cc",
+          "linux-x64": "3966e731-0900-93bb-0232-da4cdfe273cc",
+          "osx-arm64": "3966e731-0900-93bb-0232-da4cdfe273cc"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a!r}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "59f44b38-5c93-7aef-d410-bd854c441f1c",
+          "linux-x64": "59f44b38-5c93-7aef-d410-bd854c441f1c",
+          "osx-arm64": "59f44b38-5c93-7aef-d410-bd854c441f1c"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a.real}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d6368423-ab46-ac69-e7cb-77248c4f3241",
+          "linux-x64": "d6368423-ab46-ac69-e7cb-77248c4f3241",
+          "osx-arm64": "d6368423-ab46-ac69-e7cb-77248c4f3241"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:#6}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e6d8e673-5614-8c20-4921-c73bf3b326c0",
+          "linux-x64": "e6d8e673-5614-8c20-4921-c73bf3b326c0",
+          "osx-arm64": "e6d8e673-5614-8c20-4921-c73bf3b326c0"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:+6}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "22009f8f-9f27-7e38-9089-f5ab5ed49b60",
+          "linux-x64": "22009f8f-9f27-7e38-9089-f5ab5ed49b60",
+          "osx-arm64": "22009f8f-9f27-7e38-9089-f5ab5ed49b60"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:,}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "01580c0b-78b7-ea7d-d417-6b697a451a53",
+          "linux-x64": "01580c0b-78b7-ea7d-d417-6b697a451a53",
+          "osx-arm64": "01580c0b-78b7-ea7d-d417-6b697a451a53"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:.2f}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "f2ad943c-5cc9-c57c-4fda-1c4c17b9f339",
+          "linux-x64": "f2ad943c-5cc9-c57c-4fda-1c4c17b9f339",
+          "osx-arm64": "f2ad943c-5cc9-c57c-4fda-1c4c17b9f339"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:.}\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d6c7d17f-accd-6581-2dfb-347d1a6c80e0",
+          "linux-x64": "d6c7d17f-accd-6581-2dfb-347d1a6c80e0",
+          "osx-arm64": "d6c7d17f-accd-6581-2dfb-347d1a6c80e0"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:05}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "c966e307-3f3c-cc28-46b8-cf45e97ca4c6",
+          "linux-x64": "c966e307-3f3c-cc28-46b8-cf45e97ca4c6",
+          "osx-arm64": "c966e307-3f3c-cc28-46b8-cf45e97ca4c6"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:=6}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "bbc37330-045d-eceb-a660-7532bbcf1512",
+          "linux-x64": "bbc37330-045d-eceb-a660-7532bbcf1512",
+          "osx-arm64": "bbc37330-045d-eceb-a660-7532bbcf1512"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a:>{b}}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "34240150-0c6d-eec3-ea65-12f7932915d0",
+          "linux-x64": "34240150-0c6d-eec3-ea65-12f7932915d0",
+          "osx-arm64": "34240150-0c6d-eec3-ea65-12f7932915d0"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ExcludedFeaturesFailWithAnExplicitProfileCategory(format: \"{a[x]}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "cee6f6f1-d92e-8108-b668-6422da1a40cc",
+          "linux-x64": "cee6f6f1-d92e-8108-b668-6422da1a40cc",
+          "osx-arm64": "cee6f6f1-d92e-8108-b668-6422da1a40cc"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.FloatAndDecimalRepresentationsNeverBecomeIntegerTokens",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e270d3bf-1f7a-17bf-1a30-8c6ddd6d75a1",
+          "linux-x64": "e270d3bf-1f7a-17bf-1a30-8c6ddd6d75a1",
+          "osx-arm64": "e270d3bf-1f7a-17bf-1a30-8c6ddd6d75a1"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.InvalidUtf16IsRejectedEvenInPrecisionDiscardedText",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "04510cf5-963f-5dfb-79ed-3e6a0047b4ce",
+          "linux-x64": "04510cf5-963f-5dfb-79ed-3e6a0047b4ce",
+          "osx-arm64": "04510cf5-963f-5dfb-79ed-3e6a0047b4ce"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.LiteralAndCumulativeOutputBudgetsAreCheckedBeforePadding",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "ab079093-4f7a-b80c-909d-f9643e2f55f8",
+          "linux-x64": "ab079093-4f7a-b80c-909d-f9643e2f55f8",
+          "osx-arm64": "ab079093-4f7a-b80c-909d-f9643e2f55f8"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.OrdinalLookupDoesNotInheritCallerComparer",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "bb9d3ba0-eba5-f79e-023d-b34611d429bc",
+          "linux-x64": "bb9d3ba0-eba5-f79e-023d-b34611d429bc",
+          "osx-arm64": "bb9d3ba0-eba5-f79e-023d-b34611d429bc"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.RealEngineMapsValuesAndFormatUsingRepeatLast",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e06cf3c2-ddbd-68a2-1aec-e810145a89b2",
+          "linux-x64": "e06cf3c2-ddbd-68a2-1aec-e810145a89b2",
+          "osx-arm64": "e06cf3c2-ddbd-68a2-1aec-e810145a89b2"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.RealNodeResultSurvivesCallerScopeWithoutKeepingUnusedNativeAlive",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "2c7aa975-ddf3-3852-82df-33fd2e03b11e",
+          "linux-x64": "2c7aa975-ddf3-3852-82df-33fd2e03b11e",
+          "osx-arm64": "2c7aa975-ddf3-3852-82df-33fd2e03b11e"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.ScalarSpecificationRequiresExplicitConversion",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "578250d2-9d25-3e68-5b9e-6026463634c7",
+          "linux-x64": "578250d2-9d25-3e68-5b9e-6026463634c7",
+          "osx-arm64": "578250d2-9d25-3e68-5b9e-6026463634c7"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{0}\", category: \"format_missing_field\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "2241e36f-ca2e-b685-97d9-51e4daa095ee",
+          "linux-x64": "2241e36f-ca2e-b685-97d9-51e4daa095ee",
+          "osx-arm64": "2241e36f-ca2e-b685-97d9-51e4daa095ee"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{a!q:{b}}\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d4f14437-3b6c-bc5d-6f4a-3789b6c8353b",
+          "linux-x64": "d4f14437-3b6c-bc5d-6f4a-3789b6c8353b",
+          "osx-arm64": "d4f14437-3b6c-bc5d-6f4a-3789b6c8353b"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{b!qq}\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "b8e5e534-01d3-2409-1835-7dd14c951a5f",
+          "linux-x64": "b8e5e534-01d3-2409-1835-7dd14c951a5f",
+          "osx-arm64": "b8e5e534-01d3-2409-1835-7dd14c951a5f"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{b!q}\", category: \"format_missing_field\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a93f4f33-2664-49b1-f99b-7011add28abe",
+          "linux-x64": "a93f4f33-2664-49b1-f99b-7011add28abe",
+          "osx-arm64": "a93f4f33-2664-49b1-f99b-7011add28abe"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{b\", category: \"format_syntax\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "7b4dbfa2-8059-80a3-6b87-1730f103cda4",
+          "linux-x64": "7b4dbfa2-8059-80a3-6b87-1730f103cda4",
+          "osx-arm64": "7b4dbfa2-8059-80a3-6b87-1730f103cda4"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{b:04x}\", category: \"format_missing_field\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "b682cec6-bee0-c8e0-e50d-de55d977a637",
+          "linux-x64": "b682cec6-bee0-c8e0-e50d-de55d977a637",
+          "osx-arm64": "b682cec6-bee0-c8e0-e50d-de55d977a637"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{b} {\", category: \"format_missing_field\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a61d9c09-6c81-3fc8-6577-37b16f533306",
+          "linux-x64": "a61d9c09-6c81-3fc8-6577-37b16f533306",
+          "osx-arm64": "a61d9c09-6c81-3fc8-6577-37b16f533306"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.StructuralParseLookupAndConversionHaveSeparateOrderedFailureBoundaries(format: \"{}\", category: \"format_missing_field\")",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "acfc5611-e1ef-f68c-9852-3f960d4bfe09",
+          "linux-x64": "acfc5611-e1ef-f68c-9852-3f960d4bfe09",
+          "osx-arm64": "acfc5611-e1ef-f68c-9852-3f960d4bfe09"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.UnusedDirectBlockerStillPreemptsRealFormatting",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "9e149b90-7016-9c8b-ae2c-8671e771b993",
+          "linux-x64": "9e149b90-7016-9c8b-ae2c-8671e771b993",
+          "osx-arm64": "9e149b90-7016-9c8b-ae2c-8671e771b993"
+        }
+      },
+      {
+        "name": "ComfySharp.Core.Tests.StringFormatTests.UnusedTypedValuesAreNotProjectedAndFailuresDoNotStealTheirOwner",
+        "group": "StringFormatTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a1d48346-1672-2e32-bcf3-64929270c6f2",
+          "linux-x64": "a1d48346-1672-2e32-bcf3-64929270c6f2",
+          "osx-arm64": "a1d48346-1672-2e32-bcf3-64929270c6f2"
+        }
+      },
+      {
+        "name": "ComfySharp.Desktop.Tests.StringFormatEditorTests.EditorCommandsPreserveSparseConnectionsAndTheConnectedFormatAcrossSaveAndUndo",
+        "group": "StringFormatEditorTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d76e1322-cfb7-27c0-c616-b5c6079c6f84",
+          "linux-x64": "835a4c8e-948a-6981-06a0-0b4b49c30c12",
+          "osx-arm64": "b8a016a6-fbf5-21b6-3190-fc9af3e99a8f"
+        }
+      },
+      {
+        "name": "ComfySharp.Desktop.Tests.StringFormatEditorTests.ImportedSparseSlotsAreDisplayedWithoutExpansionOrRenumbering",
+        "group": "StringFormatEditorTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "caa03e3f-0429-2bcf-9606-d4007243398f",
+          "linux-x64": "1099dd04-b6f1-57b3-8b51-e528fa411345",
+          "osx-arm64": "a8d1b19f-5e9d-2f6b-1f7b-4b101c5c340a"
+        }
+      },
+      {
+        "name": "ComfySharp.Desktop.Tests.StringFormatEditorTests.SelectorCreatesNamedPortsAndAFormatWidgetWithRealHostAvailability",
+        "group": "StringFormatEditorTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d0a1ada9-7afc-3be9-b311-f221f1484089",
+          "linux-x64": "b1792901-d026-663d-d7b1-2afa4bb01e84",
+          "osx-arm64": "0252ef91-53d6-16f6-19d4-fcac2b6e3205"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.ConnectedFormatOverridesPersistedWidgetAndSparseNamedPortsRemainFlat",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a1cb6ff7-8e5d-e004-fcde-ade70272298e",
+          "linux-x64": "a1cb6ff7-8e5d-e004-fcde-ade70272298e",
+          "osx-arm64": "a1cb6ff7-8e5d-e004-fcde-ade70272298e"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.ConstantFormatRequiresNoAutogrowValues",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "61e6afec-7036-3cc3-a7b7-40d550f37c7b",
+          "linux-x64": "61e6afec-7036-3cc3-a7b7-40d550f37c7b",
+          "osx-arm64": "61e6afec-7036-3cc3-a7b7-40d550f37c7b"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.InvalidFlatNamesOrMissingRequiredFormatAreRejectedBeforeQueue(extraName: \"values.A\", code: \"unsupported_dynamic_input\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "3174c600-4112-c5ba-b3a8-0d7788d6111e",
+          "linux-x64": "3174c600-4112-c5ba-b3a8-0d7788d6111e",
+          "osx-arm64": "3174c600-4112-c5ba-b3a8-0d7788d6111e"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.InvalidFlatNamesOrMissingRequiredFormatAreRejectedBeforeQueue(extraName: \"values.aa\", code: \"unsupported_dynamic_input\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "0dd38380-abc6-1fbb-2f8d-d710bb641303",
+          "linux-x64": "0dd38380-abc6-1fbb-2f8d-d710bb641303",
+          "osx-arm64": "0dd38380-abc6-1fbb-2f8d-d710bb641303"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.InvalidFlatNamesOrMissingRequiredFormatAreRejectedBeforeQueue(extraName: null, code: \"required_input_missing\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "b4320b2a-eab8-ebad-186e-234571a5b35c",
+          "linux-x64": "b4320b2a-eab8-ebad-186e-234571a5b35c",
+          "osx-arm64": "b4320b2a-eab8-ebad-186e-234571a5b35c"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.ObjectInfoPreservesNamesSchemaAndExplicitlyDeclaresThePartialProfile",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "2fe61c8a-7730-9207-0a10-1fdb4276d1d4",
+          "linux-x64": "2fe61c8a-7730-9207-0a10-1fdb4276d1d4",
+          "osx-arm64": "2fe61c8a-7730-9207-0a10-1fdb4276d1d4"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.PersistedDefaultFormatsARealStringProducerThroughPreview",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "66bfd7c8-097b-c4d2-649c-880b106639ef",
+          "linux-x64": "66bfd7c8-097b-c4d2-649c-880b106639ef",
+          "osx-arm64": "66bfd7c8-097b-c4d2-649c-880b106639ef"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.TwoRealCreateListsMapFormatsAndRepeatTheLastValue",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "0c899799-ef15-42d6-480c-5c9097198445",
+          "linux-x64": "0c899799-ef15-42d6-480c-5c9097198445",
+          "osx-arm64": "0c899799-ef15-42d6-480c-5c9097198445"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.UnsupportedOrMalformedFormatsFailExecutionWithoutPreview(format: \"{\", category: \"format_syntax\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "5d5e0c7b-9b93-a230-a12b-661dab71253b",
+          "linux-x64": "5d5e0c7b-9b93-a230-a12b-661dab71253b",
+          "osx-arm64": "5d5e0c7b-9b93-a230-a12b-661dab71253b"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.UnsupportedOrMalformedFormatsFailExecutionWithoutPreview(format: \"{a!r}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "839c75e0-98a2-9411-737e-2313856bb0b5",
+          "linux-x64": "839c75e0-98a2-9411-737e-2313856bb0b5",
+          "osx-arm64": "839c75e0-98a2-9411-737e-2313856bb0b5"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.UnsupportedOrMalformedFormatsFailExecutionWithoutPreview(format: \"{a[0]}\", category: \"unsupported_format_feature\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "b67cb5cd-b2c1-559a-7be7-b19852fc03c0",
+          "linux-x64": "b67cb5cd-b2c1-559a-7be7-b19852fc03c0",
+          "osx-arm64": "b67cb5cd-b2c1-559a-7be7-b19852fc03c0"
+        }
+      },
+      {
+        "name": "ComfySharp.Host.Tests.StringFormatHostTests.UnsupportedOrMalformedFormatsFailExecutionWithoutPreview(format: \"{missing}\", category: \"format_missing_field\")",
+        "group": "StringFormatHostTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "2a3df7ec-7141-58ae-4393-b53d5bb9468a",
+          "linux-x64": "2a3df7ec-7141-58ae-4393-b53d5bb9468a",
+          "osx-arm64": "2a3df7ec-7141-58ae-4393-b53d5bb9468a"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.ConnectedFormatOverridesItsWidgetAndUndoRestoresTheConnection(version: 0.40000000000000002)",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "a5df908e-938c-fa83-1741-3d1c61f27066",
+          "linux-x64": "a5df908e-938c-fa83-1741-3d1c61f27066",
+          "osx-arm64": "a5df908e-938c-fa83-1741-3d1c61f27066"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.ConnectedFormatOverridesItsWidgetAndUndoRestoresTheConnection(version: 1)",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "e0e97160-565b-81af-e20a-3ee9e340d920",
+          "linux-x64": "e0e97160-565b-81af-e20a-3ee9e340d920",
+          "osx-arm64": "e0e97160-565b-81af-e20a-3ee9e340d920"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.ConstantNeedsNoValueSlotsButRequiresItsWidgetOrAFormatConnection",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "fe0c1a5c-01c2-63de-e887-6e8e23ec5c72",
+          "linux-x64": "fe0c1a5c-01c2-63de-e887-6e8e23ec5c72",
+          "osx-arm64": "fe0c1a5c-01c2-63de-e887-6e8e23ec5c72"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.DuplicateNamesAreRejectedEvenWhenUnconnected(name: \"f_string\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "7211a4e0-3460-1a3a-9b94-6375e28b5eae",
+          "linux-x64": "7211a4e0-3460-1a3a-9b94-6375e28b5eae",
+          "osx-arm64": "7211a4e0-3460-1a3a-9b94-6375e28b5eae"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.DuplicateNamesAreRejectedEvenWhenUnconnected(name: \"values.z\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "ddb381e2-af50-d10b-0e8c-2a6e4c26463e",
+          "linux-x64": "ddb381e2-af50-d10b-0e8c-2a6e4c26463e",
+          "osx-arm64": "ddb381e2-af50-d10b-0e8c-2a6e4c26463e"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.InvalidLinkIdsAreDiagnosedWithoutThrowing(invalid: \"bad\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "54e2ffa7-4ff9-0e8d-d088-9eb8333d43b3",
+          "linux-x64": "54e2ffa7-4ff9-0e8d-d088-9eb8333d43b3",
+          "osx-arm64": "54e2ffa7-4ff9-0e8d-d088-9eb8333d43b3"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.InvalidLinkIdsAreDiagnosedWithoutThrowing(invalid: 1.5)",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "6e00f6ca-4b1c-355c-c9f6-efd18f0df743",
+          "linux-x64": "6e00f6ca-4b1c-355c-c9f6-efd18f0df743",
+          "osx-arm64": "6e00f6ca-4b1c-355c-c9f6-efd18f0df743"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.SparseImportedNamesAndUnknownFieldsSurviveCompilationAndTwoRoundTrips(version: 0.40000000000000002)",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "1b0b5602-6aaf-1e2b-8026-e169608074a4",
+          "linux-x64": "1b0b5602-6aaf-1e2b-8026-e169608074a4",
+          "osx-arm64": "1b0b5602-6aaf-1e2b-8026-e169608074a4"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.SparseImportedNamesAndUnknownFieldsSurviveCompilationAndTwoRoundTrips(version: 1)",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "d13674bc-85cf-0fe2-ea04-041601968c5f",
+          "linux-x64": "d13674bc-85cf-0fe2-ea04-041601968c5f",
+          "osx-arm64": "d13674bc-85cf-0fe2-ea04-041601968c5f"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.UnavailableInputNamesProduceDiagnosticsAndPreserveTheDocument(name: \"F_string\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "11a3dc44-d0b9-9cba-dffc-23f1780be835",
+          "linux-x64": "11a3dc44-d0b9-9cba-dffc-23f1780be835",
+          "osx-arm64": "11a3dc44-d0b9-9cba-dffc-23f1780be835"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.UnavailableInputNamesProduceDiagnosticsAndPreserveTheDocument(name: \"values\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "0d0d0b91-c0c6-8465-49b4-e0685a4e988f",
+          "linux-x64": "0d0d0b91-c0c6-8465-49b4-e0685a4e988f",
+          "osx-arm64": "0d0d0b91-c0c6-8465-49b4-e0685a4e988f"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.UnavailableInputNamesProduceDiagnosticsAndPreserveTheDocument(name: \"values.A\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "c6153e65-6032-9a11-af41-f3944ae8f69a",
+          "linux-x64": "c6153e65-6032-9a11-af41-f3944ae8f69a",
+          "osx-arm64": "c6153e65-6032-9a11-af41-f3944ae8f69a"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.UnavailableInputNamesProduceDiagnosticsAndPreserveTheDocument(name: \"values.a.b\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "818f8eb3-6d9d-1bba-f17b-cb5a03382bab",
+          "linux-x64": "818f8eb3-6d9d-1bba-f17b-cb5a03382bab",
+          "osx-arm64": "818f8eb3-6d9d-1bba-f17b-cb5a03382bab"
+        }
+      },
+      {
+        "name": "ComfySharp.Workflow.Tests.StringFormatWorkflowTests.UnavailableInputNamesProduceDiagnosticsAndPreserveTheDocument(name: \"values.aa\")",
+        "group": "StringFormatWorkflowTests",
+        "outcomes": {
+          "win-x64": "Passed",
+          "linux-x64": "Passed",
+          "osx-arm64": "Passed"
+        },
+        "testIdsByPlatform": {
+          "win-x64": "5643d024-5c13-d968-f9f8-ed675d3d17bd",
+          "linux-x64": "5643d024-5c13-d968-f9f8-ed675d3d17bd",
+          "osx-arm64": "5643d024-5c13-d968-f9f8-ed675d3d17bd"
+        }
+      }
+    ]
+  },
+  "sourceComparisonScope": {
+    "sourceCollectorCommit": "52fe346c74c2db14b6c73aec804c215674550f4d",
+    "referenceResourceSha256": "a6c1aa98c333851195d0bff97f3e1305835634a1cb922dcc102dabe5e07871e0",
+    "protocolResourceSha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd",
+    "comparableOutputCases": 24,
+    "sourceErrorBoundaries": 12,
+    "localProfileRefusals": 8,
+    "expectedStringsInComparableCases": 26,
+    "localEvidence": "string-format-integration.json"
+  },
+  "trxRehashed": 19,
+  "filesAtCommit": {
+    "src/ComfySharp.Nodes/PythonTextFormat.cs": {
+      "bytes": 12445,
+      "sha256": "0e7d612483cdf0a5cc20a1e2d82b2713c7a6f1e4c8aaa816a2672f9b4712664c"
+    },
+    "src/ComfySharp.Nodes/StringFormatNode.cs": {
+      "bytes": 2181,
+      "sha256": "c6b6c10b75de10cad106f41bb1da1f439667eebf496de29921f2803102060c0d"
+    },
+    "src/ComfySharp.Nodes/AssemblyInfo.cs": {
+      "bytes": 96,
+      "sha256": "a14e2c8ebf88e747112cf1dee23210bd9be2e3714a3af867450b0b6e166c6b5c"
+    },
+    "src/ComfySharp.Nodes/BuiltInNodes.cs": {
+      "bytes": 7821,
+      "sha256": "1dd571ef4db7e4c61bb2af139ed8e6610d85cce29543373353f59fa607475853"
+    },
+    "tests/ComfySharp.Core.Tests/StringFormatTests.cs": {
+      "bytes": 12742,
+      "sha256": "428c0e0096492b6d914e55dcaf20e91fe315d953a7afe776f76d8c3b92ba7f58"
+    },
+    "tests/ComfySharp.Core.Tests/StringFormatSourceReferenceTests.cs": {
+      "bytes": 18588,
+      "sha256": "8b3f55bc73829e01e0f01ce6bf97d711f445c99ad9792e1547d686812567f79b"
+    },
+    "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+      "bytes": 1514,
+      "sha256": "6a206f4002880afb1a1ebb53e2d709ce9a36ff7d1f9e08356212063fb8eb5867"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/string-format.reference.json": {
+      "bytes": 408527,
+      "sha256": "a6c1aa98c333851195d0bff97f3e1305835634a1cb922dcc102dabe5e07871e0"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/string-format.protocol.json": {
+      "bytes": 47482,
+      "sha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd"
+    },
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+      "bytes": 10659,
+      "sha256": "738a7af714aa3aa933cba4dc9d6f04c4087c127cb50ca898f869c553db0a384a"
+    },
+    "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs": {
+      "bytes": 12251,
+      "sha256": "e94a0e8935bc4990652b27f63384c751e66a32ea01e7d11739783490e483ec21"
+    },
+    "docs/STRING_FORMAT.md": {
+      "bytes": 6852,
+      "sha256": "f64e1a87d1319dc28cca2d0504bddfb6d92afc4565cb48d7c41bdebf37e6d84a"
+    },
+    "docs/capabilities/manifest.json": {
+      "bytes": 1301462,
+      "sha256": "630637b0c6638bc91ecc1443f92b32ab44f2be7c5ac4aef0fa9da6947fbf6465"
+    },
+    "src/ComfySharp.Workflow/PromptCompiler.cs": {
+      "bytes": 12386,
+      "sha256": "142270f8f97015b7c9f25f5e3e6780b9f10e7dc8e1170131bac54ac18f255916"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 12637,
+      "sha256": "e33e6632b7f311d09c650d56463af00eebd314b37cf35fb5b4fba95705f197ca"
+    },
+    "tests/ComfySharp.Workflow.Tests/StringFormatWorkflowTests.cs": {
+      "bytes": 6588,
+      "sha256": "31f9951ce2d1c250caa2ea185e9383de85eabd105cd69725160a405916c74a56"
+    },
+    "tests/ComfySharp.Desktop.Tests/StringFormatEditorTests.cs": {
+      "bytes": 6373,
+      "sha256": "665e52e19fb8f0e70b9ad595deeae7ec4a1e29b95d84ba8e68b61d03b0b21bc2"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 14775,
+      "sha256": "fdf0982c6cffc2a52e5c818774008d5ace37bdd07988ebb17e66e81cc3509e81"
+    },
+    "tests/ComfySharp.Core.Tests/NodeParityTests.cs": {
+      "bytes": 3829,
+      "sha256": "1c232e864a595ad513be1ee612a103c983e6cef5246cbf9492eb7ce5981a6b04"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 13573,
+      "sha256": "44bcb4bd6bf4706880f20ccaa67c9454f852c3ed5ccad779f8903e452ad6651a"
+    }
+  },
+  "metadataPins": {
+    "run.json": {
+      "bytes": 18474,
+      "sha256": "db36e4cb6537106ac6367b751d0c0a8ee91266684e800666084ac4feaaac2281"
+    },
+    "artifacts.json": {
+      "bytes": 17890,
+      "sha256": "2d8ef30c5c8b512088faf65ec6a8396fa85c9cb69dec3adad007810393ca3a22"
+    },
+    "logs.txt": {
+      "bytes": 480476,
+      "sha256": "e23cce9715845df6b5fcbf7da7978f600edbaad9182f39562d91e757c8c599a2"
+    },
+    "download-inventory.json": {
+      "bytes": 4659,
+      "sha256": "4e1b2ac2c38638a2f7dcd34be52be8cb19b1c201edfe40e8fa38d68c4d04b463"
+    }
+  },
+  "downloadedArtifacts": [
+    {
+      "name": "tests-win-x64",
+      "id": 10289786437,
+      "bytes": 392098,
+      "githubReportedDigest": "sha256:b2177c43964c686d8c5e9be9007adc6e3e84b9087a5c0925314655a84290bb26"
+    },
+    {
+      "name": "tests-linux-x64",
+      "id": 10289289002,
+      "bytes": 250856,
+      "githubReportedDigest": "sha256:37a55a5cd8306004ba243e960dfadf61de6c3340868e80a2275e063365222cdf"
+    },
+    {
+      "name": "tests-stock-osx-arm64",
+      "id": 10288818643,
+      "bytes": 2844,
+      "githubReportedDigest": "sha256:a1183c4667309445bf46ab80a7b6317680367bc1fc8f06e9ddc17ce67d18e193"
+    },
+    {
+      "name": "tests-stock-win-x64",
+      "id": 10288724109,
+      "bytes": 2426,
+      "githubReportedDigest": "sha256:9268dc7678f79e569b90de6dbfb793d910c5bc8332ce75751969c89fa482f5de"
+    },
+    {
+      "name": "tests-osx-arm64",
+      "id": 10288664117,
+      "bytes": 392236,
+      "githubReportedDigest": "sha256:38468eca78c01f4a2fe90f9c67a71240be61dc48b4d81ce692f8bce0ac7be4b2"
+    }
+  ],
+  "limits": [
+    "Totals are deduplicated within each OS; repeated checkpoint/pipeline/first-use runs are not added. Linux partial totals do not attest unexecuted Inference.",
+    "Forty-four source-reference PASS outcomes include twelve distinct error boundaries and eight explicit local refusals, not forty-four output-parity successes.",
+    "Actual smoke markers are checked independently of headless tests. No loaded-native identity, ISA cause or new numerical trace comparison is claimed.",
+    "Source expected values remain the single frozen source collection; running tests on three OS does not create three new source oracles.",
+    "Archive digests are reported by GitHub; extracted TRX and exact committed file bytes were independently rehashed.",
+    "No CI rerun, .NET, source AST or native execution by this auditor."
+  ]
+}
