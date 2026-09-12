@@ -29,6 +29,7 @@ public static class PromptCompiler
         ["CaseConverter"] = new("CaseConverter", [new("string"), new("mode")]),
         ["EmptyImage"] = new("EmptyImage", [new("width"), new("height"), new("batch_size"), new("color")]),
         ["ImageInvert"] = new("ImageInvert", []),
+        ["ImageBatch"] = new("ImageBatch", []),
         ["RepeatImageBatch"] = new("RepeatImageBatch", [new("amount")]),
         ["ImageFromBatch"] = new("ImageFromBatch", [new("batch_index"), new("length")]),
         ["JsonExtractString"] = new("JsonExtractString", [new("json_string"), new("key")]),

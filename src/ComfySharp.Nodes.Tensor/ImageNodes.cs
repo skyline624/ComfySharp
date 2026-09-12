@@ -23,6 +23,9 @@ public static class ImageNodes
         registry.Register(new ImageNode(new("ImageFromBatch", "Get Image from Batch", "image/batch",
             [new("image", "IMAGE"), Int("batch_index", 0, -16384, 16384), Int("length", 1, 1, 4096)], [new("IMAGE")],
             SearchAliases: ["select image", "pick from batch", "extract image"], PythonModule: "comfy_extras.nodes_images", V3ObjectInfo: true)));
+        registry.Register(new ImageNode(new("ImageBatch", "Batch Images (DEPRECATED)", "image/batch",
+            [new("image1", "IMAGE"), new("image2", "IMAGE")], [new("IMAGE")],
+            SearchAliases: ["combine images", "merge images", "stack images"], PythonModule: "nodes", Deprecated: true)));
     }
 
     private static InputSchema Int(string name, int value, int min, int max, int? step = null, string? display = null)
@@ -42,11 +45,11 @@ public static class ImageNodes
         {
             cancellationToken.ThrowIfCancellationRequested();
             long I(string name) => checked((long)PythonValues.Integer(inputs[name].ToJson()));
-            TorchSharp.torch.Tensor Image()
+            TorchSharp.torch.Tensor Image(string name = "image")
             {
-                if (inputs["image"].Kind != RuntimeValueKind.Native)
+                if (inputs[name].Kind != RuntimeValueKind.Native)
                     throw new ArgumentException("IMAGE requires a native NHWC tensor.");
-                return inputs["image"].GetNative<TorchSharp.torch.Tensor>();
+                return inputs[name].GetNative<TorchSharp.torch.Tensor>();
             }
             NativeRuntimeBootstrap.Initialize();
             // Helpers return a detached, independently owned tensor.
@@ -56,6 +59,7 @@ public static class ImageNodes
                 "ImageInvert" => ImageOperations.Invert(Image(), cancellationToken),
                 "RepeatImageBatch" => ImageOperations.RepeatBatch(Image(), I("amount"), cancellationToken),
                 "ImageFromBatch" => ImageOperations.FromBatch(Image(), I("batch_index"), I("length"), cancellationToken),
+                "ImageBatch" => ImageOperations.Batch(Image("image1"), Image("image2"), cancellationToken),
                 _ => throw new InvalidOperationException("Unregistered image operation.")
             };
             RuntimeValue owned;

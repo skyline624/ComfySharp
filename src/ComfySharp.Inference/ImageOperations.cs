@@ -6,11 +6,11 @@ namespace ComfySharp.Inference;
 /// <summary>Image primitives for dense CPU/Float32 NHWC RGB or RGBA tensors with positive dimensions.
 /// Inputs are borrowed and never mutated. Each returned tensor owns independent storage and must be disposed.
 /// This profile does not select devices or intermediate dtypes from upstream runtime options.</summary>
-public static class ImageOperations
+public static partial class ImageOperations
 {
     /// <summary>Default per-call limit for newly allocated tensor payloads: 512 MiB.
-    /// EmptyImage admits twice its output bytes (three channel tensors plus concatenation); other operations
-    /// admit their output bytes. Borrowed inputs, allocator overhead/caches and concurrent calls are excluded.
+    /// EmptyImage admits twice its output bytes (three channel tensors plus concatenation); Invert, RepeatBatch and FromBatch
+    /// admit their output bytes. Batch also admits its padding and resize payloads. Borrowed inputs, allocator overhead/caches and concurrent calls are excluded.
     /// This is a local admission limit, configurable per call, not an upstream schema constraint or RAM guarantee.</summary>
     public const long DefaultMaxAllocationBytes = 512L * 1024 * 1024;
 

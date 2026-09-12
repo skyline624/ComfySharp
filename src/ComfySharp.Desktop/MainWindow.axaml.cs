@@ -201,7 +201,27 @@ public sealed partial class MainWindow : Window
             imageTexts.Count != 1 || imageTexts[0]?.GetValue<string>() != "tensor([[[[0., 1., 1.]]]])")
             throw new InvalidOperationException("Image primitive workflow smoke failed: " + imageEntry.ToJsonString());
         ActiveEditor.ApplyUiOutputs(imageOutputs);
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives with text preview and native preview.");
+        var secondImage = ActiveEditor.AddNode("EmptyImage");
+        ActiveEditor.Document.SetWidgets(secondImage, new JsonArray(2, 2, 1, 0x00ff00));
+        var imageBatch = ActiveEditor.AddNode("ImageBatch");
+        var lastImage = ActiveEditor.AddNode("ImageFromBatch");
+        ActiveEditor.Document.SetWidgets(lastImage, new JsonArray(-1, 1));
+        var batchPreview = ActiveEditor.AddNode("PreviewAny");
+        ActiveEditor.Document.Connect(image, 0, imageBatch, 0);
+        ActiveEditor.Document.Connect(secondImage, 0, imageBatch, 1);
+        ActiveEditor.Document.Connect(imageBatch, 0, lastImage, 0);
+        ActiveEditor.Document.Connect(lastImage, 0, batchPreview, 0);
+        ActiveEditor.Reload();
+        var batchSession = hostSession.Id;
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(Compile(true), clientId, [batchPreview.Value]), batchSession);
+        var batchEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), batchSession, 200);
+        hostSession.Require(batchSession);
+        var batchOutputs = batchEntry["outputs"]!.AsObject();
+        if (batchOutputs.Count != 1 || batchOutputs[batchPreview.Value]?["text"] is not JsonArray batchTexts ||
+            batchTexts.Count != 1 || batchTexts[0]?.GetValue<string>() != "tensor([[[[0., 1., 0.]]]])")
+            throw new InvalidOperationException("ImageBatch resize workflow smoke failed: " + batchEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(batchOutputs);
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives with text preview, ImageBatch resize with text preview and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

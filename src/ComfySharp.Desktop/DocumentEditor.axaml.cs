@@ -144,6 +144,7 @@ internal static class NodeTemplates
             case "CaseConverter": widgets = new("", "UPPERCASE"); In("string", "STRING"); In("mode", "COMBO"); Out("STRING", "STRING"); break;
             case "EmptyImage": widgets = new(512, 512, 1, 0); In("width", "INT"); In("height", "INT"); In("batch_size", "INT"); In("color", "INT"); Out("IMAGE", "IMAGE"); break;
             case "ImageInvert": In("image", "IMAGE"); Out("IMAGE", "IMAGE"); break;
+            case "ImageBatch": In("image1", "IMAGE"); In("image2", "IMAGE"); Out("IMAGE", "IMAGE"); break;
             case "RepeatImageBatch": widgets = new(1); In("image", "IMAGE"); In("amount", "INT"); Out("IMAGE", "IMAGE"); break;
             case "ImageFromBatch": widgets = new(0, 1); In("image", "IMAGE"); In("batch_index", "INT"); In("length", "INT"); Out("IMAGE", "IMAGE"); break;
             case "JsonExtractString": widgets = new("{}", "key"); In("json_string", "STRING"); Out("STRING", "STRING"); break;
@@ -179,6 +180,8 @@ internal static class NodeTemplates
             case "VAEDecode": In("samples", "LATENT"); In("vae", "VAE"); Out("IMAGE", "IMAGE"); break;
             case "SaveImage": widgets = new("ComfySharp"); In("images", "IMAGE"); break;
         }
-        return new JsonObject { ["size"] = new JsonArray(230, type == "StringFormat" ? 720 : type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
+        var template = new JsonObject { ["size"] = new JsonArray(230, type == "StringFormat" ? 720 : type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
+        if (type == "ImageBatch") template["title"] = "Batch Images (DEPRECATED)";
+        return template;
     }
 }

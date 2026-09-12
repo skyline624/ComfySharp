@@ -46,6 +46,7 @@ public sealed class NodeRegistry
             if (s.SearchAliases is not null) info["search_aliases"] = new JsonArray(s.SearchAliases.Select(a => (JsonNode?)JsonValue.Create(a)).ToArray());
             if (s.PythonModule is not null) info["python_module"] = s.PythonModule;
             if (s.EssentialsCategory is not null) info["essentials_category"] = s.EssentialsCategory;
+            if (s.Deprecated) info["deprecated"] = true;
             if (s.V3ObjectInfo)
             {
                 // Explicit V3 projection for newly ported contracts. Existing node documents keep their prior shape.
@@ -57,7 +58,7 @@ public sealed class NodeRegistry
                 info["description"] = s.Description ?? "";
                 info["output_tooltips"] = new JsonArray(s.Outputs.Select(_ => (JsonNode?)null).ToArray());
                 info["has_intermediate_output"] = false;
-                info["deprecated"] = false;
+                info["deprecated"] = s.Deprecated;
                 info["dev_only"] = false;
                 info["api_node"] = false;
                 info["price_badge"] = null;

@@ -28225,8 +28225,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2090",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -28250,7 +28250,8 @@
         "nodeId": "ImageBatch",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "CPU Float32 positive NHWC RGB/RGBA only. Preserve legacy deprecated contract; pad RGB alpha with one, center-crop and bilinearly resize image2, concatenate independent batch storage under no_grad. Configurable 512 MiB new payload budget includes padding, resize and concatenation. Zero-size crops fail explicitly. Text preview only; no codecs, GPU, other dtypes or general platform qualification. See docs/IMAGE_BATCH.md."
     },
     {
       "id": "node:ImagePadForOutpaint:nodes.py:2091",

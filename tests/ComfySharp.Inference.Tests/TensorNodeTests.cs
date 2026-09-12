@@ -116,7 +116,7 @@ public sealed class TensorNodeTests
     public void RegisteredSchemasPreserveOrderedSlotsOptionsAndOutputClassification()
     {
         var registry = TensorNodes.CreateRegistry(); var info = registry.ToObjectInfo();
-        Assert.Equal(34, registry.Nodes.Count());
+        Assert.Equal(35, registry.Nodes.Count());
         Assert.Equal(new[] { "steps", "sigma_max", "sigma_min", "rho" }, info["KarrasScheduler"]!["input"]!["required"]!.AsObject().Select(p => p.Key));
         var rho = info["KarrasScheduler"]!["input"]!["required"]!["rho"]![1]!;
         Assert.Equal(7d, rho["default"]!.GetValue<double>()); Assert.Equal(0d, rho["min"]!.GetValue<double>());
