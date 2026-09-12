@@ -1,11 +1,45 @@
 using System.Text.Json;
 using ComfySharp.RuntimeProbe;
 using Xunit;
+using ComfySharp.Inference;
+using static TorchSharp.torch;
 
 namespace ComfySharp.Inference.Tests;
 
 public sealed class Sd15GenerationDiagnosticTests
 {
+    [Fact]
+    public void Trace_requires_execution_and_an_absent_directory()
+    {
+        Assert.Throws<ArgumentException>(() => Sd15GenerationDiagnostic.Parse(["--checkpoint", "x", "--trace-dir", Path.GetTempPath()]));
+        Assert.Null(Sd15GenerationDiagnostic.Parse(["--checkpoint", "x"]).TraceDirectory);
+    }
+
+    [Fact]
+    public void Trace_preserves_view_order_and_refuses_replacement_and_invalid_values()
+    {
+        NativeRuntimeBootstrap.Initialize();
+        string directory = Path.Combine(Path.GetTempPath(), "comfysharp-trace-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(directory);
+        try
+        {
+            using var scope = NewDisposeScope();
+            var original = tensor(new float[] { 1, 2, 3, 4 }).reshape(2, 2);
+            var view = original.transpose(0, 1);
+            var record = Sd15GenerationDiagnostic.Capture(view, directory, "view");
+            byte[] bytes = File.ReadAllBytes(Path.Combine(directory, record.File));
+            Assert.Equal(new float[] { 1, 3, 2, 4 }, Enumerable.Range(0, 4).Select(i => BitConverter.ToSingle(bytes, i * 4)));
+            Assert.Equal(new long[] { 2, 2 }, record.Shape);
+            Assert.Equal(16, record.Bytes);
+            Assert.Throws<IOException>(() => Sd15GenerationDiagnostic.Capture(view, directory, "view"));
+            Assert.Throws<ArgumentException>(() => Sd15GenerationDiagnostic.Capture(view, directory, "../escape"));
+            Assert.Throws<ArgumentException>(() => Sd15GenerationDiagnostic.Capture(tensor(float.NaN), directory, "invalid"));
+            Assert.False(File.Exists(Path.Combine(directory, "invalid.f32")));
+            Assert.Equal(new float[] { 1, 2, 3, 4 }, original.data<float>().ToArray());
+        }
+        finally { File.Delete(Path.Combine(directory, "view.f32")); Directory.Delete(directory); }
+    }
+
     [Theory]
     [InlineData("--width", "513")]
     [InlineData("--height", "33")]

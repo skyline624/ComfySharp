@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using ComfySharp.Inference;
 using ComfySharp.Tokenization;
+using TorchSharp;
 using static TorchSharp.torch;
 
 namespace ComfySharp.RuntimeProbe;
@@ -11,10 +12,30 @@ namespace ComfySharp.RuntimeProbe;
 /// <summary>Explicit single-checkpoint, CPU/F32 text-to-image diagnostic. No downloads or weight copies.</summary>
 internal static class Sd15GenerationDiagnostic
 {
-    internal const string Usage = "sd15-generate --checkpoint <file> [--report-outside-components] [--execute --output <new.png>] [--prompt <text>] [--negative <text>] [--width 32..512] [--height 32..512] [--steps 1..100] [--seed <uint64>] [--cfg 0..30] [--threads 1..64] [--weight-budget-mib N]";
+    internal const string Usage = "sd15-generate --checkpoint <file> [--report-outside-components] [--execute --output <new.png> [--trace-dir <new-directory>]] [--prompt <text>] [--negative <text>] [--width 32..512] [--height 32..512] [--steps 1..100] [--seed <uint64>] [--cfg 0..30] [--threads 1..64] [--weight-budget-mib N]";
 
     internal sealed record Options(string Checkpoint, string? Output, string Prompt, string Negative,
-        bool Execute, bool ReportOutsideComponents, int Width, int Height, int Steps, ulong Seed, double Cfg, int Threads, long WeightBudgetBytes);
+        bool Execute, bool ReportOutsideComponents, int Width, int Height, int Steps, ulong Seed, double Cfg, int Threads, long WeightBudgetBytes,
+        string? TraceDirectory);
+
+    internal sealed record TraceRecord(string File, long[] Shape, string Dtype, long Bytes, string Sha256);
+
+    internal static TraceRecord Capture(Tensor value, string directory, string name, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!BitConverter.IsLittleEndian || name.Length == 0 || name.Any(c => !char.IsAsciiLetterOrDigit(c) && c != '-'))
+            throw new ArgumentException("Trace names must be ASCII letters, digits or hyphens on a little-endian platform.");
+        using var scope = NewDisposeScope();
+        if (value.dtype != ScalarType.Float32 || value.device_type != DeviceType.CPU || value.is_sparse ||
+            !value.isfinite().all().item<bool>()) throw new ArgumentException("Trace requires finite dense CPU/F32 data.");
+        var flat = value.contiguous();
+        byte[] bytes = flat.bytes.ToArray();
+        cancellationToken.ThrowIfCancellationRequested();
+        string filename = name + ".f32";
+        using (var file = new FileStream(Path.Combine(directory, filename), FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            file.Write(bytes);
+        return new(filename, value.shape, "float32-le", bytes.LongLength, Convert.ToHexStringLower(SHA256.HashData(bytes)));
+    }
 
     internal static Options Parse(string[] args)
     {
@@ -36,7 +57,7 @@ internal static class Sd15GenerationDiagnostic
             }
             string key = args[i];
             if (key is not ("--checkpoint" or "--output" or "--prompt" or "--negative" or "--width" or "--height" or
-                "--steps" or "--seed" or "--cfg" or "--threads" or "--weight-budget-mib") || ++i >= args.Length || !values.TryAdd(key, args[i]))
+                "--steps" or "--seed" or "--cfg" or "--threads" or "--weight-budget-mib" or "--trace-dir") || ++i >= args.Length || !values.TryAdd(key, args[i]))
                 throw new ArgumentException("Unknown, incomplete or duplicate argument.");
         }
         string Value(string key, string fallback) => values.GetValueOrDefault(key, fallback);
@@ -53,6 +74,10 @@ internal static class Sd15GenerationDiagnostic
         string? destination = values.TryGetValue("--output", out string? path) ? Path.GetFullPath(path) : null;
         if (execute && destination is null) throw new ArgumentException("Execution requires --output.");
         if (!execute && destination is not null) throw new ArgumentException("Output requires --execute.");
+        string? traceDirectory = values.TryGetValue("--trace-dir", out string? tracePath) ? Path.GetFullPath(tracePath) : null;
+        if (traceDirectory is not null && (!execute || File.Exists(traceDirectory) || Directory.Exists(traceDirectory) ||
+            !Directory.Exists(Path.GetDirectoryName(traceDirectory))))
+            throw new ArgumentException("Tracing requires execution and a new directory in an existing parent.");
         if (destination is not null && (!destination.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
             File.Exists(destination) || Directory.Exists(destination) || !Directory.Exists(Path.GetDirectoryName(destination))))
             throw new ArgumentException("Output must be a new PNG file in an existing directory.");
@@ -65,7 +90,8 @@ internal static class Sd15GenerationDiagnostic
         string positive = Value("--prompt", "a photograph of a red apple on a wooden table"), negative = Value("--negative", "");
         if (positive.Length > 4096 || negative.Length > 4096) throw new ArgumentException("Diagnostic text limit is 4096 characters.");
         return new(checkpoint, destination, positive, negative, execute, reportOutside, width, height, Number("--steps", 20, 1, 100), seed, cfg,
-            Number("--threads", Math.Min(Environment.ProcessorCount, 8), 1, 64), (long)Number("--weight-budget-mib", 16384, 1, 131072) * 1024 * 1024);
+            Number("--threads", Math.Min(Environment.ProcessorCount, 8), 1, 64), (long)Number("--weight-budget-mib", 16384, 1, 131072) * 1024 * 1024,
+            traceDirectory);
     }
 
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken = default)
@@ -96,6 +122,8 @@ internal static class Sd15GenerationDiagnostic
             }
             Stage("hash");
             string modelHash = file.ComputeSha256(cancellationToken);
+            var traces = new List<TraceRecord>();
+            if (options.TraceDirectory is not null) Directory.CreateDirectory(options.TraceDirectory);
             Stage("load");
             NativeRuntimeBootstrap.Initialize();
             set_num_threads(options.Threads);
@@ -109,20 +137,26 @@ internal static class Sd15GenerationDiagnostic
             var tokenizer = new ComfyClipTokenizer(ClipTokenizer.CreateDefault(), ClipProfile.Sd1L);
             using var positive = clip.Encode(tokenizer.Tokenize(options.Prompt, cancellationToken: cancellationToken), cancellationToken: cancellationToken);
             using var negative = clip.Encode(tokenizer.Tokenize(options.Negative, cancellationToken: cancellationToken), cancellationToken: cancellationToken);
+            Trace("positive-hidden", positive.Hidden); Trace("negative-hidden", negative.Hidden);
             using var noise = NativeMath.CpuNoise([1, 4, options.Height / 8, options.Width / 8], options.Seed, cancellationToken);
             var sampling = SdDiscreteSampling.Default;
             using var sigmas = SigmaSchedules.Karras(options.Steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+            Trace("noise", noise); Trace("sigmas", sigmas);
             using var empty = zeros_like(noise);
             using var firstSigma = sigmas[0];
             using var initial = SdSamplingMath.NoiseScaling(noise, empty, firstSigma, true, cancellationToken);
+            Trace("initial", initial);
             using var denoiser = new SdDenoiser(unet, SdPredictionKind.Epsilon, sampling);
             using var sampler = new SdEulerSampler(denoiser);
             Stage("sample");
             using var diffusion = sampler.Sample(initial, sigmas, positive.Hidden, negative.Hidden,
                 new SdGuidanceOptions { Scale = options.Cfg, BatchMode = SdGuidanceBatchMode.Separate }, cancellationToken);
+            Trace("diffusion", diffusion);
             Stage("decode");
             using var raw = SdSamplingMath.ProcessLatentOut(diffusion, SdSamplingMath.Sd15LatentScale, cancellationToken);
+            Trace("raw-vae", raw);
             using var image = vae.Decode(raw, cancellationToken);
+            Trace("image", image);
             var shape = image.shape;
             if (!shape.SequenceEqual(new long[] { 1, options.Height, options.Width, 3 }) || !image.isfinite().all().item<bool>())
                 throw new InvalidDataException("Decoded image has invalid dimensions or non-finite pixels.");
@@ -138,8 +172,13 @@ internal static class Sd15GenerationDiagnostic
                 destination.Write(png);
             Write(new { status = "ok", operation = "generate", familyQualified = false, settings, shape,
                 pngSha256 = Convert.ToHexStringLower(SHA256.HashData(png)), pngBytes = png.Length,
-                elapsedSeconds = watch.Elapsed.TotalSeconds, peakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64 });
+                elapsedSeconds = watch.Elapsed.TotalSeconds, peakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64, traces });
             return 0;
+
+            void Trace(string name, Tensor value)
+            {
+                if (options.TraceDirectory is not null) traces.Add(Capture(value, options.TraceDirectory, name, cancellationToken));
+            }
         }
         catch (OperationCanceledException)
         {

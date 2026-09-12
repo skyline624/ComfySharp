@@ -1,0 +1,349 @@
+{
+  "profile": "sd15-pretrained-cpu-f32-diagnostic-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+  "modelBytes": 4265146304,
+  "sourceFiles": [
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "bytes": 11888,
+      "sha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "checkpoint",
+        "timestep_embedding",
+        "avg_pool_nd",
+        "make_beta_schedule"
+      ],
+      "astSha256": "93393568f05056d4df620dd7515926c7b0aad4e226824b5a079f4fad92deea42"
+    },
+    {
+      "file": "comfy/ldm/modules/attention.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+      "bytes": 51513,
+      "sha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "default",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "GEGLU",
+        "FeedForward",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic",
+        "CrossAttention",
+        "BasicTransformerBlock",
+        "SpatialTransformer"
+      ],
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "bytes": 37937,
+      "sha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "symbols": [
+        "TimestepBlock",
+        "forward_timestep_embed",
+        "TimestepEmbedSequential",
+        "Upsample",
+        "Downsample",
+        "ResBlock",
+        "apply_control",
+        "UNetModel"
+      ],
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/model.py",
+      "bytes": 31484,
+      "sha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867",
+      "symbols": [
+        "torch_cat_if_needed",
+        "nonlinearity",
+        "Normalize",
+        "CarriedConv3d",
+        "conv_carry_causal_3d",
+        "interpolate_up",
+        "Upsample",
+        "Downsample",
+        "ResnetBlock",
+        "slice_attention",
+        "normal_attention",
+        "vae_attention",
+        "AttnBlock",
+        "make_attn",
+        "Encoder",
+        "Decoder"
+      ],
+      "astSha256": "54c55dc20154f7c7dca13e2205430ac0fd6794865ebe347e41d2479fe4bf41f3"
+    },
+    {
+      "file": "comfy/ldm/modules/distributions/distributions.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/distributions/distributions.py",
+      "bytes": 2964,
+      "sha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772",
+      "symbols": [
+        "DiagonalGaussianDistribution"
+      ],
+      "astSha256": "8a5502e38258be44bb1de5f9307b1e87f666f2c05c8be7d670e8d32e6aab4be9"
+    },
+    {
+      "file": "comfy/ldm/models/autoencoder.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/models/autoencoder.py",
+      "bytes": 9782,
+      "sha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0",
+      "symbols": [
+        "DiagonalGaussianRegularizer",
+        "AbstractAutoencoder",
+        "AutoencodingEngine",
+        "AutoencodingEngineLegacy",
+        "AutoencoderKL"
+      ],
+      "astSha256": "48975c664e6086465325e795d75895d206caa437349640dc249088e32f250d9c"
+    },
+    {
+      "file": "comfy/sd.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py",
+      "bytes": 140752,
+      "sha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7",
+      "symbols": [
+        "VAE"
+      ],
+      "astSha256": "3a5e1c6a37d45492216519e5540dc4c272185eb16a3ccf1876b35e01170972c4"
+    },
+    {
+      "file": "comfy/clip_model.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/clip_model.py",
+      "bytes": 16546,
+      "sha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d",
+      "symbols": [
+        "CLIPAttention",
+        "ACTIVATIONS",
+        "CLIPMLP",
+        "CLIPLayer",
+        "CLIPEncoder",
+        "CLIPEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextModel"
+      ],
+      "astSha256": "5cdeb4ba168704f3868e01d6811fcaae796a81665a5c3faf3da550dd60599a03"
+    },
+    {
+      "file": "comfy/sd1_clip.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_clip.py",
+      "bytes": 30624,
+      "sha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70",
+      "symbols": [
+        "gen_empty_tokens",
+        "ClipTokenWeightEncoder",
+        "SDClipModel",
+        "SD1CheckpointClipModel"
+      ],
+      "astSha256": "3668087a9e0e0130569e3c4bd918492aaa70ba3c6e72741244daa05054cc77ec"
+    },
+    {
+      "file": "comfy/model_sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/model_sampling.py",
+      "bytes": 15897,
+      "sha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "symbols": [
+        "reshape_sigma",
+        "EPS",
+        "ModelSamplingDiscrete"
+      ],
+      "astSha256": "8a65c67479eaabd3580a124a75cf62a717262fff7880f0dd840dd5494836c430"
+    },
+    {
+      "file": "comfy/samplers.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py",
+      "bytes": 64383,
+      "sha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+      "symbols": [
+        "cfg_function",
+        "sampling_function",
+        "Sampler"
+      ],
+      "astSha256": "550b38a59b391f92fd2648885afb15f3af80c745e690b86fe2133288c928cef2"
+    },
+    {
+      "file": "comfy/conds.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/conds.py",
+      "bytes": 4522,
+      "sha256": "72058e9a22c972a9c875819e59d432d30d367fd2f7092ee6c6c45e5a60c959b0",
+      "symbols": [
+        "CONDRegular",
+        "CONDCrossAttn"
+      ],
+      "astSha256": "7b27caa72534cbb4692e6843e24efbbfcb59c655f8b21af280fa8998fb6cd407"
+    },
+    {
+      "file": "comfy/k_diffusion/utils.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/utils.py",
+      "bytes": 12718,
+      "sha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272",
+      "symbols": [
+        "append_dims"
+      ],
+      "astSha256": "8999eb8dd535286ce45efc0c5ff96a664c6a12a87c005d77c0c221d6d6cb0018"
+    },
+    {
+      "file": "comfy/k_diffusion/sampling.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/k_diffusion/sampling.py",
+      "bytes": 93057,
+      "sha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+      "symbols": [
+        "to_d",
+        "sample_euler",
+        "append_zero",
+        "get_sigmas_karras"
+      ]
+    },
+    {
+      "file": "comfy/latent_formats.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/latent_formats.py",
+      "bytes": 43438,
+      "sha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4",
+      "symbols": [
+        "LatentFormat",
+        "SD15"
+      ],
+      "astSha256": "e835743658929b537511c32e936e9228527990df3261be86e823df7ed977b0da"
+    }
+  ],
+  "configs": {
+    "clip": {
+      "_name_or_path": "openai/clip-vit-large-patch14",
+      "architectures": [
+        "CLIPTextModel"
+      ],
+      "attention_dropout": 0.0,
+      "bos_token_id": 0,
+      "dropout": 0.0,
+      "eos_token_id": 49407,
+      "hidden_act": "quick_gelu",
+      "hidden_size": 768,
+      "initializer_factor": 1.0,
+      "initializer_range": 0.02,
+      "intermediate_size": 3072,
+      "layer_norm_eps": 1e-05,
+      "max_position_embeddings": 77,
+      "model_type": "clip_text_model",
+      "num_attention_heads": 12,
+      "num_hidden_layers": 12,
+      "pad_token_id": 1,
+      "projection_dim": 768,
+      "torch_dtype": "float32",
+      "transformers_version": "4.24.0",
+      "vocab_size": 49408
+    },
+    "clipProjectionPresent": true,
+    "projectionUsedForConditioning": false,
+    "unet": {
+      "image_size": 32,
+      "in_channels": 4,
+      "model_channels": 320,
+      "out_channels": 4,
+      "num_res_blocks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "dropout": 0.0,
+      "channel_mult": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "conv_resample": true,
+      "dims": 2,
+      "num_classes": null,
+      "use_checkpoint": false,
+      "num_heads": 8,
+      "num_head_channels": -1,
+      "use_scale_shift_norm": false,
+      "resblock_updown": false,
+      "use_spatial_transformer": true,
+      "legacy": false,
+      "context_dim": 768,
+      "transformer_depth": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "transformer_depth_output": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "transformer_depth_middle": 1,
+      "use_linear_in_transformer": false,
+      "use_temporal_resblock": false,
+      "use_temporal_attention": false,
+      "disable_middle_self_attn": false,
+      "heatmap_head": false
+    },
+    "vae": {
+      "double_z": true,
+      "z_channels": 4,
+      "resolution": 256,
+      "in_channels": 3,
+      "out_ch": 3,
+      "ch": 128,
+      "ch_mult": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "num_res_blocks": 2,
+      "attn_resolutions": [],
+      "dropout": 0.0
+    }
+  },
+  "clipConfigSha256": "c4dabd85f1abdd818c7a9f5dee1f6cf2b9cebc5ed3237ab2f2c4b00bdb02ce6c",
+  "tokenizerFiles": {
+    "merges.txt": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a",
+    "vocab.json": "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+  },
+  "case": {
+    "prompt": "a photograph of a red apple on a wooden table",
+    "negative": "",
+    "seed": 0,
+    "width": 512,
+    "height": 512,
+    "steps": 20,
+    "cfg": 7,
+    "threads": 16
+  },
+  "comparison": {
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "inputsMustBeExact": [
+      "noise",
+      "sigmas",
+      "initial"
+    ],
+    "familyQualification": false,
+    "policy": "Report all deviations; do not replace accepted fixtures or loosen existing profiles."
+  }
+}

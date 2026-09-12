@@ -1,0 +1,481 @@
+{
+  "scope": "One stock SD1.5 checkpoint, fixed 512x512 / 20-step Euler-Karras case, local Windows CPU/F32, frozen source resident adapters; no full-server or family qualification",
+  "implementationBaseCommit": "6ba1c75b688ec8f64403182d064762dc4401b373",
+  "comparison": {
+    "profile": "sd15-pretrained-cpu-f32-diagnostic-v1",
+    "protocolSha256": "82b65b28c989c7af8b2980fabeb5f9bf602258a29e2c9afaf3e9c5c00bc8b820",
+    "sourceReportSha256": "55bf4397045bd8b800a1f14f5369bdef394d46718abf2323d14aa70c92a5b214",
+    "productReportSha256": "7552631dcec73d1dfb446661135cfdbf59f187c1091540cb774d3fdf9e938a90",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "passed": true,
+    "familyQualified": false,
+    "comparisons": [
+      {
+        "name": "positive-hidden.f32",
+        "shape": [
+          1,
+          77,
+          768
+        ],
+        "elements": 59136,
+        "bitExact": true,
+        "exactRequired": false,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "3e683d28a4006be8f479de5b7c676b7e1726ad5e9a8e3494aa9cdd9492b1a02e",
+        "productSha256": "3e683d28a4006be8f479de5b7c676b7e1726ad5e9a8e3494aa9cdd9492b1a02e"
+      },
+      {
+        "name": "negative-hidden.f32",
+        "shape": [
+          1,
+          77,
+          768
+        ],
+        "elements": 59136,
+        "bitExact": true,
+        "exactRequired": false,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "b88e9c6b2427731ed84d343055ada91514b9a6ea22a0f0b153a39b709743f9d1",
+        "productSha256": "b88e9c6b2427731ed84d343055ada91514b9a6ea22a0f0b153a39b709743f9d1"
+      },
+      {
+        "name": "noise.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "elements": 16384,
+        "bitExact": true,
+        "exactRequired": true,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "b60eb3b5b14ff459a5517d7921ec74e7f82a23caaf9d5894e5e4a3f16ee9fd40",
+        "productSha256": "b60eb3b5b14ff459a5517d7921ec74e7f82a23caaf9d5894e5e4a3f16ee9fd40"
+      },
+      {
+        "name": "sigmas.f32",
+        "shape": [
+          21
+        ],
+        "elements": 21,
+        "bitExact": true,
+        "exactRequired": true,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "c9e32a3dbf1911d13975619f884e7151971a4181684f4f8fa334f4718bbf8cc6",
+        "productSha256": "c9e32a3dbf1911d13975619f884e7151971a4181684f4f8fa334f4718bbf8cc6"
+      },
+      {
+        "name": "initial.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "elements": 16384,
+        "bitExact": true,
+        "exactRequired": true,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "2985e711b2f5e2ec04300e124ca975b3e948b530e9d9543f2c991289c906d0ed",
+        "productSha256": "2985e711b2f5e2ec04300e124ca975b3e948b530e9d9543f2c991289c906d0ed"
+      },
+      {
+        "name": "diffusion.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "elements": 16384,
+        "bitExact": true,
+        "exactRequired": false,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "c06d091a793736fc10686a83583eda67cc029265f2e57ab5e32f95930fe0759b",
+        "productSha256": "c06d091a793736fc10686a83583eda67cc029265f2e57ab5e32f95930fe0759b"
+      },
+      {
+        "name": "raw-vae.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "elements": 16384,
+        "bitExact": true,
+        "exactRequired": false,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "df0a7df68122e95d332c30003fb94eabc678130a69c13cb5685f85281b5eb988",
+        "productSha256": "df0a7df68122e95d332c30003fb94eabc678130a69c13cb5685f85281b5eb988"
+      },
+      {
+        "name": "image.f32",
+        "shape": [
+          1,
+          512,
+          512,
+          3
+        ],
+        "elements": 786432,
+        "bitExact": true,
+        "exactRequired": false,
+        "outsideTolerance": 0,
+        "maxAbsoluteError": 0.0,
+        "meanAbsoluteError": 0.0,
+        "rmse": 0.0,
+        "passed": true,
+        "referenceSha256": "f60d37549ce211c56614b5716509740fd117769e585ace20f8d6bd67859f7568",
+        "productSha256": "f60d37549ce211c56614b5716509740fd117769e585ace20f8d6bd67859f7568"
+      }
+    ]
+  },
+  "sourceRuntime": {
+    "torch": "2.10.0+cpu",
+    "numpy": "2.2.6",
+    "threads": 16,
+    "interopThreads": 1
+  },
+  "sourceCase": {
+    "prompt": "a photograph of a red apple on a wooden table",
+    "negative": "",
+    "seed": 0,
+    "width": 512,
+    "height": 512,
+    "steps": 20,
+    "cfg": 7,
+    "threads": 16
+  },
+  "loadedSourceParameters": 1130,
+  "loadedSourceParametersManifestSha256": "5dbcb387459b6d5108d09533a18c8293a223543b6aae4d0b14b75cb0432ccc73",
+  "sourceCheckpointAndParametersUnchanged": true,
+  "sourceExecutionHashes": {
+    "labs/sd15-pretrained-source/reference.py": "554d17049ee7e08c05bb6f8189be25470a1a8d0121c12a6ea658bb95f7f0ff26",
+    "labs/sd15-pretrained-source/models.py": "c30200faa3fc72c2e20c27deece0d6b22dbac6fe92e859d19696e1358f6d8c29",
+    "labs/sd15-pretrained-source/protocol.json": "82b65b28c989c7af8b2980fabeb5f9bf602258a29e2c9afaf3e9c5c00bc8b820",
+    "labs/sd15-pipeline-source/reference.py": "6ef0485805f9dea2bb5cac0bf593ef2a8bb9f56043a7a71ee2fdfd6c8407a2fb",
+    "labs/clip-source/reference.py": "23106fef5538575a9801bc9cb61029593bd27f781f7186fc4602d8e6ef724536",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/sd-source/vae.py": "e091731c22bf6f61308b78f999d82b37303437e4fc9d2319763e0312218bb8e3"
+  },
+  "comparatorSha256": "31f4f76813be586bba6ab8f1fc18cc25df6f896b6700a7b00a6f675521de1306",
+  "comparatorTestsSha256": "0ef88e406fa11f4eff370da8b36f1c008db196d4c747fc25d1885e52b8b3a2ab",
+  "sourceBodies": [
+    {
+      "file": "comfy/ldm/modules/attention.py",
+      "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic"
+      ],
+      "astSha256": "59f3a86ee4966e65e25db886e97c707ad72ff53af6919f99bd300cac96aa604f"
+    },
+    {
+      "file": "comfy/clip_model.py",
+      "fileSha256": "de877f05881345974bcda584696537a5a425215043f88ce9b97864cecee8343d",
+      "symbols": [
+        "CLIPAttention",
+        "ACTIVATIONS",
+        "CLIPMLP",
+        "CLIPLayer",
+        "CLIPEncoder",
+        "CLIPEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextModel"
+      ],
+      "astSha256": "5cdeb4ba168704f3868e01d6811fcaae796a81665a5c3faf3da550dd60599a03"
+    },
+    {
+      "file": "comfy/sd1_clip.py",
+      "fileSha256": "cada45bf2cd1e2e20d24a46b959d86fc9f5529953456bb21471735f036e2dc70",
+      "symbols": [
+        "gen_empty_tokens",
+        "ClipTokenWeightEncoder",
+        "SDClipModel",
+        "SD1CheckpointClipModel"
+      ],
+      "astSha256": "3668087a9e0e0130569e3c4bd918492aaa70ba3c6e72741244daa05054cc77ec"
+    },
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/util.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+      "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "checkpoint",
+        "timestep_embedding",
+        "avg_pool_nd"
+      ],
+      "astSha256": "46be9aed2a5129acaee45d61938b4cd73fea6512543141e4594db8c9bd8e2f7c"
+    },
+    {
+      "source": "comfy/ldm/modules/attention.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+      "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+      "symbols": [
+        "get_attn_precision",
+        "exists",
+        "default",
+        "_heads_from_dim",
+        "_reshape_qkv_to_heads",
+        "GEGLU",
+        "FeedForward",
+        "AttentionTensorContainer",
+        "wrap_attn",
+        "attention_basic",
+        "CrossAttention",
+        "BasicTransformerBlock",
+        "SpatialTransformer"
+      ],
+      "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+    },
+    {
+      "source": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+      "fileSha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+      "symbols": [
+        "TimestepBlock",
+        "forward_timestep_embed",
+        "TimestepEmbedSequential",
+        "Upsample",
+        "Downsample",
+        "ResBlock",
+        "apply_control",
+        "UNetModel"
+      ],
+      "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/model.py",
+      "fileSha256": "a8e10d29e778007f5133bd870ed74fac478629727c08b81ec39390db3870d867",
+      "symbols": [
+        "torch_cat_if_needed",
+        "nonlinearity",
+        "Normalize",
+        "CarriedConv3d",
+        "conv_carry_causal_3d",
+        "interpolate_up",
+        "Upsample",
+        "Downsample",
+        "ResnetBlock",
+        "slice_attention",
+        "normal_attention",
+        "vae_attention",
+        "AttnBlock",
+        "make_attn",
+        "Encoder",
+        "Decoder"
+      ],
+      "astSha256": "54c55dc20154f7c7dca13e2205430ac0fd6794865ebe347e41d2479fe4bf41f3"
+    },
+    {
+      "file": "comfy/ldm/modules/distributions/distributions.py",
+      "fileSha256": "3ae3040d1e43ecfff4ea9daa7807fa345e28cf93ae5e34d29436d49bb11df772",
+      "symbols": [
+        "DiagonalGaussianDistribution"
+      ],
+      "astSha256": "8a5502e38258be44bb1de5f9307b1e87f666f2c05c8be7d670e8d32e6aab4be9"
+    },
+    {
+      "file": "comfy/ldm/models/autoencoder.py",
+      "fileSha256": "24b5a9126539733ef15f36e0d723abde8a8fb3319184083970b385ab918404f0",
+      "symbols": [
+        "DiagonalGaussianRegularizer",
+        "AbstractAutoencoder",
+        "AutoencodingEngine",
+        "AutoencodingEngineLegacy",
+        "AutoencoderKL"
+      ],
+      "astSha256": "48975c664e6086465325e795d75895d206caa437349640dc249088e32f250d9c"
+    },
+    {
+      "source": "comfy/sd.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py",
+      "fileSha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7",
+      "symbols": [
+        "VAE"
+      ],
+      "astSha256": "3a5e1c6a37d45492216519e5540dc4c272185eb16a3ccf1876b35e01170972c4"
+    },
+    {
+      "source": "comfy/sd.py",
+      "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd.py",
+      "fileSha256": "ef373b88ced93955a7147dcd3323ecac9cd5316f0ae4623adfb9b6b128c37ba7",
+      "symbols": [
+        "VAE.__init__.process_input",
+        "VAE.__init__.process_output"
+      ],
+      "astSha256": "a2fca15fb1aea03c29b27511372fe7aa3a5df5ce8af5e342c0864d64cad0a340"
+    },
+    {
+      "file": "comfy/ldm/modules/diffusionmodules/util.py",
+      "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "symbols": [
+        "make_beta_schedule"
+      ],
+      "astSha256": "0b80d3e0c2e221f93758eaa7382188ffe146d3727ee7898cd15eafb35374d8b9"
+    },
+    {
+      "file": "comfy/model_sampling.py",
+      "fileSha256": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "symbols": [
+        "reshape_sigma",
+        "EPS",
+        "ModelSamplingDiscrete"
+      ],
+      "astSha256": "8a65c67479eaabd3580a124a75cf62a717262fff7880f0dd840dd5494836c430"
+    },
+    {
+      "file": "comfy/samplers.py",
+      "fileSha256": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f",
+      "symbols": [
+        "cfg_function",
+        "sampling_function",
+        "Sampler"
+      ],
+      "astSha256": "550b38a59b391f92fd2648885afb15f3af80c745e690b86fe2133288c928cef2"
+    },
+    {
+      "file": "comfy/k_diffusion/utils.py",
+      "fileSha256": "fc30630d8a0e4520b2e864c8f84deea3231c9b04d3f1404fec93fc425f629272",
+      "symbols": [
+        "append_dims"
+      ],
+      "astSha256": "8999eb8dd535286ce45efc0c5ff96a664c6a12a87c005d77c0c221d6d6cb0018"
+    },
+    {
+      "file": "comfy/k_diffusion/sampling.py",
+      "fileSha256": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+      "symbols": [
+        "append_zero",
+        "get_sigmas_karras",
+        "to_d",
+        "sample_euler"
+      ],
+      "astSha256": "f14906856012791c9fcb89c0affa9c3cdc42618dae4414db454c37ac0d396ca3"
+    },
+    {
+      "file": "comfy/latent_formats.py",
+      "fileSha256": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4",
+      "symbols": [
+        "LatentFormat",
+        "SD15"
+      ],
+      "astSha256": "e835743658929b537511c32e936e9228527990df3261be86e823df7ed977b0da"
+    }
+  ],
+  "tracedProductElapsedSeconds": 96.0979129,
+  "sourceElapsedSeconds": 106.54699999999139,
+  "float32ElementsCompared": 970261,
+  "traceBytesPerExecution": 3881044,
+  "pngWithAndWithoutCapturesExactlyEqual": true,
+  "pngSha256": "f76955826888f804d52b937afef81e2d10768da90f8a49fe15152a817673d379",
+  "validation": {
+    "dotnetSelectedTests": {
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0,
+      "newInThisChange": 2,
+      "trxSha256": "ac8b70d4b19e2ba18d15d509422314fa252ea1bd6f54b5ab574aa1597c736aec"
+    },
+    "laboratoryComparatorTests": {
+      "passed": 7,
+      "scope": "tiny control fixtures only"
+    },
+    "releaseSolutionBuild": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "testedInputHashes": {
+      "tools/ComfySharp.RuntimeProbe/Sd15GenerationDiagnostic.cs": {
+        "bytes": 13163,
+        "sha256": "f6addc887dd9ab2c32e3869c3ef63b3926fcf20f6271de756f76dbf8490da3ba"
+      },
+      "tests/ComfySharp.Inference.Tests/Sd15GenerationDiagnosticTests.cs": {
+        "bytes": 5540,
+        "sha256": "ccfa7f16472cb24f6fe009d783b3fa47d9928df4551e0935677be6d08c6d512b"
+      },
+      "tools/ComfySharp.RuntimeProbe/Program.cs": {
+        "bytes": 5507,
+        "sha256": "d729a00fdf2d4434c8bc628a90be2ac176179d31b0a98f9c8ae622b1e8cee4ea"
+      },
+      "tools/ComfySharp.RuntimeProbe/ComfySharp.RuntimeProbe.csproj": {
+        "bytes": 468,
+        "sha256": "2b1baa80eab22ccb031554cdf6cdd6625229e3520829b641040ee92d013f7a33"
+      },
+      "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": {
+        "bytes": 3155,
+        "sha256": "508124f2ea8ca40200ef5f8ffa40f718d9af0a312eddcddf5b0b29ca75d39bc3"
+      },
+      "Directory.Build.props": {
+        "bytes": 1137,
+        "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+      },
+      "Directory.Packages.props": {
+        "bytes": 1412,
+        "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+      },
+      "global.json": {
+        "bytes": 95,
+        "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+      },
+      "build/ComfySharp.Native.props": {
+        "bytes": 4487,
+        "sha256": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd"
+      },
+      "tools/ComfySharp.RuntimeProbe/packages.win-x64.cpu.lock.json": {
+        "bytes": 2216,
+        "sha256": "c94afaa186fb1b77aa83f6e83409d7d2bf3e2f5729830c26e093e2a79d87fb3d"
+      },
+      "tests/ComfySharp.Inference.Tests/packages.win-x64.cpu.lock.json": {
+        "bytes": 6432,
+        "sha256": "df4d7c50bac44a3a5dd074d3c6af865d89b4f0825433fb4e0c1b7506c32101a1"
+      }
+    }
+  },
+  "limits": [
+    "Fixed ASCII prompt, one seed/checkpoint/size/scheduler/CFG case only",
+    "Resident CPU adapters, no full ComfyUI server execution",
+    "Identity auxiliary CLIP projection absent from checkpoint; unused projected pool only",
+    "No intermediate Euler-step captures in this comparison",
+    "Other platforms and GPU not qualified",
+    "Host/Desktop generation nodes still pending"
+  ]
+}

@@ -42,8 +42,18 @@ paramètres, durée et pic mémoire du processus. Le checkpoint est ouvert une f
 pour l'inspection, le hash et le chargement. Aucun cache de poids sur disque n'est
 créé ; les graphes et tenseurs possèdent des ressources explicitement libérées.
 
+L'option `--trace-dir <nouveau-dossier>` capture huit tenseurs Float32 : les deux
+conditionnements, le bruit, les sigmas, le latent initial, le latent final, le
+latent VAE et l'image. Le rapport JSON contient leurs formes, tailles et hashes.
+Ces captures servent au [laboratoire de comparaison](../labs/sd15-pretrained-source/README.md),
+avec les poids partagés et les déclarations ComfyUI figées. Un dossier de traces
+existant est refusé ; les fichiers intermédiaires d'un calcul échoué ne constituent
+pas une preuve de réussite.
+
 Une sortie `status=ok` prouve l'exécution demandée, pas la parité numérique avec
 ComfyUI. `familyQualified=false` reste explicite : comparaison avec références,
 autres workflows, intégration Host/Desktop, CUDA et qualification des plateformes
 restent nécessaires. Le diagnostic réduit antérieur et ses tolérances restent
 inchangés dans [SD15_PIPELINE.md](SD15_PIPELINE.md).
+
+La [première comparaison préentraînée](qualification/sd15-pretrained-comparison.json) retrouve exactement les huit captures des fonctions ComfyUI figées, sur le cas documenté 512 × 512 / 20 étapes / seed 0 / CFG 7, en CPU Windows. Les autres cas et plateformes restent à qualifier.
