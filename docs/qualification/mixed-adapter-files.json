@@ -1,0 +1,156 @@
+{
+  "status": "mixed-sd-adapter-export-reload-verified-on-local-cpu",
+  "familyQualified": false,
+  "trainingNodeQualified": false,
+  "releaseReady": false,
+  "inputs": {
+    "baseCommit": "8580892c8250639b8042c2062169dc725aad2622",
+    "sourceHashes": {
+      ".github/workflows/ci.yml": "75a4a625312db30ba458e66d313a1e069884015ae46dd43c9af23ab2fbd7f673",
+      "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+      "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+      "build/ComfySharp.Native.props": "fb34d56bccd9fa999dcf36e7329eddff52ff5b6c24d88603423047b133186545",
+      "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+      "labs/lora-alias-source/reference.py": "ecf1e566b35c34194f497ff5b55cc6691c243fc8f92655c18fba3aad3daafd3e",
+      "labs/mixed-adapter-source/reference.py": "4a39a8a4a6ac00eaaa93b2ff892e43f24d773754101cff965c181121b950aff7",
+      "labs/mixed-adapter-source/verify_export.py": "613d6523492964b884d9e2c6cc2b7ccfe4011af11ce58bc5add6f1313a908266",
+      "src/ComfySharp.Inference/LoraFileLoader.cs": "ecc910ff4504bf61101fa45cb363d2bd4f0bc55617f31ea35ff39e7c79ccbbf8",
+      "src/ComfySharp.Inference/LoraModelAliases.cs": "ef218b80d2056dc289c6b6630f3ed1128bcb63e45cedbf4552a36044fd61d812",
+      "src/ComfySharp.Inference/LoraTrainingFile.cs": "715d54df5fc54973d7c229ed68c5c5838e358e63cd361dd2b656bc09c3609c41",
+      "src/ComfySharp.Inference/LoraWeightPatch.cs": "02eedafe207adfd94240ea2af6822b6b4163c7a0e09784547d944a694738e809",
+      "src/ComfySharp.Inference/TrainableDifferencePatch.cs": "e6b8ff2c481eb26c5c45254df773ba323ddd16023f56ff5782669ed7ec1e3a70",
+      "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "621faab6f0dab8956e83824c0ff8a77da688e7cd545092ffad292bd77febd572",
+      "tests/ComfySharp.Inference.Tests/Fixtures/lora-all-aliases.reference.json": "972b1ee1561dd0dcf7abd9daa5de1edae7f5bd5bb21b120f81f13537636349a2",
+      "tests/ComfySharp.Inference.Tests/Fixtures/lora-differences.reference.json": "45c4e09af798cc068e7a0b89bfc54ecd33e32f140625f6277e708490aa026826",
+      "tests/ComfySharp.Inference.Tests/LoraDifferenceTests.cs": "3204b5a1717bed783d13ce39990cd0fd08e7362152431b5e1ad89df0030c6590",
+      "tests/ComfySharp.Inference.Tests/LoraFileLoaderTests.cs": "b877df218d1d70675cee78d294c86263479a6878846e3e4321c9713746751fb1",
+      "tests/ComfySharp.Inference.Tests/LoraModelAliasesTests.cs": "054c7d697b81dfee3cc8a5eb150710b262289f9bd6f2bf1c28fdfa885b11e712",
+      "tools/ComfySharp.RuntimeProbe/SdAllAdapterDiagnostic.cs": "9b4132b9357d32fe8f8d39e8b2547bb3524bdec9d3f00585ccaa096c38418523",
+      "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b"
+    }
+  },
+  "build": {
+    "solutionRelease": "passed; zero warnings/errors",
+    "cudaProbeRelease": "compiled before final newline normalization; CUDA runtime not tested in this change"
+  },
+  "tests": {
+    "inferenceWithoutSeparateStockClip": {
+      "total": 865,
+      "passed": 865,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "5bb17e24c74e46b31f46f2e76bfb7b17b052ac8b9ff727cd0004197b9a24b435"
+    },
+    "hostLoraContract": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "trxSha256": "3fb1a957cfe58968fa9dc247cd073a24f1618db88d3d95beb0607215711c196e"
+    }
+  },
+  "native": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 2,
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 10242232,
+    "changedParameterCount": 1133,
+    "InitialCpuRandomStateSha256": "a5591c92bf51f983cfd37fc16f69f8643b933f60b85d21b08b825111dfab8f15",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0
+      },
+      {
+        "step": 2,
+        "loss": 1.1277493,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 1244,
+        "nonzeroAlphaGradients": 280
+      }
+    ],
+    "baseUnchanged": true,
+    "export": {
+      "adapter": "sd15-all-target-trained-cpu-8580892.safetensors",
+      "adapterSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+      "bytes": 10406328,
+      "tensors": 1250,
+      "targets": 686,
+      "predictionSha256": "af58ab62f8e9986d5f6f7a3e513a61e0b0adf81e5ece70ebcdd7c50739e244b4",
+      "reloadPredictionExact": true,
+      "parameterHashManifestSha256": "c453681227b1096aba634561f4950b278d1491bb50ad80254b8869b7aaaf7648"
+    },
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 32.9228182,
+    "scope": "Real SD1.5 all-target ordinary LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Optional export reports mixed-adapter roundtrip separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "nativeReportSha256": "8b660237c6b01bc5403adc6ec8307803daf07b872a0b28f4a472c24569cb059e",
+  "sourceExport": {
+    "status": "ok",
+    "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+    },
+    "adapterSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+    "all1250PayloadHashesMatch": true,
+    "sourceAcceptedTargets": 686,
+    "kinds": {
+      "lora": 282,
+      "weightDifferences": 109,
+      "biasDifferences": 295
+    },
+    "sourceAdditiveApplicationsExact": true,
+    "scope": "Restricted independent F32 byte decoder, actual frozen mixed loader and additive application. Does not claim safetensors-package, pretrained source-forward/gradient or full training-node qualification."
+  },
+  "sourceFixtureSha256": {
+    "lora-all-aliases.reference.json": "972b1ee1561dd0dcf7abd9daa5de1edae7f5bd5bb21b120f81f13537636349a2",
+    "lora-differences.reference.json": "45c4e09af798cc068e7a0b89bfc54ecd33e32f140625f6277e708490aa026826"
+  },
+  "storage": {
+    "checkpointCopiedOrDownloaded": false,
+    "newAdapterBytes": 10406328,
+    "adapterStoredOutsideRepository": true
+  },
+  "limitations": [
+    "Synthetic miniature training inputs, not an image dataset or style-quality evaluation",
+    "No pretrained Python gradient/forward comparison",
+    "Existing-adapter training import, complete training nodes and mixed precision remain open",
+    "CUDA run deferred while user GPU workload was active",
+    "Cross-platform CI failures tracked separately; not a V1 claim"
+  ]
+}

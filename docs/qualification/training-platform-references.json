@@ -121,8 +121,46 @@
     }
   },
   "dotNetCi": {
-    "status": "pending",
-    "note": "Source collection success does not establish .NET comparison success on Linux/macOS."
+    "run": "34712065610",
+    "commit": "8580892c8250639b8042c2062169dc725aad2622",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34712065610",
+    "status": "completed",
+    "conclusion": "failure",
+    "win-x64": {
+      "inferencePassed": 859,
+      "inferenceFailed": 1,
+      "failure": "TrainableAdapterTests.Mixed_bias_norm_and_matrix_adapters_preserve_the_base_and_receive_gradients: final Tensor.TotalCount expected 2 actual 1; cause not established."
+    },
+    "linux-x64": {
+      "adapterPassed": 6,
+      "adapterFailed": 2,
+      "initializationAndRngExact": true,
+      "failures": [
+        {
+          "case": 0,
+          "stage": "output",
+          "element": 115,
+          "actual": 0.05966258,
+          "expected": 0.059699226
+        },
+        {
+          "case": 1,
+          "stage": "gradient",
+          "element": 1,
+          "actual": -0.39954707,
+          "expected": -0.3995896
+        }
+      ],
+      "laterDatasetAndDenoisingSteps": "not executed after adapter step failure"
+    },
+    "osx-arm64": {
+      "adapterPassed": 8,
+      "datasetPassed": 12,
+      "samplerAndDenoisingPassed": 96,
+      "inferencePassed": 860,
+      "remainingFailure": "Separate full stock CLIP L/G comparison; 2 failed, 1 passed"
+    },
+    "interpretation": "Same-platform references resolve macOS training comparisons and both non-Windows initializer hash checks. Linux numeric training discrepancies and Windows global tensor-count mismatch remain open. No tolerance relaxed."
   },
   "invariants": [
     "Original Windows reference bytes unchanged",

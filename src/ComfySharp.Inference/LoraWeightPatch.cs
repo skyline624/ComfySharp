@@ -1,14 +1,24 @@
 using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
-/// <summary>An immutable, independently disposable snapshot of LoRA factors for inference baking.
+/// <summary>An immutable, independently disposable snapshot of LoRA factors or an additive difference for inference baking.
 /// Low-level trainable operations use LoraMath directly; this owner intentionally freezes its factors.</summary>
 public sealed class LoraWeightPatch : IDisposable
 {
     private readonly object gate=new();
-    private Tensor? up,down,mid,dora;
+    private Tensor? up,down,mid,dora,difference;
     public double Strength { get; }
     public double? Alpha { get; }
+    private LoraWeightPatch(Tensor difference,double strength)
+    {
+        NativeRuntimeBootstrap.Initialize();using var scope=NewDisposeScope();using var noGrad=no_grad();
+        if(!double.IsFinite(strength))throw new ArgumentOutOfRangeException(nameof(strength));
+        var copy=Copy(difference);
+        if(copy.dim()<1||copy.shape.Any(d=>d<=0)||!copy.isfinite().all().item<bool>())
+            throw new InvalidDataException("An additive adapter requires finite nonempty tensor values.");
+        this.difference=copy.DetachFromDisposeScope();Strength=strength;
+    }
+    public static LoraWeightPatch FromDifference(Tensor difference,double strength=1)=>new(difference,strength);
     public LoraWeightPatch(Tensor up,Tensor down,double strength=1,double? alpha=null,Tensor? mid=null,Tensor? doraScale=null)
     {
         NativeRuntimeBootstrap.Initialize(); using var scope=NewDisposeScope(); using var noGrad=no_grad();
@@ -20,18 +30,25 @@ public sealed class LoraWeightPatch : IDisposable
     private LoraWeightPatch(LoraWeightPatch source)
     {
         using var scope=NewDisposeScope();
-        var u=source.up!.alias();var d=source.down!.alias();var m=source.mid?.alias();var s=source.dora?.alias();
-        up=u.DetachFromDisposeScope();down=d.DetachFromDisposeScope();mid=m?.DetachFromDisposeScope();dora=s?.DetachFromDisposeScope();
+        var u=source.up?.alias();var d=source.down?.alias();var m=source.mid?.alias();var s=source.dora?.alias();var diff=source.difference?.alias();
+        up=u?.DetachFromDisposeScope();down=d?.DetachFromDisposeScope();mid=m?.DetachFromDisposeScope();dora=s?.DetachFromDisposeScope();difference=diff?.DetachFromDisposeScope();
         Strength=source.Strength;Alpha=source.Alpha;
     }
     public LoraWeightPatch Retain()
     {
-        lock(gate){ObjectDisposedException.ThrowIf(up is null,this);return new(this);}
+        lock(gate){ObjectDisposedException.ThrowIf(up is null&&difference is null,this);return new(this);}
     }
     public Tensor Apply(Tensor weight,CancellationToken cancellationToken=default)
     {
         cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(weight);using var operation=Retain();
         using var scope=NewDisposeScope();using var noGrad=no_grad();
+        if(operation.difference is { } diff)
+        {
+            if(weight.dtype!=ScalarType.Float32||weight.is_sparse||!weight.shape.SequenceEqual(diff.shape))
+                throw new ArgumentException("Difference and target require identical dense Float32 shapes.",nameof(weight));
+            var result=weight+diff.to(weight.device)*Strength;
+            cancellationToken.ThrowIfCancellationRequested();return result.MoveToOuterDisposeScope();
+        }
         // Copy factors to the weight device only for this operation; source snapshots remain immutable.
         var u=operation.up!.to(weight.device);var d=operation.down!.to(weight.device);
         var m=operation.mid?.to(weight.device);var s=operation.dora?.to(weight.device);
@@ -46,8 +63,8 @@ public sealed class LoraWeightPatch : IDisposable
     }
     public void Dispose()
     {
-        Tensor? u,d,m,s;
-        lock(gate){u=up;d=down;m=mid;s=dora;up=down=mid=dora=null;}
-        u?.Dispose();d?.Dispose();m?.Dispose();s?.Dispose();
+        Tensor? u,d,m,s,diff;
+        lock(gate){u=up;d=down;m=mid;s=dora;diff=difference;up=down=mid=dora=difference=null;}
+        u?.Dispose();d?.Dispose();m?.Dispose();s?.Dispose();diff?.Dispose();
     }
 }

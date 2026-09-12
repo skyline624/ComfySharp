@@ -4,7 +4,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Exports ordinary trained LoRA factors to a new safetensors file.
+/// <summary>Exports trained LoRA factors and additive weight/bias differences to a new safetensors file.
 /// Keys are explicit loader prefixes (without suffixes), not filesystem paths.
 /// The caller serializes parameter updates against export; factor snapshots own their CPU storage.</summary>
 public static class LoraTrainingFile
@@ -12,35 +12,69 @@ public static class LoraTrainingFile
     public static void SaveNew(string path, IReadOnlyDictionary<string, TrainableLoraPatch> aliases,
         long maxFactorBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested(); ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ArgumentNullException.ThrowIfNull(aliases);
+        SaveEntries(path,aliases.Select(p=>new Entry(p.Key,p.Value,false)).ToArray(),maxFactorBytes,cancellationToken);
+    }
+
+    /// <summary>Exports canonical weight/bias targets using a source component prefix (for example diffusion_model.).
+    /// Bias targets become module.diff_b and one-dimensional weights become module.diff.</summary>
+    public static void SaveTargetsNew<T>(string path,IReadOnlyDictionary<string,T> targets,string componentPrefix="diffusion_model.",
+        long maxFactorBytes=512L*1024*1024,CancellationToken cancellationToken=default) where T:TrainableWeightPatch
+    {
+        ArgumentNullException.ThrowIfNull(targets);ArgumentNullException.ThrowIfNull(componentPrefix);
+        var entries=new List<Entry>();
+        foreach(var (name,patch) in targets)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);ArgumentNullException.ThrowIfNull(patch);
+            bool bias=name.EndsWith(".bias",StringComparison.Ordinal);
+            if(!bias&&!name.EndsWith(".weight",StringComparison.Ordinal))throw new ArgumentException("Export targets must end in .weight or .bias.",nameof(targets));
+            if(bias&&patch is not TrainableDifferencePatch)throw new ArgumentException("A bias target requires an additive adapter.",nameof(targets));
+            entries.Add(new(componentPrefix+name[..^(bias?5:7)],patch,bias));
+        }
+        SaveEntries(path,entries,maxFactorBytes,cancellationToken);
+    }
+    private sealed record Entry(string Prefix,TrainableWeightPatch Patch,bool Bias);
+    private static void SaveEntries(string path,IReadOnlyList<Entry> entries,long maxFactorBytes,CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested(); ArgumentException.ThrowIfNullOrWhiteSpace(path);
         if (!BitConverter.IsLittleEndian) throw new PlatformNotSupportedException("Safetensors export currently requires a little-endian platform.");
         if (maxFactorBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxFactorBytes));
-        if (aliases.Count is < 1 or > 10000) throw new ArgumentException("Export requires 1-10000 LoRA prefixes.", nameof(aliases));
+        if (entries.Count is < 1 or > 10000) throw new ArgumentException("Export requires 1-10000 adapter targets.", nameof(entries));
         string destination = Path.GetFullPath(path);
         if (File.Exists(destination) || Directory.Exists(destination)) throw new IOException("Adapter destination already exists.");
         string directory = Path.GetDirectoryName(destination)!;
         if (!Directory.Exists(directory)) throw new DirectoryNotFoundException("Adapter destination directory does not exist.");
-        var owners = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        var owners = new List<Entry>();
         try
         {
             long bytes = 0;
-            foreach (var (prefix, patch) in aliases)
+            foreach (var (prefix, patch,bias) in entries)
             {
                 cancellationToken.ThrowIfCancellationRequested(); ArgumentException.ThrowIfNullOrWhiteSpace(prefix); ArgumentNullException.ThrowIfNull(patch);
-                bytes = checked(bytes + (patch.Up.numel() + patch.Down.numel()) * 4 + 8);
+                bytes = checked(bytes + (patch switch
+                {
+                    TrainableLoraPatch lora=>checked((lora.Up.numel()+lora.Down.numel())*4+(lora.AlphaParameter is null?8:4)),
+                    TrainableDifferencePatch diff=>checked(diff.Difference.numel()*4),
+                    _=>throw new NotSupportedException("Unknown trainable adapter kind.")
+                }));
                 if (bytes > maxFactorBytes) throw new NotSupportedException("LoRA export snapshots exceed the configured factor allowance.");
-                owners.Add(prefix, patch.Retain());
+                owners.Add(new(prefix,patch.Retain(),bias));
             }
             NativeRuntimeBootstrap.Initialize(); using var scope = NewDisposeScope(); using var noGrad = no_grad();
             var tensors = new Dictionary<string, Tensor>(StringComparer.Ordinal);
-            foreach (var (prefix, patch) in owners)
+            foreach (var (prefix, patch,bias) in owners)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                tensors.Add(prefix + ".lora_up.weight", patch.Up.detach().to(CPU, copy: true).contiguous());
-                tensors.Add(prefix + ".lora_down.weight", patch.Down.detach().to(CPU, copy: true).contiguous());
-                // F64 keeps the explicit alpha value rather than silently narrowing it on export.
-                tensors.Add(prefix + ".alpha", tensor(patch.Alpha, dtype: ScalarType.Float64));
+                if(patch is TrainableDifferencePatch diff)
+                    tensors.Add(prefix+(bias?".diff_b":".diff"),diff.Difference.detach().to(CPU,copy:true).contiguous());
+                else if(patch is TrainableLoraPatch lora)
+                {
+                    tensors.Add(prefix + ".lora_up.weight", lora.Up.detach().to(CPU, copy: true).contiguous());
+                    tensors.Add(prefix + ".lora_down.weight", lora.Down.detach().to(CPU, copy: true).contiguous());
+                    // Preserve learned Float32 alpha bits; explicit double alpha retains its existing F64 encoding.
+                    tensors.Add(prefix + ".alpha", lora.AlphaParameter is { } alpha
+                        ?alpha.detach().to(CPU,copy:true).contiguous():tensor(lora.Alpha,dtype:ScalarType.Float64));
+                }
             }
             var header = new Dictionary<string, object>(StringComparer.Ordinal); long offset = 0;
             foreach (var (name, tensor) in tensors)
@@ -76,6 +110,6 @@ public static class LoraTrainingFile
             }
             finally { if (created) File.Delete(temporary); }
         }
-        finally { foreach (var owner in owners.Values) owner.Dispose(); }
+        finally { foreach (var owner in owners) owner.Patch.Dispose(); }
     }
 }

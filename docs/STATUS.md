@@ -1,6 +1,8 @@
 # État du port — 0.1.0-dev
 
-Les [références CPU d’entraînement par plateforme](TRAINING_PLATFORM_REFERENCES.md) sont collectées indépendamment depuis la source figée sur Windows, Linux et macOS. Les trois collectes passent ; les fichiers Windows restent identiques. **219 tests ciblés passent localement sur Windows**, sans assouplir les comparaisons. La nouvelle comparaison .NET Linux/macOS reste en attente de CI. Aucun modèle supplémentaire n’est téléchargé ou copié.
+Les [adapters SD mixtes](MIXED_ADAPTER_FILES.md) sont sauvegardés et rechargés avec leurs 686 cibles/1 250 tenseurs. **865 tests d’inférence et un contrat Host passent localement**. Le vrai SD1.5 CPU reçoit deux mises à jour puis recharge un adapter de 10,4 Mo avec prédiction exactement identique ; la source accepte toutes les cibles et hashes. Les entrées restent synthétiques, les nœuds complets et la qualification GPU restent ouverts.
+
+Les [références CPU d’entraînement par plateforme](TRAINING_PLATFORM_REFERENCES.md) sont collectées indépendamment depuis la source figée sur Windows, Linux et macOS. Les trois collectes passent ; les fichiers Windows restent identiques. **219 tests ciblés passent localement sur Windows**, sans assouplir les comparaisons. La [CI 8580892](qualification/training-platform-references.json) valide les étapes d’entraînement sur macOS ; Linux garde deux écarts numériques et Windows un échec de comptage global des tenseurs. CLIP macOS reste hors tolérance. Aucun modèle supplémentaire n’est téléchargé ou copié.
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 

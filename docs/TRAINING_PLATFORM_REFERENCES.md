@@ -37,3 +37,14 @@ fail and be investigated. The [qualification record](qualification/training-plat
 distinguishes successful source collection from actual .NET comparison results.
 Complete training nodes, GPU source parity, real image datasets and model-family
 qualification remain separate requirements.
+
+The [.NET run 34712065610](https://github.com/skyline624/ComfySharp/actions/runs/34712065610)
+at `8580892c8250639b8042c2062169dc725aad2622` completed with failures. macOS passed
+all adapter, dataset and denoising steps (8, 12 and 96 tests), and its 860-test
+inference suite; the separate stock CLIP L/G comparison still failed. Linux passed
+exact initializer/RNG checks but failed two numerical output/gradient comparisons
+in the adapter step; later dataset/denoising steps were not executed. Windows
+passed 859/860 inference tests, with one final global tensor-count assertion
+reporting 1 instead of 2. These failures remain open with unchanged assertions;
+the qualification record preserves exact observations and avoids treating a
+successful local rerun as their resolution.

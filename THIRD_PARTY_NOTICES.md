@@ -1,5 +1,13 @@
 # Third-party provenance
 
+Mixed adapter persistence and additive snapshots follow `.diff`, `.diff_b`,
+`.w_norm`/`.b_norm` precedence in `comfy/lora.py` and training parameter names in
+`comfy_extras/nodes_train.py`, frozen at `1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a`
+(GPLv3-or-later, Copyright Comfy). The C# adaptation adds deterministic snapshot
+ownership, strict shape validation and new-file atomic export. Its separate
+[source laboratory](labs/mixed-adapter-source/README.md) is not distributed with
+the application or .NET tests.
+
 `LoraFileLoader.cs` adapts the LoRA selection responsibilities of frozen
 ComfyUI `comfy/lora.py` and `LoRAAdapter.load` in `comfy/weight_adapter/lora.py`,
 under the GPLv3 provenance below. It uses the existing strict safetensors reader,

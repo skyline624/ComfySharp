@@ -26,6 +26,11 @@ public sealed class TrainableDifferencePatch : TrainableWeightPatch
     }
     public Tensor Difference { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.Difference; } } }
     public override IReadOnlyList<Tensor> Parameters => new[] { Difference };
+    public LoraWeightPatch Snapshot()
+    {
+        using var operation = Retain();
+        return LoraWeightPatch.FromDifference(operation.Difference);
+    }
     public override TrainableDifferencePatch Retain()
     {
         lock (shared.Gate) { ThrowIfDisposed(); shared.Owners = checked(shared.Owners + 1); return new(shared); }

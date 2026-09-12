@@ -34,8 +34,8 @@ public sealed class LoraFileLoaderTests
         }
         Assert.Equal(before,Tensor.TotalCount);
     }
-    private sealed record Value(long[] Shape,float[] Values,string DType="F32");
-    private static string Write(IReadOnlyDictionary<string,Value> values)
+    internal sealed record Value(long[] Shape,float[] Values,string DType="F32");
+    internal static string Write(IReadOnlyDictionary<string,Value> values)
     {
         var header=new Dictionary<string,object>();var payload=new List<byte>();
         foreach(var(name,value) in values)

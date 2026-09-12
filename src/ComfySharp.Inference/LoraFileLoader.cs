@@ -3,7 +3,7 @@ namespace ComfySharp.Inference;
 
 public sealed record LoraTarget(string Component,string Weight,IReadOnlyList<long> Shape);
 public sealed record LoraAlias(string Prefix,LoraTarget Target);
-public sealed record LoraBinding(string Prefix,LoraTarget Target,string Up,string Down,string? Mid,string? Alpha,string? Dora);
+public sealed record LoraBinding(string Prefix,LoraTarget Target,string? Up,string? Down,string? Mid,string? Alpha,string? Dora,string? Difference=null);
 
 /// <summary>Metadata-only selection tied to one open safetensors reader. Alias order is authoritative:
 /// later aliases overwrite earlier bindings for the same target, as frozen load_lora does.</summary>
@@ -42,8 +42,8 @@ public static class LoraFileLoader
             if(string.IsNullOrWhiteSpace(alias.Prefix)||!prefixes.Add(alias.Prefix))throw new ArgumentException("Alias prefixes must be nonempty and unique.",nameof(aliases));
             ArgumentNullException.ThrowIfNull(alias.Target);
             ArgumentNullException.ThrowIfNull(alias.Target.Shape);
-            if(string.IsNullOrWhiteSpace(alias.Target.Component)||string.IsNullOrWhiteSpace(alias.Target.Weight)||alias.Target.Shape.Count<2||alias.Target.Shape.Any(v=>v<=0))
-                throw new ArgumentException("LoRA targets need a component, canonical weight and positive rank>=2 shape.",nameof(aliases));
+            if(string.IsNullOrWhiteSpace(alias.Target.Component)||string.IsNullOrWhiteSpace(alias.Target.Weight)||alias.Target.Shape.Count<1||alias.Target.Shape.Any(v=>v<=0))
+                throw new ArgumentException("Adapter targets need a component, canonical weight and positive shape.",nameof(aliases));
             var target=alias.Target with{Shape=Array.AsReadOnly(alias.Target.Shape.ToArray())};
             components.Add(target.Component);
             foreach(var format in Formats)
@@ -62,10 +62,26 @@ public static class LoraFileLoader
                 if(selected.TryGetValue(identity,out var prior))shadowed.Add(prior.Prefix);
                 selected[identity]=binding;break;
             }
+            void Difference(string suffix,bool bias=false)
+            {
+                string key=alias.Prefix+suffix;
+                if(!file.Tensors.ContainsKey(key))return;
+                if(bias&&!target.Weight.EndsWith(".weight",StringComparison.Ordinal))
+                    throw new InvalidDataException("A bias difference alias must identify its module weight.");
+                var destination=bias?target with{Weight=target.Weight[..^7]+".bias",Shape=Array.AsReadOnly(new[]{target.Shape[0]})}:target;
+                var binding=new LoraBinding(alias.Prefix,destination,null,null,null,null,null,key);
+                Validate(file,binding);claimed.Add(key);
+                var identity=(destination.Component,destination.Weight);
+                if(selected.TryGetValue(identity,out var prior)&&prior.Prefix!=alias.Prefix)shadowed.Add(prior.Prefix);
+                selected[identity]=binding;
+            }
+            // Frozen load_lora ordering: norm differences, then explicit weight/bias differences.
+            if(file.Tensors.ContainsKey(alias.Prefix+".w_norm")){Difference(".w_norm");Difference(".b_norm",true);}
+            Difference(".diff");Difference(".diff_b",true);
         }
         var unclaimed=file.Tensors.Keys.Where(k=>!claimed.Contains(k)).Order(StringComparer.Ordinal).ToArray();
         if(!allowUnclaimedKeys&&unclaimed.Length>0)throw new NotSupportedException($"Unclaimed LoRA tensors ({unclaimed.Length}): {string.Join(", ",unclaimed.Take(8))}. No adapter is loaded.");
-        if(selected.Count==0)throw new NotSupportedException("No LoRA factors match the supplied target aliases.");
+        if(selected.Count==0)throw new NotSupportedException("No adapter tensors match the supplied target aliases.");
         long resident=0;
         foreach(var binding in selected.Values)
             foreach(string key in FactorKeys(binding))resident=checked(resident+Elements(file.Tensors[key].Shape)*4);
@@ -90,7 +106,12 @@ public static class LoraFileLoader
             foreach(var binding in plan.Bindings)
             {
                 cancellationToken.ThrowIfCancellationRequested();using var scope=NewDisposeScope();
-                var up=file.ReadTensor(binding.Up,cancellationToken);var down=file.ReadTensor(binding.Down,cancellationToken);
+                if(binding.Difference is { } difference)
+                {
+                    var snapshot=LoraWeightPatch.FromDifference(file.ReadTensor(difference,cancellationToken),strengths.GetValueOrDefault(binding.Target.Component,1.0));
+                    patches.Add((binding.Target.Component,binding.Target.Weight),snapshot);continue;
+                }
+                var up=file.ReadTensor(binding.Up!,cancellationToken);var down=file.ReadTensor(binding.Down!,cancellationToken);
                 var mid=binding.Mid is null?null:file.ReadTensor(binding.Mid,cancellationToken);
                 var dora=binding.Dora is null?null:file.ReadTensor(binding.Dora,cancellationToken);
                 double? alpha=null;
@@ -108,7 +129,7 @@ public static class LoraFileLoader
     }
 
     private static IEnumerable<string> FactorKeys(LoraBinding binding)
-    {yield return binding.Up;yield return binding.Down;if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;}
+    {if(binding.Difference is { } diff){yield return diff;yield break;}yield return binding.Up!;yield return binding.Down!;if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;}
     private static long Elements(IReadOnlyList<long> shape)=>shape.Aggregate(1L,(n,d)=>checked(n*d));
     private static void Validate(SafeTensorFile file,LoraBinding binding)
     {
@@ -118,7 +139,13 @@ public static class LoraFileLoader
             if(info.DType is not("F32" or "F16" or "BF16")||info.Shape.Any(v=>v<=0)||info.End-info.Start>int.MaxValue)
                 throw new InvalidDataException($"Unsupported LoRA factor dtype, shape or size: '{key}'.");
         }
-        var up=file.Tensors[binding.Up].Shape;var down=file.Tensors[binding.Down].Shape;
+        if(binding.Difference is { } diff)
+        {
+            if(!file.Tensors[diff].Shape.SequenceEqual(binding.Target.Shape))throw new InvalidDataException("Additive adapter shape differs from its target.");
+            return;
+        }
+        if(binding.Target.Shape.Count<2)throw new InvalidDataException("LoRA factors require a target with at least two dimensions.");
+        var up=file.Tensors[binding.Up!].Shape;var down=file.Tensors[binding.Down!].Shape;
         if(up.Count<2||down.Count<2)throw new InvalidDataException("LoRA up/down factors require at least two dimensions.");
         long columns=Elements(down)/down[0];
         if(binding.Mid is not null)

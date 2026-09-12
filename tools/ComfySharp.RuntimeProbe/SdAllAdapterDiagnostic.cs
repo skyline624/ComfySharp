@@ -7,7 +7,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.RuntimeProbe;
 
-/// <summary>Explicit pretrained all-target gradient diagnostic. Writes metadata only, no model or adapter copy.</summary>
+/// <summary>Explicit pretrained all-target gradient diagnostic with optional new mixed-adapter export and reload.</summary>
 internal static class SdAllAdapterDiagnostic
 {
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken)
@@ -18,12 +18,15 @@ internal static class SdAllAdapterDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device"))
-                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter"))
+                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--adapter NEW.safetensors]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
             string checkpoint = Path.GetFullPath(Required("--checkpoint")), report = Path.GetFullPath(Required("--report")), requested = Required("--device");
+            string? adapterPath = options.TryGetValue("--adapter",out var adapterOption)?Path.GetFullPath(adapterOption):null;
+            if(adapterPath is not null&&(File.Exists(adapterPath)||Directory.Exists(adapterPath)||!Directory.Exists(Path.GetDirectoryName(adapterPath))))throw new IOException("Adapter must be a new file in an existing directory.");
+            if(adapterPath is not null&&string.Equals(adapterPath,report,StringComparison.OrdinalIgnoreCase))throw new ArgumentException("Adapter and report must use distinct paths.");
             if (File.Exists(report) || Directory.Exists(report) || !Directory.Exists(Path.GetDirectoryName(report))) throw new IOException("Report must be a new file in an existing directory.");
             if (requested is not ("cpu" or "cuda:0")) throw new ArgumentException("Select cpu or cuda:0.");
             cancellationToken.ThrowIfCancellationRequested();
@@ -68,16 +71,46 @@ internal static class SdAllAdapterDiagnostic
             if (lastNonzeroAlpha == 0) throw new InvalidOperationException("No alpha gradient reached the second update.");
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
+            object? export=null;
+            if(adapterPath is not null)
+            {
+                var parameterHashes=new Dictionary<string,string>(StringComparer.Ordinal);
+                foreach(var (name,patch) in adapters.Patches)
+                {
+                    bool bias=name.EndsWith(".bias",StringComparison.Ordinal);
+                    string prefix="diffusion_model."+name[..^(bias?5:7)];
+                    if(patch is TrainableDifferencePatch diff)parameterHashes.Add(prefix+(bias?".diff_b":".diff"),Hash(diff.Difference));
+                    else if(patch is TrainableLoraPatch lora)
+                    {
+                        parameterHashes.Add(prefix+".lora_up.weight",Hash(lora.Up));parameterHashes.Add(prefix+".lora_down.weight",Hash(lora.Down));
+                        parameterHashes.Add(prefix+".alpha",Hash(lora.AlphaParameter!));
+                    }
+                }
+                string trainedPrediction;
+                using(var noGrad=no_grad())
+                using(var prediction=model.ForwardForTraining(input,time,context,adapters.Patches,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken))trainedPrediction=Hash(prediction);
+                LoraTrainingFile.SaveTargetsNew(adapterPath,adapters.Patches,maxFactorBytes:adapters.ParameterBytes,cancellationToken:cancellationToken);
+                using var adapterFile=new SafeTensorFile(adapterPath);
+                var adapterPlan=LoraFileLoader.Inspect(adapterFile,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
+                if(adapterPlan.Bindings.Count!=adapters.Patches.Count)throw new InvalidDataException("Export lost adapter targets.");
+                using var snapshots=LoraFileLoader.Load(adapterFile,adapterPlan,cancellationToken:cancellationToken);
+                using var baked=snapshots.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
+                using var reloaded=baked.Forward(input,time,context,cancellationToken);
+                if(Hash(reloaded)!=trainedPrediction)throw new InvalidOperationException("Reloaded mixed adapter prediction differs from trained parameters.");
+                export=new{adapter=Path.GetFileName(adapterPath),adapterSha256=adapterFile.ComputeSha256(cancellationToken),bytes=adapterFile.FileSizeBytes,
+                    tensors=adapterFile.Tensors.Count,targets=adapterPlan.Bindings.Count,parameterHashes,predictionSha256=trainedPrediction,reloadPredictionExact=true};
+                progress.WriteLine("Mixed adapter exported and reloaded: all targets retained, prediction exactly matches trained parameters.");
+            }
             string json = JsonSerializer.Serialize(new
             {
                 status = "ok", familyQualified = false, trainingNodeQualified = false, checkpoint = Path.GetFileName(checkpoint), modelSha256,
                 checkpointBytes = file.FileSizeBytes, backend = requested, dtype = "Float32", tf32Allowed = false, seed = 317, rank = 2,
                 optimizer = "SGD", learningRate = .01, targetCount = adapters.Patches.Count, parameterCount = leaves.Length,
                 alphaParameters = leaves.Count(p => p.IsAlpha), adapterParameterBytes = adapters.ParameterBytes, changedParameterCount = changed,
-                adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true,
+                adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true, export,
                 inputRecipe = new { shape = new[] { 1, 4, 8, 8 }, inputSeed = 511, contextShape = new[] { 1, 3, 768 }, contextSeed = 512, targetSeed = 513, timestep = 17.25 },
                 elapsedSeconds = watch.Elapsed.TotalSeconds,
-                scope = "Real SD1.5 all-target ordinary LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Metadata-only diagnostic; no image-dataset, complete node, serialization/reload of mixed adapters, pretrained source-gradient or platform qualification."
+                scope = "Real SD1.5 all-target ordinary LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Optional export reports mixed-adapter roundtrip separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
             }, new JsonSerializerOptions { WriteIndented = true });
             using var stream = new FileStream(report, FileMode.CreateNew, FileAccess.Write, FileShare.None); using var writer = new StreamWriter(stream); writer.Write(json);
             output.WriteLine(json); return 0;

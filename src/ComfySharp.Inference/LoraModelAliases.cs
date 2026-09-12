@@ -3,7 +3,7 @@ using ComfySharp.Tokenization;
 namespace ComfySharp.Inference;
 
 /// <summary>Frozen LoRA names for the implemented plain SD U-Net and a single CLIP encoder.
-/// Only existing rank-two-or-higher weights are eligible for LoRA factor application.</summary>
+/// Includes one-dimensional weights for additive normalization adapters.</summary>
 public static class LoraModelAliases
 {
     public static IReadOnlyList<LoraAlias> ForUnet(SdUnetConfig config, string component = "model")
@@ -73,7 +73,7 @@ public static class LoraModelAliases
     }
 
     private static bool Eligible(string weight, IReadOnlyList<long> shape) =>
-        weight.EndsWith(".weight", StringComparison.Ordinal) && shape.Count >= 2;
+        weight.EndsWith(".weight", StringComparison.Ordinal) && shape.Count >= 1;
     private static IReadOnlyList<LoraAlias> Snapshot(Dictionary<string, LoraTarget> aliases) =>
         Array.AsReadOnly(aliases.Select(p => new LoraAlias(p.Key, p.Value)).ToArray());
 }

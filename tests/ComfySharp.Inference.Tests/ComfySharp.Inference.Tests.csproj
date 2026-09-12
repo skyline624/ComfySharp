@@ -2,6 +2,8 @@
   <ItemGroup><Compile Include="../Shared/PngFixtureReader.cs" Link="Support/PngFixtureReader.cs" /></ItemGroup>
   <PropertyGroup><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Fixtures/lora-all-aliases.reference.json" />
+    <EmbeddedResource Include="Fixtures/lora-differences.reference.json" />
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
     <ProjectReference Include="../../src/ComfySharp.Core/ComfySharp.Core.csproj" />
     <ProjectReference Include="../../src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />

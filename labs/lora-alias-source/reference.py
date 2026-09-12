@@ -1,6 +1,6 @@
 """Run frozen alias functions on checkpoint header metadata; never read tensor payloads."""
 import argparse,ast,hashlib,json,pathlib,struct,subprocess,types
-p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--checkpoint',required=True);p.add_argument('--output',required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--checkpoint',required=True);p.add_argument('--output',required=True);p.add_argument('--include-vector-weights',action='store_true');a=p.parse_args()
 commit='1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a';hashes={};ns={}
 def extract(path,names):
     raw=subprocess.check_output(['git','-C',a.source,'show',commit+':'+path]);hashes[path]=hashlib.sha256(raw).hexdigest()
@@ -24,9 +24,9 @@ class Model:
 def capture(name,shapes,prefix,fn):
     mapping=fn(Model(shapes),{});groups={}
     for alias,target in mapping.items():
-        if target in shapes and len(shapes[target])>=2:
+        if target in shapes and len(shapes[target])>=(1 if a.include_vector_weights else 2):
             groups.setdefault(target[len(prefix):],[]).append(alias)
-    return {'name':name,'shapes':{k[len(prefix):]:v for k,v in shapes.items() if len(v)>=2},'aliasesByTarget':dict(sorted(groups.items()))}
+    return {'name':name,'shapes':{k[len(prefix):]:v for k,v in shapes.items() if len(v)>=(1 if a.include_vector_weights else 2)},'aliasesByTarget':dict(sorted(groups.items()))}
 unet={'diffusion_model.'+k[len('model.diffusion_model.'):]:v['shape'] for k,v in header.items() if k.startswith('model.diffusion_model.') and k.endswith('.weight')}
 clip={'clip_l.transformer.'+k[len('cond_stage_model.transformer.'):]:v['shape'] for k,v in header.items() if k.startswith('cond_stage_model.transformer.') and k.endswith('.weight')}
 assert len(unet)>300 and len(clip)>90
@@ -36,8 +36,12 @@ for wrapper in ['clip_l','clip_g']:
     shapes={wrapper+'.transformer.text_model.embeddings.token_embedding.weight':[49408,4],wrapper+'.transformer.text_model.embeddings.position_embedding.weight':[77,4]}
     for i in range(33):
         for part in ns['LORA_CLIP_MAP']:shapes[f'{wrapper}.transformer.text_model.encoder.layers.{i}.{part}.weight']=[8,4] if part=='mlp.fc1' else [4,8] if part=='mlp.fc2' else [4,4]
+        if a.include_vector_weights:
+            for part in ['layer_norm1','layer_norm2']:shapes[f'{wrapper}.transformer.text_model.encoder.layers.{i}.{part}.weight']=[4]
+    if a.include_vector_weights:shapes[wrapper+'.transformer.text_model.final_layer_norm.weight']=[4]
     shapes[wrapper+'.transformer.text_projection.weight']=[4,4]
     cases.append(capture(wrapper+'-33-layer-metadata',shapes,wrapper+'.transformer.',ns['model_lora_keys_clip']))
 output={'sourceCommit':commit,'sourceHashes':hashes,'scope':'Exact source alias functions with metadata-only model facade. Plain SD config; standalone CLIP. Existing rank>=2 weights only; source mappings to absent/rank-one weights are excluded. Per-target priority preserved; global unrelated-target iteration order is not a contract. Checkpoint payload not read.','cases':cases}
+if a.include_vector_weights:output['scope']='Exact source alias functions with metadata-only model facade including existing rank-one normalization weights. Plain SD config and standalone CLIP; checkpoint payload not read.'
 with open(a.output,'x',encoding='utf-8',newline='\n') as f:json.dump(output,f,ensure_ascii=False,separators=(',',':'));f.write('\n')
 print(json.dumps({c['name']:{'targets':len(c['aliasesByTarget']),'aliases':sum(map(len,c['aliasesByTarget'].values()))} for c in cases}))

@@ -9,9 +9,13 @@ public sealed class LoraModelAliasesTests
     private static JsonDocument Reference() => JsonDocument.Parse(typeof(LoraModelAliasesTests).Assembly
         .GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.lora-aliases.reference.json")!);
 
-    private static void Compare(string name, IReadOnlyList<LoraAlias> actual, bool shapes = true)
+    private static void Compare(string name, IReadOnlyList<LoraAlias> actual, bool shapes = true, bool includeVectors = false)
     {
-        using var reference = Reference();
+        using var reference = includeVectors ? JsonDocument.Parse(typeof(LoraModelAliasesTests).Assembly
+            .GetManifestResourceStream("ComfySharp.Inference.Tests.Fixtures.lora-all-aliases.reference.json")!) : Reference();
+        // This historical source corpus explicitly covers rank>=2 weights only.
+        // One-dimensional adapter aliases have a separate source corpus.
+        if (!includeVectors) actual = actual.Where(a => a.Target.Shape.Count >= 2).ToArray();
         var row = reference.RootElement.GetProperty("cases").EnumerateArray().Single(c => c.GetProperty("name").GetString() == name);
         var expected = row.GetProperty("aliasesByTarget");
         var groups = actual.GroupBy(a => a.Target.Weight).ToDictionary(g => g.Key, g => g.ToArray());
@@ -24,6 +28,15 @@ public sealed class LoraModelAliasesTests
                 foreach (var alias in groups[property.Name])
                     Assert.Equal(row.GetProperty("shapes").GetProperty(property.Name).EnumerateArray().Select(v => v.GetInt64()), alias.Target.Shape);
         }
+    }
+
+    [Fact]
+    public void All_weight_aliases_including_normalizations_match_frozen_source()
+    {
+        Compare("sd15-checkpoint", LoraModelAliases.ForUnet(SdUnetConfig.Sd15), includeVectors: true);
+        Compare("clip-l-checkpoint", LoraModelAliases.ForClip(ClipTextConfig.Large, ClipProfile.Sd1L, false), includeVectors: true);
+        Compare("clip_l-33-layer-metadata", LoraModelAliases.ForClip(new(4,8,33,1,ClipActivation.Gelu), ClipProfile.Sd1L), includeVectors: true);
+        Compare("clip_g-33-layer-metadata", LoraModelAliases.ForClip(new(4,8,33,1,ClipActivation.Gelu), ClipProfile.SdXlG), includeVectors: true);
     }
 
     [Fact]

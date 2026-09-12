@@ -1,0 +1,424 @@
+{
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+  },
+  "torch": "2.10.0+cpu",
+  "scope": "Frozen load_lora and calculate_weight with LoRA provider and explicit additive tensors. Exactly representable values; no weights or .NET outputs. Other algorithms, set/padding and training-node qualification excluded.",
+  "cases": [
+    {
+      "name": "lora-plus-bias",
+      "tensors": {
+        "layer.lora_up.weight": {
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "layer.lora_down.weight": {
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "layer.diff_b": {
+          "shape": [
+            2
+          ],
+          "values": [
+            0.25,
+            -0.5
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "strength": 0.5,
+      "weights": {
+        "layer.weight": {
+          "shape": [
+            2,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "outputs": {
+        "layer.weight": {
+          "shape": [
+            2,
+            3
+          ],
+          "values": [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.125,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "explicit-diff-overrides-lora",
+      "tensors": {
+        "layer.lora_up.weight": {
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "layer.lora_down.weight": {
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "layer.diff": {
+          "shape": [
+            2,
+            3
+          ],
+          "values": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0
+          ]
+        },
+        "layer.diff_b": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.0,
+            4.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "strength": -0.5,
+      "weights": {
+        "layer.weight": {
+          "shape": [
+            2,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "outputs": {
+        "layer.weight": {
+          "shape": [
+            2,
+            3
+          ],
+          "values": [
+            1.0,
+            0.5,
+            0.0,
+            -0.5,
+            -1.0,
+            -1.5
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            0.0,
+            -1.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "norm-then-explicit",
+      "tensors": {
+        "layer.w_norm": {
+          "shape": [
+            2
+          ],
+          "values": [
+            8.0,
+            8.0
+          ]
+        },
+        "layer.b_norm": {
+          "shape": [
+            2
+          ],
+          "values": [
+            9.0,
+            9.0
+          ]
+        },
+        "layer.diff": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            2.0
+          ]
+        },
+        "layer.diff_b": {
+          "shape": [
+            2
+          ],
+          "values": [
+            3.0,
+            4.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2
+      ],
+      "strength": 0.5,
+      "weights": {
+        "layer.weight": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "outputs": {
+        "layer.weight": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.5,
+            2.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.5,
+            3.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "later-alias-overrides-weight-only",
+      "tensors": {
+        "first.diff": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "first.diff_b": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.0,
+            4.0
+          ]
+        },
+        "second.diff": {
+          "shape": [
+            2
+          ],
+          "values": [
+            3.0,
+            6.0
+          ]
+        }
+      },
+      "aliases": [
+        "first",
+        "second"
+      ],
+      "targetShape": [
+        2
+      ],
+      "strength": 0.5,
+      "weights": {
+        "layer.weight": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "outputs": {
+        "layer.weight": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.5,
+            4.0
+          ]
+        },
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.0,
+            3.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bias-only-zero-strength",
+      "tensors": {
+        "layer.diff_b": {
+          "shape": [
+            2
+          ],
+          "values": [
+            2.0,
+            4.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "strength": 0.0,
+      "weights": {
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "outputs": {
+        "layer.bias": {
+          "shape": [
+            2
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        }
+      }
+    }
+  ]
+}
