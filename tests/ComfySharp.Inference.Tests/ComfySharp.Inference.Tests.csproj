@@ -21,6 +21,7 @@
     <EmbeddedResource Include="Fixtures/lora-loader.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-aliases.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-training.reference.json" />
+    <EmbeddedResource Include="Fixtures/lora-training-state.json" />
     <EmbeddedResource Include="Fixtures/lora-optimizers.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-denoising.reference.json" />
     <EmbeddedResource Include="Fixtures/training-batches.reference.json" />

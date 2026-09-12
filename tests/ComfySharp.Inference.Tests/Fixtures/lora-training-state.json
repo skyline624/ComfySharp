@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceSha256": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+  "sourceFile": "comfy_extras/nodes_train.py",
+  "cases": [
+    {
+      "dtype": "bf16",
+      "input": [
+        0.1,
+        -0.0,
+        1.00390625,
+        1.01171875,
+        -2.34567,
+        65536.0
+      ],
+      "shape": [
+        6
+      ],
+      "outputHex": "cd3d0080803f823f16c08047",
+      "outputSha256": "ed1fe22be6769e302e8d176a89f230756de8b2e71d9f370a2af39ffb8bfcc5f0",
+      "requiresGrad": false
+    },
+    {
+      "dtype": "fp32",
+      "input": [
+        0.1,
+        -0.0,
+        1.00390625,
+        1.01171875,
+        -2.34567,
+        65536.0
+      ],
+      "shape": [
+        6
+      ],
+      "outputHex": "cdcccc3d000000800080803f0080813f751f16c000008047",
+      "outputSha256": "5f71a351ded67cf951e13a5303c53f1d37e6c25e6a76e83997916b8177920adc",
+      "requiresGrad": false
+    }
+  ],
+  "scope": "Exact frozen final cast/detach loop only; synthetic tensors, no training-node or model-family qualification."
+}

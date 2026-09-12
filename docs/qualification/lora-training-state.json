@@ -1,0 +1,22 @@
+{
+  "scope": "Owned native training-output snapshot and engine map bridge",
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceFile": "comfy_extras/nodes_train.py",
+  "sourceSha256": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+  "fixture": "tests/ComfySharp.Inference.Tests/Fixtures/lora-training-state.json",
+  "fixtureSha256": "f066e79f9052d9ec7d629834a9a82a418ea446d76cf209bb430b8110ae495ae3",
+  "referenceScope": "Frozen final to(lora_dtype).detach() loop on six explicit scalar values; bf16/fp32 output bits only",
+  "targetCount": 686,
+  "tensorCount": 1250,
+  "targetDtypesTested": ["F32", "BF16"],
+  "localTests": { "platform": "win-x64-cpu", "targetedPassed": 6, "targetedFailed": 0, "targetedSkipped": 0,
+    "ordinaryInferencePassed": 897, "ordinaryInferenceFailed": 0, "ordinaryInferenceSkipped": 0,
+    "filter": "FullyQualifiedName!~ClipStockReferenceTests" },
+  "build": { "warnings": 0, "errors": 0 },
+  "engineScenario": "SGD update of a synthetic additive adapter, native map publication, producer disposal, retained consumer and SaveLoRA byte output",
+  "realWorkflow": false,
+  "trainingNodeQualified": false,
+  "familyQualified": false,
+  "ci": "Pending implementation publication",
+  "modelsCopiedOrDownloaded": false
+}

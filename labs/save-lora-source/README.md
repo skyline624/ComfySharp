@@ -15,3 +15,16 @@ The report must be a new file. Neither input is modified. This is a restricted
 independent format check, not execution of the official safetensors package,
 the training node or a model forward pass. Python is absent from the product
 and distributed .NET tests. See [the node scope](../../docs/SAVE_LORA.md).
+
+`collect_state.py` runs the exact final cast/detach loop extracted from
+`TrainLoraNode.execute` at the frozen backend commit. It requires the separate
+PyTorch 2.10.0+cpu laboratory. It records six explicit values (including signed
+zero and BFloat16 rounding ties) for bf16/fp32. It does not run the complete
+training node. The generated fixture contains no model weights. Regeneration:
+
+```sh
+python -I -B labs/save-lora-source/collect_state.py --source /reference/ComfyUI --output /new/lora-training-state.json
+```
+
+The checked-in fixture and frozen source hashes are recorded in
+[the training state evidence](../../docs/qualification/lora-training-state.json).

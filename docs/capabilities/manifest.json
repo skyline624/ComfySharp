@@ -25050,7 +25050,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../LORA_TRAINING_STATE.md"],
       "scenario": "contract:TrainLoraNode",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "TrainLoraNode",

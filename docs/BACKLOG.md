@@ -1,5 +1,7 @@
 # Backlog de migration
 
+Lot 9 : le [pont de sortie d'entraînement](LORA_TRAINING_STATE.md) possède les 1 250 tenseurs des adapters SD, reproduit la conversion finale bf16/fp32 de la source et publie une map consommable par SaveLoRA après libération de l'entraînement. La reprise d'adapters et leur application en mémoire via LoraModelLoader restent à implémenter ; le nœud d'entraînement public et ses options restent ouverts.
+
 Lot 9 : [SaveLoRA](SAVE_LORA.md) est raccordé au Host avec stockage atomique, snapshot natif et contrôle indépendant d'un export de 1 250 tenseurs. **891 tests d'inférence passent**. Priorité suivante : produire `LORA_MODEL` depuis le vrai nœud d'entraînement, raccorder `LoraModelLoader` et vérifier sauvegarde/reprise/réutilisation dans un workflow public. La présence de SaveLoRA seul ne ferme pas le lot ; les limites de format/mémoire et la qualification matérielle restent explicites.
 
 Les [adapters SD mixtes](MIXED_ADAPTER_FILES.md) sont sauvegardés et rechargés avec leurs 686 cibles/1 250 tenseurs. **865 tests d’inférence et un contrat Host passent localement**. Le vrai SD1.5 CPU reçoit deux mises à jour puis recharge un adapter de 10,4 Mo avec prédiction exactement identique ; la source accepte toutes les cibles et hashes. Les entrées restent synthétiques, les nœuds complets et la qualification GPU restent ouverts.
