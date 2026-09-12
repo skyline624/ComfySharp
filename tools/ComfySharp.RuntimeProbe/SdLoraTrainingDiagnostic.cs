@@ -8,7 +8,8 @@ using static TorchSharp.torch;
 namespace ComfySharp.RuntimeProbe;
 
 /// <summary>Explicit miniature raw/denoised-latent training and serialization probe with real SD1.5 weights.
-/// This is not the TrainLoraNode dataset selection, RNG schedule or a style-quality test.</summary>
+/// Optional synthetic datasets exercise the source batch/RNG schedule; this is not a complete
+/// TrainLoraNode or a style-quality test.</summary>
 internal static class SdLoraTrainingDiagnostic
 {
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken)
@@ -20,8 +21,8 @@ internal static class SdLoraTrainingDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device" or "--optimizer" or "--loss" or "--accumulation-steps" or "--objective"))
-                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0 [--optimizer Adam|AdamW|SGD|RMSprop --loss MSE|L1|Huber|SmoothL1 --accumulation-steps N --objective raw|denoised-latent]");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device" or "--optimizer" or "--loss" or "--accumulation-steps" or "--objective" or "--dataset-mode"))
+                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0 [--optimizer Adam|AdamW|SGD|RMSprop --loss MSE|L1|Huber|SmoothL1 --accumulation-steps N --objective raw|denoised-latent --dataset-mode standard|multi-resolution|buckets]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -36,6 +37,9 @@ internal static class SdLoraTrainingDiagnostic
             string optimizerName = options.GetValueOrDefault("--optimizer", "SGD"), lossName = options.GetValueOrDefault("--loss", "MSE");
             string objectiveName = options.GetValueOrDefault("--objective", "raw");
             if (objectiveName is not ("raw" or "denoised-latent")) throw new ArgumentException("Unknown training objective.");
+            string? datasetMode = options.GetValueOrDefault("--dataset-mode");
+            if (datasetMode is not (null or "standard" or "multi-resolution" or "buckets") || (datasetMode is not null && objectiveName != "denoised-latent"))
+                throw new ArgumentException("Dataset mode requires the denoised-latent objective and a supported dataset mode.");
             if (optimizerName is not ("Adam" or "AdamW" or "SGD" or "RMSprop") || lossName is not ("MSE" or "L1" or "Huber" or "SmoothL1"))
                 throw new ArgumentException("Unknown optimizer or training loss.");
             if (!int.TryParse(options.GetValueOrDefault("--accumulation-steps", "1"), out int accumulationSteps) || accumulationSteps < 1 || accumulationSteps > 1024)
@@ -70,8 +74,23 @@ internal static class SdLoraTrainingDiagnostic
                 using var before = model.Forward(latent, timesteps, context, cancellationToken);
                 string baseHash = Hash(before);
                 var steps = new List<object>();
-                using var optimizer = new LoraTrainingOptimizer(patches.Values, optimizerName, .0005, accumulationSteps);
-                for (int step = 0; step < 2; step++)
+                SdLoraTrainingResult? datasetResult = null;
+                if (datasetMode is not null)
+                {
+                    using var first = NativeMath.CpuNoise([2, 4, 8, 8], 211, cancellationToken);
+                    using var second = NativeMath.CpuNoise([1, 4, datasetMode == "standard" ? 8 : 16, 8], 212, cancellationToken);
+                    using var captions = NativeMath.CpuNoise([3, 3, 768], 213, cancellationToken);
+                    using var dataset = new SdTrainingDataset([first, second], bucketMode: datasetMode == "buckets", cancellationToken: cancellationToken);
+                    datasetResult = SdLoraTrainingLoop.Run(denoiser, dataset, captions, patches,
+                        new() { Steps = 2, BatchSize = 2, AccumulationSteps = accumulationSteps, Seed = 41, Optimizer = optimizerName, Loss = lossName },
+                        state =>
+                        {
+                            progress.WriteLine($"SD LoRA dataset {datasetMode}: microbatch {state.Microbatch}/{2 * accumulationSteps}, updates {state.OptimizerSteps}/2 on {requested}");
+                            steps.Add(new { microbatch = state.Microbatch, optimizerSteps = state.OptimizerSteps, loss = state.Loss });
+                        }, cancellationToken);
+                }
+                using var optimizer = datasetMode is null ? new LoraTrainingOptimizer(patches.Values, optimizerName, .0005, accumulationSteps) : null;
+                for (int step = 0; datasetMode is null && step < 2; step++)
                 {
                     cancellationToken.ThrowIfCancellationRequested(); using var iteration = NewDisposeScope();
                     var microbatchLosses = new List<float>();
@@ -84,7 +103,7 @@ internal static class SdLoraTrainingDiagnostic
                         using var noise = Noise([1, 4, 8, 8], 110 + (ulong)(step * accumulationSteps + micro) * 1000);
                         using var loss = objectiveName == "raw" ? TrainingLoss.Calculate(lossName, prediction!, target)
                             : SdLoraTrainingObjective.CalculateLoss(denoiser, latent, noise, sigma, context, patches, lossName, cancellationToken: cancellationToken);
-                        optimizer.Accumulate(loss, cancellationToken); microbatchLosses.Add(loss.item<float>());
+                        optimizer!.Accumulate(loss, cancellationToken); microbatchLosses.Add(loss.item<float>());
                     }
                     var norms = new Dictionary<string, object>(StringComparer.Ordinal);
                     foreach (var (name, patch) in patches)
@@ -96,7 +115,7 @@ internal static class SdLoraTrainingDiagnostic
                         if (upNorm == 0 || downNorm == 0) throw new InvalidOperationException("Expected nonzero full-graph gradients.");
                         norms.Add(name, new { upNorm, downNorm });
                     }
-                    optimizer.Step(cancellationToken);
+                    optimizer!.Step(cancellationToken);
                     steps.Add(new { step = step + 1, loss = microbatchLosses.Average(), microbatchLosses, gradientNorms = norms });
                 }
                 using var baseAfter = model.Forward(latent, timesteps, context, cancellationToken);
@@ -120,14 +139,15 @@ internal static class SdLoraTrainingDiagnostic
                         status = "ok", familyQualified = false, trainingNodeQualified = false, trainedStyleQualified = false,
                         checkpoint = Path.GetFileName(checkpointPath), modelSha256 = modelHash, checkpointBytes = file.FileSizeBytes,
                         backend = requested, dtype = "Float32", tf32Allowed = false, learningRate = .0005, rank = 2, alpha = 2.5, steps,
-                        optimizer = optimizerName, lossFunction = lossName, accumulationSteps, optimizerSteps = optimizer.CompletedSteps,
+                        optimizer = optimizerName, lossFunction = lossName, accumulationSteps, optimizerSteps = optimizer?.CompletedSteps ?? datasetResult!.OptimizerSteps,
                         objective = objectiveName,
+                        datasetRecipe = datasetMode is not null ? new { mode = datasetMode, count = 3, latentSeeds = new[] { 211, 212 }, contextSeed = 213, selectionSeed = 41, batchSize = 2, firstShape = new[] { 2, 4, 8, 8 }, secondShape = new[] { 1, 4, datasetMode == "standard" ? 8 : 16, 8 } } : null,
                         inputRecipe = new { latentShape = new[] { 1, 4, 8, 8 }, contextShape = new[] { 1, 3, 768 }, latentSeed = 111, contextSeed = 112, targetSeed = 110, timestep = 17.25 },
-                        denoisingRecipe = objectiveName == "denoised-latent" ? new { latentScale = SdSamplingMath.Sd15LatentScale, noiseSeed = 110, noiseSeedStride = 1000, repeatedSigmas = sigmaRecipe, predictionKind = "epsilon" } : null,
+                        denoisingRecipe = objectiveName == "denoised-latent" && datasetMode is null ? new { latentScale = SdSamplingMath.Sd15LatentScale, noiseSeed = 110, noiseSeedStride = 1000, repeatedSigmas = sigmaRecipe, predictionKind = "epsilon" } : null,
                         adapter = Path.GetFileName(destination), adapterBytes = adapterFile.FileSizeBytes, adapterSha256 = adapterFile.ComputeSha256(cancellationToken),
                         baseUnchanged = true, initialParameterHashes = initialHashes, updatedParameterHashes = parameterHashes,
                         reloadedPredictionIdentical = true, predictionSha256 = Hash(actual), elapsedSeconds = watch.Elapsed.TotalSeconds,
-                        scope = "Pretrained SD1.5 with synthetic miniature inputs, accumulated gradients and two optimizer updates. Explicit raw or denoised-latent objective; no dataset selection/RNG-sequence, semantic/style quality or complete TrainLoraNode qualification."
+                        scope = "Pretrained SD1.5 with synthetic miniature inputs, accumulated gradients and two optimizer updates. Optional source dataset/batch sequence; no pretrained source numerical comparison, image-dataset/style quality or complete TrainLoraNode qualification."
                     }, new JsonSerializerOptions { WriteIndented = true });
                     using var stream = new FileStream(report, FileMode.CreateNew, FileAccess.Write, FileShare.None); using var writer = new StreamWriter(stream); writer.Write(json);
                     output.WriteLine(json); return 0;

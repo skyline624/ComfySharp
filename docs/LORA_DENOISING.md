@@ -34,9 +34,12 @@ directly, miniature synthetic diffusion latents, explicit sigmas and independent
 noise seeds; it exports a small adapter and verifies snapshot/reload equality.
 Default `--objective raw` preserves the earlier raw-prediction diagnostic.
 
-This is not the complete training node or dataset loop. Dataset preparation,
-conditioning regions, standard/multi-resolution/bucket sampling, source RNG
-sequence, all adapter targets and initializers, mixed precision, checkpointing,
+The [dataset and batch loop](TRAINING_DATASETS.md) now supplies source selection,
+noise sequencing and the three dataset modes for the plain Float32 profile.
+Conditioning regions, all adapter targets and initializers, mixed precision, checkpointing,
 offload, other architectures and platform qualification remain required. The
 [campaign record](qualification/lora-denoising.json) separates source primitive
 comparisons from the pretrained CUDA diagnostic and their limitations.
+
+The subsequent [Linux/macOS CI failures](qualification/lora-denoising-ci-eec43c8.md)
+remain open with the original fixtures and tolerances unchanged.

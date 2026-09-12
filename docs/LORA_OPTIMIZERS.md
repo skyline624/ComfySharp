@@ -38,7 +38,8 @@ The existing `sd-lora-train` diagnostic additionally accepts `--optimizer`, `--l
 and `--accumulation-steps`. Defaults remain SGD/MSE/1. It uses supplied SD1.5
 weights directly and exports a new small adapter; it never downloads or copies
 a checkpoint. Its miniature inputs remain synthetic; the [denoised-latent objective](LORA_DENOISING.md)
-can now be selected explicitly. Dataset/RNG scheduling, buckets, full training nodes, checkpointing, offload and mixed precision
+can now be selected explicitly. The [dataset loop](TRAINING_DATASETS.md) supplies
+the plain Float32 batch/RNG profile. Full training nodes, checkpointing, offload and mixed precision
 remain required; no complete training node or model-family qualification follows.
 
 The [campaign record](qualification/lora-optimizers.json) identifies the source

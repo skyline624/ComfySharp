@@ -55,18 +55,28 @@ public sealed class LoraTrainingOptimizer : IDisposable
     }
 
     public void Accumulate(Tensor loss, CancellationToken cancellationToken = default)
+        => AccumulateCore(loss, 1, cancellationToken);
+
+    // Source multi-resolution order is sum / grad_acc / sample_count, not sum / sample_count / grad_acc.
+    internal void AccumulateMean(Tensor summedLoss, int sampleCount, CancellationToken cancellationToken)
+        => AccumulateCore(summedLoss, sampleCount, cancellationToken);
+
+    private void AccumulateCore(Tensor loss, int sampleCount, CancellationToken cancellationToken)
     {
         ThrowIfUnavailable();
         if (PendingMicrobatches == AccumulationSteps) throw new InvalidOperationException("Step or reset the completed window before accumulating again.");
         try
         {
             cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(loss);
+            if (sampleCount < 1) throw new ArgumentOutOfRangeException(nameof(sampleCount));
             using var scope = NewDisposeScope(); using var grad = set_grad_enabled(true);
             if (loss.numel() != 1 || loss.dtype != ScalarType.Float32 || !loss.requires_grad)
                 throw new ArgumentException("Accumulate requires a differentiable Float32 scalar loss.", nameof(loss));
             InferenceDevice.RequireSame(parameters[0].device, loss, nameof(loss));
             if (!loss.isfinite().all().item<bool>()) throw new ArithmeticException("Nonfinite training loss.");
-            using var normalized = loss / AccumulationSteps; normalized.backward();
+            using var normalized = loss / AccumulationSteps;
+            if (sampleCount == 1) normalized.backward();
+            else { using var mean = normalized / sampleCount; mean.backward(); }
             cancellationToken.ThrowIfCancellationRequested(); PendingMicrobatches++;
         }
         catch { ClearGradients(); throw; }
