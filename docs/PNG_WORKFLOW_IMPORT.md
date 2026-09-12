@@ -1,5 +1,7 @@
 # Ouvrir un workflow incorporé à un PNG
 
+La [CI des trois OS](qualification/import-ci-20260912.md) confirme les 22 nouveaux cas et le parcours natif au commit `8f5c647`. Cette preuve porte sur l'import graphique et conserve les échecs numériques globaux visibles.
+
 Le bouton **Open** accepte maintenant les workflows JSON et les images PNG contenant un workflow graphique. Le PNG ouvre un nouvel onglet ; le document peut être édité puis sauvegardé en JSON. Le chemin de l'image n'est jamais utilisé comme destination de cette sauvegarde. Les onglets existants restent intacts si l'import échoue.
 
 ## Lecture des métadonnées

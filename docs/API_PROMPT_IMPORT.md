@@ -1,5 +1,7 @@
 # Import des prompts API
 
+La [CI des trois OS](qualification/import-ci-20260912.md) confirme les 33 nouveaux cas et le parcours natif au commit `5980cbe`. Les contrôles numériques globaux restent ouverts.
+
 **Open** accepte un prompt API JSON et le champ `prompt` d'un PNG dépourvu de workflow graphique. L'import ouvre un nouveau document éditable : positions initiales, ports, connexions et widgets nommés. Une sauvegarde produit un workflow JSON ; le chemin du prompt ou de l'image d'origine n'est jamais utilisé automatiquement comme destination.
 
 Le parcours natif importe un prompt texte, modifie sa valeur dans le document, le compile et l'exécute avec le Host séparé. Il vérifie la sortie modifiée de PreviewAny. Il n'exécute aucune extension ni constructeur de nœud amont pendant l'import.

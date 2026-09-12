@@ -1,5 +1,7 @@
 # JSON Python à l'import
 
+La [CI des trois OS](qualification/import-ci-20260912.md) confirme les 46 nouveaux cas et le parcours natif au commit `1d67fb9`. Les échecs numériques indépendants restent documentés dans ce relevé.
+
 L'ouverture d'un workflow ou d'un prompt API, depuis un fichier JSON ou les métadonnées d'un PNG, accepte désormais les tokens nus `NaN`, `Infinity` et `-Infinity`. Ils deviennent `null` et un avertissement est affiché. Les mots identiques à l'intérieur d'une chaîne, les clés et les séquences échappées restent inchangés.
 
 Le comportement de référence est [`parseJsonWithNonFinite`](https://github.com/Comfy-Org/ComfyUI_frontend/blob/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/utils/jsonUtil.ts) : essai JSON strict, puis remplacement à l'import après échec, avec un avertissement par appel. Le port C# effectue un balayage linéaire des chaînes et tokens, sans expressions régulières ni exécution JavaScript. Le parseur JSON reste responsable de refuser toute autre syntaxe invalide. Les nombres représentés avec une syntaxe JSON valide, même de très grand exposant, ne passent pas par cette conversion.

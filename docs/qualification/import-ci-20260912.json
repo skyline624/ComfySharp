@@ -1,0 +1,1188 @@
+{
+  "schema": 1,
+  "campaigns": [
+    {
+      "runId": 34680379550,
+      "commit": "8f5c6479e46ad8f834d1333cdb2a95384cdfee87",
+      "conclusion": "failure",
+      "trxCount": 49,
+      "artifacts": {
+        "tests-first-use-linux-x64": {
+          "passed": 178,
+          "failed": 16,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 178,
+              "failed": 16,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-osx-arm64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-win-x64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-linux-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-osx-arm64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-win-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-linux-x64": {
+          "passed": 1822,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "PngWorkflowEditorTests": 3,
+            "PngWorkflowImportTests": 19
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 74,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 99,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-osx-arm64": {
+          "passed": 2530,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "PngWorkflowEditorTests": 3,
+            "PngWorkflowImportTests": 19
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 74,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 99,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-osx-arm64": {
+          "passed": 1,
+          "failed": 2,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 1,
+              "failed": 2,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-win-x64": {
+          "passed": 3,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 3,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-win-x64": {
+          "passed": 2530,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "PngWorkflowEditorTests": 3,
+            "PngWorkflowImportTests": 19
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 74,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 99,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        }
+      },
+      "failures": [
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "Sd15PipelineReferenceTests",
+          "name": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+          "outcome": "Failed",
+          "message": "maximum-start/finalDiffusionLatent[15]: actual=-0.79657173, source=-0.79665875, delta=8.702278137207031E-05, bound=5.3899762630462646E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-2.360069, source=-2.3598258, delta=0.00024318695068359375."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-1.6610985, source=-1.6609873, delta=0.0001112222671508789."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-1.6612213, source=-1.6609665, delta=0.00025475025177001953."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 83: actual=-2.1021144, source=-2.101966, delta=0.00014853477478027344."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "outcome": "Failed",
+          "message": "unequal-concatenated/step-0/denoised[55]: actual=1.0068393, source=1.0067731, delta=6.61611557006836E-05, bound=6.02031934261322E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "outcome": "Failed",
+          "message": "unequal-separate/step-0/denoised[2]: actual=-0.8084923, source=-0.8085635, delta=7.11679458618164E-05, bound=5.4256904125213624E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "outcome": "Failed",
+          "message": "velocity-three-step/step-2/denoised[0]: actual=-0.70408434, source=-0.7042558, delta=0.00017148256301879883, bound=5.112767457962037E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "outcome": "Failed",
+          "message": "near-one-disabled/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "outcome": "Failed",
+          "message": "near-one-present/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "outcome": "Failed",
+          "message": "near-one-null/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "outcome": "Failed",
+          "message": "three-step-batch/step-0/denoised[0]: actual=-0.8210226, source=-0.8207963, delta=0.0002263188362121582, bound=5.4623889327049254E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdUnetReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "outcome": "Failed",
+          "message": "Element 108: actual=0.7850003, source=0.7849237, delta=7.665157318115234E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdUnetReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "outcome": "Failed",
+          "message": "Element 36: actual=1.0168948, source=1.0168332, delta=6.16312026977539E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+          "outcome": "Failed",
+          "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+          "outcome": "Failed",
+          "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+        }
+      ],
+      "smokes": {
+        "test (windows-2025, win-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata and PNG workflow reimport."
+        },
+        "test (ubuntu-24.04, linux-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata and PNG workflow reimport."
+        },
+        "test (macos-14, osx-arm64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata and PNG workflow reimport."
+        }
+      },
+      "evidence": {
+        "run.json": {
+          "bytes": 19786,
+          "sha256": "e89a57e036a36091ac5ca5a8a1205cb544df2536f82c1dbc2ef9c5d651e740cb"
+        },
+        "artifacts.json": {
+          "bytes": 20021,
+          "sha256": "23519dca97a6d32819ae64c695688d07990b3535f16bafbe6f30ac2aa344482d"
+        },
+        "download-inventory.json": {
+          "bytes": 11301,
+          "sha256": "4cbd17f57528307bd29fa0a82c5119b48542e9c590af14142c40cebec2c33b9f"
+        },
+        "logs.txt": {
+          "bytes": 561305,
+          "sha256": "e5ebb102d85bc4a4d83c383a1fc83ba03fbd7523193e00fd8af9094c5c838151"
+        }
+      },
+      "label": "png",
+      "newExecutionsPassed": 66,
+      "auditSha256": "6139b4fffd3cd038d9463cae4455d3145c2fe13bfa6e13922dc3a3a5ddc3a791",
+      "failureClasses": {
+        "tests-first-use-linux-x64/Sd15PipelineReferenceTests": 1,
+        "tests-first-use-linux-x64/SdDenoiserReferenceTests": 6,
+        "tests-first-use-linux-x64/SdEulerReferenceTests": 7,
+        "tests-first-use-linux-x64/SdUnetReferenceTests": 2,
+        "tests-stock-osx-arm64/ClipStockReferenceTests": 2
+      }
+    },
+    {
+      "runId": 34681220535,
+      "commit": "5980cbe2d3f1880c34232d7f0e0f0a0ab2337d61",
+      "conclusion": "failure",
+      "trxCount": 49,
+      "artifacts": {
+        "tests-first-use-linux-x64": {
+          "passed": 178,
+          "failed": 16,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 178,
+              "failed": 16,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-osx-arm64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-win-x64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-linux-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-osx-arm64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-win-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-linux-x64": {
+          "passed": 1855,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ApiPromptEditorTests": 3,
+            "ApiPromptImportTests": 30
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 77,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 129,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-osx-arm64": {
+          "passed": 2563,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ApiPromptEditorTests": 3,
+            "ApiPromptImportTests": 30
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 77,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 129,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-osx-arm64": {
+          "passed": 1,
+          "failed": 2,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 1,
+              "failed": 2,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-win-x64": {
+          "passed": 3,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 3,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-win-x64": {
+          "passed": 2563,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ApiPromptEditorTests": 3,
+            "ApiPromptImportTests": 30
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 77,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 129,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        }
+      },
+      "failures": [
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "Sd15PipelineReferenceTests",
+          "name": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+          "outcome": "Failed",
+          "message": "maximum-start/finalDiffusionLatent[15]: actual=-0.79657173, source=-0.79665875, delta=8.702278137207031E-05, bound=5.3899762630462646E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-1.6612213, source=-1.6609665, delta=0.00025475025177001953."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 83: actual=-2.1021144, source=-2.101966, delta=0.00014853477478027344."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-2.360069, source=-2.3598258, delta=0.00024318695068359375."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 82: actual=-1.6610985, source=-1.6609873, delta=0.0001112222671508789."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "outcome": "Failed",
+          "message": "near-one-disabled/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "outcome": "Failed",
+          "message": "near-one-null/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "outcome": "Failed",
+          "message": "three-step-batch/step-0/denoised[0]: actual=-0.8210226, source=-0.8207963, delta=0.0002263188362121582, bound=5.4623889327049254E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "outcome": "Failed",
+          "message": "unequal-concatenated/step-0/denoised[55]: actual=1.0068393, source=1.0067731, delta=6.61611557006836E-05, bound=6.02031934261322E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "outcome": "Failed",
+          "message": "near-one-present/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "outcome": "Failed",
+          "message": "velocity-three-step/step-2/denoised[0]: actual=-0.70408434, source=-0.7042558, delta=0.00017148256301879883, bound=5.112767457962037E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "outcome": "Failed",
+          "message": "unequal-separate/step-0/denoised[2]: actual=-0.8084923, source=-0.8085635, delta=7.11679458618164E-05, bound=5.4256904125213624E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdUnetReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "outcome": "Failed",
+          "message": "Element 36: actual=1.0168948, source=1.0168332, delta=6.16312026977539E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdUnetReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "outcome": "Failed",
+          "message": "Element 108: actual=0.7850003, source=0.7849237, delta=7.665157318115234E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+          "outcome": "Failed",
+          "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+          "outcome": "Failed",
+          "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+        }
+      ],
+      "smokes": {
+        "test (windows-2025, win-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        },
+        "test (ubuntu-24.04, linux-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        },
+        "test (macos-14, osx-arm64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        }
+      },
+      "evidence": {
+        "run.json": {
+          "bytes": 19786,
+          "sha256": "5972b420dbfe9caa4217e53328ef9e4573c730da41d4e97c5b54386077a934a5"
+        },
+        "artifacts.json": {
+          "bytes": 20021,
+          "sha256": "51b1b4b740fcc5e6fa07286c003706138436e3dbf6c6f5c4697b64870e09f44c"
+        },
+        "download-inventory.json": {
+          "bytes": 11318,
+          "sha256": "a85a1d960fbc63aea10ab7d71c02df8495bcdf2b896c4d483f25808221b6802c"
+        },
+        "logs.txt": {
+          "bytes": 564830,
+          "sha256": "1edb1908c8b573c3ad3e09b51a5df33339f3d018d8fa15476d94362211b488b1"
+        }
+      },
+      "label": "api",
+      "newExecutionsPassed": 99,
+      "auditSha256": "fa2cdc40fa951d6477263c6319ed21f75945145315df7ec3dd188b30e1fd24a0",
+      "failureClasses": {
+        "tests-first-use-linux-x64/Sd15PipelineReferenceTests": 1,
+        "tests-first-use-linux-x64/SdDenoiserReferenceTests": 6,
+        "tests-first-use-linux-x64/SdEulerReferenceTests": 7,
+        "tests-first-use-linux-x64/SdUnetReferenceTests": 2,
+        "tests-stock-osx-arm64/ClipStockReferenceTests": 2
+      }
+    },
+    {
+      "runId": 34681614168,
+      "commit": "1d67fb91bfe212e7b7280cdc8feb56e2740652cd",
+      "conclusion": "failure",
+      "trxCount": 49,
+      "artifacts": {
+        "tests-first-use-linux-x64": {
+          "passed": 182,
+          "failed": 12,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 182,
+              "failed": 12,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-osx-arm64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-first-use-win-x64": {
+          "passed": 194,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 194,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-linux-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-osx-arm64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-image-win-x64": {
+          "passed": 134,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 134,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-linux-x64": {
+          "passed": 1901,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ImportJsonEditorTests": 5,
+            "ImportJsonTests": 41
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 82,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 170,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-osx-arm64": {
+          "passed": 2609,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ImportJsonEditorTests": 5,
+            "ImportJsonTests": 41
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 82,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 170,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-osx-arm64": {
+          "passed": 1,
+          "failed": 2,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 1,
+              "failed": 2,
+              "other": 0
+            }
+          }
+        },
+        "tests-stock-win-x64": {
+          "passed": 3,
+          "failed": 0,
+          "other": 0,
+          "new": {},
+          "projects": {
+            "Inference": {
+              "passed": 3,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        },
+        "tests-win-x64": {
+          "passed": 2609,
+          "failed": 0,
+          "other": 0,
+          "new": {
+            "ImportJsonEditorTests": 5,
+            "ImportJsonTests": 41
+          },
+          "projects": {
+            "Core": {
+              "passed": 809,
+              "failed": 0,
+              "other": 0
+            },
+            "Desktop": {
+              "passed": 82,
+              "failed": 0,
+              "other": 0
+            },
+            "Host": {
+              "passed": 300,
+              "failed": 0,
+              "other": 0
+            },
+            "Inference": {
+              "passed": 708,
+              "failed": 0,
+              "other": 0
+            },
+            "Tokenization": {
+              "passed": 540,
+              "failed": 0,
+              "other": 0
+            },
+            "Workflow": {
+              "passed": 170,
+              "failed": 0,
+              "other": 0
+            }
+          }
+        }
+      },
+      "failures": [
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "Sd15PipelineReferenceTests",
+          "name": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+          "outcome": "Failed",
+          "message": "maximum-start/finalDiffusionLatent[15]: actual=-0.79650354, source=-0.79665875, delta=0.0001552104949951172, bound=5.3899762630462646E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "Sd15PipelineReferenceTests",
+          "name": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"two-chunks-separate\")",
+          "outcome": "Failed",
+          "message": "two-chunks-separate/rawVaeLatent[0]: actual=-2.162385, source=-2.1622794, delta=0.00010561943054199219, bound=9.486838102340699E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 114: actual=-0.054500163, source=-0.054418027, delta=8.213520050048828E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 85: actual=-2.1021974, source=-2.1020834, delta=0.00011396408081054688."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "message": "Element 86: actual=-0.8802531, source=-0.8801713, delta=8.177757263183594E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdDenoiserReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "message": "Element 95: actual=-0.68741167, source=-0.68735206, delta=5.9604644775390625E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "outcome": "Failed",
+          "message": "unequal-separate/step-0/denoised[0]: actual=-1.4819734, source=-1.4818714, delta=0.00010204315185546875, bound=7.445614099502564E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "outcome": "Failed",
+          "message": "three-step-batch/step-0/denoised[0]: actual=-0.8204091, source=-0.8207963, delta=0.0003871917724609375, bound=5.4623889327049254E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "outcome": "Failed",
+          "message": "unequal-concatenated/step-0/denoised[0]: actual=-1.4819158, source=-1.4818263, delta=8.952617645263672E-05, bound=7.445478916168213E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "outcome": "Failed",
+          "message": "near-one-disabled/step-1/denoised[20]: actual=0.18643117, source=0.18639418, delta=3.698468208312988E-05, bound=3.559182554483414E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdEulerReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "outcome": "Failed",
+          "message": "velocity-three-step/step-1/denoised[31]: actual=0.0743279, source=0.07428725, delta=4.0650367736816406E-05, bound=3.2228617519140244E-05."
+        },
+        {
+          "artifact": "tests-first-use-linux-x64",
+          "class": "SdUnetReferenceTests",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "outcome": "Failed",
+          "message": "Element 108: actual=-0.05242932, source=-0.052471578, delta=4.225969314575195E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+          "outcome": "Failed",
+          "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+        },
+        {
+          "artifact": "tests-stock-osx-arm64",
+          "class": "ClipStockReferenceTests",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+          "outcome": "Failed",
+          "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+        }
+      ],
+      "smokes": {
+        "test (windows-2025, win-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        },
+        "test (macos-14, osx-arm64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        },
+        "test (ubuntu-24.04, linux-x64)": {
+          "step": "success",
+          "output": "native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution."
+        }
+      },
+      "evidence": {
+        "run.json": {
+          "bytes": 19786,
+          "sha256": "8f60065708de5a2e5ce91179ed810831611be6a8e9fe91b923c08be83ac5cda2"
+        },
+        "artifacts.json": {
+          "bytes": 20021,
+          "sha256": "af24884473822cc312a4f693f30f3f7024ec13f3671b3dc6ae88b7e8374ce84b"
+        },
+        "download-inventory.json": {
+          "bytes": 11301,
+          "sha256": "6fbb8538d6bde18479482750ab7ea3aa831bb073b424ddc2014de3d37ba58947"
+        },
+        "logs.txt": {
+          "bytes": 555715,
+          "sha256": "a1e04206658d4377081550fa47c8110aa880a7e3286df3bc25c2262285f7d622"
+        }
+      },
+      "label": "nonfinite",
+      "newExecutionsPassed": 138,
+      "auditSha256": "19c36060670e230ce1c9bcd9f20f707f223acd1fc859e2f48f27fba38acf01ab",
+      "failureClasses": {
+        "tests-first-use-linux-x64/Sd15PipelineReferenceTests": 2,
+        "tests-first-use-linux-x64/SdDenoiserReferenceTests": 4,
+        "tests-first-use-linux-x64/SdEulerReferenceTests": 5,
+        "tests-first-use-linux-x64/SdUnetReferenceTests": 1,
+        "tests-stock-osx-arm64/ClipStockReferenceTests": 2
+      }
+    }
+  ],
+  "totalTrxAudited": 147,
+  "newScenarioExecutions": 303,
+  "firstTwoFailureSignaturesIdentical": true,
+  "scope": "CPU CI and native desktop/host smoke on Windows-2025 win-x64, Ubuntu24.04 linux-x64 Xvfb, macOS14 osx-arm64. No GPU or pretrained model qualification.",
+  "counting": "Artifact scopes overlap: IMAGE/first-use suites also occur in ordinary Inference. Do not sum them as distinct tests. Missing Linux ordinary Inference/stock stages were not executed.",
+  "limits": [
+    "All three overall runs fail; numerical profiles are unchanged.",
+    "First two campaigns repeat identical failing case messages. The third Linux result differs; cause is not established by this audit.",
+    "This audit downloads immutable run artifacts and verifies TRX counters/outcomes plus native smoke log markers. It does not rerun the native programs or independently rehash installed native libraries.",
+    "No V1 or model-family completion is claimed."
+  ]
+}
