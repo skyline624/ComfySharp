@@ -356,7 +356,18 @@ public sealed partial class MainWindow : Window
         if (cutEntry["outputs"]?[cutPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated")
             throw new InvalidOperationException("Cut-and-paste graph execution failed.");
         cutEditor.Undo(); if (cutEditor.Document.ToJson() != beforeCut) throw new InvalidOperationException("Cut undo lost source document data.");
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution, independent duplicated graph execution, cross-document clipboard fragment execution and reconnected deletion plus cut-and-paste Host execution.");
+        var groupCanvas = ActiveEditor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!;
+        groupCanvas.SelectedItems = groupCanvas.ItemsSource!.Cast<NodeView>().ToList();
+        var ungroupedPrompt = Compile(true); int createdGroup = ActiveEditor.CreateGroupFromSelection();
+        string groupBeforeMove = ActiveEditor.Document.ToJson(); ActiveEditor.MoveGroup(createdGroup, 60, 40);
+        if (!JsonNode.DeepEquals(ungroupedPrompt, Compile(true)) || ActiveEditor.Document.Groups.Count != 1 || groupCanvas.Decorators!.Cast<GroupView>().Count() != 1)
+            throw new InvalidOperationException("Group movement changed execution or lost its frame.");
+        ActiveEditor.Undo(); if (ActiveEditor.Document.ToJson() != groupBeforeMove) throw new InvalidOperationException("Group move undo lost document data.");
+        ActiveEditor.Redo(); accepted = await host.SubmitAsync(Compile(true), clientId, [cutPreview]);
+        var groupedEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (groupedEntry["outputs"]?[cutPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated")
+            throw new InvalidOperationException("Grouped graph execution failed.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution, independent duplicated graph execution, cross-document clipboard fragment execution, reconnected deletion plus cut-and-paste Host execution and group creation/movement/undo with Host execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

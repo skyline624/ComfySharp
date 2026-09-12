@@ -23,7 +23,7 @@ public sealed record GraphNode(NodeId Id, string Type, string Title, double X, d
 public sealed record GraphLink(long Id, NodeId Source, int SourceSlot, NodeId Target, int TargetSlot, JsonNode? Type);
 
 /// <summary>JSON is the authoritative document. Unknown extension data survives every edit and undo.</summary>
-public sealed class WorkflowDocument
+public sealed partial class WorkflowDocument
 {
     private JsonObject root;
     private readonly Stack<string> undo = new(), redo = new();
@@ -54,7 +54,14 @@ public sealed class WorkflowDocument
         return new GraphNode(NodeId.From(data["id"]), data["type"]?.GetValue<string>() ?? "Unknown", data["title"]?.GetValue<string>() ?? data["type"]?.GetValue<string>() ?? "Unknown", Coordinate(data["pos"], 0), Coordinate(data["pos"], 1), (JsonObject)data.DeepClone());
     }).ToArray();
     public IReadOnlyList<GraphLink> Links => (root["links"] as JsonArray ?? []).Select(ParseLink).ToArray();
-    private static double Coordinate(JsonNode? position, int index) => (position is JsonArray a && a.Count > index ? a[index] : position is JsonObject o ? o[index.ToString()] : null)?.GetValue<double>() ?? 0;
+    private static double Coordinate(JsonNode? position, int index)
+    {
+        var value = position is JsonArray a && a.Count > index ? a[index] : position is JsonObject o ? o[index.ToString(CultureInfo.InvariantCulture)] : null;
+        if (value is null) return 0;
+        if (value.GetValueKind() != JsonValueKind.Number) throw new FormatException("Coordinates must be JSON numbers.");
+        // JsonValue<int> created by node templates is not directly convertible with GetValue<double>().
+        return double.Parse(value.ToJsonString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+    }
     private static int Slot(JsonNode? value) => int.Parse(NodeId.From(value).Value, System.Globalization.CultureInfo.InvariantCulture);
     private static GraphLink ParseLink(JsonNode? item) => item switch
     {

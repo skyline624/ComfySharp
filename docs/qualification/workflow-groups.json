@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "baseCommit": "3363ab50428fdd3fb75f54c745478c31280107c5",
+  "platform": "Windows win-x64 CPU",
+  "passed": 373,
+  "failed": 0,
+  "skipped": 0,
+  "excluded": 0,
+  "new": 27,
+  "projects": {
+    "Workflow": {
+      "passed": 261,
+      "bytes": 402930,
+      "sha256": "876b82b247938e5e87e7d54706d656162ab9b7021870397909205f292b5fbee4"
+    },
+    "Desktop": {
+      "passed": 112,
+      "bytes": 168358,
+      "sha256": "1894c82011035a2a2e209fd6c0907e8bb205edc6a75c21803c7aabb6f4d5ea35"
+    }
+  },
+  "newByProject": {
+    "Workflow": 17,
+    "Desktop": 10
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Workflow.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "1c9dc9a749bc1e5484cd25ba16704edbfa183c9de1b9f728463205893cebc477"
+    },
+    "workflow-tests": {
+      "bytes": 564,
+      "sha256": "8694e429d04469e37ac1256b76f38567f2263db37e7312e863079e642f9e7684"
+    },
+    "desktop-tests": {
+      "bytes": 549,
+      "sha256": "a92795044b5fdd4a5ee574aa19364c87002582d8d6581c0b692bd9a0899fe75c"
+    },
+    "native-smoke": {
+      "bytes": 608,
+      "sha256": "68c1e6025f1631a030e0f4d09f8781e32079337475c021a05a3cc30f52cf9f6e"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeSmoke": {
+    "exitCode": 0,
+    "checks": [
+      "Prior native tensor/text, IMAGE, imports, modes, duplication, clipboard and cut/deletion scenarios pass.",
+      "Create a group around three selected nodes in the native editor; move it with contents; verify the prompt remains identical and a decorator exists.",
+      "Undo restores the exact document; redo then separate Host execution returns the expected text.",
+      "Headless tests drive actual pointer press/move/release at zoom1 and1.5, frame-only movement, pinning, capture loss and concurrent document edits."
+    ]
+  },
+  "sourceInventory": [
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphGroup.ts",
+      "bytes": 11029,
+      "sha256": "89a1798b8b086d2ec25c6b943e7b0e913f4b29968ba40fdec80356737a7900d9"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphNode.ts",
+      "bytes": 132247,
+      "sha256": "d6263d56f28a5e6c5a95a3a263fe0d6ffe4083a981c01a14ec4ebfca43487e50"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraph.ts",
+      "bytes": 97233,
+      "sha256": "479244003dd83af726ae9481aab6d9f9b6693c161dd7800160389bc86a427a2f"
+    }
+  ],
+  "notice": {
+    "bytes": 1077,
+    "sha256": "1b38cc30fe774bcc77538ab99eb460f4e1c8a47c4fddc6e991ee3b5cc2a96bb9"
+  },
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.Groups.cs": {
+      "bytes": 7141,
+      "sha256": "189279a0779a4f231f3c4a65001b3f2e6e3bdafd213b4e0dbfb2dff57bba3232"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml": {
+      "bytes": 7589,
+      "sha256": "5d7a68ba81c6d9eba711dc06cdd17dc3d4700b6fe3093475d6963bc8f79d42cc"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 22635,
+      "sha256": "4eeaeac03600d96ea68302e3a96dcb86afc606ce4e8823eb00d474ce7bfe3213"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 37889,
+      "sha256": "61ab1cbf5dc06beba53f808a465f116c8db5aa4dbf016fcf8d24c4b67a86fbc9"
+    },
+    "src/ComfySharp.Workflow/WorkflowDocument.cs": {
+      "bytes": 28781,
+      "sha256": "7fde7085e7af7e164fc66c6b6fa08f9e5e939745e3d3deb78ddc03e0e11d99a3"
+    },
+    "src/ComfySharp.Workflow/WorkflowGroups.cs": {
+      "bytes": 9354,
+      "sha256": "2703d33582acccf58536e98d00a2ff15ea6dc381acf36cf20e5fc543bf8de24b"
+    },
+    "tests/ComfySharp.Desktop.Tests/WorkflowGroupEditorTests.cs": {
+      "bytes": 8312,
+      "sha256": "b780c832be14f95fdef2f2854b581088042ed8478ea3e94aa524e26c12a97066"
+    },
+    "tests/ComfySharp.Workflow.Tests/WorkflowGroupTests.cs": {
+      "bytes": 8138,
+      "sha256": "80b6c9a4484f083542d75cb4499efa80e1375c3898f862814e41cb405ce2506f"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed product/tests plus build settings; hashes are not loaded-assembly attestation.",
+  "limits": [
+    "Only Workflow and Desktop test projects were repeated locally.",
+    "Source-guided C# cases, not an executed JavaScript differential corpus.",
+    "Group membership uses measured native node bounds when available; serialized bounds with a30-unit title fallback otherwise. Collapsed membership needs measured bounds. Extension geometry callbacks remain unported.",
+    "Nested groups and contained nodes move once each; complete legacy/Vue recursive edge cases and exact frontend styling are not qualified.",
+    "Basic serialized reroute positions move with groups, but reroute rendering/editing is not qualified.",
+    "Group clipboard/duplication, marquee group selection, resize handles, drag auto-pan, full typography/layout and material platform qualification remain open.",
+    "No model-family,GPU,three-platform or distribution qualification; numerical gates unchanged."
+  ]
+}

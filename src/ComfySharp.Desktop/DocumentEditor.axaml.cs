@@ -36,7 +36,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
         Document = document; InitializeComponent();
         documentState = document.ToJson();
         document.Changed += DocumentChanged;
-        Canvas.ItemsSource = nodes; Canvas.Connections = connections;
+        Canvas.ItemsSource = nodes; Canvas.Connections = connections; Canvas.Decorators = groupViews;
         UpdateNodeChoices();
         Reload();
     }
@@ -54,7 +54,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     }
     public void Dispose()
     {
-        if (disposed) return; disposed = true; Document.Changed -= DocumentChanged; ClearPreviews();
+        if (disposed) return; disposed = true; groupDrag = null; Document.Changed -= DocumentChanged; ClearPreviews();
     }
     public void SetAvailability(ISet<string>? available) { availableNodes = available; UpdateNodeChoices(); Reload(); }
     private void UpdateNodeChoices()
@@ -64,6 +64,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     }
     public void Reload()
     {
+        groupDrag = null; // Rebuilding captured decorators cancels their uncommitted movement.
         foreach (var view in nodes) view.ImagePreview = null;
         nodes.Clear();
         foreach (var node in Document.Nodes)
@@ -74,6 +75,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
             nodes.Add(view);
         }
         RefreshConnections();
+        ReloadGroups();
     }
     public bool ApplyUiOutputs(JsonObject outputs, PreviewSubmission? submission = null)
     {
@@ -222,6 +224,7 @@ public sealed record NodeChoice(string Type, string Label) { public override str
 public sealed class NodeView : INotifyPropertyChanged
 {
     private Point location;
+    internal void PreviewLocation(Point value) { location = value; PropertyChanged?.Invoke(this, new(nameof(Location))); }
     private string previewText = "";
     private NodeImagePreview? imagePreview;
     private readonly Action<Point> move;

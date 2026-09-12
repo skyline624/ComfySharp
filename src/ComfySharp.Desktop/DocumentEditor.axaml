@@ -3,7 +3,19 @@
     <n:NodifyEditor x:Name="Canvas" Background="#171B25" GridCellSize="10" KeyDown="CanvasKeyDown">
       <n:NodifyEditor.Styles>
         <Style Selector="n|ItemContainer"><Setter Property="Location" Value="{ReflectionBinding Location, Mode=TwoWay}"/></Style>
+        <Style Selector="n|DecoratorContainer"><Setter Property="Location" Value="{ReflectionBinding Location}"/></Style>
       </n:NodifyEditor.Styles>
+      <n:NodifyEditor.DecoratorTemplate>
+        <DataTemplate>
+          <Grid Width="{ReflectionBinding Width}" Height="{ReflectionBinding Height}">
+            <Border BorderBrush="{ReflectionBinding Brush}" BorderThickness="2" Background="#12334455" IsHitTestVisible="False"/>
+            <Border Classes="group-header" Height="30" VerticalAlignment="Top" Background="{ReflectionBinding Brush}" Cursor="SizeAll"
+                    PointerPressed="GroupPointerPressed" PointerMoved="GroupPointerMoved" PointerReleased="GroupPointerReleased" PointerCaptureLost="GroupPointerCaptureLost">
+              <TextBlock Text="{ReflectionBinding Caption}" Margin="8,3" Foreground="White" TextTrimming="CharacterEllipsis" IsHitTestVisible="False"/>
+            </Border>
+          </Grid>
+        </DataTemplate>
+      </n:NodifyEditor.DecoratorTemplate>
       <n:NodifyEditor.ItemTemplate>
         <DataTemplate>
           <Border Background="#283044" BorderBrush="{ReflectionBinding Outline}" BorderThickness="2" CornerRadius="7" Padding="14" Width="230">
@@ -58,6 +70,20 @@
         <Button x:Name="CopyNodes" Content="Copy nodes" Click="CopyClicked"/>
         <Button x:Name="CutNodes" Content="Cut nodes" Click="CutClicked"/>
         <Button x:Name="PasteNodes" Content="Paste nodes" Click="PasteClicked"/>
+        <TextBlock Text="Groups" FontWeight="SemiBold" Margin="0,12,0,0"/>
+        <Button x:Name="CreateGroup" Content="Group selected nodes" Click="CreateGroupClicked"/>
+        <ComboBox x:Name="GroupChoices" SelectionChanged="GroupSelectionChanged" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="GroupTitle" PlaceholderText="Group title"/>
+        <TextBox x:Name="GroupColor" PlaceholderText="Group color"/>
+        <StackPanel Orientation="Horizontal" Spacing="5">
+          <TextBox x:Name="GroupWidth" Width="125" PlaceholderText="Width"/>
+          <TextBox x:Name="GroupHeight" Width="125" PlaceholderText="Height"/>
+        </StackPanel>
+        <Button x:Name="ApplyGroup" Content="Apply group title, color and size" Click="ApplyGroupClicked"/>
+        <Button x:Name="PinGroup" Content="Pin / unpin group" Click="PinGroupClicked"/>
+        <Button x:Name="RemoveGroup" Content="Remove group frame" Click="RemoveGroupClicked"/>
+        <TextBlock Text="Drag a group header to move its contents. Shift-drag moves only the frame." TextWrapping="Wrap"/>
+        <TextBlock x:Name="GroupDiagnostic" TextWrapping="Wrap" Foreground="#FFBE80"/>
         <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
         <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>
         <TextBox x:Name="SourceId" PlaceholderText="Source node ID"/><TextBox x:Name="SourceSlot" Text="0" PlaceholderText="Output slot"/>
