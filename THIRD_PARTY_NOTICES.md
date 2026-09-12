@@ -6,6 +6,8 @@ Functional reference: [ComfyUI at 1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a](http
 
 Editor reference: [ComfyUI_frontend v1.51.10 at e7d1c7fc6823e330fdab524610b0000394cb1dbc](https://github.com/Comfy-Org/ComfyUI_frontend/tree/e7d1c7fc6823e330fdab524610b0000394cb1dbc). C# implementations cite their corresponding reference files. No compiled upstream frontend is distributed.
 
+PNG workflow metadata extraction follows that frontend's `src/scripts/metadata/png.ts` and `src/scripts/app.ts`. The exact 223-byte `src/scripts/metadata/__fixtures__/with_metadata.png` is retained as base64 in `tests/Shared/PngMetadataFixture.cs`, copyright ComfyUI_frontend contributors, GPL-3.0-only. Its SHA-256 and supported import behavior are recorded in [PNG_WORKFLOW_IMPORT.md](docs/PNG_WORKFLOW_IMPORT.md).
+
 The sigma generators in `src/ComfySharp.Inference/SigmaSchedules.cs` and the no-churn Euler trajectory in `src/ComfySharp.Inference/SdEulerSampler.cs` are ported from the frozen ComfyUI `comfy/k_diffusion/sampling.py` (with `append_dims` from `comfy/k_diffusion/utils.py`). Their numeric references are recorded in `docs/SIGMA_SCHEDULES.md` and `docs/qualification/sd-euler-native210-cpu-f32-v1.md`. The original k-diffusion project's notice, copyright (c) 2022 Katherine Crowson, is retained in [k-diffusion-MIT.txt](docs/licenses/k-diffusion-MIT.txt), copied from [this pinned licence source](https://github.com/crowsonkb/k-diffusion/blob/4601bf085320592473f681a62808ed873d17fad5/LICENSE). This notice is preserved alongside the ComfyUI provenance and project GPLv3 licence; it does not change the frozen functional reference.
 
 ## PreviewAny and tensor text

@@ -12,6 +12,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
 {
     public WorkflowDocument Document { get; }
     public string? FilePath { get; set; }
+    public string? SuggestedFileName { get; set; }
     public event EventHandler<string>? Error;
     private readonly ObservableCollection<NodeView> nodes = [];
     private readonly ObservableCollection<ConnectionView> connections = [];

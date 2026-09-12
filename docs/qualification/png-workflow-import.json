@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "baseCommit": "7b172c122f42723683c5b05dd15a1361b444c0c7",
+  "platform": "Windows win-x64 CPU",
+  "passed": 173,
+  "failed": 0,
+  "skipped": 0,
+  "excluded": 0,
+  "new": 22,
+  "projects": {
+    "Workflow": {
+      "passed": 99,
+      "bytes": 151570,
+      "sha256": "59dabbf0a3c9a1d1cb8dbbb35770b3a85a5b1d503b2f7f3e44b59f71803e04a8"
+    },
+    "Desktop": {
+      "passed": 74,
+      "bytes": 110966,
+      "sha256": "7407d7d55be69041900e93dbfe0d9e54ef851c8de9783c0f25541ebbb5659ccb"
+    }
+  },
+  "newByProject": {
+    "Workflow": 19,
+    "Desktop": 3
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Workflow.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "ac9f0e9b8dacf4847b08c439b0b78089d6cb0fa74c7eca65c2777bb703490856"
+    },
+    "workflow-tests": {
+      "bytes": 556,
+      "sha256": "2af052cdc7569288f4655b50a74adeb7249923f2600cd90008160dfccba2d915"
+    },
+    "desktop-tests": {
+      "bytes": 541,
+      "sha256": "56b7ac364b52ce331752866694afd4353cdb993bbf45f9de728e0d7484a9fe61"
+    },
+    "native-smoke": {
+      "bytes": 349,
+      "sha256": "f06979e04bb60a811184744c24346dd1e988dd1bc83415e537e89570b410f2a7"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeSmoke": {
+    "exitCode": 0,
+    "checks": [
+      "Existing bitmap, navigation, Host restart and tensor/text workflows continue to pass.",
+      "A SaveImage PNG produced by the real Host is fetched through /view and imported in a new native Desktop tab.",
+      "The imported workflow snapshot equals the original submitted document; the image path is not a JSON save target."
+    ]
+  },
+  "upstreamFixture": {
+    "source": "https://github.com/Comfy-Org/ComfyUI_frontend/blob/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/scripts/metadata/__fixtures__/with_metadata.png",
+    "bytes": 223,
+    "sha256": "393da603c10b778089e4c48cae80c12469f03da18fbc87aa76879256e88ae1a9",
+    "representation": "Exact PNG bytes encoded as base64 in tests/Shared/PngMetadataFixture.cs. Its missing version is explicitly normalized to 0.4 on import."
+  },
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 16530,
+      "sha256": "8c383acaefeb6216415d367fb41d0bc6be42b72f445481c76424c66f0222f74e"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 27824,
+      "sha256": "902a4618d738ce3d6707eb562923f09e34ab7ad115beac5e5999f4d14cb2aa73"
+    },
+    "src/ComfySharp.Workflow/PngWorkflowImport.cs": {
+      "bytes": 7977,
+      "sha256": "a271c09f0cecc03ae5fd1119e6bd3be5e19b07dce0039292872f3918ab2665c0"
+    },
+    "tests/ComfySharp.Desktop.Tests/ComfySharp.Desktop.Tests.csproj": {
+      "bytes": 648,
+      "sha256": "4c273382325719761d56f4a36085781c561809e3309e046e8630bedbc7f1ffe2"
+    },
+    "tests/ComfySharp.Desktop.Tests/PngWorkflowEditorTests.cs": {
+      "bytes": 2652,
+      "sha256": "4758828b85fc5988d0475ef7ef3dbe4e5e0cb97ce505a0965297a03343c182ae"
+    },
+    "tests/ComfySharp.Workflow.Tests/ComfySharp.Workflow.Tests.csproj": {
+      "bytes": 566,
+      "sha256": "77549724feda87b5094dd8dc34a193ab7e5e044b3f5624dd60634aff1937bde7"
+    },
+    "tests/ComfySharp.Workflow.Tests/PngWorkflowImportTests.cs": {
+      "bytes": 7010,
+      "sha256": "2748367e111d6a944645a12a8aa57903ab17d829dcc8aaaedea6cb391697f467"
+    },
+    "tests/Shared/PngMetadataFixture.cs": {
+      "bytes": 2568,
+      "sha256": "7bc5b38b0f8ff2a60fae610f41f918a541f0a4849145a5048faa065a7838f4b9"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed product/tests plus build settings; hashes are not loaded-assembly attestation.",
+  "limits": [
+    "Only Workflow and Desktop tests were repeated; other project suites belong to earlier campaigns.",
+    "No JavaScript execution or browser-source differential corpus in this tranche; pinned frontend code and its exact PNG fixture are the reference.",
+    "API-only/A1111 reconstruction, nonfinite Python JSON, other media and drag/drop import are not implemented here.",
+    "Malformed files face stricter CRC, structure and bounded-text checks than the frozen frontend. No complete malformed-file parity claimed.",
+    "No pretrained generation or new GPU/platform/distribution qualification. Earlier SD/CLIP gates remain open."
+  ]
+}

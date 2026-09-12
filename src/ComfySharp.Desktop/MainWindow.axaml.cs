@@ -66,12 +66,12 @@ public sealed partial class MainWindow : Window
         };
     }
     public DocumentEditor ActiveEditor => (DocumentEditor)((TabItem)Documents.SelectedItem!).Content!;
-    public void AddDocument(WorkflowDocument document, string? path)
+    public void AddDocument(WorkflowDocument document, string? path, string? suggestedFileName = null)
     {
-        var editor = new DocumentEditor(document) { FilePath = path };
+        var editor = new DocumentEditor(document) { FilePath = path, SuggestedFileName = suggestedFileName };
         editor.SetAvailability(availableNodes);
         var tab = new TabItem { Content = editor };
-        void Update() => tab.Header = (Path.GetFileName(editor.FilePath) is { Length: > 0 } name ? name : "Untitled") + (document.IsDirty ? " *" : "");
+        void Update() => tab.Header = (Path.GetFileName(editor.FilePath) is { Length: > 0 } name ? name : editor.SuggestedFileName ?? "Untitled") + (document.IsDirty ? " *" : "");
         document.Changed += (_, _) => Update(); Update();
         editor.Error += (_, message) => Messages.Text = message;
         Documents.Items.Add(tab); Documents.SelectedItem = tab;
@@ -268,12 +268,19 @@ public sealed partial class MainWindow : Window
             throw new InvalidOperationException("PNG batch navigation smoke failed.");
         if (Directory.GetFiles(smokeDataDirectory!, "*.png", SearchOption.AllDirectories).Length != 6)
             throw new InvalidOperationException("PNG smoke did not create the expected output/temp files.");
+        var exportedFile = PreviewImageFile.Parse(pngEntry["outputs"]![savedImage.Value]!["images"]![0]);
+        using (var png = new MemoryStream(await imageReader(exportedFile, lifetime.Token)))
+        {
+            await ImportWorkflowAsync(png, exportedFile.Filename);
+            if (!JsonNode.DeepEquals(pngWorkflow, ActiveEditor.Document.Snapshot()) || ActiveEditor.FilePath is not null)
+                throw new InvalidOperationException("PNG workflow round-trip smoke failed.");
+        }
         var staleFile = PreviewImageFile.Parse(pngEntry["outputs"]![pngPreview.Value]!["images"]![0]);
         await StartHostAsync();
         try { await imageReader(staleFile, lifetime.Token); throw new InvalidOperationException("Old image reader survived a Host restart."); }
         catch (OperationCanceledException) { }
         if (previews.Any(p => !p!.IsDisposed || p.Image is not null)) throw new InvalidOperationException("Host restart retained old bitmap resources.");
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation and workflow metadata.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata and PNG workflow reimport.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
@@ -297,16 +304,32 @@ public sealed partial class MainWindow : Window
     private void NewClicked(object? sender, RoutedEventArgs e) => AddDocument(WorkflowDocument.Create(), null);
     private async void OpenClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () =>
     {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Open workflow", AllowMultiple = true, FileTypeFilter = [JsonType] });
-        foreach (var file in files) { await using var stream = await file.OpenReadAsync(); using var reader = new StreamReader(stream); AddDocument(WorkflowDocument.Parse(await reader.ReadToEndAsync()), file.TryGetLocalPath()); }
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Open workflow", AllowMultiple = true, FileTypeFilter = [new("Workflow JSON or PNG") { Patterns = ["*.json", "*.png"] }, JsonType] });
+        foreach (var file in files) { await using var stream = await file.OpenReadAsync(); await ImportWorkflowAsync(stream, file.Name, file.TryGetLocalPath()); }
     });
+    public async Task ImportWorkflowAsync(Stream stream, string filename, string? localPath = null)
+    {
+        if (Path.GetExtension(filename).Equals(".png", StringComparison.OrdinalIgnoreCase))
+        {
+            var metadata = await PngWorkflowImport.ReadMetadataAsync(stream, lifetime.Token);
+            var document = PngWorkflowImport.ReadWorkflow(metadata); lifetime.Token.ThrowIfCancellationRequested();
+            AddDocument(document, null, Path.GetFileNameWithoutExtension(filename) + ".json");
+            Messages.Text = metadata.Warnings.Count == 0 ? "Workflow imported from PNG." : string.Join(Environment.NewLine, metadata.Warnings);
+        }
+        else
+        {
+            using var reader = new StreamReader(stream, leaveOpen: true);
+            var document = WorkflowDocument.Parse(await reader.ReadToEndAsync(lifetime.Token)); lifetime.Token.ThrowIfCancellationRequested();
+            AddDocument(document, localPath);
+        }
+    }
     private static FilePickerFileType JsonType { get; } = new("Workflow JSON") { Patterns = ["*.json"] };
     private async Task SaveAsync(bool choosePath)
     {
         var editor = ActiveEditor;
         if (choosePath || editor.FilePath is null)
         {
-            var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save workflow", SuggestedFileName = "workflow.json", DefaultExtension = "json", FileTypeChoices = [JsonType] });
+            var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Save workflow", SuggestedFileName = editor.SuggestedFileName ?? "workflow.json", DefaultExtension = "json", FileTypeChoices = [JsonType] });
             if (file is null) return;
             await DocumentPersistence.SaveAsync(editor.Document, async snapshot =>
             {
