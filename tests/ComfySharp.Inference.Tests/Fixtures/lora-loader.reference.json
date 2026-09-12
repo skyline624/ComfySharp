@@ -1,0 +1,752 @@
+{
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+  },
+  "torch": "2.10.0+cpu",
+  "absoluteTolerance": 1e-06,
+  "relativeTolerance": 1e-06,
+  "scope": "Actual source load_lora using the LoRAAdapter provider for LoRA-only input files. Other providers are outside this corpus. Alias order supplied explicitly; architecture mapping not qualified.",
+  "cases": [
+    {
+      "name": "suffix-0",
+      "tensors": {
+        "layer.lora_up.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora_down.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora_down.weight",
+        "layer.lora_up.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-1",
+      "tensors": {
+        "layer_lora.up.weight": {
+          "dtype": "F16",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer_lora.down.weight": {
+          "dtype": "F16",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer_lora.down.weight",
+        "layer_lora.up.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-2",
+      "tensors": {
+        "layer.lora_B.weight": {
+          "dtype": "BF16",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora_A.weight": {
+          "dtype": "BF16",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora_A.weight",
+        "layer.lora_B.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-3",
+      "tensors": {
+        "layer.lora.up.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora.down.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora.down.weight",
+        "layer.lora.up.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-4",
+      "tensors": {
+        "layer.lora_B": {
+          "dtype": "F16",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora_A": {
+          "dtype": "F16",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora_A",
+        "layer.lora_B"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-5",
+      "tensors": {
+        "layer.lora_linear_layer.up.weight": {
+          "dtype": "BF16",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora_linear_layer.down.weight": {
+          "dtype": "BF16",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora_linear_layer.down.weight",
+        "layer.lora_linear_layer.up.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "suffix-6",
+      "tensors": {
+        "layer.lora_B.default.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            0.25,
+            0.5
+          ]
+        },
+        "layer.lora_A.default.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        "layer.alpha": {
+          "dtype": "F64",
+          "shape": [],
+          "values": [
+            2.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.25,
+          2.5,
+          3.75,
+          4.5,
+          6.0,
+          7.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.alpha",
+        "layer.lora_A.default.weight",
+        "layer.lora_B.default.weight"
+      ],
+      "unclaimedKeys": []
+    },
+    {
+      "name": "regular-over-B",
+      "tensors": {
+        "layer.lora_up.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "layer.lora_down.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "layer.lora_B.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            4.0,
+            4.0
+          ]
+        },
+        "layer.lora_A.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            4.0,
+            4.0,
+            4.0
+          ]
+        }
+      },
+      "aliases": [
+        "layer"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.5,
+          2.5,
+          3.5,
+          4.5,
+          5.5,
+          6.5
+        ]
+      },
+      "claimedKeys": [
+        "layer.lora_down.weight",
+        "layer.lora_up.weight"
+      ],
+      "unclaimedKeys": [
+        "layer.lora_A.weight",
+        "layer.lora_B.weight"
+      ]
+    },
+    {
+      "name": "later-alias-wins",
+      "tensors": {
+        "first.lora_up.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            1.0,
+            1.0
+          ]
+        },
+        "first.lora_down.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "second.lora_B.weight": {
+          "dtype": "F32",
+          "shape": [
+            2,
+            1
+          ],
+          "values": [
+            4.0,
+            4.0
+          ]
+        },
+        "second.lora_A.weight": {
+          "dtype": "F32",
+          "shape": [
+            1,
+            3
+          ],
+          "values": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      "aliases": [
+        "first",
+        "second"
+      ],
+      "targetShape": [
+        2,
+        3
+      ],
+      "weight": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          1.0,
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0
+        ]
+      },
+      "output": {
+        "dtype": "F32",
+        "shape": [
+          2,
+          3
+        ],
+        "values": [
+          2.0,
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ]
+      },
+      "claimedKeys": [
+        "first.lora_down.weight",
+        "first.lora_up.weight",
+        "second.lora_A.weight",
+        "second.lora_B.weight"
+      ],
+      "unclaimedKeys": []
+    }
+  ]
+}

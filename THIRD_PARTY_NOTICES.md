@@ -1,5 +1,11 @@
 # Third-party provenance
 
+`LoraFileLoader.cs` adapts the LoRA selection responsibilities of frozen
+ComfyUI `comfy/lora.py` and `LoRAAdapter.load` in `comfy/weight_adapter/lora.py`,
+under the GPLv3 provenance below. It uses the existing strict safetensors reader,
+owned native snapshots and explicit unsupported-key diagnostics. See
+[LORA_FILES.md](docs/LORA_FILES.md) for its scope and reference laboratory.
+
 `LoraMath.cs` adapts `LoRAAdapter.calculate_weight` and `weight_decompose`
 from the frozen ComfyUI `comfy/weight_adapter/lora.py` and `base.py`, under
 the ComfyUI GPLv3 provenance below. `LoraWeightPatch` and immutable-bank

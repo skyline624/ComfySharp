@@ -18,6 +18,7 @@ public sealed class ComfyClipEncoder : IDisposable
     }
 
     public ClipProfile Profile { get; }
+    public ClipTextConfig Config { get { using var graph = RetainGraph(); return graph.Config; } }
     public Device Device { get { using var graph = RetainGraph(); return graph.Device; } }
     public ComfyClipEncoder To(Device device, CancellationToken cancellationToken = default)
     {

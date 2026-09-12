@@ -1,0 +1,88 @@
+{
+  "status": "safe-lora-file-reader-windows-cpu-tested",
+  "familyQualified": false,
+  "trainingQualified": false,
+  "realWorkflow": false,
+  "releaseReady": false,
+  "baseCommit": "c7e493c2f24c45f49f5dde2a0dd7a62001ccde77",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/lora-loader.reference.json",
+    "sha256": "b0342518cb35f51bd9f6e1ba4e87f204ef25ae1c93b1b20febe17edae3cd1791",
+    "loaderCases": 9,
+    "existingMathCasesThroughFiles": 15,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Actual frozen load_lora with LoRAAdapter-only provider and CPU Tensor.to shim; explicit aliases. No architecture alias map or pretrained adapter comparison."
+  },
+  "execution": {
+    "platform": "win-x64-cpu",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "factorDTypes": [
+      "F32",
+      "F16",
+      "BF16"
+    ],
+    "testedAlphaDTypes": [
+      "F32",
+      "F64",
+      "I64"
+    ],
+    "pretrainedWeightsUsed": false,
+    "reducedGraph": "U-Net with synthetic weights; patched graph remains usable after source and file disposal"
+  },
+  "tests": {
+    "total": 99,
+    "passed": 99,
+    "failed": 0,
+    "notExecuted": 0,
+    "newTestCases": 7,
+    "trxSha256": "1ef86add4d7fb3d0cc34b568472f48fcd8553f99ba4d8a3cb17b12123d2b1e6b"
+  },
+  "build": "Release solution succeeded, zero warnings/errors",
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "e697368c016616361936dbcabf434314548f43e1cbf9d5f39307ca3c23cc7494",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "THIRD_PARTY_NOTICES.md": "34afc99abf4021a82f3ae304b0c5b6cc92e66c38cfa4e3c40c9ca3ae373a1bc5",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-loader-source/README.md": "dd85e146cf6fadf845ec1a1943a2b54fd5726f6c8761136f99e99a8cfb446608",
+    "labs/lora-loader-source/reference.py": "8e54eb9ab6c41dec25a4648db7fd4e6c5e85e0c475f24f464ad41b49b0afde48",
+    "src/ComfySharp.Inference/ComfyClipEncoder.cs": "61384b300cd787ddafc0e73888294c8f5edbd4c240ad2a71dc61f9f7eb5d0419",
+    "src/ComfySharp.Inference/LoraFileLoader.cs": "9deaed2db2ec910141f601b34f47f5cfbdc03211d03a17b6b4211fdc3d170cd1",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "a9c771487a77e8528cc843d91cb40dfca51b3ea75f0e1b5ea097869bc0b97ad4",
+    "tests/ComfySharp.Inference.Tests/Fixtures/lora-loader.reference.json": "b0342518cb35f51bd9f6e1ba4e87f204ef25ae1c93b1b20febe17edae3cd1791",
+    "tests/ComfySharp.Inference.Tests/LoraFileLoaderTests.cs": "cb2d38612c07e6e5b8b587f91ef1dbdf600e2892f0998046c6f5b1485988ab03",
+    "tests/ComfySharp.Inference.Tests/packages.win-x64.cpu.lock.json": "df4d7c50bac44a3a5dd074d3c6af865d89b4f0825433fb4e0c1b7506c32101a1"
+  },
+  "previousCI": {
+    "run": 34699969986,
+    "commit": "c7e493c2f24c45f49f5dde2a0dd7a62001ccde77",
+    "status": "completed",
+    "overall": "failure",
+    "windows": "success",
+    "linux": "failure",
+    "macOS": "failure",
+    "loraFoundationsStep": "success on all three OS",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34699969986"
+  },
+  "localAdapterScreening": {
+    "headersOnly": true,
+    "files": 15,
+    "matchedSearchedSdPrefixes": 0,
+    "architectureQualification": false,
+    "payloadRead": false,
+    "filesCopied": false
+  },
+  "limitations": [
+    "Explicit ordered aliases only; automatic SD/CLIP mapping and Host/Desktop LoRA nodes remain pending.",
+    "Synthetic files and reduced graph tests do not qualify any pretrained adapter or catalogue family.",
+    "Default strict unknown-key handling is more conservative than source warnings; opt-in unclaimed keys are returned for callers to diagnose.",
+    "Only LoRA/LoCon/DoRA providers; reshape_weight and other patch/adapter types remain unsupported.",
+    "The 512 MiB factor allowance excludes temporary conversion buffers and later patched model weights.",
+    "No new GPU, Linux or macOS execution in this local campaign; source numeric CI failures remain open.",
+    "No export/reload training workflow or integrated training node is qualified."
+  ]
+}
