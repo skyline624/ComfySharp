@@ -57,6 +57,7 @@ def main():
     p.add_argument('--source-evidence', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--staging', type=Path, required=True)
+    p.add_argument('--bundle', type=Path, required=True)
     a = p.parse_args()
     require((platform.system(), platform.machine()) == ('Linux', 'x86_64'), 'Linux x64 required.')
     require(sys.version_info[:3] == (3, 12, 10), 'Pinned laboratory Python required.')
@@ -69,8 +70,9 @@ def main():
     native = runpy.run_path(str(ROOT/'labs/sd-native-diagnostic/run.py'))
     wheel = Path(importlib.metadata.distribution('torch').locate_file('torch/lib')).resolve(strict=True)
     source = a.source_evidence.resolve(strict=True)
+    bundle = a.bundle.resolve(strict=True)
     built = ROOT/'tests/ComfySharp.Inference.Tests/bin/native/linux-x64/cpu/Release/net10.0'
-    output, staging = stage['protect_destinations'](a.output, a.staging, (ROOT, built, wheel, source, Path(sys.prefix)))
+    output, staging = stage['protect_destinations'](a.output, a.staging, (ROOT, built, wheel, source, bundle, Path(sys.prefix)))
     output.mkdir(parents=True)
     precondition = native['validate_loader_environment'](os.environ, sys.base_prefix)
     inventory = stage['inventory']
@@ -81,6 +83,7 @@ def main():
     require('[$ORIGIN]' in bridge_elf and str(wheel) not in bridge_elf,
             'Runtime bridge must resolve native siblings without an SDK runpath.')
     wheel_before, source_before = inventory(wheel), inventory(source)
+    bundle_before = inventory(bundle)
     probes, omps = stage['probe_paths'](before)
     record = native['library_record']
     original = {name: record(built/paths[0]) for name, paths in probes.items()}
@@ -98,9 +101,38 @@ def main():
         require(len(loaded) == 1 and all(loaded[0][k] == image[k] for k in ('bytes', 'sha256')), 'Source loaded a different native image.')
     staging.mkdir(parents=True)
     builds = {'original': built, 'nuget-copy': staging/'nuget', 'source-native-copy': staging/'source-native'}
-    for name in ('nuget-copy', 'source-native-copy'):
-        stage['copy_original'](built, builds[name], before)
-    candidate_inventory, aliases = stage['wheel_substitution'](builds['source-native-copy'], before, probes, omps, wheel, core, omp)
+    stage['copy_original'](built, builds['nuget-copy'], before)
+    # Product composition uses only .NET and the already verified native bundle.
+    # Python remains confined to this independent source/comparison laboratory.
+    command = ['dotnet', str(ROOT/'tools/ComfySharp.NativeBundle/bin/Release/net10.0/ComfySharp.NativeBundle.dll'),
+               'compose', '--recipe', str(ROOT/'native/bundles/linux-x64-cpu210-source.json'),
+               '--bundle', str(bundle), '--application', str(built), '--output', str(builds['source-native-copy'])]
+    subprocess.run(command, cwd=ROOT, check=True, timeout=240)
+    candidate_inventory = inventory(builds['source-native-copy'])
+    # Independently check the C# output against laboratory-native evidence, including
+    # unchanged application files and binding, complete substitutions and notices.
+    expected = dict(before['files'])
+    aliases = {}
+    groups = {name: list(probes[name]) for name in stage['CORE']}
+    native_dirs = {str(Path(p).parent) for p in probes[stage['BINDING']]}
+    groups['libgomp.so.1'] = sorted(set(omps) | {str(Path(d)/'libgomp.so.1') for d in native_dirs})
+    for name, paths in groups.items():
+        image = omp if name == 'libgomp.so.1' else core[name]
+        stamp = {k: image[k] for k in ('bytes', 'sha256')}
+        for path in paths:
+            expected[path] = stamp
+            require(not os.path.samefile(builds['source-native-copy']/path, wheel/image['name']), 'Candidate shares source package inode.')
+            if path in before['files']:
+                require(not os.path.samefile(builds['source-native-copy']/path, built/path), 'Candidate shares original inode.')
+        aliases[name] = {'relativePaths': paths, 'identicalBytes': True, 'independentOfPackage': True}
+    receipt = 'comfysharp-native-bundle.json'
+    require((builds['source-native-copy']/receipt).read_bytes() == (bundle/'bundle.json').read_bytes(), 'Composition receipt differs.')
+    expected[receipt] = bundle_before['files']['bundle.json']
+    for name, stamp in bundle_before['files'].items():
+        if name.startswith('licenses/'):
+            expected['third-party/libtorch-210-linux-cpu-source/'+name.removeprefix('licenses/')] = stamp
+    require(candidate_inventory['files'] == expected, 'C# composition changed an unexpected application file.')
+    write(output/'composition.json', json.loads((builds['source-native-copy']/receipt).read_text()))
     write(output/'native-inputs.json', {'original': original, 'originalOpenMp': original_omp, 'candidate': core,
         'candidateOpenMp': omp, 'aliases': aliases, 'loaderPrecondition': precondition,
         'protocolSha256': digest(ROOT/'labs/training-trace/protocol.json'), 'sourceManifestSha256': digest(source/'manifest.json')})
@@ -158,14 +190,15 @@ def main():
         runs[origin+'-ordinary'] = {'exitCode': child.returncode, **trx(directory/'results', expected_count)}
     for name, build in builds.items():
         require(inventory(build) == (candidate_inventory if name == 'source-native-copy' else before), 'Build inventory changed.')
-    require(inventory(wheel) == wheel_before and inventory(source) == source_before, 'Protected source inputs changed.')
-    stage['verify_aliases'](builds['source-native-copy'], aliases)
+    require(inventory(wheel) == wheel_before and inventory(source) == source_before and inventory(bundle) == bundle_before,
+            'Protected source or prepared bundle inputs changed.')
     candidate = comparisons['source-native-copy']['cases']
     accepted = all(not c['baseWeightDifferences'] and not c['missingCaptures'] and c['completed'] and
                    all(not row['outsideOriginalTolerance'] for row in c['comparisons']) for c in candidate)
     write(output/'result.json', {'scope': 'Reduced SD1/SD2 all-target training only; immutable cross-host oracle verdicts remain separate.',
         'effectiveCpuDispatch':{name:[d['native']['cpuCapability'] for d in docs] for name,docs in documents.items()},
         'nativeIdentityVerified': True, 'copyControlExact': True, 'protectedInputsUnchanged': True,
+        'composition': 'offline-dotnet-native-bundle',
         'candidateMatchesSameHostSourceTolerance': accepted, 'runs': runs, 'candidateComparison': candidate})
     # Preserve original verdicts, but gate this candidate experiment on its independently observed same-host source.
     return 0 if accepted else 1

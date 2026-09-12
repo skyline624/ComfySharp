@@ -1,5 +1,12 @@
 # Native training candidate comparison
 
+Protocol v4 prepares native files and notices directly from the pinned archive
+using the offline [C# bundle tool](../../docs/NATIVE_BUNDLES.md), then composes the
+candidate with that tool. Python remains confined to independent source collection
+and comparison. The laboratory verifies the composed inventory, actual loaded
+images and unchanged originals. Native aliases have identical verified bytes;
+the product tool does not require hard links.
+
 The current workflow compares the Linux NuGet build, an unchanged independent
 copy, and a copy using the pinned source laboratory's native CPU core/OpenMP
 libraries. It reuses the established ELF, copy, inventory and loaded-library

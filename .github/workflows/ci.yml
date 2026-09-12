@@ -32,7 +32,7 @@ jobs:
         shell: pwsh
         run: |
           $failedProjects = @()
-          foreach ($project in @('Core', 'Workflow', 'Tokenization', 'Desktop', 'Host')) {
+          foreach ($project in @('Core', 'Workflow', 'Tokenization', 'Desktop', 'Host', 'NativeBundle')) {
             & dotnet test "tests/ComfySharp.$project.Tests" --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --logger trx --results-directory "TestResults/$project"
             if ($LASTEXITCODE -ne 0) { $failedProjects += $project }
           }

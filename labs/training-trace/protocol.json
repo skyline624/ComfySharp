@@ -1,19 +1,24 @@
 {
-  "profile": "linux-training-native-identity-v3",
-  "baseCommit": "22958b033f3040aaa99124f4bd1a5e4745c9408f",
-  "purpose": "Native-only candidate comparison with effective CPU dispatch and build identity; original reference verdicts preserved.",
+  "profile": "linux-training-dotnet-native-bundle-v4",
+  "baseCommit": "f6573cecfd58005b530a4ea634216a32cdcbd9b9",
+  "purpose": "Offline C# archive preparation and application composition, with effective native identity and same-host training comparison; original reference verdicts preserved.",
   "inputs": {
     "labs/training-trace/source.py": "37134112fbb71a45aacab149470c242fb215d8fcf10ef79f535c635c64000f36",
     "labs/training-trace/compare.py": "b129933f21e96df16b33ea7e164dcc15c0386f54676aa95b3693c334a4279159",
-    ".github/workflows/training-trace.yml": "d3b98013c94d0b72fe91727fd8808b35d4fe8a7856ac455b96a53787a0117583",
+    ".github/workflows/training-trace.yml": "11df946c7504c366b9a3d69f6194f72a48dca546db3683abe9121054e752b504",
     "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "e5eabedadf93d20ae890d25a5fe7980e46a0c7706f8a870af9aaf148d1453f5e",
     "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "3b9f1eb54286efcbcb163a5fee04ef761f94933f718598c018b7341ee54eee83",
-    "labs/training-trace/native_candidate.py": "cfcded859bc4c3f373003f528b29089dd6cacebcb515382e8b69644cdb0aba0b",
+    "labs/training-trace/native_candidate.py": "9089831106821042ad06c8817dda58ee37adf87885e01d47b5fb3e3da75c5cd1",
     "labs/training-trace/test_compare.py": "87e4709c1f20daf1f717cf667b726527f98ba14fa3cb7544b74fd906c063e610",
     "labs/sd-native-copy-diagnostic/staging.py": "0ee6a1c95847d0d76d7b99b33e21497096fbe54b0f92a53f2ef943f3ebf326fd",
     "labs/sd-native-diagnostic/run.py": "6ffa862eb73757e6c9d8fdf664a54724e414bf10fd648007790c4713ca13a7f1",
     "native/ComfySharp.NativeGenerator/generator.cpp": "ca16e5847368a545d947a115fafe392b534a63d64c0ba90275e9a990f3415c15",
     "native/ComfySharp.NativeGenerator/CMakeLists.txt": "138dd05df029c37511df201fad3eb796c78245e491fa4206a06323163f7ec96d",
-    "src/ComfySharp.Inference/NativeRuntimeBuildInfo.cs": "f6de00ece006c413b21ab399ef557c9a355445d9e0019d720ba12ba81316d7d5"
+    "src/ComfySharp.Inference/NativeRuntimeBuildInfo.cs": "f6de00ece006c413b21ab399ef557c9a355445d9e0019d720ba12ba81316d7d5",
+    "tools/ComfySharp.NativeBundle/BundleOperations.cs": "93a260b07c82a4fbea9a771f10f9d060f508cadd68228474b339499f623e8f3a",
+    "tools/ComfySharp.NativeBundle/Program.cs": "31e8978fd549229af17c5c96458a2602432e565df402dc3e3980b6c578ed7d0e",
+    "tools/ComfySharp.NativeBundle/ComfySharp.NativeBundle.csproj": "68e564d3988e81391affd33bd68ed9cc9e69408b57058cb8689707c293cf5a5e",
+    "tools/ComfySharp.NativeBundle/packages.lock.json": "03eeadc5ef377c17f787ab65f41fb4c8a9c936bb7f7f4171111fdeec8a81cb46",
+    "native/bundles/linux-x64-cpu210-source.json": "3fabf4989424656895067fc19c8d4ee7115874679c5419c48041435f57982c01"
   }
 }

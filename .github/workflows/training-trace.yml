@@ -4,6 +4,8 @@ on:
     paths:
       - 'labs/training-trace/**'
       - '.github/workflows/training-trace.yml'
+      - 'tools/ComfySharp.NativeBundle/**'
+      - 'native/bundles/**'
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +30,19 @@ jobs:
           python-version: '3.12.10'
       - name: Verify unchanged source laboratory inputs
         run: python -I -S -B labs/training-platform-source/collect.py --source upstream-source --validate-only
+      - name: Build offline C# bundle tool and verify its contracts
+        run: |
+          dotnet restore tests/ComfySharp.NativeBundle.Tests --locked-mode
+          dotnet test tests/ComfySharp.NativeBundle.Tests -c Release --no-restore --logger trx --results-directory TrainingTrace/bundle-tests
+      - name: Prepare pinned native files and notices without a Python environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 2 --output "$RUNNER_TEMP/torch-cpu210.whl" 'https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl'
+          dotnet tools/ComfySharp.NativeBundle/bin/Release/net10.0/ComfySharp.NativeBundle.dll prepare \
+            --recipe native/bundles/linux-x64-cpu210-source.json --archive "$RUNNER_TEMP/torch-cpu210.whl" \
+            --output "$RUNNER_TEMP/prepared-native-bundle"
+          cp "$RUNNER_TEMP/prepared-native-bundle/bundle.json" TrainingTrace/prepared-bundle.json
       - name: Prepare locked CPU laboratory and collect source controls
         shell: bash
         run: |
@@ -51,6 +66,7 @@ jobs:
           set -euo pipefail
           "$RUNNER_TEMP/training-trace-python/bin/python" -I -B labs/training-trace/native_candidate.py \
             --source-evidence "$GITHUB_WORKSPACE/TrainingTrace/source" \
+            --bundle "$RUNNER_TEMP/prepared-native-bundle" \
             --output "$RUNNER_TEMP/training-native-evidence" --staging "$RUNNER_TEMP/training-native-copies"
       - name: Verify tracked sources remained unchanged
         if: always()

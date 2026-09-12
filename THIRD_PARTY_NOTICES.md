@@ -141,6 +141,12 @@ and the exact distribution SBOM are incomplete, so the portable workflow does
 not upload binaries. This summary is not a complete distribution notice bundle.
 See [packaging requirements](docs/packaging.md) for the unresolved release gate.
 
+The optional [offline Linux native bundle](docs/NATIVE_BUNDLES.md) extracts four
+pinned libtorch/OpenMP native images and the complete LICENSE and NOTICE from
+the official PyTorch 2.10.0 CPU archive. Composition preserves those notice bytes
+under `third-party/libtorch-210-linux-cpu-source/`. The recipe includes no Python
+sources or bindings. The complete distribution notice/SBOM gate still applies.
+
 ## CLIP text tokenization and Unicode data
 
 The four embedded files in `src/ComfySharp.Tokenization/Resources/Clip` are the exact canonical Git blobs from [ComfyUI's frozen `comfy/sd1_tokenizer`](https://github.com/comfy-org/ComfyUI/tree/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/sd1_tokenizer). Their hashes and configuration are recorded in [CLIP_TOKENIZATION.md](docs/CLIP_TOKENIZATION.md). The prompt weighting and SD1/SDXL packing adaptation follows `comfy/sd1_clip.py` and `comfy/sdxl_clip.py` under the ComfyUI GPLv3 provenance above.

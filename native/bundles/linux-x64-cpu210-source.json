@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "libtorch-210-linux-cpu-source",
+  "runtime": "linux-x64",
+  "archiveSha256": "ee40b8a4b4b2cf0670c6fd4f35a7ef23871af956fecb238fbf5da15a72650b1d",
+  "binding": {
+    "name": "libLibTorchSharp.so",
+    "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+  },
+  "files": [
+    {
+      "source": "torch/lib/libc10.so",
+      "destination": "native/libc10.so",
+      "bytes": 1403600,
+      "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84",
+      "role": "native",
+      "aliases": [],
+      "replacesSha256": [
+        "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+      ]
+    },
+    {
+      "source": "torch/lib/libtorch_cpu.so",
+      "destination": "native/libtorch_cpu.so",
+      "bytes": 443509856,
+      "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f",
+      "role": "native",
+      "aliases": [],
+      "replacesSha256": [
+        "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+      ]
+    },
+    {
+      "source": "torch/lib/libtorch.so",
+      "destination": "native/libtorch.so",
+      "bytes": 8032,
+      "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff",
+      "role": "native",
+      "aliases": [],
+      "replacesSha256": [
+        "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+      ]
+    },
+    {
+      "source": "torch/lib/libgomp.so.1",
+      "destination": "native/libgomp.so.1",
+      "bytes": 253849,
+      "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f",
+      "role": "native",
+      "aliases": [
+        "libgomp-98b21ff3.so.1"
+      ],
+      "replacesSha256": [
+        "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+      ]
+    },
+    {
+      "source": "torch-2.10.0+cpu.dist-info/licenses/LICENSE",
+      "destination": "licenses/LICENSE",
+      "bytes": 505053,
+      "sha256": "2e311cbf8c7646e764a54621ab15663bbfcfeb5bb94f1d634d79adfd49ae3191",
+      "role": "notice"
+    },
+    {
+      "source": "torch-2.10.0+cpu.dist-info/licenses/NOTICE",
+      "destination": "licenses/NOTICE",
+      "bytes": 23632,
+      "sha256": "c2cc7bf0caec7652c2b460a8a470bea1677f241e4ab8e431df34cf17f5a9fec0",
+      "role": "notice"
+    }
+  ]
+}
