@@ -218,7 +218,13 @@ public sealed class EngineService(NodeRegistry registry)
                     else
                     {
                         // Source scans flat prompt-order values for blockers before constructing V3 dictionaries.
-                        var arguments = expanded.BindArguments(invocationScope, invocation, cancellationToken);
+                        // Acquisition preserves prompt order for ordinary arguments; the V3 binder then
+                        // appends groups in schema order. Reorder here without changing producer resolution.
+                        IReadOnlyDictionary<string, RuntimeValue> flatArguments = invocation;
+                        if (node.Schema.Inputs.Any(i => i.Autogrow is not null))
+                            flatArguments = promptInputOrder.Where(invocation.ContainsKey)
+                                .ToDictionary(name => name, name => invocation[name], StringComparer.Ordinal);
+                        var arguments = expanded.BindArguments(invocationScope, flatArguments, cancellationToken);
                         returned = await node.ExecuteAsync(invocationScope, arguments, cancellationToken);
                     }
                     if (returned.Ui is not null) invocationUis.Add(UiDocument.Snapshot(returned.Ui));

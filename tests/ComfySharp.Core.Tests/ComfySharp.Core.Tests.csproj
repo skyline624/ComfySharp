@@ -10,5 +10,7 @@
     <EmbeddedResource Include="Fixtures/execution-blocker.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.execution-blocker.reference.json" />
     <EmbeddedResource Include="Fixtures/autogrow.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.autogrow.reference.json" />
     <EmbeddedResource Include="Fixtures/autogrow.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.autogrow.protocol.json" />
+    <EmbeddedResource Include="Fixtures/autogrow-names.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.autogrow-names.reference.json" />
+    <EmbeddedResource Include="Fixtures/autogrow-names.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.autogrow-names.protocol.json" />
   </ItemGroup>
 </Project>

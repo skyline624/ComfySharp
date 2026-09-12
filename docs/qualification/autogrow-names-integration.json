@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "local-source-boundary-integration",
+  "status": "validated-local-full-solution",
+  "scope": "Local Windows Release comparison of 25 prospective Names boundaries: 24 source returns and one separately compared mapper failure. Argument transport fixture, not a new production node algorithm.",
+  "productState": "Uncommitted changes identified by six exact file hashes; not attributed to an older HEAD.",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "source": {
+    "collectorCommit": "4312bdafabe2906b74bc51cdca678aa26aeec5ee",
+    "collectorUrl": "https://github.com/skyline624/ComfySharp/tree/4312bdafabe2906b74bc51cdca678aa26aeec5ee/labs/autogrow-names-source",
+    "reference": {
+      "logicalName": "autogrow-names.reference.json",
+      "bytes": 296326,
+      "sha256": "f3f6772bdf05aa464cc831edb8e929ff179f73df3d01ea2f4546616eafcbe4e3"
+    },
+    "protocol": {
+      "logicalName": "autogrow-names.protocol.json",
+      "bytes": 47770,
+      "sha256": "08b18c44494d41fef84d4055f0ef7baab1d092db0f6706af7a5043a14f8f9a8c"
+    },
+    "cases": 36,
+    "sourceBlobs": 10,
+    "astSelections": 73,
+    "classifiedComparable": 25,
+    "comparableReturned": 24,
+    "comparableRaised": 1,
+    "comparableBodyAndBinderCalls": 23,
+    "comparableTransportedRows": 27,
+    "outsidePort": {
+      "unsupportedTemplate": 6,
+      "constructorError": 1,
+      "sourceOnlyStringFormat": 2,
+      "unsupportedInput": 2
+    }
+  },
+  "initialRed": {
+    "logicalName": "names-initial-red.trx",
+    "bytes": 45459,
+    "sha256": "c7d35ab918a81ad19a9b5962a08394bfabfdc78e8db95741c3bdf29ba6bbe73e",
+    "total": 25,
+    "executed": 25,
+    "passed": 24,
+    "failed": 1,
+    "ignored": 0,
+    "uniqueTestIds": 25,
+    "classes": {
+      "ComfySharp.Core.Tests.AutogrowNamesSourceReferenceTests": 25
+    },
+    "case": "ordinary-inputs-around-group",
+    "sourceRootOrder": [
+      "tail",
+      "head",
+      "values"
+    ],
+    "productRootOrder": [
+      "head",
+      "tail",
+      "values"
+    ]
+  },
+  "correction": {
+    "file": "src/ComfySharp.Core/EngineService.cs",
+    "behavior": "After the existing flat FirstBlocker check, Autogrow inputs are presented to BindArguments in prompt order. Producer resolution, lazy resolution and the ordinary-node path are unchanged.",
+    "referenceAssertionsOrPayloadsChanged": false
+  },
+  "focusedValidation": {
+    "logicalName": "core-after-order-fix.trx",
+    "bytes": 376349,
+    "sha256": "2c55a63ae81040f231b57941775f4036a1165f8431299607e5225c00697d78f5",
+    "total": 253,
+    "executed": 253,
+    "passed": 253,
+    "failed": 0,
+    "ignored": 0,
+    "uniqueTestIds": 253,
+    "classes": {
+      "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests": 23,
+      "ComfySharp.Core.Tests.AutogrowSourceReferenceTests": 18,
+      "ComfySharp.Core.Tests.AutogrowNamesTests": 36,
+      "ComfySharp.Core.Tests.NodeParityTests": 22,
+      "ComfySharp.Core.Tests.CreateListTests": 15,
+      "ComfySharp.Core.Tests.EngineTests": 25,
+      "ComfySharp.Core.Tests.AutogrowNamesSourceReferenceTests": 25,
+      "ComfySharp.Core.Tests.AutogrowArgumentOrderTests": 4,
+      "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+      "ComfySharp.Core.Tests.ExecutionBlockerTests": 25,
+      "ComfySharp.Core.Tests.UiExecutionTests": 20,
+      "ComfySharp.Core.Tests.RuntimeValueTests": 20,
+      "ComfySharp.Core.Tests.NodeSchemaProjectionTests": 1
+    }
+  },
+  "fullSolutionValidation": {
+    "trxCount": 6,
+    "uniqueTests": 1643,
+    "passed": 1643,
+    "failed": 0,
+    "ignored": 0,
+    "duplicateTestIds": 0,
+    "focusedCoreIsRepeatedSubset": true,
+    "projects": [
+      {
+        "logicalName": "comfysharp.core.trx",
+        "bytes": 376349,
+        "sha256": "814c729bfc9b3ee88db9ff1af59be35ee6bfdbf99becf55741de061f1d786526",
+        "total": 253,
+        "executed": 253,
+        "passed": 253,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 253,
+        "classes": {
+          "ComfySharp.Core.Tests.UiExecutionTests": 20,
+          "ComfySharp.Core.Tests.AutogrowSourceReferenceTests": 18,
+          "ComfySharp.Core.Tests.AutogrowNamesSourceReferenceTests": 25,
+          "ComfySharp.Core.Tests.NodeParityTests": 22,
+          "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+          "ComfySharp.Core.Tests.ExecutionBlockerTests": 25,
+          "ComfySharp.Core.Tests.RuntimeValueTests": 20,
+          "ComfySharp.Core.Tests.CreateListTests": 15,
+          "ComfySharp.Core.Tests.AutogrowNamesTests": 36,
+          "ComfySharp.Core.Tests.AutogrowArgumentOrderTests": 4,
+          "ComfySharp.Core.Tests.EngineTests": 25,
+          "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests": 23,
+          "ComfySharp.Core.Tests.NodeSchemaProjectionTests": 1
+        },
+        "project": "ComfySharp.Core"
+      },
+      {
+        "logicalName": "comfysharp.desktop.trx",
+        "bytes": 53081,
+        "sha256": "13de0e85fffda441f1c2fd7fb7fa0334d51e3e374934b106a1b9afff295af5c0",
+        "total": 35,
+        "executed": 35,
+        "passed": 35,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 35,
+        "classes": {
+          "ComfySharp.Desktop.Tests.PreviewEditorTests": 18,
+          "ComfySharp.Desktop.Tests.CreateListEditorTests": 3,
+          "ComfySharp.Desktop.Tests.HostDiscoveryTests": 8,
+          "ComfySharp.Desktop.Tests.DesktopTests": 6
+        },
+        "project": "ComfySharp.Desktop"
+      },
+      {
+        "logicalName": "comfysharp.host.trx",
+        "bytes": 419415,
+        "sha256": "c40b5bcb3052e32ec77ecf365733df76a25a307a9b6bc9c92fb62c6c78f83f1b",
+        "total": 189,
+        "executed": 189,
+        "passed": 189,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 189,
+        "classes": {
+          "ComfySharp.Host.Tests.PromptLiteralTests": 8,
+          "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests": 33,
+          "ComfySharp.Host.Tests.StorageTests": 6,
+          "ComfySharp.Host.Tests.HostTests": 46,
+          "ComfySharp.Host.Tests.NodeCatalogueEvidenceTests": 19,
+          "ComfySharp.Host.Tests.CreateListHostTests": 4,
+          "ComfySharp.Host.Tests.HostUiTests": 19,
+          "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests": 7,
+          "ComfySharp.Host.Tests.PromptValuesReferenceTests": 28,
+          "ComfySharp.Host.Tests.CatalogTests": 19
+        },
+        "project": "ComfySharp.Host"
+      },
+      {
+        "logicalName": "comfysharp.inference.trx",
+        "bytes": 925919,
+        "sha256": "59bc6661dbf6e784c2ea3aa3f0beafa32b3dcde1e3dbc67d38eefedf885d2eb5",
+        "total": 577,
+        "executed": 577,
+        "passed": 577,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 577,
+        "classes": {
+          "ComfySharp.Inference.Tests.PreviewAnyReferenceTests": 59,
+          "ComfySharp.Inference.Tests.SdEulerSamplerTests": 9,
+          "ComfySharp.Inference.Tests.InferenceTests": 24,
+          "ComfySharp.Inference.Tests.SigmaScheduleReferenceTests": 51,
+          "ComfySharp.Inference.Tests.ClipReferenceTests": 47,
+          "ComfySharp.Inference.Tests.NativeRuntimeBootstrapTests": 12,
+          "ComfySharp.Inference.Tests.SdModelWeightTests": 27,
+          "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests": 4,
+          "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests": 11,
+          "ComfySharp.Inference.Tests.SdDiagnosticTests": 13,
+          "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests": 16,
+          "ComfySharp.Inference.Tests.SdSourceProvenanceTests": 1,
+          "ComfySharp.Inference.Tests.ClassicalVaeGraphTests": 11,
+          "ComfySharp.Inference.Tests.TensorNodeTests": 24,
+          "ComfySharp.Inference.Tests.SafeTensorDTypeTests": 29,
+          "ComfySharp.Inference.Tests.SigmaScheduleTests": 37,
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests": 8,
+          "ComfySharp.Inference.Tests.ClassicalVaeReferenceTests": 8,
+          "ComfySharp.Inference.Tests.SdSamplingTests": 11,
+          "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests": 9,
+          "ComfySharp.Inference.Tests.SdSyntheticWeightBuilderTests": 19,
+          "ComfySharp.Inference.Tests.SdDenoiserTests": 8,
+          "ComfySharp.Inference.Tests.ClipDiagnosticTests": 13,
+          "ComfySharp.Inference.Tests.ClipWeightTests": 22,
+          "ComfySharp.Inference.Tests.SdUnetTests": 10,
+          "ComfySharp.Inference.Tests.SigmaOperationTests": 21,
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests": 8,
+          "ComfySharp.Inference.Tests.SdSamplingReferenceTests": 3,
+          "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests": 12,
+          "ComfySharp.Inference.Tests.SdRuntimeIdentityTests": 3,
+          "ComfySharp.Inference.Tests.SdAlignedDiagnosticInputsTests": 8,
+          "ComfySharp.Inference.Tests.Sd15PipelineCasesTests": 6,
+          "ComfySharp.Inference.Tests.ClipEncoderTests": 9,
+          "ComfySharp.Inference.Tests.ClipConditioningTests": 10,
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests": 6,
+          "ComfySharp.Inference.Tests.NativeExecutionTests": 5,
+          "ComfySharp.Inference.Tests.ClipStockReferenceTests": 3
+        },
+        "project": "ComfySharp.Inference"
+      },
+      {
+        "logicalName": "comfysharp.tokenization.trx",
+        "bytes": 814012,
+        "sha256": "c7d517588b1de567927d634877f4e9f248aeb1c8d8e09d6542119074a56c6bb5",
+        "total": 540,
+        "executed": 540,
+        "passed": 540,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 540,
+        "classes": {
+          "ComfySharp.Tokenization.Tests.ClipDecodeReferenceTests": 270,
+          "ComfySharp.Tokenization.Tests.ClipTextReferenceTests": 194,
+          "ComfySharp.Tokenization.Tests.TokenizeCommandTests": 14,
+          "ComfySharp.Tokenization.Tests.PromptWeightsTests": 19,
+          "ComfySharp.Tokenization.Tests.ClipTokenizerTests": 24,
+          "ComfySharp.Tokenization.Tests.ClipPackingTests": 19
+        },
+        "project": "ComfySharp.Tokenization"
+      },
+      {
+        "logicalName": "comfysharp.workflow.trx",
+        "bytes": 76357,
+        "sha256": "0439cc8288d45f5dbbe0c1ce41871f5f05195cfd21475fbc38e9ceb15bd8f4d8",
+        "total": 49,
+        "executed": 49,
+        "passed": 49,
+        "failed": 0,
+        "ignored": 0,
+        "uniqueTestIds": 49,
+        "classes": {
+          "ComfySharp.Workflow.Tests.CreateListWorkflowTests": 14,
+          "ComfySharp.Workflow.Tests.WorkflowTests": 17,
+          "ComfySharp.Workflow.Tests.PromptLiteralTests": 18
+        },
+        "project": "ComfySharp.Workflow"
+      }
+    ]
+  },
+  "build": {
+    "core": {
+      "exitCodeReportedByRoot": 0,
+      "warningsReportedByRoot": 0,
+      "errorsReportedByRoot": 0
+    },
+    "fullSolution": {
+      "exitCodeReportedByRoot": 0,
+      "warningsReportedByRoot": 0,
+      "errorsReportedByRoot": 0
+    }
+  },
+  "fileIntegrity": {
+    "auditStart": [
+      {
+        "path": "tests/ComfySharp.Core.Tests/AutogrowNamesSourceReferenceTests.cs",
+        "bytes": 20881,
+        "sha256": "1a8daf3546924c65f87dede02035b297fc23e108dfc6bc645835746d0b7e0e1f",
+        "gitCanonicalBlob": "676b9dcd2ee4a29e89473560bc6362f33cb2a942"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj",
+        "bytes": 1222,
+        "sha256": "0d6cf811f2885cab6e38cdb98054d555850c1c1419b0398e2aa909ee1952d05d",
+        "gitCanonicalBlob": "4fdce22d728ea7832aa19c180fb5a089a9d31ea1"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/autogrow-names.reference.json",
+        "bytes": 296326,
+        "sha256": "f3f6772bdf05aa464cc831edb8e929ff179f73df3d01ea2f4546616eafcbe4e3",
+        "gitCanonicalBlob": "4ecbb0b0a63b3fdfad6a2e3eb66a85ec3c60e75a"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/autogrow-names.protocol.json",
+        "bytes": 47770,
+        "sha256": "08b18c44494d41fef84d4055f0ef7baab1d092db0f6706af7a5043a14f8f9a8c",
+        "gitCanonicalBlob": "789937999f7f007205af1e4c7726845f5b725a3d"
+      },
+      {
+        "path": "src/ComfySharp.Core/EngineService.cs",
+        "bytes": 23949,
+        "sha256": "8b1ece764afa75ce218003efff27f6d5e01faf6c6cce09b033df5fe05bc1bfe2",
+        "gitCanonicalBlob": "854a9a1469beb46b7c56232347f81237aed27018"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/AutogrowArgumentOrderTests.cs",
+        "bytes": 4235,
+        "sha256": "628d627a3227e2c679d2637d216dcd2890109d078934bf0c2a517e565da01745",
+        "gitCanonicalBlob": "ed49c1a46c60ea9afe78bf070a4484c51e157d7c"
+      }
+    ],
+    "auditEnd": [
+      {
+        "path": "tests/ComfySharp.Core.Tests/AutogrowNamesSourceReferenceTests.cs",
+        "bytes": 20881,
+        "sha256": "1a8daf3546924c65f87dede02035b297fc23e108dfc6bc645835746d0b7e0e1f",
+        "gitCanonicalBlob": "676b9dcd2ee4a29e89473560bc6362f33cb2a942"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj",
+        "bytes": 1222,
+        "sha256": "0d6cf811f2885cab6e38cdb98054d555850c1c1419b0398e2aa909ee1952d05d",
+        "gitCanonicalBlob": "4fdce22d728ea7832aa19c180fb5a089a9d31ea1"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/autogrow-names.reference.json",
+        "bytes": 296326,
+        "sha256": "f3f6772bdf05aa464cc831edb8e929ff179f73df3d01ea2f4546616eafcbe4e3",
+        "gitCanonicalBlob": "4ecbb0b0a63b3fdfad6a2e3eb66a85ec3c60e75a"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/autogrow-names.protocol.json",
+        "bytes": 47770,
+        "sha256": "08b18c44494d41fef84d4055f0ef7baab1d092db0f6706af7a5043a14f8f9a8c",
+        "gitCanonicalBlob": "789937999f7f007205af1e4c7726845f5b725a3d"
+      },
+      {
+        "path": "src/ComfySharp.Core/EngineService.cs",
+        "bytes": 23949,
+        "sha256": "8b1ece764afa75ce218003efff27f6d5e01faf6c6cce09b033df5fe05bc1bfe2",
+        "gitCanonicalBlob": "854a9a1469beb46b7c56232347f81237aed27018"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/AutogrowArgumentOrderTests.cs",
+        "bytes": 4235,
+        "sha256": "628d627a3227e2c679d2637d216dcd2890109d078934bf0c2a517e565da01745",
+        "gitCanonicalBlob": "ed49c1a46c60ea9afe78bf070a4484c51e157d7c"
+      }
+    ],
+    "equalAtAuditEnd": true,
+    "scope": "The initial six-file snapshot was captured during ROOT full validation, and is rechecked after the final results; it is not a binary attestation or a pre-build filesystem snapshot.",
+    "comparisonFilesAndSourceFixturesUnchangedSinceInitialRed": true
+  },
+  "qualification": {
+    "exact25CaseComparisonPassed": true,
+    "returnedArgumentTransportCases": 24,
+    "distinctFailureBoundaryCases": 1,
+    "fullSolutionPassed": true,
+    "httpParity": false,
+    "frontendParity": false,
+    "stringFormatPort": false,
+    "newProductionNodes": 0,
+    "crossPlatformValidation": false
+  },
+  "limits": [
+    "FixtureNames is an explicit test-only argument carrier using the real managed engine; no production node algorithm is qualified.",
+    "The mapper IndexError and local execution_error are asserted separately; Python/.NET exception type and text are not claimed identical.",
+    "Only cache fixtures decode $blocker; prompt dictionaries do not acquire a private blocker syntax.",
+    "One real C# callback is compared to two source observations; no second internal product hook is invented.",
+    "Source acquisition cache/hidden bookkeeping and complete HTTP validation are outside this comparison.",
+    "Focused and initial runs repeat test cases and are not added to the full-solution unique count."
+  ]
+}
