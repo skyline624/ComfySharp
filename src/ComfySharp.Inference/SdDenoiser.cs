@@ -50,6 +50,17 @@ public sealed class SdDenoiser : IDisposable
         return Apply(operation, latent, sigma, context, cancellationToken);
     }
 
+    /// <summary>Differentiable whole-image EPS/V denoising with caller-owned LoRA leaves.
+    /// Input/sigma/context gradients are preserved. Dataset ownership and detachment belong to the training caller.</summary>
+    public Tensor DenoiseForTraining(Tensor latent, Tensor sigma, Tensor context,
+        IReadOnlyDictionary<string, TrainableLoraPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
+        CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
+        using var operation = RetainModel();
+        return Apply(operation, latent, sigma, context, cancellationToken, patches, maxPatchedWeightBytes);
+    }
+
     public Tensor DenoiseGuided(Tensor latent, Tensor sigma, Tensor conditional, Tensor? unconditional,
         SdGuidanceOptions? options = null, CancellationToken cancellationToken = default)
     {
@@ -96,20 +107,27 @@ public sealed class SdDenoiser : IDisposable
         return SdSamplingMath.Guide(conditionalResult, unconditionalResult, options.Scale, cancellationToken);
     }
 
-    private Tensor Apply(SdUnet operation, Tensor latent, Tensor sigma, Tensor context, CancellationToken cancellationToken)
+    private Tensor Apply(SdUnet operation, Tensor latent, Tensor sigma, Tensor context, CancellationToken cancellationToken,
+        IReadOnlyDictionary<string, TrainableLoraPatch>? patches = null, long maxPatchedWeightBytes = 0)
     {
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
-        using var noGrad = no_grad();
+        using var gradMode = set_grad_enabled(patches is not null);
         SdSamplingMath.ValidateLatent(latent, nameof(latent));
         ValidateContext(context, latent.shape[0], nameof(context));
         InferenceDevice.RequireSame(operation.Device, latent, nameof(latent));
         InferenceDevice.RequireSame(operation.Device, context, nameof(context));
-        using var input = SdSamplingMath.ScaleInput(latent, sigma, cancellationToken);
+        using var input = patches is null
+            ? SdSamplingMath.ScaleInput(latent, sigma, cancellationToken)
+            : SdSamplingMath.ScaleInputForTraining(latent, sigma, cancellationToken);
         using var indices = Sampling.Timestep(sigma, cancellationToken);
         var time = indices.to_type(ScalarType.Float32).reshape(-1);
-        using var prediction = operation.Forward(input, time, context, cancellationToken);
-        return SdSamplingMath.Denoised(latent, prediction, sigma, PredictionKind, cancellationToken);
+        using var prediction = patches is null
+            ? operation.Forward(input, time, context, cancellationToken)
+            : operation.ForwardForTraining(input, time, context, patches, maxPatchedWeightBytes, cancellationToken);
+        return patches is null
+            ? SdSamplingMath.Denoised(latent, prediction, sigma, PredictionKind, cancellationToken)
+            : SdSamplingMath.DenoisedForTraining(latent, prediction, sigma, PredictionKind, cancellationToken);
     }
 
     private void ValidateContext(Tensor context, long batch, string name)

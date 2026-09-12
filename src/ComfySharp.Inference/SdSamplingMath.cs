@@ -11,11 +11,17 @@ public static class SdSamplingMath
     public const double SdxlLatentScale = 0.13025;
 
     public static Tensor ScaleInput(Tensor latent, Tensor sigma, CancellationToken cancellationToken = default)
+        => ScaleInputCore(latent, sigma, trackGradients: false, cancellationToken);
+
+    internal static Tensor ScaleInputForTraining(Tensor latent, Tensor sigma, CancellationToken cancellationToken)
+        => ScaleInputCore(latent, sigma, trackGradients: true, cancellationToken);
+
+    private static Tensor ScaleInputCore(Tensor latent, Tensor sigma, bool trackGradients, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
-        using var noGrad = no_grad();
+        using var gradMode = set_grad_enabled(trackGradients);
         ValidateLatent(latent, nameof(latent));
         var shaped = ReshapeSigma(sigma, latent);
         return Finish(latent / (shaped.pow(2) + 1.0).pow(0.5), cancellationToken);
@@ -23,11 +29,19 @@ public static class SdSamplingMath
 
     public static Tensor Denoised(Tensor latent, Tensor prediction, Tensor sigma, SdPredictionKind kind,
         CancellationToken cancellationToken = default)
+        => DenoisedCore(latent, prediction, sigma, kind, trackGradients: false, cancellationToken);
+
+    internal static Tensor DenoisedForTraining(Tensor latent, Tensor prediction, Tensor sigma, SdPredictionKind kind,
+        CancellationToken cancellationToken)
+        => DenoisedCore(latent, prediction, sigma, kind, trackGradients: true, cancellationToken);
+
+    private static Tensor DenoisedCore(Tensor latent, Tensor prediction, Tensor sigma, SdPredictionKind kind,
+        bool trackGradients, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
-        using var noGrad = no_grad();
+        using var gradMode = set_grad_enabled(trackGradients);
         ValidatePair(latent, prediction);
         if (!Enum.IsDefined(kind)) throw new ArgumentOutOfRangeException(nameof(kind));
         var shaped = ReshapeSigma(sigma, latent);

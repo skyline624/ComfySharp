@@ -33,3 +33,7 @@ including a parameter that becomes inactive for the middle update and reactivate
 Inputs use a small analytic LoRA linear layer. Four boundary-gradient cases cover
 residuals zero, plus/minus one and both tails. This is a primitive comparison, not
 a training-node or pretrained-model reference. Bounds are fixed before comparison.
+
+## Denoised-latent objective corpus
+
+`denoising.py --source CHECKOUT --output NEW.json` executes the frozen `TrainSampler.fwd_bwd`, discrete/EPS/V boundaries and full reduced U-Net with LoRA. A plain text-conditioning wrapper replaces external guider dispatch. Six cases compare predictions/losses and noisy-input, sigma and factor gradients for zero, shared and per-image sigmas. CPU Float32 autocast disables itself (its warning is suppressed); no mixed-precision path is emulated. Inputs are fixed diffusion latents/noise/sigmas, not a dataset sampler. The tolerance is fixed before evaluation and prior fixtures remain unchanged.

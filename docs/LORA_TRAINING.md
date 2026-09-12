@@ -29,8 +29,10 @@ fixed before comparison. Tests also cover cancelled graphs, ownership, frozen ba
 weights and export/reload through the normal LoRA file loader.
 
 The opt-in .NET diagnostic `sd-lora-train` loads a supplied real SD1.5 checkpoint,
-runs two explicit SGD steps on fixed miniature raw inputs/targets, exports a small
-adapter and checks reloaded prediction equality. It needs existing output directories:
+runs two optimizer steps on miniature synthetic inputs, exports a small adapter
+and checks reloaded prediction equality. It defaults to SGD/MSE/raw predictions;
+the [denoised-latent objective](LORA_DENOISING.md) is selectable explicitly.
+It needs existing output directories:
 
 ```text
 dotnet run --project tools/ComfySharp.RuntimeProbe -c Release -- sd-lora-train --checkpoint MODEL.safetensors --adapter-output NEW.safetensors --report NEW.json --device cpu

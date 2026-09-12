@@ -7,8 +7,8 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.RuntimeProbe;
 
-/// <summary>Explicit miniature raw-prediction training/serialization probe with real SD1.5 weights.
-/// This is not the TrainLoraNode dataset, noise schedule or a style-quality test.</summary>
+/// <summary>Explicit miniature raw/denoised-latent training and serialization probe with real SD1.5 weights.
+/// This is not the TrainLoraNode dataset selection, RNG schedule or a style-quality test.</summary>
 internal static class SdLoraTrainingDiagnostic
 {
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken)
@@ -20,8 +20,8 @@ internal static class SdLoraTrainingDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device" or "--optimizer" or "--loss" or "--accumulation-steps"))
-                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0 [--optimizer Adam|AdamW|SGD|RMSprop --loss MSE|L1|Huber|SmoothL1 --accumulation-steps N]");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device" or "--optimizer" or "--loss" or "--accumulation-steps" or "--objective"))
+                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0 [--optimizer Adam|AdamW|SGD|RMSprop --loss MSE|L1|Huber|SmoothL1 --accumulation-steps N --objective raw|denoised-latent]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -34,6 +34,8 @@ internal static class SdLoraTrainingDiagnostic
             string requested = Required("--device");
             if (requested is not ("cpu" or "cuda:0")) throw new ArgumentException("Select cpu or cuda:0.");
             string optimizerName = options.GetValueOrDefault("--optimizer", "SGD"), lossName = options.GetValueOrDefault("--loss", "MSE");
+            string objectiveName = options.GetValueOrDefault("--objective", "raw");
+            if (objectiveName is not ("raw" or "denoised-latent")) throw new ArgumentException("Unknown training objective.");
             if (optimizerName is not ("Adam" or "AdamW" or "SGD" or "RMSprop") || lossName is not ("MSE" or "L1" or "Huber" or "SmoothL1"))
                 throw new ArgumentException("Unknown optimizer or training loss.");
             if (!int.TryParse(options.GetValueOrDefault("--accumulation-steps", "1"), out int accumulationSteps) || accumulationSteps < 1 || accumulationSteps > 1024)
@@ -54,8 +56,11 @@ internal static class SdLoraTrainingDiagnostic
                 using var noise = NativeMath.CpuNoise(shape, seed, cancellationToken);
                 return noise.to(device) * scale;
             }
-            var latent = Noise([1, 4, 8, 8], 111); var context = Noise([1, 3, 768], 112); var target = Noise([1, 4, 8, 8], 110);
+            var latent = Noise([1, 4, 8, 8], 111, objectiveName == "raw" ? 1f : (float)SdSamplingMath.Sd15LatentScale);
+            var context = Noise([1, 3, 768], 112); var target = Noise([1, 4, 8, 8], 110);
             var timesteps = tensor(new[] { 17.25f }, device: device);
+            float[] sigmaRecipe = [.1f, .65f, 3f, 1.25f];
+            using var denoiser = new SdDenoiser(model, SdPredictionKind.Epsilon);
             var patches = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
             try
             {
@@ -73,9 +78,12 @@ internal static class SdLoraTrainingDiagnostic
                     for (int micro = 0; micro < accumulationSteps; micro++)
                     {
                         using var microScope = NewDisposeScope();
-                        progress.WriteLine($"SD LoRA {optimizerName}/{lossName}: step {step + 1}/2, microbatch {micro + 1}/{accumulationSteps} on {requested}");
-                        using var prediction = model.ForwardForTraining(latent, timesteps, context, patches, cancellationToken: cancellationToken);
-                        using var loss = TrainingLoss.Calculate(lossName, prediction, target);
+                        progress.WriteLine($"SD LoRA {objectiveName}/{optimizerName}/{lossName}: step {step + 1}/2, microbatch {micro + 1}/{accumulationSteps} on {requested}");
+                        using var prediction = objectiveName == "raw" ? model.ForwardForTraining(latent, timesteps, context, patches, cancellationToken: cancellationToken) : null;
+                        using var sigma = tensor(new[] { sigmaRecipe[(step * accumulationSteps + micro) % sigmaRecipe.Length] }, device: device);
+                        using var noise = Noise([1, 4, 8, 8], 110 + (ulong)(step * accumulationSteps + micro) * 1000);
+                        using var loss = objectiveName == "raw" ? TrainingLoss.Calculate(lossName, prediction!, target)
+                            : SdLoraTrainingObjective.CalculateLoss(denoiser, latent, noise, sigma, context, patches, lossName, cancellationToken: cancellationToken);
                         optimizer.Accumulate(loss, cancellationToken); microbatchLosses.Add(loss.item<float>());
                     }
                     var norms = new Dictionary<string, object>(StringComparer.Ordinal);
@@ -113,11 +121,13 @@ internal static class SdLoraTrainingDiagnostic
                         checkpoint = Path.GetFileName(checkpointPath), modelSha256 = modelHash, checkpointBytes = file.FileSizeBytes,
                         backend = requested, dtype = "Float32", tf32Allowed = false, learningRate = .0005, rank = 2, alpha = 2.5, steps,
                         optimizer = optimizerName, lossFunction = lossName, accumulationSteps, optimizerSteps = optimizer.CompletedSteps,
+                        objective = objectiveName,
                         inputRecipe = new { latentShape = new[] { 1, 4, 8, 8 }, contextShape = new[] { 1, 3, 768 }, latentSeed = 111, contextSeed = 112, targetSeed = 110, timestep = 17.25 },
+                        denoisingRecipe = objectiveName == "denoised-latent" ? new { latentScale = SdSamplingMath.Sd15LatentScale, noiseSeed = 110, noiseSeedStride = 1000, repeatedSigmas = sigmaRecipe, predictionKind = "epsilon" } : null,
                         adapter = Path.GetFileName(destination), adapterBytes = adapterFile.FileSizeBytes, adapterSha256 = adapterFile.ComputeSha256(cancellationToken),
                         baseUnchanged = true, initialParameterHashes = initialHashes, updatedParameterHashes = parameterHashes,
                         reloadedPredictionIdentical = true, predictionSha256 = Hash(actual), elapsedSeconds = watch.Elapsed.TotalSeconds,
-                        scope = "Pretrained SD1.5 raw U-Net with synthetic miniature inputs/targets, accumulated gradients and two optimizer updates. No dataset training, denoising schedule, semantic/style quality or complete TrainLoraNode qualification."
+                        scope = "Pretrained SD1.5 with synthetic miniature inputs, accumulated gradients and two optimizer updates. Explicit raw or denoised-latent objective; no dataset selection/RNG-sequence, semantic/style quality or complete TrainLoraNode qualification."
                     }, new JsonSerializerOptions { WriteIndented = true });
                     using var stream = new FileStream(report, FileMode.CreateNew, FileAccess.Write, FileShare.None); using var writer = new StreamWriter(stream); writer.Write(json);
                     output.WriteLine(json); return 0;

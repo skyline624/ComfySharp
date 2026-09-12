@@ -1,0 +1,288 @@
+{
+  "status": "sd-lora-denoised-latent-objective-windows-cpu-source-and-cuda-diagnostic-verified",
+  "familyQualified": false,
+  "trainingNodeQualified": false,
+  "releaseReady": false,
+  "baseCommit": "0aa2a8c95c7abf017dfbfe1676fa96001f261ad8",
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceComparison": {
+    "fixture": "../../tests/ComfySharp.Inference.Tests/Fixtures/lora-denoising.reference.json",
+    "fixtureSha256": "6a014fc429a878fd4d06ef2832fae574810637c1c01ae4096f2bda9303aa4e0a",
+    "sourceHashes": {
+      "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+      "comfy/model_sampling.py": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea"
+    },
+    "sourceDeclarations": [
+      {
+        "source": "comfy/ldm/modules/diffusionmodules/util.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+        "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+        "symbols": [
+          "checkpoint",
+          "timestep_embedding",
+          "avg_pool_nd"
+        ],
+        "astSha256": "46be9aed2a5129acaee45d61938b4cd73fea6512543141e4594db8c9bd8e2f7c"
+      },
+      {
+        "source": "comfy/ldm/modules/attention.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+        "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+        "symbols": [
+          "get_attn_precision",
+          "exists",
+          "default",
+          "_heads_from_dim",
+          "_reshape_qkv_to_heads",
+          "GEGLU",
+          "FeedForward",
+          "AttentionTensorContainer",
+          "wrap_attn",
+          "attention_basic",
+          "CrossAttention",
+          "BasicTransformerBlock",
+          "SpatialTransformer"
+        ],
+        "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+      },
+      {
+        "source": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+        "fileSha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+        "symbols": [
+          "TimestepBlock",
+          "forward_timestep_embed",
+          "TimestepEmbedSequential",
+          "Upsample",
+          "Downsample",
+          "ResBlock",
+          "apply_control",
+          "UNetModel"
+        ],
+        "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+      }
+    ],
+    "helperHashes": {
+      "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+      "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3"
+    },
+    "cases": 6,
+    "topologies": [
+      "reduced plain SD1/epsilon",
+      "reduced plain SD2/velocity"
+    ],
+    "sigmas": [
+      "zero scalar",
+      "shared .65",
+      "per-image .1 and 3"
+    ],
+    "compared": [
+      "noisy and scaled inputs",
+      "denoised prediction",
+      "MSE",
+      "noisy input gradient",
+      "sigma gradient",
+      "up/down LoRA gradients"
+    ],
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "scope": "Actual frozen TrainSampler.fwd_bwd, EPS/V prediction and reduced full U-Net with ordinary LoRA. Plain conditioning wrapper replaces external guider dispatch. Float32 CPU, fixed supplied diffusion latents/noise/sigmas; no dataset sampling, mixed precision, pretrained training or complete node qualification."
+  },
+  "tests": {
+    "passed": 199,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 8,
+    "trxSha256": "d2e38d751101dd41769baef098b79d08860b2aa5561df377c195daf55261ef9a"
+  },
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaProbeRelease": "passed, zero warnings/errors"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "driver": "610.88",
+    "memoryMiB": 24576
+  },
+  "native": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "trainedStyleQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cuda:0",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "learningRate": 0.0005,
+    "rank": 2,
+    "alpha": 2.5,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 0.12327566,
+        "microbatchLosses": [
+          0.010724079,
+          0.23582724
+        ],
+        "gradientNorms": {
+          "input_blocks.0.0.weight": {
+            "upNorm": 0.00520008709281683,
+            "downNorm": 0.0005156336701475084
+          },
+          "out.2.weight": {
+            "upNorm": 0.0031066001392900944,
+            "downNorm": 0.0001673109654802829
+          }
+        }
+      },
+      {
+        "step": 2,
+        "loss": 0.37579772,
+        "microbatchLosses": [
+          0.38146266,
+          0.37013277
+        ],
+        "gradientNorms": {
+          "input_blocks.0.0.weight": {
+            "upNorm": 0.026817303150892258,
+            "downNorm": 0.003930486273020506
+          },
+          "out.2.weight": {
+            "upNorm": 0.008811070583760738,
+            "downNorm": 0.0008103111758828163
+          }
+        }
+      }
+    ],
+    "optimizer": "AdamW",
+    "lossFunction": "MSE",
+    "accumulationSteps": 2,
+    "optimizerSteps": 2,
+    "objective": "denoised-latent",
+    "inputRecipe": {
+      "latentShape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "latentSeed": 111,
+      "contextSeed": 112,
+      "targetSeed": 110,
+      "timestep": 17.25
+    },
+    "denoisingRecipe": {
+      "latentScale": 0.18215,
+      "noiseSeed": 110,
+      "noiseSeedStride": 1000,
+      "repeatedSigmas": [
+        0.1,
+        0.65,
+        3,
+        1.25
+      ],
+      "predictionKind": "epsilon"
+    },
+    "adapter": "sd15-denoised-latent-diagnostic.safetensors",
+    "adapterBytes": 26544,
+    "adapterSha256": "459a2b2efbb42d780b0bfa0a169fdd3837b58eee34c04fd0f5ec2fc895e6770e",
+    "baseUnchanged": true,
+    "initialParameterHashes": {
+      "input_blocks.0.0.weight/up": "bd8b3ed8dcae91114a1b48bc8647a26ca92ac135c7379ea628e3695943b41c54",
+      "input_blocks.0.0.weight/down": "6bb37bcefc0bd4165dba70315436a3b5556ec3d2f8bf734666b3f419113f2ffa",
+      "out.2.weight/up": "f18f859958ede7f2a19b7ee0366e38656eefb4492ec7cfcefcfdab914c81e3d9",
+      "out.2.weight/down": "639d943cf1adf60d5ee868bc3a5b5b8cb030cb01d9f2d03d6b111b039fed1082"
+    },
+    "updatedParameterHashes": {
+      "input_blocks.0.0.weight/up": "d4e19725b04c42faf59d3f67e92891d1fb80b245f793b874f541e292efea07b3",
+      "input_blocks.0.0.weight/down": "aa3cacc4298c8ed06e154fd006c58ce3972d2e66b497caa4caea84574e86ff53",
+      "out.2.weight/up": "1a120ac290995a50a408a5bea20b493d96744dab0f898ec25e3cb6f42a27e938",
+      "out.2.weight/down": "c19af249b073c257ca259660e2af32f0e115ff64e1338e24654eb28f4c605bbc"
+    },
+    "reloadedPredictionIdentical": true,
+    "predictionSha256": "f9ff794016c69a2c15f7b983954c9a06da0d886a1e4cdf7b8b614352b2d34e53",
+    "elapsedSeconds": 10.5748803,
+    "scope": "Pretrained SD1.5 with synthetic miniature inputs, accumulated gradients and two optimizer updates. Explicit raw or denoised-latent objective; no dataset selection/RNG-sequence, semantic/style quality or complete TrainLoraNode qualification."
+  },
+  "nativeReportSha256": "2d29d1153c929deb6aeb0866f9be3002e6eb5a19101cfd5ef2428c26087b6663",
+  "exportInteroperability": {
+    "status": "ok",
+    "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+    },
+    "adapterSha256": "459a2b2efbb42d780b0bfa0a169fdd3837b58eee34c04fd0f5ec2fc895e6770e",
+    "factorHashesMatch": true,
+    "sourceAcceptsBothTargets": true,
+    "sourceApplications": {
+      "input_blocks.0.0.weight": {
+        "shape": [
+          320,
+          4,
+          3,
+          3
+        ],
+        "deltaSha256": "742a7a50a79ae9c99f1241bdd531b02ec97e069bee68678f48f7f791385a5c64"
+      },
+      "out.2.weight": {
+        "shape": [
+          4,
+          320,
+          3,
+          3
+        ],
+        "deltaSha256": "d7562ef0f1ed3b04e3b3f26c838b947789b28e106acddf3c394b5ce9fa652bdb"
+      }
+    },
+    "scope": "Independent restricted byte decoding plus actual frozen LoRA-only source loading/application on zero base weights. No safetensors-package, pretrained numerical or training-node qualification."
+  },
+  "modelStorage": "Existing shared SD1.5 checkpoint read directly and hashed by the diagnostic. No copy or download. Only a new 26544-byte adapter written to shared LoRA qualification storage.",
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "d62446a89247b1697be29def8b66ee0f47e9eb8d405ce8d18b8a5e7a68b46866",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "THIRD_PARTY_NOTICES.md": "ae493b84de7b72eeab82239c25547fdb01ac759a33fd32aff3820f4709374c36",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-training-source/README.md": "5677b5bc35b5dad7c6e5dd5efb5ef120f41f326a6746d4fc205d3d096cb3f39f",
+    "labs/lora-training-source/denoising.py": "a5cef75dc19cb37f0af34748ab33cdb5e5f1094e61f5b45d015abb413c365c15",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/SdDenoiser.cs": "9564a7e5f3636595337ed13f13f20d6b1d58fd0eb58ee543621a983c44a6351a",
+    "src/ComfySharp.Inference/SdLoraTrainingObjective.cs": "1264fd0fe5ae99bb0962207af06fcbc41a6f587018f1848e9b10002641e3d308",
+    "src/ComfySharp.Inference/SdSamplingMath.cs": "d48dc822b629f4e63bc36290990c849434438984375255ff247d9f40d2ad18f8",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "d67aeb06785498873987abdfe4083bf2445a211ee9d9ef4451c929ec64cca0b0",
+    "tests/ComfySharp.Inference.Tests/Fixtures/lora-denoising.reference.json": "6a014fc429a878fd4d06ef2832fae574810637c1c01ae4096f2bda9303aa4e0a",
+    "tests/ComfySharp.Inference.Tests/SdLoraObjectiveTests.cs": "8f0452f8248f61892241892916730f03bfb764856f0c7c23a88131d31c1781d8",
+    "tools/ComfySharp.RuntimeProbe/SdLoraTrainingDiagnostic.cs": "8f2bb01b1421d8c48619f113e8325cda1f6b2e3a0811809dbc84c4335955c328",
+    "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b"
+  },
+  "previousCI": {
+    "run": 34705982000,
+    "commit": "0aa2a8c95c7abf017dfbfe1676fa96001f261ad8",
+    "status": "completed",
+    "windows": "success",
+    "linux": "failure",
+    "macOS": "failure",
+    "trainingStep": "passed on all three OS"
+  },
+  "limitations": [
+    "Plain Float32 SD epsilon/velocity objective only; full training nodes and conditioning dispatch remain pending.",
+    "Source corpus uses reduced full U-Nets and fixed synthetic diffusion latents/noise/sigmas.",
+    "Pretrained CUDA diagnostic uses supplied sigmas and synthetic latents/context; it is not a dataset or style-quality evaluation.",
+    "The four CUDA microbatches have different sigmas/noise, so their losses are not a controlled learning-curve comparison.",
+    "No source numerical comparison of pretrained CUDA gradients, dataset RNG sequence, mixed precision, checkpointing/offload, long VRAM-pressure campaign, Linux/CUDA or MPS qualification.",
+    "The independent export decoder supports only F32/F64 payloads and is not the Python safetensors package."
+  ]
+}
