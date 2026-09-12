@@ -72,6 +72,7 @@ public static class BuiltInNodes
         Add("ComfyNotNode", "Not", "utilities/logic", [new("value", "*")], [new("BOOLEAN")], i => JsonValue.Create(!PythonValues.Truth(i["value"])));
         registry.Register(new SwitchNode());
         registry.Register(new CreateListNode());
+        registry.Register(new StringFormatNode());
         return registry;
     }
     private static InputSchema Text(string name) => new(name, "STRING", Options: new() { ["multiline"] = true });

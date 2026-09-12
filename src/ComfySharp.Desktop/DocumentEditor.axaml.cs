@@ -148,6 +148,11 @@ internal static class NodeTemplates
                 for (int index = 0; index < 10; index++) In($"inputs.input{index}", "*");
                 Out("list", "*"); output[0]!["is_list"] = true;
                 break;
+            case "StringFormat":
+                // Fixed named ports; imported sparse documents retain their original slots.
+                for (char name = 'a'; name <= 'z'; name++) In($"values.{name}", "*");
+                In("f_string", "STRING"); widgets = new("{a}"); Out("STRING", "STRING");
+                break;
             case "KarrasScheduler": widgets = new(20, 14.614642, .0291675, 7.0); Out("SIGMAS", "SIGMAS"); break;
             case "ExponentialScheduler": widgets = new(20, 14.614642, .0291675); Out("SIGMAS", "SIGMAS"); break;
             case "PolyexponentialScheduler": widgets = new(20, 14.614642, .0291675, 1.0); Out("SIGMAS", "SIGMAS"); break;
@@ -167,6 +172,6 @@ internal static class NodeTemplates
             case "VAEDecode": In("samples", "LATENT"); In("vae", "VAE"); Out("IMAGE", "IMAGE"); break;
             case "SaveImage": widgets = new("ComfySharp"); In("images", "IMAGE"); break;
         }
-        return new JsonObject { ["size"] = new JsonArray(230, type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
+        return new JsonObject { ["size"] = new JsonArray(230, type == "StringFormat" ? 720 : type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
     }
 }

@@ -24227,8 +24227,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_string.py#L18",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -24240,6 +24240,7 @@
       },
       "evidence": [],
       "scenario": "contract:StringFormat",
+      "limits": "Explicit python-format-text-v1 partial profile: named fields, escaped braces, Unicode text alignment/width/precision and !s; empty-format null/bool/Int64. Numeric/locale formatting, !r/!a, item/attribute access, nested fields, floating-point and formatted containers/native values are refused. Fixed a..z UI ports, eager mapping and existing execution_error diagnostics. Local Windows validation: 36 profile tests, 44 source boundary cases (24 exact-output, 12 source-error boundaries, 8 local profile refusals), 12 Host tests and compiler/editor coverage; actual Desktop/Host preview smoke passed. No full Python str.format, complete-workflow or platform qualification is claimed. See docs/qualification/string-format-integration.md and docs/STRING_FORMAT.md.",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "StringFormat",
       "registrationEvidence": {

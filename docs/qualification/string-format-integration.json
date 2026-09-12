@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "status": "validated-local-full",
+  "scope": "Local Windows partial python-format-text-v1 implementation; not full Python str.format, source-wide HTTP or cross-platform qualification.",
+  "source": {
+    "collectorCommit": "52fe346c74c2db14b6c73aec804c215674550f4d",
+    "protocolSha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd",
+    "reference": {
+      "bytes": 408527,
+      "sha256": "a6c1aa98c333851195d0bff97f3e1305835634a1cb922dcc102dabe5e07871e0"
+    },
+    "protocol": {
+      "bytes": 47482,
+      "sha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd"
+    },
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "python": "3.12.10",
+    "cases": 44,
+    "partitions": {
+      "exactOutputCases": 24,
+      "sourceErrorBoundaries": 12,
+      "localProfileRefusals": 8
+    },
+    "exactOutputStrings": 26,
+    "sourceBodyArgumentRecords": 46,
+    "sourceObserverRepeatHashes": 132,
+    "sourceProof": "string-format-source-52fe346.json"
+  },
+  "targeted": [
+    {
+      "logicalName": "workflow-targeted.trx",
+      "bytes": 97400,
+      "sha256": "fd72721190d7b20c8180059b75ce786a8655dc77d16b80607405ab2bceef2b9f",
+      "total": 63,
+      "passed": 63,
+      "failed": 0,
+      "ignored": 0,
+      "classes": {
+        "ComfySharp.Workflow.Tests.CreateListWorkflowTests": 14,
+        "ComfySharp.Workflow.Tests.StringFormatWorkflowTests": 14,
+        "ComfySharp.Workflow.Tests.PromptLiteralTests": 18,
+        "ComfySharp.Workflow.Tests.WorkflowTests": 17
+      },
+      "failures": []
+    },
+    {
+      "logicalName": "desktop-targeted.trx",
+      "bytes": 57506,
+      "sha256": "6c63a476dc02529a40340935d96bb2ef284b15827ea7152fd7667c54c65b1029",
+      "total": 38,
+      "passed": 38,
+      "failed": 0,
+      "ignored": 0,
+      "classes": {
+        "ComfySharp.Desktop.Tests.StringFormatEditorTests": 3,
+        "ComfySharp.Desktop.Tests.PreviewEditorTests": 18,
+        "ComfySharp.Desktop.Tests.HostDiscoveryTests": 8,
+        "ComfySharp.Desktop.Tests.DesktopTests": 6,
+        "ComfySharp.Desktop.Tests.CreateListEditorTests": 3
+      },
+      "failures": []
+    },
+    {
+      "logicalName": "host-targeted.trx",
+      "bytes": 465093,
+      "sha256": "f6fd86ddb8254d8409aca76a5b6f55d18d3bef4bfd8d97296564963a72597516",
+      "total": 201,
+      "passed": 201,
+      "failed": 0,
+      "ignored": 0,
+      "classes": {
+        "ComfySharp.Host.Tests.CatalogTests": 19,
+        "ComfySharp.Host.Tests.HostTests": 46,
+        "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests": 33,
+        "ComfySharp.Host.Tests.PromptValuesReferenceTests": 28,
+        "ComfySharp.Host.Tests.NodeCatalogueEvidenceTests": 19,
+        "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests": 7,
+        "ComfySharp.Host.Tests.HostUiTests": 19,
+        "ComfySharp.Host.Tests.StringFormatHostTests": 12,
+        "ComfySharp.Host.Tests.PromptLiteralTests": 8,
+        "ComfySharp.Host.Tests.CreateListHostTests": 4,
+        "ComfySharp.Host.Tests.StorageTests": 6
+      },
+      "failures": []
+    },
+    {
+      "logicalName": "core-initial-counter-red.trx",
+      "bytes": 506409,
+      "sha256": "71de2662b283e019f966b239b69cb39f43d6ff7cfa6336808c317b664eebc07e",
+      "total": 333,
+      "passed": 332,
+      "failed": 1,
+      "ignored": 0,
+      "classes": {
+        "ComfySharp.Core.Tests.StringFormatTests": 36,
+        "ComfySharp.Core.Tests.AutogrowSourceReferenceTests": 18,
+        "ComfySharp.Core.Tests.UiExecutionTests": 20,
+        "ComfySharp.Core.Tests.StringFormatSourceReferenceTests": 44,
+        "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests": 23,
+        "ComfySharp.Core.Tests.CreateListTests": 15,
+        "ComfySharp.Core.Tests.RuntimeValueTests": 20,
+        "ComfySharp.Core.Tests.ExecutionBlockerTests": 25,
+        "ComfySharp.Core.Tests.AutogrowNamesTests": 36,
+        "ComfySharp.Core.Tests.NodeSchemaProjectionTests": 1,
+        "ComfySharp.Core.Tests.EngineTests": 25,
+        "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+        "ComfySharp.Core.Tests.AutogrowNamesSourceReferenceTests": 25,
+        "ComfySharp.Core.Tests.NodeParityTests": 22,
+        "ComfySharp.Core.Tests.AutogrowArgumentOrderTests": 4
+      },
+      "failures": [
+        {
+          "test": "ComfySharp.Core.Tests.NodeParityTests.Catalog_has_upstream_ids_ports_combo_and_lazy_metadata",
+          "message": "Assert.Equal() Failure: Values differ\r\nExpected: 14\r\nActual:   15"
+        }
+      ]
+    }
+  ],
+  "newCasesIncluded": {
+    "sourceReference": 44,
+    "productBehavior": 36,
+    "host": 12,
+    "workflow": 14,
+    "desktop": 3,
+    "total": 109
+  },
+  "smoke": {
+    "result": {
+      "exitCode": 0,
+      "caseSensitiveHistory": true,
+      "nativeWindow": true,
+      "supervisedHost": true,
+      "cpuSigmas": true,
+      "textPreview": true,
+      "stringFormatHostPreview": true,
+      "dataIsolated": true
+    },
+    "artifactPins": {
+      "result.json": {
+        "bytes": 215,
+        "sha256": "7fb48b6413b5a1eb321e8578e0246ff9ea0484269dd207d71008bdce65a8da67"
+      },
+      "stdout.txt": {
+        "bytes": 166,
+        "sha256": "712d07db895b51750a20161e2d0628fa363019c21943f6799583f522a9acdd6d"
+      },
+      "stderr.txt": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "stdoutSuccessMarker": "case-sensitive UI history, StringFormat Host preview and native preview",
+    "formatResultAssertedBySmoke": "****xy",
+    "scope": "Actual root-run Desktop/supervised Host smoke. Output assertion in pinned MainWindow smoke; no separate C# argument payload artifact."
+  },
+  "fullSolution": {
+    "uniquePassed": 1752,
+    "failed": 0,
+    "ignored": 0,
+    "trx": [
+      {
+        "logicalName": "full-core.trx",
+        "bytes": 504765,
+        "sha256": "55dec1baef92a8bfffe9199106d3d04bda6e17378a1a8f554cbdd52fabbe5307",
+        "total": 333,
+        "passed": 333,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Core.Tests.StringFormatTests": 36,
+          "ComfySharp.Core.Tests.EngineTests": 25,
+          "ComfySharp.Core.Tests.AutogrowNamesSourceReferenceTests": 25,
+          "ComfySharp.Core.Tests.StringFormatSourceReferenceTests": 44,
+          "ComfySharp.Core.Tests.UiExecutionTests": 20,
+          "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests": 23,
+          "ComfySharp.Core.Tests.AutogrowArgumentOrderTests": 4,
+          "ComfySharp.Core.Tests.AutogrowNamesTests": 36,
+          "ComfySharp.Core.Tests.ExecutionBlockerTests": 25,
+          "ComfySharp.Core.Tests.NodeParityTests": 22,
+          "ComfySharp.Core.Tests.CreateListTests": 15,
+          "ComfySharp.Core.Tests.AutogrowSourceReferenceTests": 18,
+          "ComfySharp.Core.Tests.RuntimeValueTests": 20,
+          "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+          "ComfySharp.Core.Tests.NodeSchemaProjectionTests": 1
+        },
+        "failures": []
+      },
+      {
+        "logicalName": "full-desktop.trx",
+        "bytes": 57506,
+        "sha256": "95461a21ad8fcbcf32c400a9e022c1b5b44eb4fb4218cfea9d049e73d80529c6",
+        "total": 38,
+        "passed": 38,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Desktop.Tests.DesktopTests": 6,
+          "ComfySharp.Desktop.Tests.PreviewEditorTests": 18,
+          "ComfySharp.Desktop.Tests.StringFormatEditorTests": 3,
+          "ComfySharp.Desktop.Tests.HostDiscoveryTests": 8,
+          "ComfySharp.Desktop.Tests.CreateListEditorTests": 3
+        },
+        "failures": []
+      },
+      {
+        "logicalName": "full-host.trx",
+        "bytes": 465088,
+        "sha256": "88bf5469ffab542febb40f8602ba6d70e74fa4a2e98676b87f8eb39d816b9730",
+        "total": 201,
+        "passed": 201,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Host.Tests.PromptValuesReferenceTests": 28,
+          "ComfySharp.Host.Tests.HostUiTests": 19,
+          "ComfySharp.Host.Tests.NodeCatalogueEvidenceTests": 19,
+          "ComfySharp.Host.Tests.PromptLiteralTests": 8,
+          "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests": 7,
+          "ComfySharp.Host.Tests.HostTests": 46,
+          "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests": 33,
+          "ComfySharp.Host.Tests.CatalogTests": 19,
+          "ComfySharp.Host.Tests.CreateListHostTests": 4,
+          "ComfySharp.Host.Tests.StringFormatHostTests": 12,
+          "ComfySharp.Host.Tests.StorageTests": 6
+        },
+        "failures": []
+      },
+      {
+        "logicalName": "full-inference.trx",
+        "bytes": 925920,
+        "sha256": "93f6bf77d681bef62e6964d3e803f63d58d20af7602029019f0a613563848c4a",
+        "total": 577,
+        "passed": 577,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Inference.Tests.ClipWeightTests": 22,
+          "ComfySharp.Inference.Tests.SafeTensorDTypeTests": 29,
+          "ComfySharp.Inference.Tests.InferenceTests": 24,
+          "ComfySharp.Inference.Tests.Sd15PipelineCasesTests": 6,
+          "ComfySharp.Inference.Tests.ClassicalVaeGraphTests": 11,
+          "ComfySharp.Inference.Tests.SigmaOperationTests": 21,
+          "ComfySharp.Inference.Tests.ClipDiagnosticTests": 13,
+          "ComfySharp.Inference.Tests.PreviewAnyReferenceTests": 59,
+          "ComfySharp.Inference.Tests.SigmaScheduleReferenceTests": 51,
+          "ComfySharp.Inference.Tests.TensorNodeTests": 24,
+          "ComfySharp.Inference.Tests.SigmaScheduleTests": 37,
+          "ComfySharp.Inference.Tests.SdEulerSamplerTests": 9,
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests": 8,
+          "ComfySharp.Inference.Tests.ClipEncoderTests": 9,
+          "ComfySharp.Inference.Tests.SdSamplingTests": 11,
+          "ComfySharp.Inference.Tests.Sd15CheckpointAssemblyTests": 16,
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests": 8,
+          "ComfySharp.Inference.Tests.SdAlignedDiagnosticInputsTests": 8,
+          "ComfySharp.Inference.Tests.ClassicalVaeReferenceTests": 8,
+          "ComfySharp.Inference.Tests.SdDenoiserTests": 8,
+          "ComfySharp.Inference.Tests.ClipReferenceTests": 47,
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests": 6,
+          "ComfySharp.Inference.Tests.Sd15PipelineDiagnosticTests": 11,
+          "ComfySharp.Inference.Tests.Sd15CheckpointPlanTests": 9,
+          "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests": 4,
+          "ComfySharp.Inference.Tests.Sd15PipelineExecutionTests": 12,
+          "ComfySharp.Inference.Tests.SdSyntheticWeightBuilderTests": 19,
+          "ComfySharp.Inference.Tests.SdDiagnosticTests": 13,
+          "ComfySharp.Inference.Tests.SdModelWeightTests": 27,
+          "ComfySharp.Inference.Tests.ClipConditioningTests": 10,
+          "ComfySharp.Inference.Tests.SdUnetTests": 10,
+          "ComfySharp.Inference.Tests.NativeExecutionTests": 5,
+          "ComfySharp.Inference.Tests.SdRuntimeIdentityTests": 3,
+          "ComfySharp.Inference.Tests.SdSamplingReferenceTests": 3,
+          "ComfySharp.Inference.Tests.NativeRuntimeBootstrapTests": 12,
+          "ComfySharp.Inference.Tests.ClipStockReferenceTests": 3,
+          "ComfySharp.Inference.Tests.SdSourceProvenanceTests": 1
+        },
+        "failures": []
+      },
+      {
+        "logicalName": "full-tokenization.trx",
+        "bytes": 814012,
+        "sha256": "cf6a73a000f17ba450dcc30cb9f548d36a9142d70680fcdd44c68bf6baaf43f9",
+        "total": 540,
+        "passed": 540,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Tokenization.Tests.ClipDecodeReferenceTests": 270,
+          "ComfySharp.Tokenization.Tests.ClipTextReferenceTests": 194,
+          "ComfySharp.Tokenization.Tests.TokenizeCommandTests": 14,
+          "ComfySharp.Tokenization.Tests.ClipPackingTests": 19,
+          "ComfySharp.Tokenization.Tests.PromptWeightsTests": 19,
+          "ComfySharp.Tokenization.Tests.ClipTokenizerTests": 24
+        },
+        "failures": []
+      },
+      {
+        "logicalName": "full-workflow.trx",
+        "bytes": 97400,
+        "sha256": "00c881a4bfbdd70bdb42482e10d4dfb2dd7084983a14893c776e4f6c338369b6",
+        "total": 63,
+        "passed": 63,
+        "failed": 0,
+        "ignored": 0,
+        "classes": {
+          "ComfySharp.Workflow.Tests.StringFormatWorkflowTests": 14,
+          "ComfySharp.Workflow.Tests.CreateListWorkflowTests": 14,
+          "ComfySharp.Workflow.Tests.PromptLiteralTests": 18,
+          "ComfySharp.Workflow.Tests.WorkflowTests": 17
+        },
+        "failures": []
+      }
+    ],
+    "targetedRunsRepeatedSubset": true
+  },
+  "build": {
+    "exitCodeReportedByRoot": 0,
+    "warningsReportedByRoot": 0,
+    "errorsReportedByRoot": 0
+  },
+  "fileIntegrity": {
+    "captureUtc": "2026-09-12T02:14:22.404322+00:00",
+    "scope": "Snapshot during root full validation, not a pre-build snapshot or loaded binary attestation. Documents and manifest may receive explicit post-validation annotations.",
+    "duringValidation": {
+      "src/ComfySharp.Nodes/PythonTextFormat.cs": {
+        "bytes": 12445,
+        "sha256": "0e7d612483cdf0a5cc20a1e2d82b2713c7a6f1e4c8aaa816a2672f9b4712664c"
+      },
+      "src/ComfySharp.Nodes/StringFormatNode.cs": {
+        "bytes": 2181,
+        "sha256": "c6b6c10b75de10cad106f41bb1da1f439667eebf496de29921f2803102060c0d"
+      },
+      "src/ComfySharp.Nodes/AssemblyInfo.cs": {
+        "bytes": 96,
+        "sha256": "a14e2c8ebf88e747112cf1dee23210bd9be2e3714a3af867450b0b6e166c6b5c"
+      },
+      "src/ComfySharp.Nodes/BuiltInNodes.cs": {
+        "bytes": 7821,
+        "sha256": "1dd571ef4db7e4c61bb2af139ed8e6610d85cce29543373353f59fa607475853"
+      },
+      "tests/ComfySharp.Core.Tests/StringFormatTests.cs": {
+        "bytes": 12742,
+        "sha256": "428c0e0096492b6d914e55dcaf20e91fe315d953a7afe776f76d8c3b92ba7f58"
+      },
+      "tests/ComfySharp.Core.Tests/StringFormatSourceReferenceTests.cs": {
+        "bytes": 18588,
+        "sha256": "8b3f55bc73829e01e0f01ce6bf97d711f445c99ad9792e1547d686812567f79b"
+      },
+      "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+        "bytes": 1514,
+        "sha256": "6a206f4002880afb1a1ebb53e2d709ce9a36ff7d1f9e08356212063fb8eb5867"
+      },
+      "tests/ComfySharp.Core.Tests/Fixtures/string-format.reference.json": {
+        "bytes": 408527,
+        "sha256": "a6c1aa98c333851195d0bff97f3e1305835634a1cb922dcc102dabe5e07871e0"
+      },
+      "tests/ComfySharp.Core.Tests/Fixtures/string-format.protocol.json": {
+        "bytes": 47482,
+        "sha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd"
+      },
+      "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+        "bytes": 10659,
+        "sha256": "738a7af714aa3aa933cba4dc9d6f04c4087c127cb50ca898f869c553db0a384a"
+      },
+      "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs": {
+        "bytes": 12251,
+        "sha256": "e94a0e8935bc4990652b27f63384c751e66a32ea01e7d11739783490e483ec21"
+      },
+      "docs/STRING_FORMAT.md": {
+        "bytes": 6092,
+        "sha256": "bd2a58e212eb28d4e20f3787395a8a6ea9f04edaf28cff15b794d26c25b27c23"
+      },
+      "docs/capabilities/manifest.json": {
+        "bytes": 1301201,
+        "sha256": "32e04e24a7acccf9e2f557a968062c94a684b34b0316634078f32bcd51f6ffc0"
+      },
+      "src/ComfySharp.Workflow/PromptCompiler.cs": {
+        "bytes": 12386,
+        "sha256": "142270f8f97015b7c9f25f5e3e6780b9f10e7dc8e1170131bac54ac18f255916"
+      },
+      "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+        "bytes": 12637,
+        "sha256": "e33e6632b7f311d09c650d56463af00eebd314b37cf35fb5b4fba95705f197ca"
+      },
+      "tests/ComfySharp.Workflow.Tests/StringFormatWorkflowTests.cs": {
+        "bytes": 6588,
+        "sha256": "31f9951ce2d1c250caa2ea185e9383de85eabd105cd69725160a405916c74a56"
+      },
+      "tests/ComfySharp.Desktop.Tests/StringFormatEditorTests.cs": {
+        "bytes": 6373,
+        "sha256": "665e52e19fb8f0e70b9ad595deeae7ec4a1e29b95d84ba8e68b61d03b0b21bc2"
+      },
+      "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+        "bytes": 14775,
+        "sha256": "fdf0982c6cffc2a52e5c818774008d5ace37bdd07988ebb17e66e81cc3509e81"
+      },
+      "tests/ComfySharp.Core.Tests/NodeParityTests.cs": {
+        "bytes": 3829,
+        "sha256": "1c232e864a595ad513be1ee612a103c983e6cef5246cbf9492eb7ce5981a6b04"
+      }
+    },
+    "after": {
+      "src/ComfySharp.Nodes/PythonTextFormat.cs": {
+        "bytes": 12445,
+        "sha256": "0e7d612483cdf0a5cc20a1e2d82b2713c7a6f1e4c8aaa816a2672f9b4712664c"
+      },
+      "src/ComfySharp.Nodes/StringFormatNode.cs": {
+        "bytes": 2181,
+        "sha256": "c6b6c10b75de10cad106f41bb1da1f439667eebf496de29921f2803102060c0d"
+      },
+      "src/ComfySharp.Nodes/AssemblyInfo.cs": {
+        "bytes": 96,
+        "sha256": "a14e2c8ebf88e747112cf1dee23210bd9be2e3714a3af867450b0b6e166c6b5c"
+      },
+      "src/ComfySharp.Nodes/BuiltInNodes.cs": {
+        "bytes": 7821,
+        "sha256": "1dd571ef4db7e4c61bb2af139ed8e6610d85cce29543373353f59fa607475853"
+      },
+      "tests/ComfySharp.Core.Tests/StringFormatTests.cs": {
+        "bytes": 12742,
+        "sha256": "428c0e0096492b6d914e55dcaf20e91fe315d953a7afe776f76d8c3b92ba7f58"
+      },
+      "tests/ComfySharp.Core.Tests/StringFormatSourceReferenceTests.cs": {
+        "bytes": 18588,
+        "sha256": "8b3f55bc73829e01e0f01ce6bf97d711f445c99ad9792e1547d686812567f79b"
+      },
+      "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+        "bytes": 1514,
+        "sha256": "6a206f4002880afb1a1ebb53e2d709ce9a36ff7d1f9e08356212063fb8eb5867"
+      },
+      "tests/ComfySharp.Core.Tests/Fixtures/string-format.reference.json": {
+        "bytes": 408527,
+        "sha256": "a6c1aa98c333851195d0bff97f3e1305835634a1cb922dcc102dabe5e07871e0"
+      },
+      "tests/ComfySharp.Core.Tests/Fixtures/string-format.protocol.json": {
+        "bytes": 47482,
+        "sha256": "2eae9a7d3719a225110e032e4b12233300c7ae168a6659d140d87778a34aaefd"
+      },
+      "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+        "bytes": 10659,
+        "sha256": "738a7af714aa3aa933cba4dc9d6f04c4087c127cb50ca898f869c553db0a384a"
+      },
+      "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs": {
+        "bytes": 12251,
+        "sha256": "e94a0e8935bc4990652b27f63384c751e66a32ea01e7d11739783490e483ec21"
+      },
+      "docs/STRING_FORMAT.md": {
+        "bytes": 6852,
+        "sha256": "f64e1a87d1319dc28cca2d0504bddfb6d92afc4565cb48d7c41bdebf37e6d84a"
+      },
+      "docs/capabilities/manifest.json": {
+        "bytes": 1301462,
+        "sha256": "630637b0c6638bc91ecc1443f92b32ab44f2be7c5ac4aef0fa9da6947fbf6465"
+      },
+      "src/ComfySharp.Workflow/PromptCompiler.cs": {
+        "bytes": 12386,
+        "sha256": "142270f8f97015b7c9f25f5e3e6780b9f10e7dc8e1170131bac54ac18f255916"
+      },
+      "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+        "bytes": 12637,
+        "sha256": "e33e6632b7f311d09c650d56463af00eebd314b37cf35fb5b4fba95705f197ca"
+      },
+      "tests/ComfySharp.Workflow.Tests/StringFormatWorkflowTests.cs": {
+        "bytes": 6588,
+        "sha256": "31f9951ce2d1c250caa2ea185e9383de85eabd105cd69725160a405916c74a56"
+      },
+      "tests/ComfySharp.Desktop.Tests/StringFormatEditorTests.cs": {
+        "bytes": 6373,
+        "sha256": "665e52e19fb8f0e70b9ad595deeae7ec4a1e29b95d84ba8e68b61d03b0b21bc2"
+      },
+      "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+        "bytes": 14775,
+        "sha256": "fdf0982c6cffc2a52e5c818774008d5ace37bdd07988ebb17e66e81cc3509e81"
+      },
+      "tests/ComfySharp.Core.Tests/NodeParityTests.cs": {
+        "bytes": 3829,
+        "sha256": "1c232e864a595ad513be1ee612a103c983e6cef5246cbf9492eb7ce5981a6b04"
+      }
+    },
+    "codeTestsAndResourcesUnchanged": true,
+    "postValidationAnnotationFiles": [
+      "docs/STRING_FORMAT.md",
+      "docs/capabilities/manifest.json"
+    ]
+  },
+  "manifestAnnotation": {
+    "implementation": "partial",
+    "unitTests": true,
+    "realWorkflow": false,
+    "platforms": {
+      "win-x64-cpu": false,
+      "win-x64-cuda": false,
+      "linux-x64-cpu": false,
+      "linux-x64-cuda": false,
+      "osx-arm64-cpu": false,
+      "osx-arm64-mps": false
+    },
+    "note": "Manifest/document annotations after validation are not binary inputs or self-hashed qualification proof."
+  },
+  "limitations": [
+    "Only source strings from the 24 supported cases are output goldens. Twelve Python exceptions and local categories are distinct assertions; eight successful Python forms require a local profile refusal.",
+    "One managed wrapper capture per call delegates to the actual registered node. Its snapshots are compared to two source observations; no second product hook or retained C# trace artifact is claimed.",
+    "Source acquisition/cache/hidden bookkeeping is not a complete HTTP parity test. Host tests separately exercise actual compiler and HTTP routes.",
+    "Targeted runs and smoke are not added to the full unique test total. Initial Core failure was the old 14-versus-15 built-in registry count, not a failed format case.",
+    "Code is identified by exact local file hashes, not attributed to an earlier commit. No loaded-binary attestation or pre-build snapshot is claimed.",
+    "No source/.NET/native execution by this auditor."
+  ]
+}

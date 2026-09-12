@@ -106,7 +106,24 @@ public sealed partial class MainWindow : Window
         if (caseOutputs.Count != 2 || caseOutputs["preview"]?["text"]?[0]?.GetValue<string>() != "lowercase" ||
             caseOutputs["PREVIEW"]?["text"]?[0]?.GetValue<string>() != "uppercase")
             throw new InvalidOperationException("Case-sensitive history smoke failed: " + caseEntry.ToJsonString());
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview.");
+        if (availableNodes?.Contains("StringFormat") != true)
+            throw new InvalidOperationException("StringFormat smoke requires the real registered Host node.");
+        // Exercise the real formatter through the supervised Host; this direct prompt
+        // does not claim that the document editor exposes dynamic formatter ports.
+        var formatPrompt = JsonNode.Parse("""
+            {"format-input":{"class_type":"PrimitiveString","inputs":{"value":"xy"}},
+             "format":{"class_type":"StringFormat","inputs":{"values.a":["format-input",0],"f_string":"{a:*>6}"}},
+             "format-preview":{"class_type":"PreviewAny","inputs":{"source":["format",0]}}}
+            """)!.AsObject();
+        var formatSession = hostSession.Id;
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(formatPrompt, clientId, ["format-preview"]), formatSession);
+        var formatEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), formatSession, 200);
+        hostSession.Require(formatSession);
+        var formatOutputs = formatEntry["outputs"]!.AsObject();
+        if (formatOutputs.Count != 1 || formatOutputs["format-preview"]?["text"] is not JsonArray formattedText ||
+            formattedText.Count != 1 || formattedText[0]?.GetValue<string>() != "****xy")
+            throw new InvalidOperationException("StringFormat Host preview smoke failed: " + formatEntry.ToJsonString());
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
