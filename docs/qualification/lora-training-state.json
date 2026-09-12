@@ -17,6 +17,33 @@
   "realWorkflow": false,
   "trainingNodeQualified": false,
   "familyQualified": false,
-  "ci": "Pending implementation publication",
+  "ci": {
+    "commit": "936e1cafd76c0e12b0a7cf7d330d79ca3beafbbc",
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34721356391",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "platform": "win-x64-cpu", "jobId": 103627713363, "conclusion": "success",
+        "exportAndStateTests": { "passed": 27, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "ordinaryInference": { "passed": 897, "failed": 0, "skipped": 0 }
+      },
+      {
+        "platform": "linux-x64-cpu", "jobId": 103627713277, "conclusion": "failure",
+        "exportAndStateTests": { "passed": 27, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "failure": "SdAdapterInitializationTests cases 0/1, 6 passed and 2 failed; case 1 element 5: -0.0500008 vs -0.05004057; case 0 element 59: -0.4514614 vs -0.45150545. Later inference suites were not executed."
+      },
+      {
+        "platform": "osx-arm64-cpu", "jobId": 103627713372, "conclusion": "failure",
+        "exportAndStateTests": { "passed": 27, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "ordinaryInference": { "passed": 897, "failed": 0, "skipped": 0 },
+        "failure": "ClipStockReferenceTests stock/l and stock/g numerical comparisons, 1 passed and 2 failed."
+      }
+    ],
+    "qualificationScope": "CPU output-state and export contracts only; no complete training node, pretrained workflow, CUDA or MPS qualification. Existing tolerances unchanged."
+  },
   "modelsCopiedOrDownloaded": false
 }
