@@ -86,10 +86,13 @@ public sealed class AutogrowNamesTemplate : AutogrowTemplate
     }
 }
 public sealed record OutputSchema(string Type, string? Name = null, bool IsList = false, string? MatchTemplate = null);
+/// <summary>Legacy execution metadata, supplied by the engine rather than a prompt connection or widget.</summary>
+public sealed record HiddenInputSchema(string Name, string Type);
 public sealed record NodeSchema(string ClassType, string DisplayName, string Category,
     IReadOnlyList<InputSchema> Inputs, IReadOnlyList<OutputSchema> Outputs, bool OutputNode = false, bool InputIsList = false, bool Experimental = false,
     string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null,
-    bool V3ObjectInfo = false, string? EssentialsCategory = null, bool Deprecated = false);
+    bool V3ObjectInfo = false, string? EssentialsCategory = null, bool Deprecated = false,
+    IReadOnlyList<HiddenInputSchema>? HiddenInputs = null);
 public sealed record EngineDiagnostic(string Code, string Message, string? NodeId = null, string? InputName = null, string? TargetId = null);
 public sealed record ValidationResult(IReadOnlyList<string> ValidTargets, IReadOnlyList<EngineDiagnostic> Diagnostics)
 {

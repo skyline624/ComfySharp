@@ -69,7 +69,7 @@ public sealed class EngineService(NodeRegistry registry)
     }
 
     public async Task<ExecutionResult> ExecuteAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
-        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
+        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default, JsonObject? extraData = null)
     {
         // Project only at the explicit JSON boundary. Native disposal is part of successful completion.
         EngineEvent? terminal = null;
@@ -78,7 +78,7 @@ public sealed class EngineService(NodeRegistry registry)
             if (IsTerminal(e)) terminal = e;
             else if (onEvent is not null) await onEvent(e);
         }
-        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken);
+        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken, extraData);
         var diagnostics = owned.Diagnostics.ToList();
         var outputs = new Dictionary<string, IReadOnlyList<IReadOnlyList<JsonNode?>>>(StringComparer.Ordinal);
         var status = owned.Status;
@@ -100,7 +100,7 @@ public sealed class EngineService(NodeRegistry registry)
 
     /// <summary>Returns only explicit UI documents. All native slots are released before the terminal event.</summary>
     public async Task<UiExecutionResult> ExecuteUiAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
-        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
+        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default, JsonObject? extraData = null)
     {
         EngineEvent? terminal = null;
         async ValueTask Forward(EngineEvent e)
@@ -108,7 +108,7 @@ public sealed class EngineService(NodeRegistry registry)
             if (IsTerminal(e)) terminal = e;
             else if (onEvent is not null) await onEvent(e);
         }
-        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken);
+        using var owned = await ExecuteValuesAsync(prompt, targets, Forward, cancellationToken, extraData);
         var result = new UiExecutionResult(owned.Status,
             owned.UiOutputs.ToDictionary(p => p.Key, p => UiDocument.Snapshot(p.Value), StringComparer.Ordinal),
             owned.Meta.ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal), owned.Diagnostics);
@@ -120,10 +120,11 @@ public sealed class EngineService(NodeRegistry registry)
     private static bool IsTerminal(EngineEvent e) => e.Type is "execution_success" or "execution_failed" or "execution_interrupted";
 
     public async Task<OwnedExecutionResult> ExecuteValuesAsync(JsonObject prompt, IReadOnlyCollection<string>? targets = null,
-        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default)
+        Func<EngineEvent, ValueTask>? onEvent = null, CancellationToken cancellationToken = default, JsonObject? extraData = null)
     {
         // Freeze caller-owned JSON before the first await, so validation and execution see the same graph.
         prompt = prompt.DeepClone().AsObject();
+        extraData = extraData?.DeepClone().AsObject();
         var validation = Validate(prompt, targets);
         var diagnostics = validation.Diagnostics.ToList();
         var results = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
@@ -159,6 +160,10 @@ public sealed class EngineService(NodeRegistry registry)
             var rawInputs = data["inputs"]!.AsObject();
             var promptInputOrder = rawInputs.Select(p => p.Key).ToArray();
             var expanded = NodeInputExpansion.Expand(node.Schema, promptInputOrder);
+            // Supplied hidden names retain their prompt position; new names append in schema order.
+            // Their values always come from job metadata, never from caller-provided links/literals.
+            var argumentOrder = promptInputOrder.Concat(node.Schema.HiddenInputs?.Select(i => i.Name) ?? [])
+                .Distinct(StringComparer.Ordinal).ToArray();
             var declaredInputs = expanded.Inputs;
             using var nodeScope = new RuntimeNodeContext();
             var resolved = new Dictionary<string, IReadOnlyList<RuntimeValue>>(StringComparer.Ordinal);
@@ -171,6 +176,8 @@ public sealed class EngineService(NodeRegistry registry)
             try
             {
                 foreach (var input in declaredInputs.Where(i => !i.Lazy)) await Resolve(input);
+                foreach (var input in node.Schema.HiddenInputs ?? [])
+                    resolved[input.Name] = [nodeScope.Json(LegacyHiddenInputs.Resolve(input.Type, prompt, extraData, id))];
                 cancellationToken.ThrowIfCancellationRequested();
                 IReadOnlyCollection<string> lazyNames;
                 using (var lazyScope = new RuntimeNodeContext())
@@ -201,7 +208,7 @@ public sealed class EngineService(NodeRegistry registry)
                         else if (values.Count != 0) invocation[name] = invocationScope.Retain(values[Math.Min(index, values.Count - 1)]);
                         else if (resolved.Values.Any(v => v.Count != 0)) throw new InvalidOperationException("Cannot repeat the last item of an empty execution list.");
                     }
-                    var block = FirstBlocker(invocation, promptInputOrder, node.Schema.InputIsList);
+                    var block = FirstBlocker(invocation, argumentOrder, node.Schema.InputIsList);
                     NodeExecutionOutput returned;
                     if (block is not null)
                     {
@@ -220,7 +227,7 @@ public sealed class EngineService(NodeRegistry registry)
                         // Source scans flat prompt-order values for blockers before constructing V3 dictionaries.
                         // Acquisition preserves prompt order for ordinary arguments; the V3 binder then
                         // appends groups in schema order. Reorder here without changing producer resolution.
-                        var flatArguments = promptInputOrder.Where(invocation.ContainsKey)
+                        var flatArguments = argumentOrder.Where(invocation.ContainsKey)
                             .ToDictionary(name => name, name => invocation[name], StringComparer.Ordinal);
                         var arguments = expanded.BindArguments(invocationScope, flatArguments, cancellationToken);
                         returned = await node.ExecuteAsync(invocationScope, arguments, cancellationToken);

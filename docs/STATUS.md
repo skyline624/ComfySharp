@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+Les [fondations PNG et métadonnées](PNG_METADATA_FOUNDATIONS.md) portent la suite locale Windows CPU à **2 409 tests réussis, dont 47 nouveaux**, sans échec ni test ignoré. Le Host transmet `extra_pnginfo` au moteur ; l'encodeur produit des PNG RGB/RGBA avec texte ordonné. `SaveImage`, `PreviewImage`, leur stockage, `/view` et l'aperçu bitmap restent à raccorder. Le registre conserve 35 identifiants et les gates numériques CI restent ouvertes.
+
 La [CI CaseConverter du commit 7d65375](qualification/case-converter-ci-7d65375.md) confirme les 249 nouveaux tests et les quatre modes dans l'application réelle sur les trois OS. Windows passe 2 225 tests ; macOS conserve deux échecs CLIP et Linux présente 12 échecs lors du premier accès natif. Les contrôles numériques restent ouverts.
 
 La [tranche IMAGE CPU](qualification/image-primitives-integration.md) passe **2 309 tests locaux, dont 84 nouveaux**, et le parcours réel Desktop/Host de ses quatre nœuds. Les 28 comparaisons avec la source figée sont exactes sur les octets Float32 et les layouts observés. L'aperçu reste textuel ; les codecs, autres domaines de tenseurs et plateformes restent à qualifier.

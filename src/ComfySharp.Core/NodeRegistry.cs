@@ -7,7 +7,11 @@ public sealed class NodeRegistry
 {
     private readonly Dictionary<string, IRuntimeNode> nodes = new(StringComparer.Ordinal);
     public IEnumerable<IRuntimeNode> Nodes => nodes.Values;
-    public void Register(IRuntimeNode node) => nodes.Add(node.Schema.ClassType, node);
+    public void Register(IRuntimeNode node)
+    {
+        LegacyHiddenInputs.Validate(node.Schema);
+        nodes.Add(node.Schema.ClassType, node);
+    }
     public bool TryGet(string classType, out IRuntimeNode node) => nodes.TryGetValue(classType, out node!);
     public JsonObject ToObjectInfo()
     {
@@ -42,6 +46,14 @@ public sealed class NodeRegistry
                 ["output_node"] = s.OutputNode, ["is_input_list"] = s.InputIsList, ["experimental"] = s.Experimental
             };
             var info = result[s.ClassType]!.AsObject();
+            if (s.HiddenInputs is { Count: > 0 } hiddenInputs)
+            {
+                var hidden = new JsonObject();
+                var order = new JsonArray();
+                foreach (var input in hiddenInputs) { hidden.Add(input.Name, input.Type); order.Add(input.Name); }
+                info["input"]!["hidden"] = hidden;
+                info["input_order"]!["hidden"] = order;
+            }
             if (s.Description is not null) info["description"] = s.Description;
             if (s.SearchAliases is not null) info["search_aliases"] = new JsonArray(s.SearchAliases.Select(a => (JsonNode?)JsonValue.Create(a)).ToArray());
             if (s.PythonModule is not null) info["python_module"] = s.PythonModule;

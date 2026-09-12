@@ -166,7 +166,7 @@ public sealed class JobQueue(EngineService engine, EventHub events) : Background
                             if (e.Type is "execution_success" or "execution_failed" or "execution_interrupted") terminals.Add(e);
                             else PublishExecution(job, e);
                             return ValueTask.CompletedTask;
-                        }, linked.Token);
+                        }, linked.Token, job.ExtraData);
                     lock (gate)
                     {
                         job.Status = result.Status switch { "success" => "completed", "cancelled" => "cancelled", _ => "failed" };

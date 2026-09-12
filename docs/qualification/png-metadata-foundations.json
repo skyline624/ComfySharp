@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "baseCommit": "134b79f5a3795fc45da0bbf3e6d5cd219a3a8029",
+  "platform": "Windows win-x64 CPU",
+  "passed": 2409,
+  "failed": 0,
+  "skipped": 0,
+  "new": 47,
+  "uniqueTestIds": 2409,
+  "projects": {
+    "Workflow": 78,
+    "Host": 271,
+    "Tokenization": 540,
+    "Desktop": 44,
+    "Core": 773,
+    "Inference": 703
+  },
+  "newClasses": {
+    "HiddenMetadataHostTests": 5,
+    "HiddenInputTests": 23,
+    "ImagePngEncoderTests": 19
+  },
+  "trx": [
+    {
+      "project": "Workflow",
+      "passed": 78,
+      "bytes": 120023,
+      "sha256": "792713edc316a94c275171b68446ce9a68e71fe36f92646af364c15a0924ce9f"
+    },
+    {
+      "project": "Host",
+      "passed": 271,
+      "bytes": 756783,
+      "sha256": "2dae67086d497fdebd4b79827804abf4f66e1ffdac5d53ef901bf895a4055396"
+    },
+    {
+      "project": "Tokenization",
+      "passed": 540,
+      "bytes": 814012,
+      "sha256": "81f8ebe699294b60f820d3666ef642618c2f277227f179fc51c4a7cb3675e40f"
+    },
+    {
+      "project": "Desktop",
+      "passed": 44,
+      "bytes": 66212,
+      "sha256": "e2823d860a17f983af5ffb4d1b259832638a1cb6970ffdc975fcbadfd71a06e6"
+    },
+    {
+      "project": "Core",
+      "passed": 773,
+      "bytes": 1193118,
+      "sha256": "8efe5f53e72f04d744b66ceb7e883b5abe8f0a4378bca62866a9f575145c346a"
+    },
+    {
+      "project": "Inference",
+      "passed": 703,
+      "bytes": 1121692,
+      "sha256": "9026d6a7ab96774ba7333a8bae322b984355d65e0c7d5187cbf073a6fb3f854f"
+    }
+  ],
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "bytes": 3049,
+    "sha256": "f235cbd58f841d44365b25ed6bd43d7ff8b60ef6d2329dbe05dd7dc53c02ea0b"
+  },
+  "tests": {
+    "exitCode": 0,
+    "bytes": 3333,
+    "sha256": "168c9df6662ed1428656edb3143d8e13ed3d8e4d99da2b50bf1cbbfa97d181bf"
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=win-x64 --logger trx --results-directory <local-evidence-directory>"
+  ],
+  "unchangedFiles": {
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 9763,
+      "sha256": "d8153870d8d81350095587a9c04b74ac0b30c61c2fc364ab8e28bf678536e8bf"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "bytes": 24498,
+      "sha256": "e9cefaaebc8321e03bad7664db1907287b3592c32028b0c2c141d32a3ca81d9a"
+    },
+    "src/ComfySharp.Core/LegacyHiddenInputs.cs": {
+      "bytes": 1537,
+      "sha256": "a3f4e2b77ee2e0fc479108da1862554b192d8f272ac6c2c0ac42e95b33aad8ab"
+    },
+    "src/ComfySharp.Core/NodeRegistry.cs": {
+      "bytes": 4779,
+      "sha256": "22d55237517e816ecc635148a71e595611287262bddffd624ab14091eed91410"
+    },
+    "src/ComfySharp.Host/JobQueue.cs": {
+      "bytes": 10510,
+      "sha256": "624b4f7677cd0281295d2a51051eab3776f081d1456a93ae38b9a5dc7c4e626b"
+    },
+    "src/ComfySharp.Inference/ImagePngEncoder.cs": {
+      "bytes": 10456,
+      "sha256": "70fe8e7cbeb7ef22cd04b3b87f47cb81b7056c2756c60b172e446dde142cb76c"
+    },
+    "tests/ComfySharp.Core.Tests/HiddenInputTests.cs": {
+      "bytes": 12012,
+      "sha256": "d66b4685ad0c41c9fe198c698331f58c0fc71f102701c911a454e3f88e0f4a0e"
+    },
+    "tests/ComfySharp.Host.Tests/HiddenMetadataHostTests.cs": {
+      "bytes": 6287,
+      "sha256": "449e62ba282f7c61b7027926dfb8b5e1636d753f71682563ffe9677a12c3eebb"
+    },
+    "tests/ComfySharp.Inference.Tests/ImagePngEncoderTests.cs": {
+      "bytes": 10758,
+      "sha256": "c57decdfe1b2b0e9d445416ff3f7c604189c5f7c1b684be7a3759b57543aa6db"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14341,
+      "sha256": "67732b9586cdd297b91bcf4370181bc692db965843388bd0c8f92cec562dd25b"
+    }
+  },
+  "snapshotScope": "Changed source/tests/resources and build settings; a file snapshot, not loaded-assembly attestation.",
+  "snapshotPins": {
+    "before": {
+      "bytes": 2265,
+      "sha256": "9da2ba1aa5247253ee1f911c88600940cf337bd7372b6d7890d5853730b09d06"
+    },
+    "after": {
+      "bytes": 2084,
+      "sha256": "43772440953f1e2289dd5ef3c37254a3971241ed33a8e8caa2b1e0d48de19897"
+    }
+  },
+  "limits": [
+    "Windows CPU development run; no Linux, macOS, CUDA or MPS qualification in this evidence.",
+    "File snapshots identify tested inputs, not loaded native DLLs.",
+    "PNG tests use a separate C# test decoder; no Pillow corpus or actual Desktop bitmap decoding yet.",
+    "Host tests use a test-only metadata node; production SaveImage/PreviewImage and /view are not registered.",
+    "No new source lab execution, native UI smoke, model weights or numerical tolerances in this step.",
+    "Earlier published CI failures in SD/CLIP are unresolved by this local success."
+  ]
+}
