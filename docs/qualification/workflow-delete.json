@@ -136,7 +136,7 @@
     "macosJobId": 103527424683,
     "failedTest": "WorkflowClipboardEditorTests.Canvas_shortcuts_copy_and_paste_while_widget_text_keeps_normal_clipboard_behavior",
     "observed": "The textbox-copy assertion expected text only but clipboard retained the node envelope; the earlier canvas assertions passed. Desktop 93 passed,1 failed,0 skipped.",
-    "change": "Canvas now matches Avalonia platform Copy/Cut/Paste gestures; tests use platform CommandModifiers. A configured Control+Shift+C regression test passes locally. Remote correction remains to verify.",
+    "change": "Canvas now matches Avalonia platform Copy/Cut/Paste gestures; tests use platform CommandModifiers. A configured Control+Shift+C regression test passes locally. The macOS correction is confirmed by run34684628480 at af29a1d113c78c0cfa16dad54b4591d780546237; see workflow-delete-macos.json.",
     "log": {
       "bytes": 77802,
       "sha256": "44654bf43abfba27b22a31f8fe97cc0086bf845e0e1b05c54665b9375792e5f3"

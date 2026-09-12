@@ -1,0 +1,41 @@
+{
+  "runId": 34684628480,
+  "head": "af29a1d113c78c0cfa16dad54b4591d780546237",
+  "platform": "macOS arm64 CPU CI",
+  "jobId": 103529355691,
+  "jobConclusion": "failure",
+  "failedSteps": [
+    "Compare full CLIP L and G dimensions in a separate CPU process"
+  ],
+  "projects": {
+    "Workflow": {
+      "passed": 244,
+      "failed": 0,
+      "skipped": 0,
+      "trx": {
+        "bytes": 388827,
+        "sha256": "0dbe6af3e921bffe1ff42a48961b9d9849bac1703a53562bfb0120c4c1ed02f6"
+      }
+    },
+    "Desktop": {
+      "passed": 102,
+      "failed": 0,
+      "skipped": 0,
+      "trx": {
+        "bytes": 158383,
+        "sha256": "a6fda869536cf121fb901bfe87bdd0b311f8422fd4de676305d1df3967911a76"
+      }
+    }
+  },
+  "newPassed": {
+    "Workflow": 20,
+    "Desktop": 8
+  },
+  "clipboardRegression": "passed",
+  "nativeSmoke": "passed",
+  "log": {
+    "bytes": 231362,
+    "sha256": "3675ae7d09dccb2445f4fb84760a11158e313512ff2fb00c2d73a3bced867f27"
+  },
+  "scope": "Workflow/Desktop TRX and native smoke audited. Other result artifacts, GPU and native system clipboard ownership not qualified by this audit."
+}
