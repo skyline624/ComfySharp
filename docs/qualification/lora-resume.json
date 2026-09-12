@@ -20,7 +20,30 @@
     "Full TrainLoraNode and counter wiring",
     "Real image datasets and platform qualification"
   ],
-  "ci": "Pending publication",
+  "ci": {
+    "runId": 34725080075,
+    "commit": "cde73260fbfc07f25f435ba065cf788e589852e0",
+    "conclusion": "failure",
+    "windows": {
+      "conclusion": "success",
+      "resumePassed": 14,
+      "resumeFailed": 0,
+      "jobId": 103637697233
+    },
+    "linux": {
+      "conclusion": "failure",
+      "resumePassed": 10,
+      "resumeFailed": 4,
+      "jobId": 103637697109
+    },
+    "macos": {
+      "conclusion": "failure",
+      "resumePassed": 10,
+      "resumeFailed": 4,
+      "jobId": 103637697237
+    },
+    "failure": "All-parameter SHA256 differs from Windows-only source reference in four resume initialization cases on Linux/macOS. Later numeric gates were not executed on those runners. Independent same-platform source investigation is pending."
+  },
   "localTests": {
     "newCases": 14,
     "platform": "win-x64-cpu",

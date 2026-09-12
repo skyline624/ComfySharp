@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "profile": "lora-resume-source-native210-cpu-f32-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "python": "3.12.10",
+  "comparison": "Exact parameters and CPU RNG hashes, no tolerance relaxation",
+  "inputs": {
+    "labs/lora-training-source/resume.py": "5fe851733ced4158f5fcab8488379ecb4276f044a69dc7aa3d88fd636bb901ff",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/lora-resume-source/collect.py": "457976e7ba6041a50a12179cfb7acba4c366a0a63eb93cfddb6b74da0325d839",
+    ".github/workflows/lora-resume-source-laboratory.yml": "f3c313da6d616384810de5b04be55a63094b8f5ed1b333bc0dc38e5d0dfcc9d1",
+    "labs/clip-source/requirements-win-x64.txt": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+    "labs/clip-source/requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "labs/clip-source/requirements-osx-arm64.txt": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+  },
+  "sources": {
+    "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+    "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/ldm/modules/attention.py": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+    "comfy/ldm/modules/diffusionmodules/openaimodel.py": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96"
+  },
+  "constraints": [
+    "No .NET output may supply expected values.",
+    "Do not change recipes, thresholds, original Windows fixtures or application behavior during collection.",
+    "Source collection alone does not qualify application or model compatibility."
+  ]
+}

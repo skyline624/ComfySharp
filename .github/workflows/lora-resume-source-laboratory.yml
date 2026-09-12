@@ -1,0 +1,67 @@
+name: Frozen LoRA resume source laboratory
+on:
+  push:
+    paths:
+      - 'labs/lora-resume-source/**'
+      - '.github/workflows/lora-resume-source-laboratory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            runtime: win-x64
+          - os: ubuntu-24.04
+            runtime: linux-x64
+          - os: macos-14
+            runtime: osx-arm64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - name: Preserve canonical repository bytes
+        shell: pwsh
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: comfy-org/ComfyUI
+          ref: 1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a
+          path: upstream-source
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+      - name: Verify collector and source hashes before native imports
+        run: python -I -S -B labs/lora-resume-source/collect.py --source upstream-source --validate-only
+      - name: Restore unchanged hashed CPU laboratory
+        shell: pwsh
+        run: |
+          $laboratory = Join-Path $env:RUNNER_TEMP 'lora-resume-source-python'
+          python -m venv $laboratory
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot create the source laboratory.' }
+          $interpreter = if ($IsWindows) { Join-Path $laboratory 'Scripts/python.exe' } else { Join-Path $laboratory 'bin/python' }
+          & $interpreter -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r 'labs/clip-source/requirements-${{ matrix.runtime }}.txt'
+          if ($LASTEXITCODE -ne 0) { throw 'Hashed CPU dependency installation failed.' }
+          & $interpreter -I -m pip check
+          if ($LASTEXITCODE -ne 0) { throw 'Dependency closure check failed.' }
+      - name: Collect unchanged resume cases on this platform
+        shell: pwsh
+        run: |
+          $laboratory = Join-Path $env:RUNNER_TEMP 'lora-resume-source-python'
+          $interpreter = if ($IsWindows) { Join-Path $laboratory 'Scripts/python.exe' } else { Join-Path $laboratory 'bin/python' }
+          $output = Join-Path $env:RUNNER_TEMP 'lora-resume-source-evidence'
+          & $interpreter -I -B labs/lora-resume-source/collect.py --source upstream-source --output $output
+          if ($LASTEXITCODE -ne 0) { throw 'Independent training source collection failed.' }
+      - name: Check tracked inputs remained unchanged
+        if: always()
+        run: git diff --exit-code HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: lora-resume-source-torch210-${{ matrix.runtime }}
+          path: ${{ runner.temp }}/lora-resume-source-evidence
+          if-no-files-found: error
