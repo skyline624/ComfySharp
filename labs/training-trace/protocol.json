@@ -1,12 +1,16 @@
 {
-  "profile": "linux-training-observation-v1",
-  "baseCommit": "ec02f23a3d7c7b0f24ec88c55965f8301262a261",
-  "purpose": "Diagnostic controls only; no expected tensors or thresholds changed.",
+  "profile": "linux-training-native-candidate-v2",
+  "baseCommit": "cc21ba59a0c185b3b1e23009921c0c5049f9ca92",
+  "purpose": "Native-only candidate comparison to unchanged same-host source; original reference verdicts preserved.",
   "inputs": {
-    "labs/training-trace/source.py": "7fb37f5b3de76f7df80343ca851a8c302553cd5e7eb6d5eccb6d5106acf7ac44",
-    "labs/training-trace/compare.py": "f8f7fbf1fe9e088ac2dd2b8ee7cc0aab6d2574d6c53ad52cb96cf0fde5b61f51",
-    ".github/workflows/training-trace.yml": "cdf331ae065cd79d514ed7d600121215bf489f1d59d2d2e7fde81c18c561a471",
-    "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "6638f6e83f5ea1e1a4f747d2c33bb26ee27eb12e58600269109dd428e2eab3a4",
-    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "0ca244a230fd15c36b107bb4daee8475afbad992f7246efda77c8277645e3677"
+    "labs/training-trace/source.py": "37134112fbb71a45aacab149470c242fb215d8fcf10ef79f535c635c64000f36",
+    "labs/training-trace/compare.py": "b129933f21e96df16b33ea7e164dcc15c0386f54676aa95b3693c334a4279159",
+    ".github/workflows/training-trace.yml": "31e1175feb4706e060886d38a777387fd02381e3d121cb9979e26397ac99402d",
+    "tests/ComfySharp.Inference.Tests/SdTrainingTrace.cs": "34df398fa767191a924d1713cd52ebe11d8634ae44c209cf2db4bb26def569f9",
+    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "3b9f1eb54286efcbcb163a5fee04ef761f94933f718598c018b7341ee54eee83",
+    "labs/training-trace/native_candidate.py": "903c5c888ecff7905d8198a55169bc6ce276a68cb4e4c68273d7767804473578",
+    "labs/training-trace/test_compare.py": "87e4709c1f20daf1f717cf667b726527f98ba14fa3cb7544b74fd906c063e610",
+    "labs/sd-native-copy-diagnostic/staging.py": "0ee6a1c95847d0d76d7b99b33e21497096fbe54b0f92a53f2ef943f3ebf326fd",
+    "labs/sd-native-diagnostic/run.py": "6ffa862eb73757e6c9d8fdf664a54724e414bf10fd648007790c4713ca13a7f1"
   }
 }

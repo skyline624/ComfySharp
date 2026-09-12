@@ -32,6 +32,7 @@ public sealed class SdAdapterInitializationTests
         {
             using var scope = NewDisposeScope();
             using var trace = SdTrainingTrace.Open(caseIndex);
+            void Compare(Action assertion) { if(trace is null)assertion();else trace.Check(assertion); }
             using var corpus = TrainingReferenceCorpus.Load("adapters");
             var row = corpus.RootElement.GetProperty("cases")[caseIndex]; bool linear = row.GetProperty("linearProjection").GetBoolean();
             var config = new SdUnetConfig(32, 16, linear ? SdAttentionHeadMode.FixedSize : SdAttentionHeadMode.FixedCount, linear ? 8 : 4, linear);
@@ -66,8 +67,8 @@ public sealed class SdAdapterInitializationTests
             {
                 using var iteration = NewDisposeScope();
                 trace?.Phase("step-"+stepIndex++);
-                using var output = model.ForwardForTraining(latent, time, context, adapters.Patches); trace?.Capture("output",output);Near(output, step.GetProperty("output"));
-                using var loss = TrainingLoss.Calculate("MSE", output, targetValues); Assert.InRange(Math.Abs(loss.item<float>() - step.GetProperty("loss").GetSingle()), 0, 3e-5);
+                using var output = model.ForwardForTraining(latent, time, context, adapters.Patches); trace?.Capture("output",output);Compare(()=>Near(output, step.GetProperty("output")));
+                using var loss = TrainingLoss.Calculate("MSE", output, targetValues); trace?.Capture("loss",loss);Compare(()=>Assert.InRange(Math.Abs(loss.item<float>() - step.GetProperty("loss").GetSingle()), 0, 3e-5));
                 optimizer.Accumulate(loss);
                 foreach (var patch in adapters.Patches.Values) foreach (var parameter in patch.Parameters)
                 {
@@ -75,14 +76,18 @@ public sealed class SdAdapterInitializationTests
                 }
                 foreach (var target in step.GetProperty("gradients").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject())
                 {
-                    using var gradient = Named(adapters.Patches[target.Name])[expected.Name].grad; trace?.Capture("gradient/"+target.Name+"/"+expected.Name,gradient!);Near(gradient!, expected.Value);
+                    using var gradient = Named(adapters.Patches[target.Name])[expected.Name].grad; trace?.Capture("gradient/"+target.Name+"/"+expected.Name,gradient!);Compare(()=>Near(gradient!, expected.Value));
                 }
                 optimizer.Step();
-                foreach (var target in step.GetProperty("updated").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject()) Near(Named(adapters.Patches[target.Name])[expected.Name], expected.Value);
+                foreach (var target in step.GetProperty("updated").EnumerateObject()) foreach (var expected in target.Value.EnumerateObject())
+                {
+                    var value=Named(adapters.Patches[target.Name])[expected.Name];trace?.Capture("updated/"+target.Name+"/"+expected.Name,value);Compare(()=>Near(value,expected.Value));
+                }
             }
             model.DiagnosticObserver=null;
             model.FineDiagnosticObserver=null;
             using var unchanged = model.Forward(latent, time, context); Assert.Equal(Hash(baseline), Hash(unchanged));
+            trace?.Complete();
         }
         finally { set_num_threads(threads); }
         Assert.Equal(before, Tensor.TotalCount);

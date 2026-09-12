@@ -1,4 +1,37 @@
-# Linux training divergence observation
+# Native training candidate comparison
+
+The current workflow compares the Linux NuGet build, an unchanged independent
+copy, and a copy using the pinned source laboratory's native CPU core/OpenMP
+libraries. It reuses the established ELF, copy, inventory and loaded-library
+controls. Only runner temporary copies are modified; no Python interpreter or
+binding is loaded into .NET. The protocol now pins these reused controls too.
+
+`COMFYSHARP_TRAINING_TRACE_COMPLETE=1`, with capture enabled, defers numerical
+comparison assertions until both updates finish. Every failed assertion is
+retained and the original test still fails. Other exceptions, initialization
+checks and nonfinite gradients still stop execution. Captures now include losses
+and selected updated parameters. `COMFYSHARP_TRAINING_NATIVE_IDENTITY=1` records
+actual loaded native hashes. These are test controls, not product options.
+
+`native_candidate.py` requires identical records from the original and copied
+NuGet builds before attributing native differences. It compares both complete
+SD1/SD2 traces to the independently observed same-host source, and also runs the
+ordinary 865-test inference suite against original and candidate builds without
+observers. Original TRX failures are retained. The experiment gates complete
+same-host training comparisons, not success against every immutable cross-host
+oracle or qualification of the whole runtime distribution.
+
+`compare.py --require-complete --require-tolerance` rejects missing captures,
+incomplete runs, nonfinite values, changed base weights and deviations beyond the
+existing bounds. Losses use absolute `3e-5`; tensors use `3e-5 + 3e-5*abs(ref)`.
+Five stdlib-only laboratory tests exercise these failure gates. The original
+distributed source fixtures are never overridden at runtime.
+
+Local Windows controls passed three tests with and without complete capture;
+both complete traces, including losses and updates, were bit-identical to source.
+This does not qualify the Linux candidate or the pretrained families.
+
+## Earlier localization experiments
 
 This diagnostic targets the two numerical failures in the all-target adapter
 checks after exact initializer/RNG parity was established. It does not replace
@@ -20,11 +53,11 @@ interop setting solely for a separate controlled process. It is not an applicati
 option or an established fix. A trace is written even when an original assertion
 fails, preserving the point where execution stopped.
 
-The Linux workflow runs the original checks, observed checks, and observed
+The earlier Linux workflow ran the original checks, observed checks, and observed
 one-interop-thread checks separately. It continues after a failing diagnostic
-variant only to collect the other controls and upload artifacts; the final job
-explicitly remains failed when any reference check failed. Mixed-file contracts
-run independently so the earlier gradient failure does not hide their results.
+variant only to collect the other controls and upload artifacts; that job
+explicitly remained failed when any reference check failed. Mixed-file contracts
+ran independently so the earlier gradient failure did not hide their results.
 
 `compare.py` reports unchanged base weights, first differing captured boundary,
 maximum absolute differences and counts outside the original `3e-5 + 3e-5*abs(ref)`

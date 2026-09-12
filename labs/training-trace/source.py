@@ -54,9 +54,19 @@ assert (a.output/'baseline-order.json').read_bytes()==(a.output/'observed-order.
 data=json.loads((a.output/'observed.json').read_text())
 for case,row in records.items():
  for step,entry in enumerate(data['cases'][case]['steps']):
-  for target,parameters in entry['gradients'].items():
-   for name,value in parameters.items():row[f'step-{step}/gradient/{target}/{name}']=value
+  for field,label in [('gradients','gradient'),('updated','updated')]:
+   for target,parameters in entry[field].items():
+    for name,value in parameters.items():row[f'step-{step}/{label}/{target}/{name}']=value
+  row[f'step-{step}/loss']=snap(torch.tensor(entry['loss'],dtype=torch.float32))
  with (a.output/f'case-{case}.json').open('x',encoding='utf-8',newline='\n') as f:
   json.dump({'target':preflight.target(),'threads':torch.get_num_threads(),'interopThreads':torch.get_num_interop_threads(),'cpuCapability':torch.backends.cpu.get_cpu_capability(),'records':row},f);f.write('\n')
 with (a.output/'manifest.json').open('x',encoding='utf-8',newline='\n') as f:
- json.dump({'sourceUnchangedByObservation':True,'torchBuild':torch.__config__.show(),'protocolSha256':hashlib.sha256((ROOT/'labs/training-trace/protocol.json').read_bytes()).hexdigest(),'sourceHashes':data['sourceHashes'],'baselineSha256':hashlib.sha256((a.output/'baseline.json').read_bytes()).hexdigest()},f,indent=2);f.write('\n')
+ libraries=[]
+ if sys.platform=='linux':
+  paths={line.split(maxsplit=5)[-1] for line in pathlib.Path('/proc/self/maps').read_text().splitlines() if len(line.split(maxsplit=5))==6}
+  for name in sorted(paths):
+   path=pathlib.Path(name)
+   if path.is_file() and any(s in path.name.lower() for s in ['torch','c10','gomp','iomp','libomp']):
+    with path.open('rb') as payload:sha=hashlib.file_digest(payload,'sha256').hexdigest()
+    libraries.append({'name':path.name,'bytes':path.stat().st_size,'sha256':sha})
+ json.dump({'sourceUnchangedByObservation':True,'torchBuild':torch.__config__.show(),'nativeLibraries':libraries,'protocolSha256':hashlib.sha256((ROOT/'labs/training-trace/protocol.json').read_bytes()).hexdigest(),'sourceHashes':data['sourceHashes'],'baselineSha256':hashlib.sha256((a.output/'baseline.json').read_bytes()).hexdigest()},f,indent=2);f.write('\n')

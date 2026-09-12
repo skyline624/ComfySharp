@@ -1,4 +1,4 @@
-name: Diagnose Linux training source divergence
+name: Compare Linux native training candidate
 on:
   push:
     paths:
@@ -10,7 +10,7 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - run: git config --global core.autocrlf false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -38,42 +38,21 @@ jobs:
           lscpu --json > TrainingTrace/cpu.json
       - run: dotnet restore tests/ComfySharp.Inference.Tests --locked-mode -p:NativeRuntime=linux-x64
       - run: dotnet build tests/ComfySharp.Inference.Tests -c Release --no-restore -p:NativeRuntime=linux-x64
-      - name: Original checks without observation
-        id: baseline
-        continue-on-error: true
-        run: dotnet test tests/ComfySharp.Inference.Tests -c Release --no-build --no-restore -p:NativeRuntime=linux-x64 --filter FullyQualifiedName~SdAdapterInitializationTests --logger trx --results-directory TrainingTrace/tests-baseline
-      - name: Observe original checks with default inter-op pool
-        id: observed
-        continue-on-error: true
-        env:
-          COMFYSHARP_TRAINING_TRACE_DIR: ${{ github.workspace }}/TrainingTrace/dotnet-default
-        run: dotnet test tests/ComfySharp.Inference.Tests -c Release --no-build --no-restore -p:NativeRuntime=linux-x64 --filter FullyQualifiedName~SdAdapterInitializationTests --logger trx --results-directory TrainingTrace/tests-default
-      - name: Observe original checks with one inter-op thread
-        id: interop
-        continue-on-error: true
-        env:
-          COMFYSHARP_TRAINING_TRACE_DIR: ${{ github.workspace }}/TrainingTrace/dotnet-interop-one
-          COMFYSHARP_TRAINING_INTEROP_ONE: '1'
-        run: dotnet test tests/ComfySharp.Inference.Tests -c Release --no-build --no-restore -p:NativeRuntime=linux-x64 --filter FullyQualifiedName~SdAdapterInitializationTests --logger trx --results-directory TrainingTrace/tests-interop-one
-      - name: Compare captured tensors without altering test verdicts
+      - name: Compare independent native copies with the same-host source
         shell: bash
         run: |
           set -euo pipefail
-          python -I -S -B labs/training-trace/compare.py --source TrainingTrace/source --actual TrainingTrace/dotnet-default --output TrainingTrace/comparison-default.json
-          python -I -S -B labs/training-trace/compare.py --source TrainingTrace/source --actual TrainingTrace/dotnet-interop-one --output TrainingTrace/comparison-interop-one.json
-      - name: Verify mixed file contracts independently of the failing gradient cases
-        id: mixed
-        continue-on-error: true
-        run: dotnet test tests/ComfySharp.Inference.Tests -c Release --no-build --no-restore -p:NativeRuntime=linux-x64 --filter 'FullyQualifiedName~LoraDifferenceTests|FullyQualifiedName~LoraModelAliasesTests' --logger trx --results-directory TrainingTrace/tests-mixed
+          "$RUNNER_TEMP/training-trace-python/bin/python" -I -B labs/training-trace/native_candidate.py \
+            --source-evidence "$GITHUB_WORKSPACE/TrainingTrace/source" \
+            --output "$RUNNER_TEMP/training-native-evidence" --staging "$RUNNER_TEMP/training-native-copies"
       - name: Verify tracked sources remained unchanged
         if: always()
         run: git diff --exit-code HEAD
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: linux-training-trace
-          path: TrainingTrace
+          name: linux-training-native-candidate
+          path: |
+            TrainingTrace
+            ${{ runner.temp }}/training-native-evidence
           if-no-files-found: error
-      - name: Preserve failed reference verdicts
-        if: always() && (steps.baseline.outcome == 'failure' || steps.observed.outcome == 'failure' || steps.interop.outcome == 'failure' || steps.mixed.outcome == 'failure')
-        run: echo 'Reference checks failed; diagnostic artifacts do not qualify the implementation.' && exit 1

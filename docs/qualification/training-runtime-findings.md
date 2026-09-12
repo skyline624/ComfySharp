@@ -66,3 +66,8 @@ Aucune assertion, référence numérique ou fonction du produit n'est modifiée.
 La sérialisation des tests et l'observateur restent des instruments locaux,
 absents de la configuration normale. La correction ne qualifie pas la précision
 multiplateforme et ne constitue pas une mesure exhaustive de fuite de VRAM.
+
+La [CI suivant cette correction](https://github.com/skyline624/ComfySharp/actions/runs/34714992367)
+est terminée : Windows réussit ; macOS atteint de nouveau les comparaisons CLIP
+aux dimensions complètes, où il échoue ; Linux conserve l'échec numérique des
+adapters. Le contrôle de compteur corrigé n'échoue pas dans cette campagne.
