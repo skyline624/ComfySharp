@@ -2,5 +2,6 @@
   <ItemGroup><ProjectReference Include="../ComfySharp.Core/ComfySharp.Core.csproj" /></ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources/PythonUnicode/lower-3.12.10.json" LogicalName="ComfySharp.Nodes.Resources.PythonUnicode.lower-3.12.10.json" />
+    <EmbeddedResource Include="Resources/PythonUnicode/upper-title-3.12.10.json" LogicalName="ComfySharp.Nodes.Resources.PythonUnicode.upper-title-3.12.10.json" />
   </ItemGroup>
 </Project>

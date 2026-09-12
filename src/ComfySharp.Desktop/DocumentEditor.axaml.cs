@@ -141,6 +141,7 @@ internal static class NodeTemplates
             case "StringTrim": widgets = new("", "Both"); In("string", "STRING"); Out("STRING", "STRING"); break;
             case "StringContains": widgets = new("", "", true); In("string", "STRING"); In("substring", "STRING"); In("case_sensitive", "BOOLEAN"); Out("contains", "BOOLEAN"); break;
             case "StringCompare": widgets = new("", "", "Starts With", true); In("string_a", "STRING"); In("string_b", "STRING"); In("mode", "COMBO"); In("case_sensitive", "BOOLEAN"); Out("BOOLEAN", "BOOLEAN"); break;
+            case "CaseConverter": widgets = new("", "UPPERCASE"); In("string", "STRING"); In("mode", "COMBO"); Out("STRING", "STRING"); break;
             case "JsonExtractString": widgets = new("{}", "key"); In("json_string", "STRING"); Out("STRING", "STRING"); break;
             case "ComfyNotNode": In("value", "*"); Out("BOOLEAN", "BOOLEAN"); break;
             case "ComfySwitchNode": widgets = new(false); In("on_false", "*"); In("on_true", "*"); Out("output", "*"); break;

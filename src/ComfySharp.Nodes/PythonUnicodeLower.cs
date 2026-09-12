@@ -33,7 +33,19 @@ internal static class PythonUnicodeLower
         cancellationToken.ThrowIfCancellationRequested();
     }
 
-    internal static string Lower(string text, CancellationToken cancellationToken = default)
+    internal static string Lower(string text, CancellationToken cancellationToken = default) =>
+        Transform(text, null, false, cancellationToken);
+
+    // Shared original-text traversal for Capitalize/Title; upper/title tables remain separate.
+    internal static string ApplyTitle(string text, IReadOnlyDictionary<int, string> title, bool allWords,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(title);
+        return Transform(text, title, allWords, cancellationToken);
+    }
+
+    private static string Transform(string text, IReadOnlyDictionary<int, string>? title, bool allWords,
+        CancellationToken cancellationToken)
     {
         ValidateUnicode(text, cancellationToken);
         if (text.Length == 0) return string.Empty;
@@ -60,7 +72,7 @@ internal static class PythonUnicodeLower
             }
         }
         var output = new StringBuilder(Math.Min(text.Length, 4096));
-        bool previous = false;
+        bool previous = false, previousIsCased = false;
         int count = 0;
         for (int i = 0; i < text.Length;)
         {
@@ -68,7 +80,18 @@ internal static class PythonUnicodeLower
             if (Rune.DecodeFromUtf16(text.AsSpan(i), out var rune, out int consumed) != OperationStatus.Done)
                 throw InvalidUnicode(i);
             int cp = rune.Value;
-            if (cp == 0x03a3)
+            if (title is not null && (i == 0 || allWords && !previousIsCased))
+            {
+                if (title.TryGetValue(cp, out var titleMapped))
+                {
+                    Reserve(titleMapped.Length); output.Append(titleMapped);
+                }
+                else
+                {
+                    Reserve(consumed); output.Append(text.AsSpan(i, consumed));
+                }
+            }
+            else if (cp == 0x03a3)
             {
                 Reserve(1);
                 output.Append(previous && !followingCased![i] ? '\u03c2' : '\u03c3');
@@ -81,7 +104,10 @@ internal static class PythonUnicodeLower
             {
                 Reserve(consumed); output.Append(text.AsSpan(i, consumed));
             }
-            if (!InRanges(data.Ignorable, cp)) previous = InRanges(data.Cased, cp);
+            // Title examines the immediately preceding original scalar, even when it is
+            // Case_Ignorable. Final_Sigma skips ignorable scalars first; U+0345 has both bits.
+            previousIsCased = InRanges(data.Cased, cp);
+            if (!InRanges(data.Ignorable, cp)) previous = previousIsCased;
             i += consumed;
         }
         cancellationToken.ThrowIfCancellationRequested();
@@ -90,7 +116,8 @@ internal static class PythonUnicodeLower
         void Reserve(int units)
         {
             if ((long)output.Length + units > int.MaxValue)
-                throw new InvalidOperationException("unicode_lower_limit: output exceeds the .NET string length limit.");
+                throw new InvalidOperationException((title is null ? "unicode_lower_limit" : "unicode_case_limit") +
+                    ": output exceeds the .NET string length limit.");
         }
     }
 

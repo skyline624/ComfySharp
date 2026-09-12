@@ -1,0 +1,47 @@
+{
+  "tag": "v3.12.10",
+  "tagObject": "f86fdcac4c104bb671f86eb77cf98a6aa764c04e",
+  "commit": "0cc81280367df838c4b199f8f0378837165071c2",
+  "sources": {
+    "Objects/unicodetype_db.h": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/Objects/unicodetype_db.h",
+      "bytes": 260751,
+      "sha256": "ab60f0ca6db86dc14bb19ca5bcce6b0274282172500dd1c3ef61030e4b080cc8"
+    },
+    "Objects/unicodectype.c": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/Objects/unicodectype.c",
+      "bytes": 7236,
+      "sha256": "9d7a35ac40018ad087c5d2d15f8214d5831456947d858e5b5c0cd9d529e4ce61"
+    },
+    "Objects/unicodeobject.c": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/Objects/unicodeobject.c",
+      "bytes": 467971,
+      "sha256": "74028ecb90344d6f7e503e7bea29f505d04795a2c416309ac9bac4db29539abf"
+    },
+    "Tools/unicode/makeunicodedata.py": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/Tools/unicode/makeunicodedata.py",
+      "bytes": 49703,
+      "sha256": "0f660ad3fbc2331a9eab84aa5f105e92ab498dd442ac93b2cd4d133821928c00"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/LICENSE",
+      "bytes": 13936,
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+    },
+    "Doc/license.rst": {
+      "url": "https://raw.githubusercontent.com/python/cpython/0cc81280367df838c4b199f8f0378837165071c2/Doc/license.rst",
+      "bytes": 54130,
+      "sha256": "341832873fd316a37927e79385093fbbfd40a467428480835fe435a80cadf4e5"
+    }
+  },
+  "schema": 1,
+  "tagResolution": {
+    "refUrl": "https://api.github.com/repos/python/cpython/git/ref/tags/v3.12.10",
+    "objectUrl": "https://api.github.com/repos/python/cpython/git/tags/f86fdcac4c104bb671f86eb77cf98a6aa764c04e",
+    "method": "GitHub git ref then annotated tag object; commit and raw source hashes verified separately"
+  },
+  "unicodeVersion": "15.0.0",
+  "derivation": "Integer-only static extraction of full upper and title deltas/expansions from C type records and extended arrays. No builtin casing or upstream code execution.",
+  "context": "Upper uses full upper mapping only. Capitalize titles first original scalar then contextual lower; Title uses immediate preceding original Cased while Final_Sigma skips Case_Ignorable.",
+  "lowerFoundationProvenanceSha256": "8193e086fb80c5597d7fc6c92ffc8749aab78b469b77bcd0681b3da82cb0eff6"
+}

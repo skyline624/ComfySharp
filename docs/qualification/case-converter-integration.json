@@ -1,0 +1,793 @@
+{
+  "schema": 1,
+  "id": "case-converter-local-integration-v1",
+  "auditedAtUtc": "2026-09-12T03:44:47.458624+00:00",
+  "scope": "Local Windows CaseConverter and Unicode casing integration; observed working files, not a global commit or loaded-binary attestation.",
+  "auditMethod": "Read-only stdlib XML/JSON/byte integration artifact audit by the collector author. No .NET tests, source execution or builtin casing replay by this auditor.",
+  "build": {
+    "scope": "Solution",
+    "configuration": "Release",
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "Root runner confirmation, distinct from TRX parsing."
+  },
+  "fullCampaign": {
+    "passed": 2225,
+    "failed": 0,
+    "notExecuted": 0,
+    "trxCount": 6,
+    "uniqueTestIds": 2225,
+    "uniqueExecutionIds": 2225,
+    "uniqueDisplayNames": 2222,
+    "displayNameNote": "Two pre-existing Inference theory display names are truncated and repeated for respectively three and two different test IDs; identities remain unique.",
+    "commandExitCode": 0,
+    "commandExitEvidence": "Root runner confirmation after session 67330 completed.",
+    "trx": [
+      {
+        "project": "Core",
+        "artifactLabel": "case-converter-first-full/Core",
+        "bytes": 1160034,
+        "sha256": "a218a0dda9e179c2f7b4429ca083f67e3089ceebf2b91555243a3d7205eb1d33",
+        "counters": {
+          "total": 750,
+          "executed": 750,
+          "passed": 750,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:36:08.8594428+02:00",
+          "queuing": "2026-09-12T05:36:08.8594429+02:00",
+          "start": "2026-09-12T05:36:07.3155168+02:00",
+          "finish": "2026-09-12T05:36:17.1569431+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      },
+      {
+        "project": "Desktop",
+        "artifactLabel": "case-converter-first-full/Desktop",
+        "bytes": 63345,
+        "sha256": "a1e1b19817e23a305abc3843c5b38ebd910cbcf0f4454100dbb84732e8652466",
+        "counters": {
+          "total": 42,
+          "executed": 42,
+          "passed": 42,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:36:20.1700276+02:00",
+          "queuing": "2026-09-12T05:36:20.1700277+02:00",
+          "start": "2026-09-12T05:36:17.9878384+02:00",
+          "finish": "2026-09-12T05:36:22.4775799+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      },
+      {
+        "project": "Host",
+        "artifactLabel": "case-converter-first-full/Host",
+        "bytes": 637163,
+        "sha256": "a8032552af4b2c6b6cb4dcad90122773978a22733a24aee92c94d1f3f83fed1f",
+        "counters": {
+          "total": 244,
+          "executed": 244,
+          "passed": 244,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:36:24.8923817+02:00",
+          "queuing": "2026-09-12T05:36:24.8923819+02:00",
+          "start": "2026-09-12T05:36:23.1755036+02:00",
+          "finish": "2026-09-12T05:36:36.4505287+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      },
+      {
+        "project": "Inference",
+        "artifactLabel": "case-converter-first-full/Inference",
+        "bytes": 925919,
+        "sha256": "85a080e11abca733b98d293eae3226dbeed3b1caae4f46cc4f9ba50b01a53252",
+        "counters": {
+          "total": 577,
+          "executed": 577,
+          "passed": 577,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:36:38.7356689+02:00",
+          "queuing": "2026-09-12T05:36:38.7356692+02:00",
+          "start": "2026-09-12T05:36:36.9694088+02:00",
+          "finish": "2026-09-12T05:37:26.3391009+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      },
+      {
+        "project": "Tokenization",
+        "artifactLabel": "case-converter-first-full/Tokenization",
+        "bytes": 814012,
+        "sha256": "4f978c6b341dae912f1f5591c970c0a1295d47acc7ef33010e91c859306f5252",
+        "counters": {
+          "total": 540,
+          "executed": 540,
+          "passed": 540,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:37:28.8086082+02:00",
+          "queuing": "2026-09-12T05:37:28.8086085+02:00",
+          "start": "2026-09-12T05:37:26.9988924+02:00",
+          "finish": "2026-09-12T05:37:29.0163417+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      },
+      {
+        "project": "Workflow",
+        "artifactLabel": "case-converter-first-full/Workflow",
+        "bytes": 111158,
+        "sha256": "32b416bfe92cd183230f1acf4da8409fc1ac13f43f16472d4a42f538b979230a",
+        "counters": {
+          "total": 72,
+          "executed": 72,
+          "passed": 72,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "times": {
+          "creation": "2026-09-12T05:37:30.9603361+02:00",
+          "queuing": "2026-09-12T05:37:30.9603366+02:00",
+          "start": "2026-09-12T05:37:29.6991489+02:00",
+          "finish": "2026-09-12T05:37:31.0358586+02:00"
+        },
+        "summary": {
+          "outcome": "Completed"
+        },
+        "runInfos": 0,
+        "globalError": false
+      }
+    ]
+  },
+  "newCases": {
+    "total": 249,
+    "groups": [
+      {
+        "testClass": "ComfySharp.Core.Tests.CaseConverterNodeTests",
+        "passed": 28,
+        "namesSha256": "802b36c15aad4364a9a8a360019233833b530725186b11874256de9b7a65a9e1",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.PythonUnicodeCaseTests",
+        "passed": 68,
+        "namesSha256": "8d22b8d39dde59061e4dfb8d8ba6664cb0cbcb529a5cefb1befd1aa1f4896493",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.PythonUnicodeCaseSourceReferenceTests",
+        "passed": 85,
+        "namesSha256": "cf67a8e03dc261e7a0c1b0f23e383010a70d7e3c33795b448a9102d363b4f6a5",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.CaseConverterSourceReferenceTests",
+        "passed": 40,
+        "namesSha256": "95ff9e6c612b2506d4e3ac7cbde5ad95835d4ed81944879f6fde71c081bd09cf",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Core.Tests.OrdinaryArgumentOrderTests",
+        "passed": 4,
+        "namesSha256": "13af72bf7f0c5b4210e832661081c0f30af7074a97c3acfdbea2ece4c8cd4310",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Host.Tests.CaseConverterHostTests",
+        "passed": 19,
+        "namesSha256": "e52f9da927d0e1eb01a3261f67452b544b3af3af44cd51ea0e33275a54c252d3",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Workflow.Tests.CaseConverterWorkflowTests",
+        "passed": 3,
+        "namesSha256": "9899ed329b24457077d2706eba1841225846caa6b5621d4751bdbc840eefb138",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      },
+      {
+        "testClass": "ComfySharp.Desktop.Tests.CaseConverterEditorTests",
+        "passed": 2,
+        "namesSha256": "fac9deb8951dfbd97c102f6bdcf44403334f622082931041d16160c58e8910dc",
+        "namesEncoding": "Sorted exact display names, LF-delimited with final LF, UTF-8"
+      }
+    ],
+    "targetedCampaignsNotAddedAgain": true
+  },
+  "source": {
+    "collectorCommit": "74e1f790f0c22ddd91d1230322ed3abc44b0143a",
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "runtime": "CPython 3.12.10 / Unicode 15.0.0",
+    "publishedBeforeCollection": true,
+    "proof": "case-converter-source-74e1f79.json",
+    "fixture": {
+      "path": "tests/ComfySharp.Core.Tests/Fixtures/case-converter.reference.json",
+      "bytes": 268611,
+      "sha256": "649e592edbb38b02220f9f7b92fda634cb6e8a3c1eea1bc5bde95e2165f98e7b"
+    },
+    "protocol": {
+      "path": "tests/ComfySharp.Core.Tests/Fixtures/case-converter.protocol.json",
+      "bytes": 44546,
+      "sha256": "5ccc7810c4c99d427ee1dea167b26bcc638187bb4e0ae0baa2d6cda8291a58de"
+    },
+    "exactCopiedBytes": true,
+    "sourceBlobs": 10,
+    "astDeclarations": 74,
+    "nodeCases": {
+      "comparable": 28,
+      "comparableTextCases": 27,
+      "comparableTextOutputs": 32,
+      "comparableBlockerCases": 1,
+      "typedSourceErrors": 8,
+      "sourceOnlyInvalidModes": 4,
+      "sourceBodyAndBinderCalls": 44,
+      "sourceRecordedRepeats": 3
+    },
+    "casingDigests": {
+      "plans": 85,
+      "planes": 17,
+      "recipes": 5,
+      "validScalars": 1112064,
+      "applicationsPerPass": 5560320,
+      "sourcePasses": 3,
+      "sourceApplications": 16680960,
+      "managedPassesPerPlanInFull": 1,
+      "framing": "uint32LE(codepoint) + uint32LE(strict UTF-8 byte length) + UTF-8 bytes",
+      "inputAndOutputCountLengthHashCompared": true,
+      "productTableUsedAsExpected": false,
+      "recipesDescription": [
+        "upper(cp)",
+        "capitalize(cp)",
+        "capitalize(A + cp + Sigma)",
+        "title(A + cp + Sigma)",
+        "title(A + Sigma + cp + A)"
+      ],
+      "historicalLower68Regenerated": false,
+      "allStringsOrAllContextsProved": false
+    }
+  },
+  "workingFiles": {
+    "capturedAtUtc": "2026-09-12T03:41:28.954381+00:00",
+    "timing": "After the full campaign verdict. No pre-full capture or loaded-binary attestation is claimed.",
+    "recheckedAtUtc": "2026-09-12T03:44:47.458624+00:00",
+    "unchangedSinceThisCapture": true,
+    "files": [
+      {
+        "path": "src/ComfySharp.Core/EngineService.cs",
+        "bytes": 23770,
+        "sha256": "7525cde3b8553b6e6cebddb2c3dd3e9260c358682bd1e08de7fc9a0ff1927a27"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/CaseConverterNode.cs",
+        "bytes": 2427,
+        "sha256": "d4ac4a9d130365321c276926be59c7793791956dde7a28e8d3c0f8747fc94de7"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/PythonUnicodeCase.cs",
+        "bytes": 8646,
+        "sha256": "f50b93dd801736452321aafcb11e85d1dec592a9f0e92fe065638c20e413c0aa"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/PythonUnicodeLower.cs",
+        "bytes": 12680,
+        "sha256": "6aaeeaaa99e1196e0e5c299c1496397aac7450191c76f3fc1037b728b7aa559b"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/Resources/PythonUnicode/lower-3.12.10.json",
+        "bytes": 29026,
+        "sha256": "6381d72114b8aa4ee5c0dd04fcbb55395964ab1ca92832e7784f887dfbf8b42c"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/Resources/PythonUnicode/upper-title-3.12.10.json",
+        "bytes": 44021,
+        "sha256": "64b2f8c52989663aa8ff7e8d72afa31cdf813fbd80714ed12ab840222ee0ebe7"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/BuiltInNodes.cs",
+        "bytes": 7978,
+        "sha256": "103a037260a0bfc3d41da031460873fb6f99aff162dade99e8c34d40aee29720"
+      },
+      {
+        "path": "src/ComfySharp.Nodes/ComfySharp.Nodes.csproj",
+        "bytes": 488,
+        "sha256": "03aceb87d093dae8a48fc33111b0ee5013cd45ef3a3aaeb2e94b2ac42cbafdf3"
+      },
+      {
+        "path": "src/ComfySharp.Workflow/PromptCompiler.cs",
+        "bytes": 12698,
+        "sha256": "1220e232b35f4cc7ce7d739a0807ed7bd7a15f0806379bca6294168652b8edca"
+      },
+      {
+        "path": "src/ComfySharp.Desktop/DocumentEditor.axaml.cs",
+        "bytes": 13181,
+        "sha256": "003668ccbbc02cfb87af3e623317037790dc77a05ef753bf67182f37c51cff98"
+      },
+      {
+        "path": "src/ComfySharp.Desktop/MainWindow.axaml.cs",
+        "bytes": 18693,
+        "sha256": "62825e6a865c6c76496f9879f4fc93cbdbd54aa61d9c44405df2bac6578dcdd9"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj",
+        "bytes": 2110,
+        "sha256": "1f55a3362542e9b12092df573c9ffa4f3f7009cf98822e99fe48f778744dcc4e"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/CaseConverterNodeTests.cs",
+        "bytes": 5359,
+        "sha256": "9f00d69b2440b7ce73bb6de4da95f72391b647db16c8373e648862d8cca30bb2"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/CaseConverterSourceReferenceTests.cs",
+        "bytes": 21653,
+        "sha256": "ed3e1102180fbd6423f7e58e0ff56a97bec52f8481a61ab4ef4abcafee272360"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/PythonUnicodeCaseTests.cs",
+        "bytes": 10294,
+        "sha256": "2d6f85f13eecdc355e24d8b1b88cd7eacba8d9691064820b3d17162443dc8b3f"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/PythonUnicodeCaseSourceReferenceTests.cs",
+        "bytes": 11667,
+        "sha256": "92c92a5e1bb003ded56981465bcb2c117da56b43237ded7aa784768bdb1e4e8b"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/OrdinaryArgumentOrderTests.cs",
+        "bytes": 3982,
+        "sha256": "ccecbd6f6b798a64717484a674790beb18d7d243839caf021d47ad8a62cbdb3e"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/NodeParityTests.cs",
+        "bytes": 3829,
+        "sha256": "9a6f42c751c06faae3e49797c483191a2ad897a9db9b763093616d34c43a0ffd"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/case-converter.protocol.json",
+        "bytes": 44546,
+        "sha256": "5ccc7810c4c99d427ee1dea167b26bcc638187bb4e0ae0baa2d6cda8291a58de"
+      },
+      {
+        "path": "tests/ComfySharp.Core.Tests/Fixtures/case-converter.reference.json",
+        "bytes": 268611,
+        "sha256": "649e592edbb38b02220f9f7b92fda634cb6e8a3c1eea1bc5bde95e2165f98e7b"
+      },
+      {
+        "path": "tests/ComfySharp.Host.Tests/CaseConverterHostTests.cs",
+        "bytes": 9425,
+        "sha256": "43535c34471f1587bcc01b9ac23773b98269044d6ef024b63d7db7daa4ff1e5f"
+      },
+      {
+        "path": "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs",
+        "bytes": 10659,
+        "sha256": "d50eb24df349977dac634e30d1b5241ae5e8bbd4b4bb80271752dee645cbb576"
+      },
+      {
+        "path": "tests/ComfySharp.Workflow.Tests/CaseConverterWorkflowTests.cs",
+        "bytes": 3029,
+        "sha256": "f744a434a6dca9f83757bf209fd5b8c4fb4c4d407507a0d0599390249e1f5f1a"
+      },
+      {
+        "path": "tests/ComfySharp.Desktop.Tests/CaseConverterEditorTests.cs",
+        "bytes": 4191,
+        "sha256": "656b5e09c23256c144afc2dac203c4c700bab969c896fb59dcb9e1514fe9ad17"
+      },
+      {
+        "path": "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs",
+        "bytes": 12251,
+        "sha256": "7ae10d67c08b3f8f847750e1fa898f1e370a2614d3b1b40b96292e2595e98f4d"
+      },
+      {
+        "path": "labs/python-unicode-case-tables/extract.py",
+        "bytes": 6685,
+        "sha256": "94aac707581c7a0c442fa4086739dbbe12d5a7d4f6efef4a279fac5f0e1c0737"
+      },
+      {
+        "path": "labs/python-unicode-case-tables/provenance.json",
+        "bytes": 2639,
+        "sha256": "f453902eb2ba3a21f042667b17d132dcaa052555005e9c77c48fbc4bb104f4fa"
+      },
+      {
+        "path": "labs/python-unicode-tables/extract.py",
+        "bytes": 7302,
+        "sha256": "d689187a82da946fc0acc61da99026be24488172c666ae7ae32df88ee530162d"
+      },
+      {
+        "path": "labs/python-unicode-tables/provenance.json",
+        "bytes": 2473,
+        "sha256": "8193e086fb80c5597d7fc6c92ffc8749aab78b469b77bcd0681b3da82cb0eff6"
+      },
+      {
+        "path": "labs/case-converter-source/protocol.json",
+        "bytes": 44546,
+        "sha256": "5ccc7810c4c99d427ee1dea167b26bcc638187bb4e0ae0baa2d6cda8291a58de"
+      },
+      {
+        "path": "labs/case-converter-source/reference.py",
+        "bytes": 17248,
+        "sha256": "ceb3378998ea7491e75d5b04f6637f055befe9ca86eb9a1f2e1b998f3b080e9d"
+      },
+      {
+        "path": "labs/case-converter-source/README.md",
+        "bytes": 7772,
+        "sha256": "a4339a38ce77071bfb61733dd64270886f275c27d17f4e58f474f5c8024ca4df"
+      }
+    ],
+    "matchedEarlierReviewsAndFreezes": [
+      {
+        "evidenceLabel": "python-unicode-case-a-freeze.json",
+        "bytes": 1806,
+        "sha256": "15a06e93345da6c358518b0175e533b5cca99005752240caa7faa251b6b90cc0",
+        "matchedFileCount": 9,
+        "matchedPaths": [
+          "src/ComfySharp.Nodes/PythonUnicodeCase.cs",
+          "src/ComfySharp.Nodes/PythonUnicodeLower.cs",
+          "src/ComfySharp.Nodes/ComfySharp.Nodes.csproj",
+          "src/ComfySharp.Nodes/Resources/PythonUnicode/upper-title-3.12.10.json",
+          "tests/ComfySharp.Core.Tests/PythonUnicodeCaseTests.cs",
+          "labs/python-unicode-case-tables/extract.py",
+          "labs/python-unicode-case-tables/provenance.json",
+          "labs/python-unicode-case-tables/README.md",
+          "THIRD_PARTY_NOTICES.md"
+        ],
+        "documentationExcludedFromTestTimeIdentity": []
+      },
+      {
+        "evidenceLabel": "case-converter-reference-b-freeze.json",
+        "bytes": 1152,
+        "sha256": "0a0b01235eb79e3b7f10379d489640dd813b6e6a11f5379f14d96885e672900d",
+        "matchedFileCount": 4,
+        "matchedPaths": [
+          "tests/ComfySharp.Core.Tests/Fixtures/case-converter.protocol.json",
+          "tests/ComfySharp.Core.Tests/Fixtures/case-converter.reference.json",
+          "tests/ComfySharp.Core.Tests/CaseConverterSourceReferenceTests.cs",
+          "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj"
+        ],
+        "documentationExcludedFromTestTimeIdentity": []
+      },
+      {
+        "evidenceLabel": "case-converter-host-b-freeze.json",
+        "bytes": 1082,
+        "sha256": "4760ad7cde69307a6bafe26cd8af3095ed7e2b47e7cad82c9c469cb2dbc89178",
+        "matchedFileCount": 1,
+        "matchedPaths": [
+          "tests/ComfySharp.Host.Tests/CaseConverterHostTests.cs"
+        ],
+        "documentationExcludedFromTestTimeIdentity": [
+          "docs/CASE_CONVERTER.md",
+          "docs/capabilities/manifest.json"
+        ]
+      },
+      {
+        "evidenceLabel": "python-unicode-case-reference-a-freeze.json",
+        "bytes": 567,
+        "sha256": "28a7e863b9d6773ed7d32cee54fe2303f7e8a02614ad74c700b8858a314d131a",
+        "matchedFileCount": 1,
+        "matchedPaths": [
+          "tests/ComfySharp.Core.Tests/PythonUnicodeCaseSourceReferenceTests.cs"
+        ],
+        "documentationExcludedFromTestTimeIdentity": []
+      },
+      {
+        "evidenceLabel": "review-case-converter-node-ui-c.json",
+        "bytes": 1786,
+        "sha256": "05518550e087f46be897364d8a5c6fe97a4e3ed4e1c76dfd6832f9efd11f6614",
+        "matchedFileCount": 8,
+        "matchedPaths": [
+          "src/ComfySharp.Nodes/CaseConverterNode.cs",
+          "tests/ComfySharp.Core.Tests/CaseConverterNodeTests.cs",
+          "tests/ComfySharp.Workflow.Tests/CaseConverterWorkflowTests.cs",
+          "tests/ComfySharp.Desktop.Tests/CaseConverterEditorTests.cs",
+          "src/ComfySharp.Nodes/BuiltInNodes.cs",
+          "src/ComfySharp.Workflow/PromptCompiler.cs",
+          "src/ComfySharp.Desktop/DocumentEditor.axaml.cs",
+          "src/ComfySharp.Desktop/MainWindow.axaml.cs"
+        ],
+        "documentationExcludedFromTestTimeIdentity": []
+      },
+      {
+        "evidenceLabel": "review-ordinary-argument-order-a.json",
+        "bytes": 505,
+        "sha256": "fac0652c365b3c0baa61ae18679a1edd99c327caf85898906c721f68b6574107",
+        "matchedFileCount": 2,
+        "matchedPaths": [
+          "src/ComfySharp.Core/EngineService.cs",
+          "tests/ComfySharp.Core.Tests/OrdinaryArgumentOrderTests.cs"
+        ],
+        "documentationExcludedFromTestTimeIdentity": []
+      }
+    ],
+    "rootContinuityStatement": "Root reports no code changes after the final Engine ordering correction, Core 750 and full build/campaign; later annotations are documentation only. This is not an independently recorded pre-full snapshot or binary measurement."
+  },
+  "historicalCampaigns": [
+    {
+      "campaign": "case-converter-core-first",
+      "bytes": 952965,
+      "sha256": "9873505abe22c3f7143907cee88f910db60f09a353dd82ae4a52039b142c6f1d",
+      "results": 621,
+      "passed": 621,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-core-second",
+      "bytes": 1160034,
+      "sha256": "a90818c9acf9f1ed19918b88710d55b568ac95604343fc4c2ee6508e891e3acb",
+      "results": 750,
+      "passed": 750,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-desktop-first",
+      "bytes": 63345,
+      "sha256": "87ed7914194f92ed9c005cc53aeb4b787e984e10985e42c4e41fc5438560eb68",
+      "results": 42,
+      "passed": 42,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-host-first",
+      "bytes": 635701,
+      "sha256": "d60b0db43d68fb006a7558511cd37f83b0aa7d65bf78ffd5a28d6d4bcf874e80",
+      "results": 244,
+      "passed": 244,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-references-first",
+      "bytes": 204925,
+      "sha256": "45a7f261f757400ab2f5908ae3a640d9a75765510da6408c84069fd8f083d8ad",
+      "results": 125,
+      "passed": 124,
+      "failed": 1,
+      "notExecuted": 0,
+      "summaryOutcome": "Failed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-root-first",
+      "bytes": 83419,
+      "sha256": "c2a4e2aca2d97dde4b2a2c48441095684418293dd80aadfc6bcf02c5d305d920",
+      "results": 23,
+      "passed": 0,
+      "failed": 23,
+      "notExecuted": 0,
+      "summaryOutcome": "Failed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-root-red",
+      "bytes": 1819,
+      "sha256": "7dc635b91c348abaea538e03696ffa901b8e0841649a27308a967ad1c0444ec0",
+      "results": 0,
+      "passed": 0,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    },
+    {
+      "campaign": "case-converter-workflow-first",
+      "bytes": 111158,
+      "sha256": "6440484e2ca29ae7525a0f3a52f50bba0ec0cb5f656d2385f9b0037ae0775d76",
+      "results": 72,
+      "passed": 72,
+      "failed": 0,
+      "notExecuted": 0,
+      "summaryOutcome": "Completed",
+      "notAddedToFull": true
+    }
+  ],
+  "historyInterpretation": [
+    "A pre-implementation 23-case run failed with unknown-node diagnostics. A separate zero-result old-DLL run is retained and is not validation; an earlier missing-brace build correction affected tests only.",
+    "Core 621, Host 244, Workflow 72 and Desktop 42 were green before the final Engine argument-order fix.",
+    "The first 125 source comparisons had 124 Passed and one Failed: reversed prompt mode,string reached the managed body in schema order string,mode. Expected source bytes and comparison assertions were retained.",
+    "EngineService now orders all ordinary invocation arguments by prompt order after blocker detection, while preserving dependency resolution and unused-lazy behavior. Four regressions cover legacy/V3 and scalar/list invocations.",
+    "Core then passed 750, including all 125 source comparisons and four order regressions; the full campaign passed 2225. The second Desktop smoke runs the final Engine code."
+  ],
+  "desktopSmoke": {
+    "campaign": "case-converter-ui-second/smoke",
+    "afterEngineOrderFix": true,
+    "exitCode": 0,
+    "observations": {
+      "exitCode": 0,
+      "caseSensitiveHistory": true,
+      "nativeWindow": true,
+      "supervisedHost": true,
+      "cpuSigmas": true,
+      "textPreview": true,
+      "stringFormatHostPreview": true,
+      "textComparisonWorkflows": true,
+      "caseConverterModes": 4,
+      "dataIsolated": true
+    },
+    "artifacts": [
+      {
+        "label": "result.json",
+        "bytes": 279,
+        "sha256": "5c912630d4d6a938e8a4dd3d0db2a8360b98f80360b8c0bc3427eaec64acf2ed"
+      },
+      {
+        "label": "stdout.txt",
+        "bytes": 219,
+        "sha256": "1f3da36acd286636de3ff57cceaf1ceff7d29b78bc7bc7b9d318fd98f98a609a"
+      },
+      {
+        "label": "stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "driver": {
+      "path": ".superpowers/sdd/MIGRATION/case-converter-smoke-second.ps1",
+      "bytes": 2544,
+      "sha256": "092a01cff60ce95ccb1dda2482c6aac0e0898efbebf4f2ca14b6d76b99229b0c"
+    },
+    "route": "Actual Desktop templates, compiled workflow, supervised Host, completed history and PreviewAny outputs; four modes are asserted before the success marker.",
+    "input": "ǳABC AΣ",
+    "outputs": {
+      "UPPERCASE": "ǱABC AΣ",
+      "lowercase": "ǳabc aς",
+      "Capitalize": "ǲabc aς",
+      "Title Case": "ǲabc Aς"
+    },
+    "earlierSmokeNotUsedForFinalEngineQualification": true
+  },
+  "postCampaignDocumentationPins": {
+    "capturedAtUtc": "2026-09-12T03:44:47.458624+00:00",
+    "scope": "Documentation, licensing and provenance identities; not compilation inputs or a test-time snapshot.",
+    "files": [
+      {
+        "path": "docs/CASE_CONVERTER.md",
+        "bytes": 5456,
+        "sha256": "ce04ccb1f8be77f38cdc9efc8625b1090d9d8aab6df45c5e2b79a1e5a46a9fab"
+      },
+      {
+        "path": "docs/capabilities/manifest.json",
+        "bytes": 1304287,
+        "sha256": "80d6e2d6b866e1ebcac2100631661652703f146e573e48c9244e23bc1f51b202"
+      },
+      {
+        "path": "docs/qualification/case-converter-source-74e1f79.md",
+        "bytes": 6100,
+        "sha256": "9d5b2aed9d2e96afc2301b15de83c3b11a8b72164112095313e6d82a9c9c4a59"
+      },
+      {
+        "path": "docs/qualification/case-converter-source-74e1f79.json",
+        "bytes": 77377,
+        "sha256": "64dc5725177a7a44ff7c365321a4b48f6fade660e202aa93ab6eb7090b75a48c"
+      },
+      {
+        "path": "labs/python-unicode-case-tables/README.md",
+        "bytes": 7093,
+        "sha256": "c9aef02a05cc7634cf0d5cd231d4328d53e08565302d3b959874069fd4c48a70"
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "bytes": 18799,
+        "sha256": "620b5e3404fa47f7028c761a9e0500c054ff1ac07f6869fdd12e25b6acba55ce"
+      },
+      {
+        "path": "docs/licenses/CPython-3.12.10.txt",
+        "bytes": 13936,
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      }
+    ]
+  },
+  "limits": [
+    "Valid Unicode scalar strings; isolated UTF-16 surrogates are rejected locally. No NFC, casefold or locale-dependent casing.",
+    "The 85 exhaustive plane/recipe digests exercise upper/capitalize/title in five constructions; they do not cover all strings or all contexts. Existing lower tests remain in the full campaign.",
+    "Eight typed source inputs raise AttributeError in the mapper/body. The managed engine coerces null/integer to None/7 strings; typed direct calls reject them with ArgumentException. These are distinct assertions, not Python exception parity.",
+    "Four invalid modes bypass source COMBO validation and return one unchanged string slot. The local direct body preserves this identity, while ordinary engine COMBO admission rejects the mode before execution.",
+    "The blocker case skips the body. Source acquisition/binder order and signature-order observations are distinct; the reversed-prompt test compares the former without sorting.",
+    "Source collection records three repeats; each C# digest test calculates one pass and checks all three recorded source hashes. The artifact collector flag nativeProductOrTableRead=false does not describe managed test execution.",
+    "File pins do not attest loaded assemblies or the interpreter DLL. The source executable pin identifies the venv launcher. No new OS-wide, HTTP-wide, model-family or inference numerical qualification follows from this local campaign."
+  ]
+}

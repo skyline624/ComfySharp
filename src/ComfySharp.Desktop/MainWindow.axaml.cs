@@ -151,7 +151,35 @@ public sealed partial class MainWindow : Window
             comparisonOutputs[pair.Key]?["text"] is not JsonArray values || values.Count != 1 || values[0]?.GetValue<string>() != pair.Value))
             throw new InvalidOperationException("Text comparison workflow smoke failed: " + comparisonEntry.ToJsonString());
         ActiveEditor.ApplyUiOutputs(comparisonOutputs);
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows and native preview.");
+        if (availableNodes?.Contains("CaseConverter") != true)
+            throw new InvalidOperationException("Case conversion smoke requires CaseConverter in Host.");
+        var casingText = ActiveEditor.AddNode("PrimitiveString");
+        ActiveEditor.Document.SetWidgets(casingText, new JsonArray("ǳABC AΣ"));
+        var expectedCasing = new Dictionary<string, string>();
+        foreach (var (mode, expected) in new[]
+        {
+            ("UPPERCASE", "ǱABC AΣ"), ("lowercase", "ǳabc aς"),
+            ("Capitalize", "ǲabc aς"), ("Title Case", "ǲabc Aς")
+        })
+        {
+            var converter = ActiveEditor.AddNode("CaseConverter");
+            ActiveEditor.Document.SetWidgets(converter, new JsonArray("saved text", mode));
+            ActiveEditor.Document.Connect(casingText, 0, converter, 0);
+            var preview = ActiveEditor.AddNode("PreviewAny");
+            ActiveEditor.Document.Connect(converter, 0, preview, 0);
+            expectedCasing.Add(preview.Value, expected);
+        }
+        ActiveEditor.Reload();
+        var casingSession = hostSession.Id;
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(Compile(true), clientId, expectedCasing.Keys.ToArray()), casingSession);
+        var casingEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), casingSession, 200);
+        hostSession.Require(casingSession);
+        var casingOutputs = casingEntry["outputs"]!.AsObject();
+        if (casingOutputs.Count != expectedCasing.Count || expectedCasing.Any(pair =>
+            casingOutputs[pair.Key]?["text"] is not JsonArray values || values.Count != 1 || values[0]?.GetValue<string>() != pair.Value))
+            throw new InvalidOperationException("Case conversion workflow smoke failed: " + casingEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(casingOutputs);
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

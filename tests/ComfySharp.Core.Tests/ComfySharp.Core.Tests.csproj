@@ -16,5 +16,7 @@
     <EmbeddedResource Include="Fixtures/string-format.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.string-format.protocol.json" />
     <EmbeddedResource Include="Fixtures/text-comparison.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.text-comparison.protocol.json" />
     <EmbeddedResource Include="Fixtures/text-comparison.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.text-comparison.reference.json" />
+    <EmbeddedResource Include="Fixtures/case-converter.protocol.json" LogicalName="ComfySharp.Core.Tests.Fixtures.case-converter.protocol.json" />
+    <EmbeddedResource Include="Fixtures/case-converter.reference.json" LogicalName="ComfySharp.Core.Tests.Fixtures.case-converter.reference.json" />
   </ItemGroup>
 </Project>

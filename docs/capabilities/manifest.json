@@ -24368,8 +24368,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_string.py#L110",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -24381,6 +24381,7 @@
       },
       "evidence": [],
       "scenario": "contract:CaseConverter",
+      "limits": "Valid Unicode scalar strings only, using CPython 3.12.10 casing tables and managed Upper/Lower/Capitalize/Title helpers. No NFC, casefold or locale conversion; isolated UTF-16 surrogates refused. V3 COMBO retains four exact choices and multiselect=false, with no source mode default. Unknown mode is refused by engine COMBO admission; direct valid-text body keeps the source identity fallback. Local full campaign passed 2225 tests, including 249 new cases: 28 node, 68 helper, 85 source digest plans, 40 source node cases, 4 engine argument-order regressions, 19 real Host, 3 Workflow and 2 Desktop tests. Source cases distinguish 28 comparable results, 8 typed errors versus engine STRING coercion and 4 direct identity fallbacks versus COMBO admission refusal. Three source repetitions and one C# pass per digest plan; no exhaustive string-context, complete-workflow or platform qualification. See docs/qualification/case-converter-integration.md and docs/CASE_CONVERTER.md.",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "CaseConverter",
       "registrationEvidence": {

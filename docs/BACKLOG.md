@@ -15,7 +15,7 @@ Les critères complets sont dans [MIGRATION.md](MIGRATION.md). Aucun lot n'est c
 | 8 | Rien annoncé compatible | Vidéo, audio, 3D, codecs et traitements associés |
 | 9 | Gradient et mise à jour SGD élémentaires | Nœuds d'entraînement, optimisateurs/losses complets, adapters, sauvegarde et réutilisation |
 | 10 | Aucune quantification annoncée | Recettes quantifiées, kernels, offload, attention et mémoire avancée |
-| 11 | Base native C#/XAML, PreviewAny texte sans persistance des sorties, StringFormat au profil texte partiel avec ports fixes, StringContains/Compare sur scalaires Unicode valides | Domaines textuels restants, formatage Python complet de StringFormat, croissance dynamique des ports, PreviewAny Markdown et représentations restantes, widgets/outils locaux avancés, SDK et qualification UI |
+| 11 | Base native C#/XAML, PreviewAny texte sans persistance des sorties, StringFormat au profil texte partiel avec ports fixes, StringContains/Compare et CaseConverter sur scalaires Unicode valides | Domaines textuels restants, formatage Python complet de StringFormat, croissance dynamique des ports, PreviewAny Markdown et représentations restantes, widgets/outils locaux avancés, SDK et qualification UI |
 | 12 | Aucune V1 publiée | Toutes preuves, installations propres, distributions, notices/SBOM/checksums |
 
 Ordre suivant : rendre l'inventaire exhaustif et les corpus reproductibles ; porter la détection, la tokenisation, les schedulers/samplers et les composants SD1.5 avec vrais poids ; compléter le moteur et le document en parallèle ; avancer par famille dans la matrice. Les preuves Linux/CUDA et Mac/MPS attendent les machines prévues ; les tests CPU et le démarrage graphique en CI ont réussi et les autres travaux continuent.

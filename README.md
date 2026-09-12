@@ -4,7 +4,7 @@ Port indépendant de [ComfyUI](https://github.com/comfy-org/ComfyUI) en C#/.NET 
 
 **État : développement initial 0.1.0-dev. La génération d'images, vidéo, audio et 3D n'est pas encore disponible.** Le périmètre final reste le catalogue local complet, y compris l'entraînement intégré. Voir [l'objectif](docs/OBJECTIF.md), [le plan approuvé](docs/MIGRATION.md), [l'avancement réel](docs/STATUS.md) et [la matrice](docs/capabilities/README.md).
 
-Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte et un moteur avec valeurs natives. Son registre fournit 29 identifiants : 17 utilitaires, cinq générateurs de sigmas, six traitements SIGMAS et PreviewAny. Les graphes CLIP-L/G, U-Net SD1/SD2 et VAE classique sont implémentés dans la bibliothèque d'inférence ; leur qualification et leur assemblage en workflows de génération restent en cours.
+Le socle contient un éditeur C#/XAML avec canvas de nœuds, un Host .NET séparé, des documents JSON conservés sans perte et un moteur avec valeurs natives. Son registre fournit 30 identifiants : 18 utilitaires, cinq générateurs de sigmas, six traitements SIGMAS et PreviewAny. Les graphes CLIP-L/G, U-Net SD1/SD2 et VAE classique sont implémentés dans la bibliothèque d'inférence ; leur qualification et leur assemblage en workflows de génération restent en cours.
 
 ## Compiler et lancer
 
@@ -32,6 +32,8 @@ Exemple exécutable : ouvrir [text-length.workflow.json](examples/text-length.wo
 [StringFormat](docs/STRING_FORMAT.md) permet aussi de composer des textes à partir de connexions nommées. Le profil actuel prend en charge les substitutions simples, `!s`, la largeur, la précision et les alignements de chaînes Unicode. Les autres fonctions du formatage Python restent à porter et produisent des diagnostics explicites.
 
 [StringContains et StringCompare](docs/TEXT_COMPARISON.md) recherchent et comparent du texte Unicode valide. Leur mode insensible à la casse utilise les règles de minuscules de Python figées, y compris le sigma grec contextuel et l'expansion de `İ`.
+
+[CaseConverter](docs/CASE_CONVERTER.md) propose les majuscules, les minuscules et les deux modes de capitalisation de ComfyUI, avec les tables Unicode de CPython figées. Il prend en charge les expansions de caractères et le contexte original des chaînes Unicode valides.
 
 [sigma-preview.workflow.json](examples/sigma-preview.workflow.json) et son [prompt](examples/sigma-preview.prompt.json) exécutent `KarrasScheduler → SplitSigmas → PreviewAny` avec de vrais tenseurs CPU. Les deux sorties sont `tensor([3., 2.])` et `tensor([2., 1., 0.])`. Aucun poids de modèle n'est nécessaire à ce calcul. La prévisualisation native est en texte brut ; Markdown et d'autres représentations restent à porter. Voir [les contrats et limites](docs/NATIVE_NODE_HOST.md).
 
