@@ -45,10 +45,23 @@ public sealed partial class MainWindow : Window
             });
             if (Program.Sd15SmokeReport is not null)
             {
-                try { await Sd15SmokeAsync(Program.Sd15SmokeReport); Program.DiagnosticExitCode = 0; }
+                try
+                {
+                    if (Program.InitialImage is not null)
+                    {
+                        await using var image = File.OpenRead(Program.InitialImage);
+                        await ImportImageAsync(image, Path.GetFileName(Program.InitialImage), replaceSingleInput: true);
+                    }
+                    await Sd15SmokeAsync(Program.Sd15SmokeReport); Program.DiagnosticExitCode = 0;
+                }
                 catch (Exception error) { Messages.Text = error.Message; Console.Error.WriteLine(error); Program.DiagnosticExitCode = 1; }
                 Close();
             }
+            else if (Program.InitialImage is not null) await RunAsync(async () =>
+            {
+                await using var image = File.OpenRead(Program.InitialImage);
+                await ImportImageAsync(image, Path.GetFileName(Program.InitialImage), replaceSingleInput: true);
+            });
             if (Program.SmokeTest)
             {
                 try { await SmokeAsync(); Program.DiagnosticExitCode = 0; }

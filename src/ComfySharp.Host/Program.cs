@@ -19,6 +19,7 @@ builder.Services.AddSingleton(sp =>
     var registry = TensorNodes.CreateRegistry();
     ImageFileNodes.Register(registry, sp.GetRequiredService<IImageFileStore>(),
         disableMetadata: builder.Configuration.GetValue<bool>("disable-metadata"));
+    ImageInputNodes.Register(registry, sp.GetRequiredService<ImageInputService>());
     Sd15Nodes.Register(registry, new CheckpointFiles(builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]),
         cpuThreads: builder.Configuration.GetValue<int?>("cpu-threads") ?? Math.Min(16, Environment.ProcessorCount),
         inferenceDevice: builder.Configuration["inference-device"] ?? "cpu");
@@ -32,6 +33,7 @@ builder.Services.AddSingleton(_ => new LocalStore(builder.Configuration["data-di
 builder.Services.AddSingleton(_ => new ImageFileStore(builder.Configuration["data-dir"] ??
     Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ComfySharp")));
 builder.Services.AddSingleton<IImageFileStore>(sp => sp.GetRequiredService<ImageFileStore>());
+builder.Services.AddSingleton<ImageInputService>();
 var app = builder.Build();
 app.Use(async (context, next) =>
 {
@@ -54,6 +56,17 @@ foreach (var prefix in new[] { "", "/api" })
 {
     var routes = app.MapGroup(prefix);
     routes.MapGet("/health", () => new { status = "ok", product = "ComfySharp", version = "0.1.0-dev", inference_ready = false });
+    routes.MapPost("/upload/image", async (HttpContext context, ImageInputService images) =>
+    {
+        if (!context.Request.HasFormContentType) return Results.BadRequest(new { error = "expected_multipart_image" });
+        var form = await context.Request.ReadFormAsync(context.RequestAborted);
+        var upload = form.Files.GetFile("image");
+        if (upload is null) return Results.BadRequest(new { error = "missing_image" });
+        if (form["type"].Count > 0 && form["type"].ToString() != "input") return Results.BadRequest(new { error = "only_input_uploads_supported" });
+        await using var stream = upload.OpenReadStream();
+        var file = await images.UploadAsync(upload.FileName, form["subfolder"].ToString(), stream, form["overwrite"].ToString() is "true" or "1", context.RequestAborted);
+        return Results.Json(new { name = file.Filename, subfolder = file.Subfolder, type = file.Type });
+    });
     routes.MapGet("/object_info", (EngineService engine) => engine.Registry.ToObjectInfo());
     routes.MapGet("/object_info/{nodeType}", (string nodeType, EngineService engine) =>
     {
@@ -64,7 +77,7 @@ foreach (var prefix in new[] { "", "/api" })
     {
         var query = context.Request.Query;
         if (query.Keys.Any(key => key is not ("filename" or "subfolder" or "type")))
-            return Results.BadRequest(new { error = "unsupported_view_options", message = "This route currently serves original output/temp PNG files. Image conversions and annotated asset paths remain to be ported." });
+            return Results.BadRequest(new { error = "unsupported_view_options", message = "This route currently serves original input/output/temp PNG files. Image conversions and annotated asset paths remain to be ported." });
         string? filename = query["filename"].FirstOrDefault();
         if (string.IsNullOrEmpty(filename)) return Results.BadRequest(new { error = "missing_filename" });
         if (!filename.EndsWith(".png", StringComparison.OrdinalIgnoreCase))

@@ -4,6 +4,7 @@
       <TextBlock Text="ComfySharp" FontSize="22" FontWeight="SemiBold" Margin="4,4,24,4" VerticalAlignment="Center"/>
       <Button Content="New" Click="NewClicked"/><Button Content="Open…" Click="OpenClicked"/><Button Content="Save" Click="SaveClicked"/><Button Content="Save as…" Click="SaveAsClicked"/>
       <Button Content="Undo" Click="UndoClicked"/><Button Content="Redo" Click="RedoClicked"/>
+      <Button Content="Import image…" Click="ImportImageClicked"/>
       <Button Content="Export prompt…" Click="ExportClicked"/><Button Content="Queue" Click="QueueClicked"/>
       <Button Content="Queue / history" Click="HistoryClicked"/><Button Content="Interrupt last job" Click="InterruptClicked"/>
       <Button Content="Restart Host" Click="RestartClicked"/>

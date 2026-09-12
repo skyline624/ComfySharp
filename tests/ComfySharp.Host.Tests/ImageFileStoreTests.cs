@@ -78,7 +78,7 @@ public sealed class ImageFileStoreTests : IDisposable
         Assert.Throws<ArgumentException>(() => store.PrepareDirectory("output", subfolder));
 
     [Theory]
-    [InlineData("input")]
+    [InlineData("unknown")]
     [InlineData("OUTPUT")]
     [InlineData("../outside")]
     public void Unknown_media_types_are_not_redirected_to_output(string type) =>

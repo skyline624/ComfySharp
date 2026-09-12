@@ -7,6 +7,7 @@ public static class Program
     public static string? ModelsDirectory { get; private set; }
     public static string? DataDirectory { get; private set; }
     public static string? InitialWorkflow { get; private set; }
+    public static string? InitialImage { get; private set; }
     public static string? Sd15SmokeReport { get; private set; }
     public static string InferenceDevice { get; private set; } = "cpu";
     public static bool IsDiagnostic => SmokeTest || Sd15SmokeReport is not null;
@@ -17,6 +18,7 @@ public static class Program
         SmokeTest = args.Contains("--smoke-test");
         ModelsDirectory = Option(args, "--models-dir"); DataDirectory = Option(args, "--data-dir");
         InitialWorkflow = Option(args, "--workflow"); Sd15SmokeReport = Option(args, "--sd15-smoke-report");
+        InitialImage = Option(args, "--import-image");
         int deviceIndex = Array.IndexOf(args, "--inference-device");
         if (deviceIndex >= 0)
         {

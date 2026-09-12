@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" />
+    <ProjectReference Include="../ComfySharp.Contracts/ComfySharp.Contracts.csproj" />
+  </ItemGroup>
+</Project>

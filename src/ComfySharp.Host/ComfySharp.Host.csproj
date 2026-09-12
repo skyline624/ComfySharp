@@ -4,5 +4,6 @@
     <ProjectReference Include="../ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
     <ProjectReference Include="../ComfySharp.Nodes.Tensor/ComfySharp.Nodes.Tensor.csproj" />
     <ProjectReference Include="../ComfySharp.Storage/ComfySharp.Storage.csproj" />
+    <ProjectReference Include="../ComfySharp.Media/ComfySharp.Media.csproj" />
   </ItemGroup>
 </Project>

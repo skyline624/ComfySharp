@@ -57,6 +57,7 @@ public static class PromptCompiler
         ["KSampler"] = new("KSampler", [new("seed"), new("control_after_generate", false), new("steps"), new("cfg"), new("sampler_name"), new("scheduler"), new("denoise")]),
         ["VAEDecode"] = new("VAEDecode", []),
         ["VAEEncode"] = new("VAEEncode", []),
+        ["LoadImage"] = new("LoadImage", [new("image")]),
         ["SaveImage"] = new("SaveImage", [new("filename_prefix")]),
         ["PreviewImage"] = new("PreviewImage", [])
     };

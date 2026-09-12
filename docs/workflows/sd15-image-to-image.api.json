@@ -1,0 +1,10 @@
+{
+  "1": { "class_type": "CheckpointLoaderSimple", "inputs": { "ckpt_name": "v1-5-pruned-emaonly.safetensors" } },
+  "2": { "class_type": "CLIPTextEncode", "inputs": { "clip": ["1", 1], "text": "a photograph of a green apple on a wooden table" } },
+  "3": { "class_type": "CLIPTextEncode", "inputs": { "clip": ["1", 1], "text": "" } },
+  "4": { "class_type": "LoadImage", "inputs": { "image": "select-image.png" } },
+  "5": { "class_type": "VAEEncode", "inputs": { "pixels": ["4", 0], "vae": ["1", 2] } },
+  "6": { "class_type": "KSampler", "inputs": { "model": ["1", 0], "seed": 1, "steps": 20, "cfg": 7.0, "sampler_name": "euler", "scheduler": "karras", "positive": ["2", 0], "negative": ["3", 0], "latent_image": ["5", 0], "denoise": 0.7 } },
+  "7": { "class_type": "VAEDecode", "inputs": { "samples": ["6", 0], "vae": ["1", 2] } },
+  "8": { "class_type": "SaveImage", "inputs": { "images": ["7", 0], "filename_prefix": "ComfySharp_image_input" } }
+}

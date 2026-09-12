@@ -1,5 +1,15 @@
 # Third-party provenance
 
+`ImageInputNodes.cs` adapts `LoadImage` from the frozen ComfyUI `nodes.py` and
+its image/mask contract from `comfy_api/latest/_input_impl/video_types.py`, under
+the ComfyUI GPLv3 provenance below. `NativeImageDecoder.cs` uses SkiaSharp and
+its native assets (including Linux.NoDependencies), version 3.119.4, under
+their existing BSD/MIT notices. `Png16Decoder.cs` is an original C# PNG sample
+decoder. The nine `tests/ComfySharp.Host.Tests/Fixtures/input-*` images are
+original small codec test patterns created for ComfySharp and distributed
+under this project's GPLv3 licence. See [LOAD_IMAGE.md](docs/LOAD_IMAGE.md)
+for the implementation scope and remaining source parity work.
+
 ComfySharp is an independent C# port of ComfyUI. It is not an official Comfy-Org release.
 
 Functional reference: [ComfyUI at 1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a](https://github.com/comfy-org/ComfyUI/tree/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a), copyright ComfyUI contributors, GNU GPL version 3. The complete upstream GPL text is preserved in LICENSE.

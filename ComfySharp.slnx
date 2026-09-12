@@ -5,6 +5,7 @@
     <Project Path="src/ComfySharp.Desktop/ComfySharp.Desktop.csproj" />
     <Project Path="src/ComfySharp.Host/ComfySharp.Host.csproj" />
     <Project Path="src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
+    <Project Path="src/ComfySharp.Media/ComfySharp.Media.csproj" />
     <Project Path="src/ComfySharp.Nodes/ComfySharp.Nodes.csproj" />
     <Project Path="src/ComfySharp.Nodes.Tensor/ComfySharp.Nodes.Tensor.csproj" />
     <Project Path="src/ComfySharp.Storage/ComfySharp.Storage.csproj" />

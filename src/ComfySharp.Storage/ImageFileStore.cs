@@ -48,6 +48,30 @@ public sealed class ImageFileStore : IImageFileStore
     public Stream OpenRead(ImageFileDescriptor file) => new FileStream(ResolveFile(file), FileMode.Open, FileAccess.Read,
         FileShare.Read, bufferSize: 65536, options: FileOptions.Asynchronous | FileOptions.SequentialScan);
 
+    public bool IsFile(ImageFileDescriptor file)
+    {
+        try { return File.Exists(ResolveFile(file)); }
+        catch (ArgumentException) { return false; }
+    }
+
+    public async Task WriteAtomicAsync(ImageFileDescriptor file, ReadOnlyMemory<byte> bytes, CancellationToken token)
+    {
+        string destination = ResolveFile(file);
+        var temporary = file with { Filename = ".upload-" + Guid.NewGuid().ToString("N") + ".tmp" };
+        string temporaryPath = ResolveFile(temporary);
+        try
+        {
+            await using (var stream = new FileStream(temporaryPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, FileOptions.Asynchronous))
+            {
+                await stream.WriteAsync(bytes, token); await stream.FlushAsync(token);
+            }
+            token.ThrowIfCancellationRequested();
+            destination = ResolveFile(file);
+            File.Move(temporaryPath, destination, overwrite: true);
+        }
+        finally { if (File.Exists(temporaryPath)) File.Delete(temporaryPath); }
+    }
+
     private string ResolveFile(ImageFileDescriptor file)
     {
         ArgumentNullException.ThrowIfNull(file);
@@ -74,7 +98,7 @@ public sealed class ImageFileStore : IImageFileStore
 
     private string MediaRoot(string type)
     {
-        if (type is not ("output" or "temp")) throw new ArgumentException("Image type must be output or temp.", nameof(type));
+        if (type is not ("input" or "output" or "temp")) throw new ArgumentException("Image type must be input, output or temp.", nameof(type));
         string path = PhysicalPath(Path.Combine(root, type));
         RequireInside(root, path);
         return path;

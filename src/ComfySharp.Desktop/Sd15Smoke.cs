@@ -13,10 +13,12 @@ public sealed partial class MainWindow
     {
         var watch = Stopwatch.StartNew();
         var prompt = Compile(true);
-        string[] expectedTypes = ["CheckpointLoaderSimple", "CLIPTextEncode", "EmptyLatentImage", "KSampler", "VAEDecode", "SaveImage"];
+        string[] expectedTypes = ["CheckpointLoaderSimple", "CLIPTextEncode", "KSampler", "VAEDecode", "SaveImage"];
         foreach (string type in expectedTypes)
             if (!prompt.Any(p => p.Value?["class_type"]?.GetValue<string>() == type))
                 throw new InvalidOperationException("SD1.5 smoke document is missing " + type);
+        if (!prompt.Any(p => p.Value?["class_type"]?.GetValue<string>() is "EmptyLatentImage" or "LoadImage"))
+            throw new InvalidOperationException("SD1.5 smoke requires a latent or image source.");
         var target = prompt.Single(p => p.Value?["class_type"]?.GetValue<string>() == "SaveImage").Key;
         var snapshot = ActiveEditor.Document.Snapshot(); var ticket = ActiveEditor.BeginSubmission();
         var session = hostSession.Id; var readImage = host.CaptureImageReader(); var images = new JsonArray();

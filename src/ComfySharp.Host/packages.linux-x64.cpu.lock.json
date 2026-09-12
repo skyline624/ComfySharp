@@ -28,13 +28,13 @@
       },
       "SkiaSharp.NativeAssets.macOS": {
         "type": "Transitive",
-        "resolved": "2.88.6",
-        "contentHash": "Sko9LFxRXSjb3OGh5/RxrVRXxYo48tr5NKuuSy6jB85GrYt8WRqVY1iLOLwtjPiVAt4cp+pyD4i30azanS64dw=="
+        "resolved": "3.119.4",
+        "contentHash": "fgBOWEqbY012x7gMfJU4ezgz6dfhJb30Z6YdW35h85Zoe39+a8YNbAAwL29ihPfWoppg5AjvyKNzD1oCvlqWwA=="
       },
       "SkiaSharp.NativeAssets.Win32": {
         "type": "Transitive",
-        "resolved": "2.88.6",
-        "contentHash": "7TzFO0u/g2MpQsTty4fyCDdMcfcWI+aLswwfnYXr3gtNS6VLKdMXPMeKpJa3pJSLnUBN6wD0JjuCe8OoLBQ6cQ=="
+        "resolved": "3.119.4",
+        "contentHash": "XOpbx/4CReO2wYsq2s6rbvdauc6dntG4Zv499sHGTJ87bwZaFXszFkwql3+FIZMc8kUPeaj3Mx2ezIJmo8a1Kg=="
       },
       "SQLite": {
         "type": "Transitive",
@@ -78,6 +78,14 @@
           "TorchSharp": "[0.107.0, )"
         }
       },
+      "comfysharp.media": {
+        "type": "Project",
+        "dependencies": {
+          "ComfySharp.Contracts": "[0.1.0-dev, )",
+          "SkiaSharp": "[3.119.4, )",
+          "SkiaSharp.NativeAssets.Linux.NoDependencies": "[3.119.4, )"
+        }
+      },
       "comfysharp.nodes": {
         "type": "Project",
         "dependencies": {
@@ -117,12 +125,18 @@
       "SkiaSharp": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",
-        "resolved": "2.88.6",
-        "contentHash": "wdfeBAQrEQCbJIRgAiargzP1Uy+0grZiG4CSgBnhAgcJTsPzlifIaO73JRdwIlT3TyBoeU9jEqzwFUhl4hTYnQ==",
+        "resolved": "3.119.4",
+        "contentHash": "53NOSUZ1Us+91Sm0uCkIivh/k7jOowRErZT2sIWwPFN9mLUvdxnE6rS4sWo4255+Rd2MWUSF+j0NMZHD6Cke+Q==",
         "dependencies": {
-          "SkiaSharp.NativeAssets.Win32": "2.88.6",
-          "SkiaSharp.NativeAssets.macOS": "2.88.6"
+          "SkiaSharp.NativeAssets.Win32": "3.119.4",
+          "SkiaSharp.NativeAssets.macOS": "3.119.4"
         }
+      },
+      "SkiaSharp.NativeAssets.Linux.NoDependencies": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "3.119.4",
+        "contentHash": "iFnpOfZoim2SwhSPy0EJNZtQAaWM7D0A6Q1YvquwOXUdQAFrSy81Tfb1I4c0IHrrQnoVjcZPcwOc1+VM2ja77w=="
       },
       "SQLitePCLRaw.bundle_e_sqlite3": {
         "type": "CentralTransitive",

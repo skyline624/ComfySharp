@@ -36,7 +36,7 @@ dotnet run --no-build -c Release --project src/ComfySharp.Desktop -- --inference
 ```
 
 Le workflow part d'une image produite par le premier sampler. Le chargement d'un
-fichier externe par `LoadImage` reste à porter. `VAEEncode` accepte actuellement
+fichier externe est désormais décrit dans [LOAD_IMAGE.md](LOAD_IMAGE.md). `VAEEncode` accepte actuellement
 une image de 32 à 519 pixels par dimension, recadrée au centre vers un multiple
 de huit de 32 à 512 ; les trois premiers canaux sont utilisés. Les réseaux et
 les calculs restent sur le périphérique sélectionné, avec transferts explicites

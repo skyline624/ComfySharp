@@ -92,7 +92,7 @@ public sealed class ImageFileHostTests : IDisposable
     [InlineData("?filename=absent.png&subfolder=unknown", 404)]
     [InlineData("?filename=..%2Fescape.png", 400)]
     [InlineData("?filename=escape.png&subfolder=..", 400)]
-    [InlineData("?filename=escape.png&type=input", 400)]
+    [InlineData("?filename=escape.png&type=input", 404)]
     [InlineData("?filename=image.png&channel=alpha", 400)]
     [InlineData("?filename=image.jpg", 400)]
     public async Task View_rejects_unsupported_requests_and_confines_paths(string query, int status)

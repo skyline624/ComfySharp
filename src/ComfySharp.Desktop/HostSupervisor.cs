@@ -103,6 +103,20 @@ public sealed class HostSupervisor : IDisposable
         finally { gate.Release(); }
     }
     public async Task<JsonObject> GetAsync(string route) => await client.GetFromJsonAsync<JsonObject>(Endpoint(route), JsonSerializerOptions.Default) ?? new JsonObject();
+    public async Task<string> UploadImageAsync(Stream stream, string filename, CancellationToken cancellationToken = default)
+    {
+        var endpoint = Endpoint("/upload/image"); long captured = generation;
+        using var uploadClient = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromMinutes(1) };
+        using var form = new MultipartFormDataContent();
+        form.Add(new StreamContent(stream), "image", filename);
+        using var response = await uploadClient.PostAsync(endpoint, form, cancellationToken);
+        if (disposed || !Ready || captured != generation) throw new OperationCanceledException("The Host session ended during image upload.");
+        var text = await response.Content.ReadAsStringAsync(cancellationToken);
+        if (!response.IsSuccessStatusCode) throw new InvalidOperationException($"Image upload failed: {text}");
+        var result = JsonNode.Parse(text)!.AsObject();
+        string name = result["name"]!.GetValue<string>(), folder = result["subfolder"]!.GetValue<string>();
+        return folder.Length == 0 ? name : folder + "/" + name;
+    }
     public Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null, JsonObject? workflow = null)
     {
         return PostAsync("/prompt", CreateSubmission(prompt, clientId, targets, workflow));
