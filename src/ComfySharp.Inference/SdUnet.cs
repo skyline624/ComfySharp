@@ -66,15 +66,15 @@ public sealed class SdUnet : IDisposable
     /// This allowance limits patched weights, not activations. No gradient checkpointing or offload yet.</summary>
     public Tensor ForwardForTraining<TPatch>(Tensor latentNchw, Tensor timesteps, Tensor context,
         IReadOnlyDictionary<string, TPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
-        CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
+        CancellationToken cancellationToken = default, bool bypassMode = false) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(patches);
-        return ForwardCore(latentNchw, timesteps, context, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes, cancellationToken);
+        return ForwardCore(latentNchw, timesteps, context, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes, cancellationToken, bypassMode);
     }
 
     private Tensor ForwardCore(Tensor latentNchw, Tensor timesteps, Tensor context,
-        IReadOnlyDictionary<string, TrainableWeightPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken)
+        IReadOnlyDictionary<string, TrainableWeightPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken, bool bypassMode = false)
     {
         cancellationToken.ThrowIfCancellationRequested();
         using var source = RetainWeights();
@@ -86,7 +86,9 @@ public sealed class SdUnet : IDisposable
         InferenceDevice.RequireSame(source.Device, context, nameof(context));
         using var scope = NewDisposeScope();
         using var gradMode = set_grad_enabled(patches is not null);
-        using var operation = patches is null ? source.Retain() : source.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken);
+        using var operation = patches is null ? source.Retain() : bypassMode
+            ? source.WithTrainingBypassLora(patches, maxPatchedWeightBytes, cancellationToken)
+            : source.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
         var observer = DiagnosticObserver;
         var fineObserver = FineDiagnosticObserver;

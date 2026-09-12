@@ -54,11 +54,11 @@ public sealed class SdDenoiser : IDisposable
     /// Input/sigma/context gradients are preserved. Dataset ownership and detachment belong to the training caller.</summary>
     public Tensor DenoiseForTraining<TPatch>(Tensor latent, Tensor sigma, Tensor context,
         IReadOnlyDictionary<string, TPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
-        CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
+        CancellationToken cancellationToken = default, bool bypassMode = false) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
         using var operation = RetainModel();
-        return Apply(operation, latent, sigma, context, cancellationToken, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes);
+        return Apply(operation, latent, sigma, context, cancellationToken, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes, bypassMode);
     }
 
     public Tensor DenoiseGuided(Tensor latent, Tensor sigma, Tensor conditional, Tensor? unconditional,
@@ -108,7 +108,7 @@ public sealed class SdDenoiser : IDisposable
     }
 
     private Tensor Apply(SdUnet operation, Tensor latent, Tensor sigma, Tensor context, CancellationToken cancellationToken,
-        IReadOnlyDictionary<string, TrainableWeightPatch>? patches = null, long maxPatchedWeightBytes = 0)
+        IReadOnlyDictionary<string, TrainableWeightPatch>? patches = null, long maxPatchedWeightBytes = 0, bool bypassMode = false)
     {
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
@@ -124,7 +124,7 @@ public sealed class SdDenoiser : IDisposable
         var time = indices.to_type(ScalarType.Float32).reshape(-1);
         using var prediction = patches is null
             ? operation.Forward(input, time, context, cancellationToken)
-            : operation.ForwardForTraining(input, time, context, patches, maxPatchedWeightBytes, cancellationToken);
+            : operation.ForwardForTraining(input, time, context, patches, maxPatchedWeightBytes, cancellationToken, bypassMode);
         return patches is null
             ? SdSamplingMath.Denoised(latent, prediction, sigma, PredictionKind, cancellationToken)
             : SdSamplingMath.DenoisedForTraining(latent, prediction, sigma, PredictionKind, cancellationToken);

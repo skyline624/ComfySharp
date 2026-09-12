@@ -7,21 +7,30 @@ public sealed class UnetWeightSet : IDisposable
 {
     private readonly CpuModelWeightBank bank;
     private readonly IReadOnlyDictionary<string, LoraWeightPatch> bypass;
+    private readonly IReadOnlyDictionary<string, TrainableLoraPatch> trainingBypass;
     public SdUnetConfig Config { get; }
     public torch.Device Device => bank.Device;
     public UnetWeightSet To(torch.Device device, CancellationToken cancellationToken = default) => Copy(bank.To(device, cancellationToken), bypass, p => p.To(device), cancellationToken);
-    private UnetWeightSet(SdUnetConfig config, CpuModelWeightBank bank, IReadOnlyDictionary<string, LoraWeightPatch>? bypass = null)
-    { Config = config; this.bank = bank; this.bypass = bypass ?? new Dictionary<string, LoraWeightPatch>(); }
+    private UnetWeightSet(SdUnetConfig config, CpuModelWeightBank bank, IReadOnlyDictionary<string, LoraWeightPatch>? bypass = null,
+        IReadOnlyDictionary<string, TrainableLoraPatch>? trainingBypass = null)
+    { Config = config; this.bank = bank; this.bypass = bypass ?? new Dictionary<string, LoraWeightPatch>(); this.trainingBypass = trainingBypass ?? new Dictionary<string, TrainableLoraPatch>(); }
     private UnetWeightSet Copy(CpuModelWeightBank next, IReadOnlyDictionary<string, LoraWeightPatch> factors, Func<LoraWeightPatch, LoraWeightPatch> retain, CancellationToken cancellationToken = default)
     {
         var owned = new Dictionary<string, LoraWeightPatch>(StringComparer.Ordinal);
+        var training = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
         try
         {
             foreach (var (name, patch) in factors) { cancellationToken.ThrowIfCancellationRequested(); owned.Add(name, retain(patch)); }
             cancellationToken.ThrowIfCancellationRequested();
-            return new(Config, next, owned);
+            foreach (var (name, patch) in trainingBypass)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                InferenceDevice.RequireSame(next.Device, patch.Up, name);
+                training.Add(name, patch.Retain());
+            }
+            return new(Config, next, owned, training);
         }
-        catch { next.Dispose(); foreach (var patch in owned.Values) patch.Dispose(); throw; }
+        catch { next.Dispose(); foreach (var patch in owned.Values) patch.Dispose(); foreach (var patch in training.Values) patch.Dispose(); throw; }
     }
     /// <summary>Ownership transfers only after complete validation and normalization to 64-byte aligned storage.
     /// Misaligned tensors are copied bit-for-bit into native allocations; their original wrappers are disposed
@@ -59,11 +68,53 @@ public sealed class UnetWeightSet : IDisposable
     }
     internal torch.Tensor ApplyBypass(string prefix, torch.Tensor input, torch.Tensor baseOutput,
         IReadOnlyList<long>? kernelSize = null, long stride = 1, long padding = 0)
-        => bypass.TryGetValue(prefix + ".weight", out var patch)
+    {
+        using var scope = torch.NewDisposeScope();
+        var result = bypass.TryGetValue(prefix + ".weight", out var patch)
             ? patch.ApplyBypass(input, baseOutput, kernelSize, stride, padding) : baseOutput;
+        if (trainingBypass.TryGetValue(prefix + ".weight", out var training))
+            result = training.ApplyBypass(input, result, kernelSize, stride, padding);
+        // Borrowed baseOutput belongs to the caller's scope and must not be moved out of it.
+        return ReferenceEquals(result, baseOutput) ? result : result.MoveToOuterDisposeScope();
+    }
     internal torch.Tensor GetTensor(string name) => bank.GetTensor(name);
     internal UnetWeightSet WithTrainingLora(IReadOnlyDictionary<string, TrainableWeightPatch> patches,
         long maxPatchedWeightBytes, CancellationToken cancellationToken)
         => Copy(bank.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken), bypass, p => p.Retain(), cancellationToken);
-    public void Dispose() { bank.Dispose(); foreach (var patch in bypass.Values) patch.Dispose(); }
+    internal UnetWeightSet WithTrainingBypassLora(IReadOnlyDictionary<string, TrainableWeightPatch> patches,
+        long maxPatchedWeightBytes, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
+        if (patches.Count == 0) throw new ArgumentException("Training requires at least one adapter.", nameof(patches));
+        if (maxPatchedWeightBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
+        var factors = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        var regular = new Dictionary<string, TrainableWeightPatch>(StringComparer.Ordinal);
+        CpuModelWeightBank? next = null;
+        var frozen = new Dictionary<string, LoraWeightPatch>(StringComparer.Ordinal);
+        try
+        {
+            foreach (var (name, patch) in patches)
+            {
+                cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patch);
+                var weight = bank.GetTensor(name);
+                if (patch is TrainableLoraPatch lora)
+                {
+                    using var retained = lora.Retain();
+                    if (weight.dim() < 2 || !name.EndsWith(".weight", StringComparison.Ordinal) ||
+                        weight.shape[0] != retained.Up.shape[0] || weight.numel() / weight.shape[0] != retained.Down.shape[1])
+                        throw new ArgumentException("Trainable bypass target shape differs: " + name, nameof(patches));
+                    InferenceDevice.RequireSame(Device, retained.Up, name);
+                    factors.Add(name, retained.Retain());
+                }
+                else regular.Add(name, patch);
+            }
+            next = regular.Count == 0 ? bank.Retain() : bank.WithTrainingLora(regular, maxPatchedWeightBytes, cancellationToken);
+            foreach (var (name, patch) in bypass) { cancellationToken.ThrowIfCancellationRequested(); frozen.Add(name, patch.Retain()); }
+            cancellationToken.ThrowIfCancellationRequested();
+            // This operation-only bank lives until Forward returns; autograd owns saved tensors afterwards.
+            return new UnetWeightSet(Config, next, frozen, factors);
+        }
+        catch { next?.Dispose(); foreach (var patch in frozen.Values) patch.Dispose(); foreach (var patch in factors.Values) patch.Dispose(); throw; }
+    }
+    public void Dispose() { bank.Dispose(); foreach (var patch in bypass.Values) patch.Dispose(); foreach (var patch in trainingBypass.Values) patch.Dispose(); }
 }

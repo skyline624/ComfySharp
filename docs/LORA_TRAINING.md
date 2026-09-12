@@ -11,7 +11,9 @@ with explicit alpha. Conv factors use a flattened input/kernel dimension. Caller
 must serialize forward, backward, parameter updates and export; public parameter
 wrappers are borrowed and must not be disposed, resized or moved. `Snapshot`
 produces an independent frozen patch for ordinary inference. LoCon/DoRA training,
-checkpointing, bypass injection, offload and quantized backward remain required.
+checkpointing, offload and quantized backward remain required. The
+[two-factor SD Float32 training bypass](LORA_TRAINING_BYPASS.md) now preserves alpha
+gradients and is connected to the denoiser and dataset loop through `BypassMode`.
 
 `LoraTrainingFile.SaveNew` writes explicit alias prefixes with `lora_up.weight`,
 `lora_down.weight` and scalar `alpha`. CPU factor snapshots are Float32; alpha is

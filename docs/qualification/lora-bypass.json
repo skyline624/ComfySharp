@@ -55,5 +55,15 @@
     "Conv1d/Conv3d",
     "Full public workflow and platform qualification"
   ],
-  "ci": "Pending publication; local results do not imply three-platform validation"
+  "implementationCommit": "c0b834b116d4fcefa1be38560d1d9e3ef63df229",
+  "ci": {
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34723525192",
+    "conclusion": "failure",
+    "exportAndBypassTestsEachPlatform": { "passed": 58, "failed": 0, "skipped": 0 },
+    "hostTestsEachPlatform": { "passed": 315, "failed": 0, "skipped": 0 },
+    "windows": { "job": 103633538850, "conclusion": "failure", "trainingNumericalFailures": 2, "ordinaryInference": "not executed after failure" },
+    "linux": { "job": 103633538972, "conclusion": "failure", "trainingNumericalFailures": 2, "ordinaryInference": "not executed after failure" },
+    "macos": { "job": 103633538917, "conclusion": "failure", "ordinaryInferencePassed": 928, "stockClipFailures": 2 },
+    "thresholdsChanged": false
+  }
 }

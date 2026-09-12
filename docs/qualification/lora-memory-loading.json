@@ -20,5 +20,14 @@
   "familyQualified": false,
   "bypassImplemented": false,
   "modelsCopiedOrDownloaded": false,
-  "ci": "Pending implementation publication"
+  "implementationCommit": "a94d018109967a58a4986b07e02ff92fc988aa8d",
+  "ci": {
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34722211853",
+    "conclusion": "failure",
+    "exportAndMemoryTestsEachPlatform": { "passed": 43, "failed": 0, "skipped": 0 },
+    "hostTestsEachPlatform": { "passed": 315, "failed": 0, "skipped": 0 },
+    "windows": { "job": 103630048602, "conclusion": "success", "ordinaryInferencePassed": 913 },
+    "linux": { "job": 103630048475, "conclusion": "failure", "trainingNumericalFailures": 2, "ordinaryInference": "not executed after failure" },
+    "macos": { "job": 103630048564, "conclusion": "failure", "ordinaryInferencePassed": 913, "stockClipFailures": 2 }
+  }
 }

@@ -2,7 +2,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Owns two Float32 leaf factors and optionally a trainable Float32 alpha for ordinary LoRA training.
+/// <summary>Owns two Float32 leaf factors and optionally a trainable Float32 alpha for ordinary or bypass LoRA training.
 /// Callers must serialize forward/backward/updates. Borrowed parameters must not be disposed,
 /// resized or moved; use a retained owner to keep them alive across an optimization step.</summary>
 public sealed class TrainableLoraPatch : TrainableWeightPatch
@@ -65,7 +65,33 @@ public sealed class TrainableLoraPatch : TrainableWeightPatch
         }
         return LoraMath.Apply(weight, operation.Up, operation.Down, alpha: operation.Alpha, cancellationToken: cancellationToken);
     }
-    /// <summary>Independent frozen adapter snapshot for ordinary inference. Later training cannot mutate it.</summary>
+    /// <summary>Frozen LoraDiff.h for new two-factor Float32 SD adapters, preserving trainable alpha.</summary>
+    internal Tensor ApplyBypass(Tensor input, Tensor baseOutput, IReadOnlyList<long>? kernelSize, long stride, long padding)
+    {
+        using var operation = Retain(); using var scope = NewDisposeScope();
+        if (input.dtype != ScalarType.Float32 || baseOutput.dtype != ScalarType.Float32 || input.is_sparse || baseOutput.is_sparse)
+            throw new ArgumentException("Trainable SD bypass requires dense Float32 activations.");
+        InferenceDevice.RequireSame(input.device, baseOutput, nameof(baseOutput));
+        InferenceDevice.RequireSame(input.device, operation.Up, nameof(Up));
+        Tensor result;
+        if (kernelSize is null)
+            result = nn.functional.linear(nn.functional.linear(input, operation.Down), operation.Up);
+        else
+        {
+            if (input.dim() != 4 || kernelSize.Count != 2 || kernelSize.Any(v => v <= 0) || stride < 1 || padding < 0)
+                throw new ArgumentException("Trainable SD bypass requires valid Conv2d geometry.");
+            var down = operation.Down.reshape(operation.Down.shape[0], input.shape[1], kernelSize[0], kernelSize[1]);
+            var up = operation.Up.reshape(operation.Up.shape[0], operation.Up.shape[1], 1, 1);
+            result = nn.functional.conv2d(nn.functional.conv2d(input, down, strides: new[] { stride, stride }, padding: new[] { padding, padding }), up);
+        }
+        if (!result.shape.SequenceEqual(baseOutput.shape)) throw new ArgumentException("Trainable bypass output shape differs from the base module.");
+        // LoraDiff.h computes a tensor scale, including alpha's gradient. Do not call item().
+        var scale = operation.AlphaParameter is { } alpha ? alpha / operation.Down.shape[0]
+            : tensor((float)operation.Alpha, device: input.device) / operation.Down.shape[0];
+        return (baseOutput + result * (scale * 1.0)).MoveToOuterDisposeScope();
+    }
+
+    /// <summary>Independent frozen adapter snapshot. Later training cannot mutate it.</summary>
     public LoraWeightPatch Snapshot()
     {
         using var operation = Retain();

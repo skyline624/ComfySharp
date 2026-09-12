@@ -11,7 +11,7 @@ public static class SdLoraTrainingObjective
     /// Inputs are borrowed without mutating values, grad flags or gradient buffers. Only adapter leaves train.</summary>
     public static Tensor CalculateLoss<TPatch>(SdDenoiser denoiser, Tensor diffusionLatent, Tensor noise, Tensor sigma, Tensor context,
         IReadOnlyDictionary<string, TPatch> patches, string lossName,
-        long maxPatchedWeightBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
+        long maxPatchedWeightBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default, bool bypassMode = false) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(denoiser);
         ArgumentNullException.ThrowIfNull(patches); ArgumentNullException.ThrowIfNull(context);
@@ -22,7 +22,7 @@ public static class SdLoraTrainingObjective
         using var trainingSigma = sigma.detach().clone().requires_grad_();
         using var trainingContext = context.detach();
         noisy.requires_grad_();
-        using var prediction = denoiser.DenoiseForTraining(noisy, trainingSigma, trainingContext, patches, maxPatchedWeightBytes, cancellationToken);
+        using var prediction = denoiser.DenoiseForTraining(noisy, trainingSigma, trainingContext, patches, maxPatchedWeightBytes, cancellationToken, bypassMode);
         var loss = TrainingLoss.Calculate(lossName, prediction, target);
         cancellationToken.ThrowIfCancellationRequested();
         return loss.MoveToOuterDisposeScope();

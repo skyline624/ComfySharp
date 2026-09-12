@@ -48,7 +48,8 @@ dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd-lora-bypass 
 
 Voir [la preuve et les hashes](qualification/lora-bypass.json) et
 [le laboratoire source](../labs/lora-bypass-source/README.md).
-Restent ouverts : entraînement bypass avec alpha entraînable, précision mixte,
+Le [chemin d'entraînement bypass avec alpha entraînable](LORA_TRAINING_BYPASS.md)
+est maintenant raccordé à la boucle SD Float32. Restent ouverts : précision mixte,
 quantification, Conv1d/Conv3d, autres architectures, nœud d'entraînement complet,
 workflows publics et qualification des plateformes. **Aucune famille n'est
 déclarée entièrement compatible par ces résultats.**

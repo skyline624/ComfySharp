@@ -67,3 +67,19 @@ which replaces external wrapper dispatch. Full predictions/losses and selected
 factor, norm, bias and alpha gradients/updates are recorded; every source leaf
 must have a finite gradient. This is reduced CPU Float32 evidence, not a complete
 node, existing-adapter import, other algorithm or pretrained comparison.
+
+## Training bypass corpus
+
+`bypass.py --source CHECKOUT --output NEW.json` executes frozen `LoraDiff.h`,
+`BypassForwardHook._bypass_forward`, `get_module_type_info`, `BiasDiff` and the
+reduced SD1/SD2 `_forward`. It attaches six factor adapters with trainable alpha
+using the source hook constructor and forward method. Devices are already CPU/F32;
+the device-dispatch part of `inject` is not executed. Two norm/bias differences
+use `functional_call` to represent weight wrappers, as in the ordinary corpus.
+
+Two SGD steps record outputs, losses and every selected gradient/updated parameter.
+Absolute/relative tolerance `3e-5` is fixed before comparison. Fixture SHA-256:
+`31e3879b3139c29a9c19d3e24c4e95df65e5006eda6dc758cf3dfc3797fa48dd`.
+Source Git-blob and helper hashes are recorded in the fixture. .NET tests verify
+and consume this static file without Python. New two-factor Float32 adapters only;
+this does not qualify adapter resume, precision/offload or the complete training node.

@@ -12,6 +12,7 @@ public sealed record SdLoraTrainingOptions
     public string Optimizer { get; init; } = "AdamW";
     public string Loss { get; init; } = "MSE";
     public long MaxPatchedWeightBytes { get; init; } = 512L * 1024 * 1024;
+    public bool BypassMode { get; init; }
 }
 public sealed record SdLoraTrainingProgress(long Microbatch, long OptimizerSteps, float Loss);
 public sealed record SdLoraTrainingResult(IReadOnlyList<float> Losses, long OptimizerSteps, long Microbatches);
@@ -50,7 +51,7 @@ public static class SdLoraTrainingLoop
                 using var detachedContext = context.detach();
                 using var selected = context.shape[0] == 1 ? detachedContext.repeat(group.Indices.Count, 1, 1) : detachedContext.index_select(0, indices);
                 using var onDevice = selected.to(model.Device);
-                var loss = SdLoraTrainingObjective.CalculateLoss(model, group.Latent, group.Noise, group.Sigmas, onDevice, patches, options.Loss, options.MaxPatchedWeightBytes, cancellationToken);
+                var loss = SdLoraTrainingObjective.CalculateLoss(model, group.Latent, group.Noise, group.Sigmas, onDevice, patches, options.Loss, options.MaxPatchedWeightBytes, cancellationToken, options.BypassMode);
                 totalLoss = totalLoss is null ? loss : totalLoss + loss;
             }
             optimizer.AccumulateMean(totalLoss!, batch.Groups.Count, cancellationToken);
