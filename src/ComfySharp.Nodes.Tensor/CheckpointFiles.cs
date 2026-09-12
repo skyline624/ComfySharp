@@ -4,9 +4,10 @@ namespace ComfySharp.Nodes.Tensor;
 public sealed class CheckpointFiles
 {
     private readonly string? root;
-    public CheckpointFiles(string? modelsDirectory)
+    public CheckpointFiles(string? modelsDirectory, string category = "checkpoints")
     {
-        root = string.IsNullOrWhiteSpace(modelsDirectory) ? null : Path.GetFullPath(Path.Combine(modelsDirectory, "checkpoints"));
+        if (category is not ("checkpoints" or "loras")) throw new ArgumentException("Select the checkpoints or loras model category.", nameof(category));
+        root = string.IsNullOrWhiteSpace(modelsDirectory) ? null : Path.GetFullPath(Path.Combine(modelsDirectory, category));
     }
 
     public IReadOnlyList<string> Names()

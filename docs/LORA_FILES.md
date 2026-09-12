@@ -55,8 +55,8 @@ or copying files. None contained the searched SD-style U-Net prefixes. This is
 candidate screening, not complete architecture identification or qualification.
 No external adapter was downloaded and no pretrained adapter workflow is claimed.
 
-Automatic SD/CLIP alias construction, Host/Desktop `LoraLoader` and
-`LoraLoaderModelOnly` nodes, file catalogue integration, real pretrained adapters,
-export/reload and integrated training remain required. No capability matrix row
-is promoted by these synthetic-file tests. Cross-platform/GPU qualification and
-the existing numerical CI failures remain open.
+The [local LoRA nodes](LORA_NODES.md) now supply plain SD/standalone CLIP aliases,
+Host/Desktop loading and the shared file catalogue. Composite encoders, other
+architectures, trained-adapter qualification, export/reload and integrated training
+remain required. No capability matrix row is promoted by this reader's synthetic-file
+tests. Cross-platform/GPU qualification and numerical CI failures remain open.

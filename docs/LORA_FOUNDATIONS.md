@@ -42,8 +42,9 @@ adapters or model families. See the [campaign record](qualification/lora-foundat
 ## Work still required
 
 This is the foundation for lots 6 and 9. The [safe file reader](LORA_FILES.md) now
-loads adapters using explicit aliases. There is no `LoraLoader` node or automatic
-architecture key mapping yet, and no integrated `TrainLoraNode` workflow. LoRA export/reload, patch stacking policies,
+loads adapters using explicit aliases. The [local LoRA nodes](LORA_NODES.md) now add
+plain SD/standalone CLIP name mapping and chained Host/Desktop loading. There is
+no integrated `TrainLoraNode` workflow. LoRA export/reload, advanced patch stacking policies,
 other adapter types, `reshape_weight`, offsets/functions/hooks, quantized bypass,
 optimizer state and end-to-end training remain required. The API currently takes
 explicit canonical weight names and does not infer checkpoint architecture.

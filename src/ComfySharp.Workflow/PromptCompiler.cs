@@ -59,6 +59,8 @@ public static class PromptCompiler
         ["VAEEncode"] = new("VAEEncode", []),
         ["VAEEncodeForInpaint"] = new("VAEEncodeForInpaint", [new("grow_mask_by")]),
         ["SetLatentNoiseMask"] = new("SetLatentNoiseMask", []),
+        ["LoraLoader"] = new("LoraLoader", [new("lora_name"), new("strength_model"), new("strength_clip")]),
+        ["LoraLoaderModelOnly"] = new("LoraLoaderModelOnly", [new("lora_name"), new("strength_model")]),
         ["LoadImage"] = new("LoadImage", [new("image")]),
         ["SaveImage"] = new("SaveImage", [new("filename_prefix")]),
         ["PreviewImage"] = new("PreviewImage", [])

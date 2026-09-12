@@ -28873,8 +28873,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2108",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -28884,7 +28884,13 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "procedural-adapter-integration-only",
+          "reference": "../qualification/lora-nodes.json"
+        }
+      ],
       "scenario": "contract:LoraLoader",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "LoraLoader",
@@ -28898,7 +28904,8 @@
         "nodeId": "LoraLoader",
         "module": "nodes.py",
         "status": "partial-static"
-      }
+      },
+      "implementationScope": "Safe LoRA/LoCon/DoRA loading with plain SD/standalone CLIP aliases and native Host/Desktop integration. GPU SD1.5 uses procedural factors only; trained adapter workflows, broader models and all platform qualifications remain pending."
     },
     {
       "id": "node:CLIPLoader:nodes.py:2109",
@@ -29748,8 +29755,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2136",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -29759,7 +29766,13 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "procedural-adapter-integration-only",
+          "reference": "../qualification/lora-nodes.json"
+        }
+      ],
       "scenario": "contract:LoraLoaderModelOnly",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "LoraLoaderModelOnly",
@@ -29773,7 +29786,8 @@
         "nodeId": "LoraLoaderModelOnly",
         "module": "nodes.py",
         "status": "partial-static"
-      }
+      },
+      "implementationScope": "Safe LoRA/LoCon/DoRA loading with plain SD/standalone CLIP aliases and native Host/Desktop integration. GPU SD1.5 uses procedural factors only; trained adapter workflows, broader models and all platform qualifications remain pending."
     },
     {
       "id": "model-configuration:SD15",

@@ -1,0 +1,429 @@
+{
+  "status": "local-lora-nodes-with-procedural-adapter-windows-cuda-executed",
+  "familyQualified": false,
+  "trainedAdapterQualified": false,
+  "trainingQualified": false,
+  "releaseReady": false,
+  "baseCommit": "ef33a865185b9b410418bb9fd80ab1f94f3d121b",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "Existing shared file, no copy; hash from prior inpaint verification, not recomputed in this campaign."
+  },
+  "adapter": {
+    "filename": "sd15-procedural-adapter.safetensors",
+    "bytes": 18239,
+    "sha256": "39f77bea8864e32e038ab33cb90e97b4361e6a73f75ad16d01901111e8b7247e",
+    "trained": false,
+    "storage": "Created once in shared loras/ComfySharp_qualification, rehashed unchanged after both native runs.",
+    "factorRecipe": {
+      "lora_unet_conv_out.lora_up.weight": {
+        "shape": [
+          4,
+          1
+        ],
+        "fill": 0.01
+      },
+      "lora_unet_conv_out.lora_down.weight": {
+        "shape": [
+          1,
+          320,
+          3,
+          3
+        ],
+        "fill": 0.001
+      },
+      "lora_te_text_model_encoder_layers_0_self_attn_q_proj.lora_up.weight": {
+        "shape": [
+          768,
+          1
+        ],
+        "fill": 0.001
+      },
+      "lora_te_text_model_encoder_layers_0_self_attn_q_proj.lora_down.weight": {
+        "shape": [
+          1,
+          768
+        ],
+        "fill": 0.001
+      }
+    },
+    "dtype": "F32"
+  },
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/lora-aliases.reference.json",
+    "sha256": "111deda8b5276a819c82309578664c8ddd99e410d48c52dd4586a24d34cde3bb",
+    "cases": {
+      "sd15-checkpoint": {
+        "targets": 282,
+        "aliases": 1692
+      },
+      "clip-l-checkpoint": {
+        "targets": 74,
+        "aliases": 290
+      },
+      "clip_l-33-layer-metadata": {
+        "targets": 201,
+        "aliases": 778
+      },
+      "clip_g-33-layer-metadata": {
+        "targets": 201,
+        "aliases": 779
+      }
+    },
+    "exact": true,
+    "scope": "Exact source alias functions with metadata-only model facade. Plain SD config; standalone CLIP. Existing rank>=2 weights only; source mappings to absent/rank-one weights are excluded. Per-target priority preserved; global unrelated-target iteration order is not a contract. Checkpoint payload not read."
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "driver": "610.88",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "runs": [
+      {
+        "case": "zero",
+        "exitCode": 0,
+        "elapsedSeconds": 12.502999,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "a18409923d1f075f7a24a40133c818827b5e3371c178985d254c91caa6ff6519",
+        "pngBytes": 694626,
+        "reportSha256": "dc59404e09249af58744d5aa713a57cb028da218a92e887b1c937e27f3f4c496",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "8",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "8",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "euler",
+              "scheduler": "karras",
+              "denoise": 1.0,
+              "model": [
+                "9",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_LoRA_zero",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          },
+          "8": {
+            "class_type": "LoraLoader",
+            "inputs": {
+              "lora_name": "ComfySharp_qualification/sd15-procedural-adapter.safetensors",
+              "strength_model": 0,
+              "strength_clip": 0,
+              "model": [
+                "1",
+                0
+              ],
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "9": {
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "lora_name": "ComfySharp_qualification/sd15-procedural-adapter.safetensors",
+              "strength_model": 0,
+              "model": [
+                "8",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "case": "patched-and-chained",
+        "exitCode": 0,
+        "elapsedSeconds": 12.3395217,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "434cb336177fb0572e678bec82478ea7524d23fcc0fef04a2c5ca1de4775ffc3",
+        "pngBytes": 694874,
+        "reportSha256": "2bc581961a3c1893d9eb025d0be17da668d11be9c68b28f4eb31a75aa05eb5b6",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "8",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "8",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "euler",
+              "scheduler": "karras",
+              "denoise": 1.0,
+              "model": [
+                "9",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_LoRA",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          },
+          "8": {
+            "class_type": "LoraLoader",
+            "inputs": {
+              "lora_name": "ComfySharp_qualification/sd15-procedural-adapter.safetensors",
+              "strength_model": 0.7,
+              "strength_clip": 0.3,
+              "model": [
+                "1",
+                0
+              ],
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "9": {
+            "class_type": "LoraLoaderModelOnly",
+            "inputs": {
+              "lora_name": "ComfySharp_qualification/sd15-procedural-adapter.safetensors",
+              "strength_model": 0.5,
+              "model": [
+                "8",
+                0
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "claim": "Real pretrained SD1.5 workflow and native preview with procedural factors. Different output hashes establish an observable patch effect, not numerical/semantic parity or trained-style quality."
+  },
+  "tests": {
+    "inference": {
+      "total": 127,
+      "passed": 127,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "87a2212aabc9510f2e11327fab1625e617bbaa776cb47361a803a6fcf6a0c482"
+    },
+    "workflow": {
+      "total": 265,
+      "passed": 265,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "062a8038406522168eb2ee4349708511026a9b59036e5b3f9b4adc2807e67e29"
+    },
+    "desktop": {
+      "total": 115,
+      "passed": 115,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "a54a5fdca53f748eb3df6846bb075be22f8d0031bd71da83551b7a72e3695979"
+    },
+    "host": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "7e38a4dbdfaec3ad6ebb074ff31ed651165e25a72f9b9a1be4e1bb2d559e1c4e"
+    }
+  },
+  "newTestCases": 15,
+  "registeredNodeTypes": 48,
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors",
+    "catalogRelease": "passed, zero warnings/errors after adding LoRA schemas to the audit registry"
+  },
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "3a99a9d96ce8956ba809ec69d05a3794575305e168cdf903c7c1de379d6c5d4c",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "THIRD_PARTY_NOTICES.md": "d9cb54590a6a2f45e875dd2f8bf96c86b5300522006c7c9caa425d820ddab976",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-lora.api.json": "7a0b4d575b529fbfb5921ec3be035f2e437c7d5aff39c155f92c854455571ce4",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-alias-source/README.md": "2fc68fac2be39bf0204c1ef87bcee37c8fce6d29a73e428cf67b8408defad90c",
+    "labs/lora-alias-source/reference.py": "7d02d2fda3c07a063d0afebecc3e91b859d2b8f9d8d989fd3bbe2fa0b3fc9db0",
+    "src/ComfySharp.Host/Program.cs": "25d0693f3023f9266f74ac586a38b7eb9f98287800fe234717f526e310c6d278",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/ComfyClipEncoder.cs": "500b74c2a082c2430613e2ec067920c0158cccfe8f5f4dd5845eb9dbbd4a7762",
+    "src/ComfySharp.Inference/LoraModelAliases.cs": "e42ec6429ba06fc58911a06951d17071307a903fdefd17083d3c4083044d2210",
+    "src/ComfySharp.Nodes.Tensor/CheckpointFiles.cs": "d086a9744bc3cbfc5590fd53f268b0a484730b504bc784a51aadd836a8b4c4fb",
+    "src/ComfySharp.Nodes.Tensor/LoraNodes.cs": "d039d97bdaec4185b366fdc6ff49d195b54ec8b40489cc214455d0038c79f620",
+    "src/ComfySharp.Workflow/PromptCompiler.cs": "cb43537c99be2a468a0d3e2b122104198b52607b8784d3beb23e16f604b47997",
+    "tests/ComfySharp.Host.Tests/LoraHostTests.cs": "a1a6ca503d0dd314ea0ee0f32d690198f4fd8fa9ed564bf68ee880fae80c88ab",
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": "d5fc52c957d3b338f8d81b44c1fbd3bb7248810021c231cac496267c971dc3d0",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "605398354c97f71342ca636674dabfa306c05801032ee09094fa5076c7017e2d",
+    "tests/ComfySharp.Inference.Tests/Fixtures/lora-aliases.reference.json": "111deda8b5276a819c82309578664c8ddd99e410d48c52dd4586a24d34cde3bb",
+    "tests/ComfySharp.Inference.Tests/LoraModelAliasesTests.cs": "c676788d9ebfc930abf18218cca32253f2792572a03ea75c0a3ae05571af5186",
+    "tests/ComfySharp.Inference.Tests/LoraNodeTests.cs": "b4ef315e12a163e7a4bcdd9075d04c8dff4c24f29f66754f3c54d530e46a77cc",
+    "tests/ComfySharp.Workflow.Tests/LoraWorkflowTests.cs": "bb92646febccedaf9d9c9ffdaa734b4feff553018ba38654eb6930a98c30b73d",
+    "tools/ComfySharp.Catalog/Program.cs": "796edc3132abff46d1b97a999248907efcd55a38b79622be4313e902611e8d17"
+  },
+  "previousCI": {
+    "run": 34701465554,
+    "commit": "ef33a865185b9b410418bb9fd80ab1f94f3d121b",
+    "status": "completed",
+    "allOS": "failure",
+    "loraReaderStep": "success on all three OS",
+    "windowsLinuxFailedStep": "Exercise reference fixtures as the first native access in separate processes",
+    "macOSFailedStep": "Compare full CLIP L and G dimensions in a separate CPU process"
+  },
+  "limitations": [
+    "No trained SD adapter or complete model-family qualification. Local preexisting adapter headers did not contain screened SD prefixes; their architectures remain unqualified.",
+    "Only plain SD U-Net and standalone CLIP aliases. Composite encoders, other architectures and rank-one patches remain pending.",
+    "No adapter export/reload training pipeline, integrated training or optimizer state.",
+    "Other adapter providers, reshape_weight, quantization, offsets and hooks remain unavailable.",
+    "No source numerical comparison of the full patched pretrained workflow. GPU lifetime pressure, cancellation campaigns, Linux/CUDA and MPS remain required."
+  ],
+  "catalogueCheck": {
+    "rows": 1171,
+    "localNodeDeclarations": 664,
+    "registeredNodes": 48,
+    "catalogueComplete": false,
+    "errors": 0,
+    "note": "Catalog tool registration list updated after native runs and rebuilt separately with zero warnings/errors; all previously pinned inputs verified unchanged."
+  }
+}

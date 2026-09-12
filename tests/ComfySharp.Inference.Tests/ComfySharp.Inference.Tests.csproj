@@ -17,6 +17,7 @@
     <EmbeddedResource Include="Fixtures/inpaint.reference.json" />
     <EmbeddedResource Include="Fixtures/lora.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-loader.reference.json" />
+    <EmbeddedResource Include="Fixtures/lora-aliases.reference.json" />
     <EmbeddedResource Include="Fixtures/preview-any.cpu.json" />
     <EmbeddedResource Include="Fixtures/image-primitives.protocol.json" />
     <EmbeddedResource Include="Fixtures/image-primitives.reference.json" />
