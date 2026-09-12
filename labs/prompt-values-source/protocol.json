@@ -1,0 +1,626 @@
+{
+  "schema": 1,
+  "id": "prompt-values-boundaries-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "python": "3.12.10",
+  "executionRepeats": 3,
+  "scope": "Exact source link recognition, direct input acquisition, output-node validation/mutation, and post-validation acquisition; no node execution, model or HTTP server.",
+  "phases": [
+    "recognition-original",
+    "acquisition-original",
+    "validation-fresh-copy",
+    "acquisition-after-successful-validation"
+  ],
+  "secondPass": "Explicit only on three wrapper cases, using the first validation mutated prompt and a fresh validated cache through validate_prompt; reported separately.",
+  "comparison": "Typed JSON observations preserve bool/int/float distinction, float64 bits, dict order, missing versus null, list versus tuple. No numeric tolerance and no blanket API parity verdict.",
+  "sanitization": "Traceback arrays inside source validation errors become a declared omitted-frame-count object. All other public fixture values and error messages are retained. No private paths or source stacks are published.",
+  "outsideProfile": [
+    "custom validation overrides",
+    "rawLink",
+    "ACCEPT_ALL_INPUTS",
+    "non-finite numbers",
+    "unbounded integers or coercions",
+    "node execution including PreviewAny.main",
+    "native imports",
+    "external prompt replacement hooks",
+    "HTTP transport"
+  ],
+  "sourceReuse": {
+    "commit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+    "files": [
+      {
+        "path": "labs/autogrow-source/protocol.json",
+        "bytes": 39714,
+        "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+      },
+      {
+        "path": "labs/autogrow-source/reference.py",
+        "bytes": 20206,
+        "sha256": "5239b3ffc13c64e583ba6a6c7a185de3264bfe9173d7c3f3a5da3685ec4e5027"
+      },
+      {
+        "path": "labs/autogrow-source/README.md",
+        "bytes": 7388,
+        "sha256": "483dc8ba820eff7409dc4f6618238fa7b41bd526bdc96a45d368e4f18b7e7bd2"
+      }
+    ],
+    "use": "Compile pinned source AST using original protocol and reuse the pinned namespace builder only after this new collector publication gate. Existing laboratory files remain unchanged."
+  },
+  "additionalSources": [
+    {
+      "path": "comfy_api/latest/_io.py",
+      "bytes": 97422,
+      "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080",
+      "declarations": [
+        {
+          "name": "@future-annotations",
+          "line": 1,
+          "astSha256": "890bede517510aea64e32258c9530f0172f5a6ea2fcbcb247fdadc40c714e8bf",
+          "segmentSha256": "a6284e6d3d43bdfbf0da732945adb2b4f31147c92bea47aee100d7f556c22d00"
+        },
+        {
+          "name": "ControlAfterGenerate",
+          "line": 80,
+          "astSha256": "638cd856aa8bbd6aefe7c0745afc0433066a260e154eacec672cf2a7786fb53c",
+          "segmentSha256": "7b4a52daca01cdbf14c277348ffd0d1cbefa8d56b986eed2ce4db7f264e64bcf"
+        },
+        {
+          "name": "NumberDisplay",
+          "line": 74,
+          "astSha256": "c6f4523abb2b401111b4234f0b3aee8c0308f02d22562f0868c38c1504401daf",
+          "segmentSha256": "f935c69f830558a18d0b143c791f68dd06331d4dcaa5255bbf636012f69df750"
+        },
+        {
+          "name": "Float",
+          "line": 294,
+          "astSha256": "da7cf7396eeec730615e1d36a26de37580e5934b156caebd3c5b8a922e7d05fc",
+          "segmentSha256": "124ce1bce1239f920df8e5b4c35b9d1c93b84d88067839d8789e017c6c90ce7a"
+        },
+        {
+          "name": "Combo",
+          "line": 345,
+          "astSha256": "1232488207fb679635b84a69ccbfccdec8c60e8e578e80fd246ca7c92689cd93",
+          "segmentSha256": "5fa774a02ced95aaf74d4bed2a8a07cb1ba23eb81fce533092da8ec35e4bb3f4"
+        }
+      ]
+    },
+    {
+      "path": "execution.py",
+      "bytes": 61543,
+      "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declarations": [
+        {
+          "name": "full_type_name",
+          "line": 1122,
+          "astSha256": "0ec54926b24b9251f8cb316c6212eb89e5155db2526a3ff5d016305d380f7282",
+          "segmentSha256": "b7042f3084159eacfe85ce7e8a9d4ead6893ccb1b20b46e49d7523fc9fb7fee9"
+        },
+        {
+          "name": "validate_inputs",
+          "line": 846,
+          "astSha256": "ff93f2c788a0068d991d7721e8fe51de2861900bb147bc895b0dbf9fca35139a",
+          "segmentSha256": "4cbb5ec0274f46e2220a3ff8ccea865b0d6850d7863fd4cc4d9a523e503fcac1"
+        },
+        {
+          "name": "validate_prompt",
+          "line": 1128,
+          "astSha256": "c6da04a81e2d91bddde99263918c595aeec57c47c81adcf570738536570ff6bb",
+          "segmentSha256": "cdad010ba8cf4faacb8c7d5a4cd1f277d87c41cc7821ac463af6c0d2bcf5116b"
+        }
+      ]
+    },
+    {
+      "path": "comfy_execution/validation.py",
+      "bytes": 2532,
+      "sha256": "1c4ad72a2edd3655c18c65adf7a8785031f84adeef084d6086c5f3785e45e64b",
+      "declarations": [
+        {
+          "name": "validate_node_input",
+          "line": 4,
+          "astSha256": "099dcf7f7605ca9b26725561aefab5fadd169848523466f09bd7876b365cd574",
+          "segmentSha256": "8196b4833a0fb05caf178d3c5f9c33eab80ae58c2d88ab4d33bf2b5cbc54f4f5"
+        }
+      ]
+    },
+    {
+      "path": "comfy_extras/nodes_primitive.py",
+      "bytes": 2992,
+      "sha256": "329963dd20fbf8985539b7b990780291f4b82ee9cfd42b96b571288b77eaa47a",
+      "declarations": [
+        {
+          "name": "String",
+          "line": 7,
+          "astSha256": "f5ca9ba10dfa8289915e75f51af63d8d75cd3eb1a6535ab3f7f51da03abbc4f3",
+          "segmentSha256": "0f5276c386bc1cb62ade2b5d29b45126e7ec9e116b1b9cc76b207a76d5dbbb0d"
+        },
+        {
+          "name": "Int",
+          "line": 42,
+          "astSha256": "bff5576c6799fdfc89a02e2fb447dbcaa6b70f0a2f4f95dda9367733e61a8518",
+          "segmentSha256": "b928ec40c781043c1c8652de3aebedc755d9b63be9e2c773e3fb26ce4d594bba"
+        },
+        {
+          "name": "Float",
+          "line": 60,
+          "astSha256": "a8c4ffb49a96950444002df84678cbb542390e5c2fefcd4d57bdb696f5b8021f",
+          "segmentSha256": "df57e5900e972e17da365fbbdb7b7db777dda6f9f938e1074f1a89451d4b7c73"
+        },
+        {
+          "name": "Boolean",
+          "line": 78,
+          "astSha256": "b516ed519db97ad4a2a78e363d91ec076ea41c6d9643da3ccecbed21c3f0de94",
+          "segmentSha256": "2f4bd009a927f0c7f511db3455e74d3dfc7eb54f642cda1aa3159d495b6452db"
+        }
+      ]
+    },
+    {
+      "path": "comfy_extras/nodes_preview_any.py",
+      "bytes": 1495,
+      "sha256": "48cffa3b2ddd08c311af609642da8703abc9bac9e624c400c3dc41f6edcea930",
+      "declarations": [
+        {
+          "name": "PreviewAny",
+          "line": 8,
+          "astSha256": "9639a920cb9953c97ff4fababd69c153e2d28b0bd7100b42d107e8b535c9057b",
+          "segmentSha256": "66b5283b2d7d43e679c0bc6cdcad54c92539a986763333972e722b39c7963be8"
+        }
+      ]
+    }
+  ],
+  "infrastructure": {
+    "registry": "Only real source CreateList, four primitive classes and PreviewAny. No synthetic node class or Schema.",
+    "producerPrompt": {
+      "id": {
+        "class_type": "PrimitiveString",
+        "inputs": {
+          "value": "synthetic"
+        }
+      },
+      "1": {
+        "class_type": "PrimitiveInt",
+        "inputs": {
+          "value": 1
+        }
+      },
+      "bool": {
+        "class_type": "PrimitiveBoolean",
+        "inputs": {
+          "value": false
+        }
+      },
+      "float": {
+        "class_type": "PrimitiveFloat",
+        "inputs": {
+          "value": 1.25
+        }
+      }
+    },
+    "cache": {
+      "id": [
+        [
+          "synthetic"
+        ]
+      ],
+      "1": [
+        [
+          1
+        ]
+      ],
+      "bool": [
+        [
+          false
+        ]
+      ],
+      "float": [
+        [
+          1.25
+        ]
+      ]
+    },
+    "cacheRole": "Synthetic pre-existing outputs, not generated by executing primitives. One real declared output per producer. Cache records are deep-copied and checked unchanged.",
+    "outputTarget": "preview",
+    "outputClass": "PreviewAny",
+    "outputInput": {
+      "source": [
+        "subject",
+        0
+      ]
+    },
+    "forbiddenCalls": "Profile guard raises before every registered node execute/main method; PreviewAny has its exact class but no torch binding."
+  },
+  "cases": [
+    {
+      "id": "raw-empty-list",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "raw-numeric-pair",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        1,
+        2
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "KeyError"
+      ]
+    },
+    {
+      "id": "link-string-id",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        0
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "malformed-link-length",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id"
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "slot-string",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        "0"
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "TypeError"
+      ]
+    },
+    {
+      "id": "slot-null",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        null
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "TypeError"
+      ]
+    },
+    {
+      "id": "slot-boolean-false",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        false
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "slot-float-integral",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        0.0
+      ],
+      "permittedAcquisitionErrors": [
+        "TypeError"
+      ],
+      "permittedValidationExceptions": [
+        "TypeError"
+      ]
+    },
+    {
+      "id": "slot-float-fraction",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        0.5
+      ],
+      "permittedAcquisitionErrors": [
+        "TypeError"
+      ],
+      "permittedValidationExceptions": [
+        "TypeError"
+      ]
+    },
+    {
+      "id": "slot-negative",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        -1
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "slot-out-of-range",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "id",
+        99
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "IndexError"
+      ]
+    },
+    {
+      "id": "numeric-node-id",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        1,
+        0
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "KeyError"
+      ]
+    },
+    {
+      "id": "boolean-node-id",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        true,
+        0
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "KeyError"
+      ]
+    },
+    {
+      "id": "missing-node",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": [
+        "absent",
+        0
+      ],
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": [
+        "KeyError"
+      ]
+    },
+    {
+      "id": "literal-null",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": null,
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "literal-empty-map",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": {},
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "literal-nested-map",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": {
+        "x": [
+          "id",
+          0
+        ]
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "wrapped-empty-list",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": true,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": []
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "wrapped-numeric-pair",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": [
+          1,
+          2
+        ]
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "wrapped-link-shaped",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": true,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": [
+          "id",
+          0
+        ]
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "reserved-key-extra",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": 1,
+        "extra": 2
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "double-wrapper",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": true,
+      "secondValidationPass": true,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": {
+          "__value__": 1
+        }
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "required-absent",
+      "classType": "CreateList",
+      "inputName": "inputs.input0",
+      "present": false,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "optional-null",
+      "classType": "CreateList",
+      "inputName": "inputs.input1",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": true,
+      "value": null,
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "int-from-bool",
+      "classType": "PrimitiveInt",
+      "inputName": "value",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": true,
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "float-from-string",
+      "classType": "PrimitiveFloat",
+      "inputName": "value",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": "1.25",
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "string-from-null",
+      "classType": "PrimitiveString",
+      "inputName": "value",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": null,
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    },
+    {
+      "id": "boolean-from-wrapped-empty",
+      "classType": "PrimitiveBoolean",
+      "inputName": "value",
+      "present": true,
+      "secondValidationPass": false,
+      "optionalAnchor": false,
+      "value": {
+        "__value__": []
+      },
+      "permittedAcquisitionErrors": [],
+      "permittedValidationExceptions": []
+    }
+  ]
+}
