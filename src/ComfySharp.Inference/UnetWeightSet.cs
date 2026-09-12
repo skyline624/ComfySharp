@@ -23,5 +23,8 @@ public sealed class UnetWeightSet : IDisposable
         long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
         => new(Config,bank.WithLora(patches,maxPatchedWeightBytes,cancellationToken));
     internal torch.Tensor GetTensor(string name) => bank.GetTensor(name);
+    internal UnetWeightSet WithTrainingLora(IReadOnlyDictionary<string, TrainableLoraPatch> patches,
+        long maxPatchedWeightBytes, CancellationToken cancellationToken)
+        => new(Config, bank.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken));
     public void Dispose() => bank.Dispose();
 }

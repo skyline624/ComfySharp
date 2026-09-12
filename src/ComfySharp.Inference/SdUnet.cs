@@ -53,17 +53,34 @@ public sealed class SdUnet : IDisposable
     /// Cancellation is observed between operations; it does not interrupt a native kernel.</summary>
     public Tensor Forward(Tensor latentNchw, Tensor timesteps, Tensor context,
         CancellationToken cancellationToken = default)
+        => ForwardCore(latentNchw, timesteps, context, null, 0, cancellationToken);
+
+    /// <summary>Raw differentiable prediction with frozen base weights and caller-owned LoRA leaves.
+    /// The returned autograd graph owns its saved native tensors until backward/graph disposal.
+    /// This allowance limits patched weights, not activations. No gradient checkpointing or offload yet.</summary>
+    public Tensor ForwardForTraining(Tensor latentNchw, Tensor timesteps, Tensor context,
+        IReadOnlyDictionary<string, TrainableLoraPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
+        CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        using var operation = RetainWeights();
+        ArgumentNullException.ThrowIfNull(patches);
+        return ForwardCore(latentNchw, timesteps, context, patches, maxPatchedWeightBytes, cancellationToken);
+    }
+
+    private Tensor ForwardCore(Tensor latentNchw, Tensor timesteps, Tensor context,
+        IReadOnlyDictionary<string, TrainableLoraPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        using var source = RetainWeights();
         // Bootstrap precedes even DisposeScope/no_grad creation on macOS ARM64.
         NativeRuntimeBootstrap.Initialize();
         ValidateInputs(latentNchw, timesteps, context);
-        InferenceDevice.RequireSame(operation.Device, latentNchw, nameof(latentNchw));
-        InferenceDevice.RequireSame(operation.Device, timesteps, nameof(timesteps));
-        InferenceDevice.RequireSame(operation.Device, context, nameof(context));
+        InferenceDevice.RequireSame(source.Device, latentNchw, nameof(latentNchw));
+        InferenceDevice.RequireSame(source.Device, timesteps, nameof(timesteps));
+        InferenceDevice.RequireSame(source.Device, context, nameof(context));
         using var scope = NewDisposeScope();
-        using var noGrad = no_grad();
+        using var gradMode = set_grad_enabled(patches is not null);
+        using var operation = patches is null ? source.Retain() : source.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken);
         cancellationToken.ThrowIfCancellationRequested();
         var observer = DiagnosticObserver;
         var fineObserver = FineDiagnosticObserver;

@@ -77,6 +77,46 @@ internal sealed class CpuModelWeightBank : IDisposable
         finally{foreach(var patch in selected.Values)patch.Dispose();}
     }
 
+    internal CpuModelWeightBank WithTrainingLora(IReadOnlyDictionary<string, TrainableLoraPatch> patches,
+        long maxPatchedWeightBytes, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
+        if (patches.Count == 0) throw new ArgumentException("Training requires at least one LoRA target.", nameof(patches));
+        if (maxPatchedWeightBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
+        using var source = Retain(); using var scope = torch.NewDisposeScope(); using var grad = torch.set_grad_enabled(true);
+        var selected = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        try
+        {
+            long bytes = 0;
+            foreach (var (name, patch) in patches)
+            {
+                cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patch);
+                if (!source.shared.Tensors.TryGetValue(name, out var tensor)) throw new InvalidDataException($"Unknown training target '{name}'.");
+                bytes = checked(bytes + tensor.numel() * 4);
+                if (bytes > maxPatchedWeightBytes) throw new NotSupportedException("Differentiable patched weights exceed the byte allowance; saved autograd activations are additional.");
+                selected.Add(name, patch.Retain());
+            }
+            var owned = new Dictionary<string, torch.Tensor>(StringComparer.Ordinal);
+            foreach (var (name, tensor) in source.shared.Tensors)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (selected.TryGetValue(name, out var patch))
+                {
+                    using var calculated = patch.Apply(tensor, cancellationToken);
+                    // Apply returns an independently owned wrapper; keep its gradient graph while
+                    // retaining the alias in this scope until the entire bank succeeds.
+                    owned.Add(name, calculated.alias());
+                }
+                else owned.Add(name, tensor.alias());
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            var result = new CpuModelWeightBank(new Shared(owned));
+            foreach (var tensor in owned.Values) tensor.DetachFromDisposeScope();
+            return result;
+        }
+        finally { foreach (var patch in selected.Values) patch.Dispose(); }
+    }
+
     internal static CpuModelWeightBank Create(IReadOnlyDictionary<string, IReadOnlyList<long>> schema,
         IReadOnlyDictionary<string, torch.Tensor> tensors, Action<torch.Tensor>? normalized = null)
     {
