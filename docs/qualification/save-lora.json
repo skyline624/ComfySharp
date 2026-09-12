@@ -32,7 +32,34 @@
   },
   "realWorkflow": false,
   "familyQualified": false,
-  "ci": "Pending publication of this implementation",
+  "ci": {
+    "commit": "2fe0496d5b9e93c490e2af409d2eef24a677a20b",
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34720674768",
+    "status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "platform": "win-x64-cpu", "jobId": 103625813929, "conclusion": "failure",
+        "saveLora": { "passed": 21, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "failure": "SdAdapterInitializationTests cases 0 and 1: numerical comparisons, 6 passed / 2 failed. Case 1 element 0: 1.1218971 vs 1.1219877; case 0 element 0: 1.1252023 vs 1.1251303."
+      },
+      {
+        "platform": "linux-x64-cpu", "jobId": 103625813745, "conclusion": "failure",
+        "saveLora": { "passed": 21, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "failure": "SdAdapterInitializationTests cases 0 and 1: numerical comparisons, 6 passed / 2 failed."
+      },
+      {
+        "platform": "osx-arm64-cpu", "jobId": 103625813858, "conclusion": "failure",
+        "saveLora": { "passed": 21, "failed": 0, "skipped": 0 },
+        "host": { "passed": 315, "failed": 0, "skipped": 0 },
+        "ordinaryInference": { "passed": 891, "failed": 0, "skipped": 0 },
+        "failure": "ClipStockReferenceTests stock/l and stock/g numerical comparisons, 1 passed / 2 failed."
+      }
+    ],
+    "note": "CPU contract evidence only. Linux and Windows downstream suites were not run after the failing training step. No tolerance or assertion was relaxed. Local Windows symbolic-link privilege failure did not occur on the Windows CI runner."
+  },
   "remaining": [
     "TrainLoraNode production LORA_MODEL output and LoraModelLoader integration",
     "Full trained-adapter workflow and reuse through the native editor",
