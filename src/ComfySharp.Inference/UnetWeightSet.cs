@@ -19,6 +19,9 @@ public sealed class UnetWeightSet : IDisposable
     public static UnetWeightSet FromOwnedTensors(SdUnetConfig config, IReadOnlyDictionary<string, torch.Tensor> tensors)
         => new(config, CpuModelWeightBank.Create(UnetWeightSchema.Describe(config), tensors));
     public UnetWeightSet Retain() => new(Config, bank.Retain());
+    public UnetWeightSet WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,
+        long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+        => new(Config,bank.WithLora(patches,maxPatchedWeightBytes,cancellationToken));
     internal torch.Tensor GetTensor(string name) => bank.GetTensor(name);
     public void Dispose() => bank.Dispose();
 }

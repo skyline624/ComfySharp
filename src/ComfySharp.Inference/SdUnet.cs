@@ -25,6 +25,12 @@ public sealed class SdUnet : IDisposable
         using var bank = RetainWeights(); using var moved = bank.To(device, cancellationToken); return new SdUnet(moved);
     }
 
+    public SdUnet WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,
+        long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+    {
+        using var bank=RetainWeights();using var patched=bank.WithLora(patches,maxPatchedWeightBytes,cancellationToken);return new(patched);
+    }
+
     // Diagnostic callbacks borrow live tensors synchronously. They must copy any data
     // they keep and must not dispose or mutate tensors. Null adds no tensor allocations.
     internal Action<string, Tensor>? DiagnosticObserver { get; set; }

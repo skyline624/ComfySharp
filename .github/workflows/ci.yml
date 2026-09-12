@@ -60,8 +60,8 @@ jobs:
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reduced SD1.5 pipeline contracts
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15Pipeline&FullyQualifiedName!~Sd15PipelineReferenceTests' --logger trx --results-directory PipelineResults
-      - name: Exercise sampler trajectories, partial denoise and inpaint masks
-        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdHeunSamplerTests|FullyQualifiedName~SdKarrasScheduleTests|FullyQualifiedName~SdSchedulerTests|FullyQualifiedName~SdDpmpp2MSamplerTests|FullyQualifiedName~SdInpaintMaskTests' --logger trx --results-directory TestResults/Heun
+      - name: Exercise sampler trajectories, inpaint masks and LoRA foundations
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdHeunSamplerTests|FullyQualifiedName~SdKarrasScheduleTests|FullyQualifiedName~SdSchedulerTests|FullyQualifiedName~SdDpmpp2MSamplerTests|FullyQualifiedName~SdInpaintMaskTests|FullyQualifiedName~LoraMathTests|FullyQualifiedName~LoraWeightPatchTests' --logger trx --results-directory TestResults/Heun
       - name: Exercise reference fixtures as the first native access in separate processes
         id: native_first_use
         shell: pwsh

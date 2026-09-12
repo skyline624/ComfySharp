@@ -24,6 +24,12 @@ public sealed class ComfyClipEncoder : IDisposable
         using var graph = RetainGraph(); using var moved = graph.To(device, cancellationToken); return new ComfyClipEncoder(moved, Profile);
     }
 
+    public ComfyClipEncoder WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,
+        long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+    {
+        using var graph=RetainGraph();using var patched=graph.WithLora(patches,maxPatchedWeightBytes,cancellationToken);return new(patched,Profile);
+    }
+
     public ComfyClipEncoder Retain()
     {
         lock (gate) return new(encoder ?? throw new ObjectDisposedException(nameof(ComfyClipEncoder)), Profile);

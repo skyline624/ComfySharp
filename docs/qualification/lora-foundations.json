@@ -1,0 +1,99 @@
+{
+  "status": "lora-math-and-immutable-banks-windows-cpu-tested",
+  "familyQualified": false,
+  "trainingQualified": false,
+  "realWorkflow": false,
+  "releaseReady": false,
+  "baseCommit": "f19594b24a1255fee2f0571f3ac49b3227639e3f",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/lora.reference.json",
+    "sha256": "8cbb5d8aab6222d8dab059a259da999976b42cdeb62a5e597f68b97563584616",
+    "torch": "2.10.0+cpu",
+    "inferenceCases": 15,
+    "trainingCases": 1,
+    "trainingCompared": [
+      "forward",
+      "mean-square-loss",
+      "up-gradient",
+      "down-gradient",
+      "one-SGD-update",
+      "updated-forward"
+    ],
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Actual LoRAAdapter.calculate_weight and LoraDiff forward/gradients with explicit small tensors. Native cast shim is Tensor.to. No model-family or training-node qualification."
+  },
+  "execution": {
+    "platform": "win-x64-cpu",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "dtype": "Float32",
+    "reducedGraphs": [
+      "SD U-Net BaseChannels=32 ContextSize=16",
+      "CLIP HiddenSize=4 IntermediateSize=8 Heads=1 Layers=2"
+    ],
+    "pretrainedWeightsUsed": false,
+    "checks": [
+      "unchanged-weight storage shared",
+      "patched-weight storage separate",
+      "source prediction unchanged",
+      "patched prediction changed",
+      "patched model works after source/adapter disposal",
+      "partial failure leaves source usable",
+      "native wrapper count restored"
+    ]
+  },
+  "tests": {
+    "total": 92,
+    "passed": 92,
+    "failed": 0,
+    "notExecuted": 0,
+    "trxSha256": "c8ef5e646711d13886cf38aa99ab68b237451204fd5f0788164e13f02b3090a7"
+  },
+  "newTestCases": 8,
+  "build": "Release solution succeeded, zero warnings/errors",
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "45a35a5075ec175fbdfa7fde772f7f2296489c8a3854b47c6685ce896de39bf8",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-source/README.md": "223ab97e3f1024acad51f2a2799fdb268e41832004f6178c4ef21d2af2a6d7e3",
+    "labs/lora-source/reference.py": "f03bfec6a407c523123923dae95b97103fb935bd209269d294a965939cf26493",
+    "src/ComfySharp.Inference/ClipTextEncoder.cs": "7da6a2603e3a1192b05ffd71fe7539569eb3767db2773e0ce8cda5542003607c",
+    "src/ComfySharp.Inference/ClipWeightSet.cs": "e157dabc0da7627b9932a65a4b0e23288de86fa9b89c350a1419b048c59a1a43",
+    "src/ComfySharp.Inference/ComfyClipEncoder.cs": "e03895a68e22312bf65deb24df9970079fd2366012f513ec6756b6ceb5373e43",
+    "src/ComfySharp.Inference/CpuModelWeightBank.cs": "902598fcc76d0edb38111de1e744f03580b48c009c56797ef722ae9bbb6e372d",
+    "src/ComfySharp.Inference/LoraMath.cs": "64dabeb3550ddcb59845c676b05f45526b8eb533e9482c0cdd745b45b9db149d",
+    "src/ComfySharp.Inference/LoraWeightPatch.cs": "9bd5a5f58d8d1e1900eea2c8e704672779a2845a83ad84f217654fe435962566",
+    "src/ComfySharp.Inference/SdUnet.cs": "77c62fa73cb6b962f157fd801d51fb18f3de30170f1a3c1ae2b81638764d1c68",
+    "src/ComfySharp.Inference/UnetWeightSet.cs": "8bf84285ded3583ac97dac3e217431e4c43813c81290dc59c21831fd3185b95a",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "a2cc673c793a7719a838f7b32344918876da26b6e87f902647ba2f32c7e4111b",
+    "tests/ComfySharp.Inference.Tests/Fixtures/lora.reference.json": "8cbb5d8aab6222d8dab059a259da999976b42cdeb62a5e597f68b97563584616",
+    "tests/ComfySharp.Inference.Tests/LoraMathTests.cs": "d895aaac6fcae711ff72020a06f35bd9554b1d1a929cc48c45c30a5ad0ed3a59",
+    "tests/ComfySharp.Inference.Tests/LoraWeightPatchTests.cs": "d66c6315eca20aa807475b96a3e5bab425ef3a0b14676449c4bada7367ef3281",
+    "tests/ComfySharp.Inference.Tests/packages.win-x64.cpu.lock.json": "df4d7c50bac44a3a5dd074d3c6af865d89b4f0825433fb4e0c1b7506c32101a1"
+  },
+  "previousCI": {
+    "run": 34698960298,
+    "commit": "f19594b24a1255fee2f0571f3ac49b3227639e3f",
+    "allOS": "failure",
+    "inpaintSamplerStep": "success on all three OS",
+    "windowsFailure": "Numerical first-native-use reference comparisons: U-Net, denoiser, Euler and pipeline.",
+    "windowsExample": {
+      "actual": 1.0168291,
+      "source": 1.0169299,
+      "absoluteDelta": 0.00010073184967041016
+    },
+    "reference": "https://github.com/skyline624/ComfySharp/actions/runs/34698960298/job/103567219096"
+  },
+  "limitations": [
+    "No adapter file loader or name/alias mapping and no registered LoRA node yet. Explicit canonical tensor targets only.",
+    "No full pretrained adapter workflow, export/reload, integrated training, optimizer state or model-family qualification.",
+    "The compared SGD step is an explicit gradient check, not a production optimizer implementation.",
+    "reshape_weight, offsets/functions/hooks, other adapter types and quantized bypass remain pending.",
+    "The patched-byte allowance counts new resident weights, not transient math allocations or factor transfers.",
+    "No new GPU evidence in this campaign; Linux CUDA/MPS and native numerical CI failures remain open."
+  ]
+}

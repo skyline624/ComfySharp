@@ -1,5 +1,12 @@
 # Third-party provenance
 
+`LoraMath.cs` adapts `LoRAAdapter.calculate_weight` and `weight_decompose`
+from the frozen ComfyUI `comfy/weight_adapter/lora.py` and `base.py`, under
+the ComfyUI GPLv3 provenance below. `LoraWeightPatch` and immutable-bank
+integration provide C# ownership semantics. The separate source collector
+also executes `LoraDiff` for gradient comparison; see
+[LORA_FOUNDATIONS.md](docs/LORA_FOUNDATIONS.md).
+
 `SdInpaintMask.cs`, `SdInpaintImage.cs` and the two inpaint node routes adapt
 the frozen ComfyUI `nodes.py`, `comfy/utils.py`, `comfy/samplers.py` and
 `comfy/model_sampling.py`, under the GPLv3 provenance below. Their source

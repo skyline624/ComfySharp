@@ -39,6 +39,44 @@ internal sealed class CpuModelWeightBank : IDisposable
         return result;
     }
 
+    internal CpuModelWeightBank WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,long maxPatchedWeightBytes,CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(patches);
+        if(maxPatchedWeightBytes<0)throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
+        using var source=Retain();using var scope=torch.NewDisposeScope();using var noGrad=torch.no_grad();
+        var selected=new Dictionary<string,LoraWeightPatch>(StringComparer.Ordinal);
+        try
+        {
+            long bytes=0;
+            foreach(var (name,patch) in patches)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                ArgumentNullException.ThrowIfNull(patch);
+                if(!source.shared.Tensors.TryGetValue(name,out var tensor))throw new InvalidDataException($"Unknown canonical patch target '{name}'.");
+                bytes=checked(bytes+tensor.numel()*4);
+                if(bytes>maxPatchedWeightBytes)throw new NotSupportedException("Patched resident weights exceed the configured byte allowance; temporary math tensors are additional.");
+                selected.Add(name,patch.Retain());
+            }
+            var owned=new Dictionary<string,torch.Tensor>(StringComparer.Ordinal);
+            foreach(var (name,tensor) in source.shared.Tensors)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if(selected.TryGetValue(name,out var patch))
+                {
+                    using var result=patch.Apply(tensor,cancellationToken);
+                    // The alias belongs to this scope so atomic failure releases it.
+                    owned.Add(name,result.alias());
+                }
+                else owned.Add(name,tensor.alias());
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            var bank=new CpuModelWeightBank(new Shared(owned));
+            foreach(var tensor in owned.Values)tensor.DetachFromDisposeScope();
+            return bank;
+        }
+        finally{foreach(var patch in selected.Values)patch.Dispose();}
+    }
+
     internal static CpuModelWeightBank Create(IReadOnlyDictionary<string, IReadOnlyList<long>> schema,
         IReadOnlyDictionary<string, torch.Tensor> tensors, Action<torch.Tensor>? normalized = null)
     {

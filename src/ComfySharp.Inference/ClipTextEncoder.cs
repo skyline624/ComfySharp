@@ -25,6 +25,12 @@ public sealed class ClipTextEncoder : IDisposable
         using var bank = RetainWeights(); using var moved = bank.To(device, cancellationToken); return new ClipTextEncoder(moved);
     }
 
+    public ClipTextEncoder WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,
+        long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+    {
+        using var bank=RetainWeights();using var patched=bank.WithLora(patches,maxPatchedWeightBytes,cancellationToken);return new(patched);
+    }
+
     public ClipTextEncoder Retain()
     {
         lock (gate)

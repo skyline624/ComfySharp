@@ -37,3 +37,5 @@ Les [neuf schedulers KSampler](SD_SCHEDULERS.md) sont portés pour la table SD d
 [DPM++ 2M](DPMPLUSPLUS_2M.md) est porté avec six cas source, gestion de l’historique et deux parcours SD1.5 CUDA réels. Euler, Heun et DPM++ 2M sont désormais marqués partiels dans la matrice, avec leurs preuves existantes. Restent la comparaison préentraînée de DPM++ 2M, les variantes SDE/CFG++, les samplers restants, les masques et les autres familles/plateformes.
 
 [Masques SD1.5](SD_INPAINT.md) : SetLatentNoiseMask, VAEEncodeForInpaint et le wrapper de sampling sont raccordés aux trois samplers, avec contrats source et trois workflows CUDA réels. Restent InpaintModelConditioning et modèles à neuf canaux, hooks de masques, comparaison préentraînée et qualification multiplateforme.
+
+[Fondations LoRA](LORA_FOUNDATIONS.md) : arithmétique LoRA/LoCon/DoRA comparée, gradients et mise à jour SGD de référence, banques U-Net/CLIP patchées avec stockage partagé et échec atomique. Suite : chargement safetensors et alias, raccordement LoraLoader, vrais adapters, sauvegarde/rechargement et entraînement intégré. Aucun nœud ni famille n’est qualifié par les tests synthétiques.

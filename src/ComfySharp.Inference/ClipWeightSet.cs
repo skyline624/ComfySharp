@@ -79,6 +79,38 @@ public sealed class ClipWeightSet : IDisposable
         }
     }
 
+    public ClipWeightSet WithLora(IReadOnlyDictionary<string,LoraWeightPatch> patches,
+        long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(patches);
+        if(maxPatchedWeightBytes<0)throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
+        using var source=Retain();using var scope=torch.NewDisposeScope();using var noGrad=torch.no_grad();
+        var selected=new Dictionary<string,LoraWeightPatch>(StringComparer.Ordinal);
+        try
+        {
+            long bytes=0;
+            foreach(var(name,patch) in patches)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                ArgumentNullException.ThrowIfNull(patch);
+                if(!source.bank.Tensors.TryGetValue(name,out var tensor))throw new InvalidDataException($"Unknown canonical CLIP patch target '{name}'.");
+                bytes=checked(bytes+tensor.numel()*4);
+                if(bytes>maxPatchedWeightBytes)throw new NotSupportedException("Patched resident weights exceed the configured byte allowance; temporary math tensors are additional.");
+                selected.Add(name,patch.Retain());
+            }
+            var owned=new Dictionary<string,torch.Tensor>(StringComparer.Ordinal);
+            foreach(var(name,tensor) in source.bank.Tensors)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if(selected.TryGetValue(name,out var patch))
+                {using var result=patch.Apply(tensor,cancellationToken);owned.Add(name,result.alias());}
+                else owned.Add(name,tensor.alias());
+            }
+            cancellationToken.ThrowIfCancellationRequested();return FromOwnedTensors(Config,owned,HasProjection);
+        }
+        finally{foreach(var patch in selected.Values)patch.Dispose();}
+    }
+
     // Borrow only while holding a retained bank owner for the entire operation.
     internal torch.Tensor GetTensor(string name)
     {
