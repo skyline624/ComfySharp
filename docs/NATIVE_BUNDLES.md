@@ -1,5 +1,10 @@
 # Offline native bundles
 
+Portable publishing now accepts this bundle explicitly through the paired
+`NativeBundleDirectory` / `NativeBundleRecipe` options. See the
+[packaging procedure and extracted-application qualification](packaging.md#native-bundle-selection-and-process-isolation).
+The default NuGet selection remains available and unchanged.
+
 `ComfySharp.NativeBundle` prepares explicitly pinned native libraries and their
 notices, then composes an independent application directory. Both operations use
 C#/.NET only, work offline, and never execute archive contents. The original

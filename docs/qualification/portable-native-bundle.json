@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "implementationCommit": "772323460f7311dfcbb8552545facffb8f8e1b06",
+  "run": {
+    "id": 34719085344,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34719085344",
+    "conclusion": "success"
+  },
+  "scope": "Explicit Linux CPU portable Host composition and unchanged NuGet packaging path; extracted self-contained application execution. Not full installation/model/hardware acceptance.",
+  "localPreflight": {
+    "passed": 4,
+    "checks": [
+      "incomplete option pair",
+      "unsupported native composition target",
+      "prepared bundle/output overlap",
+      "existing archive preservation"
+    ],
+    "unexpectedBuildStarted": false
+  },
+  "variants": {
+    "nuget": {
+      "jobId": 103621488633,
+      "conclusion": "success",
+      "observed": {
+        "selfContainedRuntimeLoaded": true,
+        "desktopWithSupervisedHostPassed": true,
+        "archiveSha256": "57d9f3836d4f0df885492a1d636905c6681b4a5e9aa740712fc35309be2da393",
+        "composition": null,
+        "nativeSource": "nuget",
+        "success": true,
+        "scope": "Portable Linux CPU execution and native origins; no model-family, GPU or distribution release qualification.",
+        "emptyApplicationPath": true,
+        "loadedImages": [
+          {
+            "name": "libc10.so",
+            "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41"
+          },
+          {
+            "name": "libtorch.so",
+            "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760"
+          },
+          {
+            "name": "libgomp-98b21ff3.so.1",
+            "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb"
+          },
+          {
+            "name": "libLibTorchSharp.so",
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libcoreclr.so",
+            "sha256": "3ebe90cd92b1edf6742a41fa921a0c6326216fd1cca45fdb5e055bea33351bea"
+          },
+          {
+            "name": "libhostpolicy.so",
+            "sha256": "f00ae2f70454c2ba99b66c2d13025f3505f6a6c43d57d478370e711d76ad96bf"
+          }
+        ],
+        "previews": {
+          "3": {
+            "text": [
+              "tensor([3., 2.])"
+            ]
+          },
+          "4": {
+            "text": [
+              "tensor([2., 1., 0.])"
+            ]
+          }
+        }
+      },
+      "artifactHashes": {
+        "desktop.stderr.log": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "desktop.stdout.log": "63199f4326cf84f9d51366c028a90f7c23b97abbcbcdde6134377b86b2dc7d26",
+        "host.stderr.log": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "host.stdout.log": "3a8c857f1b761c442c56221a06c087c00cb5437287d6998dc40bc348b422f504",
+        "result.json": "332375342592075cb0a65a2324a289bbd8f0315332e6b6846a5e80ca9a2f724c"
+      }
+    },
+    "composed": {
+      "jobId": 103621488760,
+      "conclusion": "success",
+      "observed": {
+        "loadedImages": [
+          {
+            "name": "libc10.so",
+            "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84"
+          },
+          {
+            "name": "libtorch_cpu.so",
+            "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+          },
+          {
+            "name": "libtorch.so",
+            "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff"
+          },
+          {
+            "name": "libgomp.so.1",
+            "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f"
+          },
+          {
+            "name": "libLibTorchSharp.so",
+            "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8"
+          },
+          {
+            "name": "libcoreclr.so",
+            "sha256": "3ebe90cd92b1edf6742a41fa921a0c6326216fd1cca45fdb5e055bea33351bea"
+          },
+          {
+            "name": "libhostpolicy.so",
+            "sha256": "f00ae2f70454c2ba99b66c2d13025f3505f6a6c43d57d478370e711d76ad96bf"
+          }
+        ],
+        "scope": "Portable Linux CPU execution and native origins; no model-family, GPU or distribution release qualification.",
+        "desktopWithSupervisedHostPassed": true,
+        "previews": {
+          "3": {
+            "text": [
+              "tensor([3., 2.])"
+            ]
+          },
+          "4": {
+            "text": [
+              "tensor([2., 1., 0.])"
+            ]
+          }
+        },
+        "nativeSource": "composed",
+        "selfContainedRuntimeLoaded": true,
+        "emptyApplicationPath": true,
+        "success": true,
+        "composition": {
+          "schemaVersion": 1,
+          "recipeSha256": "27a98ae5fbb20cbd79c735df7c048d9789d0b28af5b4ec0998b48a97b8ac883a",
+          "runtime": "linux-x64",
+          "archiveSha256": "ee40b8a4b4b2cf0670c6fd4f35a7ef23871af956fecb238fbf5da15a72650b1d",
+          "files": [
+            {
+              "destination": "native/libc10.so",
+              "bytes": 1403600,
+              "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84",
+              "role": "native"
+            },
+            {
+              "destination": "native/libtorch_cpu.so",
+              "bytes": 443509856,
+              "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f",
+              "role": "native"
+            },
+            {
+              "destination": "native/libtorch.so",
+              "bytes": 8032,
+              "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff",
+              "role": "native"
+            },
+            {
+              "destination": "native/libgomp.so.1",
+              "bytes": 253849,
+              "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f",
+              "role": "native"
+            },
+            {
+              "destination": "licenses/LICENSE",
+              "bytes": 505053,
+              "sha256": "2e311cbf8c7646e764a54621ab15663bbfcfeb5bb94f1d634d79adfd49ae3191",
+              "role": "notice"
+            },
+            {
+              "destination": "licenses/NOTICE",
+              "bytes": 23632,
+              "sha256": "c2cc7bf0caec7652c2b460a8a470bea1677f241e4ab8e431df34cf17f5a9fec0",
+              "role": "notice"
+            }
+          ]
+        },
+        "archiveSha256": "9825b7014503e9aa4efb2fe0aaa698a0b6a46b35c3a681dd145658adb57be85c"
+      },
+      "artifactHashes": {
+        "desktop.stderr.log": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "desktop.stdout.log": "030a5831635329100c9a3d280a86ba354b7f91dbf137965571a79fdc7ddbda7d",
+        "host.stderr.log": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "host.stdout.log": "a3c455e0ffe396449384890b12b8ec042547249450547a627f0540bf0b5e8637",
+        "result.json": "8c426af29ace79b2bcc14e9fe1aab2e904cfea7b52c8b962d44422484ad6cb84"
+      }
+    }
+  },
+  "bindingAndDotnetRuntimeHashesEqual": true,
+  "limitations": [
+    "Only linux-x64 CPU packaging is qualified by this campaign.",
+    "The runner has development software installed; empty child PATH and invalid SDK roots plus loaded-module origins verify isolation, not removal of all development software.",
+    "No pretrained model, CUDA or MPS was executed.",
+    "Native arithmetic portability failures in the normal CI remain open.",
+    "Full dependency notices/SBOM and binary release gates remain open; archives stayed on ephemeral runners."
+  ]
+}

@@ -45,6 +45,15 @@ and exercises its supervised Host. The dedicated CI runs both NuGet and composed
 variants and uploads only reports/logs. These checks do not qualify model families
 or remove the binary redistribution gate.
 
+The [7723234 qualification](qualification/portable-native-bundle.json) passed
+for both variants in [run 34719085344](https://github.com/skyline624/ComfySharp/actions/runs/34719085344).
+Both extracted applications loaded the expected native images and their own
+.NET runtime, reproduced both sigma previews, and passed the full current
+Desktop/supervised-Host smoke. TorchSharp binding and .NET runtime hashes were
+identical between variants. The runner still had developer software installed;
+these checks prove the stated child-environment isolation, not a completely
+clean machine or pretrained-model qualification.
+
 The Desktop dependency closure stays at the archive root; the Host and **all**
 its managed/native dependencies stay in `host/`. In particular, Avalonia currently
 resolves SkiaSharp 3.119.4 while TorchSharp resolves SkiaSharp 2.88.6. Publishing
