@@ -18,8 +18,8 @@ internal static class SdAllAdapterDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass"))
-                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--adapter NEW.safetensors --bypass true|false]");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass" or "--resume"))
+                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--adapter NEW.safetensors --bypass true|false --resume EXISTING.safetensors]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -32,6 +32,8 @@ internal static class SdAllAdapterDiagnostic
             if (!bool.TryParse(options.GetValueOrDefault("--bypass", "false"), out bool bypassMode)) throw new ArgumentException("Bypass must be true or false.");
             cancellationToken.ThrowIfCancellationRequested();
             using var file = new SafeTensorFile(checkpoint);
+            using var existingFile = options.TryGetValue("--resume",out var resumePath) ? new SafeTensorFile(Path.GetFullPath(resumePath)) : null;
+            string? resumeSha256 = existingFile?.ComputeSha256(cancellationToken);
             var plan = Sd15CheckpointLoader.Inspect(file, new() { UnclaimedTensors = Sd15UnclaimedTensorHandling.ReportAndIgnoreOutsideComponents }, cancellationToken);
             string modelSha256 = file.ComputeSha256(cancellationToken);
             NativeRuntimeBootstrap.Initialize(); set_num_threads(1);
@@ -44,7 +46,7 @@ internal static class SdAllAdapterDiagnostic
             Tensor Noise(long[] shape, ulong seed) { using var noise = NativeMath.CpuNoise(shape, seed, cancellationToken); return noise.to(device); }
             using var input = Noise([1, 4, 8, 8], 511); using var context = Noise([1, 3, 768], 512);
             using var target = Noise([1, 4, 8, 8], 513); using var time = tensor(new[] { 17.25f }, device: device);
-            using var adapters = new SdTrainableAdapterSet(model.Config, 2, 317, device, cancellationToken: cancellationToken);
+            using var adapters = new SdTrainableAdapterSet(model.Config, 2, 317, device, cancellationToken: cancellationToken, existing:existingFile);
             var leaves = adapters.Patches.SelectMany(p => p.Value.Parameters.Select((v, i) => (Name: p.Key + "/" + i, Value: v, IsAlpha: p.Value is TrainableLoraPatch l && ReferenceEquals(v, l.AlphaParameter)))).ToArray();
             var initialHashes = leaves.ToDictionary(p => p.Name, p => Hash(p.Value));
             using var baseline = model.Forward(input, time, context, cancellationToken); string baseHash = Hash(baseline);
@@ -55,7 +57,7 @@ internal static class SdAllAdapterDiagnostic
                 cancellationToken.ThrowIfCancellationRequested(); using var iteration = NewDisposeScope();
                 progress.WriteLine($"SD all-adapter training: {step + 1}/2, {adapters.Patches.Count} targets, {leaves.Length} leaves on {requested}");
                 using var predicted = model.ForwardForTraining(input, time, context, adapters.Patches, maxPatchedWeightBytes: 4L * 1024 * 1024 * 1024, cancellationToken, bypassMode);
-                if (step == 0 && Hash(predicted) != baseHash) throw new InvalidOperationException("Zero-initialized adapters changed the initial prediction.");
+                if (step == 0 && existingFile is null && Hash(predicted) != baseHash) throw new InvalidOperationException("Zero-initialized adapters changed the initial prediction.");
                 using var loss = TrainingLoss.Calculate("MSE", predicted, target); optimizer.Accumulate(loss, cancellationToken);
                 int finite = 0, nonzero = 0, alphaNonzero = 0;
                 foreach (var leaf in leaves)
@@ -73,16 +75,17 @@ internal static class SdAllAdapterDiagnostic
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
             object? inMemoryReload = null;
-            if (bypassMode)
+            if (bypassMode || existingFile is not null)
             {
-                using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,true);
+                using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
                 using var snapshot = LoraTrainingState.Capture(adapters.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
                 using var source = new NativeLoraTensorSource(snapshot.Tensors,cancellationToken:cancellationToken);
                 var snapshotPlan = LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
                 using var frozen = LoraFileLoader.Load(source,snapshotPlan,cancellationToken:cancellationToken);
-                using var inference = frozen.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
+                using var inference = bypassMode ? frozen.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)
+                    : frozen.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
                 using var predicted = inference.Forward(input,time,context,cancellationToken);
-                if (Hash(trained) != Hash(predicted)) throw new InvalidOperationException("In-memory bypass reload differs from trained prediction.");
+                if (Hash(trained) != Hash(predicted)) throw new InvalidOperationException("In-memory reload differs from trained prediction.");
                 inMemoryReload = new { targets=snapshotPlan.Bindings.Count,tensors=snapshot.Tensors.Count,predictionExact=true,predictionSha256=Hash(predicted) };
             }
             object? export=null;
@@ -123,6 +126,8 @@ internal static class SdAllAdapterDiagnostic
                 optimizer = "SGD", learningRate = .01, targetCount = adapters.Patches.Count, parameterCount = leaves.Length,
                 alphaParameters = leaves.Count(p => p.IsAlpha), adapterParameterBytes = adapters.ParameterBytes, changedParameterCount = changed,
                 adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true, export, bypassMode, inMemoryReload,
+                resume = existingFile is null ? null : new { fileSha256=resumeSha256, factorTargets=adapters.ResumedTargets.Count,
+                    ignoredKeys=adapters.IgnoredExistingKeys.Count, rules="Frozen weight factory only: norm/bias reset and module.weight.alpha lookup. Filename step counter is tested separately, not used by this diagnostic." },
                 inputRecipe = new { shape = new[] { 1, 4, 8, 8 }, inputSeed = 511, contextShape = new[] { 1, 3, 768 }, contextSeed = 512, targetSeed = 513, timestep = 17.25 },
                 elapsedSeconds = watch.Elapsed.TotalSeconds,
                 scope = "Real SD1.5 all-target LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."

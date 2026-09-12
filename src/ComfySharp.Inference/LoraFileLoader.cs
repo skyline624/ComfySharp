@@ -22,7 +22,7 @@ public sealed class LoraLoadPlan
 public static class LoraFileLoader
 {
     // This is source LoRAAdapter.load order, independent of safetensors header order.
-    private static readonly (string Up,string Down,bool Mid)[] Formats=[
+    internal static readonly (string Up,string Down,bool Mid)[] Formats=[
         (".lora_up.weight",".lora_down.weight",true),("_lora.up.weight","_lora.down.weight",false),
         (".lora_B.weight",".lora_A.weight",false),(".lora.up.weight",".lora.down.weight",false),
         (".lora_B",".lora_A",false),(".lora_linear_layer.up.weight",".lora_linear_layer.down.weight",false),

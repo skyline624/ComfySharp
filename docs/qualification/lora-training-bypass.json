@@ -41,7 +41,18 @@
     "Mixed precision, checkpointing and offload",
     "Other architectures and platforms"
   ],
-  "ci": "Pending publication",
+  "implementationCommit": "f78d8d2a0f0a42b7b370d1a54eb29f3b45e7af55",
+  "ci": {
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34724263729",
+    "conclusion": "failure",
+    "trainingBypassTestsEachPlatform": { "passed": 11, "failed": 0, "skipped": 0 },
+    "exportAndInferenceBypassTestsEachPlatform": { "passed": 58, "failed": 0, "skipped": 0 },
+    "hostTestsEachPlatform": { "passed": 315, "failed": 0, "skipped": 0 },
+    "windows": { "job": 103635516550, "conclusion": "failure", "trainingComparisonFailures": 2, "ordinaryInference": "not executed after failure" },
+    "linux": { "job": 103635516489, "conclusion": "failure", "trainingComparisonFailures": 2, "ordinaryInference": "not executed after failure" },
+    "macos": { "job": 103635516435, "conclusion": "failure", "ordinaryInferencePassed": 935, "stockClipFailures": 2 },
+    "thresholdsChanged": false
+  },
   "pretrainedDiagnostic": {
     "status": "ok",
     "familyQualified": false,

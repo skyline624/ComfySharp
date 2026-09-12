@@ -1,0 +1,58 @@
+{
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceSha256": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+  "cases": [
+    {
+      "name": "[None]",
+      "steps": "0"
+    },
+    {
+      "name": "adapter_2_steps_00001_.safetensors",
+      "steps": "2"
+    },
+    {
+      "name": "folder/name_+12_steps_x",
+      "steps": "12"
+    },
+    {
+      "name": "x_-3_steps_y",
+      "steps": "-3"
+    },
+    {
+      "name": "x_ 42 _steps_y",
+      "steps": "42"
+    },
+    {
+      "name": "x_１２_steps_y",
+      "steps": "12"
+    },
+    {
+      "name": "x_١٢_steps_y",
+      "steps": "12"
+    },
+    {
+      "name": "x_92233720368547758080_steps_y",
+      "steps": "92233720368547758080"
+    },
+    {
+      "name": "x_1_000_steps_y",
+      "steps": "0"
+    },
+    {
+      "name": "x_steps_1_steps_y",
+      "error": "ValueError"
+    },
+    {
+      "name": "model.safetensors",
+      "error": "ValueError"
+    },
+    {
+      "name": "x__steps_y",
+      "error": "ValueError"
+    },
+    {
+      "name": "x_2.0_steps_y",
+      "error": "ValueError"
+    }
+  ]
+}

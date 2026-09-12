@@ -7,7 +7,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Owns all ordinary LoRA and BiasDiff targets in the frozen plain SD module traversal order.
-/// New Float32 adapters only; loading existing adapters and other algorithms are separate capabilities.</summary>
+/// New or resumed two-factor Float32 LoRA adapters. Other algorithms remain separate capabilities.</summary>
 public sealed class SdTrainableAdapterSet : IDisposable
 {
     private readonly Dictionary<string, TrainableWeightPatch> patches;
@@ -21,7 +21,7 @@ public sealed class SdTrainableAdapterSet : IDisposable
     });
 
     public SdTrainableAdapterSet(SdUnetConfig config, int rank, ulong seed, Device device,
-        long maxParameterBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default)
+        long maxParameterBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default, ILoraTensorSource? existing = null)
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(config);
         if (rank < 1 || rank > 1024) throw new ArgumentOutOfRangeException(nameof(rank));
@@ -29,11 +29,15 @@ public sealed class SdTrainableAdapterSet : IDisposable
         var schema = UnetWeightSchema.Describe(config); var order = Order.Value;
         if (order.Length != schema.Count || !order.ToHashSet(StringComparer.Ordinal).SetEquals(schema.Keys))
             throw new InvalidDataException("The SD schema differs from the frozen training traversal.");
+        var resume = existing is null ? null : SdLoraResumePlan.Inspect(existing,schema,cancellationToken);
+        ResumedTargets = Array.AsReadOnly(order.Where(n => resume?.Targets.ContainsKey(n) == true).ToArray());
+        IgnoredExistingKeys = resume?.IgnoredKeys ?? Array.Empty<string>();
         long bytes = 0;
         foreach (string name in order)
         {
             var shape = schema[name];
-            long count = shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * rank) + 1);
+            long actualRank = resume?.Targets.GetValueOrDefault(name)?.Rank ?? rank;
+            long count = shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank) + 1);
             bytes = checked(bytes + checked(count * sizeof(float)));
         }
         if (bytes > maxParameterBytes) throw new NotSupportedException("Adapter leaves exceed the configured allowance; temporary tensors and optimizer state are additional.");
@@ -53,13 +57,32 @@ public sealed class SdTrainableAdapterSet : IDisposable
                 else
                 {
                     long columns = shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b));
-                    var up = empty([shape[0], rank], device: device); var down = zeros([rank, columns], device: device);
-                    Kaiming(up, rank, weightGenerator);
+                    double alpha = 1;
+                    // The source reads module.weight.alpha, not the usual exported module.alpha.
+                    if (resume?.Alphas.TryGetValue(name,out string? alphaKey) == true)
+                    {
+                        using var value = existing!.ReadTensor(alphaKey,cancellationToken);
+                        alpha = value.to_type(ScalarType.Float64).item<double>();
+                        if (!double.IsFinite(alpha) || !float.IsFinite((float)alpha)) throw new InvalidDataException("Resume alpha must be finite Float32: " + alphaKey);
+                    }
+                    long actualRank = rank; Tensor up, down;
+                    if (resume?.Targets.TryGetValue(name,out var factors) == true)
+                    {
+                        actualRank = factors.Rank;
+                        // LoraDiff copies source weights into default CPU Float32 Linear layers before moving them.
+                        up = existing!.ReadTensor(factors.Up,cancellationToken).to_type(ScalarType.Float32).to(device);
+                        down = existing.ReadTensor(factors.Down,cancellationToken).to_type(ScalarType.Float32).to(device);
+                    }
+                    else
+                    {
+                        up = empty([shape[0], rank], device: device); down = zeros([rank, columns], device: device);
+                        Kaiming(up, rank, weightGenerator); alpha = 1;
+                    }
                     // LoraDiff constructs two default CPU nn.Linear layers before copying up/down.
                     // Their discarded initial values still consume CPU RNG, including for CUDA factors.
-                    using var discardedUp = empty([shape[0], rank], device: CPU); Kaiming(discardedUp, rank, cpuGenerator);
-                    using var discardedDown = empty([rank, columns], device: CPU); Kaiming(discardedDown, columns, cpuGenerator);
-                    patches.Add(name, new TrainableLoraPatch(up, down, 1, trainAlpha: true));
+                    using var discardedUp = empty([shape[0], actualRank], device: CPU); Kaiming(discardedUp, actualRank, cpuGenerator);
+                    using var discardedDown = empty([actualRank, columns], device: CPU); Kaiming(discardedDown, columns, cpuGenerator);
+                    patches.Add(name, new TrainableLoraPatch(up, down, alpha, trainAlpha: true));
                 }
             }
             using var cpuState = cpuGenerator.get_state(); InitialCpuRandomStateSha256 = Convert.ToHexStringLower(SHA256.HashData(cpuState.bytes));
@@ -78,6 +101,9 @@ public sealed class SdTrainableAdapterSet : IDisposable
         tensor.uniform_(-bound, bound, generator);
     }
     public long ParameterBytes { get; }
+    public IReadOnlyList<string> ResumedTargets { get; }
+    /// <summary>Includes source-reset differences and ordinary exported alpha keys not used by the training factory.</summary>
+    public IReadOnlyList<string> IgnoredExistingKeys { get; }
     public string InitialCpuRandomStateSha256 { get; }
     public string? InitialDeviceRandomStateSha256 { get; }
     /// <summary>Borrowed until this set is disposed. Retain individual patches for longer operations.</summary>

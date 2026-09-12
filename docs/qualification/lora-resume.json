@@ -1,0 +1,110 @@
+{
+  "scope": "Frozen plain SD two-factor LoRA resume factory and separate filename counter",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "implementation": "partial",
+  "sourceFixture": {
+    "sha256": "47bb97f556dbfa0b3e6613e2e2be8613dcc643d3e9d906add15ee58e94268086",
+    "factoryCases": 4,
+    "filenameCases": 13,
+    "comparison": "Exact factor values, all-parameter SHA256 and CPU RNG state; no numeric tolerance relaxation",
+    "filenameSha256": "11f8dffdb452cd75394fb73d8705570a001702709a2af97b92b13257cc9d752b"
+  },
+  "modelsCopiedOrDownloaded": false,
+  "adaptersWritten": false,
+  "realWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "LoCon and other adapter algorithms",
+    "Mixed precision, offload and checkpointing",
+    "Full TrainLoraNode and counter wiring",
+    "Real image datasets and platform qualification"
+  ],
+  "ci": "Pending publication",
+  "localTests": {
+    "newCases": 14,
+    "platform": "win-x64-cpu",
+    "ordinaryInference": {
+      "skipped": 0,
+      "filter": "FullyQualifiedName!~ClipStockReferenceTests",
+      "failed": 0,
+      "passed": 949
+    }
+  },
+  "build": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "pretrainedDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 2,
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 10242232,
+    "changedParameterCount": 1162,
+    "InitialCpuRandomStateSha256": "a90becb36e4ab4eaeccb063f3110dfaf64def7d1f8ec3a2c2d7e92907995169d",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1040573,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 1244,
+        "nonzeroAlphaGradients": 280
+      },
+      {
+        "step": 2,
+        "loss": 1.0642593,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 1244,
+        "nonzeroAlphaGradients": 280
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": true,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1250,
+      "predictionExact": true,
+      "predictionSha256": "b134c8185a0b04936400c9e3420781160c51070527996f9a4b25117b1e307bbe"
+    },
+    "resume": {
+      "fileSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+      "factorTargets": 282,
+      "ignoredKeys": 686,
+      "rules": "Frozen weight factory only: norm/bias reset and module.weight.alpha lookup. Filename step counter is tested separately, not used by this diagnostic."
+    },
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 14.7678084,
+    "scope": "Real SD1.5 all-target LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  }
+}

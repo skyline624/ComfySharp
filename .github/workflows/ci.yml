@@ -65,6 +65,8 @@ jobs:
       - name: Exercise training bypass source and dataset contracts
         # Keep the bypass source/loop cases observable even when another numerical gate fails later.
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~LoraTrainingBypassTests|FullyQualifiedName~SdTrainingLoopTests' --logger trx --results-directory TestResults/TrainingBypass
+      - name: Exercise LoRA resume source and lifetime contracts
+        run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdLoraResumeTests' --logger trx --results-directory TestResults/LoraResume
       - name: Exercise all-target adapter initialization and mixed gradients
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~SdAdapterInitializationTests|FullyQualifiedName~TrainableAdapterTests|FullyQualifiedName~TrainingReferenceCorpusTests' --logger trx --results-directory TestResults/TrainingAdapters
       - name: Exercise training datasets, source RNG and training loops

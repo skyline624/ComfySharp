@@ -24,6 +24,8 @@
     <EmbeddedResource Include="Fixtures/lora-training-state.json" />
     <EmbeddedResource Include="Fixtures/lora-bypass.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-training-bypass.reference.json" />
+    <EmbeddedResource Include="Fixtures/lora-resume.reference.json" />
+    <EmbeddedResource Include="Fixtures/lora-resume-steps.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-optimizers.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-denoising.reference.json" />
     <EmbeddedResource Include="Fixtures/training-batches.reference.json" />

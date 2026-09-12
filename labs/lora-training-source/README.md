@@ -83,3 +83,19 @@ Absolute/relative tolerance `3e-5` is fixed before comparison. Fixture SHA-256:
 Source Git-blob and helper hashes are recorded in the fixture. .NET tests verify
 and consume this static file without Python. New two-factor Float32 adapters only;
 this does not qualify adapter resume, precision/offload or the complete training node.
+
+## Resume factory and filename corpus
+
+`resume.py --source CHECKOUT --output NEW.json` executes the frozen factory and
+LoRA classes on reduced SD1/SD2 models nested under `diffusion_model`, matching
+the canonical training names. Four cases exercise seven factor spellings,
+F32/F16/BF16 source values, loaded ranks, competing aliases, alpha/reset rules,
+all initialized parameter bytes and the CPU RNG state. Comparisons are exact.
+Fixture SHA-256: `47bb97f556dbfa0b3e6613e2e2be8613dcc643d3e9d906add15ee58e94268086`.
+Only the LoRA loader is supplied in this factory oracle; other algorithms remain
+outside this corpus. Orphan-format decisions are traced to the frozen loader code.
+
+`resume_steps.py --source CHECKOUT --output NEW.json` extracts `_load_existing_lora`
+and exercises thirteen selected filenames. File resolution/loading are stubs;
+only the sentinel, splits and integer counter behavior are compared. No model
+weights are used by either collector, and distributed .NET tests read static JSON.
