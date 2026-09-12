@@ -53,6 +53,8 @@
           <Button x:Name="BypassNode" Content="Bypass" Click="BypassClicked"/>
         </StackPanel>
         <Button Content="Delete selection" Click="DeleteClicked"/>
+        <Button x:Name="DuplicateNodes" Content="Duplicate selection" Click="DuplicateClicked"/>
+        <Button x:Name="DuplicateWithInputs" Content="Duplicate with external inputs" Click="DuplicateWithInputsClicked"/>
         <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
         <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>
         <TextBox x:Name="SourceId" PlaceholderText="Source node ID"/><TextBox x:Name="SourceSlot" Text="0" PlaceholderText="Output slot"/>

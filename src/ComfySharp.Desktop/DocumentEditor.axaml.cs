@@ -120,6 +120,15 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     public void Undo() { Document.Undo(); Reload(); }
     public void Redo() { Document.Redo(); Reload(); }
     public void SetExecutionMode(NodeId id, int mode) { Document.SetExecutionMode(id, mode); Reload(); }
+    public IReadOnlyDictionary<NodeId, NodeId> DuplicateSelection(bool connectInputs = false)
+    {
+        var selected = Canvas.SelectedItems?.Cast<NodeView>().Select(n => n.Id).ToArray() ?? [];
+        if (selected.Length == 0 && Canvas.SelectedItem is NodeView single) selected = [single.Id];
+        if (selected.Length == 0) throw new InvalidOperationException("Select one or more nodes first.");
+        var copies = Document.DuplicateNodes(selected, connectInputs: connectInputs); Reload();
+        Canvas.SelectedItems = nodes.Where(n => copies.Values.Contains(n.Id)).ToList();
+        return copies;
+    }
     public NodeId AddNode(string type)
     {
         var id = Document.AddNode(type, 70 + nodes.Count * 35, 70 + nodes.Count * 35, NodeTemplates.Create(type)); Reload(); return id;
@@ -133,6 +142,8 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     private void EnableClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 0));
     private void MuteClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 2));
     private void BypassClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 4));
+    private void DuplicateClicked(object? sender, RoutedEventArgs e) => Try(() => DuplicateSelection());
+    private void DuplicateWithInputsClicked(object? sender, RoutedEventArgs e) => Try(() => DuplicateSelection(true));
     private void ConnectClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Connect(new(SourceId.Text ?? ""), int.Parse(SourceSlot.Text ?? "0"), new(TargetId.Text ?? ""), int.Parse(TargetSlot.Text ?? "0")); Reload(); });
     private void DisconnectClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Disconnect(long.Parse(LinkId.Text ?? "")); Reload(); });
 }

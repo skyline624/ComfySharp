@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "baseCommit": "969d10c2cf983f0f15cf5fdd0410ecc1fa5f1e6c",
+  "platform": "Windows win-x64 CPU",
+  "passed": 299,
+  "failed": 0,
+  "skipped": 0,
+  "excluded": 0,
+  "new": 20,
+  "projects": {
+    "Workflow": {
+      "passed": 210,
+      "bytes": 324336,
+      "sha256": "d578b7ce24d7003742ebb6c460f153fe84e09179b7132c9702729b4d66cef1eb"
+    },
+    "Desktop": {
+      "passed": 89,
+      "bytes": 133814,
+      "sha256": "3faac08ca8757bc5f5d32d66c8cfba0d57e7291c3997b7d0544ede436e6e0363"
+    }
+  },
+  "newByProject": {
+    "Workflow": 16,
+    "Desktop": 4
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Workflow.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "91a982cf17e1d8a4cd993fe76358d5d8db3f92fe279bf37030beaa4b97108c44"
+    },
+    "workflow-tests": {
+      "bytes": 566,
+      "sha256": "8a67b429b267dce491a5ea176b8d61c6c08ae23ac5bc30d63c00527803127e7b"
+    },
+    "desktop-tests": {
+      "bytes": 551,
+      "sha256": "4ac7b3560d22004deb74e715e8a097757e40a51694881e338642a7aee8b9a7e6"
+    },
+    "native-smoke": {
+      "bytes": 457,
+      "sha256": "3928a573599e85627f42bcc46a503c2d7ae209854f3d937fb97beedb7336272a"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeSmoke": {
+    "exitCode": 0,
+    "checks": [
+      "Existing tensor/text, IMAGE, PNG/API import and execution-mode scenarios continue to pass.",
+      "Three connected nodes are duplicated through the native editor selection. Copied widgets and mode are edited independently.",
+      "The separate Host executes original and copied PreviewAny outputs in one prompt, returning distinct expected strings. Original widgets/mode and four physical connections are checked."
+    ]
+  },
+  "sourceInventory": [
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphCanvas.ts",
+      "bytes": 279760,
+      "sha256": "46038040fbb86eaaf4ce8f5c492671928779c0bc972d5294c470f34215165297"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphNode.ts",
+      "bytes": 132247,
+      "sha256": "d6263d56f28a5e6c5a95a3a263fe0d6ffe4083a981c01a14ec4ebfca43487e50"
+    }
+  ],
+  "notice": {
+    "bytes": 1077,
+    "sha256": "1b38cc30fe774bcc77538ab99eb460f4e1c8a47c4fddc6e991ee3b5cc2a96bb9"
+  },
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.axaml": {
+      "bytes": 5179,
+      "sha256": "e98e1dabc17eea2bc5cc01c85ae318cddeab864ad784efbbed1cdfb9b97baf56"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 18157,
+      "sha256": "b04e524a8b561cf2946975755fe99d7ac8cbec713c8c148dc42b93739858ca7e"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 33048,
+      "sha256": "3db02587307f095e081b277eed19b91b679cd02ae3d65174335410274832d920"
+    },
+    "src/ComfySharp.Workflow/WorkflowDocument.cs": {
+      "bytes": 15838,
+      "sha256": "ed6a1af8b206de5dfc1d81d64d0ffa19dbf4aab9895dae03e8af9a2edd49fb5b"
+    },
+    "tests/ComfySharp.Desktop.Tests/WorkflowDuplicationEditorTests.cs": {
+      "bytes": 2852,
+      "sha256": "a68ae2904477a6a9153dd33360b2c83edf3f9209b1f8981b1c46257ae4037cbf"
+    },
+    "tests/ComfySharp.Workflow.Tests/WorkflowDuplicationTests.cs": {
+      "bytes": 9266,
+      "sha256": "1e6946230d47dc567955dd8f8b041c9b8bf5644a5e11a9bd09cf5a9c2d1e2f09"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed product/tests plus build settings; hashes are not loaded-assembly attestation.",
+  "limits": [
+    "Only Workflow and Desktop test projects were repeated.",
+    "Constructed C# contract cases after pinned source inspection; no executed JavaScript differential corpus.",
+    "Node duplication within one document only. Clipboard, groups, subgraph-definition remapping and reroutes remain open. Recognized subgraph instances and retained object links with parentId fail atomically.",
+    "Opaque extension data is preserved without interpreting or remapping unknown embedded identifiers. No extension callback execution.",
+    "No model-family, GPU, three-platform or distribution qualification; numerical gates remain unchanged."
+  ]
+}

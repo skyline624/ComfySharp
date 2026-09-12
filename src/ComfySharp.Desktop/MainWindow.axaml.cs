@@ -309,7 +309,22 @@ public sealed partial class MainWindow : Window
             if (modeEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != expected)
                 throw new InvalidOperationException($"Mode {mode} execution produced an unexpected preview.");
         }
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution and enabled/bypassed/muted Host execution.");
+        var duplicationCanvas = ActiveEditor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!;
+        duplicationCanvas.SelectedItems = duplicationCanvas.ItemsSource!.Cast<NodeView>().ToList();
+        var copies = ActiveEditor.DuplicateSelection();
+        ActiveEditor.Document.SetWidgets(copies[new("source:01")], new JsonObject { ["value"] = "API duplicated" });
+        ActiveEditor.SetExecutionMode(copies[replace], 0);
+        if (copies.Count != 3 || ActiveEditor.Document.Links.Count != 4 ||
+            ActiveEditor.Document.Nodes.Single(n => n.Id.Value == "source:01").Data["widgets_values"]!["value"]!.GetValue<string>() != "API import edited and executed" ||
+            ActiveEditor.Document.Nodes.Single(n => n.Id == replace).Data["mode"]!.GetValue<int>() != 2)
+            throw new InvalidOperationException("Node duplication changed the original graph.");
+        var copiedPreview = copies[new("preview")].Value;
+        accepted = await host.SubmitAsync(Compile(true), clientId, ["preview", copiedPreview]);
+        var copiedEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (copiedEntry["outputs"]?[copiedPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated" ||
+            copiedEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != "muted fallback")
+            throw new InvalidOperationException("Original and duplicated graphs did not execute independently.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution and independent duplicated graph execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
