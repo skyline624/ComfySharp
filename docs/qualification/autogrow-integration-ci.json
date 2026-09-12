@@ -1,0 +1,360 @@
+{
+  "schema": 1,
+  "run": 34662507767,
+  "commit": "499e32ebbc957c48780c42030570e95fcde96110",
+  "url": "https://github.com/skyline624/ComfySharp/actions/runs/34662507767",
+  "scope": "Core Autogrow source comparisons only; complete CI still fails on unrelated numerical references.",
+  "targets": [
+    {
+      "target": "win-x64",
+      "trxBytes": 276501,
+      "trxSha256": "110e504f530a32d57c175cbad8f7ccb6a15f1fd21a71ec3b753fb47c7d133af6",
+      "coreCounts": {
+        "total": 188,
+        "executed": 188,
+        "passed": 188,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "sourceComparisons": [
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"concat-two\")",
+          "id": "68a187be-964d-22f6-1a83-4fc6984067e9",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-hundred\")",
+          "id": "ec567408-cbad-1803-6aa4-9e1c5378b14e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"literal-empty-item\")",
+          "id": "2b5c91c1-64d8-a9ef-fb8d-0cd02c5d5763",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-reverse-order\")",
+          "id": "118c44e0-86d6-0a71-2e23-f0d93b11571e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-zero-empty\")",
+          "id": "c7882e85-f211-bad8-88b8-038ab6db11d4",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-items\")",
+          "id": "3c8d1a79-54d8-b97b-b156-7262b1d7eeca",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"duplicate-link\")",
+          "id": "71a8ffdc-2994-f73f-6716-23f063a82097",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"different-prefix\")",
+          "id": "34a4cb82-7943-fbf1-8ab2-8d636da00a64",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"empty-execution-list\")",
+          "id": "1a434e7f-c3c6-de8d-f5f7-ed665bfaf607",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-over-max\")",
+          "id": "fa2206a7-1754-beb7-d318-645808aeff90",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-one\")",
+          "id": "d5d37a48-e95b-f93c-17e0-6119608e49d2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-blocker-item\")",
+          "id": "c7dd4936-e553-dfbb-ad98-292d82f40de0",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"one-port\")",
+          "id": "2011d970-2043-8328-5aca-613122f064bb",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"reverse-gap\")",
+          "id": "ea53d810-4605-d80d-6b70-2e4a1ddd2fc2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"ten-ports\")",
+          "id": "ea7a380f-d0f9-aac0-eca4-536eb00e8019",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-empty-message\")",
+          "id": "bfc570b5-e578-ebeb-0f0a-928c38665d4e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-silent-first\")",
+          "id": "8917b652-e585-b94c-da15-a74ac28c0857",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"optional-prototype\")",
+          "id": "e2732df3-c333-8a15-d138-6afe895e814b",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "target": "linux-x64",
+      "trxBytes": 280156,
+      "trxSha256": "bdfe1721300a4d29c15faf76233a461a6ff8408901bc98d9def46688650fefb8",
+      "coreCounts": {
+        "total": 188,
+        "executed": 188,
+        "passed": 188,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "sourceComparisons": [
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-reverse-order\")",
+          "id": "118c44e0-86d6-0a71-2e23-f0d93b11571e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"empty-execution-list\")",
+          "id": "1a434e7f-c3c6-de8d-f5f7-ed665bfaf607",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-silent-first\")",
+          "id": "8917b652-e585-b94c-da15-a74ac28c0857",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"optional-prototype\")",
+          "id": "e2732df3-c333-8a15-d138-6afe895e814b",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"concat-two\")",
+          "id": "68a187be-964d-22f6-1a83-4fc6984067e9",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-zero-empty\")",
+          "id": "c7882e85-f211-bad8-88b8-038ab6db11d4",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"literal-empty-item\")",
+          "id": "2b5c91c1-64d8-a9ef-fb8d-0cd02c5d5763",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-empty-message\")",
+          "id": "bfc570b5-e578-ebeb-0f0a-928c38665d4e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-one\")",
+          "id": "d5d37a48-e95b-f93c-17e0-6119608e49d2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-over-max\")",
+          "id": "fa2206a7-1754-beb7-d318-645808aeff90",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-items\")",
+          "id": "3c8d1a79-54d8-b97b-b156-7262b1d7eeca",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"duplicate-link\")",
+          "id": "71a8ffdc-2994-f73f-6716-23f063a82097",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"different-prefix\")",
+          "id": "34a4cb82-7943-fbf1-8ab2-8d636da00a64",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"reverse-gap\")",
+          "id": "ea53d810-4605-d80d-6b70-2e4a1ddd2fc2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-blocker-item\")",
+          "id": "c7dd4936-e553-dfbb-ad98-292d82f40de0",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-hundred\")",
+          "id": "ec567408-cbad-1803-6aa4-9e1c5378b14e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"ten-ports\")",
+          "id": "ea7a380f-d0f9-aac0-eca4-536eb00e8019",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"one-port\")",
+          "id": "2011d970-2043-8328-5aca-613122f064bb",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "target": "osx-arm64",
+      "trxBytes": 289652,
+      "trxSha256": "a04ef2129269f207b860dd1e5ff072081869b111e46d8bb0c136d40f09c6b325",
+      "coreCounts": {
+        "total": 188,
+        "executed": 188,
+        "passed": 188,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "sourceComparisons": [
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-silent-first\")",
+          "id": "8917b652-e585-b94c-da15-a74ac28c0857",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-items\")",
+          "id": "3c8d1a79-54d8-b97b-b156-7262b1d7eeca",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-hundred\")",
+          "id": "ec567408-cbad-1803-6aa4-9e1c5378b14e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-max-one\")",
+          "id": "d5d37a48-e95b-f93c-17e0-6119608e49d2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"one-port\")",
+          "id": "2011d970-2043-8328-5aca-613122f064bb",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"optional-prototype\")",
+          "id": "e2732df3-c333-8a15-d138-6afe895e814b",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"duplicate-link\")",
+          "id": "71a8ffdc-2994-f73f-6716-23f063a82097",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"different-prefix\")",
+          "id": "34a4cb82-7943-fbf1-8ab2-8d636da00a64",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"nested-blocker-item\")",
+          "id": "c7dd4936-e553-dfbb-ad98-292d82f40de0",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-reverse-order\")",
+          "id": "118c44e0-86d6-0a71-2e23-f0d93b11571e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"blocker-empty-message\")",
+          "id": "bfc570b5-e578-ebeb-0f0a-928c38665d4e",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"concat-two\")",
+          "id": "68a187be-964d-22f6-1a83-4fc6984067e9",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"ten-ports\")",
+          "id": "ea7a380f-d0f9-aac0-eca4-536eb00e8019",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"reverse-gap\")",
+          "id": "ea53d810-4605-d80d-6b70-2e4a1ddd2fc2",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-over-max\")",
+          "id": "fa2206a7-1754-beb7-d318-645808aeff90",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"prefix-min-zero-empty\")",
+          "id": "c7882e85-f211-bad8-88b8-038ab6db11d4",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"empty-execution-list\")",
+          "id": "1a434e7f-c3c6-de8d-f5f7-ed665bfaf607",
+          "outcome": "Passed"
+        },
+        {
+          "name": "ComfySharp.Core.Tests.AutogrowSourceReferenceTests.PublishedSourceMetadataGroupingCallsAndOutputsMatchRealEngine(id: \"literal-empty-item\")",
+          "id": "2b5c91c1-64d8-a9ef-fb8d-0cd02c5d5763",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "method": "Read-only TRX counters/results and SHA-256 verification; no new test or source execution.",
+  "limitations": [
+    "18 source comparisons per OS, not 54 distinct capabilities.",
+    "No pretrained model, hardware GPU or complete product qualification.",
+    "Aggregate Inference/stock CLIP outcomes are not part of this evidence."
+  ]
+}

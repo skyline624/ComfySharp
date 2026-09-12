@@ -39,6 +39,21 @@ jobs:
           if ($failedProjects.Count) { throw "Application contract projects failed: $($failedProjects -join ', ')" }
       - name: Check catalogue consistency
         run: dotnet run --no-build -c Release --project tools/ComfySharp.Catalog -- docs/capabilities/manifest.json --node-evidence docs/capabilities/node-registration.json docs/capabilities/node-schemas.json
+      - name: Start native Desktop and its supervised Host
+        timeout-minutes: 3
+        shell: pwsh
+        run: |
+          $desktop = Join-Path $env:GITHUB_WORKSPACE 'src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll'
+          if ($IsLinux) {
+            $output = & xvfb-run -a -s '-screen 0 1280x800x24' dotnet $desktop --smoke-test 2>&1
+          } else {
+            $output = & dotnet $desktop --smoke-test 2>&1
+          }
+          $exitCode = $LASTEXITCODE
+          $output | Write-Output
+          if ($exitCode -ne 0 -or ($output -join "`n") -notmatch 'ComfySharp Desktop smoke passed:') {
+            throw "Native Desktop / Host smoke did not complete (exit $exitCode)."
+          }
       - name: Exercise SD1.5 checkpoint assembly contracts
         run: dotnet test tests/ComfySharp.Inference.Tests --no-build --no-restore -c Release -p:NativeRuntime=${{ matrix.runtime }} --filter 'FullyQualifiedName~Sd15CheckpointAssemblyTests|FullyQualifiedName~Sd15CheckpointPlanTests' --logger trx --results-directory CheckpointResults
       - name: Exercise reduced SD1.5 pipeline contracts
@@ -123,21 +138,6 @@ jobs:
             throw 'CLIP diagnostic did not execute the expected synthetic graph.'
           }
           Write-Output 'CLIP inspection without native payload and repeated synthetic conditioning passed; no pretrained compatibility claimed.'
-      - name: Start native Desktop and its supervised Host
-        timeout-minutes: 3
-        shell: pwsh
-        run: |
-          $desktop = Join-Path $env:GITHUB_WORKSPACE 'src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll'
-          if ($IsLinux) {
-            $output = & xvfb-run -a -s '-screen 0 1280x800x24' dotnet $desktop --smoke-test 2>&1
-          } else {
-            $output = & dotnet $desktop --smoke-test 2>&1
-          }
-          $exitCode = $LASTEXITCODE
-          $output | Write-Output
-          if ($exitCode -ne 0 -or ($output -join "`n") -notmatch 'ComfySharp Desktop smoke passed:') {
-            throw "Native Desktop / Host smoke did not complete (exit $exitCode)."
-          }
       - name: Exercise actual native CPU operations
         run: dotnet run --no-build -c Release --project tools/ComfySharp.RuntimeProbe -- --device cpu --repeat 25
       - name: Compare full CLIP L and G dimensions in a separate CPU process

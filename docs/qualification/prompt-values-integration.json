@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "targeted-local-managed-reference-integration",
+  "scope": "Windows Host suite only: 189 unique passing tests, including 28 phase-specific Prompt Values cases. No new full-solution campaign asserted.",
+  "collectorCommit": "8dad64f0cf9b04548ee722b7533776b25d3b4c46",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceEvidence": "prompt-values-source-8dad64f.json",
+  "sourceProtocolSha256": "dbd4038623e3313005cbb29393da978c0d8c9eb49a96860fb765ff217b6fe2ee",
+  "sourceCollectionSha256": "04af1fcf3c83c91d70cfd7a1d0b97f51a6eca5bdcf9c612ac9ea29fa420bee3f",
+  "fixtureBytesIdenticalToCollectedSource": true,
+  "protocolBytesIdenticalToPublishedGitBlob": true,
+  "testEvidenceMechanism": "Passing assertions in real EngineService calls; no standalone C# argument-capture artifact is claimed.",
+  "testedCompileInputs": {
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 9462,
+      "sha256": "b7b4391a83caf95bf2189f8e81f47cb76abebebb106e68d4dbd0fbae7a0eaf52"
+    },
+    "src/ComfySharp.Core/NodeInputExpansion.cs": {
+      "bytes": 6963,
+      "sha256": "6715917c6f1323c28f8f76c3d36ae0454eeda37bd8436305f4815a1756ee8789"
+    },
+    "src/ComfySharp.Core/NodeRegistry.cs": {
+      "bytes": 4059,
+      "sha256": "78e27953f40ecebc3da429195d64b054d113d972c078bf393f86d351d668518d"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "bytes": 23354,
+      "sha256": "29ee66a0cb90b7acbe34b339eea869cc09dcc4a16444bf32063a763be3e20bdb"
+    },
+    "src/ComfySharp.Nodes/CreateListNode.cs": {
+      "bytes": 2155,
+      "sha256": "063cebb2af9f195db77156104be9df280d7e892ab2c3199da74d53143a4e1cee"
+    },
+    "tests/ComfySharp.Host.Tests/PromptValuesReferenceTests.cs": {
+      "bytes": 19286,
+      "sha256": "b94a617966bbfeb2896bc8d89cac2cf2c72a727dbd1d033d4dfdcd1aa14ca767"
+    },
+    "tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj": {
+      "bytes": 1110,
+      "sha256": "76673ffad7a4e228cfc274f012f7bdea1b089e61f8e92070ccf32b9d11b562a2"
+    }
+  },
+  "testedFixtures": {
+    "tests/ComfySharp.Host.Tests/Fixtures/prompt-values.reference.json": {
+      "bytes": 677389,
+      "sha256": "04af1fcf3c83c91d70cfd7a1d0b97f51a6eca5bdcf9c612ac9ea29fa420bee3f"
+    },
+    "tests/ComfySharp.Host.Tests/Fixtures/prompt-values.protocol.json": {
+      "bytes": 17911,
+      "sha256": "dbd4038623e3313005cbb29393da978c0d8c9eb49a96860fb765ff217b6fe2ee"
+    }
+  },
+  "productSnapshotNote": "The recorded build includes AutogrowTemplate/Names changes in Contracts and expansion plus explicit Prefix constructor syntax. It is not claimed identical to an earlier product commit; these seven file hashes identify the recorded relevant compile inputs.",
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "evidence": "root build result reported in the session; not inferred from TRX"
+  },
+  "testRun": {
+    "platform": "Windows",
+    "configuration": "Release",
+    "suite": "ComfySharp.Host.Tests",
+    "exitCodeReportedByRoot": 0,
+    "trxLogicalName": "host-first.trx",
+    "bytes": 419420,
+    "sha256": "432cb0bbf4c50f3e8f37106e62a66f056a8337bb313202b78cfe833ccd77e996",
+    "resultSummaryOutcome": "Completed",
+    "counters": {
+      "total": 189,
+      "executed": 189,
+      "passed": 189,
+      "failed": 0,
+      "error": 0,
+      "timeout": 0,
+      "aborted": 0,
+      "inconclusive": 0,
+      "passedButRunAborted": 0,
+      "notRunnable": 0,
+      "notExecuted": 0,
+      "disconnected": 0,
+      "warning": 0,
+      "completed": 0,
+      "inProgress": 0,
+      "pending": 0
+    },
+    "uniqueTestIds": 189,
+    "promptValuesUniqueTestIds": 28,
+    "otherHostTests": 161,
+    "allUnitTestResultsPassed": true,
+    "runInfos": 0,
+    "times": {
+      "creation": "2026-09-12T03:16:18.6456401+02:00",
+      "queuing": "2026-09-12T03:16:18.6456402+02:00",
+      "start": "2026-09-12T03:16:16.9716505+02:00",
+      "finish": "2026-09-12T03:16:28.9152804+02:00"
+    }
+  },
+  "phasePartition": {
+    "ordinaryCases": 28,
+    "sourceAccepted": 16,
+    "sourceRejected": 12,
+    "csharpAccepted": 14,
+    "csharpRejected": 14,
+    "validationAligned": 26,
+    "validationExplicitDifferences": 2,
+    "firstExecutionArgumentsAligned": 13,
+    "firstExecutionWrappedLinkDifference": 1,
+    "adaptedSecondPassCases": 3,
+    "adaptedSecondPassArgumentsAligned": 2,
+    "adaptedSecondPassRejected": 1
+  },
+  "qualification": {
+    "sourceNodeExecution": false,
+    "sourceBodyOutputParity": false,
+    "fullHttpParity": false,
+    "directSourceAcquisitionHasProductEquivalent": false,
+    "frontendParity": false,
+    "generalScalarCoercionParity": false,
+    "newFullSolutionCampaign": false,
+    "csharpRealNodeBodiesExecuted": true,
+    "previewAnyExecutedInComparator": false
+  },
+  "adapters": [
+    "Same real schemas and real node bodies; observation wrapper copies borrowed arguments and delegates unchanged context/token.",
+    "CreateList Map members are projected back to flat names without changing values; scalar primitive arguments receive the source execution-list dimension.",
+    "Bool/int/string/null/list/dictionary order and finite Float64 bits are compared; only descriptive Python float repr metadata is excluded.",
+    "Second-pass inputs are explicit new prompts decoded from source mutation snapshots, not replacements for original-case tests."
+  ],
+  "limits": [
+    "Source only validates/acquires; no source node output golden exists.",
+    "Original recognition/acquisition/cache observations remain source evidence, not invented product APIs or cache-read parity.",
+    "Expected Python tuple failures/exceptions are not copied into C# diagnostic codes.",
+    "Bool and negative output slots remain explicit validation divergences; a wrapped link-shaped literal remains an execution-argument divergence.",
+    "Host suite contains these direct EngineService tests; placement in Host.Tests does not mean they exercise HTTP.",
+    "No unchanged-prior-product, all-platform, TemplateNames source-corpus or new full-solution qualification."
+  ],
+  "cases": [
+    {
+      "id": "raw-empty-list",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "1ceaa630eb71d97b16d982e912feb6f64c7c81646e2a7558ad47bf9a4cd496d0"
+    },
+    {
+      "id": "raw-numeric-pair",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "168cdb3c59c6aa2c5aba2e0a8bb753411c8b0539dbcfe6e95bd90761706423ab"
+    },
+    {
+      "id": "link-string-id",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "6a51e7b05dbea0a0cf369759ca627d2d2d93cd622711d5be65d97d8659e986e6"
+    },
+    {
+      "id": "malformed-link-length",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "5c7c03fe590382bcd3161e06b00ba1192540c8f464c4cc740fa68c2988956d0d"
+    },
+    {
+      "id": "slot-string",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "ee04aaf5d431e626078039362a93625f9a90aa486592beb524014c44c1bcd791"
+    },
+    {
+      "id": "slot-null",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "c3bdc40a78b002b47b90b04c66a3465d38f54b6f6eb05761dfff17e7395e7acf"
+    },
+    {
+      "id": "slot-boolean-false",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "explicit-difference",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "6410488741ab53b940be364a3b3bc82ab5fc4e417c247d60df935e838c4e1c93"
+    },
+    {
+      "id": "slot-float-integral",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "51fadbd50fccfb78530e5a70ffe601c529843808f6d3746d17188de5f6b37b7f"
+    },
+    {
+      "id": "slot-float-fraction",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "816245753d27d0e083670d381ef0dcb6a41bc53252830b9b833cd303c4cba033"
+    },
+    {
+      "id": "slot-negative",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "explicit-difference",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "3d14869c92da4ecca06e2659a5d76aac7a8273294311dec6a75e978f1c085ef6"
+    },
+    {
+      "id": "slot-out-of-range",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "a8df47169e511c51906c10e00e1bbee112b2c8062234e8117e36ad48025f2b58"
+    },
+    {
+      "id": "numeric-node-id",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "21f692abd2c0ef82e45668fcaa20e455831c1f49614f83e056b0c1e449a9db70"
+    },
+    {
+      "id": "boolean-node-id",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "d165964326ff4a2736a9490dfb295bb8d1e466703a3c3d94253ccbaae1da8a88"
+    },
+    {
+      "id": "missing-node",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "f6d0a64a78e6d1a948a8926bea630d3b85409cd991a4d35d0bf4e0c21548db52"
+    },
+    {
+      "id": "literal-null",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "42fcd8d0db493832407a09e8f0321a1308e59bf41b5a115b1ab850676ebdee9a"
+    },
+    {
+      "id": "literal-empty-map",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "18417f64d02c965ad56b33ea8f0021854b0a2157f674379039b40116d71967b1"
+    },
+    {
+      "id": "literal-nested-map",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "8ae66619d0c87ef543eb33a298d382311767893c27382f6cc72b463bf8ba7f17"
+    },
+    {
+      "id": "wrapped-empty-list",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "b3c7b3d7c13d4fefeb0db7dd03f28a1a84f503a8e9e6e01f4c7b14f6bf56d903",
+      "adaptedSecondPass": {
+        "input": "new prompt decoded from source first validation.promptAfter; original C# prompt unchanged",
+        "sourceAccepted": false,
+        "assertedCsharpAccepted": false,
+        "argumentComparison": "not-run-source-second-validation-rejected"
+      }
+    },
+    {
+      "id": "wrapped-numeric-pair",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "9e767fe47b9f067989d9d062c2c2f5aada60d98f0c38fd50d8b6a3a64643b2a0"
+    },
+    {
+      "id": "wrapped-link-shaped",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "explicit-wrapped-link-difference",
+      "sourceFreshRepeatSha256": "949e82a27a725dabbf36f322c6036d7ca3280032793753b07d069d8fd9422924",
+      "adaptedSecondPass": {
+        "input": "new prompt decoded from source first validation.promptAfter; original C# prompt unchanged",
+        "sourceAccepted": true,
+        "assertedCsharpAccepted": true,
+        "argumentComparison": "aligned-after-second-validation"
+      }
+    },
+    {
+      "id": "reserved-key-extra",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "d3d7ee4b3b397a599780c651bc76a941b58b54f8d9d5818f7b034ff6980f0050"
+    },
+    {
+      "id": "double-wrapper",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "c7bf9e3655856bcef10925122134dc2d727f2122bee67ed665a8992e8826aaae",
+      "adaptedSecondPass": {
+        "input": "new prompt decoded from source first validation.promptAfter; original C# prompt unchanged",
+        "sourceAccepted": true,
+        "assertedCsharpAccepted": true,
+        "argumentComparison": "aligned-after-second-validation"
+      }
+    },
+    {
+      "id": "required-absent",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": false,
+      "assertedCsharpValidationAccepted": false,
+      "validationComparison": "aligned",
+      "argumentComparison": "not-compared",
+      "sourceFreshRepeatSha256": "b9fa8275bc0db1bcbe0212ac273b855cdcb36d84da2fbcedbe5d8168989ccaf4"
+    },
+    {
+      "id": "optional-null",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "bfd17ca9a659297af65587d46a2e586d6bd7295e18ee26b7f926e83f34805948"
+    },
+    {
+      "id": "int-from-bool",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "5aa952dee6eeae44d8edb52411ea47180298381d2b72d27e2819deca24d7afba"
+    },
+    {
+      "id": "float-from-string",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "f152be5acc9fa3de7aa84bdc2f388bab475dd0c41c98a79c8a006658c5327a75"
+    },
+    {
+      "id": "string-from-null",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "8ef198ae144a5f7de913f9315336c2d8e824eb57830cf3f0d777556180fe08cd"
+    },
+    {
+      "id": "boolean-from-wrapped-empty",
+      "trxOutcome": "Passed",
+      "sourceValidationAccepted": true,
+      "assertedCsharpValidationAccepted": true,
+      "validationComparison": "aligned",
+      "argumentComparison": "aligned-after-validation",
+      "sourceFreshRepeatSha256": "e62031dd99a2f23867c7b01ec033102e2b30a0f4d86bb410c92b7d38507e2f95"
+    }
+  ]
+}

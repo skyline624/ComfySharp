@@ -3,29 +3,28 @@ using System.Text.Json.Nodes;
 namespace ComfySharp.Contracts;
 
 public sealed record InputSchema(string Name, string Type, bool Required = true, JsonObject? Options = null, bool Lazy = false,
-    AutogrowPrefixTemplate? Autogrow = null);
+    AutogrowTemplate? Autogrow = null);
 
-/// <summary>An immutable snapshot of the supported V3 prefix template. No dynamic prototype or implicit Python evaluation.</summary>
-public sealed class AutogrowPrefixTemplate
+/// <summary>Immutable prototype and ordered member names for the supported V3 templates.</summary>
+public abstract class AutogrowTemplate
 {
     private readonly InputSchema input;
     public InputSchema Input => input with { Options = input.Options?.DeepClone().AsObject() };
-    public string Prefix { get; }
     public int Min { get; }
-    public int Max { get; }
-    public AutogrowPrefixTemplate(InputSchema input, string prefix, int min = 1, int max = 10)
+    public abstract IReadOnlyList<string> MemberNames { get; }
+    // Only the reviewed sealed templates in this assembly can define expansion semantics.
+    private protected AutogrowTemplate(InputSchema input, int min)
     {
         ArgumentNullException.ThrowIfNull(input);
-        if (string.IsNullOrEmpty(prefix) || prefix.Any(c => !(char.IsAsciiLetterOrDigit(c) || c == '_')))
-            throw new ArgumentException("Only simple Autogrow prefixes are supported.", nameof(prefix));
-        if (min < 0 || max is < 1 or > 100) throw new ArgumentOutOfRangeException(nameof(min), "Autogrow requires min >= 0 and 1 <= max <= 100.");
-        // Source permits min > max: every generated name then becomes required.
+        if (min < 0) throw new ArgumentOutOfRangeException(nameof(min), "Autogrow requires min >= 0.");
         if (input.Autogrow is not null || input.Type is not ("*" or "COMFY_MATCHTYPE_V3") || input.Lazy)
             throw new ArgumentException("This Autogrow slice supports only non-lazy AnyType/MatchType prototypes.", nameof(input));
         this.input = input with { Options = input.Options?.DeepClone().AsObject() };
         ValidateOptions(this.input.Options, input.Type == "COMFY_MATCHTYPE_V3");
-        Prefix = prefix; Min = min; Max = max;
+        Min = min;
     }
+    private protected static bool IsSimpleName(string? name) => !string.IsNullOrEmpty(name) &&
+        name.All(c => char.IsAsciiLetterOrDigit(c) || c == '_');
     public static void ValidateOptions(JsonObject? options, bool matchType = false)
     {
         if (options is not null)
@@ -49,6 +48,41 @@ public sealed class AutogrowPrefixTemplate
                 else throw new ArgumentException($"Unsupported Autogrow option: {key}");
             }
         if (matchType && options?["template"] is not JsonObject) throw new ArgumentException("MatchType requires its explicit template.");
+    }
+}
+
+/// <summary>An immutable V3 prefix template. The source permits Min to exceed Max.</summary>
+public sealed class AutogrowPrefixTemplate : AutogrowTemplate
+{
+    public string Prefix { get; }
+    public int Max { get; }
+    public override IReadOnlyList<string> MemberNames { get; }
+    public AutogrowPrefixTemplate(InputSchema input, string prefix, int min = 1, int max = 10) : base(input, min)
+    {
+        if (!IsSimpleName(prefix)) throw new ArgumentException("Only simple Autogrow prefixes are supported.", nameof(prefix));
+        if (max is < 1 or > 100) throw new ArgumentOutOfRangeException(nameof(max), "Autogrow requires 1 <= max <= 100.");
+        Prefix = prefix; Max = max;
+        MemberNames = Array.AsReadOnly(Enumerable.Range(0, max)
+            .Select(i => prefix + i.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToArray());
+    }
+}
+
+/// <summary>Copies the first 100 names in order. Empty names collections and Min above Count are permitted.
+/// This bounded contract rejects ambiguous effective names rather than deduplicating them.</summary>
+public sealed class AutogrowNamesTemplate : AutogrowTemplate
+{
+    public IReadOnlyList<string> Names { get; }
+    public override IReadOnlyList<string> MemberNames => Names;
+    public AutogrowNamesTemplate(InputSchema input, IReadOnlyList<string> names, int min = 1) : base(input, min)
+    {
+        ArgumentNullException.ThrowIfNull(names);
+        // Truncate before validation, exactly at the source's effective-name boundary.
+        var snapshot = names.Take(100).ToArray();
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var name in snapshot)
+            if (!IsSimpleName(name) || !seen.Add(name))
+                throw new ArgumentException("Unsupported Autogrow names: effective names must be simple, nonempty and unique (ordinal).", nameof(names));
+        Names = Array.AsReadOnly(snapshot);
     }
 }
 public sealed record OutputSchema(string Type, string? Name = null, bool IsList = false, string? MatchTemplate = null);

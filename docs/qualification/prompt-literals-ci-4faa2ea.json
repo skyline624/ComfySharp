@@ -1,0 +1,1030 @@
+{
+  "schemaVersion": 1,
+  "status": "33 new application cases pass on all three OS; global CI remains failed",
+  "run": {
+    "headSha": "4faa2eac5a87ac67e575d61922c1b3ef4c396a1d",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34663882926",
+    "conclusion": "failure",
+    "createdAt": "2026-09-12T01:07:55Z",
+    "updatedAt": "2026-09-12T01:12:17Z"
+  },
+  "readOnlyAudit": true,
+  "scope": "Application regression cases and Desktop/Host smoke; no new execution or native-trace causality audit",
+  "totals": {
+    "newCasesPerOS": 33,
+    "newCaseExecutions": 99,
+    "applicationTestsPerOS": 973,
+    "windowsOrdinaryPlusSeparateStock": 1550,
+    "windowsDistinctStockTests": 3,
+    "trxRehashed": 18
+  },
+  "platforms": {
+    "win-x64": {
+      "jobId": 103471774337,
+      "jobConclusion": "success",
+      "projects": {
+        "Core": 188,
+        "Desktop": 35,
+        "Host": 161,
+        "Inference": 574,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationTotal": 973,
+      "applicationStep": {
+        "number": 6,
+        "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+        "conclusion": "success"
+      },
+      "newCases": [
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.CaseDistinctNodeIdsExecuteBothRealProducers",
+          "testId": "cb044387-f813-3bab-b3b9-c521ceb2d24a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: False)",
+          "testId": "9cbd62ac-f773-321f-3f5b-2f08ad0c61a6",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: True)",
+          "testId": "419198e2-d5c3-9d4d-094d-1028f7bd0b1f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__VALUE__\\\":2,\\\"__value__\\\":1}\")",
+          "testId": "62f0a9f2-d11b-dd20-d0d0-6f05f500cb10",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__value__\\\":1,\\\"__VALUE__\\\":2}\")",
+          "testId": "66d2ff35-1f49-b584-9f8b-784e19ffcc6c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OrdinaryNestedDictionaryRetainsCaseDistinctKeysWithoutRecursiveUnwrap",
+          "testId": "6a7f318e-894d-0406-64fc-79794a2cd69b",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.WrongCaseInputDoesNotSatisfyRequiredSourceOrEnterTheQueue",
+          "testId": "d0636cce-149f-a24c-1338-046eeb8470b3",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.ConnectedWidgetExecutesTheRealProducerInsteadOfThePersistedReservedObject",
+          "testId": "a65c34c0-242f-5adc-46a3-a91516981950",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[\\\"absent\\\",0]\", expectedValue: \"[\\\"absent\\\",0]\")",
+          "testId": "4328058a-b127-3082-9279-021c03abc7d0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[]\", expectedValue: \"[]\")",
+          "testId": "c3208c75-2810-9414-e8c8-7d16b2e13304",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\", expectedValue: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\")",
+          "testId": "261fc7b7-1c33-3521-fcda-3451e34ee264",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expectedValue: \"1\")",
+          "testId": "53d224b1-c20d-6696-d6c0-cca0b5427438",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":[],\\\"sibling\\\":[1]}\", expectedValue: \"[]\")",
+          "testId": "580beead-9440-e93a-2dc8-bf75bbc643a0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":1,\\\"sibling\\\":2}}\", expectedValue: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "1176039f-7771-24fe-76c7-fe64b5704ea5",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[\\\"absent\\\",0]},\\\"si\"···, expectedValue: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "2f1a84c6-fa6e-3679-d299-b932cc79321c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.ExplicitNestedEnvelopeIsClonedWithoutAddingAnAutomaticDictionaryWrapper",
+          "testId": "60aea40d-03dd-67bf-893a-3269da8e5d54",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"1.25\", expected: \"1.25\")",
+          "testId": "3044c5c5-13d7-837c-f523-08b4fa8ef9d9",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"12\", expected: \"12\")",
+          "testId": "49da01ee-890a-fe7f-bf8b-e9d9a6071716",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[1,2]\", expected: \"{\\\"__value__\\\":[1,2]}\")",
+          "testId": "69db41ab-3115-0352-0918-5a6dd9651f4d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[\\\"absent\\\",0]\", expected: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "e369cae5-0607-95b3-af8b-d7cf4208404d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[]\", expected: \"{\\\"__value__\\\":[]}\")",
+          "testId": "962db856-e5a6-8918-cf6e-a8e4706d5e46",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"\\\"text\\\"\", expected: \"\\\"text\\\"\")",
+          "testId": "37f66196-902e-3254-fd32-2d4b665c4f7c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"null\", expected: \"null\")",
+          "testId": "2e64414c-d9ed-c595-dd1e-56ebb47cf745",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"true\", expected: \"true\")",
+          "testId": "96376b09-4640-869b-6020-3a44ecaeba62",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__VALUE__\\\":1}\", expected: \"{\\\"__VALUE__\\\":1}\")",
+          "testId": "c0445da2-1dec-6dca-09e8-09518840c51d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expected: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "5bf181fa-55eb-44f5-7ba0-4b906255a8e1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":null}\", expected: \"{\\\"__value__\\\":null}\")",
+          "testId": "4851cb09-facd-2537-384e-7c03252fbdd1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···, expected: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···)",
+          "testId": "b3f4c06f-ba75-4c59-0e91-37e292ae761f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\", expected: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\")",
+          "testId": "8f316628-4dc5-8f29-e02b-85c5f6954dde",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"x\\\":[1,2]}\", expected: \"{\\\"x\\\":[1,2]}\")",
+          "testId": "4633c447-1ebe-9434-5dd7-25a023e5c70a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{}\", expected: \"{}\")",
+          "testId": "0aa46c6c-393e-11a5-dbed-5973fe218bff",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 0.40000000000000002)",
+          "testId": "e01492ba-2471-2b87-20b5-aa19b6c51838",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 1)",
+          "testId": "bd0b15b8-f8e5-857d-cd81-ecdc978bf9ce",
+          "outcome": "Passed"
+        }
+      ],
+      "newCaseTotal": 33,
+      "trx": [
+        {
+          "artifact": "tests-win-x64",
+          "project": "Core",
+          "bytes": 276501,
+          "sha256": "9c2076e9b7f466eed971103d4496e284b4305421728d01dc876a0c5a8def9286",
+          "total": 188,
+          "passed": 188,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-win-x64",
+          "project": "Desktop",
+          "bytes": 52368,
+          "sha256": "8d9df676228ad4155abbe7fb7fb31952c107bf2eaf02ecea9873c1e14ce1bdc4",
+          "total": 35,
+          "passed": 35,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-win-x64",
+          "project": "Host",
+          "bytes": 371169,
+          "sha256": "9eb9e5462702d00ef136e6ebb000c1bc96aed151a095988eb937a951e3c78603",
+          "total": 161,
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-win-x64",
+          "project": "Inference",
+          "bytes": 905707,
+          "sha256": "44bf39b50b2c5127f19fc425b91281e021562cac728a65a61fb612dae6f9b6cb",
+          "total": 574,
+          "passed": 574,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-win-x64",
+          "project": "Tokenization",
+          "bytes": 803199,
+          "sha256": "189338bbb37b7f03e764c2924f819b2cce58509f8f1f36f4ce31c3b2730eddea",
+          "total": 540,
+          "passed": 540,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-win-x64",
+          "project": "Workflow",
+          "bytes": 75364,
+          "sha256": "2faa584dea249c34d9921c92735f2ed2592e16f12c73732e2c9aae8cf8c4cc33",
+          "total": 49,
+          "passed": 49,
+          "failed": 0,
+          "skipped": 0
+        }
+      ],
+      "smoke": {
+        "step": 15,
+        "conclusion": "success",
+        "observedOutput": [
+          "2026-09-12T01:11:40.0430332Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview."
+        ],
+        "scope": "Actual window, supervised Host, text and CPU sigma graphs, case-distinct PreviewAny history and native preview"
+      },
+      "failedSteps": []
+    },
+    "linux-x64": {
+      "jobId": 103471774382,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": 188,
+        "Desktop": 35,
+        "Host": 161,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationTotal": 973,
+      "applicationStep": {
+        "number": 6,
+        "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+        "conclusion": "success"
+      },
+      "newCases": [
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.CaseDistinctNodeIdsExecuteBothRealProducers",
+          "testId": "cb044387-f813-3bab-b3b9-c521ceb2d24a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: False)",
+          "testId": "9cbd62ac-f773-321f-3f5b-2f08ad0c61a6",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: True)",
+          "testId": "419198e2-d5c3-9d4d-094d-1028f7bd0b1f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__VALUE__\\\":2,\\\"__value__\\\":1}\")",
+          "testId": "62f0a9f2-d11b-dd20-d0d0-6f05f500cb10",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__value__\\\":1,\\\"__VALUE__\\\":2}\")",
+          "testId": "66d2ff35-1f49-b584-9f8b-784e19ffcc6c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OrdinaryNestedDictionaryRetainsCaseDistinctKeysWithoutRecursiveUnwrap",
+          "testId": "6a7f318e-894d-0406-64fc-79794a2cd69b",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.WrongCaseInputDoesNotSatisfyRequiredSourceOrEnterTheQueue",
+          "testId": "d0636cce-149f-a24c-1338-046eeb8470b3",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.ConnectedWidgetExecutesTheRealProducerInsteadOfThePersistedReservedObject",
+          "testId": "a65c34c0-242f-5adc-46a3-a91516981950",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[\\\"absent\\\",0]\", expectedValue: \"[\\\"absent\\\",0]\")",
+          "testId": "4328058a-b127-3082-9279-021c03abc7d0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[]\", expectedValue: \"[]\")",
+          "testId": "c3208c75-2810-9414-e8c8-7d16b2e13304",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\", expectedValue: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\")",
+          "testId": "261fc7b7-1c33-3521-fcda-3451e34ee264",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expectedValue: \"1\")",
+          "testId": "53d224b1-c20d-6696-d6c0-cca0b5427438",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":[],\\\"sibling\\\":[1]}\", expectedValue: \"[]\")",
+          "testId": "580beead-9440-e93a-2dc8-bf75bbc643a0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":1,\\\"sibling\\\":2}}\", expectedValue: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "1176039f-7771-24fe-76c7-fe64b5704ea5",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[\\\"absent\\\",0]},\\\"si\"···, expectedValue: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "2f1a84c6-fa6e-3679-d299-b932cc79321c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.ExplicitNestedEnvelopeIsClonedWithoutAddingAnAutomaticDictionaryWrapper",
+          "testId": "60aea40d-03dd-67bf-893a-3269da8e5d54",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"1.25\", expected: \"1.25\")",
+          "testId": "3044c5c5-13d7-837c-f523-08b4fa8ef9d9",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"12\", expected: \"12\")",
+          "testId": "49da01ee-890a-fe7f-bf8b-e9d9a6071716",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[1,2]\", expected: \"{\\\"__value__\\\":[1,2]}\")",
+          "testId": "69db41ab-3115-0352-0918-5a6dd9651f4d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[\\\"absent\\\",0]\", expected: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "e369cae5-0607-95b3-af8b-d7cf4208404d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[]\", expected: \"{\\\"__value__\\\":[]}\")",
+          "testId": "962db856-e5a6-8918-cf6e-a8e4706d5e46",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"\\\"text\\\"\", expected: \"\\\"text\\\"\")",
+          "testId": "37f66196-902e-3254-fd32-2d4b665c4f7c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"null\", expected: \"null\")",
+          "testId": "2e64414c-d9ed-c595-dd1e-56ebb47cf745",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"true\", expected: \"true\")",
+          "testId": "96376b09-4640-869b-6020-3a44ecaeba62",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__VALUE__\\\":1}\", expected: \"{\\\"__VALUE__\\\":1}\")",
+          "testId": "c0445da2-1dec-6dca-09e8-09518840c51d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expected: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "5bf181fa-55eb-44f5-7ba0-4b906255a8e1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":null}\", expected: \"{\\\"__value__\\\":null}\")",
+          "testId": "4851cb09-facd-2537-384e-7c03252fbdd1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···, expected: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···)",
+          "testId": "b3f4c06f-ba75-4c59-0e91-37e292ae761f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\", expected: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\")",
+          "testId": "8f316628-4dc5-8f29-e02b-85c5f6954dde",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"x\\\":[1,2]}\", expected: \"{\\\"x\\\":[1,2]}\")",
+          "testId": "4633c447-1ebe-9434-5dd7-25a023e5c70a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{}\", expected: \"{}\")",
+          "testId": "0aa46c6c-393e-11a5-dbed-5973fe218bff",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 0.40000000000000002)",
+          "testId": "e01492ba-2471-2b87-20b5-aa19b6c51838",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 1)",
+          "testId": "bd0b15b8-f8e5-857d-cd81-ecdc978bf9ce",
+          "outcome": "Passed"
+        }
+      ],
+      "newCaseTotal": 33,
+      "trx": [
+        {
+          "artifact": "tests-linux-x64",
+          "project": "Core",
+          "bytes": 280156,
+          "sha256": "6b5b3e8ff1c8748f274cdb17272c3d726d5734384f934147f83c4c960a8aa8f7",
+          "total": 188,
+          "passed": 188,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-linux-x64",
+          "project": "Desktop",
+          "bytes": 52963,
+          "sha256": "c9a024eb0b03d42daf47ddd7ff40c50af8d2c6771a15ee0c5033408a5b06c515",
+          "total": 35,
+          "passed": 35,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-linux-x64",
+          "project": "Host",
+          "bytes": 366205,
+          "sha256": "96b39667bfd46b7c97b108909e34033965cfd71d197c22388627524b515f1f47",
+          "total": 161,
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-linux-x64",
+          "project": "Tokenization",
+          "bytes": 813894,
+          "sha256": "07bb104da7dc3fa551c9f00d0f3da36860625a410fc9b0c7ee67abb921f1279f",
+          "total": 540,
+          "passed": 540,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-linux-x64",
+          "project": "Workflow",
+          "bytes": 76239,
+          "sha256": "a47ea572be13ffed0b50dd9e9fac8f6f748aabfccb74b2b5f3d2e25794ceff5c",
+          "total": 49,
+          "passed": 49,
+          "failed": 0,
+          "skipped": 0
+        }
+      ],
+      "smoke": {
+        "step": 15,
+        "conclusion": "skipped",
+        "observedOutput": [],
+        "scope": "Not executed; preceding first-use native step failed"
+      },
+      "failedSteps": [
+        {
+          "number": 10,
+          "name": "Exercise reference fixtures as the first native access in separate processes"
+        }
+      ]
+    },
+    "osx-arm64": {
+      "jobId": 103471774327,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": 188,
+        "Desktop": 35,
+        "Host": 161,
+        "Inference": 574,
+        "Tokenization": 540,
+        "Workflow": 49
+      },
+      "applicationTotal": 973,
+      "applicationStep": {
+        "number": 6,
+        "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+        "conclusion": "success"
+      },
+      "newCases": [
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.CaseDistinctNodeIdsExecuteBothRealProducers",
+          "testId": "cb044387-f813-3bab-b3b9-c521ceb2d24a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: False)",
+          "testId": "9cbd62ac-f773-321f-3f5b-2f08ad0c61a6",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: True)",
+          "testId": "419198e2-d5c3-9d4d-094d-1028f7bd0b1f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__VALUE__\\\":2,\\\"__value__\\\":1}\")",
+          "testId": "62f0a9f2-d11b-dd20-d0d0-6f05f500cb10",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__value__\\\":1,\\\"__VALUE__\\\":2}\")",
+          "testId": "66d2ff35-1f49-b584-9f8b-784e19ffcc6c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OrdinaryNestedDictionaryRetainsCaseDistinctKeysWithoutRecursiveUnwrap",
+          "testId": "6a7f318e-894d-0406-64fc-79794a2cd69b",
+          "outcome": "Passed"
+        },
+        {
+          "group": "caseSensitivity",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.WrongCaseInputDoesNotSatisfyRequiredSourceOrEnterTheQueue",
+          "testId": "d0636cce-149f-a24c-1338-046eeb8470b3",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.ConnectedWidgetExecutesTheRealProducerInsteadOfThePersistedReservedObject",
+          "testId": "a65c34c0-242f-5adc-46a3-a91516981950",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[\\\"absent\\\",0]\", expectedValue: \"[\\\"absent\\\",0]\")",
+          "testId": "4328058a-b127-3082-9279-021c03abc7d0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[]\", expectedValue: \"[]\")",
+          "testId": "c3208c75-2810-9414-e8c8-7d16b2e13304",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\", expectedValue: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\")",
+          "testId": "261fc7b7-1c33-3521-fcda-3451e34ee264",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expectedValue: \"1\")",
+          "testId": "53d224b1-c20d-6696-d6c0-cca0b5427438",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":[],\\\"sibling\\\":[1]}\", expectedValue: \"[]\")",
+          "testId": "580beead-9440-e93a-2dc8-bf75bbc643a0",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":1,\\\"sibling\\\":2}}\", expectedValue: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "1176039f-7771-24fe-76c7-fe64b5704ea5",
+          "outcome": "Passed"
+        },
+        {
+          "group": "host",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[\\\"absent\\\",0]},\\\"si\"···, expectedValue: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "2f1a84c6-fa6e-3679-d299-b932cc79321c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.ExplicitNestedEnvelopeIsClonedWithoutAddingAnAutomaticDictionaryWrapper",
+          "testId": "60aea40d-03dd-67bf-893a-3269da8e5d54",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"1.25\", expected: \"1.25\")",
+          "testId": "3044c5c5-13d7-837c-f523-08b4fa8ef9d9",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"12\", expected: \"12\")",
+          "testId": "49da01ee-890a-fe7f-bf8b-e9d9a6071716",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[1,2]\", expected: \"{\\\"__value__\\\":[1,2]}\")",
+          "testId": "69db41ab-3115-0352-0918-5a6dd9651f4d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[\\\"absent\\\",0]\", expected: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "testId": "e369cae5-0607-95b3-af8b-d7cf4208404d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[]\", expected: \"{\\\"__value__\\\":[]}\")",
+          "testId": "962db856-e5a6-8918-cf6e-a8e4706d5e46",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"\\\"text\\\"\", expected: \"\\\"text\\\"\")",
+          "testId": "37f66196-902e-3254-fd32-2d4b665c4f7c",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"null\", expected: \"null\")",
+          "testId": "2e64414c-d9ed-c595-dd1e-56ebb47cf745",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"true\", expected: \"true\")",
+          "testId": "96376b09-4640-869b-6020-3a44ecaeba62",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__VALUE__\\\":1}\", expected: \"{\\\"__VALUE__\\\":1}\")",
+          "testId": "c0445da2-1dec-6dca-09e8-09518840c51d",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expected: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "testId": "5bf181fa-55eb-44f5-7ba0-4b906255a8e1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":null}\", expected: \"{\\\"__value__\\\":null}\")",
+          "testId": "4851cb09-facd-2537-384e-7c03252fbdd1",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···, expected: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···)",
+          "testId": "b3f4c06f-ba75-4c59-0e91-37e292ae761f",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\", expected: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\")",
+          "testId": "8f316628-4dc5-8f29-e02b-85c5f6954dde",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"x\\\":[1,2]}\", expected: \"{\\\"x\\\":[1,2]}\")",
+          "testId": "4633c447-1ebe-9434-5dd7-25a023e5c70a",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{}\", expected: \"{}\")",
+          "testId": "0aa46c6c-393e-11a5-dbed-5973fe218bff",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 0.40000000000000002)",
+          "testId": "e01492ba-2471-2b87-20b5-aa19b6c51838",
+          "outcome": "Passed"
+        },
+        {
+          "group": "workflow",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 1)",
+          "testId": "bd0b15b8-f8e5-857d-cd81-ecdc978bf9ce",
+          "outcome": "Passed"
+        }
+      ],
+      "newCaseTotal": 33,
+      "trx": [
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Core",
+          "bytes": 289652,
+          "sha256": "fe825bcd131e1fa753684a1b6434cfc10ce66dcf2a7a5fe306427333696be4db",
+          "total": 188,
+          "passed": 188,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Desktop",
+          "bytes": 54809,
+          "sha256": "02a5e918673a6f531d76cf8ebd7ee37069f474bb2dbf334e811193747287c6a2",
+          "total": 35,
+          "passed": 35,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Host",
+          "bytes": 374428,
+          "sha256": "7e8417284dade275f676733700a945e43da5b997699d59e153f719a4e36f945f",
+          "total": 161,
+          "passed": 161,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Inference",
+          "bytes": 947794,
+          "sha256": "5b966a2f1b562bae7bbbde756df46ff41183bd739947afdb8517352dd4649814",
+          "total": 574,
+          "passed": 574,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Tokenization",
+          "bytes": 840990,
+          "sha256": "ecbece9de081a3056b475906c1ff4ad6f0d5c858f097700478dc2b931e28a9a4",
+          "total": 540,
+          "passed": 540,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "tests-osx-arm64",
+          "project": "Workflow",
+          "bytes": 78785,
+          "sha256": "5420e305524324b07a61e8eea901f25fba8fe25c9f2986af77bc7fae853f1d02",
+          "total": 49,
+          "passed": 49,
+          "failed": 0,
+          "skipped": 0
+        }
+      ],
+      "smoke": {
+        "step": 15,
+        "conclusion": "success",
+        "observedOutput": [
+          "2026-09-12T01:10:00.6276050Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview."
+        ],
+        "scope": "Actual window, supervised Host, text and CPU sigma graphs, case-distinct PreviewAny history and native preview"
+      },
+      "failedSteps": [
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process"
+        }
+      ]
+    }
+  },
+  "windowsStock": {
+    "artifact": "tests-stock-win-x64",
+    "bytes": 10539,
+    "sha256": "c8bde56fa7509be9349b50d8086d23ae87e92c524a74fdbccc880e7835775c97",
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "filesAtRunCommit": [
+    {
+      "path": "tests/ComfySharp.Workflow.Tests/PromptLiteralTests.cs",
+      "bytes": 5585,
+      "sha256": "02edd213beac6f2ffe854a1641acbf3963b2433900e6f5d357a9ddf2874501db",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/PromptLiteralTests.cs",
+      "bytes": 5014,
+      "sha256": "35dbdf42c6b6efdc36d5b80d8a55f78fcdc8a8190e86f81bbceee86f8650b1bb",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/HttpPromptCaseSensitivityTests.cs",
+      "bytes": 4890,
+      "sha256": "65df57e48ffdcf8fd744171798ccf186dfd51993944faa222da026800bcf3224",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "src/ComfySharp.Host/Program.cs",
+      "bytes": 9391,
+      "sha256": "392ea0c65daef348810ca35f1305be338621b88ccfd11bbcf2d1d1f6d2a9549b",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj",
+      "bytes": 789,
+      "sha256": "a2573ad022aaa8fdc664328d3b67ca50231b310fc0f9387720c18304cf89cdcd",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "src/ComfySharp.Desktop/HostSupervisor.cs",
+      "bytes": 7361,
+      "sha256": "400cbb8c189b6247eed5a9c2e6a5676a18556238f31c8552c25c2747417e2d2c",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "src/ComfySharp.Desktop/MainWindow.axaml.cs",
+      "bytes": 13316,
+      "sha256": "84a4da32d0929d3e5684bea9b3696ed7abdcc19de573f05d45463f173d03c79d",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.linux-x64.cpu.lock.json",
+      "bytes": 23964,
+      "sha256": "f29a6ffcc8c2e8f6481e76a2179a4f7fc4cb9167d011521f68a09f2ee1133b00",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.osx-arm64.cpu.lock.json",
+      "bytes": 23964,
+      "sha256": "11aa6f9e4151b2e85ced82cf435d289f5b28cc8980b81fc46d0f4eed3af86d7e",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cpu.lock.json",
+      "bytes": 23960,
+      "sha256": "41cf2cc421d34355c33975eb1074d3097257b5e85bde787a132bd275756ea96f",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cuda.lock.json",
+      "bytes": 28722,
+      "sha256": "5fa36e1f8083d6a322f37e5b597c8cd9ee5c1b8a418050d766764144eaa3c29f",
+      "matchesPreviousLocalProof": true
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 13573,
+      "sha256": "dd91038fc351cef871b63045016b93edc3cb1c355383c5c59f8273b76ba2895d"
+    },
+    {
+      "path": "src/ComfySharp.Workflow/PromptCompiler.cs",
+      "bytes": 11805,
+      "sha256": "45d2d8b66ff47b16241291e097e4230f082ddb65433fe18c6bf9a5b410e89967"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "tests-win-x64",
+      "id": 10288353048,
+      "bytes": 345591,
+      "githubReportedDigest": "sha256:952cdb7dc9d26e910d5d451e77e63a85fc3ee8645684283de230401284cfcb2f"
+    },
+    {
+      "name": "tests-linux-x64",
+      "id": 10288263153,
+      "bytes": 202810,
+      "githubReportedDigest": "sha256:dcbb86f51ef83b5ee41bc3a082ad4fb398915b13d6ab6dbcd38156f58d1122a2"
+    },
+    {
+      "name": "tests-osx-arm64",
+      "id": 10288028365,
+      "bytes": 344684,
+      "githubReportedDigest": "sha256:697c1e65d0f31fd64d4206593a94fec96e72bbac67836157f1b568c357a5feda"
+    },
+    {
+      "name": "tests-stock-win-x64",
+      "id": 10287863999,
+      "bytes": 2426,
+      "githubReportedDigest": "sha256:e0a4d1454caf799f4428538a93596ff95c5f5995598a7d5474e1ae3256257fb2"
+    }
+  ],
+  "downloadEvidence": {
+    "run.json": {
+      "bytes": 18474,
+      "sha256": "db8405f340277cdf1e971520ff651168fdc55af8794b6bbebb0067497197c158"
+    },
+    "artifacts.json": {
+      "bytes": 17890,
+      "sha256": "b468d9df5966d0f20a529c1c31cf6b033afe16bbc9c737b7e69a62fd2c6718b3"
+    },
+    "logs.txt": {
+      "bytes": 446585,
+      "sha256": "3e2829ece7212eb7a971f6af1574709e4cdd44c03baf40860a53ec951e1965a1"
+    },
+    "download-inventory.json": {
+      "bytes": 4304,
+      "sha256": "f3f79e45cfdd36a71026db569e488594cf212e273d2ef3ac8516ccb2078c6caa"
+    }
+  },
+  "limits": [
+    "Tests are product contract regressions, not a new source HTTP oracle.",
+    "The 245 local targeted tests remain a separate earlier result, not added to these CI counts.",
+    "Linux smoke was skipped; no Linux GUI/Host smoke success is asserted.",
+    "Windows 1550 is six ordinary-project TRX plus three disjoint stock CLIP tests; checkpoint/pipeline/first-use duplicates are not added.",
+    "macOS job failed at stock CLIP; Linux job failed at first native reference access. Neither failure is erased by application success.",
+    "No native traces were downloaded or requalified and no cause is attributed to CPU or runtime.",
+    "Artifact archive digests are GitHub-reported; extracted TRX bytes were independently SHA-256 hashed.",
+    "This run predates subsequent TemplateNames code/tests and source-comparator work."
+  ]
+}

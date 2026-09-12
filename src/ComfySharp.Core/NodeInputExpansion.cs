@@ -69,14 +69,14 @@ public static class NodeInputExpansion
             }
             if (input.Type != "COMFY_AUTOGROW_V3" || input.Lazy || !input.Required ||
                 string.IsNullOrEmpty(input.Name) || input.Name.Contains('.'))
-                throw new NodeInputExpansionException("unsupported_dynamic_template", "Only required, non-lazy, top-level prefix groups are supported.", input.Name);
-            try { AutogrowPrefixTemplate.ValidateOptions(input.Options); }
+                throw new NodeInputExpansionException("unsupported_dynamic_template", "Only required, non-lazy, top-level Autogrow groups are supported.", input.Name);
+            try { AutogrowTemplate.ValidateOptions(input.Options); }
             catch (ArgumentException ex) { throw new NodeInputExpansionException("unsupported_dynamic_template", ex.Message, input.Name); }
             var prototype = template.Input;
             var paths = new List<(string Flat, string Member)>();
-            for (int i = 0; i < template.Max; i++)
+            for (int i = 0; i < template.MemberNames.Count; i++)
             {
-                string member = template.Prefix + i.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string member = template.MemberNames[i];
                 string name = input.Name + "." + member;
                 Add(prototype with { Name = name, Required = prototype.Required && i < template.Min,
                     Options = prototype.Options?.DeepClone().AsObject() });
@@ -106,8 +106,14 @@ public static class NodeInputExpansion
         { [input.Name] = new JsonArray(input.Type, prototypeOptions) } };
         if (!input.Required) prototype.Insert(0, "required", new JsonObject());
         var options = group.Options?.DeepClone().AsObject() ?? new JsonObject();
-        options["template"] = new JsonObject { ["input"] = prototype, ["prefix"] = template.Prefix,
-            ["min"] = template.Min, ["max"] = template.Max };
+        options["template"] = template switch
+        {
+            AutogrowPrefixTemplate prefix => new JsonObject { ["input"] = prototype, ["prefix"] = prefix.Prefix,
+                ["min"] = prefix.Min, ["max"] = prefix.Max },
+            AutogrowNamesTemplate names => new JsonObject { ["input"] = prototype,
+                ["names"] = new JsonArray(names.Names.Select(n => (JsonNode?)JsonValue.Create(n)).ToArray()), ["min"] = names.Min },
+            _ => throw new NodeInputExpansionException("unsupported_dynamic_template", "Unsupported Autogrow template.", group.Name)
+        };
         return options;
     }
 }

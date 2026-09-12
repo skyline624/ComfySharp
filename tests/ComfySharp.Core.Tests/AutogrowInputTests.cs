@@ -120,7 +120,7 @@ public sealed class AutogrowInputTests
     public void AStaticLazyInputCannotBypassTheUnsupportedDynamicLazyContract()
     {
         var schema = new NodeSchema("Mixed", "Mixed", "test",
-            [new("values", "COMFY_AUTOGROW_V3", Autogrow: new(new("value", "*"), "value")), new("other", "*", Lazy: true)], []);
+            [new("values", "COMFY_AUTOGROW_V3", Autogrow: new AutogrowPrefixTemplate(new("value", "*"), "value")), new("other", "*", Lazy: true)], []);
         var error = Assert.Throws<NodeInputExpansionException>(() => NodeInputExpansion.Expand(schema, ["values.value0"]));
         Assert.Equal("unsupported_dynamic_template", error.Code); Assert.Equal("other", error.InputName);
     }

@@ -170,7 +170,7 @@ public sealed class AutogrowSourceReferenceTests
         var template = specification["template"]!.AsObject();
         var prototype = create.Inputs[0].Autogrow!.Input with
         { Required = !(template["prototypeOptions"]?["optional"]?.GetValue<bool>() ?? false) };
-        var group = new InputSchema("inputs", "COMFY_AUTOGROW_V3", Autogrow: new(prototype,
+        var group = new InputSchema("inputs", "COMFY_AUTOGROW_V3", Autogrow: new AutogrowPrefixTemplate(prototype,
             template["prefix"]?.GetValue<string>() ?? "input", template["min"]?.GetValue<int>() ?? 1,
             template["max"]?.GetValue<int>() ?? 10));
         return new("FixturePrefix", "Fixture Prefix", "laboratory", [group], create.Outputs,

@@ -26,4 +26,3 @@ La publication du résultat est précédée, dans le code épinglé, d’une nou
 Le registre contient de vraies classes source, dont PreviewAny comme nœud de sortie de validation. Le cache est une infrastructure synthétique déclarée. Le garde de profil interdit toute tentative d’appel `execute`/`main`, même si le validateur intercepte l’exception ; aucune trace exhaustive indépendante du profiler n’est fournie. Aucun calcul de nœud, modèle, Torch, serveur HTTP ou frontend n’a été exécuté dans ce laboratoire. Les exceptions inattendues de dépendance ne sont pas converties en observations acceptées.
 
 Cette preuve établit une collecte source achevée et auditée dans son périmètre. **Aucune parité C#, HTTP, frontend ou compatibilité générale de prompt n’est qualifiée.** L’audit a effectué uniquement des lectures, analyses AST et recalculs de hashes avec la bibliothèque standard ; il n’a relancé ni le collector, ni .NET, ni une opération native.
-

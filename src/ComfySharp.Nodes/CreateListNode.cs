@@ -7,7 +7,7 @@ namespace ComfySharp.Nodes;
 public sealed class CreateListNode : IRuntimeNode
 {
     public NodeSchema Schema { get; } = new("CreateList", "Create List", "utilities",
-        Array.AsReadOnly(new[] { new InputSchema("inputs", "COMFY_AUTOGROW_V3", Autogrow: new(
+        Array.AsReadOnly(new[] { new InputSchema("inputs", "COMFY_AUTOGROW_V3", Autogrow: new AutogrowPrefixTemplate(
             new("input", "COMFY_MATCHTYPE_V3", Options: new JsonObject { ["template"] = new JsonObject
             { ["template_id"] = "type", ["allowed_types"] = "*" } }), "input")) }),
         Array.AsReadOnly(new[] { new OutputSchema("COMFY_MATCHTYPE_V3", "list", IsList: true, MatchTemplate: "type") }),
