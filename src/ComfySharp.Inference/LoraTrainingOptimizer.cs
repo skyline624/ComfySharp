@@ -7,7 +7,7 @@ namespace ComfySharp.Inference;
 /// is required before Step. Cancellation discards only the unfinished window, not prior updates.</summary>
 public sealed class LoraTrainingOptimizer : IDisposable
 {
-    private readonly List<TrainableLoraPatch> owners = [];
+    private readonly List<TrainableWeightPatch> owners = [];
     private readonly Tensor[] parameters;
     private readonly List<State> states = [];
     private readonly string name;
@@ -23,7 +23,7 @@ public sealed class LoraTrainingOptimizer : IDisposable
     public int PendingMicrobatches { get; private set; }
     public long CompletedSteps { get; private set; }
 
-    public LoraTrainingOptimizer(IEnumerable<TrainableLoraPatch> patches, string name, double learningRate, int accumulationSteps = 1)
+    public LoraTrainingOptimizer(IEnumerable<TrainableWeightPatch> patches, string name, double learningRate, int accumulationSteps = 1)
     {
         ArgumentNullException.ThrowIfNull(patches);
         if (name is not ("Adam" or "AdamW" or "SGD" or "RMSprop")) throw new ArgumentException("Unknown training optimizer.", nameof(name));
@@ -37,11 +37,14 @@ public sealed class LoraTrainingOptimizer : IDisposable
             {
                 ArgumentNullException.ThrowIfNull(patch);
                 var owner = patch.Retain(); owners.Add(owner);
-                if (!selected.Add(owner.Up)) throw new ArgumentException("An adapter may appear only once in an optimizer.", nameof(patches));
-                InferenceDevice.RequireSame(owners[0].Up.device, owner.Up, nameof(patches));
+                foreach (var parameter in owner.Parameters)
+                {
+                    if (!selected.Add(parameter)) throw new ArgumentException("An adapter parameter may appear only once in an optimizer.", nameof(patches));
+                    InferenceDevice.RequireSame(owners[0].Parameters[0].device, parameter, nameof(patches));
+                }
             }
             if (owners.Count == 0) throw new ArgumentException("At least one adapter is required.", nameof(patches));
-            parameters = owners.SelectMany(p => new[] { p.Up, p.Down }).ToArray();
+            parameters = owners.SelectMany(p => p.Parameters).ToArray();
             using var scope = NewDisposeScope();
             foreach (var parameter in parameters)
             {

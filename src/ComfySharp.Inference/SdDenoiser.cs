@@ -52,13 +52,13 @@ public sealed class SdDenoiser : IDisposable
 
     /// <summary>Differentiable whole-image EPS/V denoising with caller-owned LoRA leaves.
     /// Input/sigma/context gradients are preserved. Dataset ownership and detachment belong to the training caller.</summary>
-    public Tensor DenoiseForTraining(Tensor latent, Tensor sigma, Tensor context,
-        IReadOnlyDictionary<string, TrainableLoraPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
-        CancellationToken cancellationToken = default)
+    public Tensor DenoiseForTraining<TPatch>(Tensor latent, Tensor sigma, Tensor context,
+        IReadOnlyDictionary<string, TPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
+        CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
         using var operation = RetainModel();
-        return Apply(operation, latent, sigma, context, cancellationToken, patches, maxPatchedWeightBytes);
+        return Apply(operation, latent, sigma, context, cancellationToken, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes);
     }
 
     public Tensor DenoiseGuided(Tensor latent, Tensor sigma, Tensor conditional, Tensor? unconditional,
@@ -108,7 +108,7 @@ public sealed class SdDenoiser : IDisposable
     }
 
     private Tensor Apply(SdUnet operation, Tensor latent, Tensor sigma, Tensor context, CancellationToken cancellationToken,
-        IReadOnlyDictionary<string, TrainableLoraPatch>? patches = null, long maxPatchedWeightBytes = 0)
+        IReadOnlyDictionary<string, TrainableWeightPatch>? patches = null, long maxPatchedWeightBytes = 0)
     {
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();

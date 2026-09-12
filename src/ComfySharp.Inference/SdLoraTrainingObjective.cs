@@ -9,9 +9,9 @@ public static class SdLoraTrainingObjective
 {
     /// <summary>Returns an unnormalized scalar loss. LoraTrainingOptimizer owns accumulation scaling.
     /// Inputs are borrowed without mutating values, grad flags or gradient buffers. Only adapter leaves train.</summary>
-    public static Tensor CalculateLoss(SdDenoiser denoiser, Tensor diffusionLatent, Tensor noise, Tensor sigma, Tensor context,
-        IReadOnlyDictionary<string, TrainableLoraPatch> patches, string lossName,
-        long maxPatchedWeightBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default)
+    public static Tensor CalculateLoss<TPatch>(SdDenoiser denoiser, Tensor diffusionLatent, Tensor noise, Tensor sigma, Tensor context,
+        IReadOnlyDictionary<string, TPatch> patches, string lossName,
+        long maxPatchedWeightBytes = 512L * 1024 * 1024, CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(denoiser);
         ArgumentNullException.ThrowIfNull(patches); ArgumentNullException.ThrowIfNull(context);

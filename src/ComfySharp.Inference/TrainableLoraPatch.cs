@@ -2,23 +2,24 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Owns two Float32 leaf parameters for ordinary LoRA training.
+/// <summary>Owns two Float32 leaf factors and optionally a trainable Float32 alpha for ordinary LoRA training.
 /// Callers must serialize forward/backward/updates. Borrowed parameters must not be disposed,
 /// resized or moved; use a retained owner to keep them alive across an optimization step.</summary>
-public sealed class TrainableLoraPatch : IDisposable
+public sealed class TrainableLoraPatch : TrainableWeightPatch
 {
-    private sealed class Shared(Tensor up, Tensor down, double alpha)
+    private sealed class Shared(Tensor up, Tensor down, double alpha, Tensor? alphaParameter)
     {
         internal readonly object Gate = new();
         internal readonly Tensor Up = up, Down = down;
         internal readonly double Alpha = alpha;
+        internal readonly Tensor? AlphaParameter = alphaParameter;
         internal int Owners = 1;
     }
     private readonly Shared shared;
     private bool disposed;
     private TrainableLoraPatch(Shared shared) => this.shared = shared;
 
-    public TrainableLoraPatch(Tensor up, Tensor down, double alpha)
+    public TrainableLoraPatch(Tensor up, Tensor down, double alpha, bool trainAlpha = false)
     {
         ArgumentNullException.ThrowIfNull(up); ArgumentNullException.ThrowIfNull(down);
         if (!double.IsFinite(alpha)) throw new ArgumentOutOfRangeException(nameof(alpha));
@@ -31,20 +32,37 @@ public sealed class TrainableLoraPatch : IDisposable
         if (up.shape[1] != down.shape[0]) throw new ArgumentException("LoRA factor ranks must agree.");
         var copiedUp = up.detach().clone().requires_grad_();
         var copiedDown = down.detach().clone().requires_grad_();
-        shared = new(copiedUp, copiedDown, alpha);
+        if (trainAlpha && !float.IsFinite((float)alpha)) throw new ArgumentOutOfRangeException(nameof(alpha));
+        var alphaParameter = trainAlpha ? tensor((float)alpha, device: up.device).requires_grad_() : null;
+        shared = new(copiedUp, copiedDown, alpha, alphaParameter);
         copiedUp.DetachFromDisposeScope(); copiedDown.DetachFromDisposeScope();
+        alphaParameter?.DetachFromDisposeScope();
     }
 
     public Tensor Up { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.Up; } } }
     public Tensor Down { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.Down; } } }
-    public double Alpha { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.Alpha; } } }
-    public TrainableLoraPatch Retain()
+    public double Alpha { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.AlphaParameter?.item<float>() ?? shared.Alpha; } } }
+    public Tensor? AlphaParameter { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.AlphaParameter; } } }
+    public override IReadOnlyList<Tensor> Parameters => AlphaParameter is { } alpha ? new[] { alpha, Up, Down } : new[] { Up, Down };
+    public override TrainableLoraPatch Retain()
     {
         lock (shared.Gate) { ThrowIfDisposed(); shared.Owners = checked(shared.Owners + 1); return new(shared); }
     }
-    internal Tensor Apply(Tensor weight, CancellationToken cancellationToken)
+    internal override Tensor Apply(Tensor weight, CancellationToken cancellationToken)
     {
         using var operation = Retain();
+        if (operation.AlphaParameter is { } alpha)
+        {
+            cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(weight);
+            using var scope = NewDisposeScope();
+            if (weight.dtype != ScalarType.Float32 || weight.is_sparse || weight.dim() < 2 ||
+                weight.shape[0] != operation.Up.shape[0] || weight.numel() / weight.shape[0] != operation.Down.shape[1])
+                throw new ArgumentException("Trainable-alpha LoRA target shape or dtype differs.", nameof(weight));
+            InferenceDevice.RequireSame(operation.Up.device, weight, nameof(weight));
+            var difference = operation.Up.matmul(operation.Down).reshape(weight.shape);
+            var result = weight + (alpha / operation.Down.shape[0]) * difference;
+            cancellationToken.ThrowIfCancellationRequested(); return result.MoveToOuterDisposeScope();
+        }
         return LoraMath.Apply(weight, operation.Up, operation.Down, alpha: operation.Alpha, cancellationToken: cancellationToken);
     }
     /// <summary>Independent frozen adapter snapshot for ordinary inference. Later training cannot mutate it.</summary>
@@ -54,12 +72,12 @@ public sealed class TrainableLoraPatch : IDisposable
         return new(operation.Up, operation.Down, alpha: operation.Alpha);
     }
     private void ThrowIfDisposed() => ObjectDisposedException.ThrowIf(disposed, this);
-    public void Dispose()
+    public override void Dispose()
     {
         lock (shared.Gate)
         {
             if (disposed) return; disposed = true;
-            if (--shared.Owners == 0) { shared.Up.Dispose(); shared.Down.Dispose(); }
+            if (--shared.Owners == 0) { shared.Up.Dispose(); shared.Down.Dispose(); shared.AlphaParameter?.Dispose(); }
         }
     }
 }

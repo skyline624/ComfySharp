@@ -19,6 +19,9 @@
   </PropertyGroup>
   <!-- Host.Tests inherits its payload from Host. Pure libraries and metadata tools
        never import this file and never receive a libtorch package reference. -->
+  <ItemGroup Condition="'$(NativeGeneratorBridge)' != ''">
+    <Content Include="$(NativeGeneratorBridge)" Link="$([System.IO.Path]::GetFileName('$(NativeGeneratorBridge)'))" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
   <ItemGroup Condition="'$(ComfySharpIncludeNativePayload)' == 'true'">
     <PackageReference Include="libtorch-cpu-win-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'win-x64'" />
     <PackageReference Include="libtorch-cpu-linux-x64" Condition="'$(NativeBackend)' == 'cpu' and '$(NativeRuntime)' == 'linux-x64'" />

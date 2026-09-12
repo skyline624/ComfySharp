@@ -58,17 +58,17 @@ public sealed class SdUnet : IDisposable
     /// <summary>Raw differentiable prediction with frozen base weights and caller-owned LoRA leaves.
     /// The returned autograd graph owns its saved native tensors until backward/graph disposal.
     /// This allowance limits patched weights, not activations. No gradient checkpointing or offload yet.</summary>
-    public Tensor ForwardForTraining(Tensor latentNchw, Tensor timesteps, Tensor context,
-        IReadOnlyDictionary<string, TrainableLoraPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
-        CancellationToken cancellationToken = default)
+    public Tensor ForwardForTraining<TPatch>(Tensor latentNchw, Tensor timesteps, Tensor context,
+        IReadOnlyDictionary<string, TPatch> patches, long maxPatchedWeightBytes = 512L * 1024 * 1024,
+        CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(patches);
-        return ForwardCore(latentNchw, timesteps, context, patches, maxPatchedWeightBytes, cancellationToken);
+        return ForwardCore(latentNchw, timesteps, context, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes, cancellationToken);
     }
 
     private Tensor ForwardCore(Tensor latentNchw, Tensor timesteps, Tensor context,
-        IReadOnlyDictionary<string, TrainableLoraPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken)
+        IReadOnlyDictionary<string, TrainableWeightPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         using var source = RetainWeights();

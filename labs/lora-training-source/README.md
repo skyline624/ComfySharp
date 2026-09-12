@@ -49,3 +49,21 @@ replaces model evaluation; the guide wrapper reproduces the conditional SD15
 latent conversion. This captures the source's scaling asymmetry across modes.
 Expected values never come from .NET. Exact local CPU parity for this corpus does
 not establish end-to-end pretrained gradient parity or training-node coverage.
+
+## All-target ordinary adapter corpus
+
+`adapters.py --source CHECKOUT --output NEW.json --order-output NEW-ORDER.json`
+executes the frozen adapter factories and setup loop on both reduced full plain
+U-Net topologies. The native operation adapter supplies `weight_function` flags
+for its Linear, Conv2d, GroupNorm and LayerNorm modules. The source traversal order
+is also emitted as the product's static names-only resource; it is checked against
+the full weight schema. The collector records all 686 targets, 1250 trainable leaves,
+their initialization hashes and CPU RNG state. It includes the discarded random
+initialization of the two `LoraDiff` Linear layers and the alpha leaf enabled by
+the setup call's `requires_grad_(True)`.
+
+Two SGD updates use source `LoraDiff` and `BiasDiff` through `functional_call`,
+which replaces external wrapper dispatch. Full predictions/losses and selected
+factor, norm, bias and alpha gradients/updates are recorded; every source leaf
+must have a finite gradient. This is reduced CPU Float32 evidence, not a complete
+node, existing-adapter import, other algorithm or pretrained comparison.

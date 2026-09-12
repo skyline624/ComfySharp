@@ -77,14 +77,14 @@ internal sealed class CpuModelWeightBank : IDisposable
         finally{foreach(var patch in selected.Values)patch.Dispose();}
     }
 
-    internal CpuModelWeightBank WithTrainingLora(IReadOnlyDictionary<string, TrainableLoraPatch> patches,
+    internal CpuModelWeightBank WithTrainingLora(IReadOnlyDictionary<string, TrainableWeightPatch> patches,
         long maxPatchedWeightBytes, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
         if (patches.Count == 0) throw new ArgumentException("Training requires at least one LoRA target.", nameof(patches));
         if (maxPatchedWeightBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
         using var source = Retain(); using var scope = torch.NewDisposeScope(); using var grad = torch.set_grad_enabled(true);
-        var selected = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        var selected = new Dictionary<string, TrainableWeightPatch>(StringComparer.Ordinal);
         try
         {
             long bytes = 0;

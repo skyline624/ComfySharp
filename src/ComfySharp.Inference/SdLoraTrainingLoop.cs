@@ -11,6 +11,7 @@ public sealed record SdLoraTrainingOptions
     public ulong Seed { get; init; }
     public string Optimizer { get; init; } = "AdamW";
     public string Loss { get; init; } = "MSE";
+    public long MaxPatchedWeightBytes { get; init; } = 512L * 1024 * 1024;
 }
 public sealed record SdLoraTrainingProgress(long Microbatch, long OptimizerSteps, float Loss);
 public sealed record SdLoraTrainingResult(IReadOnlyList<float> Losses, long OptimizerSteps, long Microbatches);
@@ -20,14 +21,15 @@ public sealed record SdLoraTrainingResult(IReadOnlyList<float> Losses, long Opti
 /// checkpointing, offload and training-node integration are separate capabilities.</summary>
 public static class SdLoraTrainingLoop
 {
-    public static SdLoraTrainingResult Run(SdDenoiser denoiser, SdTrainingDataset dataset, Tensor context,
-        IReadOnlyDictionary<string, TrainableLoraPatch> patches, SdLoraTrainingOptions? options = null,
-        Action<SdLoraTrainingProgress>? progress = null, CancellationToken cancellationToken = default)
+    public static SdLoraTrainingResult Run<TPatch>(SdDenoiser denoiser, SdTrainingDataset dataset, Tensor context,
+        IReadOnlyDictionary<string, TPatch> patches, SdLoraTrainingOptions? options = null,
+        Action<SdLoraTrainingProgress>? progress = null, CancellationToken cancellationToken = default) where TPatch : TrainableWeightPatch
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(denoiser); ArgumentNullException.ThrowIfNull(dataset);
         ArgumentNullException.ThrowIfNull(context); ArgumentNullException.ThrowIfNull(patches); options ??= new();
         if (options.Steps is < 1 or > 100000) throw new ArgumentOutOfRangeException(nameof(options), "Training steps must be between 1 and 100000.");
         if (options.Loss is not ("MSE" or "L1" or "Huber" or "SmoothL1")) throw new ArgumentException("Unknown training loss.", nameof(options));
+        if (options.MaxPatchedWeightBytes < 0) throw new ArgumentOutOfRangeException(nameof(options));
         if (!InferenceDevice.IsSupported(context.device_type) || context.dtype != ScalarType.Float32 || context.is_sparse || context.dim() != 3 ||
             context.shape[1] <= 0 || context.shape[2] != denoiser.Config.ContextSize ||
             (context.shape[0] != dataset.Count && !(context.shape[0] == 1 && dataset.Mode != SdTrainingDatasetMode.Buckets)))
@@ -48,7 +50,7 @@ public static class SdLoraTrainingLoop
                 using var detachedContext = context.detach();
                 using var selected = context.shape[0] == 1 ? detachedContext.repeat(group.Indices.Count, 1, 1) : detachedContext.index_select(0, indices);
                 using var onDevice = selected.to(model.Device);
-                var loss = SdLoraTrainingObjective.CalculateLoss(model, group.Latent, group.Noise, group.Sigmas, onDevice, patches, options.Loss, cancellationToken: cancellationToken);
+                var loss = SdLoraTrainingObjective.CalculateLoss(model, group.Latent, group.Noise, group.Sigmas, onDevice, patches, options.Loss, options.MaxPatchedWeightBytes, cancellationToken);
                 totalLoss = totalLoss is null ? loss : totalLoss + loss;
             }
             optimizer.AccumulateMean(totalLoss!, batch.Groups.Count, cancellationToken);

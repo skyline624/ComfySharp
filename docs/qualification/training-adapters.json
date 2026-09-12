@@ -1,0 +1,230 @@
+{
+  "status": "ordinary-all-target-sd-adapter-source-cpu-and-cuda-gradient-diagnostic-verified",
+  "familyQualified": false,
+  "trainingNodeQualified": false,
+  "releaseReady": false,
+  "baseCommit": "d1626ad15996d44d11c07262def1f1284dd26c83",
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceComparison": {
+    "fixture": "../../tests/ComfySharp.Inference.Tests/Fixtures/training-adapters.reference.json",
+    "fixtureSha256": "ae390cc8351a5070c3355f6c0bc788f4a2309c66b0d0af255ff0bbc738bf0a0a",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea"
+    },
+    "sourceDeclarations": [
+      {
+        "source": "comfy/ldm/modules/diffusionmodules/util.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/util.py",
+        "fileSha256": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+        "symbols": [
+          "checkpoint",
+          "timestep_embedding",
+          "avg_pool_nd"
+        ],
+        "astSha256": "46be9aed2a5129acaee45d61938b4cd73fea6512543141e4594db8c9bd8e2f7c"
+      },
+      {
+        "source": "comfy/ldm/modules/attention.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/attention.py",
+        "fileSha256": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+        "symbols": [
+          "get_attn_precision",
+          "exists",
+          "default",
+          "_heads_from_dim",
+          "_reshape_qkv_to_heads",
+          "GEGLU",
+          "FeedForward",
+          "AttentionTensorContainer",
+          "wrap_attn",
+          "attention_basic",
+          "CrossAttention",
+          "BasicTransformerBlock",
+          "SpatialTransformer"
+        ],
+        "astSha256": "cbe76e5a10141fe240377beb5d19e6a33ad484059bb451c9559dae1b6af8e3c5"
+      },
+      {
+        "source": "comfy/ldm/modules/diffusionmodules/openaimodel.py",
+        "url": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/ldm/modules/diffusionmodules/openaimodel.py",
+        "fileSha256": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96",
+        "symbols": [
+          "TimestepBlock",
+          "forward_timestep_embed",
+          "TimestepEmbedSequential",
+          "Upsample",
+          "Downsample",
+          "ResBlock",
+          "apply_control",
+          "UNetModel"
+        ],
+        "astSha256": "563eb667a942bfee86b7f98c314cdb5fa45b538980f5d43d0090db121c6759b4"
+      }
+    ],
+    "topologies": 2,
+    "targetsPerTopology": 686,
+    "leavesPerTopology": 1250,
+    "initialization": "Exact target order, all parameter hashes and CPU RNG state on Windows.",
+    "training": "Two SGD updates: full prediction/loss, selected factor/norm/bias/alpha gradients and updates; finite gradients required for all leaves.",
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "scope": "Frozen all-target ordinary LoRA setup and two SGD updates through reduced full plain SD1/SD2 U-Nets. Native operation adapter supplies weight_function capability flags; wrapper dispatch is replaced by functional_call. Includes trainable alpha and discarded constructor RNG. CPU Float32 only; no complete node, existing adapters, alternative algorithms or pretrained training qualification."
+  },
+  "tests": {
+    "passed": 217,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 6,
+    "trxSha256": "f58a51bbb7b1369df428c2f0fe8d390002ab34c20e4fea7c04ea4b4ec92744f6",
+    "scope": "Targeted Inference suite; not all solution tests."
+  },
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaProbeRelease": "passed, zero warnings/errors",
+    "nativeGenerator": "passed with public Windows x64 MSVC helper; CMake and other toolchains not executed"
+  },
+  "nativeGenerator": {
+    "binarySha256": "ea9785a1c9769767f270cb98fa8f68af29445677491dfda0c45dbbd5a75210b6",
+    "bytes": 23040,
+    "libtorchVersion": "2.10.0",
+    "torchSharpVersion": "0.107.0",
+    "sdkInputHashes": {
+      "include/ATen/Context.h": "b075071e9aec391d7c9aea6ba890d3ad9e9d688cafe88c92e5d5b24f6121b6af",
+      "include/ATen/core/Generator.h": "c0f4037f00da0d48b4e65d8418185d8e12b75bec28fe85d5828faa2cc12b5303",
+      "include/torch/csrc/api/include/torch/version.h": "2d59d7f6c3979e1f1b7415f007ca1696a89296328dc49204b7652b2d2062dece",
+      "lib/torch_cpu.lib": "389e498999216a560bf398439a54c834ecb76ff0d12c21d291e2b0de0fb09f2e",
+      "lib/c10.lib": "f4d03395cc8d8dc639224e69999729fb553ed22f6576709f128f7603017f4974"
+    },
+    "initialFailure": "TorchSharp native generator constructor returned CPU despite a CUDA request; CUDA uniform_ rejected it before training.",
+    "correction": "C ABI bridge clones and seeds a private CUDA generator under the default-generator mutex, replacing only the implementation owned by the TorchSharp handle.",
+    "source": "../../native/ComfySharp.NativeGenerator/README.md"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "driver": "610.88",
+    "memoryMiB": 24576
+  },
+  "native": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cuda:0",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 2,
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 10242232,
+    "changedParameterCount": 1138,
+    "InitialCpuRandomStateSha256": "a90becb36e4ab4eaeccb063f3110dfaf64def7d1f8ec3a2c2d7e92907995169d",
+    "InitialDeviceRandomStateSha256": "acfd6e2e8bd0e34ffe750626099d2760976ebaaf3d28d48623026648f6e74ad0",
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856257,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0
+      },
+      {
+        "step": 2,
+        "loss": 1.1315963,
+        "finiteGradientLeaves": 1250,
+        "nonzeroGradientLeaves": 1244,
+        "nonzeroAlphaGradients": 280
+      }
+    ],
+    "baseUnchanged": true,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 11.3716966,
+    "scope": "Real SD1.5 all-target ordinary LoRA/BiasDiff/alpha gradients with synthetic miniature raw-prediction inputs. Metadata-only diagnostic; no image-dataset, complete node, serialization/reload of mixed adapters, pretrained source-gradient or platform qualification."
+  },
+  "nativeReportSha256": "ce548006851cf3800779f18568acc494a6298aa3f6216c04fc56631eb9c9f134",
+  "repeat": {
+    "previousReportSha256": "3eecad994a68c167f5da52a755a9533398f5a8f007eacc7aae369e8306b2dca4",
+    "sameAllFieldsExceptElapsedSeconds": true
+  },
+  "modelStorage": "Shared SD1.5 checkpoint read directly. No model/adapter download or disk copy; only metadata reports and the 23-KiB native bridge build artifact.",
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "597ac83511e7911a3e72eed5cab786685046eb4cfcfe5047e3135a04baf98c11",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "THIRD_PARTY_NOTICES.md": "eb277900dae6b53d558ca2e2289fac5ad6212d47c2c1970d6715b7a5aed763f3",
+    "build/ComfySharp.Native.props": "fb34d56bccd9fa999dcf36e7329eddff52ff5b6c24d88603423047b133186545",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-training-source/README.md": "3f2d6b3a6fb35240667a11e8dea9a8bea9c12a7deadebed386ddb764b03dda2f",
+    "labs/lora-training-source/adapters.py": "225c8574144bcb718a5d98124e3ab844321ec83039ec4295569ec7304fb199bd",
+    "native/ComfySharp.NativeGenerator/CMakeLists.txt": "f07d2a2b447fa81c7d87037e0742030f689662a2df261a338e11ff209f9f73b2",
+    "native/ComfySharp.NativeGenerator/README.md": "ea5f91c7496f70632e505c607801166c9401d227e8839b6b626e5f035f14b73a",
+    "native/ComfySharp.NativeGenerator/generator.cpp": "04dbe7e08b8655fad56fe392fec4c247a619ef7f74527671f1cb87b0cd942962",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/ComfySharp.Inference.csproj": "453868deb21cd7cca4b0182b036cf43937a6f4e11d5b6a990a070dde2dfb72a8",
+    "src/ComfySharp.Inference/CpuModelWeightBank.cs": "c12bd8912dd756389b324388ab932bcb642e9969eccc06dd1c645f987a9a93d5",
+    "src/ComfySharp.Inference/LoraTrainingOptimizer.cs": "4a9eea3d785fd2cb9755d67b97358434edde649f5a9b7b79638d49899c879e88",
+    "src/ComfySharp.Inference/NativeGenerator.cs": "6d21bdc48bc230edf54d40f640c357691165dcecc1e658fa975cc4a649db6172",
+    "src/ComfySharp.Inference/SdDenoiser.cs": "5f6783f89b2e1f45248ffaa39bcb8448d86bc47a7f3cd11ac1943baa8b471036",
+    "src/ComfySharp.Inference/SdLoraTrainingLoop.cs": "fe22d839b6a26c26f4990a781c21d216ba35e5049976cc6a136b0e4d92577ea0",
+    "src/ComfySharp.Inference/SdLoraTrainingObjective.cs": "ee2cce2c37e695b98eb620cd1410a791142ce40e8db0cb762a6dc7d9d3cc0445",
+    "src/ComfySharp.Inference/SdTrainableAdapterSet.cs": "98cf31f21f06028235be6372a257e446f9fe9c8282223c8dd515d3f80e6f0e2c",
+    "src/ComfySharp.Inference/SdUnet.cs": "684aac0538b86ec3aebbd754ec81b425e441452c866b36896742dc6d4f8c30fa",
+    "src/ComfySharp.Inference/TrainableDifferencePatch.cs": "54c3f9413c19afb8150b92b166571875091fc35b3341a81abc04b474714c171f",
+    "src/ComfySharp.Inference/TrainableLoraPatch.cs": "2410395eee0a829c878d9c4063a175cb29959fddc52132290791893df15576a9",
+    "src/ComfySharp.Inference/TrainableWeightPatch.cs": "dc4685a7d317c0029ca7ab18c7174033b185b57cd6247696c7bc4191e364f0c2",
+    "src/ComfySharp.Inference/UnetWeightSet.cs": "80f78317094ac6a3b01ac3df93b719108eee1ba87233d6bedb76b8eddd6e80a0",
+    "src/ComfySharp.Inference/unet-training-order.json": "122242a503867b9144599fafa0132ce93f2c3b664570a1067146aac9f90a047b",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "bd4c55f4ce49009d86ad9cb520d538a02bb657b83b3ee6435a7bb57209cdab12",
+    "tests/ComfySharp.Inference.Tests/Fixtures/training-adapters.reference.json": "ae390cc8351a5070c3355f6c0bc788f4a2309c66b0d0af255ff0bbc738bf0a0a",
+    "tests/ComfySharp.Inference.Tests/SdAdapterInitializationTests.cs": "16ad2690330e3e004017729808d3851404da3f23f8b5863c82d6c2a17a4f107c",
+    "tests/ComfySharp.Inference.Tests/TrainableAdapterTests.cs": "79fc4d7256222058d5ca54b2e8e9342ad289a305eba88b51d0345c11229a4ec7",
+    "tools/ComfySharp.RuntimeProbe/Program.cs": "db82fccc1fa7105ef214a36c5e3b8c7c3d048a006a3ff473098f6a74148dd5bd",
+    "tools/ComfySharp.RuntimeProbe/SdAllAdapterDiagnostic.cs": "9ee3e0de74574cedbd3cb721174c7b261f05727148d586993403e9b55f09941b",
+    "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b",
+    "tools/build-native-generator.ps1": "80ad040c74647b90c3aca57689259e007611a8e1a827af30a28e2049b1070ad1"
+  },
+  "previousCI": {
+    "run": 34709271629,
+    "status": "completed",
+    "windows": "success",
+    "linux": "failure",
+    "macOS": "failure",
+    "datasetStepPerFailingOS": {
+      "passed": 6,
+      "failed": 6,
+      "skipped": 0
+    },
+    "details": "training-batches-ci-d1626ad.md"
+  },
+  "limitations": [
+    "Pretrained native diagnostic uses miniature synthetic raw-prediction inputs, SGD and rank2; not real image-dataset or style-quality evidence.",
+    "Full mixed-adapter save/reload and training node integration remain pending. Existing explicit two-factor export does not cover norm/bias differences.",
+    "Other adapter algorithms, existing weights, precision modes, bypass, checkpointing/offload and all required model families remain pending.",
+    "No pretrained source-gradient or CUDA RNG numerical parity comparison, long VRAM-pressure campaign, Linux/CUDA or MPS qualification.",
+    "Linux/macOS exact training-noise comparisons and prior denoising precision failures remain open without weakened assertions.",
+    "Windows bridge build was tested using an existing matching SDK; portable CMake and signed/bundled distributions remain unqualified."
+  ]
+}
