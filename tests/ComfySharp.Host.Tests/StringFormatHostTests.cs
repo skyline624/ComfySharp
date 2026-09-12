@@ -16,7 +16,7 @@ public sealed class StringFormatHostTests
         await using var factory = new WebApplicationFactory<Program>();
         using var client = factory.CreateClient();
         var all = await client.GetFromJsonAsync<JsonObject>("/object_info");
-        Assert.Equal(42, all!.Count);
+        Assert.Equal(43, all!.Count);
         var info = (await client.GetFromJsonAsync<JsonObject>("/object_info/StringFormat"))!["StringFormat"]!;
         Assert.True(JsonNode.DeepEquals(info, all["StringFormat"]));
         Assert.Equal("Format Text", info["display_name"]!.GetValue<string>());

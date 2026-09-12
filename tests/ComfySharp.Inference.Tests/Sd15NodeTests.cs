@@ -18,7 +18,7 @@ public sealed class Sd15NodeTests
     [Fact]
     public void Schemas_keep_component_output_order_and_unsigned_seed_range_without_model_files()
     {
-        var info = Registry().ToObjectInfo(); Assert.Equal(5, info.Count);
+        var info = Registry().ToObjectInfo(); Assert.Equal(6, info.Count);
         Assert.Equal(new[] { "MODEL", "CLIP", "VAE" }, info["CheckpointLoaderSimple"]!["output"]!.AsArray().Select(n => n!.GetValue<string>()));
         Assert.Empty(info["CheckpointLoaderSimple"]!["input"]!["required"]!["ckpt_name"]![0]!.AsArray());
         Assert.Equal(ulong.MaxValue, info["KSampler"]!["input"]!["required"]!["seed"]![1]!["max"]!.GetValue<ulong>());
@@ -62,7 +62,6 @@ public sealed class Sd15NodeTests
     [Theory]
     [InlineData("heun", "karras", 1.0)]
     [InlineData("euler", "normal", 1.0)]
-    [InlineData("euler", "karras", .5)]
     public async Task Unported_sampler_modes_fail_explicitly_without_accessing_model_inputs(string sampler, string scheduler, double denoise)
     {
         var registry = Registry(); Assert.True(registry.TryGet("KSampler", out var node));

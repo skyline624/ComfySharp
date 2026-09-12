@@ -1,0 +1,146 @@
+{
+  "status": "windows-cuda-reencode-refine-executed",
+  "familyQualified": false,
+  "numericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "8b5a92d7c1cefe0508157f2f18f95f50ddbfbbd9",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "read from shared models directory without disk copy; hash checked after execution"
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "componentDevices": [
+      "cuda:0",
+      "cuda:0",
+      "cuda:0"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 20.4395655,
+    "dimensions": [
+      512,
+      512
+    ],
+    "stages": [
+      "20-step seed-0 red-apple generation",
+      "VAE decode",
+      "VAE encode",
+      "10-step seed-1 green-apple prompt, denoise=0.5",
+      "VAE decode",
+      "PNG save and native Desktop bitmap"
+    ],
+    "pngSha256": "3c8eae4dab708c897cb5ea476758820ce5bfe5f54c96e9e6ec233b764966531d",
+    "pngBytes": 690696,
+    "desktopReportSha256": "f54bc783bdd6a6632916cdd53b4f565734073414c828afb6c4374ec32503abb6"
+  },
+  "workflow": "../workflows/sd15-reencode-refine.api.json",
+  "registeredNodeTypes": 43,
+  "scheduleReference": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/sd15-denoise.reference.json",
+    "sha256": "cad3f9ab54782a310582172f4c67d2c2133037fb98a311a065f071c0e411504d",
+    "sourceCases": 8,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Source KSampler.set_steps and Sampler.max_denoise, real source Karras and default model schedule. No image or model-family numerical acceptance."
+  },
+  "tests": {
+    "inferenceSelected": {
+      "total": 59,
+      "passed": 59,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "workflow": {
+      "total": 261,
+      "passed": 261,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "desktop": {
+      "total": 115,
+      "passed": 115,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "host": {
+      "total": 300,
+      "passed": 299,
+      "failed": 1,
+      "notExecuted": 0
+    }
+  },
+  "newTests": 7,
+  "reclassifiedPreviousTests": 1,
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors"
+  },
+  "catalogue": {
+    "rows": 1171,
+    "localDeclarations": 664,
+    "registeredTypes": 43,
+    "errors": 0,
+    "complete": false
+  },
+  "limitations": [
+    "Image intermediate tensors were not captured or numerically compared against a source image-to-image run.",
+    "The observed image remains predominantly red despite the green-apple prompt; semantic prompt fidelity is not claimed.",
+    "LoadImage file import, masks, other samplers, more than one image and larger dimensions remain pending.",
+    "Expanded schedules above 10000 steps are explicitly rejected.",
+    "Windows symbolic-link privilege test remains failed, not skipped.",
+    "Linux CUDA and macOS MPS hardware qualification remain pending."
+  ],
+  "sourceHashes": {
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-euler-karras.api.json": "fc4b91e2e80f7fe6222cd4f02640ca8b707af79d24bacb7c42214f09a9895705",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "src/ComfySharp.Desktop/HostSupervisor.cs": "8320cb0ef616e8f40d38ed4fd80a49fd0196245d959d9825d2f082233e3bc051",
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": "81fc1e74778a23b7dcfabcd20020dd1273ca8b76ce8505a8790fd2d1870fc943",
+    "src/ComfySharp.Desktop/Program.cs": "16a935fcd3efe40a94d833ef31e4484d7d0e076e99577777169602af988176da",
+    "src/ComfySharp.Desktop/Sd15Smoke.cs": "d85fddb55a026c2014dcaa402825be2fca7482492214a6cb2171ee1b62c21dcd",
+    "src/ComfySharp.Host/Program.cs": "3cce6cd29b3b8c34a1d056ca2b55f531304d568ca4fc808cb22258486ddb66ff",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "d45dd49d58acf3dce474e6ff91c187e3eb4e67eb32a7f220613f2fb87dc6ffe4",
+    "src/ComfySharp.Inference/ClassicalVae.cs": "d89c805449691cb77cbaf2473ca35633a02e40e148c54ddad6e5e4ebf354000c",
+    "src/ComfySharp.Inference/ClassicalVaeWeightSet.cs": "10a591e6c6d6e72d95759d59f8a2094c07e68cfb608f83a9ba54687e06d488f6",
+    "src/ComfySharp.Inference/ClipContracts.cs": "e3410c28ed4e4005551e973dc07c6724bea1352bcfecc5a88828ee437f400354",
+    "src/ComfySharp.Inference/ClipTextEncoder.cs": "3a687d764d8645803ab9165f9436d41da5a4fdc6b77eb1256ad8abd8710681a9",
+    "src/ComfySharp.Inference/ClipWeightSet.cs": "89f4d20f3e35b725e0fb8d84d1c7807770e752dfd5d810f0fd0d36b326f7d229",
+    "src/ComfySharp.Inference/ComfyClipEncoder.cs": "2fcfe96993888aebddfc484ef28137fbcf9401c3e8c530e63ef2af59584df2bd",
+    "src/ComfySharp.Inference/ComfyImageVae.cs": "dd111513431f490772aa3aef69c395a78ea6389a07fff49c534c0fbe67071dc3",
+    "src/ComfySharp.Inference/CpuModelWeightBank.cs": "808f50b893802dac23c674e65ac28d14e0ef9225ca2650a482f9c9670f0e31eb",
+    "src/ComfySharp.Inference/InferenceDevice.cs": "54d77f8aa3d662757c9f0b0ad31ebfff602dfd7eda93471dbdbf992413a31d08",
+    "src/ComfySharp.Inference/SdDenoiser.cs": "37098cb61b4844b05bc7da4ef8257f84efc33b5bb8554a45d9d2ac37845f4604",
+    "src/ComfySharp.Inference/SdDiscreteSampling.cs": "63476345cdfb580777ff9dd3564aa4dba82713a9a58b023caf756b2e41439eea",
+    "src/ComfySharp.Inference/SdEulerSampler.cs": "91bc8861bc6ca50fd9a40e24024f25a990ee4d47e4861b9145eca40f089cd6ed",
+    "src/ComfySharp.Inference/SdSamplingMath.cs": "c4405c1cee3743e0e11cae0ba6b891c9506ae305c3eac86272ddc7a5601c05be",
+    "src/ComfySharp.Inference/SdUnet.cs": "036f3a84eb8062a83b4b32ad21e75b97a85b52934b0e7993fb484f8527909f56",
+    "src/ComfySharp.Inference/UnetWeightSet.cs": "403bfec2551803426a59f2161ea36f998d00bb1f49f3f5f843551569c45c601e",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "5e1e40500646ea49e8d18fa4109dc80b5daaee778e8f578a45d3a6473ed68f3f",
+    "tests/ComfySharp.Desktop.Tests/HostDiscoveryTests.cs": "bf951e853f491a6a8f85c19bc7716e592fcf6a5dd816edad90e443a1e98e7d92",
+    "tests/ComfySharp.Inference.Tests/ModelDeviceTests.cs": "9ab32a776dc5cb24068eb7833e714a8bbf4e0e300210ca8427204235938cf5d3",
+    "tests/ComfySharp.Inference.Tests/Sd15GenerationDiagnosticTests.cs": "bb15985824882320cb0e512efebaa441d1c326128ac0b4f5eff8b582addf19c3",
+    "tools/ComfySharp.RuntimeProbe/Sd15GenerationDiagnostic.cs": "ec3f12a2ef439c579949cc5d37bda5faddf5c13db4f4e3b6caaa0e1a10e8a8ff",
+    "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b",
+    "docs/workflows/sd15-reencode-refine.api.json": "c8602f0ec15b73b02acaea928266cc633bd16eedb3b3f858b674afa0a58e5b6f",
+    "labs/sd15-denoise-source/reference.py": "8ee52ce115eb2208f142beab8b23c44ff3436ec57549c6a24c398b66c7c28044",
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": "daa6585c663f696e75b709200378e64b10f9c9c686582d83506c1a46f508e620",
+    "src/ComfySharp.Inference/SdKarrasSchedule.cs": "326d8ead1a6766875132aea8625a6b171df3e8550126315614d73200d50a4c81",
+    "src/ComfySharp.Workflow/PromptCompiler.cs": "680a7f3d5d923950cff293408314e3ef76c3377382bc07d1f5438228ad551e87",
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": "531def511f91760eec112abc9d3049937297e202ac4cf8f7740a73ad1a6b4d18",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "c644503781fa024fe99be939260247dc507c78efed83f638de8b84d205804aaf",
+    "tests/ComfySharp.Inference.Tests/Fixtures/sd15-denoise.reference.json": "cad3f9ab54782a310582172f4c67d2c2133037fb98a311a065f071c0e411504d",
+    "tests/ComfySharp.Inference.Tests/Sd15NodeTests.cs": "a69d49e4c350ed6df8c8dc36df26e9aaf4c5e8ce4a1440683758d8c9360b214b",
+    "tests/ComfySharp.Inference.Tests/SdKarrasScheduleTests.cs": "681af813a231460b0d0dbc6432fb7db2962753fc9c3018ffc14aaf96521bdc87"
+  }
+}

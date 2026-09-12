@@ -1,9 +1,9 @@
 # Parcours SD1.5 dans Desktop et Host
 
-Les cinq nœuds `CheckpointLoaderSimple`, `CLIPTextEncode`, `EmptyLatentImage`,
-`KSampler` et `VAEDecode` raccordent les composants SD1.5 au moteur. `SaveImage`
+Les six nœuds `CheckpointLoaderSimple`, `CLIPTextEncode`, `EmptyLatentImage`,
+`KSampler`, `VAEEncode` et `VAEDecode` raccordent les composants SD1.5 au moteur. `SaveImage`
 enregistre le résultat et l'éditeur récupère le PNG par l'API locale pour afficher
-son aperçu. Le catalogue du Host contient désormais 42 types enregistrés.
+son aperçu. Le catalogue du Host contient désormais 43 types enregistrés.
 L'enregistrement d'un type ne signifie pas que toutes ses variantes sont portées.
 
 Après compilation Release, lancer l'éditeur depuis la racine du dépôt :
@@ -26,13 +26,16 @@ un workflow JSON distinct du prompt API d'origine. `--data-dir <dossier>` permet
 de choisir les réglages et sorties de ComfySharp séparément des modèles.
 
 Le premier parcours est limité à un checkpoint monolithique stock SD1.5,
-prédiction EPS, CPU ou CUDA/Float32, Euler sans churn, Karras, `denoise=1`, un batch de
+prédiction EPS, CPU ou CUDA/Float32, Euler sans churn, Karras, `denoise` de 0 à 1, un batch de
 une image de 32 à 512 pixels par dimension et 1 à 100 étapes. Le Host utilise
 au plus 16 threads CPU par défaut ; `--cpu-threads` le configure directement.
 Les masques, batch-index noise, conditionnements régionaux ou programmés, autres
 samplers/schedulers et autres architectures produisent des diagnostics explicites.
 Les identifiants de leurs choix amont restent dans les schémas pour préserver les
 documents. La qualification numérique CUDA, les autres plateformes et la qualification complète restent ouvertes.
+Le [réencodage et débruitage partiel](SD15_IMG2IMG.md) décrit les règles des sigmas
+et le budget des plannings étendus ; la commande CLI `sd15-generate` conserve son
+parcours de génération à débruitage complet.
 
 Pour utiliser le GPU NVIDIA sous Windows, construire le Host avec son bundle CUDA
 verrouillé, puis sélectionner ce périphérique au lancement de l'éditeur :

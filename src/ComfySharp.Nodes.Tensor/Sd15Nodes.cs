@@ -42,7 +42,8 @@ public static class Sd15Nodes
              new("negative", "CONDITIONING"), new("latent_image", "LATENT"),
              new("denoise", "FLOAT", Options: new() { ["default"] = 1.0, ["min"] = 0.0, ["max"] = 1.0, ["step"] = .01 })],
             [new("LATENT")], PythonModule: "nodes",
-            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler/Karras, denoise=1, one image up to 512x512, 1-100 steps. Other modes report an explicit error."),
+            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler/Karras, denoise in [0,1], one image up to 512x512, 1-100 steps. Expanded schedules are limited to 10000 steps. Other modes report an explicit error."),
+        new("VAEEncode", "VAE Encode", "model/latent", [new("pixels", "IMAGE"), new("vae", "VAE")], [new("LATENT")], PythonModule: "nodes"),
         new("VAEDecode", "VAE Decode", "model/latent", [new("samples", "LATENT"), new("vae", "VAE")], [new("IMAGE")], PythonModule: "nodes")
     ];
 
@@ -122,12 +123,22 @@ public static class Sd15Nodes
                 }
                 case "KSampler":
                 {
-                    if (S("sampler_name") != "euler" || S("scheduler") != "karras" || D("denoise") != 1.0)
-                        throw new NotSupportedException("KSampler currently executes Euler/Karras with denoise=1 only.");
+                    if (S("sampler_name") != "euler" || S("scheduler") != "karras")
+                        throw new NotSupportedException("KSampler currently executes Euler/Karras only.");
+                    double denoise = D("denoise");
+                    if (!double.IsFinite(denoise) || denoise is < 0 or > 1) throw new ArgumentOutOfRangeException("denoise");
                     int steps = I("steps"); double cfg = D("cfg");
                     if (steps is < 1 or > 100 || !double.IsFinite(cfg) || cfg is < 0 or > 100)
                         throw new NotSupportedException("KSampler currently requires 1-100 steps and CFG in [0,100].");
                     var latent = inputs["latent_image"].Properties;
+                    var result = latent.Where(p => p.Key is not ("downscale_ratio_spacial" or "downscale_ratio_temporal"))
+                        .ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal);
+                    // Frozen CFGGuider.sample returns the original raw latent for an empty schedule.
+                    if (denoise == 0)
+                    {
+                        result["samples"] = Own(latent["samples"].GetNative<TorchTensor>().alias());
+                        outputs = [context.Map(result)]; break;
+                    }
                     if (latent.ContainsKey("noise_mask") || latent.ContainsKey("batch_index"))
                         throw new NotSupportedException("Masked sampling and batch-index noise are not yet ported.");
                     if (latent.TryGetValue("downscale_ratio_spacial", out var ratio) && PythonValues.Integer(ratio.ToJson()) != 8 ||
@@ -140,18 +151,28 @@ public static class Sd15Nodes
                     using var noise = cpuNoise.to(model.Device, copy: true);
                     using var scaled = SdSamplingMath.ProcessLatentIn(raw, SdSamplingMath.Sd15LatentScale, cancellationToken);
                     var sampling = SdDiscreteSampling.Default;
-                    using var cpuSigmas = SigmaSchedules.Karras(steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+                    using var cpuSigmas = SdKarrasSchedule.Create(steps, denoise, sampling, cancellationToken);
                     using var sigmas = cpuSigmas.to(model.Device, copy: true);
                     using var first = sigmas[0];
-                    using var initial = SdSamplingMath.NoiseScaling(noise, scaled, first, true, cancellationToken);
+                    using var initial = SdSamplingMath.NoiseScaling(noise, scaled, first,
+                        SdKarrasSchedule.UsesMaximumNoise(first.item<float>(), sampling.SigmaMax), cancellationToken);
                     using var denoiser = new SdDenoiser(model, SdPredictionKind.Epsilon, sampling);
                     using var sampler = new SdEulerSampler(denoiser);
                     using var sampled = sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]),
                         new SdGuidanceOptions { Scale = cfg, BatchMode = SdGuidanceBatchMode.Separate }, cancellationToken);
-                    var result = latent.Where(p => p.Key is not ("downscale_ratio_spacial" or "downscale_ratio_temporal"))
-                        .ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal);
                     result["samples"] = Own(SdSamplingMath.ProcessLatentOut(sampled, SdSamplingMath.Sd15LatentScale, cancellationToken));
                     outputs = [context.Map(result)];
+                    break;
+                }
+                case "VAEEncode":
+                {
+                    var vae = inputs["vae"].GetNative<ComfyImageVae>();
+                    var source = inputs["pixels"].GetNative<TorchTensor>();
+                    var shape = source.shape;
+                    if (shape.Length != 4 || shape[0] != 1 || shape[1] is < 32 or > 519 || shape[2] is < 32 or > 519)
+                        throw new NotSupportedException("SD1.5 VAEEncode currently requires one image, cropped to 32-512 pixels per dimension.");
+                    using var pixels = source.to(vae.Device, copy: true);
+                    outputs = [context.Map(new Dictionary<string, RuntimeValue> { ["samples"] = Own(vae.Encode(pixels, cancellationToken)) })];
                     break;
                 }
                 case "VAEDecode":

@@ -1,0 +1,128 @@
+{
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+    "comfy/model_sampling.py": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+    "comfy/k_diffusion/sampling.py": "cfc4221ed0bc1f84a6f5689d3ec440cad3008c2541ab8f5e2599d1a73fac74ce",
+    "comfy/samplers.py": "f2c264ca9d394612f828e3ffe167c856a278a10e1711b269f0ba65dccb66393f"
+  },
+  "torch": "2.10.0+cpu",
+  "scope": "KSampler.set_steps and Sampler.max_denoise with real source Karras and model sampling functions; no model-family qualification",
+  "cases": [
+    {
+      "steps": 1,
+      "denoise": 1,
+      "calculatedSteps": [
+        1
+      ],
+      "sigmas": [
+        14.614643096923828,
+        0.0
+      ],
+      "maximumNoise": true
+    },
+    {
+      "steps": 5,
+      "denoise": 1,
+      "calculatedSteps": [
+        5
+      ],
+      "sigmas": [
+        14.614643096923828,
+        4.796534538269043,
+        1.2741007804870605,
+        0.2479499727487564,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": true
+    },
+    {
+      "steps": 5,
+      "denoise": 0.99991,
+      "calculatedSteps": [
+        5
+      ],
+      "sigmas": [
+        14.614643096923828,
+        4.796534538269043,
+        1.2741007804870605,
+        0.2479499727487564,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": true
+    },
+    {
+      "steps": 5,
+      "denoise": 0.9999,
+      "calculatedSteps": [
+        5
+      ],
+      "sigmas": [
+        14.614643096923828,
+        4.796534538269043,
+        1.2741007804870605,
+        0.2479499727487564,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": true
+    },
+    {
+      "steps": 5,
+      "denoise": 0.5,
+      "calculatedSteps": [
+        10
+      ],
+      "sigmas": [
+        0.9140726923942566,
+        0.4469185769557953,
+        0.2013983577489853,
+        0.08191029727458954,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": false
+    },
+    {
+      "steps": 7,
+      "denoise": 0.3333,
+      "calculatedSteps": [
+        21
+      ],
+      "sigmas": [
+        0.3551825284957886,
+        0.2479499727487564,
+        0.16975659132003784,
+        0.11372923105955124,
+        0.07436291128396988,
+        0.047305695712566376,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": false
+    },
+    {
+      "steps": 3,
+      "denoise": 0.01,
+      "calculatedSteps": [
+        300
+      ],
+      "sigmas": [
+        0.031177794560790062,
+        0.03015812672674656,
+        0.0291671771556139,
+        0.0
+      ],
+      "maximumNoise": false
+    },
+    {
+      "steps": 5,
+      "denoise": 0,
+      "calculatedSteps": [],
+      "sigmas": [],
+      "maximumNoise": null
+    }
+  ]
+}
