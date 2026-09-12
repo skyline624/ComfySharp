@@ -1,0 +1,1726 @@
+{
+  "schema": 1,
+  "id": "autogrow-template-names-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "python": "3.12.10",
+  "executionRepeats": 3,
+  "helperCommit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+  "helperFiles": [
+    {
+      "path": "labs/autogrow-source/reference.py",
+      "bytes": 20206,
+      "sha256": "5239b3ffc13c64e583ba6a6c7a185de3264bfe9173d7c3f3a5da3685ec4e5027"
+    },
+    {
+      "path": "labs/autogrow-source/protocol.json",
+      "bytes": 39714,
+      "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+    },
+    {
+      "path": "labs/autogrow-source/README.md",
+      "bytes": 7388,
+      "sha256": "483dc8ba820eff7409dc4f6618238fa7b41bd526bdc96a45d368e4f18b7e7bd2"
+    }
+  ],
+  "sources": [
+    {
+      "path": "comfy_api/internal/__init__.py",
+      "bytes": 4913,
+      "sha256": "50786f7e2ebc910ed9becddf066e92d7924b7f6080189651067bbcd839e8a410",
+      "declarations": [
+        {
+          "name": "first_real_override",
+          "line": 14,
+          "astSha256": "fa5f32b46bca30550d5518f411744a049033fd844771c7f9a0b790b5105512d5",
+          "segmentSha256": "14290cc0ae4a403ab0dc998590f4749ec0b04a8ac792ea45cecf9d86cf8fa3c0"
+        },
+        {
+          "name": "_ComfyNodeInternal",
+          "line": 38,
+          "astSha256": "051b520f639032341de8e734135624e1ca7771ce8791de038c50601260c484ea",
+          "segmentSha256": "c4440ce6fa08455c71c20828270d1e2d1354a3f2a704d4e63149c7583c63f397"
+        },
+        {
+          "name": "_NodeOutputInternal",
+          "line": 47,
+          "astSha256": "0e212f5d4ff5f50c6efddb106b73fbfa1aa68e1d3985a3846403d35b9e9534d9",
+          "segmentSha256": "46b82c42469f6239dddfd51ac3f3ee2dc11d2b046478b55d974fa73246e3a160"
+        },
+        {
+          "name": "prune_dict",
+          "line": 58,
+          "astSha256": "b07de5597d8028d65be22efec69b3daa3b5826885f222d201d308392ec43a494",
+          "segmentSha256": "9ccc0fe3ae2c5e2ef304b2a7f7c46d4e2174cabe94530ce49aeac961da9a72b6"
+        },
+        {
+          "name": "is_class",
+          "line": 62,
+          "astSha256": "faee12cd098a2cc81e869ffbf00cc3c72f9541275db45408f0c18e7111e2752d",
+          "segmentSha256": "11ebe2f9b584ffdf890575792b10b7a9fb516fdcf25f90f9f3f41405decfc921"
+        },
+        {
+          "name": "copy_class",
+          "line": 70,
+          "astSha256": "5522661aacd7aba80daf937e33da6e170f28f408af54c742add58f86bbe6ab39",
+          "segmentSha256": "298a4c0129d4601d84a70b6e4fc44d2ff5fddd6a91b8b35088551b9d58c3685d"
+        },
+        {
+          "name": "classproperty",
+          "line": 92,
+          "astSha256": "192bb44a9d34bf6efb2d32c7adffe8b1420a7289d376eadcde1fce94b9fa1488",
+          "segmentSha256": "9d250db270a5c285d8645596f82b059c64cb436d7029f486a45d008dfd3fb44a"
+        },
+        {
+          "name": "shallow_clone_class",
+          "line": 100,
+          "astSha256": "1b5ccee92b299e618b48d98f111868d2819c502b470af5035f36a5cca4b520cd",
+          "segmentSha256": "8f64cf25ab15c23c2f9b31ec4ff22c4a973c4172318fe9fc733da057ca8271ea"
+        },
+        {
+          "name": "lock_class",
+          "line": 110,
+          "astSha256": "2f7ee742b843965f6f434794af897257bf9e7bb7d79a3e7f01c0843b5670f5e6",
+          "segmentSha256": "23774e8de93d24b3bdf8207825757818912fe87697e428933712b83d18d76875"
+        },
+        {
+          "name": "make_locked_method_func",
+          "line": 132,
+          "astSha256": "70730dad9d656b0823c9a0914d15eeee3968b38fca444eea06402e7f5ec4a2dc",
+          "segmentSha256": "169dbd0571c10b86132bdef139a7c766f1fc12e8e56ffe59ec4724dc06ec4fce"
+        }
+      ]
+    },
+    {
+      "path": "comfy_execution/graph_utils.py",
+      "bytes": 5626,
+      "sha256": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d",
+      "declarations": [
+        {
+          "name": "is_link",
+          "line": 1,
+          "astSha256": "cee615af9b962a46665fe59b427c6542537af58230ed153cca7cb250a2dfc87c",
+          "segmentSha256": "326780c3e724ee94de41282bc326d4fa346ca440e9927d7d59034148d6519de6"
+        },
+        {
+          "name": "ExecutionBlocker",
+          "line": 140,
+          "astSha256": "e0d6980bd7d6981342cd08b708c74655f7ae0f65e063389c7bb00165ec861bb8",
+          "segmentSha256": "0d2e3a3ed9853ea8ab26f5f73a93037e98d97d66f4b792ca46576eaf4f0060f3"
+        }
+      ]
+    },
+    {
+      "path": "comfy/comfy_types/node_typing.py",
+      "bytes": 15221,
+      "sha256": "6bc7906a84333a767e137e89efea041b45966cd589f344a28c14116a2484a7f5",
+      "declarations": [
+        {
+          "name": "StrEnum",
+          "line": 9,
+          "astSha256": "dea4131bc8036e1b94ea6179035b466ef51ab6b95ba00da3699fd66880b78204",
+          "segmentSha256": "db2a0d3038827db1f4c96e91f726646211444de7b31f3f716e46cecda2a7f073"
+        },
+        {
+          "name": "IO",
+          "line": 16,
+          "astSha256": "aa1c8a78e361806ec5495581a7b5cc95a019b1e88e72d4486fbf87ca87bc6219",
+          "segmentSha256": "d91e94b7c89897dc67c1b41d782da730ed898cf72fee9b3ca2400f6ffedab2a7"
+        },
+        {
+          "name": "RemoteInputOptions",
+          "line": 74,
+          "astSha256": "b03cc3fe13c708d0d2961b417c5abfdff09aba8cce87020ecabcf0ae78058e3d",
+          "segmentSha256": "3da59b63acf47e31f984a07ce225956206fc0406a76f3be137d77970e96fad47"
+        },
+        {
+          "name": "MultiSelectOptions",
+          "line": 89,
+          "astSha256": "dcf005d1e43db536fbb989e1d632c76db99b97925980f30f3b43cb679db6934c",
+          "segmentSha256": "fe34d083f835ab59089a5ea9530e694366baf83161e07666e6ba171b3017dacc"
+        },
+        {
+          "name": "InputTypeOptions",
+          "line": 96,
+          "astSha256": "4325d5d403c1ba7fdc1f74e2bff7c64b1b5f4e9a3f25e166238ed45f83542456",
+          "segmentSha256": "7552deb9d5e1e93b4f406964df8f51025d1b1ff45819d4dd7f327f087347d36d"
+        },
+        {
+          "name": "HiddenInputTypeDict",
+          "line": 182,
+          "astSha256": "2815123579be5ae722290767832c2cb8aab31e6949885c66a531d29a83580c1e",
+          "segmentSha256": "e45e629e4bd1d3ce4edb2acfbeba0bbc0af3127134061a9cdaeb3504012bdb5e"
+        },
+        {
+          "name": "InputTypeDict",
+          "line": 197,
+          "astSha256": "b52fd6966e58190108f25a2fca196e65000280f90be5cbbb0a6e01f95c19829a",
+          "segmentSha256": "c77f8e3595d110377ffeee7530407708d27952b9a8a4e9f12a1cb1f51cb7f517"
+        },
+        {
+          "name": "ComfyNodeABC",
+          "line": 214,
+          "astSha256": "d7359f2b1778ae2eb8a36073bdc3a3d4359477aa1120023f74bd66d8f2897a59",
+          "segmentSha256": "145f9857836564d37cf3583871660fa0018f9b84403b37db89fdfdf56a416f55"
+        }
+      ]
+    },
+    {
+      "path": "comfy_api/latest/_io.py",
+      "bytes": 97422,
+      "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080",
+      "declarations": [
+        {
+          "name": "@future-annotations",
+          "line": 1,
+          "astSha256": "890bede517510aea64e32258c9530f0172f5a6ea2fcbcb247fdadc40c714e8bf",
+          "segmentSha256": "a6284e6d3d43bdfbf0da732945adb2b4f31147c92bea47aee100d7f556c22d00"
+        },
+        {
+          "name": "_ComfyType",
+          "line": 86,
+          "astSha256": "2576eba2eda3a37ff2b4c51ff20d866e0056e02e6ada2b5ae31901dac26c798f",
+          "segmentSha256": "db9cd80e9036b14d5d16945bcd2d5c87228580975e477e0798902442a0415729"
+        },
+        {
+          "name": "T",
+          "line": 91,
+          "astSha256": "5e4959ef6dc007a5083f61cffa3ffc698d4e422b1a80991c9bfe29234db49a92",
+          "segmentSha256": "aa4b0fb13e022ed0b22f7997e2a370927a4a586179cc3374a7f4fc92143ef673"
+        },
+        {
+          "name": "comfytype",
+          "line": 92,
+          "astSha256": "35dbe8585433412409d91f7fe8224a463a5ff72cd2b570d5af3828dd122a4547",
+          "segmentSha256": "985e3138ebe74797c0c054c868353fd92d07b77fbc5ca538c219f4d587fd7920"
+        },
+        {
+          "name": "_IO_V3",
+          "line": 140,
+          "astSha256": "24e571b91084710e4e43eb58a84cf3f3cd34161ed10b36dc31637722714d986e",
+          "segmentSha256": "f4990fde0a1002bcd946dfd9695453dafa99749f5db3b909f0b7e7a70a72faa3"
+        },
+        {
+          "name": "Input",
+          "line": 160,
+          "astSha256": "95ebdf5ff22f690b02285a5ca52136337c8eaa13bf7076770bc21dd12acdf9e5",
+          "segmentSha256": "3936883277d02dee70f9515a3df7712a020a2157a48a862ec059f70a008e340d"
+        },
+        {
+          "name": "WidgetInput",
+          "line": 191,
+          "astSha256": "1fa5af9a7edb22c2e936c3e7a54820e062df65e28d239c484a7e346356f623c5",
+          "segmentSha256": "94f6bf75f7fd1f30a4b4153380371af3f10b820f87a87667326bb2a4e5c6bdc8"
+        },
+        {
+          "name": "Output",
+          "line": 216,
+          "astSha256": "b5b386a52cc580e2178ad8ca2a12b63974ece1b48d610c339f4dd0702e1c933f",
+          "segmentSha256": "35cb654546a846f0e47fadf61dcc65ab11fb7fbefa74ae313ef7e6f9ea2f0aa8"
+        },
+        {
+          "name": "ComfyTypeI",
+          "line": 236,
+          "astSha256": "4f65140e69efd1cc5a1dac18c76d5e144d6558f74d88de8e8c18d48d961fc81d",
+          "segmentSha256": "a16b8269ec503b17991e992aefaf2c34152e3d53c246be63a624ff5d99867c25"
+        },
+        {
+          "name": "ComfyTypeIO",
+          "line": 241,
+          "astSha256": "1271da2aef2af399a566abbb868b6141e1043a0762687c540b38070b7e9a4e10",
+          "segmentSha256": "8e0b5f09ee5c315fbd70c2155f097d07f4b2f3158329afe1c3b9d3bca08cb625"
+        },
+        {
+          "name": "Boolean",
+          "line": 248,
+          "astSha256": "bffc73497ba5a359e3e2f6a446bcc73475ea4aa1aca9ebbbfba26c701bae8f9b",
+          "segmentSha256": "37e329fbdaa2198558be6148e7117f968fc914215d5875e43c72e4fed64a11b7"
+        },
+        {
+          "name": "Int",
+          "line": 268,
+          "astSha256": "bfba38bb2eecab5a78eb2bf2ff74a5de4ade5787c628432174b574ff647cdcd0",
+          "segmentSha256": "e4fcfc15310592e75fb440ea2bbcab8f0ebe2993b918fd44007b416eb8a7afb6"
+        },
+        {
+          "name": "String",
+          "line": 323,
+          "astSha256": "e46cfcc2167844571b0259a9f27fccca04bc6957f99fdad75f5ef938369acd84",
+          "segmentSha256": "0fd7a51ce672cf63abda3dc4ce835db9b9a987d7c5a085e42ed18e32a05ef419"
+        },
+        {
+          "name": "AnyType",
+          "line": 927,
+          "astSha256": "8eee0a9d994357641d0aa557c33e4137317108176eeddf56425f7ee7389588bd",
+          "segmentSha256": "d303dcaa2f007b78898c553d905d33cbdf33426b8941ae062fc2d4c408c4e066"
+        },
+        {
+          "name": "MatchType",
+          "line": 1007,
+          "astSha256": "cdad26f0a7b1188ff4c34b324c61dfadfc6e57073b5ca7445f6a357ad4329a08",
+          "segmentSha256": "6d0bc7723923973292410e46c3013cfd7c5ab38648c3141eae2548f53c178020"
+        },
+        {
+          "name": "DynamicInput",
+          "line": 1053,
+          "astSha256": "789ae6d68b5e0f75f0ec04ba4237153f3e979b5cfbad63cbe090a8f41c452fd6",
+          "segmentSha256": "9812dc1ecaabf44bd9defccde74865106bca3fb53ad116884c02f70e86b9cf32"
+        },
+        {
+          "name": "handle_prefix",
+          "line": 1067,
+          "astSha256": "4d83eb651401e7e610f71765bf104aeb555f46be2adb90a39f08c9d14e7dc07e",
+          "segmentSha256": "63b12f2a1cda65a2323b89258363ce16062c269f996b40834ea136bf6ee8363d"
+        },
+        {
+          "name": "finalize_prefix",
+          "line": 1074,
+          "astSha256": "c2302f4bbeab82265b87daa63bf32f911b3490c05d3d67611ff475b8adb8aa49",
+          "segmentSha256": "56be4c39d48b1600dc2b66370622cf1ab370885a0c74f03966b47cdf9a78e6ce"
+        },
+        {
+          "name": "Autogrow",
+          "line": 1083,
+          "astSha256": "47e94e901de38e6674e0745998b8719c2d5f5df5d6873bc2cd2e02669bc107b8",
+          "segmentSha256": "e81abe1649bd3801f248091b480a282c45ab90df6fd1dffe51ac955b1d863f65"
+        },
+        {
+          "name": "DynamicCombo",
+          "line": 1220,
+          "astSha256": "556bc9800b226f4d0b025b50b0daed458431a4232b9dcc6eaef433fd1a3768c6",
+          "segmentSha256": "1911c47eaad5c281198795b1ef50b05b30b88ebc6353f52f4de230a6e22c21b2"
+        },
+        {
+          "name": "DynamicSlot",
+          "line": 1273,
+          "astSha256": "2830815f69dfccd93fd8d080b4219fae9c6834e1ec4c55df9045d8332ef1eaf1",
+          "segmentSha256": "82df8cefaa9348f15923b575b7db4daf7dd781c037e2273e9932a85f0bf79e9a"
+        },
+        {
+          "name": "DYNAMIC_INPUT_LOOKUP",
+          "line": 1518,
+          "astSha256": "3084fed118fa9b3a99d555ade080ff8758ee8245fe3f9abc5e3e90c0e912bdc9",
+          "segmentSha256": "f9b23e7535ced35c678c2c5e92c75f73a4a23a8d28a40630cbfd8d790d1b2b23"
+        },
+        {
+          "name": "register_dynamic_input_func",
+          "line": 1519,
+          "astSha256": "4005ab30d95305ce213ab8e69004271d9428c9c3fd8e7192a9a458124a18677d",
+          "segmentSha256": "e2e1485d53884c744b4a83d75463035e77649f37e0ffe28b06660fb0c5106589"
+        },
+        {
+          "name": "get_dynamic_input_func",
+          "line": 1522,
+          "astSha256": "983a9e1f2dbd2a1a43e576fa44bb04312e478cd6dedfb72e69732809d44b538a",
+          "segmentSha256": "88c86a3c2f6432b1d9fdd3c3385b7059c6e10040e0a29cb6576c2b4c57f81c2e"
+        },
+        {
+          "name": "setup_dynamic_input_funcs",
+          "line": 1525,
+          "astSha256": "a62540ce7607661a91e3562f50488b2609950d4e84be62431e6513bd1493b483",
+          "segmentSha256": "11e771c30435548a87d0968ad535fbd7d7f54b7f32fcdb8b9bebf7779a6379d4"
+        },
+        {
+          "name": "@setup-dynamic",
+          "line": 1533,
+          "astSha256": "bafbc362651f43d5803b5fc3a3df586d00a160a0d6e51a6d711a6e17a1289ea0",
+          "segmentSha256": "0299399e3958a4a044851a4aa8e1c7b91f4dfda6b346c1190be63af2726a2465"
+        },
+        {
+          "name": "V3Data",
+          "line": 1536,
+          "astSha256": "f594119ec3763df49a22b740cf595359351241e55903e9265ebe23446db259fe",
+          "segmentSha256": "bd2782fa7879d4432ac0a357b65573392077c3bc07b50f9b5cbd57e92498eb1f"
+        },
+        {
+          "name": "HiddenHolder",
+          "line": 1546,
+          "astSha256": "bbf7bb993e4c96713502c0e707845ea142fa3837159e7e160ba4e47f801fe744",
+          "segmentSha256": "a893aa96b55c30761028aad4fa1caedf6edb45350b2dc8c5d0bb9f627ec89917"
+        },
+        {
+          "name": "Hidden",
+          "line": 1588,
+          "astSha256": "3d23c7c43c35d9f6d5f4b5ca050df1ce202f459c5c49bc8293eccc49aac962ae",
+          "segmentSha256": "666bd263918c0fa1434677b5fb41f983321bfdc5e1a3d4f2cec9872765630632"
+        },
+        {
+          "name": "NodeInfoV1",
+          "line": 1609,
+          "astSha256": "bb6eedc972a68ce61f6459f6f1e651999077e5c382a4d8cb5c63159e4f7e9a6a",
+          "segmentSha256": "1b6f423b040e8d5bd608c5f5add0c9b192ee945e9e8b49c95c743a02b58e5b43"
+        },
+        {
+          "name": "Schema",
+          "line": 1699,
+          "astSha256": "ca48ed1f756e1186b5dcfabaad851cf61a21a90c3b4d5f037457e69938239cbf",
+          "segmentSha256": "a87c26a014329fc77c0975739d6a7925cf4ff98dc815c11c88c922322189d7c7"
+        },
+        {
+          "name": "get_finalized_class_inputs",
+          "line": 1878,
+          "astSha256": "2bfbf53a1fe828eefd3c36914232268fe045ee159d1dd87bf1d95981a621095d",
+          "segmentSha256": "fbcf57b3c2f0218700ddc9a3599426a5cc941a231d2e040628be1d98fbcae4b8"
+        },
+        {
+          "name": "parse_class_inputs",
+          "line": 1901,
+          "astSha256": "d3d0bf3a00a046024792424f8f0250dbd772f5a86ce9654c3b7e3fc223589c2c",
+          "segmentSha256": "dc515d9016f5c42153ca5868ca04f360647b7ed59987a3a355e956588c87ab53"
+        },
+        {
+          "name": "create_input_dict_v1",
+          "line": 1917,
+          "astSha256": "a4792c258dd3899c9e71e8602884c1cd781c0114be517f01e1c20e84a5df9f76",
+          "segmentSha256": "20d401ef4f8fdad4293adae126afb897d8e6ebfbf238a8616a463e09852d5669"
+        },
+        {
+          "name": "add_to_dict_v1",
+          "line": 1925,
+          "astSha256": "73e06015918dfff0f1f5dc0d646f4494e8c8b01eaa8116de39c49464a9540dd8",
+          "segmentSha256": "0d5eafd2e4adc33be671290750f56a35cc5b67818a089595311fd93c12d84c97"
+        },
+        {
+          "name": "DynamicPathsDefaultValue",
+          "line": 1932,
+          "astSha256": "4fab08c70c7ed352508a9a7e20f42ec16a4d012686d20ec04d4ebf52c99635c9",
+          "segmentSha256": "c2b27b956f18effaec069f0fc6cfda2d6dba3b3d8daefd3a60397fe628c42c14"
+        },
+        {
+          "name": "build_nested_inputs",
+          "line": 1935,
+          "astSha256": "cee359a98af966582db972b01ee5e818521f2b002b984795a6923a0f3507b6d3",
+          "segmentSha256": "0ebd61ae8698d4c6b4241d66d3b1e455401eed89c9490e66859685c8298c4782"
+        },
+        {
+          "name": "_ComfyNodeBaseInternal",
+          "line": 1970,
+          "astSha256": "7dfea70ffedf43973669737b7f306357b0e67eddc74f37bd133401b1b9397a6d",
+          "segmentSha256": "0de2dc8fe24e239556e7a16957b214d2dd82a90c775367339efc171342744a3f"
+        },
+        {
+          "name": "ComfyNode",
+          "line": 2289,
+          "astSha256": "e614abd7a1cf484f706404f1b0ce371897e8524fb1591674c0d364a4af0dce39",
+          "segmentSha256": "002985d2efda8e6bed24294477eb1e6b781d46d6578b31253009612a9822cff4"
+        },
+        {
+          "name": "NodeOutput",
+          "line": 2337,
+          "astSha256": "18e33e8fa7f0cae55bc1a0164e77eac24d88d7eb8b926725bfc418759ad715e9",
+          "segmentSha256": "6cc9d8a391cd25599dadbe342b927695308ec4235dbbba187aaf63bc70359984"
+        }
+      ]
+    },
+    {
+      "path": "comfy_execution/graph.py",
+      "bytes": 14857,
+      "sha256": "bb602b45f396a3ca666d2e50af4d4cf542819c427b39ee93f2b4c816cc74d3fa",
+      "declarations": [
+        {
+          "name": "get_input_info",
+          "line": 64,
+          "astSha256": "ae2365cf7daa7675d9a5bebc0f92a123cea248e8f2baf3b4d4cb73c869928974",
+          "segmentSha256": "00a705ee8915997965863aea78b0b104c5b02335da817974e0e6d4d69f7a223b"
+        }
+      ]
+    },
+    {
+      "path": "comfy_execution/utils.py",
+      "bytes": 1529,
+      "sha256": "f80e6020f8f60754ebf15f194670c12ba57a46458b0c185694d8198e428f7be4",
+      "declarations": [
+        {
+          "name": "ExecutionContext",
+          "line": 4,
+          "astSha256": "04a7e8ee3a457107a118b3157f02b29d6b271170f37bc981b8480b900a7f30b0",
+          "segmentSha256": "adbf78cd78ba3da97308e398432e9b5ee5f882ce782795d8ed4c5e2516537f18"
+        },
+        {
+          "name": "current_executing_context",
+          "line": 16,
+          "astSha256": "9d8a7bca783e39da16e4103a6f1c958b91b244ba5029f9ac1ade2bec7c90f0c6",
+          "segmentSha256": "7c9f1b4cabb34b88cadf346d43d89f613f8c6013bd4beee2aec6fcf253dcfab1"
+        },
+        {
+          "name": "get_executing_context",
+          "line": 18,
+          "astSha256": "dbcbff9e1c639d1874d07f830b09b7b944abcdb13e941aced730871b16d761f6",
+          "segmentSha256": "3cf66f97334750e006015807d74b178cbd45f959e88336dc13f24da2e5099996"
+        },
+        {
+          "name": "CurrentNodeContext",
+          "line": 21,
+          "astSha256": "c1463ebd687c71da1549f9f8018b466f16a18cd9fef5d9e15bc9045fac41c065",
+          "segmentSha256": "e49771d401ae8ec3e9928d3687d12c0f96787c2eefb851ae9ac676c23e3e79b0"
+        }
+      ]
+    },
+    {
+      "path": "execution.py",
+      "bytes": 61543,
+      "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "declarations": [
+        {
+          "name": "get_input_data",
+          "line": 159,
+          "astSha256": "f2dd0b9b0156e572e60f637eaeb64e8493f739992b38431f4b98dd4ecb6a6a3a",
+          "segmentSha256": "6d0d2ea0962e1e3c7e495e9d4fda9243dff031fee90ff99cb2974d9e1993a106"
+        },
+        {
+          "name": "resolve_map_node_over_list_results",
+          "line": 231,
+          "astSha256": "614281e252110de2a99b03079c5a82226718d62255977dc173a7a59cb9dd70df",
+          "segmentSha256": "6f46a7a4c9ee8c32b8c6129d988205b5bbf843ab7d15f69f4484feca1dc3e431"
+        },
+        {
+          "name": "_async_map_node_over_list",
+          "line": 243,
+          "astSha256": "7abd7cface1f9000da2654a0adaa06a5f19d654d5a9c92dcb37dc95fd7e7ab1b",
+          "segmentSha256": "72efe9f534acaa6dd7f04b95c762c62d663bbb2b9380f5931c8a8860695606cd"
+        },
+        {
+          "name": "merge_result_data",
+          "line": 322,
+          "astSha256": "d892e3c3ac1b91803e26ea09361164a677a80a60cab2809b8723d23b86c5b455",
+          "segmentSha256": "5a7eca11c7639a11260579423d3c6ba59e9380dbfcbd910ab16da86c2753804e"
+        },
+        {
+          "name": "get_output_from_returns",
+          "line": 351,
+          "astSha256": "58991996db4e8025b5a7e2bffa75ac778910dd718e1ea3a1bec8195b668d1a21",
+          "segmentSha256": "b271bc88fd782995961367b9b456b40be1a511afefa6311348deb062eb40dcc7"
+        },
+        {
+          "name": "execution_block_cb",
+          "line": 522,
+          "astSha256": "1f8d95e0ae40599f5c4d0c6175ec8138e6de7c3a97406f51ddccd2e108977090",
+          "segmentSha256": "b3f779281ea43dea85c20bb8fde888e8ae012f3d2a1e5a143d1660e31fa82313"
+        }
+      ]
+    },
+    {
+      "path": "comfy_extras/nodes_toolkit.py",
+      "bytes": 1422,
+      "sha256": "d27a538173a7b75a120aad35047b5b1b36108a927241baa268a3e5938d97edbb",
+      "declarations": [
+        {
+          "name": "CreateList",
+          "line": 5,
+          "astSha256": "1109b6c62df8ace5fb5003ab0580064c0f1ea3dc293adffb4cb3deb2393aa158",
+          "segmentSha256": "457d17da815ef9cee000d9e8dc8768f19ddfe247feae4b2ff4ce3c6cc0fd564e"
+        }
+      ]
+    },
+    {
+      "path": "nodes.py",
+      "bytes": 108581,
+      "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7",
+      "declarations": []
+    },
+    {
+      "path": "comfy_extras/nodes_string.py",
+      "bytes": 17166,
+      "sha256": "bb01963178f28efc6e3a9578aecb89f53f8265e89c0518da92ec21c4955e85f1",
+      "declarations": [
+        {
+          "name": "StringFormat",
+          "line": 9,
+          "astSha256": "c3c3b7a2124a4098f7302eff2b5b1e0eed550b82a4d33df137a01beb3ec74b7e",
+          "segmentSha256": "72625287533829a8087687bb47f39bc265aced3d5f43066f615326d729725122"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "explicit-order-repeat-last",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Ordinary mapping slices jointly, repeat-last; template order z,a,b differs from prompt b,a,z.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ]
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ],
+        "values.z": [
+          "pz",
+          0
+        ]
+      },
+      "cache": {
+        "pb": [
+          [
+            30,
+            31,
+            32
+          ]
+        ],
+        "pa": [
+          [
+            20
+          ]
+        ],
+        "pz": [
+          [
+            10,
+            11
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "input-is-list-order",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "One call with complete execution lists, distinct from ordinary scalar mapping.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "isInputList": true
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ],
+        "values.z": [
+          "pz",
+          0
+        ]
+      },
+      "cache": {
+        "pb": [
+          [
+            30,
+            31,
+            32
+          ]
+        ],
+        "pa": [
+          [
+            20
+          ]
+        ],
+        "pz": [
+          [
+            10,
+            11
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "optional-hole",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Only recognized present leaves enter paths, in explicit template order.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.b": "last",
+        "values.z": "first"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "all-required",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Every effective name required when min equals count.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 3
+      },
+      "promptInputs": {
+        "values.b": 3,
+        "values.a": 2,
+        "values.z": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "min-above-count",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Source allows min above count; no artificial clamp or rejection.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 5
+      },
+      "promptInputs": {
+        "values.b": 3,
+        "values.a": 2,
+        "values.z": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "empty-names-min-zero",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Empty names accepted and binder supplies EMPTY_DICT.",
+      "template": {
+        "names": [],
+        "min": 0
+      },
+      "promptInputs": {},
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "empty-names-min-one",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Empty names remain accepted with default minimum.",
+      "template": {
+        "names": [],
+        "min": 1
+      },
+      "promptInputs": {},
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "single-name",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "One explicit name and default minimum.",
+      "template": {
+        "names": [
+          "only"
+        ]
+      },
+      "promptInputs": {
+        "values.only": "one"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "hundred-names",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Exactly100 effective names with last leaf present.",
+      "template": {
+        "names": [
+          "n0",
+          "n1",
+          "n2",
+          "n3",
+          "n4",
+          "n5",
+          "n6",
+          "n7",
+          "n8",
+          "n9",
+          "n10",
+          "n11",
+          "n12",
+          "n13",
+          "n14",
+          "n15",
+          "n16",
+          "n17",
+          "n18",
+          "n19",
+          "n20",
+          "n21",
+          "n22",
+          "n23",
+          "n24",
+          "n25",
+          "n26",
+          "n27",
+          "n28",
+          "n29",
+          "n30",
+          "n31",
+          "n32",
+          "n33",
+          "n34",
+          "n35",
+          "n36",
+          "n37",
+          "n38",
+          "n39",
+          "n40",
+          "n41",
+          "n42",
+          "n43",
+          "n44",
+          "n45",
+          "n46",
+          "n47",
+          "n48",
+          "n49",
+          "n50",
+          "n51",
+          "n52",
+          "n53",
+          "n54",
+          "n55",
+          "n56",
+          "n57",
+          "n58",
+          "n59",
+          "n60",
+          "n61",
+          "n62",
+          "n63",
+          "n64",
+          "n65",
+          "n66",
+          "n67",
+          "n68",
+          "n69",
+          "n70",
+          "n71",
+          "n72",
+          "n73",
+          "n74",
+          "n75",
+          "n76",
+          "n77",
+          "n78",
+          "n79",
+          "n80",
+          "n81",
+          "n82",
+          "n83",
+          "n84",
+          "n85",
+          "n86",
+          "n87",
+          "n88",
+          "n89",
+          "n90",
+          "n91",
+          "n92",
+          "n93",
+          "n94",
+          "n95",
+          "n96",
+          "n97",
+          "n98",
+          "n99"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.n99": "last"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "truncate-hundred-one",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Constructor copies only first100; no max/prefix appears in metadata.",
+      "template": {
+        "names": [
+          "n0",
+          "n1",
+          "n2",
+          "n3",
+          "n4",
+          "n5",
+          "n6",
+          "n7",
+          "n8",
+          "n9",
+          "n10",
+          "n11",
+          "n12",
+          "n13",
+          "n14",
+          "n15",
+          "n16",
+          "n17",
+          "n18",
+          "n19",
+          "n20",
+          "n21",
+          "n22",
+          "n23",
+          "n24",
+          "n25",
+          "n26",
+          "n27",
+          "n28",
+          "n29",
+          "n30",
+          "n31",
+          "n32",
+          "n33",
+          "n34",
+          "n35",
+          "n36",
+          "n37",
+          "n38",
+          "n39",
+          "n40",
+          "n41",
+          "n42",
+          "n43",
+          "n44",
+          "n45",
+          "n46",
+          "n47",
+          "n48",
+          "n49",
+          "n50",
+          "n51",
+          "n52",
+          "n53",
+          "n54",
+          "n55",
+          "n56",
+          "n57",
+          "n58",
+          "n59",
+          "n60",
+          "n61",
+          "n62",
+          "n63",
+          "n64",
+          "n65",
+          "n66",
+          "n67",
+          "n68",
+          "n69",
+          "n70",
+          "n71",
+          "n72",
+          "n73",
+          "n74",
+          "n75",
+          "n76",
+          "n77",
+          "n78",
+          "n79",
+          "n80",
+          "n81",
+          "n82",
+          "n83",
+          "n84",
+          "n85",
+          "n86",
+          "n87",
+          "n88",
+          "n89",
+          "n90",
+          "n91",
+          "n92",
+          "n93",
+          "n94",
+          "n95",
+          "n96",
+          "n97",
+          "n98",
+          "n99",
+          "n100"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.n99": "last"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "optional-prototype",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Optional prototype makes all leaves optional regardless of minimum.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 5,
+        "prototypeOptions": {
+          "optional": true
+        }
+      },
+      "promptInputs": {
+        "values.b": "present"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "match-wildcard",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Real wildcard MatchType constructor and metadata, distinct from AnyType.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 0,
+        "prototype": "MatchType"
+      },
+      "promptInputs": {
+        "values.z": "wild"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "ordinary-inputs-around-group",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Ordinary input order and dynamic root insertion after mapping are explicit observations.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 0,
+        "ordinaryInputs": [
+          "head",
+          "@group",
+          "tail"
+        ]
+      },
+      "promptInputs": {
+        "tail": "T",
+        "values.b": "B",
+        "head": "H",
+        "values.z": "Z"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "two-groups",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Two real Names groups with a scalar input; capture root/member orders separately.",
+      "template": {
+        "names": [
+          "z",
+          "a",
+          "b"
+        ],
+        "min": 0,
+        "ordinaryInputs": [
+          "head",
+          "@group",
+          "@other"
+        ],
+        "otherGroup": {
+          "names": [
+            "u",
+            "v"
+          ],
+          "min": 0
+        }
+      },
+      "promptInputs": {
+        "other.v": "V",
+        "values.a": "A",
+        "head": "H",
+        "other.u": "U",
+        "values.z": "Z"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "omitted-optional",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Omitted optional name uses empty grouped dictionary.",
+      "template": {
+        "names": [
+          "a"
+        ],
+        "min": 0
+      },
+      "promptInputs": {},
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "explicit-null",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Recognized explicit null remains a present key distinct from omission.",
+      "template": {
+        "names": [
+          "a"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.a": null
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "empty-list-before-blocker",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Ordinary slicing of an empty execution list fails before blocker search.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          []
+        ],
+        "pb": [
+          [
+            {
+              "$blocker": "later"
+            }
+          ]
+        ]
+      },
+      "permittedSourceErrors": [
+        {
+          "stage": "mapper",
+          "type": "IndexError"
+        }
+      ]
+    },
+    {
+      "id": "empty-input-is-list",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "InputIsList accepts an empty input list without scalar slicing.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ],
+        "min": 0,
+        "isInputList": true
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          []
+        ],
+        "pb": [
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "scalar-blocker-prompt-order",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "First blocker follows flat prompt order; the surviving row reaches real binder.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ]
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          [
+            {
+              "$blocker": "second"
+            },
+            10
+          ]
+        ],
+        "pb": [
+          [
+            {
+              "$blocker": "first"
+            },
+            20
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "scalar-blocker-silent-first",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Silent first blocker suppresses a later message before grouping.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ]
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          [
+            {
+              "$blocker": "second"
+            }
+          ]
+        ],
+        "pb": [
+          [
+            {
+              "$blocker": null
+            }
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "scalar-blocker-empty-message",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Empty message differs from a silent blocker.",
+      "template": {
+        "names": [
+          "a"
+        ]
+      },
+      "promptInputs": {
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          [
+            {
+              "$blocker": ""
+            }
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "list-blocker-before-grouping",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "InputIsList still checks direct markers before calling binder/body.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ],
+        "isInputList": true
+      },
+      "promptInputs": {
+        "values.b": [
+          "pb",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          [
+            1,
+            2
+          ]
+        ],
+        "pb": [
+          [
+            {
+              "$blocker": "list"
+            }
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "nested-marker-not-recursive",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Nested marker inside one item does not block the ordinary row.",
+      "template": {
+        "names": [
+          "a"
+        ]
+      },
+      "promptInputs": {
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pa": [
+          [
+            [
+              {
+                "$blocker": "nested"
+              }
+            ]
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "optional-group-source",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Outer group optionality is not supported by the bounded port; observe source independently.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ],
+        "groupOptions": {
+          "optional": true
+        }
+      },
+      "promptInputs": {
+        "values.a": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "duplicate-across-minimum",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Source names retain duplicates; dictionary overwrite can cross required/optional partitions. No port deduplication.",
+      "template": {
+        "names": [
+          "a",
+          "a",
+          "b"
+        ],
+        "min": 1
+      },
+      "promptInputs": {
+        "values.b": 2,
+        "values.a": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "dotted-names",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Source path splitting can create nested groups; bounded port rejects dots.",
+      "template": {
+        "names": [
+          "a.b",
+          "a.c"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.a.c": 2,
+        "values.a.b": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "empty-name",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Observe empty member path without treating it as a supported simple name.",
+      "template": {
+        "names": [
+          ""
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "widget-prototype",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Real widget prototype copy receives force_input; widget semantics remain outside port.",
+      "template": {
+        "names": [
+          "a"
+        ],
+        "prototype": "Int",
+        "prototypeOptions": {
+          "default": 4,
+          "min": 0,
+          "max": 9
+        }
+      },
+      "promptInputs": {
+        "values.a": 3
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "nested-dynamic-prototype",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-template",
+      "rationale": "Real source constructor rejects a DynamicInput prototype.",
+      "template": {
+        "names": [
+          "a"
+        ],
+        "prototype": "Autogrow"
+      },
+      "promptInputs": {},
+      "cache": {},
+      "permittedSourceErrors": [
+        {
+          "stage": "construct",
+          "type": "AssertionError"
+        }
+      ]
+    },
+    {
+      "id": "negative-minimum",
+      "kind": "fixture-names",
+      "portClassification": "constructor-error",
+      "rationale": "Real source assertion min>=0.",
+      "template": {
+        "names": [
+          "a"
+        ],
+        "min": -1
+      },
+      "promptInputs": {},
+      "cache": {},
+      "permittedSourceErrors": [
+        {
+          "stage": "construct",
+          "type": "AssertionError"
+        }
+      ]
+    },
+    {
+      "id": "string-format-mapped",
+      "kind": "string-format",
+      "portClassification": "source-only",
+      "rationale": "Real StringFormat metadata and mapped scalar arguments; actual formatter outputs source-only.",
+      "promptInputs": {
+        "f_string": "{z}|{a}",
+        "values.z": [
+          "pz",
+          0
+        ],
+        "values.a": [
+          "pa",
+          0
+        ]
+      },
+      "cache": {
+        "pz": [
+          [
+            "Z1",
+            "Z2"
+          ]
+        ],
+        "pa": [
+          [
+            "A"
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "string-format-empty",
+      "kind": "string-format",
+      "portClassification": "source-only",
+      "rationale": "Real StringFormat receives an empty values group alongside f_string; no formatter port claim.",
+      "promptInputs": {
+        "f_string": "no fields"
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "caller-names-copy",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "Mutate the caller list after the true constructor; effective source names remain the sliced copy.",
+      "template": {
+        "names": [
+          "a",
+          "b"
+        ],
+        "min": 0,
+        "mutateCallerNames": [
+          "changed",
+          "discarded",
+          "new"
+        ]
+      },
+      "promptInputs": {
+        "values.b": 2,
+        "values.a": 1
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "truncate-ambiguous-tail",
+      "kind": "fixture-names",
+      "portClassification": "comparable",
+      "rationale": "The ambiguous101st name is discarded before the bounded port validates effective names; only first100 inputs are admitted.",
+      "template": {
+        "names": [
+          "n0",
+          "n1",
+          "n2",
+          "n3",
+          "n4",
+          "n5",
+          "n6",
+          "n7",
+          "n8",
+          "n9",
+          "n10",
+          "n11",
+          "n12",
+          "n13",
+          "n14",
+          "n15",
+          "n16",
+          "n17",
+          "n18",
+          "n19",
+          "n20",
+          "n21",
+          "n22",
+          "n23",
+          "n24",
+          "n25",
+          "n26",
+          "n27",
+          "n28",
+          "n29",
+          "n30",
+          "n31",
+          "n32",
+          "n33",
+          "n34",
+          "n35",
+          "n36",
+          "n37",
+          "n38",
+          "n39",
+          "n40",
+          "n41",
+          "n42",
+          "n43",
+          "n44",
+          "n45",
+          "n46",
+          "n47",
+          "n48",
+          "n49",
+          "n50",
+          "n51",
+          "n52",
+          "n53",
+          "n54",
+          "n55",
+          "n56",
+          "n57",
+          "n58",
+          "n59",
+          "n60",
+          "n61",
+          "n62",
+          "n63",
+          "n64",
+          "n65",
+          "n66",
+          "n67",
+          "n68",
+          "n69",
+          "n70",
+          "n71",
+          "n72",
+          "n73",
+          "n74",
+          "n75",
+          "n76",
+          "n77",
+          "n78",
+          "n79",
+          "n80",
+          "n81",
+          "n82",
+          "n83",
+          "n84",
+          "n85",
+          "n86",
+          "n87",
+          "n88",
+          "n89",
+          "n90",
+          "n91",
+          "n92",
+          "n93",
+          "n94",
+          "n95",
+          "n96",
+          "n97",
+          "n98",
+          "n99",
+          "bad.name"
+        ],
+        "min": 0
+      },
+      "promptInputs": {
+        "values.n99": 99
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "unknown-literal",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-input",
+      "rationale": "Actual get_input_data may ignore unknown literals; bounded port refuses the extra name.",
+      "template": {
+        "names": [
+          "a"
+        ]
+      },
+      "promptInputs": {
+        "values.a": 1,
+        "values.other": 99
+      },
+      "cache": {},
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "unknown-link",
+      "kind": "fixture-names",
+      "portClassification": "unsupported-input",
+      "rationale": "Unknown link survives acquisition; permissive fixture echo records actual root kwargs, not a typed node acceptance claim.",
+      "template": {
+        "names": [
+          "a"
+        ]
+      },
+      "promptInputs": {
+        "values.a": 1,
+        "values.other": [
+          "p",
+          0
+        ]
+      },
+      "cache": {
+        "p": [
+          [
+            99
+          ]
+        ]
+      },
+      "permittedSourceErrors": []
+    }
+  ],
+  "comparison": "Exact encoded values and explicit order lists for metadata/finalization/flat/nested/body arguments. Fixture echo outputs are transport observations, not a backend node algorithm. No tolerance; source-only StringFormat outputs are not port acceptance expectations.",
+  "scope": "Bounded Names first100, unique simple effective names, required non-lazy groups, AnyType or wildcard MatchType. Empty names sequence and min above count supported. Unsupported templates/inputs retain source behavior without becoming successful port requirements. No formatter port, no HTTP/global required-input validation, no frontend or native qualification.",
+  "fixtureEncoding": "Only a sole $blocker in cached fixture data decodes to the actual source ExecutionBlocker. Prompt dictionaries remain ordinary data. Return encoding preserves scalars/containers and explicitly records dictionary order.",
+  "fixtureBody": "FixtureNames is a laboratory subclass of the real ComfyNode, with real Schema/TemplateNames/NodeOutput. execute(**kwargs) returns NodeOutput(kwargs) unchanged as an argument carrier. The mapper/binder/metadata are actual source; this echo body is not a source node implementation."
+}
