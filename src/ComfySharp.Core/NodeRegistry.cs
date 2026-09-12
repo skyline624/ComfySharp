@@ -21,7 +21,8 @@ public sealed class NodeRegistry
             var optionalOrder = new JsonArray();
             foreach (var input in s.Inputs)
             {
-                var options = input.Options?.DeepClone().AsObject() ?? new JsonObject();
+                var options = input.Autogrow is not null ? NodeInputExpansion.TemplateOptions(input)
+                    : input.Options?.DeepClone().AsObject() ?? new JsonObject();
                 JsonNode type = JsonValue.Create(input.Type)!;
                 if (options.Remove("options", out var choices) && choices is not null) type = choices;
                 if (input.Lazy) options["lazy"] = true;
@@ -43,6 +44,26 @@ public sealed class NodeRegistry
             if (s.Description is not null) info["description"] = s.Description;
             if (s.SearchAliases is not null) info["search_aliases"] = new JsonArray(s.SearchAliases.Select(a => (JsonNode?)JsonValue.Create(a)).ToArray());
             if (s.PythonModule is not null) info["python_module"] = s.PythonModule;
+            if (s.V3ObjectInfo)
+            {
+                // Explicit V3 projection for newly ported contracts. Existing node documents keep their prior shape.
+                if (optional.Count == 0)
+                {
+                    info["input"]!.AsObject().Remove("optional");
+                    info["input_order"]!.AsObject().Remove("optional");
+                }
+                info["description"] = s.Description ?? "";
+                info["output_tooltips"] = new JsonArray(s.Outputs.Select(_ => (JsonNode?)null).ToArray());
+                info["has_intermediate_output"] = false;
+                info["deprecated"] = false;
+                info["dev_only"] = false;
+                info["api_node"] = false;
+                info["price_badge"] = null;
+                info["essentials_category"] = null;
+                info["search_aliases"] = s.SearchAliases is { Count: > 0 }
+                    ? new JsonArray(s.SearchAliases.Select(a => (JsonNode?)JsonValue.Create(a)).ToArray()) : null;
+                info["python_module"] = s.PythonModule ?? "nodes";
+            }
         }
         return result;
     }

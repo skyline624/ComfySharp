@@ -1,0 +1,757 @@
+{
+  "schema": 1,
+  "evidenceKind": "local-file-scoped-behavior-validation",
+  "observationDate": "2026-09-12",
+  "scope": "Managed TemplatePrefix expansion and CreateList runtime, HTTP Host, workflow compiler and fixed-port Desktop integration.",
+  "testedCommit": null,
+  "fileIdentityRule": "Exact working-tree byte hashes and Git-clean canonical LF hashes; uncommitted changes are not attributed to the base commit. git hash-object --path verifies canonical blob identities without writing objects.",
+  "baseCommitForContextOnly": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+  "platform": {
+    "target": "win-x64",
+    "scope": "One local Windows campaign; no Linux or macOS result is asserted."
+  },
+  "build": {
+    "status": "passed",
+    "warnings": 0,
+    "errors": 0,
+    "evidenceOrigin": "Build outcome reported by the coordinating agent; the auditor parsed TRX and hashed files without running .NET."
+  },
+  "auditMethod": "Python standard-library XML/JSON/hash inspection only. Six TRX counters reconciled with all UnitTestResult outcomes and per-project execution identities; 16 scoped file hashes checked, including both frozen implementation sets.",
+  "qualification": {
+    "implementation": "partial",
+    "sourceParityEstablished": false,
+    "releaseReady": false,
+    "familyCompatibilityClaim": false,
+    "oracleCompared": false,
+    "sourceOracleIncludedInCampaign": false,
+    "campaignPrecedesSourceCollection": true
+  },
+  "totals": {
+    "uniqueCases": 1499,
+    "passed": 1499,
+    "failed": 0,
+    "notExecuted": 0,
+    "otherOutcomes": 0,
+    "newCases": 55,
+    "newCasesByProject": {
+      "Core": 34,
+      "Workflow": 14,
+      "Desktop": 3,
+      "Host": 4
+    },
+    "counting": "Six complete project suites once each. The historical first campaign is not added to these totals."
+  },
+  "projects": [
+    {
+      "project": "Core",
+      "trx": {
+        "bytes": 252948,
+        "sha256": "1228e9ad1d7298f8534a50fe58a0c4fded871c3f86845896b5aa9ea1198b2f78"
+      },
+      "counters": {
+        "total": 170,
+        "executed": 170,
+        "passed": 170,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 170
+      },
+      "newTestClasses": {
+        "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+        "ComfySharp.Core.Tests.CreateListTests": 15
+      },
+      "failedTests": []
+    },
+    {
+      "project": "Desktop",
+      "trx": {
+        "bytes": 53081,
+        "sha256": "e5848d6037d8c213977edb572d9ea3ab8d432f80924e968cb6b5373f0d046913"
+      },
+      "counters": {
+        "total": 35,
+        "executed": 35,
+        "passed": 35,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 35
+      },
+      "newTestClasses": {
+        "ComfySharp.Desktop.Tests.CreateListEditorTests": 3
+      },
+      "failedTests": []
+    },
+    {
+      "project": "Host",
+      "trx": {
+        "bytes": 314335,
+        "sha256": "4e3973be0178dd029bbd4bfd2067f8b85348dcf2dda3a7530c878fda5922ed80"
+      },
+      "counters": {
+        "total": 146,
+        "executed": 146,
+        "passed": 146,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 146
+      },
+      "newTestClasses": {
+        "ComfySharp.Host.Tests.CreateListHostTests": 4
+      },
+      "failedTests": []
+    },
+    {
+      "project": "Inference",
+      "trx": {
+        "bytes": 925922,
+        "sha256": "37864df3300b75d9345876d765cb75d59ba6310228a9839da72aa07a93116721"
+      },
+      "counters": {
+        "total": 577,
+        "executed": 577,
+        "passed": 577,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 577
+      },
+      "newTestClasses": {},
+      "failedTests": []
+    },
+    {
+      "project": "Tokenization",
+      "trx": {
+        "bytes": 814012,
+        "sha256": "d9226c304d1d923e852b78112dd7f40d3870ec78ce014afe57cb3fef637259e1"
+      },
+      "counters": {
+        "total": 540,
+        "executed": 540,
+        "passed": 540,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 540
+      },
+      "newTestClasses": {},
+      "failedTests": []
+    },
+    {
+      "project": "Workflow",
+      "trx": {
+        "bytes": 46649,
+        "sha256": "12679e71412532f69adb584739e95a30eaeffa2324f2966bd20667e8196e57b1"
+      },
+      "counters": {
+        "total": 31,
+        "executed": 31,
+        "passed": 31,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "resultOutcomes": {
+        "Passed": 31
+      },
+      "newTestClasses": {
+        "ComfySharp.Workflow.Tests.CreateListWorkflowTests": 14
+      },
+      "failedTests": []
+    }
+  ],
+  "initialCampaign": {
+    "total": 1499,
+    "passed": 1494,
+    "failed": 5,
+    "notExecuted": 0,
+    "projects": [
+      {
+        "project": "Core",
+        "trx": {
+          "bytes": 254592,
+          "sha256": "c149d856186f977100919f93cc5160f873bfdbfb5356a0d87c0f63aecb58932d"
+        },
+        "counters": {
+          "total": 170,
+          "executed": 170,
+          "passed": 169,
+          "failed": 1,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Failed": 1,
+          "Passed": 169
+        },
+        "newTestClasses": {
+          "ComfySharp.Core.Tests.AutogrowInputTests": 19,
+          "ComfySharp.Core.Tests.CreateListTests": 15
+        },
+        "failedTests": [
+          "ComfySharp.Core.Tests.NodeParityTests.Catalog_has_upstream_ids_ports_combo_and_lazy_metadata"
+        ]
+      },
+      {
+        "project": "Desktop",
+        "trx": {
+          "bytes": 53081,
+          "sha256": "9bcf908c6b421b693944729faf052465412954e7eb23a61a0333edfc084cf759"
+        },
+        "counters": {
+          "total": 35,
+          "executed": 35,
+          "passed": 35,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Passed": 35
+        },
+        "newTestClasses": {
+          "ComfySharp.Desktop.Tests.CreateListEditorTests": 3
+        },
+        "failedTests": []
+      },
+      {
+        "project": "Host",
+        "trx": {
+          "bytes": 318725,
+          "sha256": "91aee876b75e12223aac03f31f599ea4fb5ef69cce3418383b032e8798f72ec9"
+        },
+        "counters": {
+          "total": 146,
+          "executed": 146,
+          "passed": 143,
+          "failed": 3,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Failed": 3,
+          "Passed": 143
+        },
+        "newTestClasses": {
+          "ComfySharp.Host.Tests.CreateListHostTests": 4
+        },
+        "failedTests": [
+          "ComfySharp.Host.Tests.CreateListHostTests.ExtraDynamicNamesProduceStructured400BeforeEnqueue(name: \"inputs.input01\")",
+          "ComfySharp.Host.Tests.CreateListHostTests.ExtraDynamicNamesProduceStructured400BeforeEnqueue(name: \"inputs\")",
+          "ComfySharp.Host.Tests.CreateListHostTests.ExtraDynamicNamesProduceStructured400BeforeEnqueue(name: \"inputs.input10\")"
+        ]
+      },
+      {
+        "project": "Inference",
+        "trx": {
+          "bytes": 927629,
+          "sha256": "58ae319a87f84bb25ab26a59e58b1baf6e66245efa40798dc67d6f27288c5e49"
+        },
+        "counters": {
+          "total": 577,
+          "executed": 577,
+          "passed": 576,
+          "failed": 1,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Failed": 1,
+          "Passed": 576
+        },
+        "newTestClasses": {},
+        "failedTests": [
+          "ComfySharp.Inference.Tests.TensorNodeTests.RegisteredSchemasPreserveOrderedSlotsOptionsAndOutputClassification"
+        ]
+      },
+      {
+        "project": "Tokenization",
+        "trx": {
+          "bytes": 814012,
+          "sha256": "2df855b3aa277648fefaa2d2ca65dab88d79413b8ff5c221224dae19ebb20b73"
+        },
+        "counters": {
+          "total": 540,
+          "executed": 540,
+          "passed": 540,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Passed": 540
+        },
+        "newTestClasses": {},
+        "failedTests": []
+      },
+      {
+        "project": "Workflow",
+        "trx": {
+          "bytes": 46649,
+          "sha256": "9fb4614bc7bf9911601d91ac6e53dba6a78ab87748e43ca73c72981ceff761ad"
+        },
+        "counters": {
+          "total": 31,
+          "executed": 31,
+          "passed": 31,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "resultOutcomes": {
+          "Passed": 31
+        },
+        "newTestClasses": {
+          "ComfySharp.Workflow.Tests.CreateListWorkflowTests": 14
+        },
+        "failedTests": []
+      }
+    ],
+    "corrections": [
+      {
+        "cases": 3,
+        "test": "CreateListHostTests.ExtraDynamicNamesProduceStructured400BeforeEnqueue",
+        "observed": "prompt_no_outputs reached before the intended dynamic-name validation.",
+        "correction": "Connect CreateList to a real PreviewAny output and select preview; retain HTTP 400, unsupported_dynamic_input and empty-queue assertions."
+      },
+      {
+        "cases": 1,
+        "test": "NodeParityTests.Catalog_has_upstream_ids_ports_combo_and_lazy_metadata",
+        "observed": "Expected 13 registrations, actual 14.",
+        "correction": "Update only the expected count for the added CreateList node."
+      },
+      {
+        "cases": 1,
+        "test": "TensorNodeTests.RegisteredSchemasPreserveOrderedSlotsOptionsAndOutputClassification",
+        "observed": "Expected 25 registrations, actual 26.",
+        "correction": "Update only the expected count for the added CreateList node."
+      }
+    ],
+    "scope": "Test corrections only between campaigns; documentation clarified direct Engine targets versus HTTP Host OutputNode targets. No production fix or output fixture was derived from these failures."
+  },
+  "files": [
+    {
+      "path": "docs/CREATE_LIST.md",
+      "bytes": 6538,
+      "sha256": "217a7b163bc84e01e21edddb7b4f54a00aa3aa81a701474d34bae1ba5a40fbe9",
+      "gitCanonicalLfSha256": "217a7b163bc84e01e21edddb7b4f54a00aa3aa81a701474d34bae1ba5a40fbe9",
+      "gitCanonicalBlobOid": "185842ad3cd74dc59bee2db6e848a77e2e843bb5",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Contracts/EngineContracts.cs",
+      "bytes": 7714,
+      "sha256": "1e7aab8be4fdbc228b85355caad2d00ba1bf2e49c96186631ef25e656efbc114",
+      "gitCanonicalLfSha256": "1e7aab8be4fdbc228b85355caad2d00ba1bf2e49c96186631ef25e656efbc114",
+      "gitCanonicalBlobOid": "f83dc06ce5e5160e52431a3cb1535ea629df8889",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Core/EngineService.cs",
+      "bytes": 23354,
+      "sha256": "29ee66a0cb90b7acbe34b339eea869cc09dcc4a16444bf32063a763be3e20bdb",
+      "gitCanonicalLfSha256": "29ee66a0cb90b7acbe34b339eea869cc09dcc4a16444bf32063a763be3e20bdb",
+      "gitCanonicalBlobOid": "3811c9e32bb9c77fc23f76519369f7d61f7114ba",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Core/NodeInputExpansion.cs",
+      "bytes": 6580,
+      "sha256": "f90c84e3ca06739e005ba9058ad8a84540a36cd7072bcd68e692ac2fbdb8b44e",
+      "gitCanonicalLfSha256": "f90c84e3ca06739e005ba9058ad8a84540a36cd7072bcd68e692ac2fbdb8b44e",
+      "gitCanonicalBlobOid": "7b83910ad8295cb88541e667d0f395e3649d1eb6",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Core/NodeRegistry.cs",
+      "bytes": 4059,
+      "sha256": "78e27953f40ecebc3da429195d64b054d113d972c078bf393f86d351d668518d",
+      "gitCanonicalLfSha256": "78e27953f40ecebc3da429195d64b054d113d972c078bf393f86d351d668518d",
+      "gitCanonicalBlobOid": "a5b68d56ca8c94eb878f19fddf3e649202be2e7c",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Desktop/DocumentEditor.axaml.cs",
+      "bytes": 12282,
+      "sha256": "5d62e01e07d58ddcecca63e5aca61e7019ee5e83cac06a6438657d400f33c031",
+      "gitCanonicalLfSha256": "5d62e01e07d58ddcecca63e5aca61e7019ee5e83cac06a6438657d400f33c031",
+      "gitCanonicalBlobOid": "2ac8a9707e6ca22f471eb94cd9cec3f449b06c8c",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Nodes/BuiltInNodes.cs",
+      "bytes": 7770,
+      "sha256": "36018b6e7f14052bbf27bdc9d7e2cd6a26e0d7349f38332cae4e904678861368",
+      "gitCanonicalLfSha256": "36018b6e7f14052bbf27bdc9d7e2cd6a26e0d7349f38332cae4e904678861368",
+      "gitCanonicalBlobOid": "21d222847e66b27ed2a0312dc725153ab672e934",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Nodes/CreateListNode.cs",
+      "bytes": 2132,
+      "sha256": "14fb453266148542ec8e445cdb24b38eec69dcbfae616655aa632e13b8804e7e",
+      "gitCanonicalLfSha256": "14fb453266148542ec8e445cdb24b38eec69dcbfae616655aa632e13b8804e7e",
+      "gitCanonicalBlobOid": "62a2b3b1b34d563f4f2665fdd13d653e8c21e6e4",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "src/ComfySharp.Workflow/PromptCompiler.cs",
+      "bytes": 11805,
+      "sha256": "45d2d8b66ff47b16241291e097e4230f082ddb65433fe18c6bf9a5b410e89967",
+      "gitCanonicalLfSha256": "45d2d8b66ff47b16241291e097e4230f082ddb65433fe18c6bf9a5b410e89967",
+      "gitCanonicalBlobOid": "d270ddd8fea5913e32fb76fe19335baaeedf9473",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Core.Tests/AutogrowInputTests.cs",
+      "bytes": 8554,
+      "sha256": "67d00c351e16a0e2b43b3e1935903509e7d422a579978f91814bf8f16b8795fa",
+      "gitCanonicalLfSha256": "67d00c351e16a0e2b43b3e1935903509e7d422a579978f91814bf8f16b8795fa",
+      "gitCanonicalBlobOid": "bb86f5878e15b811c0e4c83f4f143c31b7abfe8c",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Core.Tests/CreateListTests.cs",
+      "bytes": 10717,
+      "sha256": "d8a4cfdedbe3d27602c100092cc4293d43ff937ac4315d754da86c8dc4e7eb06",
+      "gitCanonicalLfSha256": "d8a4cfdedbe3d27602c100092cc4293d43ff937ac4315d754da86c8dc4e7eb06",
+      "gitCanonicalBlobOid": "8fb82238c8f16840eec060148f54254ea6ef9eb4",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Core.Tests/NodeParityTests.cs",
+      "bytes": 3829,
+      "sha256": "8d6df604bc21a77819e0ddd151ed06eaeba126815029375532792d4fd5a3de12",
+      "gitCanonicalLfSha256": "8d6df604bc21a77819e0ddd151ed06eaeba126815029375532792d4fd5a3de12",
+      "gitCanonicalBlobOid": "11642a9947387f6a404fb1854d666e08a09f129e",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Desktop.Tests/CreateListEditorTests.cs",
+      "bytes": 7976,
+      "sha256": "656812c11153b7343550bb9e62983ef77243aba6b01dc0ba4d1bb8ccd8226043",
+      "gitCanonicalLfSha256": "656812c11153b7343550bb9e62983ef77243aba6b01dc0ba4d1bb8ccd8226043",
+      "gitCanonicalBlobOid": "b00cf070238b41eb0f596feaf8b56805440d6b74",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/CreateListHostTests.cs",
+      "bytes": 3421,
+      "sha256": "e2fabef6193c72ab66f689fc878bb56e13f831d847353a972c4eb88ae699bb5e",
+      "gitCanonicalLfSha256": "e2fabef6193c72ab66f689fc878bb56e13f831d847353a972c4eb88ae699bb5e",
+      "gitCanonicalBlobOid": "cf1285a1c510cc5f5f5a28f067c9b3e84dcd01b1",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs",
+      "bytes": 12251,
+      "sha256": "62fd8109cfe9b819cc9959e063e9d42feaec9eaa7831b128da4b7dfb090ec249",
+      "gitCanonicalLfSha256": "62fd8109cfe9b819cc9959e063e9d42feaec9eaa7831b128da4b7dfb090ec249",
+      "gitCanonicalBlobOid": "e85cb5e238ea9dc220df2190bc95f269b62573ed",
+      "rawEqualsCanonicalLf": true
+    },
+    {
+      "path": "tests/ComfySharp.Workflow.Tests/CreateListWorkflowTests.cs",
+      "bytes": 6747,
+      "sha256": "a3385a93eed644580e4013b9d459546c8a2ecb5f5621fb2e1125130414f14dc9",
+      "gitCanonicalLfSha256": "a3385a93eed644580e4013b9d459546c8a2ecb5f5621fb2e1125130414f14dc9",
+      "gitCanonicalBlobOid": "823f1d51e2fb5fe408168e50b0f5fe4f3a211282",
+      "rawEqualsCanonicalLf": true
+    }
+  ],
+  "objectInfo": {
+    "captures": [
+      {
+        "role": "baseline",
+        "document": {
+          "bytes": 13537,
+          "sha256": "ee6e4d36839e1d524bc260dd7e678cf1f66d6b765996189907858fb29fb36027"
+        },
+        "entries": 25,
+        "assemblyInventory": {
+          "bytes": 1067,
+          "sha256": "41249528363065a84efb1ccfc0dc304d11400d097e09a5acebe7a7a20c0eba67"
+        },
+        "assemblies": [
+          {
+            "name": "ComfySharp.Contracts.dll",
+            "sha256": "41ed254180184570ca1e4e77c12864f02189783d1462350a237a271b38df47ea"
+          },
+          {
+            "name": "ComfySharp.Core.dll",
+            "sha256": "d644b777eb81665e79c9c3d412093732ca19075ace2ddb6d59a38ea9835901c9"
+          },
+          {
+            "name": "ComfySharp.Host.dll",
+            "sha256": "877b9f29e7d95a682759b5423efbbe582f900f01ed3e54070ed9907786de97ee"
+          },
+          {
+            "name": "ComfySharp.Inference.dll",
+            "sha256": "0bef50f5f3919d8a9468ad20c44ce3fce1f61b08884c1ed6c6965b4f2b0a1b25"
+          },
+          {
+            "name": "ComfySharp.Nodes.dll",
+            "sha256": "328c9de1a372ce9bdb0d0b53a9a337109b62a9af347ed3aef5d6068f1c4bde92"
+          },
+          {
+            "name": "ComfySharp.Nodes.Tensor.dll",
+            "sha256": "eaa4acd8e9ce6df9dffdc76f64c783680329a3ba7268aaadccfd733943b92128"
+          },
+          {
+            "name": "ComfySharp.Storage.dll",
+            "sha256": "934c2f3b6b7b73fb57f81edd67b8959010a88a999462e3c850767dc745b2d7ae"
+          },
+          {
+            "name": "ComfySharp.Tokenization.dll",
+            "sha256": "c4dc2db11c7a6f4bf6bd156a1f67a72d0db50c07bc3eff8593e1be0bd49aff8d"
+          }
+        ]
+      },
+      {
+        "role": "candidate",
+        "document": {
+          "bytes": 14326,
+          "sha256": "5099078927f702237aaf72617d2f58859680522d30f051d35755b170672e0ec1"
+        },
+        "entries": 26,
+        "assemblyInventory": {
+          "bytes": 1067,
+          "sha256": "44da40dbf655dbade337970628503f432c71089de1876227f3703537fc9af07d"
+        },
+        "assemblies": [
+          {
+            "sha256": "49ae8cdad7a8c5ac7d0b4bb1c05ce94d2d02f8d69574b769b06aeaaf134b6bcd",
+            "name": "ComfySharp.Contracts.dll"
+          },
+          {
+            "sha256": "bd803cfebdf80c1fd0052d28d577650595f9ed002c460a6efc018676f4ffc411",
+            "name": "ComfySharp.Core.dll"
+          },
+          {
+            "sha256": "a6ee6f48e666cd692a2b69ac917fa6ca2c52ffd7c6ffb90fb4828b7e9178bd27",
+            "name": "ComfySharp.Host.dll"
+          },
+          {
+            "sha256": "df0928614af996671e8f9ff85e20c90a1f9e7a1818025da270ce5f229bf5d9b6",
+            "name": "ComfySharp.Inference.dll"
+          },
+          {
+            "sha256": "609ce27b98b016b3913526966caa21f8a241b87a0be913b0318974e39bd03b97",
+            "name": "ComfySharp.Nodes.dll"
+          },
+          {
+            "sha256": "bde4e8a728eea8fb95f749e4d85d156525099c6c34f75e30f28538989b8c8bf7",
+            "name": "ComfySharp.Nodes.Tensor.dll"
+          },
+          {
+            "sha256": "a8392cdca55a3c38d1788a9b530951486cd6b26c86a121a1cb7cb3eca25bc92a",
+            "name": "ComfySharp.Storage.dll"
+          },
+          {
+            "sha256": "ebbdb041c16a82856ddb9efdb2d238ebbca76f6ecb13c03163ca1f3dc146c5df",
+            "name": "ComfySharp.Tokenization.dll"
+          }
+        ]
+      }
+    ],
+    "oldEntriesIdentical": 25,
+    "recursiveJsonValueAndPropertyOrderEqual": true,
+    "oldTopLevelRelativeOrderEqual": true,
+    "added": [
+      "CreateList"
+    ],
+    "removed": [],
+    "limitation": "Two actual local Host captures, not an executed upstream Python object_info oracle."
+  },
+  "catalogue": {
+    "evidenceOrigin": "Coordinating agent observed successful Catalog CLI --node-evidence; not rerun by this audit.",
+    "rows": 1171,
+    "localNodeDeclarations": 664,
+    "registered": 26,
+    "errors": 0,
+    "catalogueComplete": false,
+    "releaseReady": false
+  },
+  "upstream": {
+    "commit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "url": "https://github.com/comfyanonymous/ComfyUI/tree/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "blobs": [
+      {
+        "path": "comfy_extras/nodes_toolkit.py",
+        "bytes": 1422,
+        "sha256": "d27a538173a7b75a120aad35047b5b1b36108a927241baa268a3e5938d97edbb"
+      },
+      {
+        "path": "comfy_api/latest/_io.py",
+        "bytes": 97422,
+        "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080"
+      },
+      {
+        "path": "comfy_api/internal/__init__.py",
+        "bytes": 4913,
+        "sha256": "50786f7e2ebc910ed9becddf066e92d7924b7f6080189651067bbcd839e8a410"
+      },
+      {
+        "path": "execution.py",
+        "bytes": 61543,
+        "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28"
+      },
+      {
+        "path": "nodes.py",
+        "bytes": 108581,
+        "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7"
+      }
+    ],
+    "execution": "This local campaign predates the independent source collection and includes no comparison against source outputs. Its verdict does not establish source parity."
+  },
+  "limits": [
+    "Only top-level TemplatePrefix with AnyType or wildcard MatchType prototypes; widgets, nested dynamic inputs, unqualified semantic options and dynamic-plus-lazy schemas are rejected.",
+    "CreateList requires input0 and permits canonical inputs.input0 through inputs.input9. Unknown dynamic names are rejected early; no source parity for extras is claimed.",
+    "Flat prompt blockers are scanned before grouping into a Map in template order. CreateList concatenates one execution-list level and retains runtime values.",
+    "New Desktop nodes expose ten fixed wildcard ports. Imported port order is preserved; no automatic growth or shared MatchType propagation is claimed.",
+    "Literal JSON arrays use the local __value__ envelope; raw HTTP prompt representation parity is not established. This local full-suite pass does not replace cross-platform CI or resolve earlier CPU numerical qualification limits.",
+    "Raw TRX remain private because they contain host/local-path metadata; public evidence includes hashes and sanitized counters only."
+  ],
+  "postCampaignDocumentation": {
+    "path": "docs/CREATE_LIST.md",
+    "change": "Clarify that the 1499-case local campaign predates the independent source collection and contains no source comparison. No global claim that source remains uncollected.",
+    "previousIdentity": {
+      "bytes": 6568,
+      "sha256": "eae0d267915f099ccac78589f02eb9fb997847522afedf0f82d9218c69ce2015"
+    },
+    "productAndTestFilesUnchanged": 15,
+    "currentIdentityLocation": "files entry for docs/CREATE_LIST.md"
+  }
+}

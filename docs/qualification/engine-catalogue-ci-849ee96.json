@@ -1,0 +1,2195 @@
+{
+  "schema": 1,
+  "run": "34660633065",
+  "commit": "849ee9672cfbde5ce9d2f81cb116a4d142a58732",
+  "url": "https://github.com/skyline624/ComfySharp/actions/runs/34660633065",
+  "workflowConclusion": "failure",
+  "scope": "ExecutionBlocker and static catalogue resolution, with exact CI outcomes of the existing inference gates.",
+  "method": "Read-only metadata/log/TRX audit; no .NET/native/source execution, no tensor traces downloaded or recalculated.",
+  "counting": "Each of the five application projects runs once; aggregate Inference excludes the three stock CLIP tests. Add stock once for the complete six-project suite. First-use/checkpoint/pipeline runs are separate observations, never added again to the complete suite.",
+  "artifactInventory": {
+    "available": 25,
+    "downloaded": 14,
+    "selection": "tests-* only",
+    "trxFiles": 52,
+    "metadataSha256": "42820c0690f8960923ab44666b007f9ee46fd6df4b6cdd94b75cba2579d6c97d",
+    "inventorySha256": "cce576f6b15adc1b34447094e6f6cec66b322fdfe2cc0df66b13d5e93a1cc450",
+    "logSha256": "7b9a92c96b58998b554a62eb138d3ae0de30521b8eed043571b11dc44ea01569",
+    "downloadedArtifacts": [
+      {
+        "id": 10287372346,
+        "name": "tests-checkpoint-linux-x64",
+        "size_in_bytes": 4715,
+        "digest": "sha256:a0211cb4caa747219a08b8571094bfc66d1395f2700b91d6d9944d1168b231a3"
+      },
+      {
+        "id": 10287332595,
+        "name": "tests-checkpoint-osx-arm64",
+        "size_in_bytes": 4814,
+        "digest": "sha256:5856e8615fffc1609479d32765d8b4c788423a898f181fbb7b34a456623366db"
+      },
+      {
+        "id": 10287237725,
+        "name": "tests-pipeline-osx-arm64",
+        "size_in_bytes": 5880,
+        "digest": "sha256:261ba091fc6a7e364e3e99b3b03297444e47882daf3297799d4bc8ec0d180dfa"
+      },
+      {
+        "id": 10287177845,
+        "name": "tests-stock-osx-arm64",
+        "size_in_bytes": 2840,
+        "digest": "sha256:b9d3a521cd6828155cf42fd918b6cd301436b99535e8072a3739de2c9c200ae1"
+      },
+      {
+        "id": 10287157811,
+        "name": "tests-first-use-osx-arm64",
+        "size_in_bytes": 43931,
+        "digest": "sha256:bb89d4bd895360e75272e7e36f2fbad9f547e5ae105310b5ed0fe165e3441ec4"
+      },
+      {
+        "id": 10287053184,
+        "name": "tests-checkpoint-win-x64",
+        "size_in_bytes": 4797,
+        "digest": "sha256:6b475d23c256556b0251fb02fe0de5a9a9abf435f43e5e28f189742baad79c46"
+      },
+      {
+        "id": 10287018208,
+        "name": "tests-win-x64",
+        "size_in_bytes": 319243,
+        "digest": "sha256:ebf23ecce7ab82f1da6a570c11c3e85ce05609555d340fe2f40586fb63b52d00"
+      },
+      {
+        "id": 10286903164,
+        "name": "tests-linux-x64",
+        "size_in_bytes": 177486,
+        "digest": "sha256:135150b706925b7ea1e07d26362237c9c475799b1a8ec0fdd6de04a00a8267c1"
+      },
+      {
+        "id": 10286793373,
+        "name": "tests-osx-arm64",
+        "size_in_bytes": 318902,
+        "digest": "sha256:41de6e241f5e3c88be84e1edc628739c621d2179c4c299228cbca8e1cd3d41b1"
+      },
+      {
+        "id": 10286768193,
+        "name": "tests-first-use-linux-x64",
+        "size_in_bytes": 45921,
+        "digest": "sha256:2ccf37820424fdf9e22d353c9d10c0cadc6a41abc750078ff48631415293ef46"
+      },
+      {
+        "id": 10286698782,
+        "name": "tests-first-use-win-x64",
+        "size_in_bytes": 42796,
+        "digest": "sha256:e934a40909d1b868a76812e5c1cf0fbd6782c263c8aa6e6e220f414de0d77346"
+      },
+      {
+        "id": 10286673894,
+        "name": "tests-stock-win-x64",
+        "size_in_bytes": 2440,
+        "digest": "sha256:2396839a676ef672494dddf7d28a27e849375691d6ed290ce5e2c15e75d646f9"
+      },
+      {
+        "id": 10286653602,
+        "name": "tests-pipeline-linux-x64",
+        "size_in_bytes": 5593,
+        "digest": "sha256:71964c9a95e8818f241fe5d68b5c2ea0ce255398e02db5dfe6a54436c185e0d2"
+      },
+      {
+        "id": 10286643975,
+        "name": "tests-pipeline-win-x64",
+        "size_in_bytes": 5635,
+        "digest": "sha256:2ca0c19eb916625b8d1d0054a41760321523073f113c3f3da7f9561c2574a3e5"
+      }
+    ]
+  },
+  "committedFiles": {
+    ".github/workflows/ci.yml": {
+      "bytes": 13573,
+      "sha256": "dd91038fc351cef871b63045016b93edc3cb1c355383c5c59f8273b76ba2895d"
+    },
+    "src/ComfySharp.Contracts/RuntimeValue.cs": {
+      "bytes": 10761,
+      "sha256": "1ec6993a0a4150e5179ece1b5fa5bdb546c51cbb6cd226017fb1e93937b55654"
+    },
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 4685,
+      "sha256": "6ed9a04864fbd823651c212ec02ace5a03280de397bba3afd800b68bf43665c9"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "bytes": 22680,
+      "sha256": "f36b4ae6b07d5fb51ddcae2b77ffc1ac8a00d4f0df22ccabe9f60c7fb077cfb0"
+    },
+    "tests/ComfySharp.Core.Tests/ExecutionBlockerTests.cs": {
+      "bytes": 26255,
+      "sha256": "e5888e76cd5c8b8220a82b7a84c1db080efeb3024b285a6806d15e958fd4bc8a"
+    },
+    "tests/ComfySharp.Core.Tests/ExecutionBlockerReferenceTests.cs": {
+      "bytes": 12861,
+      "sha256": "8c5756dec865e7f7093f66a40aa8ca4067cbd39308bb8daf8546d428f9849764"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/execution-blocker.reference.json": {
+      "bytes": 25302,
+      "sha256": "062a71742134c9fdc93c78b48348446c077ae5d20c1309772ec3c9b43cba2a72"
+    },
+    "tools/ComfySharp.Catalog/NodeSchemaStaticResolution.cs": {
+      "bytes": 16748,
+      "sha256": "f2a1eab2bec84e6f3a246401184095c59e85218c1c06d8cf08a89c39bca05a24"
+    },
+    "tests/ComfySharp.Host.Tests/NodeSchemaStaticResolutionTests.cs": {
+      "bytes": 16619,
+      "sha256": "6aaf778f27d4abf811ae57ca8ccdaf0aa1e8a8a319547a7ad9cdb5811ea1910d"
+    },
+    "docs/capabilities/node-schema-resolutions.json": {
+      "bytes": 38256,
+      "sha256": "a0411cbad0019ee1b30c887062f401de594a4ebf46bdde5382a8fb0448184486"
+    },
+    "docs/capabilities/node-schemas.json": {
+      "bytes": 3804520,
+      "sha256": "bc6394165e35444622fa45641643914da4cfda79b10b180c6853f009d9e4d687"
+    },
+    "docs/capabilities/manifest.json": {
+      "bytes": 1300229,
+      "sha256": "c56d960286e7083cd31c56e191d3ca528ed5e4d23d6bd8190ae5036664c58292"
+    }
+  },
+  "targets": [
+    {
+      "target": "win-x64",
+      "jobConclusion": "success",
+      "suiteCounts": {
+        "Core": {
+          "total": 136,
+          "passed": 136,
+          "failed": 0
+        },
+        "Workflow": {
+          "total": 17,
+          "passed": 17,
+          "failed": 0
+        },
+        "Tokenization": {
+          "total": 540,
+          "passed": 540,
+          "failed": 0
+        },
+        "Desktop": {
+          "total": 32,
+          "passed": 32,
+          "failed": 0
+        },
+        "Host": {
+          "total": 142,
+          "passed": 142,
+          "failed": 0
+        },
+        "Inference": {
+          "total": 574,
+          "passed": 574,
+          "failed": 0
+        }
+      },
+      "aggregatePlusStock": {
+        "total": 1444,
+        "passed": 1444,
+        "failed": 0
+      },
+      "completeSuiteExecuted": true,
+      "stock": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0
+      },
+      "firstUse": {
+        "total": 194,
+        "passed": 194,
+        "failed": 0
+      },
+      "checkpoint": {
+        "total": 25,
+        "passed": 25,
+        "failed": 0
+      },
+      "pipelineContracts": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      },
+      "failures": [],
+      "observedUniqueTestsAllProcesses": 1444,
+      "newEvidence": {
+        "ExecutionBlockerTests": {
+          "total": 25,
+          "passed": 25,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.AsyncProducerCanReturnBlockerWithoutStartingItsConsumer",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.InputIsListBlocksOnDirectMembersButDoesNotSearchNestedValues",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MixedEmptyListsStillFailBeforeBlockDetectionForOrdinaryMapping",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: True)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.WholeCallBlockExpandsAcrossScalarAndListSlotsAndKeepsProducerUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SelectedLazyBlockerSkipsSwitchAndLeavesUnselectedProducerUnexecuted",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SilentChainSkipsJsonAdaptersAndPreservesIndependentTargetsAndMemo",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"reason\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ListOutputPreservesOneBlockedPositionAndOnlyRealInvocationsProduceUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ContainersWithBlockersAndResourcesRetainAndReleaseEveryLease",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationWhileAwaitingProducerReclaimsResourcesInsteadOfCreatingABlocker",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.UiExecutionSkipsBlockedOutputWhileJsonProjectionRejectsRawMarker",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.LazyRowsAreJointlySlicedBeforeFilteringAndKeepRepeatLastPairings",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MappedExceptionsReleasePriorOutputsAndKeepIndependentTargetAlive",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"stop\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.EntirelyBlockedLazyCallDoesNotInvokeHookOrResolveBranches",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.RepeatLastBlockerAndPartialSlotsDoNotSuppressAnUnrelatedSlot",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.JsonObjectResemblingABlockerRemainsOrdinaryData",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: False)"
+          ]
+        },
+        "ExecutionBlockerReferenceTests": {
+          "total": 23,
+          "passed": 23,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ordinary-error\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-map\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"producer-block-ui\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"whole-producer\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"all-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-mixed-rows\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ui-survivors\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"empty-message\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"prompt-order\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"list-producer-block\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-nested\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"async-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-all-blocked\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"repeat-last-blocker\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"output-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"message-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"partial-slot\")"
+          ]
+        },
+        "NodeSchemaStaticResolutionTests": {
+          "total": 33,
+          "passed": 33,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AFailureAtTheLastOccurrenceDoesNotPublishEarlierChanges",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"parameter-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"catalogueComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"marker\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"duplicate-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"shared-enum\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PureTransformationChangesExactlyTheReviewed55OccurrencesAnd26Statuses",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"absent\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-removed\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"null\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"invalid-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"schema-complete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"missing-rule\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"definition-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"non-array\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"alias-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"schemaComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"backend\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ReviewedLiteralValuesPreserveStringEnumMeaningAndDeclarationOrder",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"unknown-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"missing-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"ordered-list\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.EvidenceCannotBeValidatedWithoutItsReviewedPlan",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"summary\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"value\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-total\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PublishedPlanAndAllAppliedOccurrencesHaveTheReviewedIdentity",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"value\")"
+          ]
+        }
+      },
+      "build": {
+        "warnings": 0,
+        "errors": 0,
+        "conclusion": "success"
+      },
+      "catalogue": {
+        "rows": 1171,
+        "local_node_declarations": 664,
+        "registered_nodes": 25,
+        "catalogue_complete": false,
+        "node_evidence_checked": true,
+        "release_ready": false,
+        "error_count": 0,
+        "errors": []
+      },
+      "failedSteps": [],
+      "notExecutedSteps": [
+        "Diagnose macOS native loader failures"
+      ],
+      "stockTraceUpload": "success (payload not downloaded in this audit)"
+    },
+    {
+      "target": "linux-x64",
+      "jobConclusion": "failure",
+      "suiteCounts": {
+        "Core": {
+          "total": 136,
+          "passed": 136,
+          "failed": 0
+        },
+        "Workflow": {
+          "total": 17,
+          "passed": 17,
+          "failed": 0
+        },
+        "Tokenization": {
+          "total": 540,
+          "passed": 540,
+          "failed": 0
+        },
+        "Desktop": {
+          "total": 32,
+          "passed": 32,
+          "failed": 0
+        },
+        "Host": {
+          "total": 142,
+          "passed": 142,
+          "failed": 0
+        },
+        "Inference": {
+          "executed": false
+        }
+      },
+      "aggregatePlusStock": {
+        "total": 867,
+        "passed": 867,
+        "failed": 0
+      },
+      "completeSuiteExecuted": false,
+      "stock": {
+        "total": 0,
+        "passed": 0,
+        "failed": 0
+      },
+      "firstUse": {
+        "total": 194,
+        "passed": 178,
+        "failed": 16
+      },
+      "checkpoint": {
+        "total": 25,
+        "passed": 25,
+        "failed": 0
+      },
+      "pipelineContracts": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      },
+      "failures": [
+        {
+          "id": "1c61a269-91c5-b939-7b7d-c4aff8d18597",
+          "name": "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+          "outcome": "Failed",
+          "failure": "maximum-start/finalDiffusionLatent[15]: actual=-0.79657173, source=-0.79665875, delta=8.702278137207031E-05, bound=5.3899762630462646E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "8782163f-cd48-eae9-2cfe-e9aa0076b8f4",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "failure": "Element 83: actual=-2.1021144, source=-2.101966, delta=0.00014853477478027344.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "176b2008-9f81-166f-eebc-94e36ca77c0e",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "failure": "Element 82: actual=-2.360069, source=-2.3598258, delta=0.00024318695068359375.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "e856b5d9-d8eb-0c3b-7739-06adb3058846",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "outcome": "Failed",
+          "failure": "Element 82: actual=-1.6610985, source=-1.6609873, delta=0.0001112222671508789.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "0b576f48-b0d8-34b0-b578-c71649279e10",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "failure": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "1a833d97-62b7-a771-a51d-2c65b2df6847",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "outcome": "Failed",
+          "failure": "Element 82: actual=-1.6612213, source=-1.6609665, delta=0.00025475025177001953.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "d68fee0e-b304-8494-5f28-0e35be2f988b",
+          "name": "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+          "outcome": "Failed",
+          "failure": "Element 85: actual=-1.1149207, source=-1.1149889, delta=6.818771362304688E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "35b4a67e-4d61-583c-9502-f7a76be87ce7",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "outcome": "Failed",
+          "failure": "near-one-present/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "e72ea222-7afc-025f-3367-6bd7eb3801a6",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "outcome": "Failed",
+          "failure": "unequal-separate/step-0/denoised[2]: actual=-0.8084923, source=-0.8085635, delta=7.11679458618164E-05, bound=5.4256904125213624E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "049d7455-37e8-6a6f-da74-86faa737f8da",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "outcome": "Failed",
+          "failure": "near-one-disabled/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "bb4d13de-9879-30d3-29b6-0de23514900c",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "outcome": "Failed",
+          "failure": "velocity-three-step/step-2/denoised[0]: actual=-0.70408434, source=-0.7042558, delta=0.00017148256301879883, bound=5.112767457962037E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "37831630-950b-3f88-bc47-fb0deb486bbd",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "outcome": "Failed",
+          "failure": "three-step-batch/step-0/denoised[0]: actual=-0.8210226, source=-0.8207963, delta=0.0002263188362121582, bound=5.4623889327049254E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "48ca52b4-142c-317a-0afa-181b4e284aa8",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "outcome": "Failed",
+          "failure": "near-one-null/step-1/denoised[20]: actual=0.186446, source=0.18639418, delta=5.18113374710083E-05, bound=3.559182554483414E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "1a73c0f2-951d-320a-4ef4-5968bad906bf",
+          "name": "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "outcome": "Failed",
+          "failure": "unequal-concatenated/step-0/denoised[55]: actual=1.0068393, source=1.0067731, delta=6.61611557006836E-05, bound=6.02031934261322E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "c2725b0c-8cdb-27bd-fac1-c1a990c4a213",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "outcome": "Failed",
+          "failure": "Element 108: actual=0.7850003, source=0.7849237, delta=7.665157318115234E-05.",
+          "project": null,
+          "group": "firstUse"
+        },
+        {
+          "id": "da79d384-f088-36cd-318d-a6006054c8bd",
+          "name": "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "outcome": "Failed",
+          "failure": "Element 36: actual=1.0168948, source=1.0168332, delta=6.16312026977539E-05.",
+          "project": null,
+          "group": "firstUse"
+        }
+      ],
+      "observedUniqueTestsAllProcesses": 1115,
+      "newEvidence": {
+        "ExecutionBlockerTests": {
+          "total": 25,
+          "passed": 25,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.InputIsListBlocksOnDirectMembersButDoesNotSearchNestedValues",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.JsonObjectResemblingABlockerRemainsOrdinaryData",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: False)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ContainersWithBlockersAndResourcesRetainAndReleaseEveryLease",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"reason\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ListOutputPreservesOneBlockedPositionAndOnlyRealInvocationsProduceUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationWhileAwaitingProducerReclaimsResourcesInsteadOfCreatingABlocker",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MappedExceptionsReleasePriorOutputsAndKeepIndependentTargetAlive",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.AsyncProducerCanReturnBlockerWithoutStartingItsConsumer",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.RepeatLastBlockerAndPartialSlotsDoNotSuppressAnUnrelatedSlot",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: True)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MixedEmptyListsStillFailBeforeBlockDetectionForOrdinaryMapping",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"stop\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.UiExecutionSkipsBlockedOutputWhileJsonProjectionRejectsRawMarker",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.WholeCallBlockExpandsAcrossScalarAndListSlotsAndKeepsProducerUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SelectedLazyBlockerSkipsSwitchAndLeavesUnselectedProducerUnexecuted",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.EntirelyBlockedLazyCallDoesNotInvokeHookOrResolveBranches",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.LazyRowsAreJointlySlicedBeforeFilteringAndKeepRepeatLastPairings",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SilentChainSkipsJsonAdaptersAndPreservesIndependentTargetsAndMemo"
+          ]
+        },
+        "ExecutionBlockerReferenceTests": {
+          "total": 23,
+          "passed": 23,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"output-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-mixed-rows\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"prompt-order\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-map\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"repeat-last-blocker\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ui-survivors\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"all-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"list-producer-block\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-all-blocked\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"whole-producer\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"partial-slot\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"async-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ordinary-error\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"producer-block-ui\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"empty-message\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-nested\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"message-middle\")"
+          ]
+        },
+        "NodeSchemaStaticResolutionTests": {
+          "total": 33,
+          "passed": 33,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-total\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"null\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PureTransformationChangesExactlyTheReviewed55OccurrencesAnd26Statuses",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.EvidenceCannotBeValidatedWithoutItsReviewedPlan",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AFailureAtTheLastOccurrenceDoesNotPublishEarlierChanges",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"shared-enum\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"summary\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"alias-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"marker\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"parameter-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"unknown-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-removed\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"absent\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"missing-rule\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"backend\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"value\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"schema-complete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"missing-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"invalid-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"duplicate-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"non-array\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"definition-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"catalogueComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"ordered-list\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ReviewedLiteralValuesPreserveStringEnumMeaningAndDeclarationOrder",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"schemaComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PublishedPlanAndAllAppliedOccurrencesHaveTheReviewedIdentity",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"value\")"
+          ]
+        }
+      },
+      "build": {
+        "warnings": 0,
+        "errors": 0,
+        "conclusion": "success"
+      },
+      "catalogue": {
+        "rows": 1171,
+        "local_node_declarations": 664,
+        "registered_nodes": 25,
+        "catalogue_complete": false,
+        "node_evidence_checked": true,
+        "release_ready": false,
+        "error_count": 0,
+        "errors": []
+      },
+      "failedSteps": [
+        {
+          "number": 10,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ],
+      "notExecutedSteps": [
+        "Test inference contracts and CPU primitives",
+        "Inspect a safetensors file in a fresh process without libtorch",
+        "Tokenize CLIP text in a fresh process without libtorch",
+        "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+        "Start native Desktop and its supervised Host",
+        "Exercise actual native CPU operations",
+        "Compare full CLIP L and G dimensions in a separate CPU process",
+        "Diagnose macOS native loader failures",
+        "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+      ],
+      "stockTraceUpload": "not attempted because producer was skipped"
+    },
+    {
+      "target": "osx-arm64",
+      "jobConclusion": "failure",
+      "suiteCounts": {
+        "Core": {
+          "total": 136,
+          "passed": 136,
+          "failed": 0
+        },
+        "Workflow": {
+          "total": 17,
+          "passed": 17,
+          "failed": 0
+        },
+        "Tokenization": {
+          "total": 540,
+          "passed": 540,
+          "failed": 0
+        },
+        "Desktop": {
+          "total": 32,
+          "passed": 32,
+          "failed": 0
+        },
+        "Host": {
+          "total": 142,
+          "passed": 142,
+          "failed": 0
+        },
+        "Inference": {
+          "total": 574,
+          "passed": 574,
+          "failed": 0
+        }
+      },
+      "aggregatePlusStock": {
+        "total": 1444,
+        "passed": 1442,
+        "failed": 2
+      },
+      "completeSuiteExecuted": true,
+      "stock": {
+        "total": 3,
+        "passed": 1,
+        "failed": 2
+      },
+      "firstUse": {
+        "total": 194,
+        "passed": 194,
+        "failed": 0
+      },
+      "checkpoint": {
+        "total": 25,
+        "passed": 25,
+        "failed": 0
+      },
+      "pipelineContracts": {
+        "total": 29,
+        "passed": 29,
+        "failed": 0
+      },
+      "failures": [
+        {
+          "id": "cef6b18c-a4d2-2a92-4a56-47a26b37118f",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+          "outcome": "Failed",
+          "failure": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05.",
+          "project": null,
+          "group": "stock"
+        },
+        {
+          "id": "283d80d8-ca93-324c-bd2a-133e930028b2",
+          "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+          "outcome": "Failed",
+          "failure": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05.",
+          "project": null,
+          "group": "stock"
+        }
+      ],
+      "observedUniqueTestsAllProcesses": 1444,
+      "newEvidence": {
+        "ExecutionBlockerTests": {
+          "total": 25,
+          "passed": 25,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MappedExceptionsReleasePriorOutputsAndKeepIndependentTargetAlive",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: True)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.AsyncProducerCanReturnBlockerWithoutStartingItsConsumer",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.RepeatLastBlockerAndPartialSlotsDoNotSuppressAnUnrelatedSlot",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.UiExecutionSkipsBlockedOutputWhileJsonProjectionRejectsRawMarker",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.EntirelyBlockedLazyCallDoesNotInvokeHookOrResolveBranches",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.WholeCallBlockExpandsAcrossScalarAndListSlotsAndKeepsProducerUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ContainersWithBlockersAndResourcesRetainAndReleaseEveryLease",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SelectedLazyBlockerSkipsSwitchAndLeavesUnselectedProducerUnexecuted",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.DiagnosticMessagesAreConsumedAtEachFirstConsumerWithoutMutatingTheProducer(message: \"stop\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.JsonObjectResemblingABlockerRemainsOrdinaryData",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.ListOutputPreservesOneBlockedPositionAndOnlyRealInvocationsProduceUi",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: \"reason\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationAtBlockedBoundaryWinsOverSuccessfulPropagation(verbose: False)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.SilentChainSkipsJsonAdaptersAndPreservesIndependentTargetsAndMemo",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.BlockersAreDistinctFromNullAndRetainIndependentLeases(message: null)",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.InputIsListBlocksOnDirectMembersButDoesNotSearchNestedValues",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.FirstBlockerUsesPromptInputOrderIncludingSilentAndEmptyMessages(firstMessage: \"first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.LazyRowsAreJointlySlicedBeforeFilteringAndKeepRepeatLastPairings",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.MixedEmptyListsStillFailBeforeBlockDetectionForOrdinaryMapping",
+            "ComfySharp.Core.Tests.ExecutionBlockerTests.CancellationWhileAwaitingProducerReclaimsResourcesInsteadOfCreatingABlocker"
+          ]
+        },
+        "ExecutionBlockerReferenceTests": {
+          "total": 23,
+          "passed": 23,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"async-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-all-blocked\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"whole-producer\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"producer-block-ui\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"prompt-order\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"empty-message\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"mixed-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"message-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-middle\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"partial-slot\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"all-empty\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"silent-first\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ui-survivors\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"output-is-list\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"repeat-last-blocker\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.AggregateLazySnapshotPreservesSourceActiveRowsAndRequestedNames(id: \"lazy-mixed-rows\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"ordinary-error\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"input-list-nested\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"nested-map\")",
+            "ComfySharp.Core.Tests.ExecutionBlockerReferenceTests.MapperCallsOutputsUiAndBlockMessagesMatchPublishedSource(id: \"list-producer-block\")"
+          ]
+        },
+        "NodeSchemaStaticResolutionTests": {
+          "total": 33,
+          "passed": 33,
+          "failed": 0,
+          "testNames": [
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PublishedPlanAndAllAppliedOccurrencesHaveTheReviewedIdentity",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"schema-complete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"unknown-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"null\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-total\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"coverage-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AFailureAtTheLastOccurrenceDoesNotPublishEarlierChanges",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"summary\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-removed\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"parameter-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"shared-enum\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.PureTransformationChangesExactlyTheReviewed55OccurrencesAnd26Statuses",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"marker\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"value\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"duplicate-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"value\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"ordered-list\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"missing-evidence\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AppliedValuesAndProvenanceCannotDriftIndependently(mutation: \"source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"invalid-status\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"missing-rule\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"definition-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ReviewedLiteralValuesPreserveStringEnumMeaningAndDeclarationOrder",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-path\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"schemaComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"alias-source\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.StandaloneTransformationCannotPromoteCompleteness(field: \"catalogueComplete\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AccountingRejectsStaleSummariesWithoutDoubleCountingMirrors(mutation: \"mirror-expression\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"non-array\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.EvidenceCannotBeValidatedWithoutItsReviewedPlan",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.ParameterProvenanceMustBeAnArrayAtEveryPublicBoundary(form: \"absent\")",
+            "ComfySharp.Host.Tests.NodeSchemaStaticResolutionTests.AnyChangeToTheReviewedPlanIsRejected(mutation: \"backend\")"
+          ]
+        }
+      },
+      "build": {
+        "warnings": 0,
+        "errors": 0,
+        "conclusion": "success"
+      },
+      "catalogue": {
+        "rows": 1171,
+        "local_node_declarations": 664,
+        "registered_nodes": 25,
+        "catalogue_complete": false,
+        "node_evidence_checked": true,
+        "release_ready": false,
+        "error_count": 0,
+        "errors": []
+      },
+      "failedSteps": [
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "status": "completed",
+          "conclusion": "failure"
+        }
+      ],
+      "notExecutedSteps": [],
+      "stockTraceUpload": "success (payload not downloaded in this audit)"
+    }
+  ],
+  "trx": [
+    {
+      "artifact": "tests-checkpoint-linux-x64",
+      "subdirectory": ".",
+      "sha256": "869188045008df82952f20536e09bb1cdf1c3d4c7b066fbc85c22ed57ea56b97",
+      "bytes": 41242,
+      "project": null,
+      "counts": {
+        "total": 25,
+        "executed": 25,
+        "passed": 25,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-checkpoint-osx-arm64",
+      "subdirectory": ".",
+      "sha256": "43b8f939f746b3a88ced14d0a0d2d96bed8d726defeca60ab999b967ea1ef2f0",
+      "bytes": 42588,
+      "project": null,
+      "counts": {
+        "total": 25,
+        "executed": 25,
+        "passed": 25,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-checkpoint-win-x64",
+      "subdirectory": ".",
+      "sha256": "d97379738d8c203773b88f8088c94cc83b2c4b5f2fdda2ad8111c73623d3ecfc",
+      "bytes": 40747,
+      "project": null,
+      "counts": {
+        "total": 25,
+        "executed": 25,
+        "passed": 25,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "ClassicalVaeReferenceTests",
+      "sha256": "11e210bd70ef1c412dd2f9d4523191d3898cfa4cf2e3ec380b6f3c6d2823861e",
+      "bytes": 14351,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "ClipReferenceTests",
+      "sha256": "f80d78e9af34c4a20774177728eb248709e29a4e9429b5965a00fec40a97dfc3",
+      "bytes": 94626,
+      "project": null,
+      "counts": {
+        "total": 47,
+        "executed": 47,
+        "passed": 47,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "PreviewAnyReferenceTests",
+      "sha256": "acb8d1446184d84035fa3eb27d365d769dd6064c2c78a0c120bd6deb6c3f85b2",
+      "bytes": 92563,
+      "project": null,
+      "counts": {
+        "total": 59,
+        "executed": 59,
+        "passed": 59,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "Sd15PipelineReferenceTests",
+      "sha256": "d937d0272e098fc3d1cabd8a950af2cd8a0e079a2269a77b757f2a67e4a15bd2",
+      "bytes": 10022,
+      "project": null,
+      "counts": {
+        "total": 4,
+        "executed": 4,
+        "passed": 3,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "SdDenoiserReferenceTests",
+      "sha256": "aa0a281f1daebec132c47589cd7b2dbc2bd5ef6868e28a907a5a8998be1a1f7f",
+      "bytes": 23502,
+      "project": null,
+      "counts": {
+        "total": 6,
+        "executed": 6,
+        "passed": 0,
+        "failed": 6,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "SdEulerReferenceTests",
+      "sha256": "2dbece1b58b9d551a1a6c020f54ae19625a83cbd7c0c919a6965cbc1f2accf4a",
+      "bytes": 29179,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 1,
+        "failed": 7,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "SdSamplingReferenceTests",
+      "sha256": "24c2588bf13c887ddcd6bfcba38831fa2e62bc2702028ef7e5bf33052a6136a0",
+      "bytes": 5970,
+      "project": null,
+      "counts": {
+        "total": 3,
+        "executed": 3,
+        "passed": 3,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "SdUnetReferenceTests",
+      "sha256": "da853d6da8de7cadbfbbbf613fb781b736fbf4c106ae73a4b3964dc1f50c75cc",
+      "bytes": 18376,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 6,
+        "failed": 2,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-linux-x64",
+      "subdirectory": "SigmaScheduleReferenceTests",
+      "sha256": "cf0e3a68382aaf144cf3bdd4dd18c77314a5fc945cac30deec13c885393e5644",
+      "bytes": 89435,
+      "project": null,
+      "counts": {
+        "total": 51,
+        "executed": 51,
+        "passed": 51,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "ClassicalVaeReferenceTests",
+      "sha256": "3059ca56e83851f41cafd9ad173d264e421390e017c44f5d23f9b62ef83f1d3b",
+      "bytes": 14847,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "ClipReferenceTests",
+      "sha256": "4d79e81885329e8d691d7c5d302559ad1ee537c4ccfe23f52aab678985a0c317",
+      "bytes": 97147,
+      "project": null,
+      "counts": {
+        "total": 47,
+        "executed": 47,
+        "passed": 47,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "PreviewAnyReferenceTests",
+      "sha256": "71b8ef3cf1affa8d57ed6766c5337912265a3d8e3eded860ccb03b7c87470ab0",
+      "bytes": 95609,
+      "project": null,
+      "counts": {
+        "total": 59,
+        "executed": 59,
+        "passed": 59,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "Sd15PipelineReferenceTests",
+      "sha256": "5b87f19cd7b9a0e6555bd34f8de68523ce5ed2b49c8378c15892dc496f2d340f",
+      "bytes": 8053,
+      "project": null,
+      "counts": {
+        "total": 4,
+        "executed": 4,
+        "passed": 4,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "SdDenoiserReferenceTests",
+      "sha256": "177ad1cbe221f718477f23005a1525d6957a8bef859f7793e80e19ed2bf1adcd",
+      "bytes": 11461,
+      "project": null,
+      "counts": {
+        "total": 6,
+        "executed": 6,
+        "passed": 6,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "SdEulerReferenceTests",
+      "sha256": "b8663a882e6533987dc084ed3f213fc4218f1357f4f6f8412d5a8cafebff1b4c",
+      "bytes": 14365,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "SdSamplingReferenceTests",
+      "sha256": "906540ab492ac1e4afa32ba8d10aa929f1e3fc881d55e22043572d6ee5b54990",
+      "bytes": 6216,
+      "project": null,
+      "counts": {
+        "total": 3,
+        "executed": 3,
+        "passed": 3,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "SdUnetReferenceTests",
+      "sha256": "db601e25fdecf05674dc5a8582c1f4ee13691b5506a18815b06eea2649c9178d",
+      "bytes": 14751,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-osx-arm64",
+      "subdirectory": "SigmaScheduleReferenceTests",
+      "sha256": "b76b8af3f9c13fcfb0773c6034f7efd830bb5c0b4729ab2523c04c86e7d2402a",
+      "bytes": 92197,
+      "project": null,
+      "counts": {
+        "total": 51,
+        "executed": 51,
+        "passed": 51,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "ClassicalVaeReferenceTests",
+      "sha256": "1e3e4ac1bd3eb0751d46b302d7a7248041727e0bfba9620a7ddb42973b962128",
+      "bytes": 14264,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "ClipReferenceTests",
+      "sha256": "2b9c30279a1a560555839baee9638f0597c6188738593fcc58a52e9d9f821d5c",
+      "bytes": 94123,
+      "project": null,
+      "counts": {
+        "total": 47,
+        "executed": 47,
+        "passed": 47,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "PreviewAnyReferenceTests",
+      "sha256": "0aa40e0bd0386c01b467f59f77d2a10b1fb33b994bcfd72a7d3f4015e6332d61",
+      "bytes": 91252,
+      "project": null,
+      "counts": {
+        "total": 59,
+        "executed": 59,
+        "passed": 59,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "Sd15PipelineReferenceTests",
+      "sha256": "b2c8c4e7102b22f67615cb3124f537ce3107b48bd74e69679972d1bf973c77c3",
+      "bytes": 7766,
+      "project": null,
+      "counts": {
+        "total": 4,
+        "executed": 4,
+        "passed": 4,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "SdDenoiserReferenceTests",
+      "sha256": "d426be01855d66fd086daa57831c659d905324ed5f162731bcba1089a8d57910",
+      "bytes": 11026,
+      "project": null,
+      "counts": {
+        "total": 6,
+        "executed": 6,
+        "passed": 6,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "SdEulerReferenceTests",
+      "sha256": "0f8c6c3e4361fb6818a32760c7c10aefb80bafa31bd45d3e1d33a1d7d70e248c",
+      "bytes": 13782,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "SdSamplingReferenceTests",
+      "sha256": "34cc68096d6145f3b9dc4ff9ca54606583cb21328c3cac7fcc111fe5744e5903",
+      "bytes": 6003,
+      "project": null,
+      "counts": {
+        "total": 3,
+        "executed": 3,
+        "passed": 3,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "SdUnetReferenceTests",
+      "sha256": "6a5ebc94315bad96673c19ea23f976bac8ee46039602dc80d3cd5f740f2c0356",
+      "bytes": 14168,
+      "project": null,
+      "counts": {
+        "total": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-first-use-win-x64",
+      "subdirectory": "SigmaScheduleReferenceTests",
+      "sha256": "528ee93e5dea7cb75d6b0da4f7f4f0dc75085f85ccddef9f3184f2be2884bd41",
+      "bytes": 88367,
+      "project": null,
+      "counts": {
+        "total": 51,
+        "executed": 51,
+        "passed": 51,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-linux-x64",
+      "subdirectory": "Core",
+      "sha256": "c162ef0af837b852f40f54436990bc8aa6e45f6611d7e4cdf56fe4a1a548e63b",
+      "bytes": 204916,
+      "project": "Core",
+      "counts": {
+        "total": 136,
+        "executed": 136,
+        "passed": 136,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-linux-x64",
+      "subdirectory": "Desktop",
+      "sha256": "836374091fa0fee2407cfce936ea4dac0fbf2cb396416f3a2fd67ac24817336c",
+      "bytes": 48571,
+      "project": "Desktop",
+      "counts": {
+        "total": 32,
+        "executed": 32,
+        "passed": 32,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-linux-x64",
+      "subdirectory": "Host",
+      "sha256": "e3d13793038371db1de503f39854e2b6235212174d50e2f75513fb93dd79d5e4",
+      "bytes": 292819,
+      "project": "Host",
+      "counts": {
+        "total": 142,
+        "executed": 142,
+        "passed": 142,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-linux-x64",
+      "subdirectory": "Tokenization",
+      "sha256": "d160497e93df303a2949c393f47d431ffaa20377757f068710cbffb94c3a19d5",
+      "bytes": 813894,
+      "project": "Tokenization",
+      "counts": {
+        "total": 540,
+        "executed": 540,
+        "passed": 540,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-linux-x64",
+      "subdirectory": "Workflow",
+      "sha256": "b5802184ee528a046178a321b4f61b58a835f30d5de853d9f184dc259f061d2c",
+      "bytes": 25636,
+      "project": "Workflow",
+      "counts": {
+        "total": 17,
+        "executed": 17,
+        "passed": 17,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Core",
+      "sha256": "961789f8c773479e5496afdc9899fdbea6060ac897285a281730e24f7977d0fa",
+      "bytes": 211812,
+      "project": "Core",
+      "counts": {
+        "total": 136,
+        "executed": 136,
+        "passed": 136,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Desktop",
+      "sha256": "8ab313bfbd7b7f5fca56abe3612e960446d5735642ce0cc0dbb5a8d106ed51fd",
+      "bytes": 50267,
+      "project": "Desktop",
+      "counts": {
+        "total": 32,
+        "executed": 32,
+        "passed": 32,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Host",
+      "sha256": "72500f4a2750c9e382267d3a654751df0987dc0275070e3c8c2755e95cf0d904",
+      "bytes": 300073,
+      "project": "Host",
+      "counts": {
+        "total": 142,
+        "executed": 142,
+        "passed": 142,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Inference",
+      "sha256": "d2bebe1712d4a6e8b91ce80add535336fd71ee83a0b07d49165dc4d4e3336574",
+      "bytes": 947794,
+      "project": "Inference",
+      "counts": {
+        "total": 574,
+        "executed": 574,
+        "passed": 574,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Tokenization",
+      "sha256": "110ed61ce78f3abe1e0f95fbb874856b1a9f7ec3e1636cec0ea045fa0b828d8c",
+      "bytes": 840990,
+      "project": "Tokenization",
+      "counts": {
+        "total": 540,
+        "executed": 540,
+        "passed": 540,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-osx-arm64",
+      "subdirectory": "Workflow",
+      "sha256": "cc7807b6d8d1b2e2e083bcd069738b7f64c9ad1f49c241872f3499436487ee79",
+      "bytes": 26582,
+      "project": "Workflow",
+      "counts": {
+        "total": 17,
+        "executed": 17,
+        "passed": 17,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-pipeline-linux-x64",
+      "subdirectory": ".",
+      "sha256": "2e0a7b9a07a61cfbb6d31f85764117af3eb659aabdc6a28310829d449e79866d",
+      "bytes": 48387,
+      "project": null,
+      "counts": {
+        "total": 29,
+        "executed": 29,
+        "passed": 29,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-pipeline-osx-arm64",
+      "subdirectory": ".",
+      "sha256": "2b6c4e0d41ab2d3e12130e51f917a18c73984209e585fd502857bd4f4dc61c67",
+      "bytes": 49933,
+      "project": null,
+      "counts": {
+        "total": 29,
+        "executed": 29,
+        "passed": 29,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-pipeline-win-x64",
+      "subdirectory": ".",
+      "sha256": "a73a063d26079c9791e93baf247c3ef6d1056a70955738b40f7edc35f8367604",
+      "bytes": 47796,
+      "project": null,
+      "counts": {
+        "total": 29,
+        "executed": 29,
+        "passed": 29,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-stock-osx-arm64",
+      "subdirectory": ".",
+      "sha256": "024340477ac1e0efa202e1f0b0256c50caf6f6ec556be034d6223b344e420a85",
+      "bytes": 12904,
+      "project": null,
+      "counts": {
+        "total": 3,
+        "executed": 3,
+        "passed": 1,
+        "failed": 2,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-stock-win-x64",
+      "subdirectory": ".",
+      "sha256": "272126da2cc4eeb933cfe7e3ef0a5d37a0e9d2d104d9790cf7c9768f16cf265b",
+      "bytes": 10539,
+      "project": null,
+      "counts": {
+        "total": 3,
+        "executed": 3,
+        "passed": 3,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Core",
+      "sha256": "6411b273397f7e06272b0f1e9a2a020ca9858c5556111160190415bdcae7f8dc",
+      "bytes": 202301,
+      "project": "Core",
+      "counts": {
+        "total": 136,
+        "executed": 136,
+        "passed": 136,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Desktop",
+      "sha256": "595a321c4db2c2419e438b2386ab36c63a222a3448d82d30b20f7d4e3991c041",
+      "bytes": 48036,
+      "project": "Desktop",
+      "counts": {
+        "total": 32,
+        "executed": 32,
+        "passed": 32,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Host",
+      "sha256": "a808c29089ec1a4f071485ecb863f1fcf8637f7a08e6f0702f29da9d988e5896",
+      "bytes": 295656,
+      "project": "Host",
+      "counts": {
+        "total": 142,
+        "executed": 142,
+        "passed": 142,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Inference",
+      "sha256": "d022e423e8e6f6767d1beb7ab7507df0128b7ba5bc40bac0b5e03414135ccf53",
+      "bytes": 905707,
+      "project": "Inference",
+      "counts": {
+        "total": 574,
+        "executed": 574,
+        "passed": 574,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Tokenization",
+      "sha256": "4655f92cf688d6968da29fe641b78c3a9c564d4e2ca4801eae508e8f6aaab779",
+      "bytes": 803199,
+      "project": "Tokenization",
+      "counts": {
+        "total": 540,
+        "executed": 540,
+        "passed": 540,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    },
+    {
+      "artifact": "tests-win-x64",
+      "subdirectory": "Workflow",
+      "sha256": "3ca209cc6e9bc3048d1cac4367140d787ffba1214c484540062b276c8eb0f711",
+      "bytes": 25401,
+      "project": "Workflow",
+      "counts": {
+        "total": 17,
+        "executed": 17,
+        "passed": 17,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      }
+    }
+  ],
+  "limits": [
+    "The five early projects are not a proof of native isolation: Host tests execute sigma tensor operations.",
+    "The 23 blocker source tests cover 21 direct mapper projections and two lazy projections; source interruption instrumentation and full PromptExecutor are excluded.",
+    "The 33 catalogue tests cover the reviewed static-resolution plan for 55 occurrences and 26 status changes; they do not execute Python nodes.",
+    "Old inference failures remain failures; skipped Linux inference/CLI/Desktop-smoke/stock steps are not attested.",
+    "No full frontend, full backend, real model weights, model family, GPU or release readiness is claimed.",
+    "Uncommitted later CreateList work is not part of this commit."
+  ]
+}

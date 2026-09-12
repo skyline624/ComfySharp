@@ -116,7 +116,9 @@ public sealed class NodeView : INotifyPropertyChanged
         var known = PromptCompiler.BaseDefinitions.ContainsKey(node.Type);
         var available = availableNodes?.Contains(node.Type) == true;
         Subtitle = $"#{node.Id} · {node.Type}" + (!known ? "\nUnsupported / preserved" : available ? "\nAvailable in Host" : availableNodes is null ? "\nHost availability unchecked" : "\nUnavailable in Host / preserved"); Outline = known && available ? Brushes.SlateBlue : Brushes.Orange;
-        Ports = string.Join("\n", (node.Data["inputs"] as JsonArray ?? []).Select((n, i) => $"← {i}: {n?["name"]}").Concat((node.Data["outputs"] as JsonArray ?? []).Select((n, i) => $"→ {i}: {n?["name"]}")));
+        Ports = string.Join("\n", (node.Data["inputs"] as JsonArray ?? []).Select((n, i) => $"← {i}: {n?["name"]}" +
+            (node.Type == "CreateList" && n?["name"]?.ToString() == "inputs.input0" ? " (required)" : ""))
+            .Concat((node.Data["outputs"] as JsonArray ?? []).Select((n, i) => $"→ {i}: {n?["name"]}" + (node.Type == "CreateList" ? " (list)" : ""))));
     }
 }
 internal static class NodeTemplates
@@ -140,6 +142,12 @@ internal static class NodeTemplates
             case "JsonExtractString": widgets = new("{}", "key"); In("json_string", "STRING"); Out("STRING", "STRING"); break;
             case "ComfyNotNode": In("value", "*"); Out("BOOLEAN", "BOOLEAN"); break;
             case "ComfySwitchNode": widgets = new(false); In("on_false", "*"); In("on_true", "*"); Out("output", "*"); break;
+            case "CreateList":
+                // Fixed wildcard ports are a bounded UI, not source Autogrow or
+                // shared MatchType propagation. Imported nodes stay untouched.
+                for (int index = 0; index < 10; index++) In($"inputs.input{index}", "*");
+                Out("list", "*"); output[0]!["is_list"] = true;
+                break;
             case "KarrasScheduler": widgets = new(20, 14.614642, .0291675, 7.0); Out("SIGMAS", "SIGMAS"); break;
             case "ExponentialScheduler": widgets = new(20, 14.614642, .0291675); Out("SIGMAS", "SIGMAS"); break;
             case "PolyexponentialScheduler": widgets = new(20, 14.614642, .0291675, 1.0); Out("SIGMAS", "SIGMAS"); break;
@@ -159,6 +167,6 @@ internal static class NodeTemplates
             case "VAEDecode": In("samples", "LATENT"); In("vae", "VAE"); Out("IMAGE", "IMAGE"); break;
             case "SaveImage": widgets = new("ComfySharp"); In("images", "IMAGE"); break;
         }
-        return new JsonObject { ["size"] = new JsonArray(230, 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
+        return new JsonObject { ["size"] = new JsonArray(230, type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
     }
 }

@@ -27,6 +27,7 @@ public static class PromptCompiler
         ["JsonExtractString"] = new("JsonExtractString", [new("json_string"), new("key")]),
         ["ComfyNotNode"] = new("ComfyNotNode", []),
         ["ComfySwitchNode"] = new("ComfySwitchNode", [new("switch")]),
+        ["CreateList"] = new("CreateList", []),
         ["KarrasScheduler"] = new("KarrasScheduler", [new("steps"), new("sigma_max"), new("sigma_min"), new("rho")]),
         ["ExponentialScheduler"] = new("ExponentialScheduler", [new("steps"), new("sigma_max"), new("sigma_min")]),
         ["PolyexponentialScheduler"] = new("PolyexponentialScheduler", [new("steps"), new("sigma_max"), new("sigma_min"), new("rho")]),
@@ -73,17 +74,30 @@ public static class PromptCompiler
                     else if (!definition.Widgets.Any(w => w.Name == pair.Key)) diagnostics.Add(new("unknown_widget", $"Widget {pair.Key} has no serialization contract.", node.Id));
             }
             var nodeInputs = node.Data["inputs"] as JsonArray ?? [];
+            // Imported slot order is authoritative; never expand or renumber imports.
+            var createListNames = node.Type == "CreateList" ? CreateListNames(node, diagnostics) : null;
+            if (node.Type == "CreateList" && values is not null and not JsonArray and not JsonObject)
+                diagnostics.Add(new("widget_layout", "CreateList has no persisted widgets.", node.Id));
             for (var slot = 0; slot < nodeInputs.Count; slot++)
             {
+                if (createListNames is not null && !createListNames.ContainsKey(slot)) continue;
                 var input = nodeInputs[slot];
                 if (input?["link"] is null) continue;
-                var id = input["link"]!.GetValue<long>();
+                long id;
+                if (createListNames is not null)
+                {
+                    if (input["link"] is not JsonValue linkValue || !linkValue.TryGetValue(out id))
+                    { diagnostics.Add(new("invalid_link", $"Input slot {slot} has an invalid link ID.", node.Id)); continue; }
+                }
+                else id = input["link"]!.GetValue<long>();
                 var links = document.Links.Where(l => l.Id == id && l.Target == node.Id && l.TargetSlot == slot).ToArray();
                 if (links.Length != 1 || !nodes.TryGetValue(links[0].Source, out var source)) { diagnostics.Add(new("invalid_link", $"Input slot {slot} has a dangling or inconsistent link.", node.Id)); continue; }
                 var link = links[0];
                 if (link.SourceSlot < 0 || link.SourceSlot >= ((source.Data["outputs"] as JsonArray)?.Count ?? 0)) diagnostics.Add(new("invalid_output", "Source output slot does not exist.", node.Id));
-                inputs[input["name"]!.GetValue<string>()] = new JsonArray(link.Source.Value, link.SourceSlot);
+                inputs[createListNames is null ? input["name"]!.GetValue<string>() : createListNames[slot]] = new JsonArray(link.Source.Value, link.SourceSlot);
             }
+            if (createListNames is not null && !inputs.ContainsKey("inputs.input0"))
+                diagnostics.Add(new("missing_input", "CreateList requires a connection to inputs.input0.", node.Id));
             foreach (var widget in definition.Widgets.Where(w => w.Serialize))
                 if (!inputs.ContainsKey(widget.Name)) diagnostics.Add(new("missing_widgets", $"Required widget {widget.Name} has neither a persisted value nor an input connection.", node.Id));
             prompt[node.Id.Value] = new JsonObject { ["class_type"] = definition.ClassType, ["inputs"] = inputs, ["_meta"] = new JsonObject { ["title"] = node.Title } };
@@ -94,6 +108,14 @@ public static class PromptCompiler
         {
             if (!nodes.ContainsKey(link.Source) || !nodes.TryGetValue(link.Target, out var target)) { diagnostics.Add(new("dangling_link", $"Link {link.Id} refers to a missing node.")); continue; }
             var slots = target.Data["inputs"] as JsonArray;
+            if (target.Type == "CreateList")
+            {
+                if (slots is null || link.TargetSlot < 0 || link.TargetSlot >= slots.Count ||
+                    slots[link.TargetSlot] is not JsonObject input || input["link"] is not JsonValue value ||
+                    !value.TryGetValue<long>(out var referenced) || referenced != link.Id)
+                    diagnostics.Add(new("inconsistent_link", $"Link {link.Id} is not referenced by its target input.", target.Id));
+                continue;
+            }
             if (slots is null || link.TargetSlot < 0 || link.TargetSlot >= slots.Count || slots[link.TargetSlot]?["link"]?.GetValue<long>() != link.Id)
                 diagnostics.Add(new("inconsistent_link", $"Link {link.Id} is not referenced by its target input."));
         }
@@ -108,6 +130,33 @@ public static class PromptCompiler
         }
         if (nodes.Keys.Any(Visit)) diagnostics.Add(new("cycle", "The executable graph contains a cycle."));
         return new(diagnostics.Count == 0 ? prompt : null, diagnostics);
+    }
+    private static Dictionary<int, string> CreateListNames(GraphNode node, List<CompilationDiagnostic> diagnostics)
+    {
+        var names = new Dictionary<int, string>();
+        var seen = new HashSet<string>(StringComparer.Ordinal);
+        if (node.Data["inputs"] is not JsonArray slots)
+        {
+            diagnostics.Add(new("invalid_input_name", "CreateList input ports must be an array of named slots.", node.Id));
+            return names;
+        }
+        for (int slot = 0; slot < slots.Count; slot++)
+        {
+            if (slots[slot] is not JsonObject input || input["name"] is not JsonValue value ||
+                !value.TryGetValue<string>(out var name) || name.Length != 13 ||
+                !name.StartsWith("inputs.input", StringComparison.Ordinal) || name[12] is < '0' or > '9')
+            {
+                diagnostics.Add(new("invalid_input_name", $"CreateList input slot {slot} must be named inputs.input0 through inputs.input9.", node.Id));
+                continue;
+            }
+            if (!seen.Add(name))
+            {
+                diagnostics.Add(new("duplicate_input_name", $"CreateList has more than one input slot named {name}.", node.Id));
+                continue;
+            }
+            names.Add(slot, name);
+        }
+        return names;
     }
     private static JsonNode? Literal(JsonNode? value) => value is JsonArray ? new JsonObject { ["__value__"] = value.DeepClone() } : value?.DeepClone();
 }

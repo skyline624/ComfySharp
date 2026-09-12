@@ -24962,8 +24962,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_toolkit.py#L14",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -24975,6 +24975,7 @@
       },
       "evidence": [],
       "scenario": "contract:CreateList",
+      "limits": "Top-level wildcard Autogrow.TemplatePrefix, inputs.input0 through inputs.input9, ordered execution-list concatenation and typed blocker propagation. Extra input names are rejected explicitly, unlike the upstream distinction between extra literals and links. Desktop provides ten fixed ports; automatic growth, shared MatchType propagation, nested dynamic templates and V3 lazy hooks remain open. See docs/CREATE_LIST.md for validation scope.",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "CreateList",
       "registrationEvidence": {

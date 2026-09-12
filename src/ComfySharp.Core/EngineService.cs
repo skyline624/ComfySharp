@@ -32,8 +32,11 @@ public sealed class EngineService(NodeRegistry registry)
                 { Error("invalid_node", "Node must contain a string class_type.", id); return; }
                 if (!Registry.TryGet(type, out var node)) { Error("unknown_node", $"Node type '{type}' is not implemented.", id); return; }
                 if (n["inputs"] is not JsonObject inputs) { Error("invalid_inputs", "Node inputs must be an object.", id); return; }
+                ExpandedNodeInputs expanded;
+                try { expanded = NodeInputExpansion.Expand(node.Schema, inputs.Select(p => p.Key)); }
+                catch (NodeInputExpansionException e) { Error(e.Code, e.Message, id, e.InputName); return; }
                 active.Add(id);
-                foreach (var input in node.Schema.Inputs)
+                foreach (var input in expanded.Inputs)
                 {
                     if (!inputs.TryGetPropertyValue(input.Name, out var value))
                     {
@@ -155,6 +158,8 @@ public sealed class EngineService(NodeRegistry registry)
             Registry.TryGet(data["class_type"]!.GetValue<string>(), out var node);
             var rawInputs = data["inputs"]!.AsObject();
             var promptInputOrder = rawInputs.Select(p => p.Key).ToArray();
+            var expanded = NodeInputExpansion.Expand(node.Schema, promptInputOrder);
+            var declaredInputs = expanded.Inputs;
             using var nodeScope = new RuntimeNodeContext();
             var resolved = new Dictionary<string, IReadOnlyList<RuntimeValue>>(StringComparer.Ordinal);
             async Task Resolve(InputSchema input)
@@ -165,7 +170,7 @@ public sealed class EngineService(NodeRegistry registry)
             }
             try
             {
-                foreach (var input in node.Schema.Inputs.Where(i => !i.Lazy)) await Resolve(input);
+                foreach (var input in declaredInputs.Where(i => !i.Lazy)) await Resolve(input);
                 cancellationToken.ThrowIfCancellationRequested();
                 IReadOnlyCollection<string> lazyNames;
                 using (var lazyScope = new RuntimeNodeContext())
@@ -175,7 +180,7 @@ public sealed class EngineService(NodeRegistry registry)
                 }
                 foreach (var name in lazyNames.Distinct(StringComparer.Ordinal))
                 {
-                    var input = node.Schema.Inputs.SingleOrDefault(i => i.Name == name && i.Lazy)
+                    var input = declaredInputs.SingleOrDefault(i => i.Name == name && i.Lazy)
                         ?? throw new InvalidOperationException($"Node requested undeclared lazy input '{name}'.");
                     await Resolve(input);
                 }
@@ -210,7 +215,12 @@ public sealed class EngineService(NodeRegistry registry)
                         // Consume a message at this invocation, never mutate the memoized producer.
                         returned = NodeExecutionOutput.Blocked();
                     }
-                    else returned = await node.ExecuteAsync(invocationScope, invocation, cancellationToken);
+                    else
+                    {
+                        // Source scans flat prompt-order values for blockers before constructing V3 dictionaries.
+                        var arguments = expanded.BindArguments(invocationScope, invocation, cancellationToken);
+                        returned = await node.ExecuteAsync(invocationScope, arguments, cancellationToken);
+                    }
                     if (returned.Ui is not null) invocationUis.Add(UiDocument.Snapshot(returned.Ui));
                     cancellationToken.ThrowIfCancellationRequested();
                     var returnedValues = returned.BlockExecution is { } wholeCall

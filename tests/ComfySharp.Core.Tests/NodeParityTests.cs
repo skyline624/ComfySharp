@@ -38,7 +38,7 @@ public sealed class NodeParityTests
     public void Catalog_has_upstream_ids_ports_combo_and_lazy_metadata()
     {
         var catalog = BuiltInNodes.CreateRegistry().ToObjectInfo();
-        Assert.Equal(13, catalog.Count);
+        Assert.Equal(14, catalog.Count);
         Assert.Equal("STRING", catalog["StringConcatenate"]!["input"]!["required"]!["string_a"]![0]!.GetValue<string>());
         Assert.Equal("Both", catalog["StringTrim"]!["input"]!["required"]!["mode"]![0]![0]!.GetValue<string>());
         Assert.True(catalog["ComfySwitchNode"]!["input"]!["optional"]!["on_true"]![1]!["lazy"]!.GetValue<bool>());

@@ -2,11 +2,60 @@ using System.Text.Json.Nodes;
 
 namespace ComfySharp.Contracts;
 
-public sealed record InputSchema(string Name, string Type, bool Required = true, JsonObject? Options = null, bool Lazy = false);
+public sealed record InputSchema(string Name, string Type, bool Required = true, JsonObject? Options = null, bool Lazy = false,
+    AutogrowPrefixTemplate? Autogrow = null);
+
+/// <summary>An immutable snapshot of the supported V3 prefix template. No dynamic prototype or implicit Python evaluation.</summary>
+public sealed class AutogrowPrefixTemplate
+{
+    private readonly InputSchema input;
+    public InputSchema Input => input with { Options = input.Options?.DeepClone().AsObject() };
+    public string Prefix { get; }
+    public int Min { get; }
+    public int Max { get; }
+    public AutogrowPrefixTemplate(InputSchema input, string prefix, int min = 1, int max = 10)
+    {
+        ArgumentNullException.ThrowIfNull(input);
+        if (string.IsNullOrEmpty(prefix) || prefix.Any(c => !(char.IsAsciiLetterOrDigit(c) || c == '_')))
+            throw new ArgumentException("Only simple Autogrow prefixes are supported.", nameof(prefix));
+        if (min < 0 || max is < 1 or > 100) throw new ArgumentOutOfRangeException(nameof(min), "Autogrow requires min >= 0 and 1 <= max <= 100.");
+        // Source permits min > max: every generated name then becomes required.
+        if (input.Autogrow is not null || input.Type is not ("*" or "COMFY_MATCHTYPE_V3") || input.Lazy)
+            throw new ArgumentException("This Autogrow slice supports only non-lazy AnyType/MatchType prototypes.", nameof(input));
+        this.input = input with { Options = input.Options?.DeepClone().AsObject() };
+        ValidateOptions(this.input.Options, input.Type == "COMFY_MATCHTYPE_V3");
+        Prefix = prefix; Min = min; Max = max;
+    }
+    public static void ValidateOptions(JsonObject? options, bool matchType = false)
+    {
+        if (options is not null)
+            foreach (var (key, value) in options)
+            {
+                if (key is "display_name" or "tooltip")
+                {
+                    if (value is not JsonValue text || !text.TryGetValue<string>(out _)) throw new ArgumentException("Autogrow presentation text must be a string.");
+                }
+                else if (key == "advanced")
+                {
+                    if (value is not JsonValue flag || !flag.TryGetValue<bool>(out _)) throw new ArgumentException("Autogrow advanced must be Boolean.");
+                }
+                else if (key == "template" && matchType)
+                {
+                    if (value is not JsonObject template || template.Count != 2 ||
+                        template["template_id"] is not JsonValue id || !id.TryGetValue<string>(out var name) || string.IsNullOrEmpty(name) ||
+                        template["allowed_types"] is not JsonValue allowed || !allowed.TryGetValue<string>(out var types) || types != "*")
+                        throw new ArgumentException("Only an explicit wildcard MatchType template is supported.");
+                }
+                else throw new ArgumentException($"Unsupported Autogrow option: {key}");
+            }
+        if (matchType && options?["template"] is not JsonObject) throw new ArgumentException("MatchType requires its explicit template.");
+    }
+}
 public sealed record OutputSchema(string Type, string? Name = null, bool IsList = false, string? MatchTemplate = null);
 public sealed record NodeSchema(string ClassType, string DisplayName, string Category,
     IReadOnlyList<InputSchema> Inputs, IReadOnlyList<OutputSchema> Outputs, bool OutputNode = false, bool InputIsList = false, bool Experimental = false,
-    string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null);
+    string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null,
+    bool V3ObjectInfo = false);
 public sealed record EngineDiagnostic(string Code, string Message, string? NodeId = null, string? InputName = null, string? TargetId = null);
 public sealed record ValidationResult(IReadOnlyList<string> ValidTargets, IReadOnlyList<EngineDiagnostic> Diagnostics)
 {
