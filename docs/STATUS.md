@@ -8,6 +8,8 @@ La [tranche IMAGE CPU](qualification/image-primitives-integration.md) passe **2 
 
 La [tranche ImageBatch](qualification/image-batch-integration.md) porte le total local à **2 362 PASS, dont 53 nouveaux cas**. Les 19 comparaisons source et le parcours natif Desktop/Host passent ; padding alpha, recadrage et interpolation restent dans le profil CPU/F32 décrit. La [CI des quatre primitives précédentes](qualification/image-primitives-ci-c4dc65d.md) confirme leurs 84 nouveaux cas sur les trois OS ; les gates numériques SD/CLIP restent ouvertes.
 
+La [CI ImageBatch du commit 8a261a0](qualification/image-batch-ci-8a261a0.md) confirme les 53 nouveaux cas et le smoke sur les trois OS. Les contrôles SD de premier accès natif échouent sur Windows (18 cas) et Linux (16 cas) ; macOS conserve deux échecs CLIP. Les suites Inference ordinaires et CLIP stock Windows/Linux sautées après ces échecs ne sont pas déclarées réussies.
+
 | Composant | Disponible | Limites |
 |---|---|---|
 | Dépôt/socle | Lot 0 validé : dépôt public indépendant, clone propre vérifié, .NET 10, verrous, GPLv3 ; CI CPU et démarrage graphique Desktop/Host sur les trois OS | Installations propres et distributions finales à qualifier au lot 12 |

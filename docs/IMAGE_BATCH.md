@@ -18,7 +18,9 @@ Les premiers contrôles locaux passent : 18 cas d'opérations et cinq cas du vra
 
 Le [protocole source](../labs/image-batch-source/README.md) fixe 19 cas avant collecte : quatre sans redimensionnement à comparer sur les octets Float32 exacts, quatorze bilinéaires avec `abs(actual-source) <= 1e-6 + 1e-6*abs(source)` et un échec de recadrage vide. Cette marge est limitée aux entrées et dimensions bornées du protocole ; elle ne valide pas tout le domaine numérique du nœud. Les 19 comparaisons passent ; l'écart absolu maximal observé dans les cas bilinéaires est zéro sur cette machine, sans changer la règle de tolérance. La [campagne finale locale](qualification/image-batch-integration.md) passe 2 362 tests, dont 53 nouveaux, et le smoke natif Desktop/Host.
 
-La route d'éditeur utilise deux nœuds EmptyImage, ImageBatch, ImageFromBatch et PreviewAny. Ce dernier affiche le tenseur sous forme de texte. Aucun codec ni fichier image, modèle préentraîné, autre dtype ou GPU n'est qualifié par cette tranche. Les validations des plateformes requises restent ouvertes.
+La route d'éditeur utilise deux nœuds EmptyImage, ImageBatch, ImageFromBatch et PreviewAny. Ce dernier affiche le tenseur sous forme de texte. Aucun codec ni fichier image, modèle préentraîné, autre dtype ou GPU n'est qualifié par cette tranche. Les configurations GPU prévues restent à valider.
+
+La [CI du commit 8a261a0](qualification/image-batch-ci-8a261a0.md) confirme ensuite les 53 nouveaux cas et le smoke sur les trois configurations CPU. Les gates SD/CLIP restent en échec ; cette campagne ne ferme pas les autres dtypes, GPU ou fonctions du catalogue.
 
 ## Provenance
 
