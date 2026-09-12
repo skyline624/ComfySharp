@@ -1,0 +1,212 @@
+{
+  "schema": 1,
+  "baseCommit": "c262ed87b1e8a4e3db2666558df5ebd0330aa6c0",
+  "platform": "Windows win-x64 CPU",
+  "passed": 2450,
+  "failed": 0,
+  "skipped": 0,
+  "new": 41,
+  "excludedTests": [
+    {
+      "name": "ComfySharp.Host.Tests.ImageFileStoreTests.File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write",
+      "reason": "Local Windows lacks symbolic-link creation privilege; initial fixture creation failed. Test remains active in CI."
+    }
+  ],
+  "uniqueTestIds": 2450,
+  "projects": {
+    "Workflow": 78,
+    "Host": 287,
+    "Tokenization": 540,
+    "Desktop": 44,
+    "Core": 798,
+    "Inference": 703
+  },
+  "newClasses": {
+    "ImageFileStoreTests": 16,
+    "ImageFileNamingTests": 25
+  },
+  "trx": [
+    {
+      "project": "Workflow",
+      "passed": 78,
+      "bytes": 120023,
+      "sha256": "57764a33151d0b0974563fc31d2be4dfba632388d3337650388003b83bd2b26f"
+    },
+    {
+      "project": "Host",
+      "passed": 287,
+      "bytes": 781965,
+      "sha256": "2913fd0cee9f671e26eb1650cc143fb332985acc07a57da4a288d2b262312fca"
+    },
+    {
+      "project": "Tokenization",
+      "passed": 540,
+      "bytes": 814012,
+      "sha256": "d3d1c8a84908b1e895324dcc69b1a863e705207dcbf5c9add92c0cf9c5b77b90"
+    },
+    {
+      "project": "Desktop",
+      "passed": 44,
+      "bytes": 66212,
+      "sha256": "4a0fbccad28b337b99171a55895e69c211f2ca280daebbd028dfeb90cd73734d"
+    },
+    {
+      "project": "Core",
+      "passed": 798,
+      "bytes": 1231989,
+      "sha256": "44b0c9c32f0cb34c7a98c774f19555c39286528fd4cc334a0e1cae3b35477b87"
+    },
+    {
+      "project": "Inference",
+      "passed": 703,
+      "bytes": 1121691,
+      "sha256": "49c0799c3e3f7f06ebdfaa04b01096911e670836a9dab0fbe2cd347d63e58b32"
+    }
+  ],
+  "build": {
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "bytes": 3049,
+    "sha256": "1e4ad5e180c0223f9a593617b10ce79882238cca3b6732d14e23389b12f865fb"
+  },
+  "tests": {
+    "exitCode": 0,
+    "bytes": 3310,
+    "sha256": "e24bebb103183647cbd24cc533f37d213faab0fa8a06dec888df9ef5f3699370"
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=win-x64 --filter Requires!=SymbolicLinks --logger trx --results-directory <local-evidence-directory>"
+  ],
+  "unchangedFiles": {
+    "src/ComfySharp.Contracts/ImageFiles.cs": {
+      "bytes": 1083,
+      "sha256": "9f01b4b7aa6e5eb3635797a076fcd2c0dddc2aeeb441c6bbaa472d84cbca7963"
+    },
+    "src/ComfySharp.Host/packages.linux-x64.cpu.lock.json": {
+      "bytes": 5230,
+      "sha256": "e58aaed0a677ab4852950b46cdd83d97ced4c14765273b9ac0cae93e49583cb0"
+    },
+    "src/ComfySharp.Host/packages.linux-x64.cpu.publish.lock.json": {
+      "bytes": 6549,
+      "sha256": "9347c413bc937994a47d1d3ab8cefe647b93be9ca25536d14b074ec2e3ea9b96"
+    },
+    "src/ComfySharp.Host/packages.osx-arm64.cpu.lock.json": {
+      "bytes": 5230,
+      "sha256": "6565e9670966f14bb20d44915b2abc24e10a16e31c9f619bc807e3e7e3289beb"
+    },
+    "src/ComfySharp.Host/packages.osx-arm64.cpu.publish.lock.json": {
+      "bytes": 6549,
+      "sha256": "7974399b8a3f01e024230ba9db500b2dff65e4d8fc45ec4acf0b43adc5f960bc"
+    },
+    "src/ComfySharp.Host/packages.win-x64.cpu.lock.json": {
+      "bytes": 5228,
+      "sha256": "5bc56a743ff04f17fb599dcf148cc1729a202d8e6312ddab246effcb3f6992d5"
+    },
+    "src/ComfySharp.Host/packages.win-x64.cpu.publish.lock.json": {
+      "bytes": 6543,
+      "sha256": "7414b0f3750e2803dc868ba65ceb460f63836ce32fd3b0e12c0fb6bc78af5fae"
+    },
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": {
+      "bytes": 9984,
+      "sha256": "d45dd49d58acf3dce474e6ff91c187e3eb4e67eb32a7f220613f2fb87dc6ffe4"
+    },
+    "src/ComfySharp.Host/packages.win-x64.cuda.publish.lock.json": {
+      "bytes": 13356,
+      "sha256": "75d3d45de1ce570fbec83c82278c0a1e868e2d371a104a08ac286155470d7653"
+    },
+    "src/ComfySharp.Nodes/ImageFileNaming.cs": {
+      "bytes": 6979,
+      "sha256": "963050527efbc0b623a71be39aa73bdb5ea66de3a64143724594ef7ead607b40"
+    },
+    "src/ComfySharp.Storage/ComfySharp.Storage.csproj": {
+      "bytes": 377,
+      "sha256": "49599f9a3cd69e7ec7ab03c5511282fdda0c598c2637ce4a636123959c4fe1ae"
+    },
+    "src/ComfySharp.Storage/ImageFileStore.cs": {
+      "bytes": 5384,
+      "sha256": "4ea8945bd67397a3017a5738084697c21e44e84d34838dc58d78d82854b8866c"
+    },
+    "src/ComfySharp.Storage/packages.linux-x64.lock.json": {
+      "bytes": 2488,
+      "sha256": "e48caf827d49bf7c8efa41d4bbdc195044ed2a7ae624b3f1b1e00c2a4ccad1da"
+    },
+    "src/ComfySharp.Storage/packages.lock.json": {
+      "bytes": 2254,
+      "sha256": "33e14d0a6b49a0fd2d2469d296a2ed4109f49030ed019197a958c76b0cf3570a"
+    },
+    "src/ComfySharp.Storage/packages.osx-arm64.lock.json": {
+      "bytes": 2488,
+      "sha256": "b58f9dda19bebede5dab26c438a1bdcec138e75af66fc59f1d51fc71ac94965e"
+    },
+    "src/ComfySharp.Storage/packages.win-x64.lock.json": {
+      "bytes": 2486,
+      "sha256": "03761d77a66c71825727a9a340fb88a8d766c199c74701edeff970f4898fb0d3"
+    },
+    "tests/ComfySharp.Core.Tests/ImageFileNamingTests.cs": {
+      "bytes": 5736,
+      "sha256": "d2c9b6cd3ca09fe0a63245944ef622c42a7fb10a6bffa85bfc8de4a70e0e3be8"
+    },
+    "tests/ComfySharp.Host.Tests/ImageFileStoreTests.cs": {
+      "bytes": 8561,
+      "sha256": "80d9ee6db6315b3263409cf617e6c124fc4759648f7eaa8da5cfac474f14f2d1"
+    },
+    "tests/ComfySharp.Host.Tests/TestDirectoryLink.cs": {
+      "bytes": 2414,
+      "sha256": "24fd19d102d7033315a479d562310a80ff6f910ca0e2ab977c95a205cb469648"
+    },
+    "tests/ComfySharp.Host.Tests/packages.linux-x64.cpu.lock.json": {
+      "bytes": 24015,
+      "sha256": "648bd4b425bc8d7a6e24db6f721f2caa74a9c6c4c4a64685fe9306d25c0aae21"
+    },
+    "tests/ComfySharp.Host.Tests/packages.osx-arm64.cpu.lock.json": {
+      "bytes": 24015,
+      "sha256": "1659f7fa959cb299da60fca379f900370f863045aa5856bcedfa67fc7fe563a1"
+    },
+    "tests/ComfySharp.Host.Tests/packages.win-x64.cpu.lock.json": {
+      "bytes": 24011,
+      "sha256": "c7a4d6fafd1934db8a09de7592436b8cb6d3319491da2f049cda72406c235029"
+    },
+    "tests/ComfySharp.Host.Tests/packages.win-x64.cuda.lock.json": {
+      "bytes": 28773,
+      "sha256": "a3a84355025e4fcb153d361756a39075d5081497f366308a41e3758a470e3fb8"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14381,
+      "sha256": "1458691934eee77982eaada3dc4f24594d4629e3aac3c173bccff81129720d6b"
+    }
+  },
+  "snapshotScope": "Changed source/tests/resources and build settings; a file snapshot, not loaded-assembly attestation.",
+  "snapshotPins": {
+    "before": {
+      "bytes": 4757,
+      "sha256": "2a40415657824a2a913a6b08b1afaed9d73d8eb0019f208ede60b782ef7151cd"
+    },
+    "after": {
+      "bytes": 4576,
+      "sha256": "49591c24b1939d093fd35071fc5cf08293f0c753584ba911d7cd587e302ea53c"
+    }
+  },
+  "limits": [
+    "Windows CPU development run; no Linux, macOS, CUDA or MPS qualification in this evidence.",
+    "File snapshots identify tested inputs, not loaded native DLLs.",
+    "PNG tests use a separate C# test decoder; no Pillow corpus or actual Desktop bitmap decoding yet.",
+    "New naming tests use explicit reference vectors; new storage tests verify byte/file behavior, not PNG decoding. Production SaveImage/PreviewImage and /view are not registered.",
+    "Exactly one Requires=SymbolicLinks test was excluded from this local campaign. Its initial fixture creation failed for lack of Windows privilege; directory junction tests passed separately and in this campaign. CI does not exclude this test.",
+    "No new source lab execution, native UI smoke, model weights or numerical tolerances in this step.",
+    "Earlier published CI failures in SD/CLIP are unresolved by this local success."
+  ]
+}

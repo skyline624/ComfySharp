@@ -193,6 +193,7 @@
       "comfysharp.storage": {
         "type": "Project",
         "dependencies": {
+          "ComfySharp.Contracts": "[0.1.0-dev, )",
           "Microsoft.Data.Sqlite": "[10.0.9, )",
           "SQLitePCLRaw.bundle_e_sqlite3": "[3.0.5, )"
         }
