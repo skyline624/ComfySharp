@@ -12,7 +12,7 @@ using Xunit;
 namespace ComfySharp.Desktop.Tests;
 public static class TestApplication
 {
-    public static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>().UseHeadless(new AvaloniaHeadlessPlatformOptions());
+    public static AppBuilder BuildAvaloniaApp() => AppBuilder.Configure<App>().UseSkia().UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false });
 }
 public class DesktopTests
 {

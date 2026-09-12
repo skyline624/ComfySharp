@@ -1,6 +1,6 @@
 # Nommage et stockage des images
 
-Ces composants assurent le nommage et le stockage de `SaveImage` et `PreviewImage`, désormais enregistrés dans le Host. Leur [raccordement tensoriel, métadonnées et API `/view`](IMAGE_FILE_NODES.md) est documenté séparément. Le catalogue compte 37 identifiants ; les aperçus bitmap de Desktop restent à intégrer. Les résultats ci-dessous décrivent la campagne antérieure des fondations.
+Ces composants assurent le nommage et le stockage de `SaveImage` et `PreviewImage`, désormais enregistrés dans le Host. Leur [raccordement tensoriel, métadonnées et API `/view`](IMAGE_FILE_NODES.md) est documenté séparément. Le catalogue compte 37 identifiants ; les [aperçus bitmap de Desktop](BITMAP_PREVIEWS.md) disposent maintenant d’une tranche distincte. Les résultats ci-dessous décrivent la campagne antérieure des fondations.
 
 ## Règles de nommage
 

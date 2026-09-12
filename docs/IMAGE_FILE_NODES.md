@@ -36,10 +36,10 @@ Les prompts invalides ne modifient pas ce cache. Lorsque plusieurs appels au mot
 
 Les options non portées sont refusées explicitement : autres formats, conversions, canal alpha isolé, répertoire `input` et chemins d'assets annotés. Aucun support complet du `/view` amont n'est revendiqué.
 
-Les workflows 0.4 et 1 peuvent compiler `EmptyImage → SaveImage → PreviewImage`. Les modèles de nœuds dans Desktop exposent les entrées et sorties correspondantes, avec sauvegarde et undo/redo. **Desktop n'affiche pas encore les PNG comme bitmaps** et ne transmet pas encore automatiquement son document dans `extra_pnginfo.workflow`. L'appel API peut déjà transmettre ce document. Les substitutions frontend de noms restent à porter.
+Les workflows 0.4 et 1 peuvent compiler `EmptyImage → SaveImage → PreviewImage`. Les modèles de nœuds dans Desktop exposent les entrées et sorties correspondantes, avec sauvegarde et undo/redo. La [tranche suivante des aperçus bitmap](BITMAP_PREVIEWS.md) ajoute l'affichage natif du lot et la transmission du document dans `extra_pnginfo.workflow`. Les substitutions frontend de noms restent à porter.
 
 ## Preuves et suites
 
 La [campagne locale](qualification/image-file-nodes.json) sépare les tests des objets, des fichiers tensoriels, du Host, des documents et des templates Avalonia. Les tests vérifient des pixels explicites avec un lecteur PNG C# distinct, les métadonnées, les fichiers réels, les événements, l'historique, HEAD et les plages d'octets. Les tests de durée de vie couvrent réutilisation, lazy/listes, suppression, changement de type, chevauchement, fermeture, erreur et annulation.
 
-Les validations réelles avec poids, le corpus exécuté contre SaveImage/Pillow, les autres dtypes/devices, l'interface bitmap et les plateformes requises restent ouverts. Les tolérances SD/CLIP et leurs échecs CI antérieurs ne sont pas modifiés. Les deux entrées du manifeste restent `partial`, sans déclaration de workflow préentraîné ni de plateforme complète.
+Les validations réelles avec poids, le corpus exécuté contre SaveImage/Pillow, les autres dtypes/devices et la qualification complète des plateformes restent ouverts. La [CI des nœuds fichiers](qualification/image-file-nodes-ci-8556ab2.md) confirme les 34 nouveaux cas sur les trois OS, avant l'ajout de l'interface bitmap. Les tolérances SD/CLIP et leurs échecs CI antérieurs ne sont pas modifiés. Les deux entrées du manifeste restent `partial`, sans déclaration de workflow préentraîné ni de plateforme complète.

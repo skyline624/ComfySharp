@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "baseCommit": "8556ab2ed59ed64ca9df868bd3069695e690861b",
+  "platform": "Windows win-x64 CPU",
+  "scope": "Desktop and tests; Host implementation unchanged from base commit.",
+  "tests": {
+    "project": "Desktop",
+    "passed": 71,
+    "failed": 0,
+    "skipped": 0,
+    "excluded": 0,
+    "new": 26,
+    "classes": {
+      "ImagePrimitiveEditorTests": 1,
+      "PreviewEditorTests": 18,
+      "BitmapPreviewTests": 11,
+      "CreateListEditorTests": 3,
+      "ImagePreviewTransportTests": 15,
+      "DesktopTests": 6,
+      "HostDiscoveryTests": 8,
+      "StringFormatEditorTests": 3,
+      "ImageFileEditorTests": 1,
+      "ImageBatchEditorTests": 1,
+      "CaseConverterEditorTests": 2,
+      "TextComparisonEditorTests": 2
+    },
+    "trx": {
+      "bytes": 106502,
+      "sha256": "7fe6908e1fe018bc6487ee8fc602d57a6ef2fe66a1fe065503567964a1b9b193"
+    }
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0,
+    "exitCode": 0,
+    "bytes": 3049,
+    "sha256": "71284980cccc8447c000ae0e7108fa1b0870160c56f096e4e6a748b771658d9f"
+  },
+  "nativeSmoke": {
+    "exitCode": 0,
+    "window": "Real Avalonia platform window with separately supervised Host",
+    "checks": [
+      "Existing text/SIGMAS/IMAGE text workflows remain functional.",
+      "Three-frame IMAGE batch traverses SaveImage then PreviewImage, producing six original PNG files in an isolated temporary data directory.",
+      "Both outputs decode to bitmaps and navigate to frame 3.",
+      "Full workflow snapshot is preserved in submitted history metadata. Earlier Host tests separately assert PNG embedded metadata.",
+      "Host restart invalidates the captured image reader and disposes both previews.",
+      "Temporary data directory is removed only after the Host has stopped."
+    ],
+    "bytes": 326,
+    "sha256": "31685b62fdcd13202882c313a3f4560279165458d1a081d192d985e7ffa8cabe"
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx --results-directory <local-evidence-directory>",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.axaml": {
+      "bytes": 4648,
+      "sha256": "e87b962116249d9f62dbc222bf0a5d4a7ed4c26a61ddaba80b579488b2f7fc5b"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 16479,
+      "sha256": "d3007aa74b8a620d9110852989620a5b50d0b047fd787dce5e8e0973a24eedc2"
+    },
+    "src/ComfySharp.Desktop/HostSupervisor.cs": {
+      "bytes": 8556,
+      "sha256": "6a42dd5d093fb2bae68350e2453c7dc1295135d7aef5e181bc2d90a3d71da51d"
+    },
+    "src/ComfySharp.Desktop/ImagePreviewTransport.cs": {
+      "bytes": 4169,
+      "sha256": "0390abd2d9be0fc836f0cfd261966619d1c471b16353bd7d71c5069370f80599"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 26205,
+      "sha256": "67a1553721b3664f5c6a9c9c64d83631865d47c4c6954f13832135d3ca85d296"
+    },
+    "src/ComfySharp.Desktop/NodeImagePreview.cs": {
+      "bytes": 3732,
+      "sha256": "e382c66658e11594bd642a18740e334541f5f7bb5875b81ed51da7dd36163941"
+    },
+    "tests/ComfySharp.Desktop.Tests/BitmapPreviewTests.cs": {
+      "bytes": 8200,
+      "sha256": "bcbd428885f9344e210abfd98205e0bb357b6aae50df12ba7ac7c893ed210174"
+    },
+    "tests/ComfySharp.Desktop.Tests/DesktopTests.cs": {
+      "bytes": 5169,
+      "sha256": "6c0537f4c69f943612816da52b7ad46882acbaec60af3b366dd6084b7ddb6e69"
+    },
+    "tests/ComfySharp.Desktop.Tests/ImagePreviewTransportTests.cs": {
+      "bytes": 7725,
+      "sha256": "9723201a49b2371121af64a38e4130dfe98586785260e7e8c11bf48a24844df0"
+    },
+    "tests/ComfySharp.Desktop.Tests/PngPreviewFixture.cs": {
+      "bytes": 2283,
+      "sha256": "7704f4dec9d84cf91b3815d978c6b11d89ed9801fbf3e6bc012ee85dc3613c02"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed Desktop source/tests plus build settings; file hashes are not loaded-native-library attestation.",
+  "limits": [
+    "Only the complete Desktop test project was repeated after this Desktop-only change; other test project results belong to earlier campaigns.",
+    "Headless tests now use the real Skia raster backend. Explicit solid-color PNG fixture pixels are compared after native decode and bitmap disposal is checked by attempted pixel access.",
+    "Navigation displays one thumbnail per node with a maximum extent of 512 pixels, not a full-resolution gallery.",
+    "No pretrained model, GPU, Linux/macOS Desktop bitmap or portable distribution qualification in this local campaign.",
+    "Earlier SD/CLIP CI failures remain open; references and tolerances were not modified."
+  ]
+}

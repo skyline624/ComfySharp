@@ -27970,7 +27970,7 @@
         "module": "nodes.py",
         "status": "resolved-static"
       },
-      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Frontend filename substitutions, bitmap UI, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
+      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Native bitmap batch preview and workflow metadata submission are available in the Desktop profile (docs/BITMAP_PREVIEWS.md). Frontend filename substitutions, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
     },
     {
       "id": "node:PreviewImage:nodes.py:2083",
@@ -28006,7 +28006,7 @@
         "module": "nodes.py",
         "status": "resolved-static"
       },
-      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Frontend filename substitutions, bitmap UI, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
+      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Native bitmap batch preview and workflow metadata submission are available in the Desktop profile (docs/BITMAP_PREVIEWS.md). Frontend filename substitutions, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
     },
     {
       "id": "node:LoadImage:nodes.py:2084",

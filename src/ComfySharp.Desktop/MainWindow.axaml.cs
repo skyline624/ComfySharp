@@ -16,14 +16,24 @@ public sealed partial class MainWindow : Window
     private HashSet<string> outputNodes = new(StringComparer.Ordinal);
     private readonly CancellationTokenSource lifetime = new();
     private readonly HostSession hostSession = new();
+    private readonly string? smokeDataDirectory = Program.SmokeTest
+        ? Path.Combine(Path.GetTempPath(), "comfysharp-desktop-smoke-" + Guid.NewGuid().ToString("N")) : null;
     public MainWindow() : this(true) { }
     public MainWindow(bool startHost)
     {
         InitializeComponent(); AddDocument(WorkflowDocument.Create(), null);
         host.Changed += (_, _) => Dispatcher.UIThread.Post(() =>
         {
+            if (lifetime.IsCancellationRequested) return;
             HostStatus.Text = host.Status;
-            if (!host.Ready) { availableNodes = null; outputNodes.Clear(); foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).SetAvailability(null); }
+            if (!host.Ready)
+            {
+                availableNodes = null; outputNodes.Clear();
+                foreach (var tab in Documents.Items.OfType<TabItem>())
+                {
+                    var editor = (DocumentEditor)tab.Content!; editor.ClearPreviews(); editor.SetAvailability(null);
+                }
+            }
         });
         Opened += async (_, _) =>
         {
@@ -40,7 +50,20 @@ public sealed partial class MainWindow : Window
             if (!Program.SmokeTest && Documents.Items.OfType<TabItem>().Any(t => ((DocumentEditor)t.Content!).Document.IsDirty))
             { e.Cancel = true; Messages.Text = "Save all modified tabs before closing. Documents remain open."; }
         };
-        Closed += (_, _) => { hostSession.Close(); lifetime.Cancel(); host.Dispose(); };
+        Closed += (_, _) =>
+        {
+            hostSession.Close(); lifetime.Cancel();
+            foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).Dispose();
+            host.Dispose();
+            if (smokeDataDirectory is not null)
+            {
+                string directory = Path.GetFullPath(smokeDataDirectory);
+                if (!directory.StartsWith(Path.GetFullPath(Path.GetTempPath()), StringComparison.OrdinalIgnoreCase) ||
+                    !Path.GetFileName(directory).StartsWith("comfysharp-desktop-smoke-", StringComparison.Ordinal))
+                    throw new InvalidOperationException("Unexpected smoke data directory.");
+                if (Directory.Exists(directory)) Directory.Delete(directory, true);
+            }
+        };
     }
     public DocumentEditor ActiveEditor => (DocumentEditor)((TabItem)Documents.SelectedItem!).Content!;
     public void AddDocument(WorkflowDocument document, string? path)
@@ -62,7 +85,8 @@ public sealed partial class MainWindow : Window
     private async Task StartHostAsync()
     {
         availableNodes = null; lastPromptId = null; var session = hostSession.Restart();
-        await host.StartAsync();
+        foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).ClearPreviews();
+        await host.StartAsync(lifetime.Token, smokeDataDirectory);
         hostSession.Require(session);
         var info = await hostSession.ObserveAsync(host.GetAsync("/object_info"), session);
         hostSession.Require(session);
@@ -221,7 +245,35 @@ public sealed partial class MainWindow : Window
             batchTexts.Count != 1 || batchTexts[0]?.GetValue<string>() != "tensor([[[[0., 1., 0.]]]])")
             throw new InvalidOperationException("ImageBatch resize workflow smoke failed: " + batchEntry.ToJsonString());
         ActiveEditor.ApplyUiOutputs(batchOutputs);
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives with text preview, ImageBatch resize with text preview and native preview.");
+        var savedImage = ActiveEditor.AddNode("SaveImage"); var pngPreview = ActiveEditor.AddNode("PreviewImage");
+        ActiveEditor.Document.SetWidgets(savedImage, new JsonArray("smoke/frame"));
+        ActiveEditor.Document.Connect(imageBatch, 0, savedImage, 0); ActiveEditor.Document.Connect(savedImage, 0, pngPreview, 0);
+        ActiveEditor.Document.Move(savedImage, 40, 40); ActiveEditor.Document.Move(pngPreview, 340, 40);
+        ActiveEditor.Reload();
+        var pngSubmission = ActiveEditor.BeginSubmission(); var pngWorkflow = ActiveEditor.Document.Snapshot();
+        var pngSession = hostSession.Id; var imageReader = host.CaptureImageReader();
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(Compile(true), clientId, [pngPreview.Value], pngWorkflow), pngSession);
+        var pngEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), pngSession, 200);
+        hostSession.Require(pngSession);
+        if (!JsonNode.DeepEquals(pngWorkflow, pngEntry["prompt"]![3]!["extra_pnginfo"]!["workflow"]))
+            throw new InvalidOperationException("PNG smoke lost the submitted workflow metadata.");
+        if (!await ActiveEditor.ApplyUiOutputsAsync(pngEntry["outputs"]!.AsObject(), pngSubmission, imageReader))
+            throw new InvalidOperationException("PNG smoke result became obsolete.");
+        var previews = ActiveEditor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!.ItemsSource!.Cast<NodeView>()
+            .Where(n => n.Id == savedImage || n.Id == pngPreview).Select(n => n.ImagePreview).ToArray();
+        if (previews.Length != 2 || previews.Any(p => p?.Count != 3 || p.Image is null || p.Status.Length != 0 || p.Image.PixelSize != new Avalonia.PixelSize(1, 1)))
+            throw new InvalidOperationException("PNG smoke did not decode both three-frame outputs.");
+        foreach (var preview in previews) await preview!.LoadAsync(2);
+        if (previews.Any(p => p!.Image is null || p.Status.Length != 0 || p.Position != "3 / 3"))
+            throw new InvalidOperationException("PNG batch navigation smoke failed.");
+        if (Directory.GetFiles(smokeDataDirectory!, "*.png", SearchOption.AllDirectories).Length != 6)
+            throw new InvalidOperationException("PNG smoke did not create the expected output/temp files.");
+        var staleFile = PreviewImageFile.Parse(pngEntry["outputs"]![pngPreview.Value]!["images"]![0]);
+        await StartHostAsync();
+        try { await imageReader(staleFile, lifetime.Token); throw new InvalidOperationException("Old image reader survived a Host restart."); }
+        catch (OperationCanceledException) { }
+        if (previews.Any(p => !p!.IsDisposed || p.Image is not null)) throw new InvalidOperationException("Host restart retained old bitmap resources.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation and workflow metadata.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
@@ -302,15 +354,18 @@ public sealed partial class MainWindow : Window
         var targets = prompt.Where(p => outputNodes.Contains(p.Value!["class_type"]!.GetValue<string>())).Select(p => p.Key).ToArray();
         if (targets.Length == 0) throw new InvalidOperationException("Connect the result to an available output node, such as PreviewAny, before queueing.");
         var submission = editor.BeginSubmission();
+        var workflow = editor.Document.Snapshot(); var readImage = host.CaptureImageReader();
         var order = ++submissionOrder;
-        var result = await hostSession.ObserveAsync(host.SubmitAsync(prompt, clientId, targets), session);
+        var result = await hostSession.ObserveAsync(host.SubmitAsync(prompt, clientId, targets, workflow), session);
         hostSession.Require(session);
         var jobId = result["prompt_id"]?.GetValue<string>() ?? throw new InvalidOperationException("Host did not return a prompt ID.");
         if (order == submissionOrder) lastPromptId = jobId;
         Messages.Text = $"Submitted {jobId}. Waiting for output…";
         var entry = await WaitForJobAsync(jobId, session);
         hostSession.Require(session);
-        Messages.Text = editor.ApplyUiOutputs(entry["outputs"]!.AsObject(), submission)
+        var applied = await editor.ApplyUiOutputsAsync(entry["outputs"]!.AsObject(), submission, readImage);
+        hostSession.Require(session);
+        Messages.Text = applied
             ? $"Completed {jobId}. Outputs are shown in the document that submitted the job."
             : $"Completed {jobId}. The document changed or a newer job was submitted; this result remains in history.";
     });

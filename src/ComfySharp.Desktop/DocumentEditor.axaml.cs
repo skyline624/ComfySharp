@@ -8,7 +8,7 @@ using Avalonia.Media;
 using ComfySharp.Workflow;
 
 namespace ComfySharp.Desktop;
-public sealed partial class DocumentEditor : UserControl
+public sealed partial class DocumentEditor : UserControl, IDisposable
 {
     public WorkflowDocument Document { get; }
     public string? FilePath { get; set; }
@@ -16,27 +16,41 @@ public sealed partial class DocumentEditor : UserControl
     private readonly ObservableCollection<NodeView> nodes = [];
     private readonly ObservableCollection<ConnectionView> connections = [];
     private readonly Dictionary<string, string> previews = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, NodeImagePreview> imagePreviews = new(StringComparer.Ordinal);
+    private bool disposed;
     private string documentState;
     private long revision, submissionSequence;
     public readonly record struct PreviewSubmission(long Revision, long Sequence);
-    public PreviewSubmission BeginSubmission() => new(revision, ++submissionSequence);
+    public PreviewSubmission BeginSubmission()
+    {
+        ObjectDisposedException.ThrowIf(disposed, this); ClearPreviews(); return new(revision, submissionSequence);
+    }
     private ISet<string>? availableNodes;
     public DocumentEditor() : this(WorkflowDocument.Create()) { }
     public DocumentEditor(WorkflowDocument document)
     {
         Document = document; InitializeComponent();
         documentState = document.ToJson();
-        document.Changed += (_, _) =>
-        {
-            var state = document.ToJson();
-            if (state == documentState) return; // Saving the same document does not invalidate a result.
-            documentState = state; revision++;
-            previews.Clear();
-            foreach (var view in nodes) view.PreviewText = "";
-        };
+        document.Changed += DocumentChanged;
         Canvas.ItemsSource = nodes; Canvas.Connections = connections;
         UpdateNodeChoices();
         Reload();
+    }
+    private void DocumentChanged(object? sender, EventArgs e)
+    {
+        var state = Document.ToJson();
+        if (state == documentState) return; // Saving an unchanged document keeps its previews.
+        documentState = state; revision++; ClearPreviews();
+    }
+    public void ClearPreviews()
+    {
+        submissionSequence++; previews.Clear();
+        foreach (var view in nodes) { view.PreviewText = ""; view.ImagePreview = null; }
+        foreach (var preview in imagePreviews.Values) preview.Dispose(); imagePreviews.Clear();
+    }
+    public void Dispose()
+    {
+        if (disposed) return; disposed = true; Document.Changed -= DocumentChanged; ClearPreviews();
     }
     public void SetAvailability(ISet<string>? available) { availableNodes = available; UpdateNodeChoices(); Reload(); }
     private void UpdateNodeChoices()
@@ -46,18 +60,20 @@ public sealed partial class DocumentEditor : UserControl
     }
     public void Reload()
     {
+        foreach (var view in nodes) view.ImagePreview = null;
         nodes.Clear();
         foreach (var node in Document.Nodes)
         {
             var view = new NodeView(node, location => { Document.Move(node.Id, location.X, location.Y); RefreshConnections(); }, availableNodes);
             if (node.Type == "PreviewAny" && previews.TryGetValue(node.Id.Value, out var text)) view.PreviewText = text;
+            if (imagePreviews.TryGetValue(node.Id.Value, out var image)) view.ImagePreview = image;
             nodes.Add(view);
         }
         RefreshConnections();
     }
     public bool ApplyUiOutputs(JsonObject outputs, PreviewSubmission? submission = null)
     {
-        if (submission.HasValue && (submission.Value.Revision != revision || submission.Value.Sequence != submissionSequence)) return false;
+        if (!IsCurrent(submission)) return false;
         foreach (var node in Document.Nodes.Where(n => n.Type == "PreviewAny"))
         {
             if (outputs[node.Id.Value]?["text"] is not { } value) continue;
@@ -67,6 +83,28 @@ public sealed partial class DocumentEditor : UserControl
             if (view is not null) view.PreviewText = text;
         }
         return true;
+    }
+    private bool IsCurrent(PreviewSubmission? submission) => !disposed && (!submission.HasValue ||
+        submission.Value.Revision == revision && submission.Value.Sequence == submissionSequence);
+    public async Task<bool> ApplyUiOutputsAsync(JsonObject outputs, PreviewSubmission submission,
+        Func<PreviewImageFile, CancellationToken, Task<byte[]>> read)
+    {
+        if (!IsCurrent(submission)) return false;
+        // Validate all descriptors before changing the displayed batch.
+        var batches = Document.Nodes.Where(n => n.Type is "SaveImage" or "PreviewImage")
+            .Where(n => outputs[n.Id.Value]?["images"] is not null)
+            .Select(n => (n.Id, Files: outputs[n.Id.Value]!["images"]!.AsArray().Select(PreviewImageFile.Parse).ToArray())).ToArray();
+        ApplyUiOutputs(outputs, submission);
+        foreach (var (id, files) in batches)
+        {
+            if (!IsCurrent(submission)) return false;
+            var preview = new NodeImagePreview(files, read);
+            if (imagePreviews.Remove(id.Value, out var old)) old.Dispose();
+            imagePreviews.Add(id.Value, preview);
+            var view = nodes.FirstOrDefault(n => n.Id == id); if (view is not null) view.ImagePreview = preview;
+            await preview.LoadAsync();
+        }
+        return IsCurrent(submission);
     }
     private void RefreshConnections()
     {
@@ -99,6 +137,7 @@ public sealed class NodeView : INotifyPropertyChanged
 {
     private Point location;
     private string previewText = "";
+    private NodeImagePreview? imagePreview;
     private readonly Action<Point> move;
     public event PropertyChangedEventHandler? PropertyChanged;
     public NodeId Id { get; }
@@ -107,6 +146,8 @@ public sealed class NodeView : INotifyPropertyChanged
     public string Ports { get; }
     public IBrush Outline { get; }
     public bool IsPreview { get; }
+    public bool HasImagePreview => imagePreview is not null;
+    public NodeImagePreview? ImagePreview { get => imagePreview; set { if (ReferenceEquals(imagePreview, value)) return; imagePreview = value; PropertyChanged?.Invoke(this, new(nameof(ImagePreview))); PropertyChanged?.Invoke(this, new(nameof(HasImagePreview))); } }
     public string PreviewText { get => previewText; set { if (previewText == value) return; previewText = value; PropertyChanged?.Invoke(this, new(nameof(PreviewText))); } }
     public Point Location { get => location; set { if (location == value) return; location = value; PropertyChanged?.Invoke(this, new(nameof(Location))); move(value); } }
     public NodeView(GraphNode node, Action<Point> move, ISet<string>? availableNodes = null)

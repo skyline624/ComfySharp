@@ -1,6 +1,6 @@
 # Fondations PNG et métadonnées d'exécution
 
-Cette étape prépare les nœuds `SaveImage` et `PreviewImage`. Elle ajoute un encodeur PNG C# et la transmission des métadonnées dans le moteur et le Host. **Les deux nœuds, leur stockage de fichiers, `/view` et l'affichage des images dans Desktop ne sont pas encore raccordés.** Le registre public conserve 35 identifiants ; aucune capacité de génération de modèle n'est promue.
+Cette documentation décrit la tranche initiale de l’encodeur PNG C# et de la transmission des métadonnées. Son registre comptait alors 35 identifiants. Les [nœuds SaveImage/PreviewImage et leur API](IMAGE_FILE_NODES.md), puis les [aperçus bitmap natifs](BITMAP_PREVIEWS.md), ont été raccordés dans les tranches suivantes. Aucune capacité de génération de modèle n’est promue.
 
 ## Entrées cachées
 
@@ -42,7 +42,7 @@ La [preuve locale Windows CPU](qualification/png-metadata-foundations.json) comp
 
 Les nouveaux tests couvrent la projection des schémas, les trois frontières d'exécution, les données absentes, les entrées lazy, les listes vides et non vides, la modification du document après suspension, deux travaux simultanés et les soumissions HTTP avec les deux alias. Les tests PNG utilisent un lecteur de test distinct avec un calcul CRC bit par bit, le décodage zlib et les cinq filtres PNG pour vérifier les pixels attendus, l'alpha, les métadonnées, les chunks multiples, les plafonds et la durée de vie des wrappers natifs.
 
-Ce lecteur de test ne remplace pas la qualification par un décodeur natif ni les comparaisons de PNG produits par la source. Les étapes suivantes restent nécessaires :
+Ce lecteur de test ne remplace pas la qualification par un décodeur natif ni les comparaisons de PNG produits par la source. Les suites prévues à cette étape étaient les suivantes ; le raccordement des fichiers, des nœuds et du bitmap est désormais couvert par les documents liés ci-dessus, tandis que les comparaisons de source et la qualification complète restent ouvertes :
 
 1. Sauvegarder dans les répertoires propres à ComfySharp, avec les règles amont de préfixes, compteurs, noms de fichiers et répertoires.
 2. Enregistrer les véritables nœuds `SaveImage` et `PreviewImage`, retourner leur IMAGE empruntée et les descripteurs `ui.images`, puis vérifier les métadonnées incorporées.

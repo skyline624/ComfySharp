@@ -12,6 +12,22 @@
               <TextBlock Text="{ReflectionBinding Subtitle}" Foreground="#B9C5DB" TextWrapping="Wrap"/>
               <TextBlock Text="{ReflectionBinding Ports}" FontSize="12" TextWrapping="Wrap"/>
               <TextBox IsVisible="{ReflectionBinding IsPreview}" Text="{ReflectionBinding PreviewText, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="60" MaxHeight="220" FontFamily="monospace"/>
+              <ContentControl Content="{ReflectionBinding ImagePreview}" IsVisible="{ReflectionBinding HasImagePreview}">
+                <ContentControl.ContentTemplate>
+                  <DataTemplate>
+                    <StackPanel Spacing="5">
+                      <Image Source="{ReflectionBinding Image}" MaxHeight="220" Stretch="Uniform"/>
+                      <TextBlock Text="{ReflectionBinding Status}" TextWrapping="Wrap"/>
+                      <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Button Content="←" Command="{ReflectionBinding Previous}" ToolTip.Tip="Previous image"/>
+                        <TextBlock Grid.Column="1" Text="{ReflectionBinding Position}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Grid.Column="2" Content="→" Command="{ReflectionBinding Next}" ToolTip.Tip="Next image"/>
+                      </Grid>
+                      <TextBlock Text="{ReflectionBinding Filename}" TextWrapping="Wrap" FontSize="11"/>
+                    </StackPanel>
+                  </DataTemplate>
+                </ContentControl.ContentTemplate>
+              </ContentControl>
             </StackPanel>
           </Border>
         </DataTemplate>

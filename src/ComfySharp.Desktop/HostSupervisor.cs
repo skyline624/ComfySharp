@@ -13,7 +13,8 @@ public sealed class HostSupervisor : IDisposable
 {
     private Process? process;
     private readonly SemaphoreSlim gate = new(1, 1);
-    private readonly HttpClient client = new() { Timeout = TimeSpan.FromSeconds(5) };
+    private readonly HttpClient client = new(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromSeconds(5) };
+    private long generation;
     private bool disposed;
     public string Status { get; private set; } = "Host stopped";
     public Uri? Address { get; private set; }
@@ -58,7 +59,7 @@ public sealed class HostSupervisor : IDisposable
                     { var path = Path.Combine(buildRoot, configuration, "net10.0", name); if (File.Exists(path)) return path; }
         return null;
     }
-    public async Task StartAsync(CancellationToken cancellationToken = default)
+    public async Task StartAsync(CancellationToken cancellationToken = default, string? dataDirectory = null)
     {
         await gate.WaitAsync(cancellationToken);
         try
@@ -73,6 +74,7 @@ public sealed class HostSupervisor : IDisposable
             { UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Path.GetDirectoryName(path)! };
             if (path.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)) info.ArgumentList.Add(path);
             info.ArgumentList.Add("--urls"); info.ArgumentList.Add(Address.AbsoluteUri);
+            if (dataDirectory is not null) { info.ArgumentList.Add("--data-dir"); info.ArgumentList.Add(Path.GetFullPath(dataDirectory)); }
             var child = new Process { StartInfo = info, EnableRaisingEvents = true };
             child.Exited += (_, _) => { if (ReferenceEquals(process, child)) { Ready = false; SetStatus("Host exited. Documents are retained; restart is available."); } };
             process = child;
@@ -97,11 +99,25 @@ public sealed class HostSupervisor : IDisposable
         finally { gate.Release(); }
     }
     public async Task<JsonObject> GetAsync(string route) => await client.GetFromJsonAsync<JsonObject>(Endpoint(route), JsonSerializerOptions.Default) ?? new JsonObject();
-    public Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null)
+    public Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null, JsonObject? workflow = null)
+    {
+        return PostAsync("/prompt", CreateSubmission(prompt, clientId, targets, workflow));
+    }
+    public static JsonObject CreateSubmission(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null, JsonObject? workflow = null)
     {
         var body = new JsonObject { ["prompt"] = prompt.DeepClone(), ["client_id"] = clientId };
         if (targets is not null) body["partial_execution_targets"] = new JsonArray(targets.Select(t => (JsonNode?)JsonValue.Create(t)).ToArray());
-        return PostAsync("/prompt", body);
+        if (workflow is not null) body["extra_data"] = new JsonObject { ["extra_pnginfo"] = new JsonObject { ["workflow"] = workflow.DeepClone() } };
+        return body;
+    }
+    public Func<PreviewImageFile, CancellationToken, Task<byte[]>> CaptureImageReader()
+    {
+        var address = Endpoint("/"); long captured = generation;
+        void Require() { if (disposed || !Ready || generation != captured) throw new OperationCanceledException("The Host session ended; image results are discarded."); }
+        return async (file, token) =>
+        {
+            Require(); var png = await ImagePreviewTransport.ReadAsync(client, address, file, token); Require(); return png;
+        };
     }
     public Task<JsonObject> InterruptAsync(string promptId) => PostAsync("/interrupt", new JsonObject { ["prompt_id"] = promptId });
     private Uri Endpoint(string route) => Ready && Address is not null ? new Uri(Address, route) : throw new InvalidOperationException("Host is not ready.");
@@ -114,7 +130,7 @@ public sealed class HostSupervisor : IDisposable
     }
     private void StopCore()
     {
-        Ready = false; var old = process; process = null;
+        generation++; Ready = false; var old = process; process = null;
         if (old is null) return;
         try { if (!old.HasExited) { old.Kill(entireProcessTree: true); old.WaitForExit(5000); } } finally { old.Dispose(); }
     }
