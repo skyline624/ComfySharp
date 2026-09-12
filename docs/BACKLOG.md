@@ -35,3 +35,5 @@ Le [réencodage VAE et débruitage partiel](SD15_IMG2IMG.md) est raccordé et ex
 Les [neuf schedulers KSampler](SD_SCHEDULERS.md) sont portés pour la table SD discrète par défaut, avec 71 cas source et neuf workflows Heun/CUDA réels. La matrice les marque partiels : les autres lois de bruit des modèles, les paramètres avancés et la qualification complète des plateformes restent requis.
 
 [DPM++ 2M](DPMPLUSPLUS_2M.md) est porté avec six cas source, gestion de l’historique et deux parcours SD1.5 CUDA réels. Euler, Heun et DPM++ 2M sont désormais marqués partiels dans la matrice, avec leurs preuves existantes. Restent la comparaison préentraînée de DPM++ 2M, les variantes SDE/CFG++, les samplers restants, les masques et les autres familles/plateformes.
+
+[Masques SD1.5](SD_INPAINT.md) : SetLatentNoiseMask, VAEEncodeForInpaint et le wrapper de sampling sont raccordés aux trois samplers, avec contrats source et trois workflows CUDA réels. Restent InpaintModelConditioning et modèles à neuf canaux, hooks de masques, comparaison préentraînée et qualification multiplateforme.

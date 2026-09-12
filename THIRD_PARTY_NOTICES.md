@@ -1,5 +1,12 @@
 # Third-party provenance
 
+`SdInpaintMask.cs`, `SdInpaintImage.cs` and the two inpaint node routes adapt
+the frozen ComfyUI `nodes.py`, `comfy/utils.py`, `comfy/samplers.py` and
+`comfy/model_sampling.py`, under the GPLv3 provenance below. Their source
+collector and limits are recorded in [SD_INPAINT.md](docs/SD_INPAINT.md).
+`inpaint-input.png` is an original procedural RGBA test pattern under the
+project GPLv3 licence; it contains no external artwork or model data.
+
 `SdDpmpp2MSampler.cs` adapts the frozen ComfyUI k-diffusion
 `sample_dpmpp_2m` implementation. The retained k-diffusion MIT notice below
 applies alongside ComfyUI's GPLv3 provenance. Its source-function laboratory

@@ -35,10 +35,12 @@ public sealed class SdEulerSampler : IDisposable
     /// independently of this sampler and ambient tensor scopes. Cancellation is checked between
     /// synchronous native operations, which cannot be interrupted in their middle.</summary>
     public Tensor Sample(Tensor initialDiffusionLatent, Tensor sigmas, Tensor positiveContext,
-        Tensor? negativeContext, SdGuidanceOptions? guidance = null, CancellationToken cancellationToken = default)
+        Tensor? negativeContext, SdGuidanceOptions? guidance = null, CancellationToken cancellationToken = default,
+        SdInpaintMask? inpaint = null)
     {
         cancellationToken.ThrowIfCancellationRequested();
         using var operation = RetainDenoiser();
+        using var paint = inpaint?.Retain();
         NativeRuntimeBootstrap.Initialize();
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
@@ -59,8 +61,8 @@ public sealed class SdEulerSampler : IDisposable
                 using var stepScope = NewDisposeScope();
                 var sigma = sigmas[step];
                 var modelSigma = sigma * sigmaBatchUnits;
-                using var denoised = operation.DenoiseGuided(current, modelSigma, positiveContext, negativeContext,
-                    guidance, cancellationToken);
+                Tensor Predict(Tensor x, Tensor s) => operation.DenoiseGuided(x, s, positiveContext, negativeContext, guidance, cancellationToken);
+                using var denoised = paint is null ? Predict(current, modelSigma) : paint.Denoise(current, modelSigma, Predict, cancellationToken);
                 // Keep source Tensor/F32 arithmetic and evaluation order, including the last
                 // interval. NativeMath.EulerStep is a separate scalar-double foundation API.
                 var derivative = (current - denoised) / sigma.reshape(1, 1, 1, 1);

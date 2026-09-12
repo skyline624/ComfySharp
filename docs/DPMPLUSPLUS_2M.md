@@ -48,6 +48,9 @@ durée de vie après libération des propriétaires du modèle.
 
 Le périmètre actuel reste SD1.5 Float32, CPU ou CUDA, un élément, au plus
 512 pixels par dimension et 1 à 100 étapes demandées. Les variantes SDE,
-CFG++, les autres architectures, les masques et la comparaison numérique
+CFG++, les autres architectures et la comparaison numérique
 préentraînée avec ComfyUI restent à porter ou qualifier. Ce mode ne suffit
 pas à déclarer la famille SD1.5 ou la V1 complète.
+
+Les [masques SD1.5](SD_INPAINT.md) sont désormais raccordés à ce sampler,
+avec preuve d'exécution CUDA distincte de cette première campagne.

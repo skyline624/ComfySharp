@@ -16,16 +16,18 @@ public sealed class SdHeunSampler : IDisposable
     }
 
     public Tensor Sample(Tensor initial, Tensor sigmas, Tensor positive, Tensor? negative,
-        SdGuidanceOptions? guidance = null, CancellationToken cancellationToken = default)
+        SdGuidanceOptions? guidance = null, CancellationToken cancellationToken = default, SdInpaintMask? inpaint = null)
     {
         cancellationToken.ThrowIfCancellationRequested();
         SdDenoiser retained;
         lock (gate) retained = (denoiser ?? throw new ObjectDisposedException(nameof(SdHeunSampler))).Retain();
         using (retained)
         {
+            using var paint = inpaint?.Retain();
             InferenceDevice.RequireSame(retained.Device, initial, nameof(initial));
+            Tensor Predict(Tensor x, Tensor sigma) => retained.DenoiseGuided(x, sigma, positive, negative, guidance, cancellationToken);
             return Integrate(initial, sigmas,
-                (x, sigma) => retained.DenoiseGuided(x, sigma, positive, negative, guidance, cancellationToken), cancellationToken);
+                (x, sigma) => paint is null ? Predict(x, sigma) : paint.Denoise(x, sigma, Predict, cancellationToken), cancellationToken);
         }
     }
 

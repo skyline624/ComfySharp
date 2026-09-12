@@ -27699,9 +27699,9 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2075",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -27710,7 +27710,13 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/inpaint.json"
+        }
+      ],
       "scenario": "contract:VAEEncodeForInpaint",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "VAEEncodeForInpaint",
@@ -27724,7 +27730,8 @@
         "nodeId": "VAEEncodeForInpaint",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "implementationScope": "SD1.5 Float32 latent mask path and VAE preprocessing; broader model families, precision modes and platform qualification remain pending."
     },
     {
       "id": "node:VAELoader:nodes.py:2076",
@@ -28649,9 +28656,9 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2102",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -28660,7 +28667,13 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/inpaint.json"
+        }
+      ],
       "scenario": "contract:SetLatentNoiseMask",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "SetLatentNoiseMask",
@@ -28674,7 +28687,8 @@
         "nodeId": "SetLatentNoiseMask",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "implementationScope": "SD1.5 Float32 latent mask path and VAE preprocessing; broader model families, precision modes and platform qualification remain pending."
     },
     {
       "id": "node:LatentComposite:nodes.py:2103",

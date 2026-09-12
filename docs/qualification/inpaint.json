@@ -1,0 +1,464 @@
+{
+  "status": "sd15-masked-workflows-windows-cuda-executed",
+  "familyQualified": false,
+  "modelNumericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "cfe158a2a6d1ad0de87edd20d70b465b380d688e",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "Read directly from shared model directory, without a disk copy; SHA256 rechecked after all three native runs."
+  },
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/inpaint.reference.json",
+    "sha256": "16caa8222346ead7c497cd485063e91a8f021c16e267585d1e7d162e97ac46ce",
+    "torch": "2.10.0+cpu",
+    "resizeCases": 2,
+    "wrapperEvaluations": 9,
+    "preprocessingCases": 5,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "scope": "Actual source mask transforms and inpaint wrapper with analytical prediction and capture-only VAE; not pretrained parity."
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "runs": [
+      {
+        "sampler": "euler",
+        "mode": "VAEEncodeForInpaint",
+        "exitCode": 0,
+        "elapsedSeconds": 12.0537872,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "a179a7fd3ba7a67638ae0421fab8859f84fa2fd3046c6ff49c4c11d4a6b8b128",
+        "pngBytes": 187240,
+        "reportSha256": "8de49ab89d090dd6e4b88eee27a92345053de0457b2d7ade53467102e69a2592",
+        "inputImageSha256": "62e51f7cf0ca563dfe74e045137b466893fbc10f7985e236d839db1a9f6594fe",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a green apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "LoadImage",
+            "inputs": {
+              "image": "inpaint-input.png"
+            }
+          },
+          "5": {
+            "class_type": "VAEEncodeForInpaint",
+            "inputs": {
+              "grow_mask_by": 6,
+              "pixels": [
+                "4",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ],
+              "mask": [
+                "4",
+                1
+              ]
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 1,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "euler",
+              "scheduler": "karras",
+              "denoise": 0.7,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "5",
+                0
+              ]
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_inpaint_euler",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "sampler": "heun",
+        "mode": "VAEEncode + SetLatentNoiseMask",
+        "exitCode": 0,
+        "elapsedSeconds": 18.1596049,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "a3947663760f9ae11adac183c468bbdbc45cc3155d38d62c5bc9572c95e1f46c",
+        "pngBytes": 148523,
+        "reportSha256": "272fef8cd4f986f74c9076c6d85ec101db75a0044e9decd2c18d12051b809a0f",
+        "inputImageSha256": "62e51f7cf0ca563dfe74e045137b466893fbc10f7985e236d839db1a9f6594fe",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a green apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "LoadImage",
+            "inputs": {
+              "image": "inpaint-input.png"
+            }
+          },
+          "5": {
+            "class_type": "VAEEncode",
+            "inputs": {
+              "pixels": [
+                "4",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 1,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "karras",
+              "denoise": 0.7,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "9",
+                0
+              ]
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_inpaint_heun",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          },
+          "9": {
+            "class_type": "SetLatentNoiseMask",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "mask": [
+                "4",
+                1
+              ]
+            }
+          }
+        }
+      },
+      {
+        "sampler": "dpmpp_2m",
+        "mode": "VAEEncodeForInpaint",
+        "exitCode": 0,
+        "elapsedSeconds": 13.1840308,
+        "dimensions": [
+          512,
+          512
+        ],
+        "pngSha256": "b8264ea168456b2e42d658fde0d840cd3fb315fd0fa8457509a5561ef6287ddf",
+        "pngBytes": 189089,
+        "reportSha256": "b7197cc8e26b38b38fccefcefc00f6c194b424e3da9be231f21f48b8a9c7f005",
+        "inputImageSha256": "62e51f7cf0ca563dfe74e045137b466893fbc10f7985e236d839db1a9f6594fe",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a green apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "LoadImage",
+            "inputs": {
+              "image": "inpaint-input.png"
+            }
+          },
+          "5": {
+            "class_type": "VAEEncodeForInpaint",
+            "inputs": {
+              "grow_mask_by": 6,
+              "pixels": [
+                "4",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ],
+              "mask": [
+                "4",
+                1
+              ]
+            }
+          },
+          "6": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 1,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "dpmpp_2m",
+              "scheduler": "karras",
+              "denoise": 0.7,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "5",
+                0
+              ]
+            }
+          },
+          "7": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "6",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "8": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_inpaint_dpmpp_2m",
+              "images": [
+                "7",
+                0
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "tests": {
+    "inference": {
+      "total": 65,
+      "passed": 65,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "863de897b30645eff9c68858c4629b050577bcb91b232000e328141e9cbde051"
+    },
+    "host": {
+      "total": 23,
+      "passed": 23,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "8b9050f8ebe022249264b32aa6dc1bffb424f88c5553d65833b2f9aefa88abe8"
+    },
+    "workflow": {
+      "total": 263,
+      "passed": 263,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "5640aaf39756eec9ac61db001cbeb6cc7336b340d3c83715c4877c47fd88b5aa"
+    },
+    "desktop": {
+      "total": 115,
+      "passed": 115,
+      "failed": 0,
+      "notExecuted": 0,
+      "trxSha256": "6852fcba02668701d5f0531142210596191d2ad7482b87bbdaceccba3ec8dbdf"
+    }
+  },
+  "newInferenceCases": 10,
+  "newWorkflowCases": 2,
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors"
+  },
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "7516ffd1af23cbbc5a777eee73664ebc10a16b29563b64a5d53f93bdae025e43",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-inpaint.api.json": "468a28ac454b8dfb307feb48e6a61447134941b1f08be624788c946f5f36af51",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/inpaint-source/README.md": "1949cd960af051afe74d86d4b9a8abd724d5dbac03b4b3c2c1a61c532f352749",
+    "labs/inpaint-source/reference.py": "d9daef5530e7f9459344bc4aa6e01c819de3e0fbd6cca3f9815d3a442aea5834",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/SdDpmpp2MSampler.cs": "d85eff1c4641fab79b378f5850f097381b845932a42d2ce2865325dd20299737",
+    "src/ComfySharp.Inference/SdEulerSampler.cs": "642c3bbb4342a2a75f886f0474e9a934cc62112feb9dbe43ea9395a34c0f77a5",
+    "src/ComfySharp.Inference/SdHeunSampler.cs": "b30b1b9aa51914d928dc4163d640e8a8940a6f89dcd559eec3eea7d2bc6a097c",
+    "src/ComfySharp.Inference/SdInpaintImage.cs": "cec143be91c2acdf71c4e172361d8a86e773d245ed0a447e36034e08c02d142b",
+    "src/ComfySharp.Inference/SdInpaintMask.cs": "987bb2c45751345ecf452fda3a0a30e406068dc43412d765a9bfec99640f4e5b",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "1c68b09479c5dcfbfd612dfbf9a4b0d689d46ba0dac48d7870486f6c1664cee4",
+    "src/ComfySharp.Workflow/PromptCompiler.cs": "a0e3e791c5d92d5f99b34433993ce10cdb24b2b855a58895ddca3183663c3b0d",
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": "2da19536a943de1d80b2a470b63170e7690828b30f34f81bf7d32391de4fdd67",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "fea51001855cff471b1a98eddc2c8838a4c955b54fca563dc5c34a95d338ca7c",
+    "tests/ComfySharp.Inference.Tests/Fixtures/inpaint-input.png": "62e51f7cf0ca563dfe74e045137b466893fbc10f7985e236d839db1a9f6594fe",
+    "tests/ComfySharp.Inference.Tests/Fixtures/inpaint.reference.json": "16caa8222346ead7c497cd485063e91a8f021c16e267585d1e7d162e97ac46ce",
+    "tests/ComfySharp.Inference.Tests/Sd15NodeTests.cs": "e6fbcb0396216dd34daa8e493a7c6696042517eab328a2389be402aecbb3cae1",
+    "tests/ComfySharp.Inference.Tests/SdInpaintMaskTests.cs": "d1172f012ddb112cbb76f38133ab2152038ff702d1d5ea07fab6850ce6ae231f",
+    "tests/ComfySharp.Inference.Tests/SdKarrasScheduleTests.cs": "98370223df192b889655a6ed734c7036cfacee702f8d77c1894c52990d6727fd",
+    "tests/ComfySharp.Workflow.Tests/InpaintWorkflowTests.cs": "71d96cec608463c5b6e06c9b5d27fde7046689e2fe22bbf674cf89c7ef7882a4"
+  },
+  "limitations": [
+    "Actual pretrained CUDA runs establish execution and native preview, not source-model numerical parity or image quality.",
+    "Black masks preserve latent predictions; the VAE may change pixels outside the mask. No exact pixel-compositing guarantee.",
+    "The input is an original procedural RGBA test pattern. Each workflow uses a fresh Host; persistent VRAM stress remains pending.",
+    "Host currently supports SD1.5 Float32, one image cropped to 32-512 pixels, 1-100 requested steps, default mask behavior only.",
+    "Dedicated nine-channel inpaint checkpoints, InpaintModelConditioning, mask functions/hooks, batch-index noise and other model families remain pending.",
+    "Only 23 selected Host tests rerun; prior Windows symbolic-link privilege failure remains open.",
+    "Previous commit cfe158a sampler tests passed on all three CI operating systems, but overall Linux/macOS runs failed.",
+    "Linux CUDA and Apple MPS hardware qualification remain pending."
+  ]
+}

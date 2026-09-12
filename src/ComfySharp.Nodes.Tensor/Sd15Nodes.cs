@@ -42,8 +42,13 @@ public static class Sd15Nodes
              new("negative", "CONDITIONING"), new("latent_image", "LATENT"),
              new("denoise", "FLOAT", Options: new() { ["default"] = 1.0, ["min"] = 0.0, ["max"] = 1.0, ["step"] = .01 })],
             [new("LATENT")], PythonModule: "nodes",
-            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler/Heun without churn or DPM++ 2M, all nine listed schedulers, denoise in [0,1], one image up to 512x512, 1-100 requested steps. Expanded schedules are limited to 10000 steps; DDIM and beta may change the interval count. Nonfinite schedules or DPM++ 2M trajectories report an error."),
+            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler/Heun without churn or DPM++ 2M, all nine listed schedulers, denoise in [0,1], optional soft latent noise mask, one image up to 512x512, 1-100 requested steps. Expanded schedules are limited to 10000 steps; DDIM and beta may change the interval count. Nonfinite schedules or DPM++ 2M trajectories report an error. Dedicated inpaint checkpoints and mask hooks remain unavailable."),
         new("VAEEncode", "VAE Encode", "model/latent", [new("pixels", "IMAGE"), new("vae", "VAE")], [new("LATENT")], PythonModule: "nodes"),
+        new("VAEEncodeForInpaint", "VAE Encode (for Inpainting)", "model/latent",
+            [new("pixels", "IMAGE"), new("vae", "VAE"), new("mask", "MASK"), Integer("grow_mask_by", 6, 0, 64, 1)], [new("LATENT")], PythonModule: "nodes",
+            Description: "SD1.5 Float32 VAE, one image cropped to 32-512 pixels. Center crop, round-to-even mask, RGB neutralization and growth precede encoding. This does not enable dedicated nine-channel inpaint models."),
+        new("SetLatentNoiseMask", "Set Latent Noise Mask", "model/latent",
+            [new("samples", "LATENT"), new("mask", "MASK")], [new("LATENT")], PythonModule: "nodes"),
         new("VAEDecode", "VAE Decode", "model/latent", [new("samples", "LATENT"), new("vae", "VAE")], [new("IMAGE")], PythonModule: "nodes")
     ];
 
@@ -139,8 +144,8 @@ public static class Sd15Nodes
                         result["samples"] = Own(latent["samples"].GetNative<TorchTensor>().alias());
                         outputs = [context.Map(result)]; break;
                     }
-                    if (latent.ContainsKey("noise_mask") || latent.ContainsKey("batch_index"))
-                        throw new NotSupportedException("Masked sampling and batch-index noise are not yet ported.");
+                    if (latent.ContainsKey("batch_index"))
+                        throw new NotSupportedException("Batch-index noise is not yet ported.");
                     if (latent.TryGetValue("downscale_ratio_spacial", out var ratio) && PythonValues.Integer(ratio.ToJson()) != 8 ||
                         latent.ContainsKey("downscale_ratio_temporal"))
                         throw new NotSupportedException("Only SD1.5 spatial latents with downscale ratio 8 are supported.");
@@ -150,6 +155,8 @@ public static class Sd15Nodes
                     using var cpuNoise = NativeMath.CpuNoise(raw.shape, seed, cancellationToken);
                     using var noise = cpuNoise.to(model.Device, copy: true);
                     using var scaled = SdSamplingMath.ProcessLatentIn(raw, SdSamplingMath.Sd15LatentScale, cancellationToken);
+                    using var inpaint = latent.TryGetValue("noise_mask", out var maskValue)
+                        ? new SdInpaintMask(scaled, noise, maskValue.GetNative<TorchTensor>(), cancellationToken) : null;
                     var sampling = SdDiscreteSampling.Default;
                     using var cpuSigmas = SdScheduler.Create(S("scheduler"), steps, denoise, sampling, cancellationToken);
                     using var sigmas = cpuSigmas.to(model.Device, copy: true);
@@ -163,15 +170,15 @@ public static class Sd15Nodes
                         if (S("sampler_name") == "dpmpp_2m")
                         {
                             using var sampler = new SdDpmpp2MSampler(denoiser);
-                            return sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken);
+                            return sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken, inpaint);
                         }
                         if (S("sampler_name") == "heun")
                         {
                             using var sampler = new SdHeunSampler(denoiser);
-                            return sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken);
+                            return sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken, inpaint);
                         }
                         using var euler = new SdEulerSampler(denoiser);
-                        return euler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken);
+                        return euler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]), guidance, cancellationToken, inpaint);
                     }
                     using var sampled = ExecuteSampler();
                     result["samples"] = Own(SdSamplingMath.ProcessLatentOut(sampled, SdSamplingMath.Sd15LatentScale, cancellationToken));
@@ -179,14 +186,34 @@ public static class Sd15Nodes
                     break;
                 }
                 case "VAEEncode":
+                case "VAEEncodeForInpaint":
                 {
                     var vae = inputs["vae"].GetNative<ComfyImageVae>();
                     var source = inputs["pixels"].GetNative<TorchTensor>();
                     var shape = source.shape;
                     if (shape.Length != 4 || shape[0] != 1 || shape[1] is < 32 or > 519 || shape[2] is < 32 or > 519)
                         throw new NotSupportedException("SD1.5 VAEEncode currently requires one image, cropped to 32-512 pixels per dimension.");
-                    using var pixels = source.to(vae.Device, copy: true);
-                    outputs = [context.Map(new Dictionary<string, RuntimeValue> { ["samples"] = Own(vae.Encode(pixels, cancellationToken)) })];
+                    // Upstream pixel/mask preprocessing runs before the VAE's device transfer.
+                    using var pixels = source.to(schema.ClassType == "VAEEncodeForInpaint" ? CPU : vae.Device, copy: true);
+                    if (schema.ClassType == "VAEEncodeForInpaint")
+                    {
+                        using var mask = inputs["mask"].GetNative<TorchTensor>().to(pixels.device, copy: true);
+                        var prepared = SdInpaintImage.Prepare(pixels, mask, I("grow_mask_by"), cancellationToken);
+                        using var preparedPixels = prepared.Pixels; using var preparedMask = prepared.NoiseMask;
+                        using var encodedPixels = preparedPixels.to(vae.Device, copy: true);
+                        outputs = [context.Map(new Dictionary<string, RuntimeValue> {
+                            ["samples"] = Own(vae.Encode(encodedPixels, cancellationToken)), ["noise_mask"] = Own(preparedMask.to(CPU, copy: true)) })];
+                    }
+                    else outputs = [context.Map(new Dictionary<string, RuntimeValue> { ["samples"] = Own(vae.Encode(pixels, cancellationToken)) })];
+                    break;
+                }
+                case "SetLatentNoiseMask":
+                {
+                    var result = inputs["samples"].Properties.ToDictionary(p => p.Key, p => p.Value, StringComparer.Ordinal);
+                    var mask = inputs["mask"].GetNative<TorchTensor>();
+                    if (mask.dim() < 2 || mask.shape.Any(v => v <= 0)) throw new ArgumentException("MASK must have nonempty spatial dimensions.");
+                    result["noise_mask"] = Own(mask.reshape(-1, 1, mask.shape[^2], mask.shape[^1]));
+                    outputs = [context.Map(result)];
                     break;
                 }
                 case "VAEDecode":

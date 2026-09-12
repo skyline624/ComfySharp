@@ -56,7 +56,9 @@ Le [workflow Heun/beta](workflows/sd15-heun-beta.api.json) fournit un exemple.
 La [preuve de campagne](qualification/sd-schedulers.json) distingue les
 comparaisons de plannings des générations réelles. Les limites du Host restent
 SD1.5 Float32, un élément, au plus 512 pixels par dimension, 1 à 100 étapes
-demandées et 10 000 étapes pour le planning étendu. Les masques, les autres
+demandées et 10 000 étapes pour le planning étendu. Les autres
 samplers, les options avancées des schedulers et les architectures restantes
 font toujours partie du travail à réaliser. La comparaison numérique des
 générations complètes et les validations Linux/CUDA et macOS/MPS restent ouvertes.
+
+Les [masques SD1.5](SD_INPAINT.md) sont raccordés aux trois samplers portés.

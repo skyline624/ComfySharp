@@ -18,12 +18,17 @@ public sealed class Sd15NodeTests
     [Fact]
     public void Schemas_keep_component_output_order_and_unsigned_seed_range_without_model_files()
     {
-        var info = Registry().ToObjectInfo(); Assert.Equal(6, info.Count);
+        var info = Registry().ToObjectInfo(); Assert.Equal(8, info.Count);
         Assert.Equal(new[] { "MODEL", "CLIP", "VAE" }, info["CheckpointLoaderSimple"]!["output"]!.AsArray().Select(n => n!.GetValue<string>()));
         Assert.Empty(info["CheckpointLoaderSimple"]!["input"]!["required"]!["ckpt_name"]![0]!.AsArray());
         Assert.Equal(ulong.MaxValue, info["KSampler"]!["input"]!["required"]!["seed"]![1]!["max"]!.GetValue<ulong>());
         Assert.Contains("uni_pc_bh2", info["KSampler"]!["input"]!["required"]!["sampler_name"]![0]!.AsArray().Select(n => n!.GetValue<string>()));
         Assert.False(info["CLIPTextEncode"]!["output_is_list"]![0]!.GetValue<bool>());
+        Assert.Equal(new[] { "pixels", "vae", "mask", "grow_mask_by" }, info["VAEEncodeForInpaint"]!["input_order"]!["required"]!.AsArray().Select(n => n!.GetValue<string>()));
+        Assert.Equal(6, info["VAEEncodeForInpaint"]!["input"]!["required"]!["grow_mask_by"]![1]!["default"]!.GetValue<int>());
+        Assert.Equal(64, info["VAEEncodeForInpaint"]!["input"]!["required"]!["grow_mask_by"]![1]!["max"]!.GetValue<int>());
+        Assert.Equal(new[] { "samples", "mask" }, info["SetLatentNoiseMask"]!["input_order"]!["required"]!.AsArray().Select(n => n!.GetValue<string>()));
+        Assert.Equal("LATENT", info["SetLatentNoiseMask"]!["output"]![0]!.GetValue<string>());
     }
 
     [Fact]

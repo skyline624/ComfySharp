@@ -59,12 +59,14 @@ public sealed class SdKarrasScheduleTests
                 ["sampler_name"] = input.Json(JsonValue.Create(sampler)), ["scheduler"] = input.Json(JsonValue.Create(scheduler)),
                 ["steps"] = input.Json(JsonValue.Create(20)), ["cfg"] = input.Json(JsonValue.Create(7)), ["denoise"] = input.Json(JsonValue.Create(0)),
                 ["latent_image"] = input.Map(new Dictionary<string, RuntimeValue> { ["samples"] = raw,
+                    ["noise_mask"] = input.Json(JsonValue.Create("not evaluated for an empty schedule")),
                     ["custom"] = input.Json(JsonValue.Create("retained")), ["downscale_ratio_spacial"] = input.Json(JsonValue.Create(8)) })
             };
             var result = await node.ExecuteAsync(output, values, default);
             Assert.Equal(raw.GetNative<Tensor>().data<float>().ToArray(), result.Result[0].Properties["samples"].GetNative<Tensor>().data<float>().ToArray());
             Assert.Equal("retained", result.Result[0].Properties["custom"].ToJson()!.GetValue<string>());
             Assert.False(result.Result[0].Properties.ContainsKey("downscale_ratio_spacial"));
+            Assert.Equal("not evaluated for an empty schedule", result.Result[0].Properties["noise_mask"].ToJson()!.GetValue<string>());
         }
         Assert.Equal(before, Tensor.TotalCount);
     }
