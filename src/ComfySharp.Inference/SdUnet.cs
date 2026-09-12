@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>The plain SD1/SD2 four-level U-Net on CPU/Float32, with explicit basic attention.
+/// <summary>The plain SD1/SD2 four-level U-Net on CPU/CUDA Float32, with explicit basic attention.
 /// Inputs are borrowed for the call; the returned raw prediction is independently owned.
 /// Sigma scaling, prediction conversion and CFG belong to the denoiser wrapper.</summary>
 public sealed class SdUnet : IDisposable
@@ -19,6 +19,11 @@ public sealed class SdUnet : IDisposable
     }
 
     public SdUnetConfig Config { get; }
+    public Device Device { get { using var bank = RetainWeights(); return bank.Device; } }
+    public SdUnet To(Device device, CancellationToken cancellationToken = default)
+    {
+        using var bank = RetainWeights(); using var moved = bank.To(device, cancellationToken); return new SdUnet(moved);
+    }
 
     // Diagnostic callbacks borrow live tensors synchronously. They must copy any data
     // they keep and must not dispose or mutate tensors. Null adds no tensor allocations.
@@ -48,6 +53,9 @@ public sealed class SdUnet : IDisposable
         // Bootstrap precedes even DisposeScope/no_grad creation on macOS ARM64.
         NativeRuntimeBootstrap.Initialize();
         ValidateInputs(latentNchw, timesteps, context);
+        InferenceDevice.RequireSame(operation.Device, latentNchw, nameof(latentNchw));
+        InferenceDevice.RequireSame(operation.Device, timesteps, nameof(timesteps));
+        InferenceDevice.RequireSame(operation.Device, context, nameof(context));
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
         cancellationToken.ThrowIfCancellationRequested();
@@ -59,7 +67,7 @@ public sealed class SdUnet : IDisposable
         // caller data. A scalar view lets the address check also accept strided context.
         using (var firstContextValue = context[0, 0, 0])
         {
-            if (!CpuModelWeightBank.IsAligned(firstContextValue))
+            if (context.device_type == DeviceType.CPU && !CpuModelWeightBank.IsAligned(firstContextValue))
                 context = context.is_contiguous() ? context.clone() : context.contiguous();
         }
 
@@ -143,7 +151,7 @@ public sealed class SdUnet : IDisposable
         int half = Config.BaseChannels / 2;
         // Preserve the source's Float32 native expression order: multiply, divide, exp;
         // timestep phases concatenate cosine before sine, with the default period 10000.
-        var frequencies = (-Math.Log(10000) * arange(half, dtype: ScalarType.Float32, device: CPU) / half).exp();
+        var frequencies = (-Math.Log(10000) * arange(half, dtype: ScalarType.Float32, device: timesteps.device) / half).exp();
         var phases = timesteps.unsqueeze(1) * frequencies.unsqueeze(0);
         var sinusoidal = cat(new[] { phases.cos(), phases.sin() }, -1);
         var embedded = Linear(nn.functional.silu(Linear(sinusoidal, bank, "time_embed.0")), bank, "time_embed.2");
@@ -326,8 +334,8 @@ public sealed class SdUnet : IDisposable
     {
         ArgumentNullException.ThrowIfNull(tensor, name);
         ObjectDisposedException.ThrowIf(tensor.IsInvalid, tensor);
-        if (tensor.dtype != ScalarType.Float32 || tensor.device_type != DeviceType.CPU || tensor.is_sparse)
-            throw new ArgumentException("U-Net inputs must be dense CPU/Float32 tensors.", name);
+        if (tensor.dtype != ScalarType.Float32 || !InferenceDevice.IsSupported(tensor.device_type) || tensor.is_sparse)
+            throw new ArgumentException("U-Net inputs must be dense CPU or CUDA Float32 tensors.", name);
         if (tensor.shape.Length != rank)
             throw new ArgumentException($"U-Net input must have rank {rank}.", name);
     }

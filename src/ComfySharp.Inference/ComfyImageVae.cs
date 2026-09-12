@@ -2,8 +2,8 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Comfy image conventions over the classical CPU/Float32 VAE.
-/// Uses complete images; no tiled, sliced or GPU fallback is implied.</summary>
+/// <summary>Comfy image conventions over the classical Float32 VAE on the explicitly selected device.
+/// Uses complete images; no tiled, sliced or device fallback is implied.</summary>
 public sealed class ComfyImageVae : IDisposable
 {
     private readonly object gate = new();
@@ -17,6 +17,11 @@ public sealed class ComfyImageVae : IDisposable
     }
 
     public ClassicalVaeConfig Config { get; }
+    public Device Device { get { using var graph = RetainVae(); return graph.Device; } }
+    public ComfyImageVae To(Device device, CancellationToken cancellationToken = default)
+    {
+        using var graph = RetainVae(); using var moved = graph.To(device, cancellationToken); return new ComfyImageVae(moved);
+    }
 
     public ComfyImageVae Retain()
     {
@@ -34,7 +39,7 @@ public sealed class ComfyImageVae : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
         using var operation = RetainVae();
         NativeRuntimeBootstrap.Initialize();
-        ClassicalVae.ValidateCpuTensor(image, nameof(image));
+        ClassicalVae.ValidateTensor(image, nameof(image));
         var shape = image.shape;
         const int factor = ClassicalVaeConfig.Compression;
         if (shape.Length != 4 || shape[0] <= 0 || shape[1] < factor || shape[2] < factor || shape[3] < ClassicalVaeConfig.ImageChannels)
@@ -49,7 +54,7 @@ public sealed class ComfyImageVae : IDisposable
         using var mean = operation.Encode(normalized, cancellationToken);
         // Source VAE.encode copies the raw posterior mean into its own NCHW
         // output buffer; keep the source compute strides until this boundary.
-        var samples = empty(mean.shape, dtype: ScalarType.Float32, device: CPU);
+        var samples = empty(mean.shape, dtype: ScalarType.Float32, device: mean.device);
         samples.copy_(mean);
         cancellationToken.ThrowIfCancellationRequested();
         return samples.DetachFromDisposeScope();
@@ -66,7 +71,7 @@ public sealed class ComfyImageVae : IDisposable
         using var raw = operation.Decode(latent, cancellationToken);
         // Source materializes a NCHW output buffer before its in-place image
         // normalization, then returns movedim's NHWC view of that buffer.
-        var pixels = empty(raw.shape, dtype: ScalarType.Float32, device: CPU);
+        var pixels = empty(raw.shape, dtype: ScalarType.Float32, device: raw.device);
         pixels.copy_(raw);
         pixels.add_(1.0).div_(2.0).clamp_(0, 1);
         var image = pixels.permute(0, 2, 3, 1);

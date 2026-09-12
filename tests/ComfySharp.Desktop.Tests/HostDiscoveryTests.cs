@@ -89,6 +89,26 @@ public sealed class HostDiscoveryTests : IDisposable
         _ => throw new PlatformNotSupportedException("The test requires a supported V1 platform.")
     };
 
+    [Fact]
+    public void ExplicitCudaSelectionFindsCudaClosureWhenBothBundlesExist()
+    {
+        Touch("src", "ComfySharp.Host", "bin", "native", SystemRuntime(), "cpu", "Release", "net10.0", AppHost);
+        var cuda = Touch("src", "ComfySharp.Host", "bin", "native", SystemRuntime(), "cuda", "Release", "net10.0", AppHost);
+        Assert.Equal(cuda, HostSupervisor.DiscoverHost(root, "", "cuda"));
+    }
+
+    [Fact]
+    public void MissingCudaClosureDoesNotSelectCpuOrLegacyDevelopmentBinaries()
+    {
+        Touch("src", "ComfySharp.Host", "bin", "native", SystemRuntime(), "cpu", "Release", "net10.0", AppHost);
+        Touch("src", "ComfySharp.Host", "bin", "Release", "net10.0", AppHost);
+        Assert.Null(HostSupervisor.DiscoverHost(root, "", "cuda"));
+    }
+
+    [Fact]
+    public void UnsupportedBackendNamesCannotBecomeDiscoveryPaths()
+        => Assert.Throws<ArgumentException>(() => HostSupervisor.DiscoverHost(root, "", "../cpu"));
+
     private string Touch(params string[] components)
     {
         var path = Path.Combine([root, .. components]);

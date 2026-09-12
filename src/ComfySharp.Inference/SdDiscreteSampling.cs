@@ -31,7 +31,7 @@ public sealed class SdDiscreteSampling
     }
 
     /// <summary>Nearest log-sigma index, with source first-index tie breaking. Zero maps to index zero.
-    /// Input is a nonnegative finite CPU/F32 scalar or vector; output is an independently owned Int64 tensor.</summary>
+    /// Input is a nonnegative finite CPU/CUDA Float32 scalar or vector; output is an independently owned Int64 tensor.</summary>
     public Tensor Timestep(Tensor sigma, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -39,7 +39,7 @@ public sealed class SdDiscreteSampling
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
         SdSamplingMath.ValidateSigma(sigma);
-        var logTable = tensor(tables.Value.LogSigmas, dtype: ScalarType.Float32, device: CPU).unsqueeze(1);
+        var logTable = tensor(tables.Value.LogSigmas, dtype: ScalarType.Float32, device: sigma.device).unsqueeze(1);
         var distances = sigma.log().reshape(-1) - logTable;
         var result = distances.abs().argmin(0).reshape(sigma.shape);
         cancellationToken.ThrowIfCancellationRequested();
@@ -47,7 +47,7 @@ public sealed class SdDiscreteSampling
     }
 
     /// <summary>Clamped interpolation in the source F32 log table. Fractional times are supported.
-    /// Accepts CPU F32/F64/Int32/Int64 scalars or vectors; infinities clamp to the endpoint, NaN is rejected.</summary>
+    /// Accepts CPU/CUDA F32/F64/Int32/Int64 scalars or vectors; infinities clamp to the endpoint, NaN is rejected.</summary>
     public Tensor Sigma(Tensor timestep, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -55,15 +55,15 @@ public sealed class SdDiscreteSampling
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
         ArgumentNullException.ThrowIfNull(timestep);
-        if (timestep.device_type != DeviceType.CPU || timestep.is_sparse || timestep.dim() > 1 ||
+        if (!InferenceDevice.IsSupported(timestep.device_type) || timestep.is_sparse || timestep.dim() > 1 ||
             timestep.dtype is not (ScalarType.Float32 or ScalarType.Float64 or ScalarType.Int32 or ScalarType.Int64))
-            throw new ArgumentException("Discrete timesteps require a dense CPU numeric scalar or vector.", nameof(timestep));
+            throw new ArgumentException("Discrete timesteps require a dense CPU or CUDA numeric scalar or vector.", nameof(timestep));
         var time = timestep.to_type(ScalarType.Float32).clamp(0, Count - 1).reshape(-1);
         if (time.isnan().any().item<bool>()) throw new ArgumentException("Timesteps cannot contain NaN.", nameof(timestep));
         var low = time.floor().to_type(ScalarType.Int64);
         var high = time.ceil().to_type(ScalarType.Int64);
         var weight = time.frac();
-        var logTable = tensor(tables.Value.LogSigmas, dtype: ScalarType.Float32, device: CPU);
+        var logTable = tensor(tables.Value.LogSigmas, dtype: ScalarType.Float32, device: timestep.device);
         var logSigma = (1.0 - weight) * logTable.index_select(0, low) + weight * logTable.index_select(0, high);
         var result = logSigma.exp().reshape(timestep.shape);
         cancellationToken.ThrowIfCancellationRequested();

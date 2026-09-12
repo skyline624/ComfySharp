@@ -8,26 +8,27 @@ using TorchTensor = TorchSharp.torch.Tensor;
 
 namespace ComfySharp.Nodes.Tensor;
 
-/// <summary>First stock SD1.5 CPU/F32 workflow path. Other architectures and sampler modes fail explicitly.</summary>
+/// <summary>Stock SD1.5 Float32 workflow path with explicit CPU/CUDA placement. Other modes fail explicitly.</summary>
 public static class Sd15Nodes
 {
     // Frozen comfy/samplers.py order; retaining identifiers does not announce their execution support.
     private const string Samplers = "euler euler_cfg_pp euler_ancestral euler_ancestral_cfg_pp heun heunpp2 exp_heun_2_x0 exp_heun_2_x0_sde dpm_2 dpm_2_ancestral lms dpm_fast dpm_adaptive dpmpp_2s_ancestral dpmpp_2s_ancestral_cfg_pp dpmpp_sde dpmpp_sde_gpu dpmpp_2m dpmpp_2m_cfg_pp dpmpp_2m_sde dpmpp_2m_sde_gpu dpmpp_2m_sde_heun dpmpp_2m_sde_heun_gpu dpmpp_3m_sde dpmpp_3m_sde_gpu ddpm lcm ipndm ipndm_v deis cfgpp_ud10_ab res_multistep res_multistep_cfg_pp res_multistep_ancestral res_multistep_ancestral_cfg_pp gradient_estimation gradient_estimation_cfg_pp er_sde seeds_2 seeds_3 sa_solver sa_solver_pece ddim uni_pc uni_pc_bh2";
     private const string Schedulers = "simple sgm_uniform karras exponential ddim_uniform beta normal linear_quadratic kl_optimal";
     public static void Register(NodeRegistry registry, CheckpointFiles files, int cpuThreads = 16,
-        long maxEstimatedPeakWeightBytes = 16L * 1024 * 1024 * 1024)
+        long maxEstimatedPeakWeightBytes = 16L * 1024 * 1024 * 1024, string inferenceDevice = "cpu")
     {
         ArgumentNullException.ThrowIfNull(files);
         if (cpuThreads is < 1 or > 64) throw new ArgumentOutOfRangeException(nameof(cpuThreads));
         if (maxEstimatedPeakWeightBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxEstimatedPeakWeightBytes));
-        foreach (var schema in Schemas(files.Names())) registry.Register(new Node(schema, files, cpuThreads, maxEstimatedPeakWeightBytes));
+        if (inferenceDevice is not ("cpu" or "cuda:0")) throw new ArgumentException("Select inference device cpu or cuda:0.", nameof(inferenceDevice));
+        foreach (var schema in Schemas(files.Names())) registry.Register(new Node(schema, files, cpuThreads, maxEstimatedPeakWeightBytes, inferenceDevice));
     }
 
     public static IReadOnlyList<NodeSchema> Schemas(IReadOnlyList<string> checkpointNames) =>
     [
         new("CheckpointLoaderSimple", "Load Checkpoint", "model/loaders", [Combo("ckpt_name", checkpointNames)],
             [new("MODEL"), new("CLIP"), new("VAE")], PythonModule: "nodes",
-            Description: "Stock SD1.5 safetensors, EPS prediction, CPU/Float32. Other architectures remain unavailable."),
+            Description: "Stock SD1.5 safetensors, EPS prediction, Float32 on the explicitly selected CPU or CUDA device. Other architectures remain unavailable."),
         new("CLIPTextEncode", "CLIP Text Encode (Prompt)", "model/conditioning",
             [new("text", "STRING", Options: new() { ["multiline"] = true, ["dynamicPrompts"] = true }), new("clip", "CLIP")],
             [new("CONDITIONING")], PythonModule: "nodes"),
@@ -41,7 +42,7 @@ public static class Sd15Nodes
              new("negative", "CONDITIONING"), new("latent_image", "LATENT"),
              new("denoise", "FLOAT", Options: new() { ["default"] = 1.0, ["min"] = 0.0, ["max"] = 1.0, ["step"] = .01 })],
             [new("LATENT")], PythonModule: "nodes",
-            Description: "Available execution: SD1.5 CPU/Float32, Euler/Karras, denoise=1, one image up to 512x512, 1-100 steps. Other modes report an explicit error."),
+            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler/Karras, denoise=1, one image up to 512x512, 1-100 steps. Other modes report an explicit error."),
         new("VAEDecode", "VAE Decode", "model/latent", [new("samples", "LATENT"), new("vae", "VAE")], [new("IMAGE")], PythonModule: "nodes")
     ];
 
@@ -54,7 +55,7 @@ public static class Sd15Nodes
         return new(name, "INT", Options: options);
     }
 
-    private sealed class Node(NodeSchema schema, CheckpointFiles files, int threads, long budget) : IRuntimeNode
+    private sealed class Node(NodeSchema schema, CheckpointFiles files, int threads, long budget, string inferenceDevice) : IRuntimeNode
     {
         public NodeSchema Schema => schema;
         public ValueTask<NodeExecutionOutput> ExecuteAsync(RuntimeNodeContext context,
@@ -75,11 +76,17 @@ public static class Sd15Nodes
                 using var file = new SafeTensorFile(path);
                 var plan = Sd15CheckpointLoader.Inspect(file, new() { UnclaimedTensors = Sd15UnclaimedTensorHandling.ReportAndIgnoreOutsideComponents }, cancellationToken);
                 NativeRuntimeBootstrap.Initialize(); set_num_threads(threads);
+                if (inferenceDevice == "cuda:0" && !cuda.is_available()) throw new NotSupportedException("CUDA inference was selected but is unavailable; no CPU fallback is performed.");
+                var device = inferenceDevice == "cpu" ? CPU : new Device(TorchSharp.DeviceType.CUDA, 0);
+                InferenceDevice.ConfigureFloat32(device);
                 using var checkpoint = Sd15CheckpointLoader.Load(file, plan, budget, cancellationToken);
-                outputs = [context.Own(checkpoint.CreateUnet()), context.Own(checkpoint.CreateClipEncoder()), context.Own(checkpoint.CreateImageVae())];
+                using var sourceUnet = checkpoint.CreateUnet(); using var sourceClip = checkpoint.CreateClipEncoder(); using var sourceVae = checkpoint.CreateImageVae();
+                outputs = [context.Own(sourceUnet.To(device, cancellationToken)), context.Own(sourceClip.To(device, cancellationToken)), context.Own(sourceVae.To(device, cancellationToken))];
                 return ValueTask.FromResult(new NodeExecutionOutput(outputs, new JsonObject
                 {
-                    ["comfysharp_model"] = new JsonArray(new JsonObject { ["architecture"] = "SD1.5", ["backend"] = "cpu", ["dtype"] = "Float32",
+                    ["comfysharp_model"] = new JsonArray(new JsonObject { ["architecture"] = "SD1.5", ["backend"] = inferenceDevice, ["dtype"] = "Float32",
+                        ["tf32_allowed"] = false,
+                        ["component_devices"] = new JsonArray(outputs[0].GetNative<SdUnet>().Device.ToString(), outputs[1].GetNative<ComfyClipEncoder>().Device.ToString(), outputs[2].GetNative<ComfyImageVae>().Device.ToString()),
                         ["ignored_auxiliary_tensors"] = new JsonArray(plan.UnclaimedTensorNames.Select(n => (JsonNode?)JsonValue.Create(n)).ToArray()) })
                 }));
             }
@@ -126,15 +133,18 @@ public static class Sd15Nodes
                     if (latent.TryGetValue("downscale_ratio_spacial", out var ratio) && PythonValues.Integer(ratio.ToJson()) != 8 ||
                         latent.ContainsKey("downscale_ratio_temporal"))
                         throw new NotSupportedException("Only SD1.5 spatial latents with downscale ratio 8 are supported.");
-                    var raw = latent["samples"].GetNative<TorchTensor>(); ValidateShape(raw);
+                    var model = inputs["model"].GetNative<SdUnet>();
+                    using var raw = latent["samples"].GetNative<TorchTensor>().to(model.Device, copy: true); ValidateShape(raw);
                     ulong seed = ulong.Parse(inputs["seed"].ToJson()!.ToJsonString(), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture);
-                    using var noise = NativeMath.CpuNoise(raw.shape, seed, cancellationToken);
+                    using var cpuNoise = NativeMath.CpuNoise(raw.shape, seed, cancellationToken);
+                    using var noise = cpuNoise.to(model.Device, copy: true);
                     using var scaled = SdSamplingMath.ProcessLatentIn(raw, SdSamplingMath.Sd15LatentScale, cancellationToken);
                     var sampling = SdDiscreteSampling.Default;
-                    using var sigmas = SigmaSchedules.Karras(steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+                    using var cpuSigmas = SigmaSchedules.Karras(steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+                    using var sigmas = cpuSigmas.to(model.Device, copy: true);
                     using var first = sigmas[0];
                     using var initial = SdSamplingMath.NoiseScaling(noise, scaled, first, true, cancellationToken);
-                    using var denoiser = new SdDenoiser(inputs["model"].GetNative<SdUnet>(), SdPredictionKind.Epsilon, sampling);
+                    using var denoiser = new SdDenoiser(model, SdPredictionKind.Epsilon, sampling);
                     using var sampler = new SdEulerSampler(denoiser);
                     using var sampled = sampler.Sample(initial, sigmas, Conditioning(inputs["positive"]), Conditioning(inputs["negative"]),
                         new SdGuidanceOptions { Scale = cfg, BatchMode = SdGuidanceBatchMode.Separate }, cancellationToken);
@@ -146,8 +156,11 @@ public static class Sd15Nodes
                 }
                 case "VAEDecode":
                 {
-                    var raw = inputs["samples"].Properties["samples"].GetNative<TorchTensor>(); ValidateShape(raw);
-                    outputs = [Own(inputs["vae"].GetNative<ComfyImageVae>().Decode(raw, cancellationToken))];
+                    var vae = inputs["vae"].GetNative<ComfyImageVae>();
+                    using var raw = inputs["samples"].Properties["samples"].GetNative<TorchTensor>().to(vae.Device, copy: true); ValidateShape(raw);
+                    using var decoded = vae.Decode(raw, cancellationToken);
+                    // IMAGE/PNG and media nodes currently consume CPU buffers; inference remains on the selected device.
+                    outputs = [Own(decoded.to(CPU, copy: true))];
                     break;
                 }
                 default: throw new InvalidOperationException("Unregistered SD1.5 operation.");

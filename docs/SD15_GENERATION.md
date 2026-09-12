@@ -24,11 +24,26 @@ Pour calculer une image, fournir un nouveau fichier PNG dans un dossier existant
 dotnet run --no-build -c Release --project tools/ComfySharp.RuntimeProbe -- sd15-generate --checkpoint <checkpoint.safetensors> --report-outside-components --execute --output <nouveau.png> --prompt "a photograph of a red apple on a wooden table" --negative "" --width 512 --height 512 --steps 20 --cfg 7 --seed 0 --threads 8 --weight-budget-mib 16384
 ```
 
-Le calcul utilise CPU/Float32, le bruit gaussien natif avec générateur par appel,
+Le calcul utilise CPU/Float32 par défaut, le bruit gaussien natif avec générateur par appel,
 le conditionnement CLIP ComfyUI, le débruiteur EPS, CFG séparé, Euler sans churn et
 Karras rho 7. Le latent initial utilise la règle de débruitage maximal ; le latent
 final est divisé par 0,18215 avant décodage. Le fichier PNG contient les paramètres
 dans `comfysharp.sd15`, sans prétendre être un document graphique ComfyUI.
+
+Sous Windows/NVIDIA, `--device cuda:0` sélectionne le calcul des trois réseaux
+sur GPU avec TF32 désactivé. Construire d'abord la variante CUDA du diagnostic :
+
+```text
+dotnet restore tools/ComfySharp.RuntimeProbe -p:NativeBackend=cuda --locked-mode
+dotnet build tools/ComfySharp.RuntimeProbe -c Release -p:NativeBackend=cuda --no-restore
+dotnet tools/ComfySharp.RuntimeProbe/bin/native/win-x64/cuda/Release/net10.0/ComfySharp.RuntimeProbe.dll sd15-generate --device cuda:0 --checkpoint <checkpoint.safetensors> --report-outside-components --execute --output <nouveau.png>
+```
+
+Le diagnostic refuse un GPU indisponible. Il conserve le bruit initial et les
+sigmas CPU avant transfert pour pouvoir les comparer exactement ; les captures
+CUDA sont explicitement transférées sur CPU pour leur écriture. Le rapport
+enregistre le périphérique et la politique TF32. Les valeurs CPU et GPU ne sont
+pas supposées identiques : voir les [mesures CUDA](qualification/sd15-cuda.json).
 
 Les limites de cette commande sont une image, des dimensions multiples de huit
 entre 32 et 512, 1 à 100 étapes et 4 096 caractères par texte. Le budget explicite

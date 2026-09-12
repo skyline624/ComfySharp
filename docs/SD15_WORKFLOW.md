@@ -26,13 +26,36 @@ un workflow JSON distinct du prompt API d'origine. `--data-dir <dossier>` permet
 de choisir les réglages et sorties de ComfySharp séparément des modèles.
 
 Le premier parcours est limité à un checkpoint monolithique stock SD1.5,
-prédiction EPS, CPU/Float32, Euler sans churn, Karras, `denoise=1`, un batch de
+prédiction EPS, CPU ou CUDA/Float32, Euler sans churn, Karras, `denoise=1`, un batch de
 une image de 32 à 512 pixels par dimension et 1 à 100 étapes. Le Host utilise
 au plus 16 threads CPU par défaut ; `--cpu-threads` le configure directement.
 Les masques, batch-index noise, conditionnements régionaux ou programmés, autres
 samplers/schedulers et autres architectures produisent des diagnostics explicites.
 Les identifiants de leurs choix amont restent dans les schémas pour préserver les
-documents. CUDA, les autres plateformes et la qualification complète restent ouvertes.
+documents. La qualification numérique CUDA, les autres plateformes et la qualification complète restent ouvertes.
+
+Pour utiliser le GPU NVIDIA sous Windows, construire le Host avec son bundle CUDA
+verrouillé, puis sélectionner ce périphérique au lancement de l'éditeur :
+
+```text
+dotnet restore src/ComfySharp.Host -p:NativeBackend=cuda --locked-mode
+dotnet build src/ComfySharp.Host -c Release -p:NativeBackend=cuda --no-restore
+dotnet run --no-build -c Release --project src/ComfySharp.Desktop -- --inference-device cuda:0 --models-dir <dossier-modeles-partage> --workflow docs/workflows/sd15-euler-karras.api.json
+```
+
+Le Host place CLIP, U-Net et VAE sur le GPU choisi. Le bruit initial et les sigmas
+sont construits sur CPU puis transférés ; l'image décodée revient sur CPU pour
+les nœuds média. Les checkpoints restent lus à leur emplacement partagé, avec
+chargement temporaire en RAM puis transfert des poids en VRAM. Aucun cache disque
+de modèle n'est créé. Le budget des poids ne couvre pas les activations GPU.
+
+Le mode Float32 désactive explicitement TF32 pour les multiplications matricielles
+et convolutions CUDA avant le chargement. Ces réglages libtorch sont globaux au
+processus ; les extensions ne doivent pas les modifier pendant une exécution.
+Le CPU reste le défaut. Un bundle CUDA absent ou un GPU indisponible produit
+une erreur explicite, sans repli silencieux. Seul `cuda:0` est exposé actuellement.
+La [preuve Windows/RTX 3090](qualification/sd15-cuda.json) distingue exécution
+réelle, répétabilité et comparaison numérique restant à qualifier.
 
 Le chargeur inspecte les trois composants avant allocation, avec un budget de
 poids de 16 Gio. Les tenseurs auxiliaires extérieurs aux réseaux sont signalés

@@ -29,7 +29,7 @@ public sealed record ClipForwardOptions
     public IReadOnlyList<int>? TokenCounts { get; init; }
 }
 
-/// <summary>Caller-owned CPU/F32 outputs; disposing a model never disposes these results.</summary>
+/// <summary>Caller-owned Float32 outputs on the model device; disposing a model never disposes these results.</summary>
 public sealed class ClipForwardResult(torch.Tensor finalHidden, torch.Tensor? intermediateHidden, torch.Tensor? projectedPooled, torch.Tensor pooled) : IDisposable
 {
     public torch.Tensor FinalHidden { get; } = finalHidden;

@@ -4,7 +4,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Plain SD diffusion boundaries from model_sampling.py and samplers.py.
-/// CPU/F32 tensors are borrowed, never mutated; every result has independent wrapper ownership.</summary>
+/// CPU/CUDA Float32 tensors are borrowed, never mutated; every result has independent wrapper ownership.</summary>
 public static class SdSamplingMath
 {
     public const double Sd15LatentScale = 0.18215;
@@ -92,16 +92,16 @@ public static class SdSamplingMath
     internal static void ValidateLatent(Tensor value, string name)
     {
         ArgumentNullException.ThrowIfNull(value, name);
-        if (value.device_type != DeviceType.CPU || value.dtype != ScalarType.Float32 || value.is_sparse ||
+        if (!InferenceDevice.IsSupported(value.device_type) || value.dtype != ScalarType.Float32 || value.is_sparse ||
             value.dim() != 4 || value.shape[0] <= 0 || value.shape[1] != 4 || value.shape[2] <= 0 || value.shape[3] <= 0)
-            throw new ArgumentException("Plain SD latents require a dense CPU/F32 tensor [batch, 4, height, width] with positive dimensions.", name);
+            throw new ArgumentException("Plain SD latents require a dense CPU or CUDA Float32 tensor [batch, 4, height, width] with positive dimensions.", name);
     }
 
     internal static void ValidateSigma(Tensor sigma)
     {
         ArgumentNullException.ThrowIfNull(sigma);
-        if (sigma.device_type != DeviceType.CPU || sigma.dtype != ScalarType.Float32 || sigma.is_sparse || sigma.dim() > 1)
-            throw new ArgumentException("Sigma requires a dense CPU/F32 scalar or vector.", nameof(sigma));
+        if (!InferenceDevice.IsSupported(sigma.device_type) || sigma.dtype != ScalarType.Float32 || sigma.is_sparse || sigma.dim() > 1)
+            throw new ArgumentException("Sigma requires a dense CPU or CUDA Float32 scalar or vector.", nameof(sigma));
         if (!sigma.isfinite().all().item<bool>() || sigma.lt(0).any().item<bool>())
             throw new ArgumentException("Sigma must be nonnegative and finite.", nameof(sigma));
     }
@@ -109,6 +109,7 @@ public static class SdSamplingMath
     internal static Tensor ReshapeSigma(Tensor sigma, Tensor latent)
     {
         ValidateSigma(sigma);
+        InferenceDevice.RequireSame(latent.device, sigma, nameof(sigma));
         if (sigma.numel() == 1) return sigma.reshape(Array.Empty<long>());
         if (sigma.dim() != 1 || sigma.shape[0] != latent.shape[0])
             throw new ArgumentException("A sigma vector must have one element or match the latent batch.", nameof(sigma));
@@ -119,6 +120,7 @@ public static class SdSamplingMath
     {
         ValidateLatent(first, nameof(first));
         ValidateLatent(second, nameof(second));
+        InferenceDevice.RequireSame(first.device, second, nameof(second));
         if (!first.shape.SequenceEqual(second.shape))
             throw new ArgumentException("Paired latent tensors must have identical shapes.", nameof(second));
     }

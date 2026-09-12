@@ -67,6 +67,16 @@ public sealed class Sd15GenerationDiagnosticTests
         Assert.Null(options.Output);
         Assert.Equal(512, options.Width);
         Assert.Equal(20, options.Steps);
+        Assert.Equal("cpu", options.Device);
+    }
+
+    [Fact]
+    public void Cuda_device_selection_is_explicit_and_does_not_imply_execution()
+    {
+        var options = Sd15GenerationDiagnostic.Parse(["--checkpoint", "shared.safetensors", "--device", "cuda:0"]);
+        Assert.Equal("cuda:0", options.Device); Assert.False(options.Execute);
+        Assert.Throws<ArgumentException>(() => Sd15GenerationDiagnostic.Parse(["--checkpoint", "x", "--device", "cuda:1"]));
+        Assert.Throws<ArgumentException>(() => Sd15GenerationDiagnostic.Parse(["--checkpoint", "x", "--device", "mps"]));
     }
 
     [Fact]

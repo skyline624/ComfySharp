@@ -14,6 +14,30 @@ internal sealed class CpuModelWeightBank : IDisposable
     private readonly Shared shared;
     private bool disposed;
     private CpuModelWeightBank(Shared shared) => this.shared = shared;
+    internal torch.Device Device
+    {
+        get { lock (shared.Gate) { ObjectDisposedException.ThrowIf(disposed, this); return shared.Tensors.Values.First().device; } }
+    }
+
+    internal CpuModelWeightBank To(torch.Device device, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested(); device = InferenceDevice.Validate(device);
+        using var source = Retain();
+        if (InferenceDevice.Same(source.Device, device)) return source.Retain();
+        using var scope = torch.NewDisposeScope(); using var noGrad = torch.no_grad();
+        var copies = new Dictionary<torch.Tensor, torch.Tensor>(ReferenceEqualityComparer.Instance);
+        var tensors = new Dictionary<string, torch.Tensor>(StringComparer.Ordinal);
+        foreach (var (name, tensor) in source.shared.Tensors)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (!copies.TryGetValue(tensor, out var copy)) { copy = tensor.to(device, copy: true); copies.Add(tensor, copy); }
+            tensors.Add(name, copy);
+        }
+        cancellationToken.ThrowIfCancellationRequested();
+        var result = new CpuModelWeightBank(new Shared(tensors));
+        foreach (var tensor in copies.Values) tensor.DetachFromDisposeScope();
+        return result;
+    }
 
     internal static CpuModelWeightBank Create(IReadOnlyDictionary<string, IReadOnlyList<long>> schema,
         IReadOnlyDictionary<string, torch.Tensor> tensors, Action<torch.Tensor>? normalized = null)
@@ -25,12 +49,14 @@ internal sealed class CpuModelWeightBank : IDisposable
             if (!schema.TryGetValue(name, out var shape)) throw new InvalidDataException($"Unknown canonical weight '{name}'.");
             if (tensor is null || tensor.IsInvalid) throw new InvalidDataException($"Weight '{name}' is null or disposed.");
             ModelWeightSchemaBuilder.CheckShape(name, tensor.shape, shape);
-            if (tensor.dtype != torch.ScalarType.Float32 || tensor.device_type != DeviceType.CPU || tensor.is_sparse || !tensor.is_contiguous())
-                throw new InvalidDataException($"Weight '{name}' must be contiguous dense CPU/Float32.");
+            if (tensor.dtype != torch.ScalarType.Float32 || !InferenceDevice.IsSupported(tensor.device_type) || tensor.is_sparse || !tensor.is_contiguous())
+                throw new InvalidDataException($"Weight '{name}' must be contiguous dense CPU or CUDA Float32.");
             if (tensor.requires_grad) throw new InvalidDataException($"Weight '{name}' must be frozen (requires_grad=false).");
         }
         foreach (string name in schema.Keys)
             if (!snapshot.ContainsKey(name)) throw new InvalidDataException($"Missing weight '{name}'.");
+        var device = snapshot.Values.First().device;
+        if (snapshot.Values.Any(t => !InferenceDevice.Same(device, t.device))) throw new InvalidDataException("A weight bank cannot mix devices.");
         // Preserve caller ownership until every required allocation succeeds. Managed-backed tensors
         // and offset views can select different CPU reduction kernels despite identical F32 bits.
         using var scope = torch.NewDisposeScope();
@@ -38,7 +64,7 @@ internal sealed class CpuModelWeightBank : IDisposable
         var replacements = new Dictionary<torch.Tensor, torch.Tensor>(ReferenceEqualityComparer.Instance);
         foreach (var tensor in new HashSet<torch.Tensor>(snapshot.Values, ReferenceEqualityComparer.Instance))
         {
-            if (IsAligned(tensor)) continue;
+            if (tensor.device_type != DeviceType.CPU || IsAligned(tensor)) continue;
             var clone = tensor.clone();
             if (!IsAligned(clone)) throw new NotSupportedException("The CPU allocator did not provide 64-byte aligned weight storage.");
             replacements.Add(tensor, clone);

@@ -97,7 +97,7 @@ public sealed partial class MainWindow : Window
     {
         availableNodes = null; lastPromptId = null; var session = hostSession.Restart();
         foreach (var tab in Documents.Items.OfType<TabItem>()) ((DocumentEditor)tab.Content!).ClearPreviews();
-        await host.StartAsync(lifetime.Token, smokeDataDirectory ?? Program.DataDirectory, Program.ModelsDirectory);
+        await host.StartAsync(lifetime.Token, smokeDataDirectory ?? Program.DataDirectory, Program.ModelsDirectory, Program.InferenceDevice);
         hostSession.Require(session);
         var info = await hostSession.ObserveAsync(host.GetAsync("/object_info"), session);
         hostSession.Require(session);

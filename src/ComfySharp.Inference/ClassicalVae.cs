@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>The complete classical image VAE graph, CPU/Float32 and deterministic mean encoding.
+/// <summary>The complete classical image VAE graph, Float32 on CPU/CUDA and deterministic mean encoding.
 /// Latents are raw VAE values; diffusion scaling belongs to the conditioning/sampling boundary.</summary>
 public sealed class ClassicalVae : IDisposable
 {
@@ -18,6 +18,11 @@ public sealed class ClassicalVae : IDisposable
     }
 
     public ClassicalVaeConfig Config { get; }
+    public Device Device { get { using var bank = RetainWeights(); return bank.Device; } }
+    public ClassicalVae To(Device device, CancellationToken cancellationToken = default)
+    {
+        using var bank = RetainWeights(); using var moved = bank.To(device, cancellationToken); return new ClassicalVae(moved);
+    }
 
     // Optional test diagnostics borrow the tensor only for the callback duration.
     internal Action<string, Tensor>? DiagnosticObserver { get; set; }
@@ -46,6 +51,7 @@ public sealed class ClassicalVae : IDisposable
         using var operation = RetainWeights();
         NativeRuntimeBootstrap.Initialize();
         ValidateNchw(image, ClassicalVaeConfig.ImageChannels, ClassicalVaeConfig.Compression, nameof(image));
+        InferenceDevice.RequireSame(operation.Device, image, nameof(image));
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
         // Preserve source layout: an NHWC image moved to NCHW can select the
@@ -81,6 +87,7 @@ public sealed class ClassicalVae : IDisposable
         using var operation = RetainWeights();
         NativeRuntimeBootstrap.Initialize();
         ValidateNchw(latent, ClassicalVaeConfig.LatentChannels, 1, nameof(latent));
+        InferenceDevice.RequireSame(operation.Device, latent, nameof(latent));
         using var scope = NewDisposeScope();
         using var noGrad = no_grad();
         DiagnosticObserver?.Invoke("post_quant_conv.input", latent);
@@ -180,16 +187,16 @@ public sealed class ClassicalVae : IDisposable
         return next;
     }
 
-    internal static void ValidateCpuTensor(Tensor tensor, string parameterName)
+    internal static void ValidateTensor(Tensor tensor, string parameterName)
     {
         ArgumentNullException.ThrowIfNull(tensor, parameterName);
-        if (tensor.IsInvalid || tensor.dtype != ScalarType.Float32 || tensor.device_type != DeviceType.CPU || tensor.is_sparse)
-            throw new ArgumentException("VAE inputs must be live dense CPU/Float32 tensors.", parameterName);
+        if (tensor.IsInvalid || tensor.dtype != ScalarType.Float32 || !InferenceDevice.IsSupported(tensor.device_type) || tensor.is_sparse)
+            throw new ArgumentException("VAE inputs must be live dense CPU or CUDA Float32 tensors.", parameterName);
     }
 
     private static void ValidateNchw(Tensor tensor, int channels, int minimumSpatialSize, string parameterName)
     {
-        ValidateCpuTensor(tensor, parameterName);
+        ValidateTensor(tensor, parameterName);
         var shape = tensor.shape;
         if (shape.Length != 4 || shape[0] <= 0 || shape[1] != channels || shape[2] < minimumSpatialSize || shape[3] < minimumSpatialSize)
             throw new ArgumentException($"VAE expects positive-batch NCHW, {channels} channels and spatial dimensions at least {minimumSpatialSize}.", parameterName);

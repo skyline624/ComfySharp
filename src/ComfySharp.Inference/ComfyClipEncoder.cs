@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Frozen SDClipModel and ClipTokenWeightEncoder integer-token, CPU/F32 inference path.</summary>
+/// <summary>Frozen SDClipModel and ClipTokenWeightEncoder integer-token, Float32 inference on CPU/CUDA.</summary>
 public sealed class ComfyClipEncoder : IDisposable
 {
     private readonly object gate = new();
@@ -18,6 +18,11 @@ public sealed class ComfyClipEncoder : IDisposable
     }
 
     public ClipProfile Profile { get; }
+    public Device Device { get { using var graph = RetainGraph(); return graph.Device; } }
+    public ComfyClipEncoder To(Device device, CancellationToken cancellationToken = default)
+    {
+        using var graph = RetainGraph(); using var moved = graph.To(device, cancellationToken); return new ComfyClipEncoder(moved, Profile);
+    }
 
     public ComfyClipEncoder Retain()
     {
@@ -57,7 +62,7 @@ public sealed class ComfyClipEncoder : IDisposable
             ? encoded.IntermediateHidden! : encoded.FinalHidden;
         Tensor? mask = null;
         if (options.ZeroOutMasked || options.ReturnAttentionMasks)
-            mask = tensor(processed.Masks.SelectMany(x => x).Select(x => (long)x).ToArray(), dtype: ScalarType.Int64, device: CPU)
+            mask = tensor(processed.Masks.SelectMany(x => x).Select(x => (long)x).ToArray(), dtype: ScalarType.Int64, device: selected.device)
                 .reshape(rows.Count, ClipTextConfig.MaxPositions);
         if (options.ZeroOutMasked) selected = selected * mask!.unsqueeze(-1).to_type(ScalarType.Float32);
 

@@ -7,6 +7,8 @@ public sealed class UnetWeightSet : IDisposable
 {
     private readonly CpuModelWeightBank bank;
     public SdUnetConfig Config { get; }
+    public torch.Device Device => bank.Device;
+    public UnetWeightSet To(torch.Device device, CancellationToken cancellationToken = default) => new(Config, bank.To(device, cancellationToken));
     private UnetWeightSet(SdUnetConfig config, CpuModelWeightBank bank) { Config = config; this.bank = bank; }
     /// <summary>Ownership transfers only after complete validation and normalization to 64-byte aligned storage.
     /// Misaligned tensors are copied bit-for-bit into native allocations; their original wrappers are disposed

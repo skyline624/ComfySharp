@@ -25,6 +25,14 @@ public sealed partial class MainWindow
         var jobId = accepted["prompt_id"]!.GetValue<string>();
         var entry = await WaitForJobAsync(jobId, session, 12000);
         hostSession.Require(session);
+        var loaderId = prompt.Single(p => p.Value?["class_type"]?.GetValue<string>() == "CheckpointLoaderSimple").Key;
+        var modelInfo = entry["outputs"]?[loaderId]?["comfysharp_model"]?[0]
+            ?? throw new InvalidOperationException("Host did not report the actual model placement.");
+        if (modelInfo["backend"]?.GetValue<string>() != Program.InferenceDevice ||
+            modelInfo["tf32_allowed"]?.GetValue<bool>() != false ||
+            modelInfo["component_devices"] is not JsonArray devices || devices.Count != 3 ||
+            devices.Any(d => !string.Equals(d?.GetValue<string>(), Program.InferenceDevice, StringComparison.OrdinalIgnoreCase)))
+            throw new InvalidOperationException("Host model components do not match the requested inference device.");
         if (!await ActiveEditor.ApplyUiOutputsAsync(entry["outputs"]!.AsObject(), ticket, async (file, token) =>
         {
             byte[] png = await readImage(file, token);
@@ -37,7 +45,7 @@ public sealed partial class MainWindow
             throw new InvalidOperationException("SD1.5 smoke expected one decoded 512x512 desktop preview.");
         var report = new JsonObject
         {
-            ["status"] = "ok", ["familyQualified"] = false, ["backend"] = "cpu", ["dtype"] = "Float32",
+            ["status"] = "ok", ["familyQualified"] = false, ["backend"] = Program.InferenceDevice, ["dtype"] = "Float32",
             ["desktopPreview"] = new JsonArray(512, 512), ["elapsedSeconds"] = watch.Elapsed.TotalSeconds,
             ["prompt"] = prompt.DeepClone(), ["history"] = entry.DeepClone(), ["images"] = images,
             ["workflow"] = snapshot

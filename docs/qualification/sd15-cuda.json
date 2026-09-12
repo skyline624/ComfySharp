@@ -1,0 +1,316 @@
+{
+  "status": "windows-cuda-workflow-verified",
+  "familyQualified": false,
+  "cudaNumericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "540455743a633b4b949780462beea630d044a318",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "shared checkpoints directory, read directly; no new disk copy"
+  },
+  "runtime": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "vramMiB": 24576,
+    "driver": "610.88",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "backend": "cuda:0",
+    "dtype": "Float32",
+    "cudaMatmulTf32Allowed": false,
+    "cudnnTf32Allowed": false,
+    "componentDevices": [
+      "cuda:0",
+      "cuda:0",
+      "cuda:0"
+    ]
+  },
+  "settings": {
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "prompt": "a photograph of a red apple on a wooden table",
+    "negative": "",
+    "width": 512,
+    "height": 512,
+    "steps": 20,
+    "seed": 0,
+    "cfg": 7,
+    "sampler": "euler",
+    "scheduler": "karras",
+    "backend": "cuda:0",
+    "dtype": "Float32",
+    "threads": 16,
+    "tf32Allowed": false,
+    "ignoredOutsideComponentTensors": [
+      "alphas_cumprod",
+      "alphas_cumprod_prev",
+      "betas",
+      "log_one_minus_alphas_cumprod",
+      "model_ema.decay",
+      "model_ema.num_updates",
+      "posterior_log_variance_clipped",
+      "posterior_mean_coef1",
+      "posterior_mean_coef2",
+      "posterior_variance",
+      "sqrt_alphas_cumprod",
+      "sqrt_one_minus_alphas_cumprod",
+      "sqrt_recip_alphas_cumprod",
+      "sqrt_recipm1_alphas_cumprod"
+    ]
+  },
+  "workflow": "../workflows/sd15-euler-karras.api.json",
+  "executions": {
+    "cli": {
+      "exitCode": 0,
+      "elapsedSeconds": 14.8065028,
+      "peakWorkingSetBytes": 4742426624,
+      "pngSha256": "be643f1bc2c53d5beb29b66827df39f61ad19bfbeee07e09cff939bcda597f30"
+    },
+    "cliRepeat": {
+      "exitCode": 0,
+      "elapsedSeconds": 14.8612097,
+      "pngSha256": "be643f1bc2c53d5beb29b66827df39f61ad19bfbeee07e09cff939bcda597f30"
+    },
+    "desktop": {
+      "exitCode": 0,
+      "elapsedSeconds": 11.2909992,
+      "pngSha256": "68e7a2194f62d243e05af497476091062017bac3c285b712ae9ce62793df2903",
+      "pngBytes": 692765,
+      "preview": [
+        512,
+        512
+      ],
+      "componentDevicesVerified": true,
+      "matchesCliScanlines": true,
+      "scanlineSha256": "a33c0f65174c60f866ecfe9bb7f45dd238d6e3fa8381cc8e598b32ee938ba6b3"
+    }
+  },
+  "comparison": {
+    "valuesPerExecution": 970261,
+    "metrics": [
+      {
+        "name": "positive-hidden.f32",
+        "shape": [
+          1,
+          77,
+          768
+        ],
+        "values": 59136,
+        "cudaSha256": "d354d6d7648ff8a9ccccccece54bff5909196e65c61301467a53cb9e57617506",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": true,
+        "maxAbsoluteErrorVsCpu": 6.198883056640625e-06,
+        "meanAbsoluteErrorVsCpu": 4.830800967674981e-07,
+        "rmseVsCpu": 6.216846515079504e-07,
+        "outsideExistingCpuDiagnosticTolerance": 0
+      },
+      {
+        "name": "negative-hidden.f32",
+        "shape": [
+          1,
+          77,
+          768
+        ],
+        "values": 59136,
+        "cudaSha256": "82f74bfd00da9891a20ad670c0724900c205cf966e24c43bdb3702cf40d9e3e1",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": true,
+        "maxAbsoluteErrorVsCpu": 5.0067901611328125e-06,
+        "meanAbsoluteErrorVsCpu": 4.26533488540481e-07,
+        "rmseVsCpu": 5.546196299944339e-07,
+        "outsideExistingCpuDiagnosticTolerance": 0
+      },
+      {
+        "name": "noise.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "values": 16384,
+        "cudaSha256": "b60eb3b5b14ff459a5517d7921ec74e7f82a23caaf9d5894e5e4a3f16ee9fd40",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": true,
+        "maxAbsoluteErrorVsCpu": 0.0,
+        "meanAbsoluteErrorVsCpu": 0.0,
+        "rmseVsCpu": 0.0,
+        "outsideExistingCpuDiagnosticTolerance": 0
+      },
+      {
+        "name": "sigmas.f32",
+        "shape": [
+          21
+        ],
+        "values": 21,
+        "cudaSha256": "c9e32a3dbf1911d13975619f884e7151971a4181684f4f8fa334f4718bbf8cc6",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": true,
+        "maxAbsoluteErrorVsCpu": 0.0,
+        "meanAbsoluteErrorVsCpu": 0.0,
+        "rmseVsCpu": 0.0,
+        "outsideExistingCpuDiagnosticTolerance": 0
+      },
+      {
+        "name": "initial.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "values": 16384,
+        "cudaSha256": "2985e711b2f5e2ec04300e124ca975b3e948b530e9d9543f2c991289c906d0ed",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": true,
+        "maxAbsoluteErrorVsCpu": 0.0,
+        "meanAbsoluteErrorVsCpu": 0.0,
+        "rmseVsCpu": 0.0,
+        "outsideExistingCpuDiagnosticTolerance": 0
+      },
+      {
+        "name": "diffusion.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "values": 16384,
+        "cudaSha256": "00c9a4832f251f5d95cd12011059da0704d9d3602fe5eb86e4dd42345c490c70",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": false,
+        "maxAbsoluteErrorVsCpu": 0.0013458728790283203,
+        "meanAbsoluteErrorVsCpu": 2.9067816591066276e-05,
+        "rmseVsCpu": 6.489869899362401e-05,
+        "outsideExistingCpuDiagnosticTolerance": 2238
+      },
+      {
+        "name": "raw-vae.f32",
+        "shape": [
+          1,
+          4,
+          64,
+          64
+        ],
+        "values": 16384,
+        "cudaSha256": "b76361be7292b325ebdc3c0951009d32e9e5eb3cc544a922a0235b148c862b37",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": false,
+        "maxAbsoluteErrorVsCpu": 0.007388114929199219,
+        "meanAbsoluteErrorVsCpu": 0.0001595883623721761,
+        "rmseVsCpu": 0.0003562945562731326,
+        "outsideExistingCpuDiagnosticTolerance": 5972
+      },
+      {
+        "name": "image.f32",
+        "shape": [
+          1,
+          512,
+          512,
+          3
+        ],
+        "values": 786432,
+        "cudaSha256": "59348b6a228c4998a9874e33cb53c42aa8e16c77a8b0bd4802a1991964ab50fa",
+        "repeatExact": true,
+        "matchesTf32DisabledExperiment": false,
+        "maxAbsoluteErrorVsCpu": 0.0009744465351104736,
+        "meanAbsoluteErrorVsCpu": 9.551166802642305e-06,
+        "rmseVsCpu": 2.4715335898056582e-05,
+        "outsideExistingCpuDiagnosticTolerance": 28235
+      }
+    ],
+    "interpretation": "Eight CUDA captures repeat exactly on this machine. CPU comparison uses the device-placement regression capture already checked against the frozen-source CPU baseline. TF32 disabled substantially reduces errors, but some values remain outside the existing CPU diagnostic tolerance. These metrics do not replace a same-backend frozen-source CUDA reference. No tolerance was changed.",
+    "cpuSourceReference": "sd15-pretrained-comparison.json",
+    "previousDefaultTf32ImageMeanAbsoluteError": 0.001844921675835091
+  },
+  "tests": {
+    "inferenceCpu": {
+      "total": 748,
+      "passed": 748,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "desktopHeadless": {
+      "total": 115,
+      "passed": 115,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "host": {
+      "total": 300,
+      "passed": 299,
+      "failed": 1,
+      "notExecuted": 0
+    }
+  },
+  "newTests": 7,
+  "builds": {
+    "solutionCpuRelease": "passed, zero warnings/errors",
+    "hostCudaRelease": "passed, zero warnings/errors",
+    "diagnosticCudaRelease": "passed, zero warnings/errors",
+    "dependencyRestore": "locked; no package or lock changes"
+  },
+  "knownTestFailure": "Host File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write: Windows lacks CreateSymbolicLink privilege. Failed, not skipped.",
+  "previousCi": {
+    "runId": 34689671671,
+    "commit": "540455743a633b4b949780462beea630d044a318",
+    "windows": "success",
+    "linux": "failure: first native reference access",
+    "macos": "failure: full CLIP L/G numerical comparison"
+  },
+  "limits": [
+    "One stock SD1.5 checkpoint, batch one, 32..512 dimensions, 1..100 Euler/Karras steps, denoise=1.",
+    "GPU activations are not covered by the weight budget; no offload is implemented in this path.",
+    "Linux CUDA and macOS MPS hardware qualification remain pending.",
+    "Repeated process exits are not a persistent Host VRAM leak qualification.",
+    "The other existing ComfyUI Python environment has PyTorch 2.13/CUDA 13.0 and was not used to claim libtorch 2.10/CUDA 12.8 parity."
+  ],
+  "sourceHashes": {
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-euler-karras.api.json": "fc4b91e2e80f7fe6222cd4f02640ca8b707af79d24bacb7c42214f09a9895705",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "src/ComfySharp.Desktop/HostSupervisor.cs": "8320cb0ef616e8f40d38ed4fd80a49fd0196245d959d9825d2f082233e3bc051",
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": "81fc1e74778a23b7dcfabcd20020dd1273ca8b76ce8505a8790fd2d1870fc943",
+    "src/ComfySharp.Desktop/Program.cs": "16a935fcd3efe40a94d833ef31e4484d7d0e076e99577777169602af988176da",
+    "src/ComfySharp.Desktop/Sd15Smoke.cs": "d85fddb55a026c2014dcaa402825be2fca7482492214a6cb2171ee1b62c21dcd",
+    "src/ComfySharp.Host/Program.cs": "3cce6cd29b3b8c34a1d056ca2b55f531304d568ca4fc808cb22258486ddb66ff",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "d45dd49d58acf3dce474e6ff91c187e3eb4e67eb32a7f220613f2fb87dc6ffe4",
+    "src/ComfySharp.Inference/ClassicalVae.cs": "d89c805449691cb77cbaf2473ca35633a02e40e148c54ddad6e5e4ebf354000c",
+    "src/ComfySharp.Inference/ClassicalVaeWeightSet.cs": "10a591e6c6d6e72d95759d59f8a2094c07e68cfb608f83a9ba54687e06d488f6",
+    "src/ComfySharp.Inference/ClipContracts.cs": "e3410c28ed4e4005551e973dc07c6724bea1352bcfecc5a88828ee437f400354",
+    "src/ComfySharp.Inference/ClipTextEncoder.cs": "3a687d764d8645803ab9165f9436d41da5a4fdc6b77eb1256ad8abd8710681a9",
+    "src/ComfySharp.Inference/ClipWeightSet.cs": "89f4d20f3e35b725e0fb8d84d1c7807770e752dfd5d810f0fd0d36b326f7d229",
+    "src/ComfySharp.Inference/ComfyClipEncoder.cs": "2fcfe96993888aebddfc484ef28137fbcf9401c3e8c530e63ef2af59584df2bd",
+    "src/ComfySharp.Inference/ComfyImageVae.cs": "dd111513431f490772aa3aef69c395a78ea6389a07fff49c534c0fbe67071dc3",
+    "src/ComfySharp.Inference/CpuModelWeightBank.cs": "808f50b893802dac23c674e65ac28d14e0ef9225ca2650a482f9c9670f0e31eb",
+    "src/ComfySharp.Inference/InferenceDevice.cs": "54d77f8aa3d662757c9f0b0ad31ebfff602dfd7eda93471dbdbf992413a31d08",
+    "src/ComfySharp.Inference/SdDenoiser.cs": "37098cb61b4844b05bc7da4ef8257f84efc33b5bb8554a45d9d2ac37845f4604",
+    "src/ComfySharp.Inference/SdDiscreteSampling.cs": "63476345cdfb580777ff9dd3564aa4dba82713a9a58b023caf756b2e41439eea",
+    "src/ComfySharp.Inference/SdEulerSampler.cs": "91bc8861bc6ca50fd9a40e24024f25a990ee4d47e4861b9145eca40f089cd6ed",
+    "src/ComfySharp.Inference/SdSamplingMath.cs": "c4405c1cee3743e0e11cae0ba6b891c9506ae305c3eac86272ddc7a5601c05be",
+    "src/ComfySharp.Inference/SdUnet.cs": "036f3a84eb8062a83b4b32ad21e75b97a85b52934b0e7993fb484f8527909f56",
+    "src/ComfySharp.Inference/UnetWeightSet.cs": "403bfec2551803426a59f2161ea36f998d00bb1f49f3f5f843551569c45c601e",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "12bc8973c63e18e21d51e160bd3d7f6379e652cebb1f1d76d033d593408cbd5e",
+    "tests/ComfySharp.Desktop.Tests/HostDiscoveryTests.cs": "bf951e853f491a6a8f85c19bc7716e592fcf6a5dd816edad90e443a1e98e7d92",
+    "tests/ComfySharp.Inference.Tests/ModelDeviceTests.cs": "9ab32a776dc5cb24068eb7833e714a8bbf4e0e300210ca8427204235938cf5d3",
+    "tests/ComfySharp.Inference.Tests/Sd15GenerationDiagnosticTests.cs": "bb15985824882320cb0e512efebaa441d1c326128ac0b4f5eff8b582addf19c3",
+    "tools/ComfySharp.RuntimeProbe/Sd15GenerationDiagnostic.cs": "ec3f12a2ef439c579949cc5d37bda5faddf5c13db4f4e3b6caaa0e1a10e8a8ff",
+    "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b"
+  },
+  "reportHashes": {
+    "cli": "7e5592cd719ff7e723bb859cb55ecae4b342ecd6ad716b3fe79e665420627805",
+    "cliRepeat": "51ee358a501310610b018b16d05335ce3e0d69290bc10f19d51861f89d744264",
+    "desktop": "06a30ef230518ac44b0e56292c812bf29b45d2dcf8e59a3ad6d7991e81d1fb9f",
+    "tf32Experiment": "19ca8db38e1a413bce36815386363df14824fa2fb189c6353cb646f503a72812"
+  },
+  "precisionReferences": [
+    "https://github.com/dotnet/TorchSharp/blob/main/src/TorchSharp/Torch.cs",
+    "https://docs.pytorch.org/docs/main/notes/numerical_accuracy.html"
+  ]
+}

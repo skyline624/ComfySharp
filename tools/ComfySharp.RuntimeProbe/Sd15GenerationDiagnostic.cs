@@ -9,14 +9,14 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.RuntimeProbe;
 
-/// <summary>Explicit single-checkpoint, CPU/F32 text-to-image diagnostic. No downloads or weight copies.</summary>
+/// <summary>Explicit single-checkpoint, CPU/CUDA Float32 text-to-image diagnostic. No downloads or weight copies.</summary>
 internal static class Sd15GenerationDiagnostic
 {
-    internal const string Usage = "sd15-generate --checkpoint <file> [--report-outside-components] [--execute --output <new.png> [--trace-dir <new-directory>]] [--prompt <text>] [--negative <text>] [--width 32..512] [--height 32..512] [--steps 1..100] [--seed <uint64>] [--cfg 0..30] [--threads 1..64] [--weight-budget-mib N]";
+    internal const string Usage = "sd15-generate --checkpoint <file> [--device cpu|cuda:0] [--report-outside-components] [--execute --output <new.png> [--trace-dir <new-directory>]] [--prompt <text>] [--negative <text>] [--width 32..512] [--height 32..512] [--steps 1..100] [--seed <uint64>] [--cfg 0..30] [--threads 1..64] [--weight-budget-mib N]";
 
     internal sealed record Options(string Checkpoint, string? Output, string Prompt, string Negative,
         bool Execute, bool ReportOutsideComponents, int Width, int Height, int Steps, ulong Seed, double Cfg, int Threads, long WeightBudgetBytes,
-        string? TraceDirectory);
+        string? TraceDirectory, string Device = "cpu");
 
     internal sealed record TraceRecord(string File, long[] Shape, string Dtype, long Bytes, string Sha256);
 
@@ -26,9 +26,9 @@ internal static class Sd15GenerationDiagnostic
         if (!BitConverter.IsLittleEndian || name.Length == 0 || name.Any(c => !char.IsAsciiLetterOrDigit(c) && c != '-'))
             throw new ArgumentException("Trace names must be ASCII letters, digits or hyphens on a little-endian platform.");
         using var scope = NewDisposeScope();
-        if (value.dtype != ScalarType.Float32 || value.device_type != DeviceType.CPU || value.is_sparse ||
-            !value.isfinite().all().item<bool>()) throw new ArgumentException("Trace requires finite dense CPU/F32 data.");
-        var flat = value.contiguous();
+        if (value.dtype != ScalarType.Float32 || !InferenceDevice.IsSupported(value.device_type) || value.is_sparse ||
+            !value.isfinite().all().item<bool>()) throw new ArgumentException("Trace requires finite dense CPU or CUDA Float32 data.");
+        var flat = value.device_type == DeviceType.CPU ? value.contiguous() : value.to(CPU, copy: true).contiguous();
         byte[] bytes = flat.bytes.ToArray();
         cancellationToken.ThrowIfCancellationRequested();
         string filename = name + ".f32";
@@ -57,7 +57,7 @@ internal static class Sd15GenerationDiagnostic
             }
             string key = args[i];
             if (key is not ("--checkpoint" or "--output" or "--prompt" or "--negative" or "--width" or "--height" or
-                "--steps" or "--seed" or "--cfg" or "--threads" or "--weight-budget-mib" or "--trace-dir") || ++i >= args.Length || !values.TryAdd(key, args[i]))
+                "--steps" or "--seed" or "--cfg" or "--threads" or "--weight-budget-mib" or "--trace-dir" or "--device") || ++i >= args.Length || !values.TryAdd(key, args[i]))
                 throw new ArgumentException("Unknown, incomplete or duplicate argument.");
         }
         string Value(string key, string fallback) => values.GetValueOrDefault(key, fallback);
@@ -69,6 +69,8 @@ internal static class Sd15GenerationDiagnostic
             return value;
         }
         string checkpoint = Value("--checkpoint", "");
+        string device = Value("--device", "cpu");
+        if (device is not ("cpu" or "cuda:0")) throw new ArgumentException("Select --device cpu or cuda:0.");
         if (string.IsNullOrWhiteSpace(checkpoint)) throw new ArgumentException("Checkpoint is required.");
         checkpoint = Path.GetFullPath(checkpoint);
         string? destination = values.TryGetValue("--output", out string? path) ? Path.GetFullPath(path) : null;
@@ -91,7 +93,7 @@ internal static class Sd15GenerationDiagnostic
         if (positive.Length > 4096 || negative.Length > 4096) throw new ArgumentException("Diagnostic text limit is 4096 characters.");
         return new(checkpoint, destination, positive, negative, execute, reportOutside, width, height, Number("--steps", 20, 1, 100), seed, cfg,
             Number("--threads", Math.Min(Environment.ProcessorCount, 8), 1, 64), (long)Number("--weight-budget-mib", 16384, 1, 131072) * 1024 * 1024,
-            traceDirectory);
+            traceDirectory, device);
     }
 
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken = default)
@@ -127,10 +129,15 @@ internal static class Sd15GenerationDiagnostic
             Stage("load");
             NativeRuntimeBootstrap.Initialize();
             set_num_threads(options.Threads);
+            if (options.Device == "cuda:0" && !cuda.is_available()) throw new NotSupportedException("CUDA is unavailable; no CPU fallback is performed.");
+            var device = options.Device == "cpu" ? CPU : new Device(DeviceType.CUDA, 0);
+            InferenceDevice.ConfigureFloat32(device);
             using var checkpoint = Sd15CheckpointLoader.Load(file, plan, options.WeightBudgetBytes, cancellationToken);
-            using var clip = checkpoint.CreateClipEncoder();
-            using var unet = checkpoint.CreateUnet();
-            using var vae = checkpoint.CreateImageVae();
+            using var sourceClip = checkpoint.CreateClipEncoder(); using var sourceUnet = checkpoint.CreateUnet(); using var sourceVae = checkpoint.CreateImageVae();
+            using var clip = sourceClip.To(device, cancellationToken);
+            using var unet = sourceUnet.To(device, cancellationToken);
+            using var vae = sourceVae.To(device, cancellationToken);
+            sourceClip.Dispose(); sourceUnet.Dispose(); sourceVae.Dispose(); checkpoint.Dispose();
             using var scope = NewDisposeScope();
             using var inference = no_grad();
             Stage("encode");
@@ -138,9 +145,11 @@ internal static class Sd15GenerationDiagnostic
             using var positive = clip.Encode(tokenizer.Tokenize(options.Prompt, cancellationToken: cancellationToken), cancellationToken: cancellationToken);
             using var negative = clip.Encode(tokenizer.Tokenize(options.Negative, cancellationToken: cancellationToken), cancellationToken: cancellationToken);
             Trace("positive-hidden", positive.Hidden); Trace("negative-hidden", negative.Hidden);
-            using var noise = NativeMath.CpuNoise([1, 4, options.Height / 8, options.Width / 8], options.Seed, cancellationToken);
+            using var cpuNoise = NativeMath.CpuNoise([1, 4, options.Height / 8, options.Width / 8], options.Seed, cancellationToken);
+            using var noise = cpuNoise.to(device, copy: true);
             var sampling = SdDiscreteSampling.Default;
-            using var sigmas = SigmaSchedules.Karras(options.Steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+            using var cpuSigmas = SigmaSchedules.Karras(options.Steps, sampling.SigmaMin, sampling.SigmaMax, cancellationToken: cancellationToken);
+            using var sigmas = cpuSigmas.to(device, copy: true);
             Trace("noise", noise); Trace("sigmas", sigmas);
             using var empty = zeros_like(noise);
             using var firstSigma = sigmas[0];
@@ -155,7 +164,8 @@ internal static class Sd15GenerationDiagnostic
             Stage("decode");
             using var raw = SdSamplingMath.ProcessLatentOut(diffusion, SdSamplingMath.Sd15LatentScale, cancellationToken);
             Trace("raw-vae", raw);
-            using var image = vae.Decode(raw, cancellationToken);
+            using var deviceImage = vae.Decode(raw, cancellationToken);
+            using var image = deviceImage.to(CPU, copy: true);
             Trace("image", image);
             var shape = image.shape;
             if (!shape.SequenceEqual(new long[] { 1, options.Height, options.Width, 3 }) || !image.isfinite().all().item<bool>())
@@ -163,7 +173,8 @@ internal static class Sd15GenerationDiagnostic
             Stage("png");
             var settings = new { modelSha256 = modelHash, prompt = options.Prompt, negative = options.Negative,
                 width = options.Width, height = options.Height, steps = options.Steps, seed = options.Seed, cfg = options.Cfg,
-                sampler = "euler", scheduler = "karras", backend = "cpu", dtype = "Float32", threads = options.Threads,
+                sampler = "euler", scheduler = "karras", backend = options.Device, dtype = "Float32", threads = options.Threads,
+                tf32Allowed = false,
                 ignoredOutsideComponentTensors = plan.UnclaimedTensorNames };
             byte[] png = ImagePngEncoder.EncodeFrame(image, 0, [new PngText("comfysharp.sd15", JsonSerializer.Serialize(settings))], cancellationToken: cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();

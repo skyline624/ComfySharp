@@ -4,7 +4,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Plain no-churn Euler trajectory over an already initialized diffusion latent.
-/// CPU/F32 only; the explicit nonincreasing schedule must end at zero. This component does not
+/// CPU/CUDA Float32; the explicit nonincreasing schedule must end at zero. This component does not
 /// initialize noise, choose a scheduler, load a checkpoint or convert VAE latent scales.</summary>
 public sealed class SdEulerSampler : IDisposable
 {
@@ -44,9 +44,11 @@ public sealed class SdEulerSampler : IDisposable
         using var noGrad = no_grad();
         SdSamplingMath.ValidateLatent(initialDiffusionLatent, nameof(initialDiffusionLatent));
         ValidateSchedule(sigmas);
+        InferenceDevice.RequireSame(operation.Device, initialDiffusionLatent, nameof(initialDiffusionLatent));
+        InferenceDevice.RequireSame(operation.Device, sigmas, nameof(sigmas));
         cancellationToken.ThrowIfCancellationRequested();
         var observer = DiagnosticObserver;
-        var sigmaBatchUnits = ones(new[] { initialDiffusionLatent.shape[0] }, dtype: ScalarType.Float32, device: CPU);
+        var sigmaBatchUnits = ones(new[] { initialDiffusionLatent.shape[0] }, dtype: ScalarType.Float32, device: initialDiffusionLatent.device);
         Tensor current = initialDiffusionLatent;
         bool ownsCurrent = false;
         try
@@ -87,9 +89,9 @@ public sealed class SdEulerSampler : IDisposable
     {
         ArgumentNullException.ThrowIfNull(sigmas);
         using var scope = NewDisposeScope();
-        if (sigmas.device_type != DeviceType.CPU || sigmas.dtype != ScalarType.Float32 || sigmas.is_sparse ||
+        if (!InferenceDevice.IsSupported(sigmas.device_type) || sigmas.dtype != ScalarType.Float32 || sigmas.is_sparse ||
             sigmas.dim() != 1 || sigmas.shape[0] < 2)
-            throw new ArgumentException("Euler requires a dense CPU/F32 vector containing at least two sigmas.", nameof(sigmas));
+            throw new ArgumentException("Euler requires a dense CPU or CUDA Float32 vector containing at least two sigmas.", nameof(sigmas));
         var current = sigmas.narrow(0, 0, sigmas.shape[0] - 1);
         var next = sigmas.narrow(0, 1, sigmas.shape[0] - 1);
         if (!sigmas.isfinite().all().item<bool>() || current.le(0).any().item<bool>() ||

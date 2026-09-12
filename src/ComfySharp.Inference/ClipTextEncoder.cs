@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Frozen CLIP text inference on CPU/F32 using the source basic attention path.</summary>
+/// <summary>Frozen CLIP Float32 inference on CPU/CUDA using the source basic attention path.</summary>
 public sealed class ClipTextEncoder : IDisposable
 {
     private readonly object gate = new();
@@ -19,6 +19,11 @@ public sealed class ClipTextEncoder : IDisposable
 
     public ClipTextConfig Config { get; }
     public bool HasProjection { get; }
+    public Device Device { get { using var bank = RetainWeights(); return bank.Device; } }
+    public ClipTextEncoder To(Device device, CancellationToken cancellationToken = default)
+    {
+        using var bank = RetainWeights(); using var moved = bank.To(device, cancellationToken); return new ClipTextEncoder(moved);
+    }
 
     public ClipTextEncoder Retain()
     {
@@ -46,14 +51,14 @@ public sealed class ClipTextEncoder : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
         int batch = input.PoolIndices.Length;
         const int length = ClipTextConfig.MaxPositions;
-        var ids = tensor(input.Ids, dtype: ScalarType.Int64, device: CPU);
+        var ids = tensor(input.Ids, dtype: ScalarType.Int64, device: operation.Device);
         var x = operation.GetTensor("text_model.embeddings.token_embedding.weight").index_select(0, ids)
             .reshape(batch, length, Config.HiddenSize)
             + operation.GetTensor("text_model.embeddings.position_embedding.weight");
-        var mask = full(new long[] { length, length }, -float.MaxValue, dtype: ScalarType.Float32, device: CPU).triu_(1);
+        var mask = full(new long[] { length, length }, -float.MaxValue, dtype: ScalarType.Float32, device: operation.Device).triu_(1);
         if (input.Mask is not null)
         {
-            var padding = tensor(input.Mask, dtype: ScalarType.Float32, device: CPU).reshape(batch, 1, 1, length)
+            var padding = tensor(input.Mask, dtype: ScalarType.Float32, device: operation.Device).reshape(batch, 1, 1, length)
                 .expand(batch, 1, length, length);
             mask = padding + mask;
         }
@@ -87,7 +92,7 @@ public sealed class ClipTextEncoder : IDisposable
         var final = Normalize(x, operation, "text_model.final_layer_norm");
         if (intermediate is not null && options.NormalizeIntermediate)
             intermediate = Normalize(intermediate, operation, "text_model.final_layer_norm");
-        var poolIndices = tensor(input.PoolIndices, dtype: ScalarType.Int64, device: CPU);
+        var poolIndices = tensor(input.PoolIndices, dtype: ScalarType.Int64, device: operation.Device);
         var pooled = final.reshape(batch * length, Config.HiddenSize).index_select(0, poolIndices);
         var projected = options.ProjectPooled
             ? nn.functional.linear(pooled, operation.GetTensor("text_projection.weight")) : null;

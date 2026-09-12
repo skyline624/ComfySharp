@@ -32,6 +32,7 @@ public sealed class SdDenoiser : IDisposable
     public SdUnetConfig Config { get; }
     public SdPredictionKind PredictionKind { get; }
     public SdDiscreteSampling Sampling { get; }
+    public Device Device { get { using var graph = RetainModel(); return graph.Device; } }
 
     public SdDenoiser Retain()
     {
@@ -63,6 +64,7 @@ public sealed class SdDenoiser : IDisposable
         SdSamplingMath.ValidateLatent(latent, nameof(latent));
         _ = SdSamplingMath.ReshapeSigma(sigma, latent);
         ValidateContext(conditional, latent.shape[0], nameof(conditional));
+        InferenceDevice.RequireSame(operation.Device, conditional, nameof(conditional));
         bool omitted = unconditional is null || SdSamplingMath.CanOmitUnconditional(options.Scale, options.DisableScaleOneOptimization);
         if (omitted)
         {
@@ -71,6 +73,7 @@ public sealed class SdDenoiser : IDisposable
         }
 
         ValidateContext(unconditional!, latent.shape[0], nameof(unconditional));
+        InferenceDevice.RequireSame(operation.Device, unconditional!, nameof(unconditional));
         if (options.BatchMode == SdGuidanceBatchMode.ConcatenateCompatible &&
             TryCommonContextLength(conditional.shape[1], unconditional!.shape[1], out long common))
         {
@@ -100,6 +103,8 @@ public sealed class SdDenoiser : IDisposable
         using var noGrad = no_grad();
         SdSamplingMath.ValidateLatent(latent, nameof(latent));
         ValidateContext(context, latent.shape[0], nameof(context));
+        InferenceDevice.RequireSame(operation.Device, latent, nameof(latent));
+        InferenceDevice.RequireSame(operation.Device, context, nameof(context));
         using var input = SdSamplingMath.ScaleInput(latent, sigma, cancellationToken);
         using var indices = Sampling.Timestep(sigma, cancellationToken);
         var time = indices.to_type(ScalarType.Float32).reshape(-1);
@@ -110,9 +115,9 @@ public sealed class SdDenoiser : IDisposable
     private void ValidateContext(Tensor context, long batch, string name)
     {
         ArgumentNullException.ThrowIfNull(context, name);
-        if (context.device_type != DeviceType.CPU || context.dtype != ScalarType.Float32 || context.is_sparse ||
+        if (!InferenceDevice.IsSupported(context.device_type) || context.dtype != ScalarType.Float32 || context.is_sparse ||
             context.dim() != 3 || context.shape[0] != batch || context.shape[1] <= 0 || context.shape[2] != Config.ContextSize)
-            throw new ArgumentException($"Text context must be a dense CPU/F32 tensor [batch, positive token count, {Config.ContextSize}].", name);
+            throw new ArgumentException($"Text context must be a dense CPU or CUDA Float32 tensor [batch, positive token count, {Config.ContextSize}].", name);
     }
 
     internal static bool TryCommonContextLength(long first, long second, out long common)

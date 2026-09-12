@@ -21,8 +21,9 @@ public sealed class HostSupervisor : IDisposable
     public bool Ready { get; private set; }
     public event EventHandler? Changed;
     private void SetStatus(string text) { Status = text; Changed?.Invoke(this, EventArgs.Empty); }
-    public static string? DiscoverHost(string? baseDirectory = null, string? configuredHostPath = null)
+    public static string? DiscoverHost(string? baseDirectory = null, string? configuredHostPath = null, string nativeBackend = "cpu")
     {
+        if (nativeBackend is not ("cpu" or "cuda")) throw new ArgumentException("Unknown native backend.", nameof(nativeBackend));
         var configured = configuredHostPath ?? Environment.GetEnvironmentVariable("COMFYSHARP_HOST_PATH");
         if (!string.IsNullOrWhiteSpace(configured)) return Path.GetFullPath(configured);
         var directory = new DirectoryInfo(baseDirectory ?? AppContext.BaseDirectory);
@@ -52,21 +53,22 @@ public sealed class HostSupervisor : IDisposable
             foreach (var buildRoot in runtime is null
                     ? new[] { Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin") }
                     : new[] {
-                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin", "native", runtime, "cpu"),
-                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin") })
+                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin", "native", runtime, nativeBackend),
+                        Path.Combine(parent.FullName, "src", "ComfySharp.Host", "bin") }.Take(nativeBackend == "cuda" ? 1 : 2))
                 foreach (var configuration in configurations)
                     foreach (var name in names)
                     { var path = Path.Combine(buildRoot, configuration, "net10.0", name); if (File.Exists(path)) return path; }
         return null;
     }
-    public async Task StartAsync(CancellationToken cancellationToken = default, string? dataDirectory = null, string? modelsDirectory = null)
+    public async Task StartAsync(CancellationToken cancellationToken = default, string? dataDirectory = null, string? modelsDirectory = null, string inferenceDevice = "cpu")
     {
         await gate.WaitAsync(cancellationToken);
         try
         {
             ObjectDisposedException.ThrowIf(disposed, this);
             StopCore();
-            var path = DiscoverHost() ?? throw new FileNotFoundException("Build ComfySharp.Host or set COMFYSHARP_HOST_PATH to its apphost or DLL.");
+            if (inferenceDevice is not ("cpu" or "cuda:0")) throw new ArgumentException("Select inference device cpu or cuda:0.");
+            var path = DiscoverHost(nativeBackend: inferenceDevice == "cpu" ? "cpu" : "cuda") ?? throw new FileNotFoundException("Build ComfySharp.Host with the selected native backend or set COMFYSHARP_HOST_PATH to its apphost or DLL.");
             using var listener = new TcpListener(IPAddress.Loopback, 0); listener.Start();
             var port = ((IPEndPoint)listener.LocalEndpoint).Port; listener.Stop();
             Address = new Uri($"http://127.0.0.1:{port}");
@@ -76,6 +78,7 @@ public sealed class HostSupervisor : IDisposable
             info.ArgumentList.Add("--urls"); info.ArgumentList.Add(Address.AbsoluteUri);
             if (dataDirectory is not null) { info.ArgumentList.Add("--data-dir"); info.ArgumentList.Add(Path.GetFullPath(dataDirectory)); }
             if (modelsDirectory is not null) { info.ArgumentList.Add("--models-dir"); info.ArgumentList.Add(Path.GetFullPath(modelsDirectory)); }
+            info.ArgumentList.Add("--inference-device"); info.ArgumentList.Add(inferenceDevice);
             var child = new Process { StartInfo = info, EnableRaisingEvents = true };
             child.Exited += (_, _) => { if (ReferenceEquals(process, child)) { Ready = false; SetStatus("Host exited. Documents are retained; restart is available."); } };
             process = child;
