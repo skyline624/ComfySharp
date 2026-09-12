@@ -1,6 +1,6 @@
 # Heun sans churn
 
-`KSampler` accepte désormais `sampler_name=heun` avec `scheduler=karras`,
+`KSampler` accepte désormais `sampler_name=heun` avec les [neuf schedulers SD](SD_SCHEDULERS.md),
 en plus du parcours Euler existant. Les mêmes paramètres `seed`, `steps`,
 `cfg` et `denoise` sont utilisés. Un `denoise` nul conserve le latent brut.
 

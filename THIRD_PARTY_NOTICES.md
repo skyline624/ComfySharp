@@ -1,5 +1,12 @@
 # Third-party provenance
 
+`SdScheduler.cs` adapts the nine scheduler routes and `KSampler.set_steps`
+from the frozen ComfyUI `comfy/samplers.py`, under the ComfyUI GPLv3 provenance
+below. Its Karras/exponential generators retain the k-diffusion MIT notice.
+The fixed Beta(0.6,0.6) quantile calculation is an original C# binomial-series
+and bisection implementation, not a copy of SciPy. SciPy is used only to run
+the source reference in the separate [scheduler laboratory](labs/sd-schedulers-source/README.md).
+
 `SdHeunSampler.cs` ports `sample_heun` with its default `s_churn=0` and the
 `to_d` / `append_dims` expression from the frozen ComfyUI k-diffusion sources.
 The k-diffusion MIT notice retained below also applies to this adaptation.

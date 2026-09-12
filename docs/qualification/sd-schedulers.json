@@ -1,0 +1,941 @@
+{
+  "status": "nine-sd-schedulers-windows-cuda-executed",
+  "familyQualified": false,
+  "modelNumericallyQualified": false,
+  "releaseReady": false,
+  "baseCommit": "00730227fa63c5efac89523d0616a28a26ecf95b",
+  "upstreamCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "model": {
+    "filename": "v1-5-pruned-emaonly.safetensors",
+    "bytes": 4265146304,
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "storage": "Read directly from shared directory, no disk copy; hash checked after nine executions."
+  },
+  "sourceComparison": {
+    "file": "../../tests/ComfySharp.Inference.Tests/Fixtures/sd-schedulers.reference.json",
+    "sha256": "d854d4f27b9b45677b6114928e3dfbff94c58c268d10192b1aecc3110871d2c2",
+    "cases": 71,
+    "finiteCases": 70,
+    "nonfiniteCasesDiagnosed": 1,
+    "absoluteTolerance": 1e-06,
+    "relativeTolerance": 1e-06,
+    "torch": "2.10.0+cpu",
+    "numpy": "2.2.6",
+    "scipy": "1.18.0",
+    "scope": "Default SD discrete table, nine schedulers and set_steps; not pretrained generation numerical comparison."
+  },
+  "execution": {
+    "platform": "win-x64",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "torchSharp": "0.107.0",
+    "libtorch": "2.10.0.0",
+    "cuda": "12.8",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "componentDevices": [
+      "cuda:0",
+      "cuda:0",
+      "cuda:0"
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "requestedSteps": 20,
+    "seed": 0,
+    "sampler": "heun",
+    "denoise": 1,
+    "runs": [
+      {
+        "scheduler": "beta",
+        "exitCode": 0,
+        "elapsedSeconds": 18.0704978,
+        "pngSha256": "252b01a99453ed69282a6e2a54bb861c2e5adfe3ed0c9fb24bbdd1fa9fff0493",
+        "pngBytes": 683702,
+        "reportSha256": "e731740c5a337879d259c28ef7c917f7de267999cd30b466b50f579faa9068ff",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "beta",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_beta",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "ddim_uniform",
+        "exitCode": 0,
+        "elapsedSeconds": 17.8107326,
+        "pngSha256": "ec7e1572508ded2f5b1c1f4d803da87fefc4f28e8d4616d1b184f9e75b1889c8",
+        "pngBytes": 694151,
+        "reportSha256": "6c4368c6c7c32dbc06c1fac1fa06d97704c2b6b38f559f6e1a222010b9c1e214",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "ddim_uniform",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_ddim_uniform",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "exponential",
+        "exitCode": 0,
+        "elapsedSeconds": 17.7704219,
+        "pngSha256": "73b687b46ba68b298ec712b550dcd692bf37a8f57fc152d1c27b4afad88bca5e",
+        "pngBytes": 696462,
+        "reportSha256": "7a5729b532a37d2e9cfc1c83a9e5e287d28bfa2aa851bf50a4281d782dd28a43",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "exponential",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_exponential",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "karras",
+        "exitCode": 0,
+        "elapsedSeconds": 16.1879042,
+        "pngSha256": "63c6f970e547101b644a155a0e36309711b21118ad2661d5b1d8a61ac89c0cb9",
+        "pngBytes": 689644,
+        "reportSha256": "9a5602dc0d856ee48b536990d3f01c8cb265fd7fb04ec2eb78d607b38bb02a0c",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "karras",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_karras",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "kl_optimal",
+        "exitCode": 0,
+        "elapsedSeconds": 16.2825559,
+        "pngSha256": "12bdaf89cd5dd3ddaa4128b66262f8da95fe4a02cc56b4a5f99f9437176ce4d3",
+        "pngBytes": 677107,
+        "reportSha256": "01b59e48910bbc146a59c0909a843082b14ce73a744e31c08ade5d82afc784d4",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "kl_optimal",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_kl_optimal",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "linear_quadratic",
+        "exitCode": 0,
+        "elapsedSeconds": 17.9900639,
+        "pngSha256": "f3f1929aadb215e88f33d3f442754a55acfb26f479102b274315c198d79e5d18",
+        "pngBytes": 605198,
+        "reportSha256": "473b1eca555f28ec8444b7fb9cf3974633270edd3b60d061cbcce5312b0b9de0",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "linear_quadratic",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_linear_quadratic",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "normal",
+        "exitCode": 0,
+        "elapsedSeconds": 17.7512585,
+        "pngSha256": "82d65082521a83ce2f3924b9268aac8dac9a48d5b61266d78b34ca89dcd0815d",
+        "pngBytes": 699671,
+        "reportSha256": "6c7241bc22081538c858cbd893c6d8c08e85c7fe0e4c2153b38b6e28fe41c8c2",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "normal",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_normal",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "sgm_uniform",
+        "exitCode": 0,
+        "elapsedSeconds": 18.1441198,
+        "pngSha256": "06e88c56f620d833684968403cbe6f489922a97c18b6bc9f8c2d0fa8b3ff1e27",
+        "pngBytes": 679683,
+        "reportSha256": "8fe7b578e99a6f744d958b9bfda974c0ce2e59a7b25b3e0eb7d7be9c6607f3f2",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "sgm_uniform",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_sgm_uniform",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "scheduler": "simple",
+        "exitCode": 0,
+        "elapsedSeconds": 18.0618964,
+        "pngSha256": "4c08b6d9c69af79a905566d7347ec1509c3649e015e65406ff7f156f6e6f4635",
+        "pngBytes": 680560,
+        "reportSha256": "162a11fdc4d8d42c31952ef0aaf335e57e1dbf1c278c631d36c11cb2c08169c4",
+        "prompt": {
+          "1": {
+            "class_type": "CheckpointLoaderSimple",
+            "inputs": {
+              "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+            }
+          },
+          "2": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "a photograph of a red apple on a wooden table",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "3": {
+            "class_type": "CLIPTextEncode",
+            "inputs": {
+              "text": "",
+              "clip": [
+                "1",
+                1
+              ]
+            }
+          },
+          "4": {
+            "class_type": "EmptyLatentImage",
+            "inputs": {
+              "width": 512,
+              "height": 512,
+              "batch_size": 1
+            }
+          },
+          "5": {
+            "class_type": "KSampler",
+            "inputs": {
+              "seed": 0,
+              "steps": 20,
+              "cfg": 7.0,
+              "sampler_name": "heun",
+              "scheduler": "simple",
+              "denoise": 1.0,
+              "model": [
+                "1",
+                0
+              ],
+              "positive": [
+                "2",
+                0
+              ],
+              "negative": [
+                "3",
+                0
+              ],
+              "latent_image": [
+                "4",
+                0
+              ]
+            }
+          },
+          "6": {
+            "class_type": "VAEDecode",
+            "inputs": {
+              "samples": [
+                "5",
+                0
+              ],
+              "vae": [
+                "1",
+                2
+              ]
+            }
+          },
+          "7": {
+            "class_type": "SaveImage",
+            "inputs": {
+              "filename_prefix": "ComfySharp_simple",
+              "images": [
+                "6",
+                0
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "karrasRegression": {
+    "sameHeader": true,
+    "sameInflatedScanlines": true,
+    "oldScanlinesSha256": "0ed2a6a51815690f770f015fae62ca8ccfa597412c2bfd9c488f6b202ae87860",
+    "newScanlinesSha256": "0ed2a6a51815690f770f015fae62ca8ccfa597412c2bfd9c488f6b202ae87860",
+    "scope": "PNG IHDR and decompressed IDAT equality against preceding native Heun/Karras execution; metadata excluded."
+  },
+  "tests": {
+    "total": 83,
+    "passed": 83,
+    "failed": 0,
+    "notExecuted": 0,
+    "trxSha256": "f030ada8c4f1f85c4d487927e564caaa81dac6f286dcd830d2bf6c5994fc6d27"
+  },
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaHostRelease": "passed, zero warnings/errors"
+  },
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "e2be5745599c7fdc8827886d03b5dc71cf9b6b3c511ee29f704518bd544fb6f4",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "docs/workflows/sd15-heun-beta.api.json": "f2e2f10b95ad7f9a0094f67ad1d9d6eef2ab80763e912d726ffdba426be20ad4",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/sd-schedulers-source/reference.py": "bdeb6484992b5fbd952830f8a1daa81c248d66ea0a3cd5bf49cfc51d8ee0b609",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/SdScheduler.cs": "9ffb95ed354754af50ee4d45f0afa2f804c301739ef4f1ee858dc786892eb55d",
+    "src/ComfySharp.Nodes.Tensor/Sd15Nodes.cs": "6a0c51a96d88835b99fc63bb7899f9ab8d6c3875ec3e222563fd7b2b5c667be7",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "1e6664cd36f269670a83ab1cad3f01c3148479eeb5a21a76aa043bb73d543d89",
+    "tests/ComfySharp.Inference.Tests/Fixtures/sd-schedulers.reference.json": "d854d4f27b9b45677b6114928e3dfbff94c58c268d10192b1aecc3110871d2c2",
+    "tests/ComfySharp.Inference.Tests/Sd15NodeTests.cs": "610346d1949da61752aa0874d2af93b4f5f9e962f4b4f85ad09a43fa995fa2d6",
+    "tests/ComfySharp.Inference.Tests/SdKarrasScheduleTests.cs": "bd96055cadcf39751ed3e809987c5b1076bced8618cca2e9af5add72371c6c4d",
+    "tests/ComfySharp.Inference.Tests/SdSchedulerTests.cs": "647206d1cdea5b38b6f7371acb0c3185e87d5ee99a69543f59193d26d8604fee"
+  },
+  "limitations": [
+    "Default SD1.5/SD2 discrete sampling table only; other model sampling laws and advanced scheduler parameters remain pending.",
+    "Heun/Euler Host path only, one image up to 512 pixels, without masks.",
+    "Linear-quadratic output was visibly much smoother and less detailed than beta; no visual-quality equivalence claimed.",
+    "The complete pretrained generations were not compared against source runs.",
+    "No additional Host-suite run in this campaign; earlier Windows symbolic-link privilege failure remains open.",
+    "Prior Heun CI stage passed on all three OS, but Linux/macOS overall CI still failed. Current scheduler CI has not yet run.",
+    "Linux CUDA and macOS MPS hardware qualification remain pending."
+  ]
+}

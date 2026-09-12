@@ -42,7 +42,7 @@ public static class Sd15Nodes
              new("negative", "CONDITIONING"), new("latent_image", "LATENT"),
              new("denoise", "FLOAT", Options: new() { ["default"] = 1.0, ["min"] = 0.0, ["max"] = 1.0, ["step"] = .01 })],
             [new("LATENT")], PythonModule: "nodes",
-            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler or Heun without churn, Karras, denoise in [0,1], one image up to 512x512, 1-100 steps. Expanded schedules are limited to 10000 steps. Other modes report an explicit error."),
+            Description: "Available execution: SD1.5 Float32 on CPU or CUDA, Euler or Heun without churn, all nine listed schedulers, denoise in [0,1], one image up to 512x512, 1-100 requested steps. Expanded schedules are limited to 10000 steps; DDIM and beta may change the interval count. KL optimal with one step is nonfinite in the source and reports an error."),
         new("VAEEncode", "VAE Encode", "model/latent", [new("pixels", "IMAGE"), new("vae", "VAE")], [new("LATENT")], PythonModule: "nodes"),
         new("VAEDecode", "VAE Decode", "model/latent", [new("samples", "LATENT"), new("vae", "VAE")], [new("IMAGE")], PythonModule: "nodes")
     ];
@@ -123,8 +123,8 @@ public static class Sd15Nodes
                 }
                 case "KSampler":
                 {
-                    if (S("sampler_name") is not ("euler" or "heun") || S("scheduler") != "karras")
-                        throw new NotSupportedException("KSampler currently executes Euler/Karras or Heun/Karras only.");
+                    if (S("sampler_name") is not ("euler" or "heun") || !SdScheduler.Names.Contains(S("scheduler"), StringComparer.Ordinal))
+                        throw new NotSupportedException("KSampler currently executes Euler or Heun with the ported SD schedulers.");
                     double denoise = D("denoise");
                     if (!double.IsFinite(denoise) || denoise is < 0 or > 1) throw new ArgumentOutOfRangeException("denoise");
                     int steps = I("steps"); double cfg = D("cfg");
@@ -151,7 +151,7 @@ public static class Sd15Nodes
                     using var noise = cpuNoise.to(model.Device, copy: true);
                     using var scaled = SdSamplingMath.ProcessLatentIn(raw, SdSamplingMath.Sd15LatentScale, cancellationToken);
                     var sampling = SdDiscreteSampling.Default;
-                    using var cpuSigmas = SdKarrasSchedule.Create(steps, denoise, sampling, cancellationToken);
+                    using var cpuSigmas = SdScheduler.Create(S("scheduler"), steps, denoise, sampling, cancellationToken);
                     using var sigmas = cpuSigmas.to(model.Device, copy: true);
                     using var first = sigmas[0];
                     using var initial = SdSamplingMath.NoiseScaling(noise, scaled, first,

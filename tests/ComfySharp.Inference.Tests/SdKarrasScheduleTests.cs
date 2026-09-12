@@ -42,8 +42,8 @@ public sealed class SdKarrasScheduleTests
     }
 
     [Theory]
-    [InlineData("euler")] [InlineData("heun")]
-    public async Task Zero_strength_keeps_raw_latent_bits_and_metadata_without_model_or_conditioning_access(string sampler)
+    [InlineData("euler", "karras")] [InlineData("heun", "karras")] [InlineData("euler", "normal")]
+    public async Task Zero_strength_keeps_raw_latent_bits_and_metadata_without_model_or_conditioning_access(string sampler, string scheduler)
     {
         NativeRuntimeBootstrap.Initialize(); long before = Tensor.TotalCount;
         using (var input = new RuntimeNodeContext())
@@ -55,7 +55,7 @@ public sealed class SdKarrasScheduleTests
             var raw = input.Own(tensor(new[] { .125f, -7.125f, float.Epsilon }).reshape(1, 1, 1, 3));
             var values = new Dictionary<string, RuntimeValue>
             {
-                ["sampler_name"] = input.Json(JsonValue.Create(sampler)), ["scheduler"] = input.Json(JsonValue.Create("karras")),
+                ["sampler_name"] = input.Json(JsonValue.Create(sampler)), ["scheduler"] = input.Json(JsonValue.Create(scheduler)),
                 ["steps"] = input.Json(JsonValue.Create(20)), ["cfg"] = input.Json(JsonValue.Create(7)), ["denoise"] = input.Json(JsonValue.Create(0)),
                 ["latent_image"] = input.Map(new Dictionary<string, RuntimeValue> { ["samples"] = raw,
                     ["custom"] = input.Json(JsonValue.Create("retained")), ["downscale_ratio_spacial"] = input.Json(JsonValue.Create(8)) })

@@ -33739,9 +33739,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1366",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33750,8 +33750,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:simple:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:simple:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:sgm_uniform",
@@ -33760,9 +33772,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1367",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33771,8 +33783,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:sgm_uniform:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:sgm_uniform:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:karras",
@@ -33781,9 +33805,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1368",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33792,8 +33816,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:karras:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:karras:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:exponential",
@@ -33802,9 +33838,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1369",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33813,8 +33849,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:exponential:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:exponential:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:ddim_uniform",
@@ -33823,9 +33871,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1370",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33834,8 +33882,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:ddim_uniform:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:ddim_uniform:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:beta",
@@ -33844,9 +33904,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1371",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33855,8 +33915,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:beta:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:beta:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:normal",
@@ -33865,9 +33937,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1372",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33876,8 +33948,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:normal:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:normal:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:linear_quadratic",
@@ -33886,9 +33970,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1373",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33897,8 +33981,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:linear_quadratic:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:linear_quadratic:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "scheduler:kl_optimal",
@@ -33907,9 +34003,9 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/samplers.py#L1374",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
-      "realWorkflow": false,
+      "implementation": "partial",
+      "unitTests": true,
+      "realWorkflow": true,
       "platforms": {
         "win-x64-cpu": false,
         "win-x64-cuda": false,
@@ -33918,8 +34014,20 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "scheduler:kl_optimal:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "scheduler-values",
+          "reference": "../qualification/sd-schedulers.json"
+        },
+        {
+          "platform": "win-x64-cuda",
+          "kind": "workflow-execution-only",
+          "reference": "../qualification/sd-schedulers.json"
+        }
+      ],
+      "scenario": "scheduler:kl_optimal:reference-workflow",
+      "implementationScope": "Default SD discrete table and KSampler defaults; generic model sampling laws and advanced parameters remain pending."
     },
     {
       "id": "weight-adapter:boft",
