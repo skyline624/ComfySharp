@@ -44,3 +44,16 @@ La [preuve Windows](qualification/native-runtime-identity.json) identifie le
 binaire compilé, les sources et les contrôles exécutés. La solution Release
 compile sans avertissement ; les 870 tests ordinaires d'inférence passent
 localement, dont les cinq nouveaux tests de l'interface native.
+
+La [campagne Linux d9c386b](https://github.com/skyline624/ComfySharp/actions/runs/34716664659)
+valide ensuite la compilation CMake et le chemin de chargement `$ORIGIN`. Le
+bundle candidat et la source annoncent exactement le même build et le mode
+effectif `AVX2` ; les 282 captures d'entraînement restent exactes. La suite
+ordinaire passe 855 tests sur 870 avec le candidat, contre 848 avec le bundle
+actuel. Les 15 échecs historiques du candidat restent ouverts.
+
+La [CI normale correspondante](https://github.com/skyline624/ComfySharp/actions/runs/34716664668)
+échoue encore sur les gradients d'entraînement Windows, les comparaisons
+d'entraînement Linux et CLIP aux dimensions complètes macOS. L'identification
+du runtime est désormais opérationnelle ; la distribution du bundle natif et
+la sélection de profils sources explicitement identifiés sont les étapes suivantes.

@@ -54,8 +54,51 @@
     "interopThreads": 64
   },
   "limitations": [
-    "CMake Linux bridge and candidate identity gate await CI.",
+    "Linux CPU identity and reduced candidate training are verified; 15 ordinary candidate tests still fail against historical references.",
     "The identity hash describes observations, not an accepted reference profile.",
     "The existing CUDA generator export source is unchanged; CUDA was not executed in this campaign."
-  ]
+  ],
+  "linux": {
+    "commit": "d9c386b4469d7df6bd2e2f8799f52db333b5a2b7",
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34716664659",
+    "cmakeBridgeBuilt": true,
+    "siblingRunpathVerified": true,
+    "candidateBuildConfigurationExactlyMatchesSource": true,
+    "cpuDispatch": {
+      "original": [
+        "AVX2",
+        "AVX2"
+      ],
+      "nuget-copy": [
+        "AVX2",
+        "AVX2"
+      ],
+      "source-native-copy": [
+        "AVX2",
+        "AVX2"
+      ]
+    },
+    "exactTrainingCaptures": 282,
+    "bridge": {
+      "name": "libComfySharp.Native.so",
+      "bytes": 29344,
+      "sha256": "2f50e10ab6bb4406692c06b70943d8a406baf39e1ed5a6900a906895fac68397"
+    },
+    "originalOrdinary": {
+      "passed": 848,
+      "executed": 870
+    },
+    "candidateOrdinary": {
+      "passed": 855,
+      "executed": 870
+    },
+    "resultSha256": "1dc51912d6def80b62a3869be256df9fca61624c40437b1faf17f8af1414d8ba",
+    "sourceManifestSha256": "9a8bb08d37e3d05c6dc08a4dbe1b999ff0e9ed9b888b91f6e9fdb443d57de048"
+  },
+  "normalCi": {
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34716664668",
+    "windows": "failed-training-gradient-comparisons",
+    "linux": "failed-training-comparisons",
+    "macos": "failed-full-clip-comparisons"
+  }
 }
