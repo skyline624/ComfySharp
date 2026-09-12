@@ -71,3 +71,40 @@ La [CI suivant cette correction](https://github.com/skyline624/ComfySharp/action
 est terminée : Windows réussit ; macOS atteint de nouveau les comparaisons CLIP
 aux dimensions complètes, où il échoue ; Linux conserve l'échec numérique des
 adapters. Le contrôle de compteur corrigé n'échoue pas dans cette campagne.
+
+## Résultat du candidat natif pour l'entraînement
+
+La [campagne a27985b](https://github.com/skyline624/ComfySharp/actions/runs/34715511898)
+réussit son contrôle ciblé sur un AMD EPYC 7763, Ubuntu 24.04, source AVX2 et
+un thread intra/inter-op. Le [rapport vérifiable](training-native-candidate.json)
+conserve les hashes des bibliothèques, des rapports et les noms de tous les tests
+en échec.
+
+Les trois bibliothèques CPU et OpenMP de la source, chargées par le binding
+TorchSharp inchangé dans une copie indépendante, donnent **282 captures exactes**
+contre la source du même hôte. Chaque topologie contribue 141 captures, dont
+18 gradients sélectionnés, 18 paramètres mis à jour et deux pertes. Les 686 poids
+de base correspondent aussi. Le contrôle NuGet original/copie est exact et les
+inventaires restent inchangés ; aucun binding Python n'est chargé dans .NET.
+
+| Contrôle contre les oracles distribués inchangés | Build actuel | Candidat natif |
+| --- | --- | --- |
+| Initialisation et entraînement, capture complète | 1 réussite, 2 échecs | 1 réussite, 2 échecs |
+| Suite ordinaire d'inférence, sans observateur | 843 réussites, 22 échecs | 850 réussites, 15 échecs |
+
+Les tests d'entraînement restent explicitement en échec contre l'ancien oracle,
+même lorsque toutes leurs captures correspondent à la source du même hôte.
+Une comparaison U-Net SD1.5 carrée échoue seulement avec le candidat : le nombre
+total d'échecs ne suffit donc pas à conclure à son adoption. Les captures ne
+comparent pas exactement les 1 250 gradients ; elles n'utilisent pas de poids
+préentraînés et ne qualifient pas les autres plateformes.
+
+La prochaine étape d'intégration associera le bundle natif à son identité de
+build et à son mode CPU effectif, puis sélectionnera un profil source identifié.
+Les API natives `at::get_cpu_capability()` et `at::show_config()` existent dans les
+headers libtorch 2.10 déjà utilisés par le bridge. Aucun oracle ne doit être
+remplacé silencieusement et les contrôles entre profils resteront distingués.
+
+La [CI normale a27985b](https://github.com/skyline624/ComfySharp/actions/runs/34715512023)
+est également terminée : Windows réussit, Linux échoue à l'étape des adapters,
+et macOS échoue à la comparaison CLIP aux dimensions complètes.

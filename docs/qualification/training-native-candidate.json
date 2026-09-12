@@ -1,0 +1,306 @@
+{
+  "commit": "a27985b77459d1f1548a5fa24fc50ec5c3e6a94f",
+  "run": "https://github.com/skyline624/ComfySharp/actions/runs/34715511898",
+  "scope": "Reduced SD1/SD2 mixed-adapter training; source-compatible native candidate, not whole-runtime or pretrained-family qualification.",
+  "host": {
+    "os": "Ubuntu 24.04 x64",
+    "cpu": "AMD EPYC 7763",
+    "sourceCpuDispatch": "AVX2",
+    "threads": 1,
+    "interopThreads": 1
+  },
+  "cases": [
+    {
+      "case": 0,
+      "baseWeightCount": 686,
+      "exactCaptures": 141,
+      "selectedGradientCaptures": 18,
+      "selectedUpdateCaptures": 18,
+      "lossCaptures": 2
+    },
+    {
+      "case": 1,
+      "baseWeightCount": 686,
+      "exactCaptures": 141,
+      "selectedGradientCaptures": 18,
+      "selectedUpdateCaptures": 18,
+      "lossCaptures": 2
+    }
+  ],
+  "controls": {
+    "nativeIdentityVerified": true,
+    "copyControlExact": true,
+    "protectedInputsUnchanged": true,
+    "candidateMatchesSameHostSourceTolerance": true
+  },
+  "nativeInputs": {
+    "original": {
+      "libc10.so": {
+        "name": "libc10.so",
+        "bytes": 1455496,
+        "sha256": "5a54a1c71c90df5011b20529bba91bcd160871c7cb19f33d9da8e73f9c45fbbc",
+        "soname": "libc10.so",
+        "needed": [
+          "libdl.so.2",
+          "libstdc++.so.6",
+          "libm.so.6",
+          "libgcc_s.so.1",
+          "libpthread.so.0",
+          "libc.so.6",
+          "ld-linux-x86-64.so.2"
+        ]
+      },
+      "libtorch_cpu.so": {
+        "name": "libtorch_cpu.so",
+        "bytes": 461211481,
+        "sha256": "0f4b3e14ed8468219fefe110605e741afc6bfbec27cc777a224301edb9f24c41",
+        "soname": "libtorch_cpu.so",
+        "needed": [
+          "libc10.so",
+          "librt.so.1",
+          "libgcc_s.so.1",
+          "libdl.so.2",
+          "libpthread.so.0",
+          "libm.so.6",
+          "libgomp-98b21ff3.so.1",
+          "libstdc++.so.6",
+          "libc.so.6",
+          "ld-linux-x86-64.so.2"
+        ]
+      },
+      "libtorch.so": {
+        "name": "libtorch.so",
+        "bytes": 7584,
+        "sha256": "aaa36e9d80c624fc796e0fd591ebe7a59262814f57bc639ec20f6ae91fadb760",
+        "soname": "libtorch.so",
+        "needed": [
+          "libtorch_cpu.so"
+        ]
+      },
+      "libLibTorchSharp.so": {
+        "name": "libLibTorchSharp.so",
+        "bytes": 2399008,
+        "sha256": "cf33b1b0bb6bbb9754a768fb5c5d04d9f498603be50e73f55621a0b40ee608b8",
+        "soname": "libLibTorchSharp.so",
+        "needed": [
+          "libtorch.so",
+          "libc10.so",
+          "libtorch_cpu.so",
+          "libstdc++.so.6",
+          "libm.so.6",
+          "libgcc_s.so.1",
+          "libc.so.6",
+          "ld-linux-x86-64.so.2"
+        ]
+      }
+    },
+    "originalOpenMp": {
+      "name": "libgomp-98b21ff3.so.1",
+      "bytes": 283265,
+      "sha256": "6b254201cafdc5389580d77139398a298f63ce3b139cfbcceade961ac0d721cb",
+      "soname": "libgomp.so.1",
+      "needed": [
+        "libdl.so.2",
+        "libpthread.so.0",
+        "libc.so.6"
+      ]
+    },
+    "candidate": {
+      "libc10.so": {
+        "name": "libc10.so",
+        "bytes": 1403600,
+        "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84",
+        "soname": "libc10.so",
+        "needed": [
+          "libdl.so.2",
+          "libstdc++.so.6",
+          "libm.so.6",
+          "libgcc_s.so.1",
+          "libpthread.so.0",
+          "libc.so.6",
+          "ld-linux-x86-64.so.2"
+        ]
+      },
+      "libtorch_cpu.so": {
+        "name": "libtorch_cpu.so",
+        "bytes": 443509856,
+        "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f",
+        "soname": "libtorch_cpu.so",
+        "needed": [
+          "libc10.so",
+          "librt.so.1",
+          "libgcc_s.so.1",
+          "libdl.so.2",
+          "libpthread.so.0",
+          "libm.so.6",
+          "libgomp.so.1",
+          "libstdc++.so.6",
+          "libc.so.6",
+          "ld-linux-x86-64.so.2"
+        ]
+      },
+      "libtorch.so": {
+        "name": "libtorch.so",
+        "bytes": 8032,
+        "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff",
+        "soname": "libtorch.so",
+        "needed": [
+          "libtorch_cpu.so"
+        ]
+      }
+    },
+    "candidateOpenMp": {
+      "name": "libgomp.so.1",
+      "bytes": 253849,
+      "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f",
+      "soname": "libgomp.so.1",
+      "needed": [
+        "libdl.so.2",
+        "libpthread.so.0",
+        "libc.so.6"
+      ]
+    },
+    "aliases": {
+      "libc10.so": {
+        "relativePaths": [
+          "runtimes/linux-x64/native/libc10.so"
+        ],
+        "sameInode": true,
+        "independentOfPackage": true
+      },
+      "libtorch_cpu.so": {
+        "relativePaths": [
+          "runtimes/linux-x64/native/libtorch_cpu.so"
+        ],
+        "sameInode": true,
+        "independentOfPackage": true
+      },
+      "libtorch.so": {
+        "relativePaths": [
+          "runtimes/linux-x64/native/libtorch.so"
+        ],
+        "sameInode": true,
+        "independentOfPackage": true
+      },
+      "libgomp.so.1": {
+        "relativePaths": [
+          "runtimes/linux-x64/native/libgomp-98b21ff3.so.1",
+          "runtimes/linux-x64/native/libgomp.so.1"
+        ],
+        "sameInode": true,
+        "independentOfPackage": true
+      }
+    },
+    "loaderPrecondition": {
+      "classification": "verifiedInterpreterLib",
+      "directoryName": "lib",
+      "matchesInterpreterBasePrefixLib": true,
+      "baselinePythonLibraryPreserved": true,
+      "directEntryCount": 5,
+      "directEntryNamesSha256": "0eecd03711915840dd6e96394a540e09978f3871a6b9a02bf5fd67ae51591046",
+      "pythonLibraries": [
+        {
+          "name": "libpython3.12.so",
+          "sha256": "5a7536ea0859ddd06a53daddd0c83ce72cda5ac07f14d5e2acffe13f3bce0c3a",
+          "bytes": 29801232
+        },
+        {
+          "name": "libpython3.12.so.1.0",
+          "sha256": "5a7536ea0859ddd06a53daddd0c83ce72cda5ac07f14d5e2acffe13f3bce0c3a",
+          "bytes": 29801232
+        },
+        {
+          "name": "libpython3.so",
+          "sha256": "5a41254e8f638c7ab1c573e167e916f22eb9d7811d85b126ef3f557559a69ebb",
+          "bytes": 15096
+        }
+      ]
+    },
+    "protocolSha256": "f821d193d6c8952772fe18db6bf9d7becd624a9f2ae5c3d45db6bfd8b9ce0759",
+    "sourceManifestSha256": "392cc4e211e2afd7edbc61ba6451d87eedf0b52a2b9fab783836f179e52b7dac"
+  },
+  "artifacts": {
+    "resultSha256": "ca356715dbb80d2c56828dc75249e2cecb450cf91ff61bae1ba215be7d0b16c0",
+    "sourceManifestSha256": "392cc4e211e2afd7edbc61ba6451d87eedf0b52a2b9fab783836f179e52b7dac"
+  },
+  "immutableOracleTestVerdicts": {
+    "original": {
+      "executed": 3,
+      "passed": 1,
+      "failedNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)"
+      ]
+    },
+    "nuget-copy": {
+      "executed": 3,
+      "passed": 1,
+      "failedNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "source-native-copy": {
+      "executed": 3,
+      "passed": 1,
+      "failedNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "original-ordinary": {
+      "executed": 865,
+      "passed": 843,
+      "failedNames": [
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 2)",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+        "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "source-native-copy-ordinary": {
+      "executed": 865,
+      "passed": 850,
+      "failedNames": [
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"square\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 2)",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+        "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")"
+      ]
+    }
+  },
+  "limitations": [
+    "18 selected gradients and 18 selected updates per topology, not an exact comparison of all 1250 leaves.",
+    "15 ordinary candidate tests still fail against old cross-host references; one SD1.5 square comparison fails only with the candidate.",
+    "No model weights, GPU, macOS candidate or product runtime replacement in this experiment."
+  ]
+}
