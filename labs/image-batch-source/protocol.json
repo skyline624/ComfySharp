@@ -1,0 +1,1337 @@
+{
+  "schema": 1,
+  "id": "image-batch-cpu-f32-v1",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "python": "3.12.10",
+  "sources": [
+    {
+      "path": "nodes.py",
+      "bytes": 108581,
+      "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7",
+      "declarations": [
+        {
+          "name": "ImageBatch",
+          "line": 1955,
+          "segmentSha256": "bfb40be31901a22052b8f9bbb9b7c24eb546e8e777a74b5ed144a43c368903be",
+          "astSha256": "ce3a260cc1d23b5d4292d3685ec2d00d64862b313058280d0c8a7a08fc9d1398"
+        }
+      ]
+    },
+    {
+      "path": "comfy/utils.py",
+      "bytes": 64114,
+      "sha256": "f3ee59baf72f6910b7662224854e372c713ba3ad01c89739ba092e5ee22460e6",
+      "declarations": [
+        {
+          "name": "common_upscale",
+          "line": 1105,
+          "segmentSha256": "48e93bc6f26647067f165213e74b839da7944d0e1e945ccac45acbfcc412e04c",
+          "astSha256": "cfba45e4ddbe3ae4048f2d814102204c284f838b9004c678bb613f05fbe98b7d"
+        }
+      ]
+    }
+  ],
+  "helperFiles": [
+    {
+      "path": "labs/autogrow-source/reference.py",
+      "commit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+      "bytes": 20206,
+      "sha256": "5239b3ffc13c64e583ba6a6c7a185de3264bfe9173d7c3f3a5da3685ec4e5027"
+    },
+    {
+      "path": "labs/autogrow-source/protocol.json",
+      "commit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+      "bytes": 39714,
+      "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+    },
+    {
+      "path": "labs/autogrow-source/README.md",
+      "commit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+      "bytes": 7388,
+      "sha256": "483dc8ba820eff7409dc4f6618238fa7b41bd526bdc96a45d368e4f18b7e7bd2"
+    },
+    {
+      "path": "labs/sd-stock-source/reference.py",
+      "commit": "babb14b40524c7fa6df998156048d23fec88827e",
+      "bytes": 34126,
+      "sha256": "a1117a31e4e25c1ffbc2c6fa8b681eccaa33defa7122e8c0744a71faa0f07ee3"
+    },
+    {
+      "path": "labs/image-primitives-source/protocol.json",
+      "commit": "829a6b87f48ef7b1022da512524c5966e998a369",
+      "bytes": 40343,
+      "sha256": "26ce418d969ee583ab077880530d20b6c11530094d7bbb97956bc5feaf56c0b4"
+    },
+    {
+      "path": "labs/image-primitives-source/reference.py",
+      "commit": "829a6b87f48ef7b1022da512524c5966e998a369",
+      "bytes": 20474,
+      "sha256": "bbc62d6369496bc5fd3150826d3f7d28d3f123c75e341cfb78bb531aae219515"
+    },
+    {
+      "path": "labs/image-primitives-source/README.md",
+      "commit": "829a6b87f48ef7b1022da512524c5966e998a369",
+      "bytes": 10401,
+      "sha256": "911597d8e90820b401c864a13c7275b6d6e73ada8a2b8977bcba0f1a91e28c2a"
+    }
+  ],
+  "dependencyLocks": [
+    {
+      "target": "win-x64",
+      "path": "labs/clip-source/requirements-win-x64.txt",
+      "commit": "babb14b40524c7fa6df998156048d23fec88827e",
+      "canonicalBytes": 3178,
+      "canonicalSha256": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5"
+    },
+    {
+      "target": "linux-x64",
+      "path": "labs/clip-source/requirements-linux-x64.txt",
+      "commit": "babb14b40524c7fa6df998156048d23fec88827e",
+      "canonicalBytes": 3280,
+      "canonicalSha256": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719"
+    },
+    {
+      "target": "osx-arm64",
+      "path": "labs/clip-source/requirements-osx-arm64.txt",
+      "commit": "babb14b40524c7fa6df998156048d23fec88827e",
+      "canonicalBytes": 3195,
+      "canonicalSha256": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+    }
+  ],
+  "environment": {
+    "torch": "2.10.0",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "device": "cpu",
+    "dtype": "float32",
+    "intraOpThreads": 1,
+    "interOpThreads": 1,
+    "gpu_only": false,
+    "fp16_intermediates": false,
+    "gradEnabled": false,
+    "requestedAtenCapability": "unset"
+  },
+  "profile": {
+    "dtype": "float32",
+    "device": "cpu",
+    "layout": "NHWC",
+    "channels": [
+      3,
+      4
+    ],
+    "positiveDimensions": true,
+    "finite": true,
+    "maxStorageElements": 2048,
+    "maxOutputElements": 4096,
+    "inputAbsoluteBound": 32,
+    "sourceRepeats": 3,
+    "comparison": {
+      "exact-no-resize": "exact logical little-endian Float32 bytes, including signed zero",
+      "bilinear": {
+        "absoluteTolerance": 1e-06,
+        "relativeTolerance": 1e-06,
+        "formula": "abs(actual-source) <= 1e-6 + 1e-6*abs(source)",
+        "metadata": "shape/dtype/layout exact; finite outputs required"
+      },
+      "source-error": "classified body failure; no fabricated numeric output or exception-message equivalence"
+    },
+    "sourceOnlyBody": true,
+    "mapperAndHttpAssessed": false
+  },
+  "observations": {
+    "repeatSequence": [
+      "off",
+      "on",
+      "off"
+    ],
+    "freshNamespacesAndInputs": true,
+    "interpolation": "middle-run sys.setprofile of actual common_upscale return, including exceptional return, records actual crop locals/layout only",
+    "copy": "after successful body: mutate declared scalar of image1, then image2, separately capture both inputs and unchanged output; not part of source body",
+    "error": "on classified source error: inputs unchanged; no output/copy verification asserted"
+  },
+  "cases": [
+    {
+      "id": "same-rgb-batches",
+      "node": "ImageBatch",
+      "classification": "exact-no-resize",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "stride": [
+          18,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 18,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABA",
+        "storageSha256": "8c2c94524a47892995abcd7d877f7cf0fa9f710b9fc552975682b223f1bd7704",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "stride": [
+          18,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 36,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBAAAC4QAAAQL8AAAAAAACAPgAAgD8AAOA/AAAAQAAAMEAAAGBAAABwQAAAkEAAAKhA",
+        "storageSha256": "e92027fe2f5a2992b72dd02f1feb5c9de05b0e2da64cb3a111abe2d7c97213ad",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "same-rgba-views",
+      "node": "ImageBatch",
+      "classification": "exact-no-resize",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          3,
+          4
+        ],
+        "stride": [
+          96,
+          48,
+          8,
+          1
+        ],
+        "storageOffset": 4,
+        "storageElements": 168,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AAAAvwAAgL8AAIC+AAAAPwAAAIAAAAC/AAAAvwAAAL8AAAC/AABAPwAAwD8AABBAAAAAAAAAAL8AAAC/AAAAvwAAAL8AACBAAABQQAAAgEAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAiEAAAKBAAAC4QAAAQD8AAAC/AAAAvwAAAL8AAAC/AADAQAAAAL8AAIA+AACAPwAAAL8AAAC/AAAAvwAAAL8AAAA/AACgPwAAAEAAAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAEEAAAEBAAABwQAAAAIAAAAC/AAAAvwAAAL8AAAC/AACAQAAAmEAAALBAAAAAAAAAAL8AAAC/AAAAvwAAAL8AALhAAABAvwAAAAAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAgD4AAIA/AADgPwAAQD8AAAC/AAAAvwAAAL8AAAC/AAAAQAAAMEAAAGBAAACAPwAAAL8AAAC/AAAAvwAAAL8AAHBAAACQQAAAqEAAAKA/",
+        "storageSha256": "261268534553e8f7bd1d4a26f32754b29c3c54d715d98e78efd4a34fe2c9d32f",
+        "layoutLabel": "spatial-step2"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "stride": [
+          24,
+          3,
+          1,
+          6
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AACAvwAAQD8AACBAAACIQAAAwEAAAAA/AACAvgAAwD8AAFBAAACgQAAAAL8AAKA/AAAAPwAAEEAAAIBAAAC4QAAAgD4AAABAAAAAgAAAAAAAAIA+AABAPwAAgD8AAKA/",
+        "storageSha256": "db23a0def20e6fc427ce5bbde2c0522537853acd9a53da7ae22935f28d0fa3f7",
+        "layoutLabel": "nchw-view"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "pad-first-rgb",
+      "node": "ImageBatch",
+      "classification": "exact-no-resize",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "stride": [
+          18,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 18,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABA",
+        "storageSha256": "8c2c94524a47892995abcd7d877f7cf0fa9f710b9fc552975682b223f1bd7704",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          3,
+          4
+        ],
+        "stride": [
+          24,
+          12,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 48,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/AAAQQAAAQEAAAHBAAAAAgAAAgEAAAJhAAACwQAAAAAAAALhAAABAvwAAAAAAAIA+AACAPgAAgD8AAOA/AABAPwAAAEAAADBAAABgQAAAgD8AAHBAAACQQAAAqEAAAKA/",
+        "storageSha256": "5655fcf15eefabacbe96154cece553e6c1b9ff58b9d5feaf1dbaad86d16d55fd",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "pad-second-rgb",
+      "node": "ImageBatch",
+      "classification": "exact-no-resize",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          3,
+          4
+        ],
+        "stride": [
+          24,
+          12,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 48,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/AAAQQAAAQEAAAHBAAAAAgAAAgEAAAJhAAACwQAAAAAAAALhAAABAvwAAAAAAAIA+AACAPgAAgD8AAOA/AABAPwAAAEAAADBAAABgQAAAgD8AAHBAAACQQAAAqEAAAKA/",
+        "storageSha256": "5655fcf15eefabacbe96154cece553e6c1b9ff58b9d5feaf1dbaad86d16d55fd",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "stride": [
+          18,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 18,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABA",
+        "storageSha256": "8c2c94524a47892995abcd7d877f7cf0fa9f710b9fc552975682b223f1bd7704",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "upsample-half-pixel",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          1,
+          4,
+          3
+        ],
+        "stride": [
+          12,
+          12,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBA",
+        "storageSha256": "fc578a7cdc6292a0240ac401930fb98732968b6af2c0fc46fe385f2b728fb814",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "stride": [
+          6,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 6,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAQQAAAEEAAABB",
+        "storageSha256": "e389114828f4891caffbbf0f536aea34525c79969a23b66e39ec720935cb9556",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "downsample-no-antialias",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "stride": [
+          6,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 6,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBA",
+        "storageSha256": "97c10659271dae1f0031ee1c3b354db2c316835bbc2e4b4995e4dc29cf5e8049",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          4,
+          3
+        ],
+        "stride": [
+          24,
+          12,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQAAAEEAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQAAAEEAAABB",
+        "storageSha256": "c77e77abc6661efef1c2092632efd1bc59ed03a4be696fd1cd3f1365ef839048",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-wide",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "stride": [
+          12,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 12,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhA",
+        "storageSha256": "f634b9be7eb332ecec33ae66afd0a646ce85445355354c04770a12d5adb6993e",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          6,
+          3
+        ],
+        "stride": [
+          36,
+          18,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 72,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBAAAC4QAAAQL8AAAAAAACAPgAAgD8AAOA/AAAAQAAAMEAAAGBAAABwQAAAkEAAAKhAAACwQAAAgL8AAIC+AAAAAAAAQD8AAMA/AADgPwAAIEAAAFBAAABgQAAAiEAAAKBAAACoQAAAwEAAAAC/AACAvgAAAD8AAKA/AADAPwAAEEAAAEBAAABQQAAAgEAAAJhAAACgQAAAuEAAAEC/AAAAvwAAgD4AAIA/AACgPwAAAEAAADBAAABAQAAAcEAAAJBA",
+        "storageSha256": "f612aaf98a376cdd9f3a69528acf57731574bd5933e6dd6480a00972024c3c18",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-tall",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          2,
+          3
+        ],
+        "stride": [
+          12,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBA",
+        "storageSha256": "fc578a7cdc6292a0240ac401930fb98732968b6af2c0fc46fe385f2b728fb814",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          6,
+          2,
+          4
+        ],
+        "stride": [
+          48,
+          8,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 48,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/AAAQQAAAQEAAAHBAAAAAgAAAgEAAAJhAAACwQAAAAAAAALhAAABAvwAAAAAAAIA+AACAPgAAgD8AAOA/AABAPwAAAEAAADBAAABgQAAAgD8AAHBAAACQQAAAqEAAAKA/",
+        "storageSha256": "5655fcf15eefabacbe96154cece553e6c1b9ff58b9d5feaf1dbaad86d16d55fd",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-half-x-even-zero",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "stride": [
+          6,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 6,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBA",
+        "storageSha256": "97c10659271dae1f0031ee1c3b354db2c316835bbc2e4b4995e4dc29cf5e8049",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "stride": [
+          9,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 9,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAQQAAAEEAAABBAACAQQAAgEEAAIBB",
+        "storageSha256": "2d93cbe9b590da6e589ebcedd38e13755385892c683f6ad4adf2f62785d4ceec",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-one-half-x-even-two",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          2,
+          4
+        ],
+        "stride": [
+          8,
+          8,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 8,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAA=",
+        "storageSha256": "d0870d5c803d16a05f7975fbf6be8a286e07a9799508a885e28e3f7f131b86f5",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          1,
+          5,
+          4
+        ],
+        "stride": [
+          20,
+          20,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 40,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAgAAAAEEAAABBAAAAQQAAAAAAAIBBAACAQQAAgEEAAIA+AADAQQAAwEEAAMBBAABAPwAAAEIAAABCAAAAQgAAgD8AAAAAAAAAAAAAAAAAAKA/AAAAQQAAAEEAAABBAAAAgAAAgEEAAIBBAACAQQAAAAAAAMBBAADAQQAAwEEAAIA+AAAAQgAAAEIAAABCAABAPw==",
+        "storageSha256": "f8ff0edb002a82dc58431ac9005bc4a2a180cf7f97358e54c98494f749bf0056",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-half-y-even-zero",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          1,
+          3
+        ],
+        "stride": [
+          6,
+          3,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 6,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBA",
+        "storageSha256": "97c10659271dae1f0031ee1c3b354db2c316835bbc2e4b4995e4dc29cf5e8049",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          3,
+          1,
+          3
+        ],
+        "stride": [
+          9,
+          3,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 9,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAQQAAAEEAAABBAACAQQAAgEEAAIBB",
+        "storageSha256": "2d93cbe9b590da6e589ebcedd38e13755385892c683f6ad4adf2f62785d4ceec",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "crop-one-half-y-even-two",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          1,
+          4
+        ],
+        "stride": [
+          8,
+          4,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 16,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPw==",
+        "storageSha256": "13b04f79564dc551f03041f252f7d023c3a8c2ab1d656ea65dcfc391b056212d",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          5,
+          1,
+          4
+        ],
+        "stride": [
+          20,
+          4,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 20,
+        "storageLittleEndianBase64": "AAAAAAAAAAAAAAAAAAAAgAAAAEEAAABBAAAAQQAAAAAAAIBBAACAQQAAgEEAAIA+AADAQQAAwEEAAMBBAABAPwAAAEIAAABCAAAAQgAAgD8=",
+        "storageSha256": "b3e48a12a29a1b418e2e75bf2b7a44d13f34514f7836e72c1faf5e146c5b5cbe",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "asymmetric-tall-crop-views",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          3,
+          5,
+          3
+        ],
+        "stride": [
+          45,
+          5,
+          1,
+          15
+        ],
+        "storageOffset": 0,
+        "storageElements": 45,
+        "storageLittleEndianBase64": "AACAvwAAQD8AACBAAACIQAAAwEAAAAA/AAAQQAAAgEAAALhAAACAPgAAAEAAAHBAAACwQAAAAAAAAOA/AACAvgAAwD8AAFBAAACgQAAAAL8AAKA/AABAQAAAmEAAAEC/AACAPwAAMEAAAJBAAACAvwAAQD8AACBAAAAAPwAAEEAAAIBAAAC4QAAAgD4AAABAAABwQAAAsEAAAAAAAADgPwAAYEAAAKhAAACAvgAAwD8AAFBA",
+        "storageSha256": "a3228f7fb511e5e1ee0653d7d01af6047df8c995c667b2321f8ebe1492ba8cf3",
+        "layoutLabel": "nchw-view"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          4,
+          3,
+          3
+        ],
+        "stride": [
+          144,
+          36,
+          6,
+          1
+        ],
+        "storageOffset": 3,
+        "storageElements": 270,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AACAvwAAgL4AAAA/AAAAvwAAAL8AAAC/AABAPwAAwD8AABBAAAAAvwAAAL8AAAC/AAAgQAAAUEAAAIBAAAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AACIQAAAoEAAALhAAAAAvwAAAL8AAAC/AADAQAAAAL8AAIA+AAAAvwAAAL8AAAC/AAAAPwAAoD8AAABAAAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAQQAAAQEAAAHBAAAAAvwAAAL8AAAC/AACAQAAAmEAAALBAAAAAvwAAAL8AAAC/AAC4QAAAQL8AAAAAAAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AACAPgAAgD8AAOA/AAAAvwAAAL8AAAC/AAAAQAAAMEAAAGBAAAAAvwAAAL8AAAC/AABwQAAAkEAAAKhAAAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AACwQAAAgL8AAIC+AAAAvwAAAL8AAAC/AAAAAAAAQD8AAMA/AAAAvwAAAL8AAAC/AADgPwAAIEAAAFBAAAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AABgQAAAiEAAAKBAAAAAvwAAAL8AAAC/AACoQAAAwEAAAAC/AAAAvwAAAL8AAAC/AACAvgAAAD8AAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AADAPwAAEEAAAEBAAAAAvwAAAL8AAAC/AABQQAAAgEAAAJhAAAAAvwAAAL8AAAC/AACgQAAAuEAAAEC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAgD4AAIA/AAAAvwAAAL8AAAC/AACgPwAAAEAAADBAAAAAvwAAAL8AAAC/AABAQAAAcEAAAJBA",
+        "storageSha256": "67b4542cc5a34e532067545a345d845771bbdfe0e6a6827fe9a01f3f740289cf",
+        "layoutLabel": "spatial-step2"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "asymmetric-wide-crop-views",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          5,
+          3,
+          4
+        ],
+        "stride": [
+          240,
+          48,
+          8,
+          1
+        ],
+        "storageOffset": 4,
+        "storageElements": 456,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AAAAvwAAgL8AAIC+AAAAPwAAAIAAAAC/AAAAvwAAAL8AAAC/AABAPwAAwD8AABBAAAAAAAAAAL8AAAC/AAAAvwAAAL8AACBAAABQQAAAgEAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAiEAAAKBAAAC4QAAAQD8AAAC/AAAAvwAAAL8AAAC/AADAQAAAAL8AAIA+AACAPwAAAL8AAAC/AAAAvwAAAL8AAAA/AACgPwAAAEAAAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAEEAAAEBAAABwQAAAAIAAAAC/AAAAvwAAAL8AAAC/AACAQAAAmEAAALBAAAAAAAAAAL8AAAC/AAAAvwAAAL8AALhAAABAvwAAAAAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAgD4AAIA/AADgPwAAQD8AAAC/AAAAvwAAAL8AAAC/AAAAQAAAMEAAAGBAAACAPwAAAL8AAAC/AAAAvwAAAL8AAHBAAACQQAAAqEAAAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAsEAAAIC/AACAvgAAAIAAAAC/AAAAvwAAAL8AAAC/AAAAAAAAQD8AAMA/AAAAAAAAAL8AAAC/AAAAvwAAAL8AAOA/AAAgQAAAUEAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAYEAAAIhAAACgQAAAQD8AAAC/AAAAvwAAAL8AAAC/AACoQAAAwEAAAAC/AACAPwAAAL8AAAC/AAAAvwAAAL8AAIC+AAAAPwAAoD8AAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAwD8AABBAAABAQAAAAIAAAAC/AAAAvwAAAL8AAAC/AABQQAAAgEAAAJhAAAAAAAAAAL8AAAC/AAAAvwAAAL8AAKBAAAC4QAAAQL8AAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAIA+AACAPwAAQD8AAAC/AAAAvwAAAL8AAAC/AACgPwAAAEAAADBAAACAPwAAAL8AAAC/AAAAvwAAAL8AAEBAAABwQAAAkEAAAKA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAmEAAALBAAACAvwAAAIAAAAC/AAAAvwAAAL8AAAC/AABAvwAAAAAAAEA/AAAAAAAAAL8AAAC/AAAAvwAAAL8AAIA/AADgPwAAIEAAAIA+AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAMEAAAGBAAACIQAAAQD8AAAC/AAAAvwAAAL8AAAC/AACQQAAAqEAAAMBAAACAPwAAAL8AAAC/AAAAvwAAAL8AAIC/AACAvgAAAD8AAKA/",
+        "storageSha256": "67c5136f59a9b70569513189e205756c6c40558bc8b62ab84a316bdf7f13207e",
+        "layoutLabel": "spatial-step2"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          3,
+          4,
+          4
+        ],
+        "stride": [
+          48,
+          4,
+          1,
+          12
+        ],
+        "storageOffset": 0,
+        "storageElements": 48,
+        "storageLittleEndianBase64": "AACAvwAAQD8AACBAAACIQAAAwEAAAAA/AAAQQAAAgEAAALhAAACAPgAAAEAAAHBAAACAvgAAwD8AAFBAAACgQAAAAL8AAKA/AABAQAAAmEAAAEC/AACAPwAAMEAAAJBAAAAAPwAAEEAAAIBAAAC4QAAAgD4AAABAAABwQAAAsEAAAAAAAADgPwAAYEAAAKhAAAAAgAAAAAAAAIA+AABAPwAAgD8AAKA/AAAAgAAAAAAAAIA+AABAPwAAgD8AAKA/",
+        "storageSha256": "8c7b14307fed67e9370fe0db01829692b5cc0d0dff0a995f7f01ed08299b34cf",
+        "layoutLabel": "nchw-view"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "rgba-alpha-downsample",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          1,
+          4
+        ],
+        "stride": [
+          4,
+          4,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 4,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgA==",
+        "storageSha256": "d1a1fd5f27565a4ecbfc6001bb166a0825693ea189c25ca93336dba7764d825b",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          2,
+          4
+        ],
+        "stride": [
+          16,
+          8,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 32,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/AAAQQAAAQEAAAHBAAAAAgAAAgEAAAJhAAACwQAAAAAA=",
+        "storageSha256": "edb6284c70935a9f38661f370a141a68db6dc5093d5951312fb3e58da811d3a8",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "pad-second-before-resize",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          3,
+          2,
+          4
+        ],
+        "stride": [
+          24,
+          8,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/",
+        "storageSha256": "55ebcf31e17d853e92e7cea552eadfffac664b9b17dc47eb931528e0347a0e36",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          2,
+          3
+        ],
+        "stride": [
+          12,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 3,
+        "storageElements": 27,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBA",
+        "storageSha256": "3ccd4de81b30830f3d97bdc2301850f8c73efbfdf622e19b14837260751ddeb9",
+        "layoutLabel": "offset-contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "pad-first-before-resize",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "stride": [
+          18,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 3,
+        "storageElements": 39,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBAAAC4QAAAQL8AAAAAAACAPgAAgD8AAOA/AAAAQAAAMEAAAGBAAABwQAAAkEAAAKhA",
+        "storageSha256": "888f7ba645d96026342ee88f4fc0ca91bde54a24fba780cb3f3fb0876d900eac",
+        "layoutLabel": "offset-contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          3,
+          2,
+          4
+        ],
+        "stride": [
+          24,
+          2,
+          1,
+          6
+        ],
+        "storageOffset": 0,
+        "storageElements": 24,
+        "storageLittleEndianBase64": "AACAvwAAQD8AACBAAACIQAAAwEAAAAA/AACAvgAAwD8AAFBAAACgQAAAAL8AAKA/AAAAPwAAEEAAAIBAAAC4QAAAgD4AAABAAAAAgAAAAAAAAIA+AABAPwAAgD8AAKA/",
+        "storageSha256": "db23a0def20e6fc427ce5bbde2c0522537853acd9a53da7ae22935f28d0fa3f7",
+        "layoutLabel": "nchw-view"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "resize-batches-offsets",
+      "node": "ImageBatch",
+      "classification": "bilinear",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "stride": [
+          27,
+          9,
+          3,
+          1
+        ],
+        "storageOffset": 3,
+        "storageElements": 84,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBAAAC4QAAAQL8AAAAAAACAPgAAgD8AAOA/AAAAQAAAMEAAAGBAAABwQAAAkEAAAKhAAACwQAAAgL8AAIC+AAAAAAAAQD8AAMA/AADgPwAAIEAAAFBAAABgQAAAiEAAAKBAAACoQAAAwEAAAAC/AACAvgAAAD8AAKA/AADAPwAAEEAAAEBAAABQQAAAgEAAAJhAAACgQAAAuEAAAEC/AAAAvwAAgD4AAIA/AACgPwAAAEAAADBAAABAQAAAcEAAAJBAAACYQAAAsEAAAIC/AABAvwAAAAAAAEA/AACAPwAA4D8AACBA",
+        "storageSha256": "7674a5e86db77d90fd73ac035392d1df476707b91f081921640d1c308b88bf9a",
+        "layoutLabel": "offset-contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          2,
+          2,
+          2,
+          3
+        ],
+        "stride": [
+          12,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 3,
+        "storageElements": 27,
+        "storageLittleEndianBase64": "AAAAvwAAAL8AAAC/AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhAAADAQAAAAL8AAIA+AAAAPwAAoD8AAABAAAAQQAAAQEAAAHBAAACAQAAAmEAAALBA",
+        "storageSha256": "3ccd4de81b30830f3d97bdc2301850f8c73efbfdf622e19b14837260751ddeb9",
+        "layoutLabel": "offset-contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": []
+    },
+    {
+      "id": "empty-center-crop",
+      "node": "ImageBatch",
+      "classification": "source-error",
+      "image1": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          1,
+          100,
+          4
+        ],
+        "stride": [
+          400,
+          400,
+          4,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 400,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AAAAgAAAQD8AAMA/AAAQQAAAAAAAACBAAABQQAAAgEAAAIA+AACIQAAAoEAAALhAAABAPwAAwEAAAAC/AACAPgAAgD8AAAA/AACgPwAAAEAAAKA/AAAQQAAAQEAAAHBAAAAAgAAAgEAAAJhAAACwQAAAAAAAALhAAABAvwAAAAAAAIA+AACAPgAAgD8AAOA/AABAPwAAAEAAADBAAABgQAAAgD8AAHBAAACQQAAAqEAAAKA/AACwQAAAgL8AAIC+AAAAgAAAAAAAAEA/AADAPwAAAAAAAOA/AAAgQAAAUEAAAIA+AABgQAAAiEAAAKBAAABAPwAAqEAAAMBAAAAAvwAAgD8AAIC+AAAAPwAAoD8AAKA/AADAPwAAEEAAAEBAAAAAgAAAUEAAAIBAAACYQAAAAAAAAKBAAAC4QAAAQL8AAIA+AAAAvwAAgD4AAIA/AABAPwAAoD8AAABAAAAwQAAAgD8AAEBAAABwQAAAkEAAAKA/AACYQAAAsEAAAIC/AAAAgAAAQL8AAAAAAABAPwAAAAAAAIA/AADgPwAAIEAAAIA+AAAwQAAAYEAAAIhAAABAPwAAkEAAAKhAAADAQAAAgD8AAIC/AACAvgAAAD8AAKA/AABAPwAAwD8AABBAAAAAgAAAIEAAAFBAAACAQAAAAAAAAIhAAACgQAAAuEAAAIA+AADAQAAAAL8AAIA+AABAPwAAAD8AAKA/AAAAQAAAgD8AABBAAABAQAAAcEAAAKA/AACAQAAAmEAAALBAAAAAgAAAuEAAAEC/AAAAAAAAAAAAAIA+AACAPwAA4D8AAIA+AAAAQAAAMEAAAGBAAABAPwAAcEAAAJBAAACoQAAAgD8AALBAAACAvwAAgL4AAKA/AAAAAAAAQD8AAMA/AAAAgAAA4D8AACBAAABQQAAAAAAAAGBAAACIQAAAoEAAAIA+AACoQAAAwEAAAAC/AABAPwAAgL4AAAA/AACgPwAAgD8AAMA/AAAQQAAAQEAAAKA/AABQQAAAgEAAAJhAAAAAgAAAoEAAALhAAABAvwAAAAAAAAC/AACAPgAAgD8AAIA+AACgPwAAAEAAADBAAABAPwAAQEAAAHBAAACQQAAAgD8AAJhAAACwQAAAgL8AAKA/AABAvwAAAAAAAEA/AAAAgAAAgD8AAOA/AAAgQAAAAAAAADBAAABgQAAAiEAAAIA+AACQQAAAqEAAAMBAAABAPwAAgL8AAIC+AAAAPwAAgD8AAEA/AADAPwAAEEAAAKA/AAAgQAAAUEAAAIBAAAAAgAAAiEAAAKBAAAC4QAAAAAAAAMBAAAAAvwAAgD4AAIA+AAAAPwAAoD8AAABAAABAPwAAEEAAAEBAAABwQAAAgD8AAIBAAACYQAAAsEAAAKA/AAC4QAAAQL8AAAAAAAAAgAAAgD4AAIA/AADgPwAAAAAAAABAAAAwQAAAYEAAAIA+AABwQAAAkEAAAKhAAABAPwAAsEAAAIC/AACAvgAAgD8AAAAAAABAPwAAwD8AAKA/AADgPwAAIEAAAFBAAAAAgAAAYEAAAIhAAACgQAAAAAAAAKhAAADAQAAAAL8AAIA+AACAvgAAAD8AAKA/AABAPwAAwD8AABBAAABAQAAAgD8AAFBAAACAQAAAmEAAAKA/AACgQAAAuEAAAEC/AAAAgAAAAL8AAIA+AACAPwAAAAAAAKA/AAAAQAAAMEAAAIA+AABAQAAAcEAAAJBAAABAPwAAmEAAALBAAACAvwAAgD8AAEC/AAAAAAAAQD8AAKA/AACAPwAA4D8AACBAAAAAgAAAMEAAAGBAAACIQAAAAAAAAJBAAACoQAAAwEAAAIA+AACAvwAAgL4AAAA/AABAPwAAQD8AAMA/AAAQQAAAgD8AACBAAABQQAAAgEAAAKA/AACIQAAAoEAAALhAAAAAgAAAwEAAAAC/AACAPgAAAAAAAAA/AACgPwAAAEAAAIA+AAAQQAAAQEAAAHBAAABAPwAAgEAAAJhAAACwQAAAgD8AALhAAABAvwAAAAAAAKA/AACAPgAAgD8AAOA/AAAAgAAAAEAAADBAAABgQAAAAAAAAHBAAACQQAAAqEAAAIA+AACwQAAAgL8AAIC+AABAPw==",
+        "storageSha256": "d4639a2df1922054ce7c861824537ed33f1867c4eed628e072e379de6ac199a0",
+        "layoutLabel": "contiguous"
+      },
+      "image2": {
+        "dtype": "float32",
+        "device": "cpu",
+        "shape": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "stride": [
+          12,
+          6,
+          3,
+          1
+        ],
+        "storageOffset": 0,
+        "storageElements": 12,
+        "storageLittleEndianBase64": "AACAvwAAgL4AAAA/AABAPwAAwD8AABBAAAAgQAAAUEAAAIBAAACIQAAAoEAAALhA",
+        "storageSha256": "f634b9be7eb332ecec33ae66afd0a646ce85445355354c04770a12d5adb6993e",
+        "layoutLabel": "contiguous"
+      },
+      "mutationIndices": {
+        "image1": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "image2": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "permittedSourceErrors": [
+        {
+          "stage": "body",
+          "type": "RuntimeError"
+        }
+      ]
+    }
+  ]
+}
