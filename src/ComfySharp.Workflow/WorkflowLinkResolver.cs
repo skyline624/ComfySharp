@@ -75,7 +75,7 @@ internal sealed class WorkflowLinkResolver(IReadOnlyDictionary<NodeId, GraphNode
         _ => type.ToJsonString()
     };
 
-    private static bool Compatible(JsonNode? a, JsonNode? b)
+    internal static bool Compatible(JsonNode? a, JsonNode? b)
     {
         if (Generic(a) || Generic(b) || StrictTypeEqual(a, b)) return true;
         string left = Text(a).ToLowerInvariant(), right = Text(b).ToLowerInvariant();

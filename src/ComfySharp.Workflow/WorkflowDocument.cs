@@ -104,6 +104,116 @@ public sealed class WorkflowDocument
         foreach (var link in Links.Where(l => l.Source == id || l.Target == id).ToArray()) DisconnectCore(link.Id);
         ((JsonArray)root["nodes"]!).Remove(Find(id));
     });
+    /// <summary>Removes eligible selected nodes in selection order, reconnecting compatible ports as the editor does.</summary>
+    public IReadOnlyList<NodeId> DeleteNodes(IEnumerable<NodeId> selection)
+    {
+        var selected = RemovableNodes(selection); var removed = selected.Select(n => n.Id).ToArray();
+        Edit(() =>
+        {
+            foreach (var node in selected)
+            {
+                ReconnectForDeletion(node.Id);
+                foreach (var link in Links.Where(l => l.Source == node.Id || l.Target == node.Id).ToArray()) DisconnectCore(link.Id);
+                root["nodes"]!.AsArray().Remove(Find(node.Id));
+            }
+        });
+        return removed;
+    }
+    private static bool Flag(JsonObject data, string key, bool expected) => data[key] is JsonValue value && value.TryGetValue<bool>(out var flag) && flag == expected;
+    private GraphNode[] RemovableNodes(IEnumerable<NodeId> selection)
+    {
+        ArgumentNullException.ThrowIfNull(selection);
+        var all = Nodes.ToDictionary(n => n.Id);
+        var selected = selection.Distinct().Select(id => all.TryGetValue(id, out var node) ? node : throw new ArgumentException($"Selected node {id} does not exist.", nameof(selection)))
+            .Where(n => !Flag(n.Data, "block_delete", true) && !Flag(n.Data, "ignore_remove", true) && !Flag(n.Data, "removable", false)).ToArray();
+        var ids = selected.Select(n => n.Id).ToHashSet();
+        var definitions = (root["definitions"] as JsonObject)?["subgraphs"] as JsonArray;
+        if (definitions?.OfType<JsonObject>().Any(d => d["id"] is JsonValue id && id.TryGetValue<string>(out var type) && selected.Any(n => n.Type == type)) == true)
+            throw new NotSupportedException("Removing subgraph instances requires definition and lifecycle handling, which is not yet available.");
+        if ((root["links"] as JsonArray ?? []).OfType<JsonObject>().Any(l => l["parentId"] is not null && (ids.Contains(NodeId.From(l["origin_id"])) || ids.Contains(NodeId.From(l["target_id"])))))
+            throw new NotSupportedException("Removing routed nodes requires reroute handling, which is not yet available.");
+        if ((root["floatingLinks"] as JsonArray ?? []).OfType<JsonObject>().Any(l =>
+            l["origin_id"] is not null && ids.Contains(NodeId.From(l["origin_id"])) || l["target_id"] is not null && ids.Contains(NodeId.From(l["target_id"]))))
+            throw new NotSupportedException("Removing nodes with floating links requires floating-link handling, which is not yet available.");
+        ValidateDeletionLinks(selected);
+        return selected;
+    }
+    private void ValidateDeletionLinks(GraphNode[] selected)
+    {
+        if (selected.Length == 0) return;
+        var allLinks = Links; var ids = selected.Select(n => n.Id).ToHashSet();
+        if (allLinks.Select(l => l.Id).Distinct().Count() != allLinks.Count) throw new FormatException("Duplicate link IDs cannot be removed safely.");
+        foreach (var link in allLinks.Where(l => ids.Contains(l.Source) || ids.Contains(l.Target)))
+        {
+            var source = Find(link.Source); var target = Find(link.Target);
+            if (source["outputs"] is not JsonArray outputs || link.SourceSlot < 0 || link.SourceSlot >= outputs.Count ||
+                outputs[link.SourceSlot]?["links"] is not JsonArray links || links.Count(v => v?.GetValue<long>() == link.Id) != 1 ||
+                target["inputs"] is not JsonArray inputs || link.TargetSlot < 0 || link.TargetSlot >= inputs.Count || inputs[link.TargetSlot]?["link"]?.GetValue<long>() != link.Id)
+                throw new FormatException("A removed connection has inconsistent slot references.");
+        }
+        foreach (var node in selected)
+        {
+            if (node.Data["inputs"] is JsonArray inputs)
+                for (int i = 0; i < inputs.Count; i++)
+                    if (inputs[i]?["link"] is { } link && !allLinks.Any(l => l.Id == link.GetValue<long>() && l.Target == node.Id && l.TargetSlot == i))
+                        throw new FormatException("A removed input has a dangling link reference.");
+            if (node.Data["outputs"] is JsonArray outputs)
+                for (int i = 0; i < outputs.Count; i++)
+                    if (outputs[i]?["links"] is JsonArray links && links.Any(link => !allLinks.Any(l => l.Id == link!.GetValue<long>() && l.Source == node.Id && l.SourceSlot == i)))
+                        throw new FormatException("A removed output has a dangling link reference.");
+        }
+    }
+    private void ReconnectForDeletion(NodeId id)
+    {
+        var node = Find(id); if (node["inputs"] is not JsonArray inputs || node["outputs"] is not JsonArray outputs) return;
+        void Reconnect(JsonNode? input, JsonNode? output)
+        {
+            if (input?["link"] is null || output?["links"] is not JsonArray outLinks) return;
+            var inputLink = Links.SingleOrDefault(l => l.Id == input["link"]!.GetValue<long>()) ?? throw new FormatException("Deletion input link is missing.");
+            foreach (var linkId in outLinks.Select(v => v!.GetValue<long>()).ToArray())
+            {
+                var link = Links.SingleOrDefault(l => l.Id == linkId) ?? throw new FormatException("Deletion output link is missing.");
+                if (inputLink.Source == link.Target) continue; // Upstream connect rejects self-links.
+                var source = Find(inputLink.Source); var target = Find(link.Target);
+                var sourcePort = source["outputs"]?[inputLink.SourceSlot]; var targetPort = target["inputs"]?[link.TargetSlot];
+                if (sourcePort is null || targetPort is null) throw new FormatException("Deletion connection refers to a missing port.");
+                if (WorkflowLinkResolver.Compatible(sourcePort["type"], targetPort["type"]))
+                    ConnectCore(inputLink.Source, inputLink.SourceSlot, link.Target, link.TargetSlot, compatibleTypes: true);
+            }
+        }
+        for (int i = 0; i < inputs.Count; i++)
+            if (i < outputs.Count && WorkflowLinkResolver.Compatible(inputs[i]?["type"], outputs[i]?["type"])) Reconnect(inputs[i], outputs[i]);
+        if (node["flags"] is JsonObject flags && Flag(flags, "keepAllLinksOnBypass", true))
+            foreach (var input in inputs)
+                foreach (var output in outputs)
+                    if (WorkflowLinkResolver.Compatible(input?["type"], output?["type"])) { Reconnect(input, output); break; }
+    }
+
+    public sealed class NodeCut
+    {
+        internal WorkflowDocument Owner { get; }
+        internal string Before { get; }
+        internal string After { get; }
+        public string ClipboardText { get; }
+        internal NodeCut(WorkflowDocument owner, string before, string after, string clipboardText)
+        { Owner = owner; Before = before; After = after; ClipboardText = clipboardText; }
+    }
+    /// <summary>Validates both copy and removal before any clipboard write or document mutation.</summary>
+    public NodeCut PrepareCut(IEnumerable<NodeId> selection)
+    {
+        var selected = RemovableNodes(selection);
+        if (selected.Length == 0) throw new InvalidOperationException("No selected node can be cut.");
+        if (selected.Any(n => Flag(n.Data, "clonable", false))) throw new InvalidOperationException("A selected node cannot be copied; cut was cancelled.");
+        string before = ToJson(), text = CopyNodes(selected.Select(n => n.Id));
+        var planned = Parse(before); planned.DeleteNodes(selected.Select(n => n.Id));
+        return new(this, before, planned.ToJson(), text);
+    }
+    public void CommitCut(NodeCut cut)
+    {
+        ArgumentNullException.ThrowIfNull(cut);
+        if (!ReferenceEquals(cut.Owner, this) || cut.Before != ToJson()) throw new InvalidOperationException("The document changed after cut was prepared. Cut again.");
+        Edit(() => root = JsonNode.Parse(cut.After)!.AsObject());
+    }
     /// <summary>Duplicates nodes and their internal links as one undoable edit. External inputs are optional.</summary>
     public IReadOnlyDictionary<NodeId, NodeId> DuplicateNodes(IEnumerable<NodeId> selection, double offsetX = 40, double offsetY = 40, bool connectInputs = false)
         => InsertCopies(this, SelectCopyableNodes(selection), offsetX, offsetY, connectInputs);
@@ -230,15 +340,19 @@ public sealed class WorkflowDocument
         }
         return raw;
     }
-    public void Connect(NodeId source, int output, NodeId target, int input) => Edit(() =>
+    public void Connect(NodeId source, int output, NodeId target, int input) => Edit(() => ConnectCore(source, output, target, input));
+    private void ConnectCore(NodeId source, int output, NodeId target, int input, bool compatibleTypes = false)
     {
         var from = Find(source); var to = Find(target);
         var outputData = (from["outputs"] as JsonArray)?[output] as JsonObject ?? throw new ArgumentException("Output slot is missing.");
         var inputData = (to["inputs"] as JsonArray)?[input] as JsonObject ?? throw new ArgumentException("Input slot is missing.");
         var a = outputData["type"]?.ToJsonString(); var b = inputData["type"]?.ToJsonString();
-        if (a != b && a != "\"*\"" && b != "\"*\"") throw new ArgumentException("The selected ports have incompatible types.");
+        if (compatibleTypes ? !WorkflowLinkResolver.Compatible(outputData["type"], inputData["type"]) : a != b && a != "\"*\"" && b != "\"*\"") throw new ArgumentException("The selected ports have incompatible types.");
+        var counter = root["version"]!.GetValue<double>() == 1 ? (root["state"] as JsonObject)?["lastLinkId"] : root["last_link_id"];
+        long maximum = Math.Max(counter is JsonValue value && value.TryGetValue<long>(out var savedCounter) ? savedCounter : 0, Links.Select(l => l.Id).Append(0).Max());
+        if (maximum >= 9007199254740991L) throw new InvalidOperationException("No further exact JavaScript-safe link IDs can be allocated in this document.");
+        long next = maximum + 1;
         foreach (var link in Links.Where(l => l.Target == target && l.TargetSlot == input).ToArray()) DisconnectCore(link.Id);
-        var next = Links.Select(l => l.Id).DefaultIfEmpty().Max() + 1;
         var links = root["links"] as JsonArray;
         if (links is null) root["links"] = links = new JsonArray();
         links.Add(root["version"]!.GetValue<double>() == 1
@@ -248,7 +362,7 @@ public sealed class WorkflowDocument
         if (outputData["links"] is not JsonArray) outputData["links"] = new JsonArray();
         ((JsonArray)outputData["links"]!).Add(next);
         UpdateCounter("last_link_id", "lastLinkId", next);
-    });
+    }
     public void Disconnect(long id) => Edit(() => DisconnectCore(id));
     private void DisconnectCore(long id)
     {

@@ -7,6 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using ComfySharp.Workflow;
 
 namespace ComfySharp.Desktop;
@@ -141,6 +142,23 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
         Canvas.SelectedItems = nodes.Where(n => copies.Values.Contains(n.Id)).ToList();
     }
     public string CopySelection() => Document.CopyNodes(SelectedIds());
+    public void DeleteSelection()
+    {
+        var selected = SelectedIds(); Document.DeleteNodes(selected); Reload();
+        Canvas.SelectedItems = nodes.Where(n => selected.Contains(n.Id)).ToList();
+    }
+    public Task CutSelectionAsync(IClipboard clipboard) => CutSelectionAsync(text => clipboard.SetTextAsync(text));
+    public async Task CutSelectionAsync(Func<string, Task> writeText)
+    {
+        ArgumentNullException.ThrowIfNull(writeText);
+        var selected = SelectedIds(); long requestedRevision = revision;
+        var cut = Document.PrepareCut(selected);
+        await writeText(cut.ClipboardText);
+        ObjectDisposedException.ThrowIf(disposed, this);
+        if (requestedRevision != revision) throw new InvalidOperationException("The document changed while writing the clipboard. Nothing was cut; cut again.");
+        Document.CommitCut(cut); Reload();
+        Canvas.SelectedItems = nodes.Where(n => selected.Contains(n.Id)).ToList();
+    }
     public IReadOnlyDictionary<NodeId, NodeId> PasteSelection(string json, double x = 100, double y = 100)
     {
         ObjectDisposedException.ThrowIf(disposed, this);
@@ -163,14 +181,23 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     private IClipboard Clipboard => TopLevel.GetTopLevel(this)?.Clipboard ?? throw new InvalidOperationException("The system clipboard is unavailable.");
     private async Task TryAsync(Func<Task> action) { try { await action(); } catch (Exception error) { if (!disposed) Error?.Invoke(this, error.Message); } }
     private async void CopyClicked(object? sender, RoutedEventArgs e) => await TryAsync(() => CopySelectionAsync(Clipboard));
+    private async void CutClicked(object? sender, RoutedEventArgs e) => await TryAsync(() => CutSelectionAsync(Clipboard));
     private async void PasteClicked(object? sender, RoutedEventArgs e) => await TryAsync(() => PasteSelectionAsync(Clipboard, Canvas.ViewportLocation.X + 100, Canvas.ViewportLocation.Y + 100));
     private async void CanvasKeyDown(object? sender, KeyEventArgs e)
     {
         if (e.Handled || TopLevel.GetTopLevel(this)?.FocusManager?.GetFocusedElement() is TextBox) return;
-        var modifier = OperatingSystem.IsMacOS() ? KeyModifiers.Meta : KeyModifiers.Control;
-        if (e.KeyModifiers != modifier || e.Key is not (Key.C or Key.V)) return;
+        if (e.KeyModifiers == KeyModifiers.None && e.Key is Key.Delete or Key.Back)
+        {
+            e.Handled = true; Try(DeleteSelection); return;
+        }
+        var hotkeys = this.GetPlatformSettings()?.HotkeyConfiguration;
+        if (hotkeys is null) return;
+        Func<Task>? action = hotkeys.Copy.Any(g => g.Matches(e)) ? () => CopySelectionAsync(Clipboard) :
+            hotkeys.Cut.Any(g => g.Matches(e)) ? () => CutSelectionAsync(Clipboard) :
+            hotkeys.Paste.Any(g => g.Matches(e)) ? () => PasteSelectionAsync(Clipboard, Canvas.ViewportLocation.X + 100, Canvas.ViewportLocation.Y + 100) : null;
+        if (action is null) return;
         e.Handled = true;
-        await TryAsync(() => e.Key == Key.C ? CopySelectionAsync(Clipboard) : PasteSelectionAsync(Clipboard, Canvas.ViewportLocation.X + 100, Canvas.ViewportLocation.Y + 100));
+        await TryAsync(action);
     }
     public NodeId AddNode(string type)
     {
@@ -181,7 +208,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     private void AddClicked(object? sender, RoutedEventArgs e) => Try(() => AddNode(((NodeChoice)NodeTypes.SelectedItem!).Type));
     private void InspectClicked(object? sender, RoutedEventArgs e) => Try(() => { var node = Document.Nodes.Single(n => n.Id == Selected.Id); NodeTitle.Text = node.Title; Widgets.Text = node.Data["widgets_values"]?.ToJsonString() ?? "[]"; });
     private void ApplyClicked(object? sender, RoutedEventArgs e) => Try(() => { var id = Selected.Id; var values = JsonNode.Parse(Widgets.Text ?? "[]") ?? throw new FormatException("Enter widget JSON."); Document.SetWidgets(id, values); Document.Rename(id, NodeTitle.Text ?? ""); Reload(); });
-    private void DeleteClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Delete(Selected.Id); Reload(); });
+    private void DeleteClicked(object? sender, RoutedEventArgs e) => Try(DeleteSelection);
     private void EnableClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 0));
     private void MuteClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 2));
     private void BypassClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 4));

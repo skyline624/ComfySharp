@@ -4,6 +4,7 @@ using Avalonia.Headless.XUnit;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 using ComfySharp.Desktop;
 using ComfySharp.Workflow;
 using Xunit;
@@ -20,7 +21,7 @@ public sealed class WorkflowClipboardEditorTests
         try
         {
             var canvas = editor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!; Assert.True(canvas.Focus());
-            var modifier = OperatingSystem.IsMacOS() ? RawInputModifiers.Meta : RawInputModifiers.Control;
+            var modifier = ClipboardModifiers(window);
             window.KeyPressQwerty(PhysicalKey.C, modifier); window.KeyReleaseQwerty(PhysicalKey.C, modifier);
             Assert.Contains("ComfySharp.nodes", await window.Clipboard!.TryGetTextAsync());
             window.KeyPressQwerty(PhysicalKey.V, modifier); window.KeyReleaseQwerty(PhysicalKey.V, modifier);
@@ -101,5 +102,13 @@ public sealed class WorkflowClipboardEditorTests
     private static void SelectAll(DocumentEditor editor)
     {
         var canvas = editor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!; canvas.SelectedItems = canvas.ItemsSource!.Cast<NodeView>().ToList();
+    }
+    internal static RawInputModifiers ClipboardModifiers(Window window)
+    {
+        var modifiers = window.GetPlatformSettings()!.HotkeyConfiguration.CommandModifiers;
+        return (modifiers.HasFlag(KeyModifiers.Control) ? RawInputModifiers.Control : 0) |
+            (modifiers.HasFlag(KeyModifiers.Meta) ? RawInputModifiers.Meta : 0) |
+            (modifiers.HasFlag(KeyModifiers.Alt) ? RawInputModifiers.Alt : 0) |
+            (modifiers.HasFlag(KeyModifiers.Shift) ? RawInputModifiers.Shift : 0);
     }
 }

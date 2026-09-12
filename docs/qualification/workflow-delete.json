@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "baseCommit": "f49315a4ef80a735699935f14e155da9b238e773",
+  "platform": "Windows win-x64 CPU",
+  "passed": 346,
+  "failed": 0,
+  "skipped": 0,
+  "excluded": 0,
+  "new": 28,
+  "projects": {
+    "Workflow": {
+      "passed": 244,
+      "bytes": 376649,
+      "sha256": "1b9290e47aea8ecbe56f79ad82ea997a47f0569e856f9de40b5f13c26384bdd9"
+    },
+    "Desktop": {
+      "passed": 102,
+      "bytes": 153305,
+      "sha256": "3df108d895c34d0a19c4f7b37a455ccad1d21ec60ef9a743563ec03031de792f"
+    }
+  },
+  "newByProject": {
+    "Workflow": 20,
+    "Desktop": 8
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Workflow.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "e36af898d88a6f13fbe28c364d960315a37eda8abcb9de2d57088184e87e446a"
+    },
+    "workflow-tests": {
+      "bytes": 561,
+      "sha256": "2015ab012346dcbb27879321a11f60da324f7b12a8d4c16c9fdc3fe50b8a7232"
+    },
+    "desktop-tests": {
+      "bytes": 546,
+      "sha256": "94656339d9e78969f6e674f6beed641654b4e6d7493a941f8e17b96f8d3beeef"
+    },
+    "native-smoke": {
+      "bytes": 558,
+      "sha256": "db1923f69aed0a0da8c1ad8aed3193e40e347d31842d2dba0798db0155b1a249"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeSmoke": {
+    "exitCode": 0,
+    "checks": [
+      "Prior native tensor/text, IMAGE, imports, modes, duplication and clipboard fragment scenarios pass.",
+      "Delete StringReplace and execute the reconnected graph with the separate Host; expected untransformed text and one link. Undo restores the graph.",
+      "Cut three connected nodes through the editor async-write boundary into an in-memory fragment, paste into a fresh tab and execute expected transformed text. Cut undo exactly restores the source document.",
+      "System clipboard adapter and keyboard tests use Avalonia Headless; native smoke does not read or replace the workstation clipboard."
+    ]
+  },
+  "sourceInventory": [
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphCanvas.ts",
+      "bytes": 279760,
+      "sha256": "46038040fbb86eaaf4ce8f5c492671928779c0bc972d5294c470f34215165297"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraphNode.ts",
+      "bytes": 132247,
+      "sha256": "d6263d56f28a5e6c5a95a3a263fe0d6ffe4083a981c01a14ec4ebfca43487e50"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LGraph.ts",
+      "bytes": 97233,
+      "sha256": "479244003dd83af726ae9481aab6d9f9b6693c161dd7800160389bc86a427a2f"
+    }
+  ],
+  "notice": {
+    "bytes": 1077,
+    "sha256": "1b38cc30fe774bcc77538ab99eb460f4e1c8a47c4fddc6e991ee3b5cc2a96bb9"
+  },
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.axaml": {
+      "bytes": 5458,
+      "sha256": "bb70fab5e624a3e109558f61a775cb5e6b633a86a95ab3917d71a53e1915de09"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 22342,
+      "sha256": "58b5dd6d7e5dcb73dcd6863be14b04457c080d4a1c649d339328767489b0b37f"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 36602,
+      "sha256": "a0d6b9f22ef27b4301352b1a40d1f4a3ae8daf2482c6888a7802f2747ecaed59"
+    },
+    "src/ComfySharp.Workflow/WorkflowDocument.cs": {
+      "bytes": 28378,
+      "sha256": "6bbc4053cae7dedbced480d4b72850b142db5ef0e063394e30078e7852e59ea8"
+    },
+    "src/ComfySharp.Workflow/WorkflowLinkResolver.cs": {
+      "bytes": 5280,
+      "sha256": "eff0d24cab2cc8c0cbcb721a4701e282594adcca98a0f24202b505e24a9c4060"
+    },
+    "tests/ComfySharp.Desktop.Tests/WorkflowClipboardEditorTests.cs": {
+      "bytes": 6547,
+      "sha256": "27abb3dac9d23200ddee73b71e7dd3568fa3b56d07edda4c9561fb0d39625396"
+    },
+    "tests/ComfySharp.Desktop.Tests/WorkflowDeletionEditorTests.cs": {
+      "bytes": 7570,
+      "sha256": "1c560ba9b98bf3dd1579514fb1a2400173543dc3d2a949d50a5475464ea88717"
+    },
+    "tests/ComfySharp.Workflow.Tests/WorkflowDeletionTests.cs": {
+      "bytes": 8041,
+      "sha256": "8d918af03d08897d11aa730a42e585f684140d9a1ac403d33fcc0849655d446e"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed product/tests plus build settings; hashes are not loaded-assembly attestation.",
+  "priorCiRegression": {
+    "runId": 34683919217,
+    "head": "f49315a4ef80a735699935f14e155da9b238e773",
+    "macosJobId": 103527424683,
+    "failedTest": "WorkflowClipboardEditorTests.Canvas_shortcuts_copy_and_paste_while_widget_text_keeps_normal_clipboard_behavior",
+    "observed": "The textbox-copy assertion expected text only but clipboard retained the node envelope; the earlier canvas assertions passed. Desktop 93 passed,1 failed,0 skipped.",
+    "change": "Canvas now matches Avalonia platform Copy/Cut/Paste gestures; tests use platform CommandModifiers. A configured Control+Shift+C regression test passes locally. Remote correction remains to verify.",
+    "log": {
+      "bytes": 77802,
+      "sha256": "44654bf43abfba27b22a31f8fe97cc0086bf845e0e1b05c54665b9375792e5f3"
+    }
+  },
+  "limits": [
+    "Only Workflow and Desktop test projects were repeated.",
+    "Constructed C# contract cases after pinned source inspection; no executed JavaScript differential corpus.",
+    "Protected boolean block_delete/ignore_remove/removable flags are checked before reconnection. This intentionally avoids upstream intermediate reconnection of a node whose later removal is refused.",
+    "Known subgraph instances, routed incident links and incident floating links fail atomically pending their lifecycle implementation. Unknown extension callbacks are not executed.",
+    "Reconnection uses the existing ASCII slot type compatibility profile; broad JavaScript coercion parity remains open.",
+    "No model-family,GPU,three-platform or distribution qualification; numerical gates remain unchanged."
+  ]
+}

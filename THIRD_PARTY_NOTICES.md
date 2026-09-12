@@ -18,6 +18,8 @@ The sigma generators in `src/ComfySharp.Inference/SigmaSchedules.cs` and the no-
 
 The [cross-document clipboard](docs/WORKFLOW_CLIPBOARD.md) reuses the same pinned LiteGraph selection/link semantics and MIT notice. It introduces a ComfySharp text envelope and Avalonia native clipboard adapter, without executing JavaScript or copying browser localStorage. Unknown-node data retention and cross-version conversion limits are documented separately from upstream clipboard behavior.
 
+Selection deletion and cut adapt `LGraphCanvas.deleteSelected`, `LGraphNode.connectInputToOutput` and node removal in `LGraph.ts` from the same frozen frontend, under the LiteGraph MIT and frontend provenance above. [WORKFLOW_DELETE_CUT.md](docs/WORKFLOW_DELETE_CUT.md) records reconnection, protected-node handling, clipboard preflight and unported lifecycles.
+
 ## PreviewAny and tensor text
 
 `src/ComfySharp.Inference/TensorPreviewFormatter.cs` adapts the dense real-number formatting logic in PyTorch's [`torch/_tensor_str.py` at cf30153c4c131c8164ee7798e5022d810682e2cb](https://github.com/pytorch/pytorch/blob/cf30153c4c131c8164ee7798e5022d810682e2cb/torch/_tensor_str.py): numeric width and notation, scalar/vector/multidimensional layout, summarized edges and suffix placement. The complete PyTorch copyright statements, redistribution conditions and disclaimer are retained in [PyTorch-BSD-style.txt](docs/licenses/PyTorch-BSD-style.txt), copied from [LICENSE at the same commit](https://github.com/pytorch/pytorch/blob/cf30153c4c131c8164ee7798e5022d810682e2cb/LICENSE). The C# adaptation has an explicit supported representation scope; it does not include the Python module or claim to port every PyTorch tensor representation.

@@ -52,10 +52,11 @@
           <Button x:Name="MuteNode" Content="Mute" Click="MuteClicked"/>
           <Button x:Name="BypassNode" Content="Bypass" Click="BypassClicked"/>
         </StackPanel>
-        <Button Content="Delete selection" Click="DeleteClicked"/>
+        <Button x:Name="DeleteNodes" Content="Delete selection" Click="DeleteClicked"/>
         <Button x:Name="DuplicateNodes" Content="Duplicate selection" Click="DuplicateClicked"/>
         <Button x:Name="DuplicateWithInputs" Content="Duplicate with external inputs" Click="DuplicateWithInputsClicked"/>
         <Button x:Name="CopyNodes" Content="Copy nodes" Click="CopyClicked"/>
+        <Button x:Name="CutNodes" Content="Cut nodes" Click="CutClicked"/>
         <Button x:Name="PasteNodes" Content="Paste nodes" Click="PasteClicked"/>
         <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
         <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>

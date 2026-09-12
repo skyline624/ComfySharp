@@ -337,7 +337,26 @@ public sealed partial class MainWindow : Window
             throw new InvalidOperationException("Cross-document clipboard fragment execution failed.");
         ActiveEditor.Undo(); if (ActiveEditor.Document.Nodes.Count != 0) throw new InvalidOperationException("Paste undo was not atomic.");
         ActiveEditor.Redo(); if (ActiveEditor.Document.Nodes.Count != 3) throw new InvalidOperationException("Paste redo lost nodes.");
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution, independent duplicated graph execution and cross-document clipboard fragment execution.");
+        var deletionCanvas = ActiveEditor.FindControl<Nodify.Avalonia.NodifyEditor>("Canvas")!;
+        var deleteId = ActiveEditor.Document.Nodes.Single(n => n.Type == "StringReplace").Id;
+        deletionCanvas.SelectedItems = deletionCanvas.ItemsSource!.Cast<NodeView>().Where(n => n.Id == deleteId).ToList();
+        ActiveEditor.DeleteSelection();
+        accepted = await host.SubmitAsync(Compile(true), clientId, [pastedPreview]);
+        var deletedEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (deletedEntry["outputs"]?[pastedPreview]?["text"]?[0]?.GetValue<string>() != "API duplicated" || ActiveEditor.Document.Links.Count != 1)
+            throw new InvalidOperationException("Deletion did not reconnect the remaining executable graph.");
+        ActiveEditor.Undo(); var cutEditor = ActiveEditor; string beforeCut = cutEditor.Document.ToJson();
+        deletionCanvas.SelectedItems = deletionCanvas.ItemsSource!.Cast<NodeView>().ToList(); string? cutText = null;
+        await cutEditor.CutSelectionAsync(text => { cutText = text; return Task.CompletedTask; });
+        if (cutEditor.Document.Nodes.Count != 0 || cutText is null) throw new InvalidOperationException("Cut did not transfer the complete selection.");
+        AddDocument(WorkflowDocument.Create(), null); ActiveEditor.PasteSelection(cutText);
+        string cutPreview = ActiveEditor.Document.Nodes.Single(n => n.Type == "PreviewAny").Id.Value;
+        accepted = await host.SubmitAsync(Compile(true), clientId, [cutPreview]);
+        var cutEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (cutEntry["outputs"]?[cutPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated")
+            throw new InvalidOperationException("Cut-and-paste graph execution failed.");
+        cutEditor.Undo(); if (cutEditor.Document.ToJson() != beforeCut) throw new InvalidOperationException("Cut undo lost source document data.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution, independent duplicated graph execution, cross-document clipboard fragment execution and reconnected deletion plus cut-and-paste Host execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
