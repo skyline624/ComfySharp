@@ -16,7 +16,7 @@ public static class ImageFileNaming
             "_" + FormatCounter(Counter + batchIndex) + "_.png", Subfolder, type);
     }
 
-    public static Plan Prepare(IImageFileStore store, string type, string prefix, int width, int height,
+    public static Plan Prepare(ILocalFileStore store, string type, string prefix, int width, int height,
         DateTimeOffset localTime, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(store);
@@ -88,7 +88,7 @@ public static class ImageFileNaming
         return offset;
     }
 
-    private static string FormatCounter(BigInteger counter)
+    public static string FormatCounter(BigInteger counter)
     {
         string magnitude = BigInteger.Abs(counter).ToString(CultureInfo.InvariantCulture);
         return counter.Sign < 0 ? "-" + magnitude.PadLeft(4, '0') : magnitude.PadLeft(5, '0');

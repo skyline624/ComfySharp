@@ -42,6 +42,32 @@ public sealed class ImageFileStoreTests : IDisposable
     }
 
     [Fact]
+    public async Task Atomic_stream_failure_and_cancellation_preserve_prior_asset_and_clean_temporary()
+    {
+        store.PrepareDirectory("output","loras");var file=new ImageFileDescriptor("adapter.safetensors","loras","output");
+        await store.WriteAsync(file,new byte[]{7,8,9});
+        await Assert.ThrowsAsync<IOException>(async()=>await store.WriteAtomicAsync(file,(stream,token)=>
+        { stream.Write(new byte[]{1,2});throw new IOException("writer failed"); }));
+        Assert.Equal(new byte[]{7,8,9},await Read(file));
+        using var cancellation=new CancellationTokenSource();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async()=>await store.WriteAtomicAsync(file,(stream,token)=>
+        { stream.Write(new byte[]{3});cancellation.Cancel(); },cancellation.Token));
+        Assert.Equal(new byte[]{7,8,9},await Read(file));
+        Assert.Equal(new[]{file.Filename},store.PrepareDirectory("output","loras"));
+        await store.WriteAtomicAsync(file,(stream,token)=>stream.Write(new byte[]{4}));
+        Assert.Equal(new byte[]{4},await Read(file));
+    }
+
+    [Fact]
+    public async Task Atomic_stream_containment_and_precancellation_precede_writer_invocation()
+    {
+        bool invoked=false;var file=new ImageFileDescriptor("adapter.safetensors","../../outside","output");
+        await Assert.ThrowsAsync<ArgumentException>(async()=>await store.WriteAtomicAsync(file,(stream,token)=>invoked=true));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async()=>await store.WriteAtomicAsync(file,(stream,token)=>invoked=true,new(true)));
+        Assert.False(invoked);
+    }
+
+    [Fact]
     public void Absolute_directory_within_media_root_is_allowed_but_outside_and_sibling_roots_are_rejected()
     {
         string media = Path.Combine(directory, "data", "output");

@@ -1,0 +1,42 @@
+{
+  "scope": "SaveLoRA native tensor-map export, storage and Host contracts; full training workflow remains incomplete",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1364",
+  "implementation": "partial",
+  "registeredNodeCount": 49,
+  "localValidation": {
+    "platform": "win-x64-cpu",
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "inference": { "passed": 891, "failed": 0, "skipped": 0, "filter": "FullyQualifiedName!~ClipStockReferenceTests" },
+    "host": {
+      "passed": 314, "failed": 1, "skipped": 0,
+      "failure": "ImageFileStoreTests.File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write: File.CreateSymbolicLink requires a Windows privilege unavailable to the current process. Test retained."
+    },
+    "catalogue": { "rows": 1171, "localNodeDeclarations": 664, "registeredNodes": 49, "errors": 0, "complete": false },
+    "writerAndNodeCases": 21
+  },
+  "trainedAdapterExport": {
+    "inputProvenance": "Existing SD1.5 all-target CPU adapter from the mixed-adapter qualification; see mixed-adapter-files.json",
+    "inputSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+    "outputSha256": "456e019cb42caf8a00d492bf52191faf4afe0c2584196f425f55b5a6f5bbc642",
+    "tensorCount": 1250,
+    "keysDtypesShapesAndPayloadHashesExact": true,
+    "independentByteDecoderPassed": true,
+    "hostTest": "SaveLoraHostTests.Host_exports_native_adapter_state_and_preserves_each_tensor",
+    "producer": "TestAdapterState, test-only; absent from the product registry",
+    "trainingRerun": false,
+    "generationRerun": false,
+    "officialSafetensorsPackageExecuted": false,
+    "pretrainedCheckpointCopiedOrDownloaded": false
+  },
+  "realWorkflow": false,
+  "familyQualified": false,
+  "ci": "Pending publication of this implementation",
+  "remaining": [
+    "TrainLoraNode production LORA_MODEL output and LoraModelLoader integration",
+    "Full trained-adapter workflow and reuse through the native editor",
+    "Broader dtype, rank and memory allowances required by the full catalogue",
+    "Complete required platform and hardware qualification"
+  ]
+}

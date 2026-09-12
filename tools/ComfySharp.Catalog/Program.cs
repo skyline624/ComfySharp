@@ -28,7 +28,7 @@ try
     var localNodes = new HashSet<string>(StringComparer.Ordinal);
     // The Host configures its local image store. Describe these service-backed nodes without opening files in this audit tool.
     var registry = NodeRegistry.Describe(TensorNodes.CreateRegistry().Nodes.Select(n => n.Schema)
-        .Concat(ImageFileNodes.Schemas).Concat(Sd15Nodes.Schemas([])).Concat(LoraNodes.Schemas([])).Append(ImageInputNodes.Describe([])));
+        .Concat(ImageFileNodes.Schemas).Concat(Sd15Nodes.Schemas([])).Concat(LoraNodes.Schemas([])).Append(ImageInputNodes.Describe([])).Append(SaveLoraNode.Description));
     foreach (var row in capabilities)
     {
         var id = row["id"]!.GetValue<string>();

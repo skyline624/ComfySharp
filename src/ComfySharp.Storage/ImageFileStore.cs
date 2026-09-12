@@ -5,7 +5,7 @@ namespace ComfySharp.Storage;
 /// <summary>Image files under the application's own data directory. Containment is checked
 /// after resolving symbolic links/junctions, and again at each write/read. As with the upstream
 /// realpath check, this does not lock the directory tree against concurrent external replacement.</summary>
-public sealed class ImageFileStore : IImageFileStore
+public sealed class ImageFileStore : IImageFileStore, IStreamingFileStore
 {
     private readonly string root;
     private static StringComparison PathComparison => OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
@@ -70,6 +70,32 @@ public sealed class ImageFileStore : IImageFileStore
             File.Move(temporaryPath, destination, overwrite: true);
         }
         finally { if (File.Exists(temporaryPath)) File.Delete(temporaryPath); }
+    }
+
+    public async ValueTask WriteAtomicAsync(ImageFileDescriptor file, Action<Stream, CancellationToken> write,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(write);
+        cancellationToken.ThrowIfCancellationRequested();
+        string destination = ResolveFile(file);
+        var temporary = file with { Filename = ".asset-" + Guid.NewGuid().ToString("N") + ".tmp" };
+        string temporaryPath = ResolveFile(temporary);
+        bool created = false;
+        try
+        {
+            await using (var stream = new FileStream(temporaryPath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, FileOptions.Asynchronous))
+            {
+                created = true;
+                write(stream, cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await stream.FlushAsync(cancellationToken);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            destination = ResolveFile(file);
+            File.Move(temporaryPath, destination, overwrite: true);
+            created = false;
+        }
+        finally { if (created) File.Delete(temporaryPath); }
     }
 
     private string ResolveFile(ImageFileDescriptor file)
