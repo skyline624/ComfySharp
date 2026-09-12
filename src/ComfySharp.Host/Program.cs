@@ -10,6 +10,8 @@ using ComfySharp.Storage;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
+// Prompt IDs, input names and literal dictionary keys are case-sensitive JSON data.
+builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.PropertyNameCaseInsensitive = false);
 if (builder.Configuration["urls"] is null) builder.WebHost.UseUrls("http://127.0.0.1:8189");
 builder.Services.AddSingleton(new EngineService(TensorNodes.CreateRegistry()));
 builder.Services.AddSingleton<EventHub>();

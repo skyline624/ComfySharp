@@ -509,6 +509,9 @@
       "comfysharp.tokenization": {
         "type": "Project"
       },
+      "comfysharp.workflow": {
+        "type": "Project"
+      },
       "libtorch-cpu-linux-x64": {
         "type": "CentralTransitive",
         "requested": "[2.10.0, )",

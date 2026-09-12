@@ -1,0 +1,1223 @@
+{
+  "schema": 1,
+  "evidenceKind": "independent-source-collection-audit",
+  "collectorCommit": "8dad64f0cf9b04548ee722b7533776b25d3b4c46",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "collectorUrl": "https://github.com/skyline624/ComfySharp/tree/8dad64f0cf9b04548ee722b7533776b25d3b4c46/labs/prompt-values-source",
+  "sourceArtifact": {
+    "logicalName": "reference.json",
+    "bytes": 677389,
+    "sha256": "04af1fcf3c83c91d70cfd7a1d0b97f51a6eca5bdcf9c612ac9ea29fa420bee3f"
+  },
+  "python": "3.12.10",
+  "platform": "Windows",
+  "qualification": {
+    "sourceCollectionComplete": true,
+    "sourceNodeExecution": false,
+    "httpServerExecuted": false,
+    "frontendExecuted": false,
+    "csharpCompared": false,
+    "apiParityEstablished": false
+  },
+  "auditMethod": "Read-only independent stdlib JSON/AST/hash audit; no collector rerun, source exec, .NET or native operation.",
+  "integrity": {
+    "laboratoryFiles": {
+      "labs/prompt-values-source/protocol.json": {
+        "bytes": 17911,
+        "sha256": "dbd4038623e3313005cbb29393da978c0d8c9eb49a96860fb765ff217b6fe2ee"
+      },
+      "labs/prompt-values-source/reference.py": {
+        "bytes": 22516,
+        "sha256": "f312fe8c887528fa87693c3e5e2c1e981008cc423dbd119cf4a8b1c47efea28c"
+      },
+      "labs/prompt-values-source/README.md": {
+        "bytes": 7731,
+        "sha256": "aa8b45641c350b8d9a6fda167a2a4adffbeef6b3b3785afca110f304ac3b4bff"
+      }
+    },
+    "helperFiles": {
+      "commit": "ae241a0ae32f4e053f0bc5754e8d4d0ebfc7d5f4",
+      "files": [
+        {
+          "path": "labs/autogrow-source/protocol.json",
+          "bytes": 39714,
+          "sha256": "772b018f80b35dd7e1d4f4655ab6d58ccbc62c34fcc915f5a93e9cb8ad1d164b"
+        },
+        {
+          "path": "labs/autogrow-source/reference.py",
+          "bytes": 20206,
+          "sha256": "5239b3ffc13c64e583ba6a6c7a185de3264bfe9173d7c3f3a5da3685ec4e5027"
+        },
+        {
+          "path": "labs/autogrow-source/README.md",
+          "bytes": 7388,
+          "sha256": "483dc8ba820eff7409dc4f6618238fa7b41bd526bdc96a45d368e4f18b7e7bd2"
+        }
+      ],
+      "use": "Compile pinned source AST using original protocol and reuse the pinned namespace builder only after this new collector publication gate. Existing laboratory files remain unchanged."
+    },
+    "uniqueBackendBlobs": 12,
+    "astDeclarationSelectionsVerified": 86,
+    "backendBlobs": {
+      "comfy_api/internal/__init__.py": {
+        "bytes": 4913,
+        "sha256": "50786f7e2ebc910ed9becddf066e92d7924b7f6080189651067bbcd839e8a410"
+      },
+      "comfy_execution/graph_utils.py": {
+        "bytes": 5626,
+        "sha256": "dabb3f75952a1398891ed87ad853d4ea9c929f322ce6997d4ea916adbc2f209d"
+      },
+      "comfy/comfy_types/node_typing.py": {
+        "bytes": 15221,
+        "sha256": "6bc7906a84333a767e137e89efea041b45966cd589f344a28c14116a2484a7f5"
+      },
+      "comfy_api/latest/_io.py": {
+        "bytes": 97422,
+        "sha256": "55391c45bee9cfd821c7c86a23ab0f9e12ce9b5b40d77d48308c1d3698ed4080"
+      },
+      "comfy_execution/graph.py": {
+        "bytes": 14857,
+        "sha256": "bb602b45f396a3ca666d2e50af4d4cf542819c427b39ee93f2b4c816cc74d3fa"
+      },
+      "comfy_execution/utils.py": {
+        "bytes": 1529,
+        "sha256": "f80e6020f8f60754ebf15f194670c12ba57a46458b0c185694d8198e428f7be4"
+      },
+      "execution.py": {
+        "bytes": 61543,
+        "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28"
+      },
+      "comfy_extras/nodes_toolkit.py": {
+        "bytes": 1422,
+        "sha256": "d27a538173a7b75a120aad35047b5b1b36108a927241baa268a3e5938d97edbb"
+      },
+      "nodes.py": {
+        "bytes": 108581,
+        "sha256": "f7b6a909bf9a47296b974b730e5db0ec2137a3c6a64dda045970951d7382d4c7"
+      },
+      "comfy_execution/validation.py": {
+        "bytes": 2532,
+        "sha256": "1c4ad72a2edd3655c18c65adf7a8785031f84adeef084d6086c5f3785e45e64b"
+      },
+      "comfy_extras/nodes_primitive.py": {
+        "bytes": 2992,
+        "sha256": "329963dd20fbf8985539b7b990780291f4b82ee9cfd42b96b571288b77eaa47a"
+      },
+      "comfy_extras/nodes_preview_any.py": {
+        "bytes": 1495,
+        "sha256": "48cffa3b2ddd08c311af609642da8703abc9bac9e624c400c3dc41f6edcea930"
+      }
+    },
+    "selectionCounting": "72 inherited plus14 additional selections; the future-annotations declaration is selected twice. This is not86 distinct declarations.",
+    "representativeRecordsRehashed": 28,
+    "recordedRepeatHashesVerified": 84,
+    "freshRepetitionsPerCase": 3,
+    "repeatStorage": "One representative full record per case and three equal hashes recorded by the collector; the independent audit recalculates that representative against all three hashes, not84 separately persisted payloads.",
+    "typedNodesValidated": 3540,
+    "typedNodesByKind": {
+      "tuple": 73,
+      "string": 940,
+      "dict": 1204,
+      "list": 702,
+      "int": 290,
+      "bool": 168,
+      "float64": 120,
+      "null": 43
+    },
+    "acquisitionCacheSnapshotsVerified": 46,
+    "privatePathMarkerScanPassed": true,
+    "beforeAfterQualification": "The published collector enforces unchanged HEAD/public bytes/helpers/backend identities before writing the final document. This audit verifies its final provenance against published Git blobs and current exact files; no separate before/after filesystem snapshots are invented."
+  },
+  "counts": {
+    "cases": 28,
+    "recognition": {
+      "true": 7,
+      "false": 20,
+      "absentNotInvoked": 1
+    },
+    "directAcquisition": {
+      "returned": 26,
+      "raised": 2
+    },
+    "firstValidation": {
+      "accepted": 16,
+      "rejected": 12,
+      "promptMutated": 9
+    },
+    "acquisitionAfterFirstValidation": {
+      "returned": 16,
+      "notRunBecauseRejected": 12
+    },
+    "secondValidation": {
+      "cases": 3,
+      "accepted": 2,
+      "rejected": 1,
+      "promptMutated": 1
+    },
+    "acquisitionAfterSecondValidation": {
+      "returned": 2,
+      "notRunBecauseRejected": 1
+    },
+    "counting": "28 unique cases; three fresh repetitions per case. Rejected validation and non-run dependent phases remain explicit outcomes, not skipped tests or port successes."
+  },
+  "cases": [
+    {
+      "id": "raw-empty-list",
+      "sourceRecordSha256": "1ceaa630eb71d97b16d982e912feb6f64c7c81646e2a7558ad47bf9a4cd496d0",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "bad_linked_input"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": []
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "raw-numeric-pair",
+      "sourceRecordSha256": "168cdb3c59c6aa2c5aba2e0a8bb753411c8b0539dbcfe6e95bd90761706423ab",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "int",
+            "decimal": "1"
+          },
+          {
+            "kind": "int",
+            "decimal": "2"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "link-string-id",
+      "sourceRecordSha256": "6a51e7b05dbea0a0cf369759ca627d2d2d93cd622711d5be65d97d8659e986e6",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "int",
+            "decimal": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "synthetic"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "malformed-link-length",
+      "sourceRecordSha256": "5c7c03fe590382bcd3161e06b00ba1192540c8f464c4cc740fa68c2988956d0d",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "bad_linked_input"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "slot-string",
+      "sourceRecordSha256": "ee04aaf5d431e626078039362a93625f9a90aa486592beb524014c44c1bcd791",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "string",
+            "value": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "slot-null",
+      "sourceRecordSha256": "c3bdc40a78b002b47b90b04c66a3465d38f54b6f6eb05761dfff17e7395e7acf",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "null"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "slot-boolean-false",
+      "sourceRecordSha256": "6410488741ab53b940be364a3b3bc82ab5fc4e417c247d60df935e838c4e1c93",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "bool",
+            "value": false
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "synthetic"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "slot-float-integral",
+      "sourceRecordSha256": "51fadbd50fccfb78530e5a70ffe601c529843808f6d3746d17188de5f6b37b7f",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "raised",
+      "directErrorType": "TypeError",
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "float64",
+            "bitsLE": "0000000000000000",
+            "repr": "0.0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "slot-float-fraction",
+      "sourceRecordSha256": "816245753d27d0e083670d381ef0dcb6a41bc53252830b9b833cd303c4cba033",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "raised",
+      "directErrorType": "TypeError",
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "float64",
+            "bitsLE": "000000000000e03f",
+            "repr": "0.5"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "slot-negative",
+      "sourceRecordSha256": "3d14869c92da4ecca06e2659a5d76aac7a8273294311dec6a75e978f1c085ef6",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "int",
+            "decimal": "-1"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "synthetic"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "slot-out-of-range",
+      "sourceRecordSha256": "a8df47169e511c51906c10e00e1bbee112b2c8062234e8117e36ad48025f2b58",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "int",
+            "decimal": "99"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "numeric-node-id",
+      "sourceRecordSha256": "21f692abd2c0ef82e45668fcaa20e455831c1f49614f83e056b0c1e449a9db70",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "int",
+            "decimal": "1"
+          },
+          {
+            "kind": "int",
+            "decimal": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "boolean-node-id",
+      "sourceRecordSha256": "d165964326ff4a2736a9490dfb295bb8d1e466703a3c3d94253ccbaae1da8a88",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "bool",
+            "value": true
+          },
+          {
+            "kind": "int",
+            "decimal": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "missing-node",
+      "sourceRecordSha256": "f6d0a64a78e6d1a948a8926bea630d3b85409cd991a4d35d0bf4e0c21548db52",
+      "isLink": true,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "exception_during_inner_validation"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "absent"
+          },
+          {
+            "kind": "int",
+            "decimal": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "literal-null",
+      "sourceRecordSha256": "42fcd8d0db493832407a09e8f0321a1308e59bf41b5a115b1ab850676ebdee9a",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "null"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "literal-empty-map",
+      "sourceRecordSha256": "18417f64d02c965ad56b33ea8f0021854b0a2157f674379039b40116d71967b1",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "dict",
+        "items": []
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "dict",
+                  "items": []
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "literal-nested-map",
+      "sourceRecordSha256": "8ae66619d0c87ef543eb33a298d382311767893c27382f6cc72b463bf8ba7f17",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "dict",
+        "items": [
+          [
+            "x",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "id"
+                },
+                {
+                  "kind": "int",
+                  "decimal": "0"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "dict",
+                  "items": [
+                    [
+                      "x",
+                      {
+                        "kind": "list",
+                        "items": [
+                          {
+                            "kind": "string",
+                            "value": "id"
+                          },
+                          {
+                            "kind": "int",
+                            "decimal": "0"
+                          }
+                        ]
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "wrapped-empty-list",
+      "sourceRecordSha256": "b3c7b3d7c13d4fefeb0db7dd03f28a1a84f503a8e9e6e01f4c7b14f6bf56d903",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": []
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "list",
+                  "items": []
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": {
+        "accepted": false,
+        "promptMutated": false,
+        "valueAfter": {
+          "kind": "list",
+          "items": []
+        }
+      }
+    },
+    {
+      "id": "wrapped-numeric-pair",
+      "sourceRecordSha256": "9e767fe47b9f067989d9d062c2c2f5aada60d98f0c38fd50d8b6a3a64643b2a0",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "int",
+            "decimal": "1"
+          },
+          {
+            "kind": "int",
+            "decimal": "2"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "list",
+                  "items": [
+                    {
+                      "kind": "int",
+                      "decimal": "1"
+                    },
+                    {
+                      "kind": "int",
+                      "decimal": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "wrapped-link-shaped",
+      "sourceRecordSha256": "949e82a27a725dabbf36f322c6036d7ca3280032793753b07d069d8fd9422924",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "list",
+        "items": [
+          {
+            "kind": "string",
+            "value": "id"
+          },
+          {
+            "kind": "int",
+            "decimal": "0"
+          }
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "synthetic"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": {
+        "accepted": true,
+        "promptMutated": false,
+        "valueAfter": {
+          "kind": "list",
+          "items": [
+            {
+              "kind": "string",
+              "value": "id"
+            },
+            {
+              "kind": "int",
+              "decimal": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "reserved-key-extra",
+      "sourceRecordSha256": "d3d7ee4b3b397a599780c651bc76a941b58b54f8d9d5818f7b034ff6980f0050",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "int",
+        "decimal": "1"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "int",
+                  "decimal": "1"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "double-wrapper",
+      "sourceRecordSha256": "c7bf9e3655856bcef10925122134dc2d727f2122bee67ed665a8992e8826aaae",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "dict",
+        "items": [
+          [
+            "__value__",
+            {
+              "kind": "int",
+              "decimal": "1"
+            }
+          ]
+        ]
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "dict",
+                  "items": [
+                    [
+                      "__value__",
+                      {
+                        "kind": "int",
+                        "decimal": "1"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": {
+        "accepted": true,
+        "promptMutated": true,
+        "valueAfter": {
+          "kind": "int",
+          "decimal": "1"
+        }
+      }
+    },
+    {
+      "id": "required-absent",
+      "sourceRecordSha256": "b9fa8275bc0db1bcbe0212ac273b855cdcb36d84da2fbcedbe5d8168989ccaf4",
+      "isLink": null,
+      "predicateInvoked": false,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": false,
+      "validationErrors": [
+        {
+          "node": "subject",
+          "type": "required_input_missing"
+        }
+      ],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "absent"
+      },
+      "acquisitionAfterValidation": "not-run",
+      "postValidationFlat": null,
+      "secondValidation": null
+    },
+    {
+      "id": "optional-null",
+      "sourceRecordSha256": "bfd17ca9a659297af65587d46a2e586d6bd7295e18ee26b7f926e83f34805948",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": false,
+      "valueAfterValidation": {
+        "kind": "null"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "inputs.input0",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "anchor"
+                }
+              ]
+            }
+          ],
+          [
+            "inputs.input1",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "null"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "int-from-bool",
+      "sourceRecordSha256": "5aa952dee6eeae44d8edb52411ea47180298381d2b72d27e2819deca24d7afba",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "int",
+        "decimal": "1"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "value",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "int",
+                  "decimal": "1"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "float-from-string",
+      "sourceRecordSha256": "f152be5acc9fa3de7aa84bdc2f388bab475dd0c41c98a79c8a006658c5327a75",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "float64",
+        "bitsLE": "000000000000f43f",
+        "repr": "1.25"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "value",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "float64",
+                  "bitsLE": "000000000000f43f",
+                  "repr": "1.25"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "string-from-null",
+      "sourceRecordSha256": "8ef198ae144a5f7de913f9315336c2d8e824eb57830cf3f0d777556180fe08cd",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "string",
+        "value": "None"
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "value",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "string",
+                  "value": "None"
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    },
+    {
+      "id": "boolean-from-wrapped-empty",
+      "sourceRecordSha256": "e62031dd99a2f23867c7b01ec033102e2b30a0f4d86bb410c92b7d38507e2f95",
+      "isLink": false,
+      "predicateInvoked": true,
+      "directAcquisition": "returned",
+      "directErrorType": null,
+      "validationAccepted": true,
+      "validationErrors": [],
+      "promptMutated": true,
+      "valueAfterValidation": {
+        "kind": "bool",
+        "value": false
+      },
+      "acquisitionAfterValidation": "returned",
+      "postValidationFlat": {
+        "kind": "dict",
+        "items": [
+          [
+            "value",
+            {
+              "kind": "list",
+              "items": [
+                {
+                  "kind": "bool",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        ]
+      },
+      "secondValidation": null
+    }
+  ],
+  "limits": [
+    "The source validator is called with a real PreviewAny output class, but no HTTP transport, frontend or node compute method is executed.",
+    "Cache values and registry are explicit infrastructure. A persistent profile guard refuses execute/main attempts even if source validation catches their exception; the artifact does not contain a separate full profiler call trace.",
+    "Traceback text alone is omitted as declared, with frame counts retained; all other synthetic values and public source error fields remain in the raw source artifact.",
+    "Source acceptance is phase-specific. Direct acquisition of a literal does not demonstrate prompt API acceptance, and successful validation does not execute a workflow.",
+    "Bool/int/float and missing/null are preserved. Negative/bool index observations describe this pinned source and are not adopted by C# here.",
+    "No C# output, changed fixture, source rerun or product behavior is used to produce this evidence."
+  ]
+}

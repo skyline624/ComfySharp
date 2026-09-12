@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace ComfySharp.Desktop;
@@ -83,7 +84,7 @@ public sealed class HostSupervisor : IDisposable
                 if (child.HasExited) throw new InvalidOperationException($"Host exited with code {child.ExitCode}.");
                 try
                 {
-                    var health = await client.GetFromJsonAsync<JsonObject>(new Uri(Address, "/health"), cancellationToken);
+                    var health = await client.GetFromJsonAsync<JsonObject>(new Uri(Address, "/health"), JsonSerializerOptions.Default, cancellationToken);
                     if (health?["status"]?.GetValue<string>() == "ok") { Ready = true; SetStatus($"Host ready at {Address}"); return; }
                 }
                 catch (HttpRequestException) { }
@@ -95,7 +96,7 @@ public sealed class HostSupervisor : IDisposable
         catch (Exception error) { StopCore(); SetStatus(error.Message); throw; }
         finally { gate.Release(); }
     }
-    public async Task<JsonObject> GetAsync(string route) => await client.GetFromJsonAsync<JsonObject>(Endpoint(route)) ?? new JsonObject();
+    public async Task<JsonObject> GetAsync(string route) => await client.GetFromJsonAsync<JsonObject>(Endpoint(route), JsonSerializerOptions.Default) ?? new JsonObject();
     public Task<JsonObject> SubmitAsync(JsonObject prompt, string clientId, IReadOnlyList<string>? targets = null)
     {
         var body = new JsonObject { ["prompt"] = prompt.DeepClone(), ["client_id"] = clientId };

@@ -6,6 +6,7 @@
     <PackageReference Include="xunit.runner.visualstudio"><PrivateAssets>all</PrivateAssets></PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <ProjectReference Include="../../src/ComfySharp.Host/ComfySharp.Host.csproj" />
+    <ProjectReference Include="../../src/ComfySharp.Workflow/ComfySharp.Workflow.csproj" />
     <ProjectReference Include="../../tools/ComfySharp.Catalog/ComfySharp.Catalog.csproj" Aliases="catalog" />
   </ItemGroup>
   <ItemGroup><Using Include="Xunit" /></ItemGroup>

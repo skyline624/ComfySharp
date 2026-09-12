@@ -589,6 +589,9 @@
       "comfysharp.tokenization": {
         "type": "Project"
       },
+      "comfysharp.workflow": {
+        "type": "Project"
+      },
       "libtorch-cuda-12.8-win-x64": {
         "type": "CentralTransitive",
         "requested": "[2.10.0, )",

@@ -96,7 +96,17 @@ public sealed partial class MainWindow : Window
         if (sigmaEntry["outputs"]?[sigmaPreview.Value]?["text"]?[0]?.GetValue<string>() != "tensor([2., 1., 0.])" || sigmaEntry["outputs"]!.AsObject().Count != 1)
             throw new InvalidOperationException("Native sigma preview smoke failed: " + sigmaEntry.ToJsonString());
         ActiveEditor.ApplyUiOutputs(sigmaEntry["outputs"]!.AsObject());
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, UI history and native preview.");
+        var casePrompt = JsonNode.Parse("""
+            {"preview":{"class_type":"PreviewAny","inputs":{"source":"lowercase"}},
+             "PREVIEW":{"class_type":"PreviewAny","inputs":{"source":"uppercase"}}}
+            """)!.AsObject();
+        accepted = await host.SubmitAsync(casePrompt, clientId, ["preview", "PREVIEW"]);
+        var caseEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        var caseOutputs = caseEntry["outputs"]!.AsObject();
+        if (caseOutputs.Count != 2 || caseOutputs["preview"]?["text"]?[0]?.GetValue<string>() != "lowercase" ||
+            caseOutputs["PREVIEW"]?["text"]?[0]?.GetValue<string>() != "uppercase")
+            throw new InvalidOperationException("Case-sensitive history smoke failed: " + caseEntry.ToJsonString());
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "status": "targeted_regressions_passed",
+  "baseCommit": "8dad64f0cf9b04548ee722b7533776b25d3b4c46",
+  "changeState": "The tested product/tests were uncommitted when this evidence was prepared; baseCommit is not an attestation that these changes were already published.",
+  "verification": {
+    "method": "Read-only stdlib parsing and hashing of three retained TRX files, code and canonical Git source blobs.",
+    "reviewerExecutedDotnet": false,
+    "reviewerExecutedNativeOrSource": false,
+    "passedTargetedTests": 245,
+    "newCases": 33,
+    "fullSolutionCampaignClaimed": false,
+    "sourceOracleAdded": false
+  },
+  "tests": {
+    "workflow": {
+      "label": "Workflow after new literal tests, before HTTP fix",
+      "bytes": 76357,
+      "sha256": "fe375ea5b50afbc0ee2ca33cf645d2f22270e8af7401a0551cc9dcfcfdba4554",
+      "counts": {
+        "total": 49,
+        "executed": 49,
+        "passed": 49,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    },
+    "hostAfterFix": {
+      "label": "Host after HTTP fix and seven case-sensitive input regressions",
+      "bytes": 377294,
+      "sha256": "4ebcffe5976fc98a029894a45be79590a62a0c81a7f2df3f8522a2f50a1d0d4e",
+      "counts": {
+        "total": 161,
+        "executed": 161,
+        "passed": 161,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    },
+    "desktopAfterFix": {
+      "label": "Desktop after response JSON case-sensitivity fix",
+      "bytes": 53081,
+      "sha256": "3008d7d8369cfdafe762a751bd86ba81c60c81088351e1280521c1155b09b8a8",
+      "counts": {
+        "total": 35,
+        "executed": 35,
+        "passed": 35,
+        "failed": 0,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": []
+    },
+    "hostBeforeFix": {
+      "label": "Host before HTTP fix; preserved regression failure",
+      "bytes": 350409,
+      "sha256": "1da75ddce7be5f189ea7da009b91faf5528bfcd333d1140a630d5145d0a2542c",
+      "counts": {
+        "total": 154,
+        "executed": 154,
+        "passed": 153,
+        "failed": 1,
+        "error": 0,
+        "timeout": 0,
+        "aborted": 0,
+        "inconclusive": 0,
+        "passedButRunAborted": 0,
+        "notRunnable": 0,
+        "notExecuted": 0,
+        "disconnected": 0,
+        "warning": 0,
+        "completed": 0,
+        "inProgress": 0,
+        "pending": 0
+      },
+      "failures": [
+        {
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\", expectedValue: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\")",
+          "message": "1"
+        }
+      ]
+    },
+    "selectedNewCases": {
+      "workflowLiteral": [
+        {
+          "id": "8f316628-4dc5-8f29-e02b-85c5f6954dde",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\", expected: \"{\\\"nested\\\":{\\\"__value__\\\":1}}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "4633c447-1ebe-9434-5dd7-25a023e5c70a",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"x\\\":[1,2]}\", expected: \"{\\\"x\\\":[1,2]}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "5bf181fa-55eb-44f5-7ba0-4b906255a8e1",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expected: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "3044c5c5-13d7-837c-f523-08b4fa8ef9d9",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"1.25\", expected: \"1.25\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "e369cae5-0607-95b3-af8b-d7cf4208404d",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[\\\"absent\\\",0]\", expected: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "69db41ab-3115-0352-0918-5a6dd9651f4d",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[1,2]\", expected: \"{\\\"__value__\\\":[1,2]}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "bd0b15b8-f8e5-857d-cd81-ecdc978bf9ce",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 1)",
+          "outcome": "Passed"
+        },
+        {
+          "id": "4851cb09-facd-2537-384e-7c03252fbdd1",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":null}\", expected: \"{\\\"__value__\\\":null}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "0aa46c6c-393e-11a5-dbed-5973fe218bff",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{}\", expected: \"{}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "962db856-e5a6-8918-cf6e-a8e4706d5e46",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"[]\", expected: \"{\\\"__value__\\\":[]}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "e01492ba-2471-2b87-20b5-aa19b6c51838",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealConnectionOverridesReservedLiteralAndUndoRestoresTheWidget(version: 0,40000000000000002)",
+          "outcome": "Passed"
+        },
+        {
+          "id": "c0445da2-1dec-6dca-09e8-09518840c51d",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__VALUE__\\\":1}\", expected: \"{\\\"__VALUE__\\\":1}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "96376b09-4640-869b-6020-3a44ecaeba62",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"true\", expected: \"true\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "60aea40d-03dd-67bf-893a-3269da8e5d54",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.ExplicitNestedEnvelopeIsClonedWithoutAddingAnAutomaticDictionaryWrapper",
+          "outcome": "Passed"
+        },
+        {
+          "id": "37f66196-902e-3254-fd32-2d4b665c4f7c",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"\\\"text\\\"\", expected: \"\\\"text\\\"\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "49da01ee-890a-fe7f-bf8b-e9d9a6071716",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"12\", expected: \"12\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "b3f4c06f-ba75-4c59-0e91-37e292ae761f",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···, expected: \"{\\\"__value__\\\":{\\\"__value__\\\":[1]},\\\"sibling\\\":fal\"···)",
+          "outcome": "Passed"
+        },
+        {
+          "id": "2e64414c-d9ed-c595-dd1e-56ebb47cf745",
+          "name": "ComfySharp.Workflow.Tests.PromptLiteralTests.RealCompilerWrapsOnlyArraysAndTransmitsObjectsAcrossFormatsAndSerialization(literal: \"null\", expected: \"null\")",
+          "outcome": "Passed"
+        }
+      ],
+      "hostLiteral": [
+        {
+          "id": "580beead-9440-e93a-2dc8-bf75bbc643a0",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":[],\\\"sibling\\\":[1]}\", expectedValue: \"[]\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "261fc7b7-1c33-3521-fcda-3451e34ee264",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\", expectedValue: \"{\\\"__VALUE__\\\":1,\\\"nested\\\":{\\\"__value__\\\":2}}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "1176039f-7771-24fe-76c7-fe64b5704ea5",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":1,\\\"sibling\\\":2}}\", expectedValue: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "a65c34c0-242f-5adc-46a3-a91516981950",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.ConnectedWidgetExecutesTheRealProducerInsteadOfThePersistedReservedObject",
+          "outcome": "Passed"
+        },
+        {
+          "id": "4328058a-b127-3082-9279-021c03abc7d0",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[\\\"absent\\\",0]\", expectedValue: \"[\\\"absent\\\",0]\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "2f1a84c6-fa6e-3679-d299-b932cc79321c",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":{\\\"__value__\\\":[\\\"absent\\\",0]},\\\"si\"···, expectedValue: \"{\\\"__value__\\\":[\\\"absent\\\",0]}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "53d224b1-c20d-6696-d6c0-cca0b5427438",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"{\\\"__value__\\\":1,\\\"sibling\\\":2}\", expectedValue: \"1\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "c3208c75-2810-9414-e8c8-7d16b2e13304",
+          "name": "ComfySharp.Host.Tests.PromptLiteralTests.CurrentCompilerAndHttpUnwrapOnceIncludingExplicitEnvelopesAndObjectCollisions(literal: \"[]\", expectedValue: \"[]\")",
+          "outcome": "Passed"
+        }
+      ],
+      "hostCaseSensitivity": [
+        {
+          "id": "6a7f318e-894d-0406-64fc-79794a2cd69b",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OrdinaryNestedDictionaryRetainsCaseDistinctKeysWithoutRecursiveUnwrap",
+          "outcome": "Passed"
+        },
+        {
+          "id": "d0636cce-149f-a24c-1338-046eeb8470b3",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.WrongCaseInputDoesNotSatisfyRequiredSourceOrEnterTheQueue",
+          "outcome": "Passed"
+        },
+        {
+          "id": "9cbd62ac-f773-321f-3f5b-2f08ad0c61a6",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: False)",
+          "outcome": "Passed"
+        },
+        {
+          "id": "66d2ff35-1f49-b584-9f8b-784e19ffcc6c",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__value__\\\":1,\\\"__VALUE__\\\":2}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "419198e2-d5c3-9d4d-094d-1028f7bd0b1f",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.ExactInputWinsIndependentlyOfCaseDistinctSiblingOrder(uppercaseFirst: True)",
+          "outcome": "Passed"
+        },
+        {
+          "id": "62f0a9f2-d11b-dd20-d0d0-6f05f500cb10",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.OnlyExactReservedKeyIsUnwrappedWhenBothSpellingsExist(literal: \"{\\\"__VALUE__\\\":2,\\\"__value__\\\":1}\")",
+          "outcome": "Passed"
+        },
+        {
+          "id": "cb044387-f813-3bab-b3b9-c521ceb2d24a",
+          "name": "ComfySharp.Host.Tests.HttpPromptCaseSensitivityTests.CaseDistinctNodeIdsExecuteBothRealProducers",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    "beforeFixFailureExcludedFromPassingTotal": true
+  },
+  "buildEvidence": {
+    "authority": "Root-reported command outcomes, not inferred from TRX",
+    "solutionBeforeHttpFix": "build succeeded; zero warnings and errors",
+    "hostProjectAfterHttpFix": "build succeeded; zero warnings and errors",
+    "desktopTestsAfterResponseFix": "build succeeded; zero warnings and errors",
+    "fullSolutionAfterHttpFix": "not claimed"
+  },
+  "files": [
+    {
+      "path": "tests/ComfySharp.Workflow.Tests/PromptLiteralTests.cs",
+      "workingTreeBytes": 5585,
+      "workingTreeSha256": "02edd213beac6f2ffe854a1641acbf3963b2433900e6f5d357a9ddf2874501db",
+      "canonicalBytes": 5585,
+      "canonicalSha256": "02edd213beac6f2ffe854a1641acbf3963b2433900e6f5d357a9ddf2874501db",
+      "gitCleanBlobId": "cd2c08fb95a23d0e21b01e972391cf84860f2ab7"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/PromptLiteralTests.cs",
+      "workingTreeBytes": 5014,
+      "workingTreeSha256": "35dbdf42c6b6efdc36d5b80d8a55f78fcdc8a8190e86f81bbceee86f8650b1bb",
+      "canonicalBytes": 5014,
+      "canonicalSha256": "35dbdf42c6b6efdc36d5b80d8a55f78fcdc8a8190e86f81bbceee86f8650b1bb",
+      "gitCleanBlobId": "cf097b9c9eb11417dfb512177bafefb501b1c6c2"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/HttpPromptCaseSensitivityTests.cs",
+      "workingTreeBytes": 4890,
+      "workingTreeSha256": "65df57e48ffdcf8fd744171798ccf186dfd51993944faa222da026800bcf3224",
+      "canonicalBytes": 4890,
+      "canonicalSha256": "65df57e48ffdcf8fd744171798ccf186dfd51993944faa222da026800bcf3224",
+      "gitCleanBlobId": "6d3b6d3e13ed0622e9a83d535f6bd3a930fc3b09"
+    },
+    {
+      "path": "src/ComfySharp.Host/Program.cs",
+      "workingTreeBytes": 9391,
+      "workingTreeSha256": "392ea0c65daef348810ca35f1305be338621b88ccfd11bbcf2d1d1f6d2a9549b",
+      "canonicalBytes": 9391,
+      "canonicalSha256": "392ea0c65daef348810ca35f1305be338621b88ccfd11bbcf2d1d1f6d2a9549b",
+      "gitCleanBlobId": "ae2be89251f8cb4b912b70339dec0cad46ed4674"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj",
+      "workingTreeBytes": 789,
+      "workingTreeSha256": "a2573ad022aaa8fdc664328d3b67ca50231b310fc0f9387720c18304cf89cdcd",
+      "canonicalBytes": 789,
+      "canonicalSha256": "a2573ad022aaa8fdc664328d3b67ca50231b310fc0f9387720c18304cf89cdcd",
+      "gitCleanBlobId": "0899b56a471bdff9259f2e367bfe0fb75073b169"
+    },
+    {
+      "path": "src/ComfySharp.Desktop/HostSupervisor.cs",
+      "workingTreeBytes": 7361,
+      "workingTreeSha256": "400cbb8c189b6247eed5a9c2e6a5676a18556238f31c8552c25c2747417e2d2c",
+      "canonicalBytes": 7361,
+      "canonicalSha256": "400cbb8c189b6247eed5a9c2e6a5676a18556238f31c8552c25c2747417e2d2c",
+      "gitCleanBlobId": "fa640f4a7c9eb64939356bbbafbf1ea72b4e9c4a"
+    },
+    {
+      "path": "src/ComfySharp.Desktop/MainWindow.axaml.cs",
+      "workingTreeBytes": 13316,
+      "workingTreeSha256": "84a4da32d0929d3e5684bea9b3696ed7abdcc19de573f05d45463f173d03c79d",
+      "canonicalBytes": 13316,
+      "canonicalSha256": "84a4da32d0929d3e5684bea9b3696ed7abdcc19de573f05d45463f173d03c79d",
+      "gitCleanBlobId": "d32ecab8ace9650f240ad12fefc1de0c4872c034"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.linux-x64.cpu.lock.json",
+      "workingTreeBytes": 24528,
+      "workingTreeSha256": "ab481cbda93fd1c6133583e8868100c03a6e8ff987a8985ca41519f3c29530a7",
+      "canonicalBytes": 23964,
+      "canonicalSha256": "f29a6ffcc8c2e8f6481e76a2179a4f7fc4cb9167d011521f68a09f2ee1133b00",
+      "gitCleanBlobId": "3405ea59ce37911649894c570508c06030468c73"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.osx-arm64.cpu.lock.json",
+      "workingTreeBytes": 24528,
+      "workingTreeSha256": "8a9b34c77ea85fdf83f33c9c7c74140631f1b5ea771bb9a9507250dd2a207cae",
+      "canonicalBytes": 23964,
+      "canonicalSha256": "11aa6f9e4151b2e85ced82cf435d289f5b28cc8980b81fc46d0f4eed3af86d7e",
+      "gitCleanBlobId": "c5a2f164f9f059ac5292225099546bf5f1e955d9"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cpu.lock.json",
+      "workingTreeBytes": 24524,
+      "workingTreeSha256": "3e6af0b5b089207aebf7580b86d474b9e3766cbcf170c776502259c81f8198f0",
+      "canonicalBytes": 23960,
+      "canonicalSha256": "41cf2cc421d34355c33975eb1074d3097257b5e85bde787a132bd275756ea96f",
+      "gitCleanBlobId": "1d44d57df467abeda68a0ed777411dee1e23fcba"
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cuda.lock.json",
+      "workingTreeBytes": 29384,
+      "workingTreeSha256": "2f086d95d226a1c0d3b65679036b39bdb119855a0955d06b4b141b71758f68f6",
+      "canonicalBytes": 28722,
+      "canonicalSha256": "5fa36e1f8083d6a322f37e5b597c8cd9ee5c1b8a418050d766764144eaa3c29f",
+      "gitCleanBlobId": "dc70e2e6799f01aae7619bb918dcdc29987fe83a"
+    }
+  ],
+  "lockChanges": [
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.linux-x64.cpu.lock.json",
+      "onlyAddedProject": "comfysharp.workflow",
+      "externalPackageRecordsUnchanged": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.osx-arm64.cpu.lock.json",
+      "onlyAddedProject": "comfysharp.workflow",
+      "externalPackageRecordsUnchanged": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cpu.lock.json",
+      "onlyAddedProject": "comfysharp.workflow",
+      "externalPackageRecordsUnchanged": true
+    },
+    {
+      "path": "tests/ComfySharp.Host.Tests/packages.win-x64.cuda.lock.json",
+      "onlyAddedProject": "comfysharp.workflow",
+      "externalPackageRecordsUnchanged": true
+    }
+  ],
+  "sources": [
+    {
+      "repository": "Comfy-Org/ComfyUI_frontend",
+      "commit": "e7d1c7fc6823e330fdab524610b0000394cb1dbc",
+      "path": "src/utils/executionUtil.ts",
+      "bytes": 4794,
+      "sha256": "264e11395f28880603e7f9fe36d2e61c74cd59d6d88be990225cce8510e3f816",
+      "executed": false
+    },
+    {
+      "repository": "comfy-org/ComfyUI",
+      "commit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+      "path": "execution.py",
+      "bytes": 61543,
+      "sha256": "e4058e4cc03e89753f41a62f51d4534933a35e243358aa6796a65a9fd0bdda28",
+      "executed": false
+    }
+  ],
+  "fix": {
+    "boundary": "ASP.NET minimal-API HTTP JSON body materialization",
+    "setting": "PropertyNameCaseInsensitive=false",
+    "scope": "Global HTTP JsonOptions: affects JsonObject request keys for all HTTP routes, not just /prompt.",
+    "programDeltaVerifiedExactlyTwoLines": true,
+    "compilerAndCoreUnwrapChanged": false
+  },
+  "desktop": {
+    "fix": "HostSupervisor uses JsonSerializerOptions.Default for health and generic GET response deserialization; no global JsonNode semantic override.",
+    "supervisorDeltaVerifiedOnlyUsingAndTwoOptionsArguments": true,
+    "smoke": {
+      "result": {
+        "exitCode": 0,
+        "caseSensitiveHistory": true,
+        "nativeWindow": true,
+        "supervisedHost": true,
+        "cpuSigmas": true,
+        "textPreview": true,
+        "dataIsolated": true
+      },
+      "evidenceFiles": [
+        {
+          "label": "result.json",
+          "bytes": 179,
+          "sha256": "454822c3f487d5997de4e8f4e1a8d00e4c44e103a14dac3888dcb630dfb48d4a"
+        },
+        {
+          "label": "stdout.txt",
+          "bytes": 139,
+          "sha256": "b5833e30cda01cd982e968ade1eab1720ea8101be69ab6262ac7533b7c60831c"
+        },
+        {
+          "label": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "label": "prompt-literal-smoke.ps1",
+          "bytes": 2370,
+          "sha256": "eecd140ddd24206e2ae5e8e95f9e5cc5b4d9dcd5d5a5c2b42d1893dc7605af70"
+        }
+      ],
+      "stdout": "ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history and native preview.",
+      "route": "Actual MainWindow.Opened smoke: supervised Host, text graph, CPU sigma graph, then two real PreviewAny outputs with IDs preview and PREVIEW, retrieved through HostSupervisor.GetAsync history.",
+      "launch": "Explicit Release Windows CPU Host apphost and Release Desktop apphost, with isolated data-dir.",
+      "cleanup": "Reviewed script has a finally block that disposes/kills the Desktop process when needed and restores both prior environment values. MainWindow.Closed disposes its supervised Host.",
+      "limits": "Retained process exit/stdout evidence, not a native binary identity manifest or an additional xUnit test. The reviewer did not rerun the smoke."
+    }
+  },
+  "limits": [
+    "These are real C# compiler and HTTP Host regression tests, not an executed upstream frontend/backend oracle.",
+    "The fixture adds an explicit PreviewAny source-widget binding for compiler tests; the product zero-widget definition is unchanged.",
+    "Curve-specific envelopes, asynchronous widget serializers, full LiteGraph routing and global frontend parity are outside this evidence.",
+    "Known one-level envelope semantics and object-key collisions are recorded as current product behavior; no claim of full upstream HTTP equivalence.",
+    "245 is the sum of disjoint Workflow49, Host161 and Desktop35 successful targeted suites. The earlier Host154 run overlaps and is retained only as failure evidence. The smoke is separate and not added as another test.",
+    "No full1550 campaign, multi-OS qualification, native model compatibility, or relation to the independent Autogrow source collection is claimed."
+  ]
+}
