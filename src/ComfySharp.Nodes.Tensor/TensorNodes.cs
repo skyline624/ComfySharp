@@ -48,6 +48,7 @@ public static class TensorNodes
                 SearchAliases: id == "ManualSigmas" ? ["custom noise schedule", "define sigmas"] : id == "ExtendIntermediateSigmas" ? ["interpolate sigmas"] : null, PythonModule: Module)));
         }
         registry.Register(new PreviewNode());
+        ImageNodes.Register(registry);
     }
     private static InputSchema Int(string name, int value, int min, int max) => new(name, "INT", Options: new() { ["default"] = value, ["min"] = min, ["max"] = max });
     private static InputSchema Float(string name, double value, double min, double max, double step, bool advanced = false, bool? round = false)

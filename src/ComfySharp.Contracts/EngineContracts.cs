@@ -89,7 +89,7 @@ public sealed record OutputSchema(string Type, string? Name = null, bool IsList 
 public sealed record NodeSchema(string ClassType, string DisplayName, string Category,
     IReadOnlyList<InputSchema> Inputs, IReadOnlyList<OutputSchema> Outputs, bool OutputNode = false, bool InputIsList = false, bool Experimental = false,
     string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null,
-    bool V3ObjectInfo = false);
+    bool V3ObjectInfo = false, string? EssentialsCategory = null);
 public sealed record EngineDiagnostic(string Code, string Message, string? NodeId = null, string? InputName = null, string? TargetId = null);
 public sealed record ValidationResult(IReadOnlyList<string> ValidTargets, IReadOnlyList<EngineDiagnostic> Diagnostics)
 {

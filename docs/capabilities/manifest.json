@@ -14427,8 +14427,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L264",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -14452,7 +14452,8 @@
         "nodeId": "RepeatImageBatch",
         "module": "comfy_extras/nodes_images.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "Partial CPU Float32 positive-batch NHWC RGB/RGBA profile. Independent native storage, alpha-preserving inversion, whole-batch repeat and bounded cloned extraction. Explicit per-call allocation payload budget 512 MiB (EmptyImage transient payload twice output), configurable in the C# helper; no gradients, GPU/dtype fallback or image codecs. Compiled workflow ends in tensor-as-text PreviewAny. See docs/IMAGE_PRIMITIVES.md; required platform and full-domain qualification remains open."
     },
     {
       "id": "node:ImageFromBatch:comfy_extras/nodes_images.py:287",
@@ -14462,8 +14463,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_images.py#L287",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -14487,7 +14488,8 @@
         "nodeId": "ImageFromBatch",
         "module": "comfy_extras/nodes_images.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "Partial CPU Float32 positive-batch NHWC RGB/RGBA profile. Independent native storage, alpha-preserving inversion, whole-batch repeat and bounded cloned extraction. Explicit per-call allocation payload budget 512 MiB (EmptyImage transient payload twice output), configurable in the C# helper; no gradients, GPU/dtype fallback or image codecs. Compiled workflow ends in tensor-as-text PreviewAny. See docs/IMAGE_PRIMITIVES.md; required platform and full-domain qualification remains open."
     },
     {
       "id": "node:ImageAddNoise:comfy_extras/nodes_images.py:316",
@@ -28187,8 +28189,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2089",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -28212,7 +28214,8 @@
         "nodeId": "ImageInvert",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "Partial CPU Float32 positive-batch NHWC RGB/RGBA profile. Independent native storage, alpha-preserving inversion, whole-batch repeat and bounded cloned extraction. Explicit per-call allocation payload budget 512 MiB (EmptyImage transient payload twice output), configurable in the C# helper; no gradients, GPU/dtype fallback or image codecs. Compiled workflow ends in tensor-as-text PreviewAny. See docs/IMAGE_PRIMITIVES.md; required platform and full-domain qualification remains open."
     },
     {
       "id": "node:ImageBatch:nodes.py:2090",
@@ -28292,8 +28295,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2092",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -28317,7 +28320,8 @@
         "nodeId": "EmptyImage",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "Partial CPU Float32 positive-batch NHWC RGB/RGBA profile. Independent native storage, alpha-preserving inversion, whole-batch repeat and bounded cloned extraction. Explicit per-call allocation payload budget 512 MiB (EmptyImage transient payload twice output), configurable in the C# helper; no gradients, GPU/dtype fallback or image codecs. Compiled workflow ends in tensor-as-text PreviewAny. See docs/IMAGE_PRIMITIVES.md; required platform and full-domain qualification remains open."
     },
     {
       "id": "node:ConditioningAverage:nodes.py:2093",

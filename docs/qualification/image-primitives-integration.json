@@ -1,0 +1,362 @@
+{
+  "schema": 1,
+  "id": "image-primitives-local-integration-v1",
+  "preparedAtUtc": "2026-09-12T04:31:01.762849+00:00",
+  "scope": "Local Windows CPU/F32 image integration. No full multi-platform or GPU qualification.",
+  "evidenceMethod": "Root executed the Release build, tests and graphical smoke and audited six TRX identities/counters. This proof checks audit totals, pre/post file snapshots, two targeted comparison TRX and smoke artifacts; it does not repeat the complete TRX audit or execute any calculations.",
+  "fullCampaign": {
+    "passed": 2309,
+    "failed": 0,
+    "skipped": 0,
+    "new": 84,
+    "projects": {
+      "Workflow": {
+        "passed": 75,
+        "new": 3
+      },
+      "Tokenization": {
+        "passed": 540,
+        "new": 0
+      },
+      "Inference": {
+        "passed": 642,
+        "new": 65
+      },
+      "Desktop": {
+        "passed": 43,
+        "new": 1
+      },
+      "Core": {
+        "passed": 750,
+        "new": 0
+      },
+      "Host": {
+        "passed": 259,
+        "new": 15
+      }
+    },
+    "trxCount": 6,
+    "uniqueTestIds": 2309,
+    "identityAndCounterAudit": "Root root-audit.json and runner confirmation; no inference from repeated display names.",
+    "trx": [
+      {
+        "record": 1,
+        "bytes": 115652,
+        "sha256": "efaf229f8a12a19e2dab16b3c357da04631ad6ec2148b22b2973029ba325108c"
+      },
+      {
+        "record": 2,
+        "bytes": 814012,
+        "sha256": "f59bffc99e02921900262128699b0f6192e166f6417031d0e6b31e5e0f885dff"
+      },
+      {
+        "record": 3,
+        "bytes": 1026685,
+        "sha256": "5cb1cd97457611fc3be93ed736a485f6bd96fe59587575fa436c06e91fe9c01d"
+      },
+      {
+        "record": 4,
+        "bytes": 64777,
+        "sha256": "6950f6365805238fcfc53a571dc8a32ab74b4db5b951e10dbacae8f91215bccd"
+      },
+      {
+        "record": 5,
+        "bytes": 1160034,
+        "sha256": "81594d2ee264746d962b7189fca24e27854703d5c3f0bc9b63f1e27e34b91eaf"
+      },
+      {
+        "record": 6,
+        "bytes": 715368,
+        "sha256": "6eb744c53174c6afcf496e8c4f76d1361af4c6c04f211f8448e90f9ca514c767"
+      }
+    ],
+    "build": {
+      "configuration": "Release",
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "testCommandExitCode": 0,
+    "commandExitEvidence": "Root runner confirmation after completion; retained build/tests logs."
+  },
+  "newCaseBreakdown": {
+    "ImageOperationsTests": 28,
+    "ImageNodeTests": 9,
+    "ImagePrimitiveSourceReferenceTests": 28,
+    "ImagePrimitiveHostTests": 15,
+    "ImagePrimitiveWorkflowTests": 3,
+    "ImagePrimitiveEditorTests": 1
+  },
+  "sourceComparison": {
+    "collectorCommit": "829a6b87f48ef7b1022da512524c5966e998a369",
+    "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "proof": "image-primitives-source-829a6b8.json",
+    "artifact": {
+      "bytes": 460188,
+      "sha256": "6b31ffb26843506bed8ee0e41cc97e91087e5f46ce01e39cdedf27fa3e218a62"
+    },
+    "protocol": {
+      "bytes": 40343,
+      "sha256": "26ce418d969ee583ab077880530d20b6c11530094d7bbb97956bc5feaf56c0b4"
+    },
+    "cases": 28,
+    "sourceRecordsPerCase": 3,
+    "sourceBodyCalls": 84,
+    "managedBodyCallsPerCase": 1,
+    "numericComparison": "Exact logical little-endian Float32 bytes including signed zero; no tolerance.",
+    "otherComparisons": [
+      "Genuine V3 object_info or actual legacy declaration scope",
+      "Input storage, shape, strides, offset and first-element alignment",
+      "Output capture and unchanged input after the body",
+      "Controlled overlapping input mutation with stable independent output"
+    ],
+    "historicalRuns": [
+      {
+        "campaign": "image-primitives-source-comparison-first",
+        "label": "image-primitives-source-comparison-first/TRX",
+        "bytes": 65481,
+        "sha256": "6b35e30048e0eb7abdb991c0b5265cfc1ec861ad1a4dbc24d42ea86550334584",
+        "counters": {
+          "total": 28,
+          "executed": 28,
+          "passed": 22,
+          "failed": 6,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "countedAgainInFull": false
+      },
+      {
+        "campaign": "image-primitives-source-comparison-second",
+        "label": "image-primitives-source-comparison-second/TRX",
+        "bytes": 46488,
+        "sha256": "8e79d2a15356ad95f1a3076b17bcae66eded629cdd30e0a6beaae31c0014c245",
+        "counters": {
+          "total": 28,
+          "executed": 28,
+          "passed": 28,
+          "failed": 0,
+          "error": 0,
+          "timeout": 0,
+          "aborted": 0,
+          "inconclusive": 0,
+          "passedButRunAborted": 0,
+          "notRunnable": 0,
+          "notExecuted": 0,
+          "disconnected": 0,
+          "warning": 0,
+          "completed": 0,
+          "inProgress": 0,
+          "pending": 0
+        },
+        "countedAgainInFull": false
+      }
+    ],
+    "initialFailureCause": "The test Aligned64 capture accessed bytes() on six noncontiguous views and failed before the node body.",
+    "testCorrection": "Inspect the first scalar through a same-offset view without copying; consume the already-completed ValueTask with await. Product operations, protocol and fixture bytes were unchanged.",
+    "afterCorrection": "28 Passed, 0 Failed/Skipped; repeated within the full campaign."
+  },
+  "snapshot": {
+    "baseCommit": "829a6b87f48ef7b1022da512524c5966e998a369",
+    "scope": "Changed source/tests/resources and build settings; a file snapshot, not loaded-assembly attestation.",
+    "phase": "before_build versus after_tests",
+    "fileCount": 23,
+    "unchanged": true,
+    "files": {
+      "src/ComfySharp.Contracts/EngineContracts.cs": {
+        "bytes": 9497,
+        "sha256": "d882d5ba686cfadeea43ac54663bd52a4ad4f297139f88b8f11f89309171b9b4"
+      },
+      "src/ComfySharp.Core/NodeRegistry.cs": {
+        "bytes": 4243,
+        "sha256": "8aa372de41ba9902c422224c7098ff82dffe2e88958852d1498df16c6cee2533"
+      },
+      "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+        "bytes": 13726,
+        "sha256": "c9a926a0cbcf7718c53e4855118a48b8a5804043f52b0e5fa734debbf5d26172"
+      },
+      "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+        "bytes": 20411,
+        "sha256": "b54b42b94d81175f504be9ab362d58109500fb7a50519859f2fafc1ed0f4aa9f"
+      },
+      "src/ComfySharp.Inference/ImageOperations.cs": {
+        "bytes": 6579,
+        "sha256": "5e9e6cac1769dc347ea1650ab66b283bc5fb4def5ac1337e6d52c5b75f8704f1"
+      },
+      "src/ComfySharp.Nodes.Tensor/ImageNodes.cs": {
+        "bytes": 3894,
+        "sha256": "5daefe4024001edbb074d381f9e20d183226ce4e5534e4ef4aeb560e248ed434"
+      },
+      "src/ComfySharp.Nodes.Tensor/TensorNodes.cs": {
+        "bytes": 15151,
+        "sha256": "8e4576859eee37720312dc1681284ce3cd1bf9b2351eb9e381354bae92ac6e09"
+      },
+      "src/ComfySharp.Workflow/PromptCompiler.cs": {
+        "bytes": 13018,
+        "sha256": "1d8fd460bb212f32a03caf750582166bf57e58a75ffe44ea9b6d6e30076ee4d2"
+      },
+      "tests/ComfySharp.Desktop.Tests/ImagePrimitiveEditorTests.cs": {
+        "bytes": 2262,
+        "sha256": "dcc556c6180429f88fa6cd99c681c86567139785e5ab530958381a857ca26408"
+      },
+      "tests/ComfySharp.Host.Tests/ImagePrimitiveHostTests.cs": {
+        "bytes": 9921,
+        "sha256": "ed1b6c8c3c7c9efd3d0cfb27fc284e255868d86820837f8ca273eecbea0f209f"
+      },
+      "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+        "bytes": 10659,
+        "sha256": "dce7e493f386afafe7d989ade0e1d5c7b4da248d7d21403630c39d7cd09f59f5"
+      },
+      "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": {
+        "bytes": 2613,
+        "sha256": "684727c646c108370b00eae5829c9fd45e46bc98eda7fdba22558807e0a0cba5"
+      },
+      "tests/ComfySharp.Inference.Tests/Fixtures/image-primitives.protocol.json": {
+        "bytes": 40343,
+        "sha256": "26ce418d969ee583ab077880530d20b6c11530094d7bbb97956bc5feaf56c0b4"
+      },
+      "tests/ComfySharp.Inference.Tests/Fixtures/image-primitives.reference.json": {
+        "bytes": 460188,
+        "sha256": "6b31ffb26843506bed8ee0e41cc97e91087e5f46ce01e39cdedf27fa3e218a62"
+      },
+      "tests/ComfySharp.Inference.Tests/ImageNodeTests.cs": {
+        "bytes": 4322,
+        "sha256": "16a285aecd6ad98bf92c324f1e1720e2807521d2851ee617a78130033c0c5c9f"
+      },
+      "tests/ComfySharp.Inference.Tests/ImageOperationsTests.cs": {
+        "bytes": 10518,
+        "sha256": "773011121b23fa0d76f9bc3a5ecf50925e9bb014594e20f800b059f42710668f"
+      },
+      "tests/ComfySharp.Inference.Tests/ImagePrimitiveSourceReferenceTests.cs": {
+        "bytes": 17752,
+        "sha256": "1856b13c8b33f3426a3f8602aeb5436076a6a8c8d5ac5b0e22bdc04b1a5f1bc0"
+      },
+      "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs": {
+        "bytes": 12251,
+        "sha256": "86135de6a93b2054455f4078ef3038e20f7dd58ca5a2021675ccd20a8dfe972b"
+      },
+      "tests/ComfySharp.Workflow.Tests/ImagePrimitiveWorkflowTests.cs": {
+        "bytes": 3468,
+        "sha256": "ce8fff49a8347295d8989c77891d2ec01234874db560f8befdf38a30ebcc383e"
+      },
+      "global.json": {
+        "bytes": 95,
+        "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+      },
+      "Directory.Build.props": {
+        "bytes": 1137,
+        "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+      },
+      "Directory.Packages.props": {
+        "bytes": 1412,
+        "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+      },
+      ".github/workflows/ci.yml": {
+        "bytes": 14207,
+        "sha256": "c461f15e94e797011ca00f7be182e11a6c437b67f53f7f8ae908f11214715a54"
+      }
+    },
+    "binaryAttestation": false,
+    "snapshotOrigin": "Root runner recorded the snapshot before invoking build and rechecked after tests. No invented capture timestamp is assigned."
+  },
+  "smoke": {
+    "campaign": "image-primitives-ui-first/smoke",
+    "result": {
+      "exitCode": 0,
+      "nativeWindow": true,
+      "supervisedHost": true,
+      "imagePrimitives": 4,
+      "previewKind": "tensor-as-text",
+      "caseConverterModes": 4,
+      "dataIsolated": true
+    },
+    "artifacts": [
+      {
+        "label": "result.json",
+        "bytes": 189,
+        "sha256": "9d1bf95133af17ec13a21f6e197b4d1e8bb4e60b924dbc4bfe31ee013692c4c0"
+      },
+      {
+        "label": "stdout.txt",
+        "bytes": 260,
+        "sha256": "6f8e0cd85af1f68cb8535da0939b7529d7000e9af75318f91b9439bbfae94936"
+      },
+      {
+        "label": "stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "driver": {
+      "label": "image-primitives-smoke-first.ps1",
+      "bytes": 2422,
+      "sha256": "fb39883912511833a3e56c0f013cda3ef05452f0b3e19ce00b7fc0715abf279a"
+    },
+    "route": "Native Desktop window, compiled EmptyImage/RepeatImageBatch/ImageFromBatch/ImageInvert chain, supervised Host and PreviewAny text.",
+    "productContinuity": "Root confirms image product code unchanged between this successful smoke and final campaign; only tests were subsequently added/corrected.",
+    "pngProduced": false
+  },
+  "runtimeContract": {
+    "registeredNodes": 34,
+    "imageNodes": 4,
+    "device": "CPU",
+    "dtype": "Float32",
+    "layout": "NHWC",
+    "channels": [
+      3,
+      4
+    ],
+    "positiveBatchHeightWidth": true,
+    "noGrad": true,
+    "defaultNewTensorPayloadBudgetBytes": 536870912,
+    "budget": "Per call, configurable through C# API. EmptyImage counts twice final output; other operations count output payload. Borrowed inputs, runtime/allocator overhead, caches and concurrent calls excluded.",
+    "returnedStorage": "Independently owned and detached; caller/context disposes.",
+    "cancellation": "At managed boundaries; synchronous native kernels are not interrupted mid-call."
+  },
+  "auditPins": [
+    {
+      "label": "root-audit.json",
+      "bytes": 1565,
+      "sha256": "de5afa8df515353fea0247036898a073c6967a536159eb642e4f52ce4fe158af"
+    },
+    {
+      "label": "before-build.json",
+      "bytes": 4093,
+      "sha256": "5203d6be637a0b52e9d8d6c8b5293f0086b8c1537c89abd3918f43b23e2a9076"
+    },
+    {
+      "label": "after-tests.json",
+      "bytes": 3912,
+      "sha256": "84c0eb5798ff45b48b8467a381847fb882658e1b333969e0a48c3f8898c3fda3"
+    },
+    {
+      "label": "build.log",
+      "bytes": 3049,
+      "sha256": "73ddabdb78010c459c4dd7fb8980e9551f36a28ec67af7db3162747d5720ce71"
+    },
+    {
+      "label": "tests.log",
+      "bytes": 3340,
+      "sha256": "afa2546a4eaba24171fbd90f62b52a81dfb3c6b8198e6be373c55eb9794d967d"
+    }
+  ],
+  "limits": [
+    "Source and local integration proofs are separate; this document does not rewrite historical source-only qualification.",
+    "No source mapper or complete HTTP parity is implied by direct source-comparison tests. Real HTTP routes are tested separately by 15 local Host cases.",
+    "GPU, other dtypes, sparse inputs, nonpositive B/H/W and channel counts other than 3/4 are outside the declared execution profile.",
+    "PreviewAny emits tensor-as-text only: no PNG, raster preview or image-file transport.",
+    "No checkpoint, pretrained model, VAE, image codec or complete SD workflow is qualified.",
+    "The local full campaign does not resolve previously red numerical CI gates or establish multi-platform parity. Manifest state remains partial; no platform flag or realWorkflow claim is promoted here.",
+    "Snapshots identify files, not loaded assemblies."
+  ]
+}

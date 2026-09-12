@@ -179,7 +179,29 @@ public sealed partial class MainWindow : Window
             casingOutputs[pair.Key]?["text"] is not JsonArray values || values.Count != 1 || values[0]?.GetValue<string>() != pair.Value))
             throw new InvalidOperationException("Case conversion workflow smoke failed: " + casingEntry.ToJsonString());
         ActiveEditor.ApplyUiOutputs(casingOutputs);
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes and native preview.");
+        var image = ActiveEditor.AddNode("EmptyImage");
+        ActiveEditor.Document.SetWidgets(image, new JsonArray(1, 1, 2, 0xff0000));
+        var repeatedImage = ActiveEditor.AddNode("RepeatImageBatch");
+        ActiveEditor.Document.SetWidgets(repeatedImage, new JsonArray(3));
+        var extractedImage = ActiveEditor.AddNode("ImageFromBatch");
+        ActiveEditor.Document.SetWidgets(extractedImage, new JsonArray(-1, 10));
+        var invertedImage = ActiveEditor.AddNode("ImageInvert");
+        var imageTextPreview = ActiveEditor.AddNode("PreviewAny");
+        ActiveEditor.Document.Connect(image, 0, repeatedImage, 0);
+        ActiveEditor.Document.Connect(repeatedImage, 0, extractedImage, 0);
+        ActiveEditor.Document.Connect(extractedImage, 0, invertedImage, 0);
+        ActiveEditor.Document.Connect(invertedImage, 0, imageTextPreview, 0);
+        ActiveEditor.Reload();
+        var imageSession = hostSession.Id;
+        accepted = await hostSession.ObserveAsync(host.SubmitAsync(Compile(true), clientId, [imageTextPreview.Value]), imageSession);
+        var imageEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), imageSession, 200);
+        hostSession.Require(imageSession);
+        var imageOutputs = imageEntry["outputs"]!.AsObject();
+        if (imageOutputs.Count != 1 || imageOutputs[imageTextPreview.Value]?["text"] is not JsonArray imageTexts ||
+            imageTexts.Count != 1 || imageTexts[0]?.GetValue<string>() != "tensor([[[[0., 1., 1.]]]])")
+            throw new InvalidOperationException("Image primitive workflow smoke failed: " + imageEntry.ToJsonString());
+        ActiveEditor.ApplyUiOutputs(imageOutputs);
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives with text preview and native preview.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
