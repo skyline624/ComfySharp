@@ -131,7 +131,8 @@ public sealed class TensorNodeTests
     public void DenseFormatterPreservesLinebreaksDtypeSignedZeroAndLimits()
     {
         NativeRuntimeBootstrap.Initialize();
-        using var matrix = tensor(new float[] { 1, 2, 3, 4 }).reshape(2, 2);
+        using var storage = tensor(new float[] { 1, 2, 3, 4 });
+        using var matrix = storage.reshape(2, 2);
         Assert.Equal("tensor([[1., 2.],\n        [3., 4.]])", TensorPreviewFormatter.Format(matrix));
         using var zero = tensor(new double[] { -0.0, double.NaN, double.PositiveInfinity });
         Assert.Equal("tensor([-0., nan, inf], dtype=torch.float64)", TensorPreviewFormatter.Format(zero));

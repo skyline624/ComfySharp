@@ -51,7 +51,8 @@ public sealed class ClipConditioningTests
                 TokenCounts = processed.Counts
             });
             using var selected = (profile == ClipProfile.Sd1L ? raw.FinalHidden : raw.IntermediateHidden!).reshape(1, 154, 4);
-            using var pooled = (profile == ClipProfile.Sd1L ? raw.Pooled : raw.ProjectedPooled!)[0].unsqueeze(0);
+            using var firstPooled = (profile == ClipProfile.Sd1L ? raw.Pooled : raw.ProjectedPooled!)[0];
+            using var pooled = firstPooled.unsqueeze(0);
             AssertClose(selected, result.Hidden);
             AssertClose(pooled, result.Pooled);
             Assert.Equal(new long[] { 1, 154 }, result.AttentionMask!.shape);
@@ -100,10 +101,12 @@ public sealed class ClipConditioningTests
         using var empty = wrapper.Encode(Sections(EmptyRow(49407)), options);
         using var plain = wrapper.Encode(Sections(Row(17)), options);
         Assert.Equal(new long[] { 1, 2, 154, 4 }, result.Hidden.shape);
-        using var first = result.Hidden[0, 0].slice(0, 0, 77, 1);
+        using var firstLayer = result.Hidden[0, 0];
+        using var first = firstLayer.slice(0, 0, 77, 1);
         using var baseline = empty.Hidden[0, 0];
         AssertClose(baseline, first);
-        using var second = result.Hidden[0, 1].slice(0, 0, 77, 1);
+        using var secondLayer = result.Hidden[0, 1];
+        using var second = secondLayer.slice(0, 0, 77, 1);
         using var untouched = plain.Hidden[0, 1];
         AssertClose(untouched, second);
     }
