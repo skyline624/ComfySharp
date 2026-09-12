@@ -1,9 +1,10 @@
 """Frozen dataset preparation and training batch/RNG sequencing, without model evaluation."""
-import argparse,ast,hashlib,json,logging,math,pathlib,subprocess,types
+import argparse,ast,hashlib,json,logging,math,pathlib,subprocess,sys,types
 import numpy as np
 import torch
 p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--output',required=True);a=p.parse_args()
-assert torch.__version__=='2.10.0+cpu';torch.set_num_threads(1)
+assert torch.__version__==('2.10.0' if sys.platform=='darwin' else '2.10.0+cpu') and torch.version.cuda is None
+torch.set_num_threads(1);torch.set_num_interop_threads(1)
 commit='1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a';hashes={}
 comfy=types.SimpleNamespace(samplers=types.SimpleNamespace(Sampler=object),sample=types.SimpleNamespace())
 extras=types.SimpleNamespace(nodes_custom_sampler=types.SimpleNamespace())

@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "profile": "training-platform-source-native210-cpu-f32-v1",
+  "status": "prospectively pinned before same-platform output collection",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "runtime": {
+    "python": "3.12.10",
+    "torch": "2.10.0 CPU",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "threads": 1,
+    "interopThreads": 1
+  },
+  "comparison": {
+    "batches": "exact arrays, indices and RNG-state hashes",
+    "adaptersInitialization": "exact parameter and RNG-state hashes",
+    "denoisingAndAdapterGradients": {
+      "absoluteTolerance": 3e-05,
+      "relativeTolerance": 3e-05
+    }
+  },
+  "inputs": {
+    "labs/lora-training-source/batches.py": "c38a32891d5cb51a01ca6e80cc720e76f2de1a20287dc6c5f3afa4b150ca71f3",
+    "labs/lora-training-source/denoising.py": "a6809ce7fc89ade2509344f157d1bfd10581a4f6e90eebb2ff3db74c64aabd7f",
+    "labs/lora-training-source/adapters.py": "9446fc7449893b2ad0b92ec2cc9dfd782e2aae2a07518d4b14ea598e5ebb6d87",
+    "labs/sd-source/common.py": "970ee60f97d8c535a7076eba91c2cd38baecf88cf023f68ac8965fbf8a6853c3",
+    "labs/sd-source/unet.py": "57813ce615d443601511e3657d56039bf32796e2b7904a7d0ff2d64be55c520f",
+    "labs/training-platform-source/collect.py": "efb0e61de175b311ecb3186c4bd0018d0d84522dba6f75caa76b22eebee8a550",
+    ".github/workflows/training-source-laboratory.yml": "02081c6cd3429db1f92db9e834e922f6bab45d5c217847d5e296fec84708c2fe",
+    "labs/clip-source/requirements-win-x64.txt": "53becb18e5c1ea63de4ee8f6eacdd482bcd992827be25439a0a84a89cbc099d5",
+    "labs/clip-source/requirements-linux-x64.txt": "84df56cd98339e8dfec9b6f765312758706476ed1328d5f95f6a06433b9bb719",
+    "labs/clip-source/requirements-osx-arm64.txt": "329ab59df4b1cd1b5dd16eaa2a84d3f0e8e4c807f6bf984246c70290e406dec4"
+  },
+  "sources": {
+    "comfy/sample.py": "d274ed5b6abf83707b52b87d25d1716f072d5444954cf23ac0ed31a3b803ee1c",
+    "comfy_extras/nodes_custom_sampler.py": "b0ba1521c72475e06fed15db004274ed7c8bb2bf73f1d58849faf6f9f9d264fe",
+    "comfy/ldm/modules/diffusionmodules/util.py": "fb58652a35521fc23bdcb75d91adace8e4cc79e2d5b13af1617a38d0c0f7142e",
+    "comfy/model_sampling.py": "173346f1975f6ddedee08505915ed97d152c3951747ebd213be0434f8d7011bd",
+    "comfy/latent_formats.py": "8b782699d1c58626fc3e7c8ac31608e1311ac7bf6c8d22e44e291391dc2734b4",
+    "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/ldm/modules/attention.py": "9cafaafaf93ff53e8cbefb5e4a204014019985df2da8c1996bf40f1235fc2960",
+    "comfy/ldm/modules/diffusionmodules/openaimodel.py": "9d27fb036cab8a262ef3d866a643f7fdc40994022616f1b8be14b7d919f57f96"
+  },
+  "constraints": [
+    "No .NET output may supply expected values.",
+    "Do not change recipes, thresholds, original Windows fixtures or application behavior during collection.",
+    "Source collection alone does not qualify application or model compatibility."
+  ]
+}

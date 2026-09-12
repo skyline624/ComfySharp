@@ -5,7 +5,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--output',required=True);p.add_argument('--order-output',required=True);a=p.parse_args()
-assert torch.__version__=='2.10.0+cpu';torch.set_num_threads(1);torch.set_num_interop_threads(1)
+assert torch.__version__==('2.10.0' if sys.platform=='darwin' else '2.10.0+cpu') and torch.version.cuda is None
+torch.set_num_threads(1);torch.set_num_interop_threads(1)
 root=pathlib.Path(__file__).resolve().parents[2];sys.path.insert(0,str(root/'labs/sd-source'))
 from unet import source_model_type,source_configuration
 from common import fill_parameters,synthetic_tensor,tensor_record
