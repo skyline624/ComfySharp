@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "implementationCommit": "1f8db165e353d6b3c39ddf49f42a247f3f5e6822",
+  "scope": "Offline native archive preparation and independent application composition. Reduced synthetic SD1/SD2 training qualification only; no model-family or universal CPU-profile acceptance.",
+  "candidateRun": {
+    "id": 34718270857,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34718270857",
+    "conclusion": "success",
+    "jobId": 103619304329
+  },
+  "protocolSha256": "520f9d428f49c8680e0bdf302025d5e69f7de5c563c26774e95234b07f8f713e",
+  "recipeFileSha256": "3fabf4989424656895067fc19c8d4ee7115874679c5419c48041435f57982c01",
+  "composition": {
+    "schemaVersion": 1,
+    "recipeSha256": "27a98ae5fbb20cbd79c735df7c048d9789d0b28af5b4ec0998b48a97b8ac883a",
+    "runtime": "linux-x64",
+    "archiveSha256": "ee40b8a4b4b2cf0670c6fd4f35a7ef23871af956fecb238fbf5da15a72650b1d",
+    "files": [
+      {
+        "destination": "native/libc10.so",
+        "bytes": 1403600,
+        "sha256": "7dc289cfb287f751eb8586c275022dba56979dd9e769cd01b73b2993f3442c84",
+        "role": "native"
+      },
+      {
+        "destination": "native/libtorch_cpu.so",
+        "bytes": 443509856,
+        "sha256": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f",
+        "role": "native"
+      },
+      {
+        "destination": "native/libtorch.so",
+        "bytes": 8032,
+        "sha256": "59a95807d56ca89993351a173839f160ca9c2c6ec6f6b89a5e691d8f1392d3ff",
+        "role": "native"
+      },
+      {
+        "destination": "native/libgomp.so.1",
+        "bytes": 253849,
+        "sha256": "78511033caddec6ccae8f4d62b94d56135f377c4cee33120e6d7df2ef499f69f",
+        "role": "native"
+      },
+      {
+        "destination": "licenses/LICENSE",
+        "bytes": 505053,
+        "sha256": "2e311cbf8c7646e764a54621ab15663bbfcfeb5bb94f1d634d79adfd49ae3191",
+        "role": "notice"
+      },
+      {
+        "destination": "licenses/NOTICE",
+        "bytes": 23632,
+        "sha256": "c2cc7bf0caec7652c2b460a8a470bea1677f241e4ab8e431df34cf17f5a9fec0",
+        "role": "notice"
+      }
+    ]
+  },
+  "sourceManifestSha256": "cabdce2122296d677b0fd6505797ef5fdc7110bece26aa3a976f35dba3533509",
+  "sourceBaselineSha256": "2148aa3d9e70abfca2e0493c76fea22498e829293c3cb43adc5f794df2dcb795",
+  "artifactHashes": {
+    "result.json": "9d9285451adebce924d60b7284f90c2d514829649c8d544f48634583d59a16df",
+    "composition.json": "59e0b7334be3bd77d88df3eb393603ba218b9c08ffc7b4fd1292663df64646bf",
+    "native-inputs.json": "90aaad7f937518f4a7664bbc3827c15c80b944446898052446ce38da940ccaec",
+    "bundle-tests.trx": "7d7d3eb0c6a0ec8c96473300f9b2b026a96557a6a17d73f3d038bfa8b6c62da6"
+  },
+  "toolTests": {
+    "windowsLocal": {
+      "total": 24,
+      "executed": 24,
+      "passed": 24,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "linuxCandidateCi": {
+      "total": 24,
+      "executed": 24,
+      "passed": 24,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  },
+  "applicationCi": {
+    "id": 34718270875,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34718270875",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "runtime": "win-x64",
+        "jobId": 103619304781,
+        "conclusion": "success",
+        "bundleTests": {
+          "passed": 24,
+          "failed": 0,
+          "skipped": 0
+        },
+        "evidence": "Completed job log, NativeBundle.Tests summary at 2026-09-12T20:54:23.0286376Z"
+      },
+      {
+        "runtime": "linux-x64",
+        "jobId": 103619304847,
+        "conclusion": "failure",
+        "failureStep": "Exercise all-target adapter initialization and mixed gradients"
+      },
+      {
+        "runtime": "osx-arm64",
+        "jobId": 103619304841,
+        "conclusion": "failure",
+        "bundleTests": {
+          "passed": 24,
+          "failed": 0,
+          "skipped": 0
+        },
+        "evidence": "Completed job log, NativeBundle.Tests summary at 2026-09-12T20:53:52.4993720Z",
+        "failureStep": "Compare full CLIP L and G dimensions in a separate CPU process"
+      }
+    ]
+  },
+  "effectiveCpuDispatch": {
+    "original": [
+      "AVX512",
+      "AVX512"
+    ],
+    "nuget-copy": [
+      "AVX512",
+      "AVX512"
+    ],
+    "source-native-copy": [
+      "AVX512",
+      "AVX512"
+    ]
+  },
+  "cases": [
+    {
+      "case": 0,
+      "captures": 141,
+      "exact": 141,
+      "sourceThreads": [
+        1,
+        1
+      ],
+      "actualThreads": [
+        1,
+        1
+      ],
+      "baseWeightDifferences": []
+    },
+    {
+      "case": 1,
+      "captures": 141,
+      "exact": 141,
+      "sourceThreads": [
+        1,
+        1
+      ],
+      "actualThreads": [
+        1,
+        1
+      ],
+      "baseWeightDifferences": []
+    }
+  ],
+  "cpu": {
+    "Architecture": "x86_64",
+    "Vendor ID": "AuthenticAMD",
+    "Model name": "AMD EPYC 9V74 80-Core Processor",
+    "CPU family": "25",
+    "Model": "17"
+  },
+  "nativeIdentityVerified": true,
+  "copyControlExact": true,
+  "protectedInputsUnchanged": true,
+  "originalFixtureVerdicts": {
+    "original": {
+      "executed": 3,
+      "passed": 1,
+      "failed": 2,
+      "exitCode": 1,
+      "failureNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "nuget-copy": {
+      "executed": 3,
+      "passed": 1,
+      "failed": 2,
+      "exitCode": 1,
+      "failureNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "source-native-copy": {
+      "executed": 3,
+      "passed": 1,
+      "failed": 2,
+      "exitCode": 1,
+      "failureNames": [
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)"
+      ]
+    },
+    "original-ordinary": {
+      "executed": 870,
+      "passed": 850,
+      "failed": 20,
+      "exitCode": 1,
+      "failureNames": [
+        "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+        "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")"
+      ]
+    },
+    "source-native-copy-ordinary": {
+      "executed": 870,
+      "passed": 851,
+      "failed": 19,
+      "exitCode": 1,
+      "failureNames": [
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+        "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+        "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+        "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"two-chunks-separate\")",
+        "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"square\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+        "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")"
+      ]
+    }
+  },
+  "limits": [
+    "Default product/publish runtime remains the NuGet bundle.",
+    "Original cross-host reference failures remain open with unchanged thresholds.",
+    "AVX512 was observed on this runner; the earlier native identity campaign used AVX2. Counts must not be conflated.",
+    "No pretrained models, CUDA or MPS were executed in this campaign.",
+    "No Python code or native binaries are distributed by this qualification artifact; complete distribution SBOM/notices remain required."
+  ]
+}

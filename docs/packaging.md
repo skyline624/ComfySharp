@@ -20,6 +20,13 @@ does not depend on completion of binary packaging.
 
 ## Native bundle selection and process isolation
 
+The optional [offline C# bundle tool](NATIVE_BUNDLES.md) can prepare the pinned
+Linux CPU candidate and compose a new Host/test application directory with its
+notices. It leaves the original NuGet build intact. This is an explicit separate
+operation; `publish.ps1` still uses the package selection below, and the candidate
+has not replaced the default runtime. Compose a Host directory independently of
+the Desktop closure; do not merge their dependencies.
+
 The Desktop dependency closure stays at the archive root; the Host and **all**
 its managed/native dependencies stay in `host/`. In particular, Avalonia currently
 resolves SkiaSharp 3.119.4 while TorchSharp resolves SkiaSharp 2.88.6. Publishing

@@ -69,3 +69,17 @@ compares training on the same host. The original build and an independent NuGet
 copy remain controls. Cross-host fixture failures stay visible in TRX and are
 not converted to passing tests by composition. No binary payload is uploaded by
 this campaign. Application-contract CI also tests this tool on all three OSes.
+
+The [qualification record](qualification/native-bundle.json) for commit
+`1f8db165e353d6b3c39ddf49f42a247f3f5e6822` records 24 passing tool tests on
+Windows, Linux and macOS. The [real Linux bundle campaign](https://github.com/skyline624/ComfySharp/actions/runs/34718270857)
+completed successfully: all 282 selected training captures match the same-host
+source exactly, the binding and other application files are preserved, and
+the source/build/bundle input inventories remain unchanged.
+
+This runner used **AVX512**, whereas the earlier identity campaign used AVX2.
+The ordinary candidate suite passed **851/870**, retaining 19 failures against
+historical references; the original NuGet suite passed **850/870**. Those counts
+are not a model compatibility score. Numerical profile admission remains open.
+The [normal CI](https://github.com/skyline624/ComfySharp/actions/runs/34718270875)
+passed on Windows and failed on Linux training comparisons and macOS stock CLIP.
