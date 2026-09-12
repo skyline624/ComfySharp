@@ -1,0 +1,130 @@
+{
+  "scope": "First local pretrained SD1.5 CPU/F32 text-to-image execution, not family parity",
+  "baseCommit": "98b5cc710ff15f4bd741e1fd729eff56625f9fd4",
+  "model": {
+    "file": "v1-5-pruned-emaonly.safetensors",
+    "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "bytes": 4265146304,
+    "source": "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/blob/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/v1-5-pruned-emaonly.safetensors"
+  },
+  "execution": {
+    "status": "ok",
+    "operation": "generate",
+    "familyQualified": false,
+    "settings": {
+      "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+      "prompt": "a photograph of a red apple on a wooden table",
+      "negative": "",
+      "width": 512,
+      "height": 512,
+      "steps": 20,
+      "seed": 0,
+      "cfg": 7,
+      "sampler": "euler",
+      "scheduler": "karras",
+      "backend": "cpu",
+      "dtype": "Float32",
+      "threads": 16,
+      "ignoredOutsideComponentTensors": [
+        "alphas_cumprod",
+        "alphas_cumprod_prev",
+        "betas",
+        "log_one_minus_alphas_cumprod",
+        "model_ema.decay",
+        "model_ema.num_updates",
+        "posterior_log_variance_clipped",
+        "posterior_mean_coef1",
+        "posterior_mean_coef2",
+        "posterior_variance",
+        "sqrt_alphas_cumprod",
+        "sqrt_one_minus_alphas_cumprod",
+        "sqrt_recip_alphas_cumprod",
+        "sqrt_recipm1_alphas_cumprod"
+      ]
+    },
+    "shape": [
+      1,
+      512,
+      512,
+      3
+    ],
+    "pngSha256": "f76955826888f804d52b937afef81e2d10768da90f8a49fe15152a817673d379",
+    "pngBytes": 688339,
+    "elapsedSeconds": 92.914692,
+    "peakWorkingSetBytes": 6177026048
+  },
+  "hardware": {
+    "os": "Windows x64",
+    "cpu": "AMD engineering sample, 64 cores / 128 logical processors",
+    "threadsUsed": 16
+  },
+  "validation": {
+    "solutionReleaseBuild": {
+      "exitCode": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "selectedTests": {
+      "passed": 72,
+      "failed": 0,
+      "skipped": 0,
+      "newTests": 14,
+      "trxSha256": "8cedf41d8d0fe68cf0f57190136f1e11477b61c98ea8a30c51c28b6c4438cd38"
+    },
+    "pngDimensionsVerified": true,
+    "visualInspection": "Recognizable red apples on wooden boards; this is not a numerical comparison.",
+    "inputHashes": {
+      "tools/ComfySharp.RuntimeProbe/Program.cs": {
+        "bytes": 5507,
+        "sha256": "d729a00fdf2d4434c8bc628a90be2ac176179d31b0a98f9c8ae622b1e8cee4ea"
+      },
+      "tools/ComfySharp.RuntimeProbe/Sd15GenerationDiagnostic.cs": {
+        "bytes": 10614,
+        "sha256": "8528a3963bb7aa078652d3f73e0acd04f59b676b0a776f5ee7a9720f8a1c338c"
+      },
+      "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": {
+        "bytes": 3155,
+        "sha256": "508124f2ea8ca40200ef5f8ffa40f718d9af0a312eddcddf5b0b29ca75d39bc3"
+      },
+      "tests/ComfySharp.Inference.Tests/Sd15GenerationDiagnosticTests.cs": {
+        "bytes": 3624,
+        "sha256": "c6448f2440c6cf29fc5d450ff9c09bb60688b94208c2fe1fde7c31cfc307fd9e"
+      },
+      "Directory.Build.props": {
+        "bytes": 1137,
+        "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+      },
+      "Directory.Packages.props": {
+        "bytes": 1412,
+        "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+      },
+      "global.json": {
+        "bytes": 95,
+        "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+      },
+      "build/ComfySharp.Native.props": {
+        "bytes": 4487,
+        "sha256": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd"
+      },
+      "tools/ComfySharp.RuntimeProbe/ComfySharp.RuntimeProbe.csproj": {
+        "bytes": 468,
+        "sha256": "2b1baa80eab22ccb031554cdf6cdd6625229e3520829b641040ee92d013f7a33"
+      },
+      "tools/ComfySharp.RuntimeProbe/packages.win-x64.cpu.lock.json": {
+        "bytes": 2216,
+        "sha256": "c94afaa186fb1b77aa83f6e83409d7d2bf3e2f5729830c26e093e2a79d87fb3d"
+      },
+      "tests/ComfySharp.Inference.Tests/packages.win-x64.cpu.lock.json": {
+        "bytes": 6432,
+        "sha256": "df4d7c50bac44a3a5dd074d3c6af865d89b4f0825433fb4e0c1b7506c32101a1"
+      }
+    }
+  },
+  "remaining": [
+    "ComfyUI comparison using the same checkpoint and noise",
+    "Host/Desktop model nodes and execution",
+    "CUDA execution",
+    "Linux CPU/CUDA and macOS CPU/MPS qualification",
+    "Other required SD1.5 workflows and resource/cancellation tests"
+  ]
+}

@@ -4,7 +4,7 @@ using ComfySharp.Inference;
 using TorchSharp;
 using static TorchSharp.torch;
 
-if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline")
+if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline" or "sd15-generate")
 {
     using var cancellation = new CancellationTokenSource();
     ConsoleCancelEventHandler cancel = (_, eventArgs) => { eventArgs.Cancel = true; cancellation.Cancel(); };
@@ -15,6 +15,7 @@ if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline")
         {
             "clip" => ComfySharp.RuntimeProbe.ClipDiagnostic.Run(args[1..], Console.Out, cancellation.Token),
             "sd" => ComfySharp.RuntimeProbe.SdDiagnostic.Run(args[1..], Console.Out, cancellation.Token),
+            "sd15-generate" => ComfySharp.RuntimeProbe.Sd15GenerationDiagnostic.Run(args[1..], Console.Out, Console.Error, cancellation.Token),
             _ => ComfySharp.RuntimeProbe.Sd15PipelineDiagnostic.Run(args[1..], Console.Out, cancellation.Token)
         };
     }

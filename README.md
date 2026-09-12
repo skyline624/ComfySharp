@@ -86,3 +86,5 @@ Le [diagnostic expérimental des encodeurs](docs/CLIP_ENCODERS.md) charge un che
 - `tools/publish.ps1` prépare un dossier portable de développement non signé ; une V1 exige la fermeture de toute la matrice.
 
 Modèles, entrées, sorties et données personnelles sont exclus de Git. La base ComfySharp utilise son propre répertoire de données ; elle ne migre pas en place la base ComfyUI.
+
+Le [diagnostic de génération SD1.5](docs/SD15_GENERATION.md) utilise maintenant un checkpoint safetensors local partagé pour produire un PNG avec CLIP, U-Net, Euler/Karras et VAE en CPU/F32. Le [premier parcours préentraîné 512 × 512](docs/qualification/sd15-first-pretrained.json) est exécuté ; la comparaison ComfyUI, les nœuds de génération dans l’éditeur et CUDA restent à réaliser.
