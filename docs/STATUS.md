@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+Le [copier/coller de nœuds entre documents](WORKFLOW_CLIPBOARD.md) ajoute le presse-papiers système et les raccourcis du canvas, le transfert 0.4/1 des liens standards, undo/redo et les contrôles de document modifié/fermé pendant la lecture. La [campagne Windows locale](qualification/workflow-clipboard.json) passe **224 tests Workflow et 94 tests Desktop, dont 19 nouveaux**, le build Release sans avertissement et le parcours natif de collage puis exécution dans un nouvel onglet. Le presse-papiers réel multiplateforme, couper, les structures avancées et les liens étendus entre versions restent à qualifier ou porter.
+
 La [duplication d'une sélection de nœuds](WORKFLOW_DUPLICATION.md) conserve les connexions internes, avec une option pour reconnecter les entrées externes, et s'annule en une seule édition. La [campagne Windows locale](qualification/workflow-duplication.json) passe **210 tests Workflow et 89 tests Desktop, dont 20 nouveaux**, le build Release sans avertissement et l'exécution indépendante des originaux et copies dans le Host du parcours natif. Presse-papiers, groupes, reroutes et duplication des sous-graphes restent ouverts.
 
 Les [modes muet et bypass](WORKFLOW_MODES.md) du graphe statique sont maintenant compilés et modifiables dans l'éditeur avec undo/redo. Leur [campagne locale](qualification/workflow-modes.json) passe **194 tests Workflow et 85 tests Desktop, dont 27 nouveaux**, sans échec ni test ignoré, ainsi que le build Release et le parcours natif des trois modes avec le Host séparé. Les sous-graphes, nœuds virtuels et leur sémantique restent ouverts.

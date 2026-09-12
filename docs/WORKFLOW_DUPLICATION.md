@@ -14,7 +14,7 @@ La base fonctionnelle est la copie/sérialisation puis la reconstruction des lie
 
 ## Limites explicites
 
-Cette tranche couvre la duplication de nœuds dans un même document. Le presse-papiers, les groupes, les reroutes et la duplication des définitions de sous-graphes restent à porter. Une instance reconnue dans `definitions.subgraphs` ou un lien objet copié contenant `parentId` produit un diagnostic sans modification du document. Les références cachées dans les données opaques d'une extension sont conservées telles quelles ; leur remappage requiert le portage de cette extension. Les callbacks JavaScript ne sont pas exécutés.
+Cette tranche couvre la duplication de nœuds dans un même document. Le [copier/coller entre documents](WORKFLOW_CLIPBOARD.md) est livré dans une tranche distincte. Les groupes, les reroutes et la duplication des définitions de sous-graphes restent à porter. Une instance reconnue dans `definitions.subgraphs` ou un lien objet copié contenant `parentId` produit un diagnostic sans modification du document. Les références cachées dans les données opaques d'une extension sont conservées telles quelles ; leur remappage requiert le portage de cette extension. Les callbacks JavaScript ne sont pas exécutés.
 
 Les compteurs sont lus sous leur forme entière habituelle. Cela ne qualifie pas toutes les représentations numériques atypiques ni tous les workflows malformés acceptés par le frontend. L'allocation existante des autres commandes d'édition n'est pas modifiée par cette tranche.
 

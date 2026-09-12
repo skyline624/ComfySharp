@@ -324,7 +324,20 @@ public sealed partial class MainWindow : Window
         if (copiedEntry["outputs"]?[copiedPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated" ||
             copiedEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != "muted fallback")
             throw new InvalidOperationException("Original and duplicated graphs did not execute independently.");
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution and independent duplicated graph execution.");
+        var clipboardSource = ActiveEditor; string clipboardSourceBefore = clipboardSource.Document.ToJson();
+        duplicationCanvas.SelectedItems = duplicationCanvas.ItemsSource!.Cast<NodeView>().Where(n => copies.Values.Contains(n.Id)).ToList();
+        string clipboardText = clipboardSource.CopySelection();
+        AddDocument(WorkflowDocument.Parse("{\"version\":1,\"nodes\":[],\"links\":[],\"state\":{}}"), null);
+        ActiveEditor.PasteSelection(clipboardText, 150, 250);
+        string pastedPreview = ActiveEditor.Document.Nodes.Single(n => n.Type == "PreviewAny").Id.Value;
+        accepted = await host.SubmitAsync(Compile(true), clientId, [pastedPreview]);
+        var pastedEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (pastedEntry["outputs"]?[pastedPreview]?["text"]?[0]?.GetValue<string>() != "REPLACED duplicated" ||
+            clipboardSource.Document.ToJson() != clipboardSourceBefore || ActiveEditor.Document.Nodes.Count != 3 || ActiveEditor.Document.Links.Count != 2)
+            throw new InvalidOperationException("Cross-document clipboard fragment execution failed.");
+        ActiveEditor.Undo(); if (ActiveEditor.Document.Nodes.Count != 0) throw new InvalidOperationException("Paste undo was not atomic.");
+        ActiveEditor.Redo(); if (ActiveEditor.Document.Nodes.Count != 3) throw new InvalidOperationException("Paste redo lost nodes.");
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution, enabled/bypassed/muted Host execution, independent duplicated graph execution and cross-document clipboard fragment execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {

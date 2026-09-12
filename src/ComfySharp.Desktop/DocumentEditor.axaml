@@ -1,6 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:n="clr-namespace:Nodify.Avalonia;assembly=Nodify.Avalonia" xmlns:c="clr-namespace:Nodify.Avalonia.Connections;assembly=Nodify.Avalonia" x:Class="ComfySharp.Desktop.DocumentEditor">
   <Grid ColumnDefinitions="*,300">
-    <n:NodifyEditor x:Name="Canvas" Background="#171B25" GridCellSize="10">
+    <n:NodifyEditor x:Name="Canvas" Background="#171B25" GridCellSize="10" KeyDown="CanvasKeyDown">
       <n:NodifyEditor.Styles>
         <Style Selector="n|ItemContainer"><Setter Property="Location" Value="{ReflectionBinding Location, Mode=TwoWay}"/></Style>
       </n:NodifyEditor.Styles>
@@ -55,6 +55,8 @@
         <Button Content="Delete selection" Click="DeleteClicked"/>
         <Button x:Name="DuplicateNodes" Content="Duplicate selection" Click="DuplicateClicked"/>
         <Button x:Name="DuplicateWithInputs" Content="Duplicate with external inputs" Click="DuplicateWithInputsClicked"/>
+        <Button x:Name="CopyNodes" Content="Copy nodes" Click="CopyClicked"/>
+        <Button x:Name="PasteNodes" Content="Paste nodes" Click="PasteClicked"/>
         <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
         <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>
         <TextBox x:Name="SourceId" PlaceholderText="Source node ID"/><TextBox x:Name="SourceSlot" Text="0" PlaceholderText="Output slot"/>

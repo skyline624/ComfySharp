@@ -106,25 +106,61 @@ public sealed class WorkflowDocument
     });
     /// <summary>Duplicates nodes and their internal links as one undoable edit. External inputs are optional.</summary>
     public IReadOnlyDictionary<NodeId, NodeId> DuplicateNodes(IEnumerable<NodeId> selection, double offsetX = 40, double offsetY = 40, bool connectInputs = false)
+        => InsertCopies(this, SelectCopyableNodes(selection), offsetX, offsetY, connectInputs);
+
+    private GraphNode[] SelectCopyableNodes(IEnumerable<NodeId> selection)
     {
         ArgumentNullException.ThrowIfNull(selection);
-        if (!double.IsFinite(offsetX) || !double.IsFinite(offsetY)) throw new ArgumentOutOfRangeException(nameof(offsetX));
         var requested = selection.ToHashSet(); var allNodes = Nodes.ToDictionary(n => n.Id);
         foreach (var id in requested) if (!allNodes.ContainsKey(id)) throw new ArgumentException($"Selected node {id} does not exist.", nameof(selection));
         var selected = allNodes.Values.Where(n => requested.Contains(n.Id) &&
             !(n.Data["clonable"] is JsonValue v && v.TryGetValue<bool>(out bool clonable) && !clonable)).ToArray();
-        var map = new Dictionary<NodeId, NodeId>(); if (selected.Length == 0) return map;
-        var selectedIds = selected.Select(n => n.Id).ToHashSet();
         var definitions = (root["definitions"] as JsonObject)?["subgraphs"] as JsonArray;
         if (definitions?.OfType<JsonObject>().Any(d => d["id"] is JsonValue id && id.TryGetValue<string>(out var type) && selected.Any(n => n.Type == type)) == true)
             throw new NotSupportedException("Duplicating subgraph instances requires definition remapping, which is not yet available.");
-        var allLinks = Links;
+        return selected;
+    }
+
+    /// <summary>Creates a detached, versioned clipboard fragment containing only selected nodes and internal links.</summary>
+    public string CopyNodes(IEnumerable<NodeId> selection)
+    {
+        var selected = SelectCopyableNodes(selection);
+        if (selected.Length == 0) throw new InvalidOperationException("Select one or more clonable nodes first.");
+        var fragment = new WorkflowDocument(new JsonObject { ["version"] = root["version"]!.DeepClone(), ["nodes"] = new JsonArray(), ["links"] = new JsonArray() });
+        fragment.InsertCopies(this, selected, 0, 0, false);
+        string text = new JsonObject { ["format"] = "ComfySharp.nodes", ["version"] = 1, ["workflow"] = fragment.Snapshot() }.ToJsonString();
+        if (text.Length > 16 * 1024 * 1024) throw new FormatException("Node clipboard text exceeds the 16 Mi character limit.");
+        return text;
+    }
+
+    /// <summary>Pastes a clipboard fragment with its top-left node at the requested graph position.</summary>
+    public IReadOnlyDictionary<NodeId, NodeId> PasteNodes(string json, double x = 100, double y = 100)
+    {
+        ArgumentNullException.ThrowIfNull(json);
+        if (json.Length > 16 * 1024 * 1024) throw new FormatException("Node clipboard text exceeds the 16 Mi character limit.");
+        if (!double.IsFinite(x) || !double.IsFinite(y)) throw new ArgumentOutOfRangeException(nameof(x));
+        var payload = JsonNode.Parse(json) as JsonObject ?? throw new FormatException("Clipboard data must be a node selection.");
+        if (payload["format"]?.GetValue<string>() != "ComfySharp.nodes" || payload["version"]?.GetValue<int>() != 1 || payload["workflow"] is not JsonObject workflow)
+            throw new FormatException("Clipboard data is not a supported ComfySharp node selection.");
+        var source = Parse(workflow.ToJsonString());
+        var selected = source.SelectCopyableNodes(source.Nodes.Select(n => n.Id));
+        if (selected.Length == 0) throw new FormatException("Clipboard selection contains no clonable nodes.");
+        return InsertCopies(source, selected, x - selected.Min(n => n.X), y - selected.Min(n => n.Y), false);
+    }
+
+    private IReadOnlyDictionary<NodeId, NodeId> InsertCopies(WorkflowDocument original, GraphNode[] selected, double offsetX, double offsetY, bool connectInputs)
+    {
+        if (!double.IsFinite(offsetX) || !double.IsFinite(offsetY)) throw new ArgumentOutOfRangeException(nameof(offsetX));
+        var map = new Dictionary<NodeId, NodeId>(); if (selected.Length == 0) return map;
+        var selectedIds = selected.Select(n => n.Id).ToHashSet();
+        var allNodes = original.Nodes.ToDictionary(n => n.Id); var allLinks = original.Links;
+        var originalRawLinks = original.root["links"] as JsonArray;
         if (allLinks.Select(l => l.Id).Distinct().Count() != allLinks.Count) throw new FormatException("Duplicate link IDs cannot be copied safely.");
         var retained = allLinks.Where(l => selectedIds.Contains(l.Target) && (selectedIds.Contains(l.Source) || connectInputs)).ToArray();
         long Counter(string legacy, string modern) => (root["version"]!.GetValue<double>() == 1 ? (root["state"] as JsonObject)?[modern] : root[legacy])
             is JsonValue counter && counter.TryGetValue<long>(out var value) ? Math.Max(0, value) : 0;
-        long nextNode = Math.Max(Counter("last_node_id", "lastNodeId"), allNodes.Keys.Select(id => long.TryParse(id.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var number) ? number : 0).Append(0).Max());
-        long nextLink = Math.Max(Counter("last_link_id", "lastLinkId"), allLinks.Select(l => l.Id).Append(0).Max());
+        long nextNode = Math.Max(Counter("last_node_id", "lastNodeId"), Nodes.Select(n => long.TryParse(n.Id.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var number) ? number : 0).Append(0).Max());
+        long nextLink = Math.Max(Counter("last_link_id", "lastLinkId"), Links.Select(l => l.Id).Append(0).Max());
         static long Allocate(ref long counter)
         {
             if (counter >= 9007199254740991L) throw new InvalidOperationException("No further exact JavaScript-safe numeric IDs can be allocated in this document.");
@@ -158,20 +194,41 @@ public sealed class WorkflowDocument
                     originalOutputs is null || link.SourceSlot < 0 || link.SourceSlot >= originalOutputs.Count ||
                     originalOutputs[link.SourceSlot]?["links"] is not JsonArray outputLinks || outputLinks.Count(v => v?.GetValue<long>() == link.Id) != 1)
                     throw new FormatException("A copied connection has inconsistent slot references.");
-                JsonNode raw = rawLinks!.Single(item => ParseLink(item).Id == link.Id)!.DeepClone();
+                JsonNode raw = originalRawLinks!.Single(item => ParseLink(item).Id == link.Id)!.DeepClone();
                 if (raw is JsonObject routed && routed["parentId"] is not null)
                     throw new NotSupportedException("Duplicating routed connections requires reroute remapping, which is not yet available.");
+                if (original.root["version"]!.GetValue<double>() != root["version"]!.GetValue<double>())
+                    raw = ConvertClipboardLink(raw, root["version"]!.GetValue<double>());
                 var source = Find(map.TryGetValue(link.Source, out var copied) ? copied : link.Source); var target = Find(map[link.Target]);
                 long id = Allocate(ref nextLink);
                 if (raw is JsonArray legacy) { legacy[0] = id; legacy[1] = source["id"]!.DeepClone(); legacy[3] = target["id"]!.DeepClone(); }
                 else { raw["id"] = id; raw["origin_id"] = source["id"]!.DeepClone(); raw["target_id"] = target["id"]!.DeepClone(); }
-                rawLinks!.Add(raw); target["inputs"]![link.TargetSlot]!["link"] = id;
+                if (rawLinks is null) root["links"] = rawLinks = new JsonArray();
+                rawLinks.Add(raw); target["inputs"]![link.TargetSlot]!["link"] = id;
                 source["outputs"]![link.SourceSlot]!["links"]!.AsArray().Add(id);
             }
             UpdateCounter("last_node_id", "lastNodeId", nextNode);
             if (retained.Length > 0) UpdateCounter("last_link_id", "lastLinkId", nextLink);
         });
         return map;
+    }
+
+    private static JsonNode ConvertClipboardLink(JsonNode raw, double targetVersion)
+    {
+        string[] fields = ["id", "origin_id", "origin_slot", "target_id", "target_slot", "type"];
+        if (targetVersion == 1 && raw is JsonArray legacy)
+        {
+            if (legacy.Count != 6) throw new NotSupportedException("Cross-version paste of extended legacy links requires an extension mapping.");
+            var converted = new JsonObject(); for (int i = 0; i < fields.Length; i++) converted[fields[i]] = legacy[i]?.DeepClone();
+            return converted;
+        }
+        if (targetVersion == 0.4 && raw is JsonObject modern)
+        {
+            if (modern.Any(p => !fields.Contains(p.Key) && !(p.Key == "parentId" && p.Value is null)))
+                throw new NotSupportedException("Cross-version paste of extended links requires an extension mapping.");
+            return new JsonArray(fields.Select(f => modern[f]?.DeepClone()).ToArray());
+        }
+        return raw;
     }
     public void Connect(NodeId source, int output, NodeId target, int input) => Edit(() =>
     {

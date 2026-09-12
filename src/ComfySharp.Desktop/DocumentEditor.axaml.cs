@@ -4,6 +4,8 @@ using System.Text.Json.Nodes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Input;
+using Avalonia.Input.Platform;
 using Avalonia.Media;
 using ComfySharp.Workflow;
 
@@ -122,12 +124,53 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     public void SetExecutionMode(NodeId id, int mode) { Document.SetExecutionMode(id, mode); Reload(); }
     public IReadOnlyDictionary<NodeId, NodeId> DuplicateSelection(bool connectInputs = false)
     {
+        var copies = Document.DuplicateNodes(SelectedIds(), connectInputs: connectInputs); SelectCopies(copies);
+        return copies;
+    }
+    private NodeId[] SelectedIds()
+    {
+        ObjectDisposedException.ThrowIf(disposed, this);
         var selected = Canvas.SelectedItems?.Cast<NodeView>().Select(n => n.Id).ToArray() ?? [];
         if (selected.Length == 0 && Canvas.SelectedItem is NodeView single) selected = [single.Id];
         if (selected.Length == 0) throw new InvalidOperationException("Select one or more nodes first.");
-        var copies = Document.DuplicateNodes(selected, connectInputs: connectInputs); Reload();
+        return selected;
+    }
+    private void SelectCopies(IReadOnlyDictionary<NodeId, NodeId> copies)
+    {
+        Reload();
         Canvas.SelectedItems = nodes.Where(n => copies.Values.Contains(n.Id)).ToList();
+    }
+    public string CopySelection() => Document.CopyNodes(SelectedIds());
+    public IReadOnlyDictionary<NodeId, NodeId> PasteSelection(string json, double x = 100, double y = 100)
+    {
+        ObjectDisposedException.ThrowIf(disposed, this);
+        var copies = Document.PasteNodes(json, x, y); SelectCopies(copies);
         return copies;
+    }
+    public Task CopySelectionAsync(IClipboard clipboard) => clipboard.SetTextAsync(CopySelection());
+    public Task PasteSelectionAsync(IClipboard clipboard, double x = 100, double y = 100)
+        => PasteSelectionAsync(() => clipboard.TryGetTextAsync(), x, y);
+    public async Task PasteSelectionAsync(Func<Task<string?>> readText, double x = 100, double y = 100)
+    {
+        ArgumentNullException.ThrowIfNull(readText);
+        ObjectDisposedException.ThrowIf(disposed, this); long requestedRevision = revision;
+        string? text = await readText();
+        ObjectDisposedException.ThrowIf(disposed, this);
+        if (requestedRevision != revision) throw new InvalidOperationException("The document changed while reading the clipboard. Paste again.");
+        if (text is null) throw new FormatException("The clipboard contains no node selection text.");
+        PasteSelection(text, x, y);
+    }
+    private IClipboard Clipboard => TopLevel.GetTopLevel(this)?.Clipboard ?? throw new InvalidOperationException("The system clipboard is unavailable.");
+    private async Task TryAsync(Func<Task> action) { try { await action(); } catch (Exception error) { if (!disposed) Error?.Invoke(this, error.Message); } }
+    private async void CopyClicked(object? sender, RoutedEventArgs e) => await TryAsync(() => CopySelectionAsync(Clipboard));
+    private async void PasteClicked(object? sender, RoutedEventArgs e) => await TryAsync(() => PasteSelectionAsync(Clipboard, Canvas.ViewportLocation.X + 100, Canvas.ViewportLocation.Y + 100));
+    private async void CanvasKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Handled || TopLevel.GetTopLevel(this)?.FocusManager?.GetFocusedElement() is TextBox) return;
+        var modifier = OperatingSystem.IsMacOS() ? KeyModifiers.Meta : KeyModifiers.Control;
+        if (e.KeyModifiers != modifier || e.Key is not (Key.C or Key.V)) return;
+        e.Handled = true;
+        await TryAsync(() => e.Key == Key.C ? CopySelectionAsync(Clipboard) : PasteSelectionAsync(Clipboard, Canvas.ViewportLocation.X + 100, Canvas.ViewportLocation.Y + 100));
     }
     public NodeId AddNode(string type)
     {
