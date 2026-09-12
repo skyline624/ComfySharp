@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+La [CI CaseConverter du commit 7d65375](qualification/case-converter-ci-7d65375.md) confirme les 249 nouveaux tests et les quatre modes dans l'application réelle sur les trois OS. Windows passe 2 225 tests ; macOS conserve deux échecs CLIP et Linux présente 12 échecs lors du premier accès natif. Les contrôles numériques restent ouverts.
+
 | Composant | Disponible | Limites |
 |---|---|---|
 | Dépôt/socle | Lot 0 validé : dépôt public indépendant, clone propre vérifié, .NET 10, verrous, GPLv3 ; CI CPU et démarrage graphique Desktop/Host sur les trois OS | Installations propres et distributions finales à qualifier au lot 12 |
