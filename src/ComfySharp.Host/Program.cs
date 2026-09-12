@@ -22,6 +22,7 @@ builder.Services.AddSingleton(sp =>
     ImageInputNodes.Register(registry, sp.GetRequiredService<ImageInputService>());
     LoraNodes.Register(registry, builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]);
     registry.Register(new SaveLoraNode(sp.GetRequiredService<ImageFileStore>()));
+    registry.Register(new LoraModelLoaderNode());
     Sd15Nodes.Register(registry, new CheckpointFiles(builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]),
         cpuThreads: builder.Configuration.GetValue<int?>("cpu-threads") ?? Math.Min(16, Environment.ProcessorCount),
         inferenceDevice: builder.Configuration["inference-device"] ?? "cpu");

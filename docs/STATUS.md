@@ -1,5 +1,7 @@
 # État du port — 0.1.0-dev
 
+Le mode ordinaire de [LoraModelLoader](LORA_MEMORY_LOADING.md) charge maintenant un `LORA_MODEL` natif sans fichier intermédiaire, avec les mêmes règles que le lecteur safetensors. Le registre passe à **50 types**. Seize nouveaux tests vérifient formats, snapshots, erreurs et application d'un adapter SGD sur U-Net réduit avec forces positives/négatives. Le bypass reste explicitement indisponible ; le parcours d'entraînement public et les familles complètes restent non qualifiés.
+
 Le [pont de sortie d'entraînement](LORA_TRAINING_STATE.md) publie maintenant un état natif `LORA_MODEL` indépendant des paramètres entraînables. Six tests ciblés passent, avec conversion bf16/fp32 exacte contre la boucle source, 686 cibles/1 250 tenseurs et sauvegarde après une mise à jour SGD puis destruction du producteur. Ce travail prépare le vrai nœud d'entraînement ; il ne le déclare pas opérationnel et ne change pas les 49 nœuds enregistrés.
 
 La [CI de `936e1ca`](https://github.com/skyline624/ComfySharp/actions/runs/34721356391) passe entièrement sur Windows. **Les 27 tests de sauvegarde/sortie d'entraînement et les 315 tests Host passent sur chacun des trois OS** ; les 897 tests ordinaires d'inférence passent localement, sur Windows CI et sur macOS CI. Linux conserve deux écarts numériques d'entraînement, macOS deux écarts CLIP. Aucun seuil n'est assoupli ; ce résultat Windows ne résout pas à lui seul les différences déjà observées entre runners.

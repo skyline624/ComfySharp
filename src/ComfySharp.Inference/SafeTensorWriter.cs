@@ -9,7 +9,7 @@ namespace ComfySharp.Inference;
 /// be serialized against snapshot capture by the caller.</summary>
 public static class SafeTensorWriter
 {
-    private static (string Name, int Width) Describe(ScalarType dtype) => dtype switch
+    internal static (string Name, int Width) Describe(ScalarType dtype) => dtype switch
     {
         ScalarType.Bool => ("BOOL", 1), ScalarType.Byte => ("U8", 1), ScalarType.Int8 => ("I8", 1),
         ScalarType.Int16 => ("I16", 2), ScalarType.Int32 => ("I32", 4), ScalarType.Int64 => ("I64", 8),

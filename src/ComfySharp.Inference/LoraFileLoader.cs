@@ -5,17 +5,17 @@ public sealed record LoraTarget(string Component,string Weight,IReadOnlyList<lon
 public sealed record LoraAlias(string Prefix,LoraTarget Target);
 public sealed record LoraBinding(string Prefix,LoraTarget Target,string? Up,string? Down,string? Mid,string? Alpha,string? Dora,string? Difference=null);
 
-/// <summary>Metadata-only selection tied to one open safetensors reader. Alias order is authoritative:
+/// <summary>Metadata-only selection tied to one tensor source. Alias order is authoritative:
 /// later aliases overwrite earlier bindings for the same target, as frozen load_lora does.</summary>
 public sealed class LoraLoadPlan
 {
-    internal SafeTensorFile Source { get; }
+    internal ILoraTensorSource Source { get; }
     public IReadOnlyList<LoraBinding> Bindings { get; }
     public IReadOnlyList<string> UnclaimedKeys { get; }
     public IReadOnlyList<string> ShadowedPrefixes { get; }
     public IReadOnlyList<string> Components { get; }
     public long ResidentFactorBytes { get; }
-    internal LoraLoadPlan(SafeTensorFile file,LoraBinding[] bindings,string[] unclaimed,string[] shadowed,string[] components,long bytes)
+    internal LoraLoadPlan(ILoraTensorSource file,LoraBinding[] bindings,string[] unclaimed,string[] shadowed,string[] components,long bytes)
     {Source=file;Bindings=Array.AsReadOnly(bindings);UnclaimedKeys=Array.AsReadOnly(unclaimed);ShadowedPrefixes=Array.AsReadOnly(shadowed);Components=Array.AsReadOnly(components);ResidentFactorBytes=bytes;}
 }
 
@@ -28,7 +28,7 @@ public static class LoraFileLoader
         (".lora_B",".lora_A",false),(".lora_linear_layer.up.weight",".lora_linear_layer.down.weight",false),
         (".lora_B.default.weight",".lora_A.default.weight",false)];
 
-    public static LoraLoadPlan Inspect(SafeTensorFile file,IReadOnlyList<LoraAlias> aliases,
+    public static LoraLoadPlan Inspect(ILoraTensorSource file,IReadOnlyList<LoraAlias> aliases,
         bool allowUnclaimedKeys=false,long maxResidentFactorBytes=512L*1024*1024,CancellationToken cancellationToken=default)
     {
         ArgumentNullException.ThrowIfNull(file);ArgumentNullException.ThrowIfNull(aliases);
@@ -90,11 +90,11 @@ public static class LoraFileLoader
         return new(file,selected.Values.ToArray(),unclaimed,shadowed.ToArray(),components.ToArray(),resident);
     }
 
-    public static LoraAdapterSet Load(SafeTensorFile file,LoraLoadPlan plan,
+    public static LoraAdapterSet Load(ILoraTensorSource file,LoraLoadPlan plan,
         IReadOnlyDictionary<string,double>? componentStrengths=null,CancellationToken cancellationToken=default)
     {
         ArgumentNullException.ThrowIfNull(file);ArgumentNullException.ThrowIfNull(plan);
-        if(!ReferenceEquals(file,plan.Source))throw new ArgumentException("Load must use the same open safetensors reader as inspection.",nameof(file));
+        if(!ReferenceEquals(file,plan.Source))throw new ArgumentException("Load must use the same tensor source as inspection.",nameof(file));
         cancellationToken.ThrowIfCancellationRequested();
         var strengths=componentStrengths is null?new Dictionary<string,double>():new Dictionary<string,double>(componentStrengths,StringComparer.Ordinal);
         foreach(var pair in strengths)
@@ -131,7 +131,7 @@ public static class LoraFileLoader
     private static IEnumerable<string> FactorKeys(LoraBinding binding)
     {if(binding.Difference is { } diff){yield return diff;yield break;}yield return binding.Up!;yield return binding.Down!;if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;}
     private static long Elements(IReadOnlyList<long> shape)=>shape.Aggregate(1L,(n,d)=>checked(n*d));
-    private static void Validate(SafeTensorFile file,LoraBinding binding)
+    private static void Validate(ILoraTensorSource file,LoraBinding binding)
     {
         foreach(string key in FactorKeys(binding))
         {

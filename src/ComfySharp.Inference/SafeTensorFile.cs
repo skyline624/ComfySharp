@@ -12,7 +12,7 @@ public sealed record SafeTensorLimits(int MaxHeaderBytes = 16 * 1024 * 1024, int
 public sealed record SafeTensorInfo(string DType, IReadOnlyList<long> Shape, long Start, long End);
 
 /// <summary>Strict contiguous safetensors reader. Owns its file; returned tensors own copied storage.</summary>
-public sealed class SafeTensorFile : IDisposable
+public sealed class SafeTensorFile : IDisposable, ILoraTensorSource
 {
     private readonly FileStream stream;
     private readonly long dataStart;

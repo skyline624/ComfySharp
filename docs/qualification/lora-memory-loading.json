@@ -1,0 +1,24 @@
+{
+  "scope": "Native LoRA source and ordinary LoraModelLoader path on plain SD Float32 models",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1313",
+  "registeredNodes": 50,
+  "implementation": "partial",
+  "localTests": { "platform": "win-x64-cpu", "newPassed": 16, "newFailed": 0, "newSkipped": 0,
+    "ordinaryInference": { "passed": 913, "failed": 0, "skipped": 0, "filter": "FullyQualifiedName!~ClipStockReferenceTests" },
+    "targetedHost": { "passed": 13, "failed": 0, "skipped": 0, "filter": "StringFormatHostTests|SaveLoraHostTests" },
+    "catalogueErrors": 0 },
+  "build": { "warnings": 0, "errors": 0 },
+  "scenarios": [
+    "Seven factor spellings plus bias differences: file/native plans and output bytes agree",
+    "F32/F16/BF16 strided input snapshots and independent reads survive source disposal",
+    "Plan identity, allocation allowance and cancellation failures retain source ownership",
+    "Synthetic SGD adapter -> fp32/bf16 runtime state -> LoraModelLoader with +/-0.5 strength: predictions exactly match the file path and the original model remains unchanged",
+    "Zero strength bypasses adapter reading; nonzero bypass explicitly rejected"
+  ],
+  "realWorkflow": false,
+  "familyQualified": false,
+  "bypassImplemented": false,
+  "modelsCopiedOrDownloaded": false,
+  "ci": "Pending implementation publication"
+}

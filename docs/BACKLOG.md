@@ -1,5 +1,7 @@
 # Backlog de migration
 
+Lot 9 : [LoraModelLoader en mode ordinaire](LORA_MEMORY_LOADING.md) consomme maintenant le `LORA_MODEL` natif, sans sérialisation intermédiaire. Priorités restantes : implémenter les adapters de forward pour le bypass, raccorder le vrai TrainLoraNode et sa reprise, puis valider le parcours complet. Les tests sur modèle réduit ne ferment pas ces exigences.
+
 Lot 9 : le [pont de sortie d'entraînement](LORA_TRAINING_STATE.md) possède les 1 250 tenseurs des adapters SD, reproduit la conversion finale bf16/fp32 de la source et publie une map consommable par SaveLoRA après libération de l'entraînement. La reprise d'adapters et leur application en mémoire via LoraModelLoader restent à implémenter ; le nœud d'entraînement public et ses options restent ouverts.
 
 Lot 9 : [SaveLoRA](SAVE_LORA.md) est raccordé au Host avec stockage atomique, snapshot natif et contrôle indépendant d'un export de 1 250 tenseurs. **891 tests d'inférence passent**. Priorité suivante : produire `LORA_MODEL` depuis le vrai nœud d'entraînement, raccorder `LoraModelLoader` et vérifier sauvegarde/reprise/réutilisation dans un workflow public. La présence de SaveLoRA seul ne ferme pas le lot ; les limites de format/mémoire et la qualification matérielle restent explicites.

@@ -25074,8 +25074,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1317",
       "registration": "schema_node_id_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -25085,7 +25085,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../LORA_MEMORY_LOADING.md", "../qualification/lora-memory-loading.json"],
       "scenario": "contract:LoraModelLoader",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "LoraModelLoader",
