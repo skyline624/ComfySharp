@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "baseCommit": "84658ffa1102ba2a38b64a2b5096ff00caa08469",
+  "platform": "Windows win-x64 CPU",
+  "passed": 279,
+  "failed": 0,
+  "skipped": 0,
+  "excluded": 0,
+  "new": 27,
+  "projects": {
+    "Workflow": {
+      "passed": 194,
+      "bytes": 299505,
+      "sha256": "62bdf6015f40778d7df28f50ab58923f27596de2484f267cbb0a353757242e73"
+    },
+    "Desktop": {
+      "passed": 85,
+      "bytes": 127689,
+      "sha256": "f68aa66efca41ceaf086e3c66594e4dea9e6a38ae01c9ab0fdf1384c3cc8867a"
+    }
+  },
+  "newByProject": {
+    "Workflow": 24,
+    "Desktop": 3
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Workflow.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet test tests/ComfySharp.Desktop.Tests --no-build --no-restore -c Release --logger trx",
+    "dotnet src/ComfySharp.Desktop/bin/Release/net10.0/ComfySharp.Desktop.dll --smoke-test"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "fcc8b0411a71b48cdce67ca5f92e60341cb936fda247a4833323c4edadee582b"
+    },
+    "workflow-tests": {
+      "bytes": 560,
+      "sha256": "022669f8b2d935e576c3e7c6c7cdb556b780b1474be78bd34f8f6ebe270c8491"
+    },
+    "desktop-tests": {
+      "bytes": 545,
+      "sha256": "9ae0a97b65c62efa46e407b2f2f64f7910023442e68758455b3dad1c795b274a"
+    },
+    "native-smoke": {
+      "bytes": 417,
+      "sha256": "55945c0d0373c8314c096c4311557cdd966f39da8328f4548dba620ae4579bb7"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeSmoke": {
+    "exitCode": 0,
+    "checks": [
+      "Existing tensor/text, IMAGE, PNG and API import scenarios continue to pass.",
+      "The same native graph is compiled and submitted to a separate Host with StringReplace enabled, bypassed, and muted.",
+      "PreviewAny returns the transformed text, unchanged source text and destination literal fallback respectively. Both physical document links remain present."
+    ]
+  },
+  "sourceInventory": [
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/LiteGraphGlobal.ts",
+      "bytes": 31046,
+      "sha256": "ab76595c5a141c076f23997e6b178e5c278438877b87c7f93acb65c606d5b664"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/subgraph/ExecutableNodeDTO.ts",
+      "bytes": 14852,
+      "sha256": "64baa71b46bd67440b032e18e4d9aebb67a6cc135fe7c4509ae1b5bc25acc2a3"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/subgraph/ExecutableNodeDTO.test.ts",
+      "bytes": 21931,
+      "sha256": "9c92d75e64652356f8e5b98b8cb020310df841d7d5dc45687113db73e8fb7831"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/utils/executionUtil.ts",
+      "bytes": 4794,
+      "sha256": "264e11395f28880603e7f9fe36d2e61c74cd59d6d88be990225cce8510e3f816"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/e7d1c7fc6823e330fdab524610b0000394cb1dbc/src/lib/litegraph/src/types/globalEnums.ts",
+      "bytes": 3318,
+      "sha256": "74d106cbe62141f86991cd50aea7c341462933c4a5d7c66dd26d3764cba7fbe8"
+    }
+  ],
+  "notice": {
+    "bytes": 1077,
+    "sha256": "1b38cc30fe774bcc77538ab99eb460f4e1c8a47c4fddc6e991ee3b5cc2a96bb9"
+  },
+  "testedFiles": {
+    "src/ComfySharp.Desktop/DocumentEditor.axaml": {
+      "bytes": 4959,
+      "sha256": "85d77acf3880a8fd37f1f6e4d0f9a660fca05e05fbf6fa9f23b45f5a6802fb0d"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 17317,
+      "sha256": "ea9c115c434e818286940fec92a8904b15c8c6f03eb8b83ab0c52ca91f503a60"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 31535,
+      "sha256": "17de95d386c31e678014cc6b5a643368a262eb8ff93ba3315e1ffafa0ed5900d"
+    },
+    "src/ComfySharp.Workflow/PromptCompiler.cs": {
+      "bytes": 14170,
+      "sha256": "a06ceb131dd9bbb6f9e9faa9fe4abf072a97056581f55500d9570c7f3b003c2e"
+    },
+    "src/ComfySharp.Workflow/WorkflowDocument.cs": {
+      "bytes": 9650,
+      "sha256": "85a4d6769c10d25fdd51644820637616d0a89762af3e2db8210d4d70f9d00675"
+    },
+    "src/ComfySharp.Workflow/WorkflowLinkResolver.cs": {
+      "bytes": 5279,
+      "sha256": "c3f970dc61fd271d332b19c7423a66e9661c94ea3ba085b0d3293127807d3969"
+    },
+    "tests/ComfySharp.Desktop.Tests/WorkflowModeEditorTests.cs": {
+      "bytes": 2347,
+      "sha256": "c04d4a542cf2de02105f3fd246c7a7d80889571bbb01feea0ab3eb5868cec95d"
+    },
+    "tests/ComfySharp.Workflow.Tests/WorkflowModeTests.cs": {
+      "bytes": 9353,
+      "sha256": "0fe56f3b00e86e814d4a5aa77aece4470e285ba4ba1b8c3d6e0020063d1fb15d"
+    },
+    "tests/ComfySharp.Workflow.Tests/WorkflowTests.cs": {
+      "bytes": 9231,
+      "sha256": "a6ec56b0b03e467f97aa2e284ca5d9a24ea39dcc888945e1c47e4773baa435af"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    }
+  },
+  "snapshotScope": "Changed product/tests plus build settings; hashes are not loaded-assembly attestation.",
+  "limits": [
+    "Only Workflow and Desktop tests were repeated.",
+    "Contract tests are constructed C# cases guided by pinned source; no executed JavaScript differential corpus.",
+    "Static graphs only. Subgraph/virtual-node expansion, Set/Get and full reroute semantics remain open.",
+    "ASCII slot-name compatibility is qualified; complete JavaScript coercion and Unicode casing parity for atypical type data are not established.",
+    "Structural link checks remain stricter than some malformed upstream graphs. Modes1/3 serialize as active API nodes; no LiteGraph event loop is added.",
+    "No model-family, GPU, three-platform or distribution qualification. Existing numerical gates remain open."
+  ]
+}

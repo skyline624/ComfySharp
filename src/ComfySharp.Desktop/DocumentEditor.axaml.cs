@@ -119,6 +119,7 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     }
     public void Undo() { Document.Undo(); Reload(); }
     public void Redo() { Document.Redo(); Reload(); }
+    public void SetExecutionMode(NodeId id, int mode) { Document.SetExecutionMode(id, mode); Reload(); }
     public NodeId AddNode(string type)
     {
         var id = Document.AddNode(type, 70 + nodes.Count * 35, 70 + nodes.Count * 35, NodeTemplates.Create(type)); Reload(); return id;
@@ -129,6 +130,9 @@ public sealed partial class DocumentEditor : UserControl, IDisposable
     private void InspectClicked(object? sender, RoutedEventArgs e) => Try(() => { var node = Document.Nodes.Single(n => n.Id == Selected.Id); NodeTitle.Text = node.Title; Widgets.Text = node.Data["widgets_values"]?.ToJsonString() ?? "[]"; });
     private void ApplyClicked(object? sender, RoutedEventArgs e) => Try(() => { var id = Selected.Id; var values = JsonNode.Parse(Widgets.Text ?? "[]") ?? throw new FormatException("Enter widget JSON."); Document.SetWidgets(id, values); Document.Rename(id, NodeTitle.Text ?? ""); Reload(); });
     private void DeleteClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Delete(Selected.Id); Reload(); });
+    private void EnableClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 0));
+    private void MuteClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 2));
+    private void BypassClicked(object? sender, RoutedEventArgs e) => Try(() => SetExecutionMode(Selected.Id, 4));
     private void ConnectClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Connect(new(SourceId.Text ?? ""), int.Parse(SourceSlot.Text ?? "0"), new(TargetId.Text ?? ""), int.Parse(TargetSlot.Text ?? "0")); Reload(); });
     private void DisconnectClicked(object? sender, RoutedEventArgs e) => Try(() => { Document.Disconnect(long.Parse(LinkId.Text ?? "")); Reload(); });
 }
@@ -158,6 +162,10 @@ public sealed class NodeView : INotifyPropertyChanged
         var known = PromptCompiler.BaseDefinitions.ContainsKey(node.Type);
         var available = availableNodes?.Contains(node.Type) == true;
         Subtitle = $"#{node.Id} · {node.Type}" + (!known ? "\nUnsupported / preserved" : available ? "\nAvailable in Host" : availableNodes is null ? "\nHost availability unchecked" : "\nUnavailable in Host / preserved"); Outline = known && available ? Brushes.SlateBlue : Brushes.Orange;
+        int mode = node.Data["mode"] is JsonValue value && value.TryGetValue<int>(out var storedMode) ? storedMode : 0;
+        Subtitle += mode switch { 2 => "\nMuted", 4 => "\nBypassed", 1 => "\nOn event", 3 => "\nOn trigger", _ => "" };
+        if (mode == 2) Outline = Brushes.Gray;
+        else if (mode == 4) Outline = Brushes.Magenta;
         Ports = string.Join("\n", (node.Data["inputs"] as JsonArray ?? []).Select((n, i) => $"← {i}: {n?["name"]}" +
             (node.Type == "CreateList" && n?["name"]?.ToString() == "inputs.input0" ? " (required)" : ""))
             .Concat((node.Data["outputs"] as JsonArray ?? []).Select((n, i) => $"→ {i}: {n?["name"]}" + (node.Type == "CreateList" ? " (list)" : ""))));

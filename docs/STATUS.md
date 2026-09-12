@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+Les [modes muet et bypass](WORKFLOW_MODES.md) du graphe statique sont maintenant compilés et modifiables dans l'éditeur avec undo/redo. Leur [campagne locale](qualification/workflow-modes.json) passe **194 tests Workflow et 85 tests Desktop, dont 27 nouveaux**, sans échec ni test ignoré, ainsi que le build Release et le parcours natif des trois modes avec le Host séparé. Les sous-graphes, nœuds virtuels et leur sémantique restent ouverts.
+
 L’[audit CI des trois tranches d'import](qualification/import-ci-20260912.md) vérifie 147 TRX : les 22 nouveaux cas PNG, les 33 cas API et les 46 cas JSON Python passent chacun sur les trois OS, ainsi que les smokes natifs. Les trois runs restent en échec global : Linux compte 16, 16 puis 12 échecs numériques de premier accès ; macOS conserve deux échecs CLIP. Les étapes Linux non exécutées restent non vérifiées.
 
 La [lecture du JSON Python à l'import](IMPORT_JSON.md) convertit les tokens non finis avec avertissement et permet le repli PNG vers un prompt valide. Elle protège le chemin source des sauvegardes automatiques après conversion. La [campagne locale](qualification/nonfinite-import.json) passe **170 tests Workflow et 82 tests Desktop, dont 46 nouveaux**, le build Release complet et le parcours natif. Aucun autre projet de tests ni nouvelle plateforme n'est qualifié par cette campagne.

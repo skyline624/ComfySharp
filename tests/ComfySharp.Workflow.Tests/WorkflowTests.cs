@@ -90,11 +90,11 @@ public class WorkflowTests
         var doc = WorkflowDocument.Parse(Legacy); var before = doc.ToJson();
         Assert.ThrowsAny<Exception>(() => doc.Connect(new("custom:1"), 100, new("2"), 0)); Assert.Equal(before, doc.ToJson()); Assert.False(doc.CanUndo);
     }
-    [Fact] public void UnknownAndBypassedNodesNeverProducePartialPrompt()
+    [Fact] public void UnknownNodesAndUnknownModesNeverProducePartialPrompt()
     {
         var doc = WorkflowDocument.Parse(Legacy); var result = PromptCompiler.Compile(doc);
         Assert.False(result.Success); Assert.Null(result.Prompt); Assert.Contains(result.Diagnostics, d => d.Code == "unsupported_node");
-        var root = JsonNode.Parse(Legacy)!; root["nodes"]![1]!["mode"] = 4;
+        var root = JsonNode.Parse(Legacy)!; root["nodes"]![1]!["mode"] = 99;
         Assert.Contains(PromptCompiler.Compile(WorkflowDocument.Parse(root.ToJsonString())).Diagnostics, d => d.Code == "unsupported_mode");
     }
     [Fact] public void ExplicitWidgetsOmitClientControlsAndWrapArrayLiterals()

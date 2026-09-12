@@ -47,6 +47,11 @@
         <TextBox x:Name="NodeTitle" PlaceholderText="Node title"/>
         <TextBox x:Name="Widgets" PlaceholderText="Widget values (JSON array / object)" AcceptsReturn="True" MinHeight="90" TextWrapping="Wrap"/>
         <Button Content="Apply title and widgets" Click="ApplyClicked"/>
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <Button x:Name="EnableNode" Content="Enable" Click="EnableClicked"/>
+          <Button x:Name="MuteNode" Content="Mute" Click="MuteClicked"/>
+          <Button x:Name="BypassNode" Content="Bypass" Click="BypassClicked"/>
+        </StackPanel>
         <Button Content="Delete selection" Click="DeleteClicked"/>
         <TextBlock Text="Connect ports" FontWeight="SemiBold" Margin="0,12,0,0"/>
         <TextBlock Text="Use the IDs and zero-based slot numbers shown on each node." TextWrapping="Wrap"/>

@@ -8,6 +8,7 @@ public sealed record CompilationDiagnostic(string Code, string Message, NodeId? 
 public sealed record CompilationResult(JsonObject? Prompt, IReadOnlyList<CompilationDiagnostic> Diagnostics)
 {
     public bool Success => Prompt is not null && Diagnostics.Count == 0;
+    public IReadOnlyList<CompilationDiagnostic> Warnings { get; init; } = [];
 }
 public static class PromptCompiler
 {
@@ -61,12 +62,16 @@ public static class PromptCompiler
     public static CompilationResult Compile(WorkflowDocument document, IReadOnlyDictionary<string, NodeDefinition>? definitions = null, ISet<string>? availableNodes = null)
     {
         definitions ??= BaseDefinitions;
-        var diagnostics = new List<CompilationDiagnostic>(); var prompt = new JsonObject();
+        var diagnostics = new List<CompilationDiagnostic>(); var warnings = new List<CompilationDiagnostic>(); var prompt = new JsonObject();
         var root = document.Snapshot(); var nodes = document.Nodes.ToDictionary(n => n.Id);
+        var allLinks = document.Links; var resolvedLinks = new List<GraphLink>();
+        var resolver = new WorkflowLinkResolver(nodes, allLinks, diagnostics, warnings);
         if (root["definitions"] is JsonObject d && d.Count > 0) diagnostics.Add(new("unsupported_subgraphs", "Subgraph definitions are preserved but cannot yet be compiled."));
         foreach (var node in nodes.Values)
         {
-            if ((node.Data["mode"]?.GetValue<int>() ?? 0) != 0) diagnostics.Add(new("unsupported_mode", "Muted, bypass and event modes require frontend execution semantics that are not implemented.", node.Id));
+            int mode = WorkflowLinkResolver.Mode(node);
+            if (mode is 2 or 4) continue;
+            if (mode is not (0 or 1 or 3)) diagnostics.Add(new("unsupported_mode", "The workflow contains an unknown execution mode.", node.Id));
             if (!definitions.TryGetValue(node.Type, out var definition)) { diagnostics.Add(new("unsupported_node", $"No explicit widget/compiler definition exists for {node.Type}.", node.Id)); continue; }
             if (availableNodes is not null && !availableNodes.Contains(node.Type)) diagnostics.Add(new("unavailable_node", $"The Host does not provide {node.Type}.", node.Id));
             var inputs = new JsonObject();
@@ -93,17 +98,9 @@ public static class PromptCompiler
                 if (dynamicNames is not null && !dynamicNames.ContainsKey(slot)) continue;
                 var input = nodeInputs[slot];
                 if (input?["link"] is null) continue;
-                long id;
-                if (dynamicNames is not null)
-                {
-                    if (input["link"] is not JsonValue linkValue || !linkValue.TryGetValue(out id))
-                    { diagnostics.Add(new("invalid_link", $"Input slot {slot} has an invalid link ID.", node.Id)); continue; }
-                }
-                else id = input["link"]!.GetValue<long>();
-                var links = document.Links.Where(l => l.Id == id && l.Target == node.Id && l.TargetSlot == slot).ToArray();
-                if (links.Length != 1 || !nodes.TryGetValue(links[0].Source, out var source)) { diagnostics.Add(new("invalid_link", $"Input slot {slot} has a dangling or inconsistent link.", node.Id)); continue; }
-                var link = links[0];
-                if (link.SourceSlot < 0 || link.SourceSlot >= ((source.Data["outputs"] as JsonArray)?.Count ?? 0)) diagnostics.Add(new("invalid_output", "Source output slot does not exist.", node.Id));
+                var link = resolver.Resolve(node, slot);
+                if (link is null) continue;
+                resolvedLinks.Add(link);
                 inputs[dynamicNames is null ? input["name"]!.GetValue<string>() : dynamicNames[slot]] = new JsonArray(link.Source.Value, link.SourceSlot);
             }
             if (node.Type == "CreateList" && !inputs.ContainsKey("inputs.input0"))
@@ -128,7 +125,6 @@ public static class PromptCompiler
             }
             prompt[node.Id.Value] = compiled;
         }
-        var allLinks = document.Links;
         if (allLinks.Select(l => l.Id).Distinct().Count() != allLinks.Count) diagnostics.Add(new("duplicate_link", "The document contains duplicate link IDs."));
         foreach (var link in allLinks)
         {
@@ -150,12 +146,12 @@ public static class PromptCompiler
         {
             if (state.TryGetValue(id, out var seen)) return seen == 1;
             state[id] = 1;
-            foreach (var link in allLinks.Where(l => l.Source == id && nodes.ContainsKey(l.Target)))
+            foreach (var link in resolvedLinks.Where(l => l.Source == id && nodes.ContainsKey(l.Target)))
                 if (Visit(link.Target)) return true;
             state[id] = 2; return false;
         }
         if (nodes.Keys.Any(Visit)) diagnostics.Add(new("cycle", "The executable graph contains a cycle."));
-        return new(diagnostics.Count == 0 ? prompt : null, diagnostics);
+        return new(diagnostics.Count == 0 ? prompt : null, diagnostics) { Warnings = warnings };
     }
     private static Dictionary<int, string> DynamicInputNames(GraphNode node, List<CompilationDiagnostic> diagnostics)
     {

@@ -293,7 +293,23 @@ public sealed partial class MainWindow : Window
         if (apiEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != "API import edited and executed")
             throw new InvalidOperationException("Edited API import execution smoke failed.");
         ActiveEditor.ApplyUiOutputs(apiEntry["outputs"]!.AsObject());
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution.");
+        var replace = ActiveEditor.AddNode("StringReplace");
+        ActiveEditor.Document.SetWidgets(replace, new JsonArray("", "API", "REPLACED"));
+        ActiveEditor.Document.SetWidgets(new("preview"), new JsonObject { ["source"] = "muted fallback" });
+        ActiveEditor.Document.Connect(new("source:01"), 0, replace, 0);
+        ActiveEditor.Document.Connect(replace, 0, new("preview"), 0);
+        foreach (var (mode, expected) in new[] { (0, "REPLACED import edited and executed"), (4, "API import edited and executed"), (2, "muted fallback") })
+        {
+            ActiveEditor.SetExecutionMode(replace, mode);
+            var projected = Compile(true);
+            if (projected.ContainsKey(replace.Value) != (mode == 0) || ActiveEditor.Document.Links.Count != 2)
+                throw new InvalidOperationException("Execution modes did not preserve the graph and project the prompt.");
+            accepted = await host.SubmitAsync(projected, clientId, ["preview"]);
+            var modeEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+            if (modeEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != expected)
+                throw new InvalidOperationException($"Mode {mode} execution produced an unexpected preview.");
+        }
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport, edited API prompt execution and enabled/bypassed/muted Host execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
@@ -376,24 +392,28 @@ public sealed partial class MainWindow : Window
     private async void SaveAsClicked(object? sender, RoutedEventArgs e) => await RunAsync(() => SaveAsync(true));
     private void UndoClicked(object? sender, RoutedEventArgs e) => ActiveEditor.Undo();
     private void RedoClicked(object? sender, RoutedEventArgs e) => ActiveEditor.Redo();
+    private string compilationWarnings = "";
     private JsonObject Compile(bool requireHost)
     {
         if (requireHost && availableNodes is null) throw new InvalidOperationException("Start the Host before queueing.");
         var result = PromptCompiler.Compile(ActiveEditor.Document, availableNodes: requireHost ? availableNodes : null);
         if (!result.Success) throw new InvalidOperationException(string.Join(Environment.NewLine, result.Diagnostics.Select(d => $"{d.Node}: {d.Code} — {d.Message}")));
+        compilationWarnings = string.Join("", result.Warnings.Select(d => $"\n{d.Node}: {d.Code} — {d.Message}"));
         return result.Prompt!;
     }
     private async void ExportClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () =>
     {
         var prompt = Compile(false);
+        var warnings = compilationWarnings;
         var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { SuggestedFileName = "prompt.json", FileTypeChoices = [JsonType] });
         if (file is null) return;
         await using var stream = await file.OpenWriteAsync(); stream.SetLength(0); await using var writer = new StreamWriter(stream); await writer.WriteAsync(prompt.ToJsonString(new() { WriteIndented = true }));
-        Messages.Text = "Prompt exported; backend availability is checked when queueing.";
+        Messages.Text = "Prompt exported; backend availability is checked when queueing." + warnings;
     });
     private async void QueueClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () =>
     {
         var prompt = Compile(true);
+        var warnings = compilationWarnings;
         var editor = ActiveEditor;
         var session = hostSession.Id;
         var targets = prompt.Where(p => outputNodes.Contains(p.Value!["class_type"]!.GetValue<string>())).Select(p => p.Key).ToArray();
@@ -405,14 +425,14 @@ public sealed partial class MainWindow : Window
         hostSession.Require(session);
         var jobId = result["prompt_id"]?.GetValue<string>() ?? throw new InvalidOperationException("Host did not return a prompt ID.");
         if (order == submissionOrder) lastPromptId = jobId;
-        Messages.Text = $"Submitted {jobId}. Waiting for output…";
+        Messages.Text = $"Submitted {jobId}. Waiting for output…" + warnings;
         var entry = await WaitForJobAsync(jobId, session);
         hostSession.Require(session);
         var applied = await editor.ApplyUiOutputsAsync(entry["outputs"]!.AsObject(), submission, readImage);
         hostSession.Require(session);
-        Messages.Text = applied
+        Messages.Text = (applied
             ? $"Completed {jobId}. Outputs are shown in the document that submitted the job."
-            : $"Completed {jobId}. The document changed or a newer job was submitted; this result remains in history.";
+            : $"Completed {jobId}. The document changed or a newer job was submitted; this result remains in history.") + warnings;
     });
     private async void HistoryClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () => Messages.Text = $"Queue: {await host.GetAsync("/queue")}\nHistory: {await host.GetAsync("/history")}");
     private async void InterruptClicked(object? sender, RoutedEventArgs e) => await RunAsync(async () => { if (lastPromptId is null) throw new InvalidOperationException("No job has been submitted in this Host session."); Messages.Text = (await host.InterruptAsync(lastPromptId)).ToJsonString(); });

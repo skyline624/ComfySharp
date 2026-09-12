@@ -78,6 +78,11 @@ public sealed class WorkflowDocument
         else node["pos"] = new JsonArray(x, y);
     });
     public void Rename(NodeId id, string title) => Edit(() => Find(id)["title"] = title);
+    public void SetExecutionMode(NodeId id, int mode)
+    {
+        if (mode is < 0 or > 4) throw new ArgumentOutOfRangeException(nameof(mode));
+        Edit(() => Find(id)["mode"] = mode);
+    }
     public void SetWidgets(NodeId id, JsonNode values) => Edit(() =>
     {
         if (values is not (JsonArray or JsonObject)) throw new ArgumentException("Widget values must be an array or object.");
