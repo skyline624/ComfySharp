@@ -34211,8 +34211,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L867",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34222,8 +34222,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "optimizer:Adam:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "optimizer:Adam:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "optimizer:AdamW",
@@ -34232,8 +34239,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L867",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34243,8 +34250,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "optimizer:AdamW:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "optimizer:AdamW:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "optimizer:SGD",
@@ -34253,8 +34267,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L867",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34264,8 +34278,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "optimizer:SGD:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "optimizer:SGD:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "optimizer:RMSprop",
@@ -34274,8 +34295,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L867",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34285,8 +34306,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "optimizer:RMSprop:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "optimizer:RMSprop:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "loss:MSE",
@@ -34295,8 +34323,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L888",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34306,8 +34334,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "loss:MSE:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "loss:MSE:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "loss:L1",
@@ -34316,8 +34351,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L888",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34327,8 +34362,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "loss:L1:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "loss:L1:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "loss:Huber",
@@ -34337,8 +34379,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L888",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34348,8 +34390,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "loss:Huber:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "loss:Huber:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "loss:SmoothL1",
@@ -34358,8 +34407,8 @@
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L888",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34369,8 +34418,15 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
-      "scenario": "loss:SmoothL1:reference-workflow"
+      "evidence": [
+        {
+          "platform": "win-x64-cpu",
+          "kind": "source-primitive-comparison",
+          "reference": "../qualification/lora-optimizers.json"
+        }
+      ],
+      "scenario": "loss:SmoothL1:reference-workflow",
+      "implementationScope": "Frozen default options and Float32 LoRA training factors; accumulated-gradient primitive comparison. Full dataset/node integration, mixed precision and platform qualification pending."
     },
     {
       "id": "quantization:FP8-e4m3",

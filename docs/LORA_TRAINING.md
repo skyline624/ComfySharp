@@ -37,9 +37,11 @@ dotnet run --project tools/ComfySharp.RuntimeProbe -c Release -- sd-lora-train -
 ```
 
 For the existing Windows CUDA build, use `-p:NativeBackend=cuda` and `--device cuda:0`.
-No checkpoint is copied or downloaded. This diagnostic is not dataset training,
-the source denoising/noise schedule, a production optimizer suite or a style-quality
-assessment. `TrainLoraNode`, `LoraModelLoader`, `SaveLoRA` and `LossGraphNode` are
+No checkpoint is copied or downloaded. The [optimizer and loss implementation](LORA_OPTIMIZERS.md)
+now supplies Adam, AdamW, SGD, RMSprop and accumulated gradients. Optional diagnostic
+flags select these; the original defaults remain SGD/MSE/1. This is not dataset training,
+the source denoising/noise schedule or a style-quality assessment.
+`TrainLoraNode`, `LoraModelLoader`, `SaveLoRA` and `LossGraphNode` are
 not announced complete by these APIs. The catalogue stays at 48 registered nodes.
 Full training, other architectures/dtypes, source comparison of pretrained training,
 and platform qualification remain mandatory. See the [campaign record](qualification/lora-training.json).

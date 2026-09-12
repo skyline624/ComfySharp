@@ -24,3 +24,12 @@ safetensors package. It checks interoperability of this export, not arbitrary fi
 The laboratory neither downloads models nor runs in the product/distributed .NET
 tests. No complete dataset training node, optimizer suite, pretrained numerical
 parity or model-family qualification is claimed.
+# Optimizer and loss corpus
+
+`optimizers.py --source SOURCE --output NEW.json` executes only the two frozen
+optimizer/loss factories from `comfy_extras/nodes_train.py` with PyTorch 2.10 CPU.
+It compares all 16 combinations across three updates with two microbatches each,
+including a parameter that becomes inactive for the middle update and reactivates.
+Inputs use a small analytic LoRA linear layer. Four boundary-gradient cases cover
+residuals zero, plus/minus one and both tails. This is a primitive comparison, not
+a training-node or pretrained-model reference. Bounds are fixed before comparison.

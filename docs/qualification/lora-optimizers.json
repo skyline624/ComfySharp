@@ -1,0 +1,202 @@
+{
+  "status": "optimizer-loss-accumulation-windows-cpu-and-sd15-cuda-diagnostic-verified",
+  "familyQualified": false,
+  "trainingNodeQualified": false,
+  "releaseReady": false,
+  "baseCommit": "25c8021abd2e7c40721bb8464d084e34a989f481",
+  "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceComparison": {
+    "fixture": "../../tests/ComfySharp.Inference.Tests/Fixtures/lora-optimizers.reference.json",
+    "fixtureSha256": "8d62d993a41cbadd7347a1c291a1e2ca972113c7ea18fef14af7c9f91ceeef70",
+    "sourceFile": "comfy_extras/nodes_train.py",
+    "sourceFileSha256": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea",
+    "cases": 16,
+    "microbatches": 96,
+    "optimizerUpdates": 48,
+    "lossBoundaryCases": 4,
+    "absoluteTolerance": 2e-06,
+    "relativeTolerance": 2e-06,
+    "includesPreviouslyActiveParameterSkippedAndReactivated": true,
+    "scope": "Frozen source optimizer/loss factories, default options, three updates with two accumulated microbatches each. Analytic LoRA linear layer, unused leaf, and loss boundary gradients. No dataset or pretrained-model qualification."
+  },
+  "tests": {
+    "passed": 177,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 24,
+    "trxSha256": "83a4653344deee2f6322334cb1cf0409538dcb45e1db655d082f5506e5475ce5"
+  },
+  "builds": {
+    "solutionRelease": "passed, zero warnings/errors",
+    "cudaProbeRelease": "passed, zero warnings/errors"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "driver": "610.88",
+    "memoryMiB": 24576
+  },
+  "native": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "trainedStyleQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cuda:0",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "learningRate": 0.0005,
+    "rank": 2,
+    "alpha": 2.5,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 0.55107224,
+        "microbatchLosses": [
+          0.55107224,
+          0.55107224
+        ],
+        "gradientNorms": {
+          "input_blocks.0.0.weight": {
+            "upNorm": 0.004694992210716009,
+            "downNorm": 0.00040499845636077225
+          },
+          "out.2.weight": {
+            "upNorm": 0.009368149563670158,
+            "downNorm": 0.0004183468990959227
+          }
+        }
+      },
+      {
+        "step": 2,
+        "loss": 0.5510024,
+        "microbatchLosses": [
+          0.5510024,
+          0.5510024
+        ],
+        "gradientNorms": {
+          "input_blocks.0.0.weight": {
+            "upNorm": 0.004683592822402716,
+            "downNorm": 0.0011272361734881997
+          },
+          "out.2.weight": {
+            "upNorm": 0.00959946122020483,
+            "downNorm": 0.0005189552903175354
+          }
+        }
+      }
+    ],
+    "optimizer": "AdamW",
+    "lossFunction": "Huber",
+    "accumulationSteps": 2,
+    "optimizerSteps": 2,
+    "inputRecipe": {
+      "latentShape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "latentSeed": 111,
+      "contextSeed": 112,
+      "targetSeed": 110,
+      "timestep": 17.25
+    },
+    "adapter": "sd15-adamw-huber-diagnostic.safetensors",
+    "adapterBytes": 26544,
+    "adapterSha256": "e330aa56b8d179b8512d390aba9eb23541a121f9c4a3247ea8c1b61d1fb76585",
+    "baseUnchanged": true,
+    "initialParameterHashes": {
+      "input_blocks.0.0.weight/up": "bd8b3ed8dcae91114a1b48bc8647a26ca92ac135c7379ea628e3695943b41c54",
+      "input_blocks.0.0.weight/down": "6bb37bcefc0bd4165dba70315436a3b5556ec3d2f8bf734666b3f419113f2ffa",
+      "out.2.weight/up": "f18f859958ede7f2a19b7ee0366e38656eefb4492ec7cfcefcfdab914c81e3d9",
+      "out.2.weight/down": "639d943cf1adf60d5ee868bc3a5b5b8cb030cb01d9f2d03d6b111b039fed1082"
+    },
+    "updatedParameterHashes": {
+      "input_blocks.0.0.weight/up": "f5aaca7c85f04200c5dde96c5bc51349ddc457a3b7dd3822a0a3a1863582abbb",
+      "input_blocks.0.0.weight/down": "ee98458d72108f1b570d8d334479b1ca92ed4292e625e148b2f5a1673bfaa24b",
+      "out.2.weight/up": "1f5801dd5674c058f0245f306cb293d6e39eaf8f2c481fd4559d2ec7e379ce7f",
+      "out.2.weight/down": "64d231f8561cbf3e48dd3092841e4e9f5817bced269e24455bbf15f2e7cbd060"
+    },
+    "reloadedPredictionIdentical": true,
+    "predictionSha256": "ba2b514bb3e423edfa6dda3f8762008544f71a1172cd9fa28396b4ebdc40bbe4",
+    "elapsedSeconds": 10.0299943,
+    "scope": "Pretrained SD1.5 raw U-Net with synthetic miniature inputs/targets, accumulated gradients and two optimizer updates. No dataset training, denoising schedule, semantic/style quality or complete TrainLoraNode qualification."
+  },
+  "nativeReportSha256": "2a434c718cca6995c34526cb5fa93cceb4107159df270971cc76e98c9e605713",
+  "exportInteroperability": {
+    "status": "ok",
+    "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+    },
+    "adapterSha256": "e330aa56b8d179b8512d390aba9eb23541a121f9c4a3247ea8c1b61d1fb76585",
+    "factorHashesMatch": true,
+    "sourceAcceptsBothTargets": true,
+    "sourceApplications": {
+      "input_blocks.0.0.weight": {
+        "shape": [
+          320,
+          4,
+          3,
+          3
+        ],
+        "deltaSha256": "8f64cef43da5da1eaf9c48d228bb7c5d13854880971e596e5e39ea8a9f104297"
+      },
+      "out.2.weight": {
+        "shape": [
+          4,
+          320,
+          3,
+          3
+        ],
+        "deltaSha256": "428bb63dd0c01488cf05013a6bec508cafbadb144dada77122b7e7e0442d401f"
+      }
+    },
+    "scope": "Independent restricted byte decoding plus actual frozen LoRA-only source loading/application on zero base weights. No safetensors-package, pretrained numerical or training-node qualification."
+  },
+  "modelStorage": "Existing shared SD1.5 checkpoint read directly and hashed by the native diagnostic. No copy or download. Only a new 26544-byte adapter written to the shared LoRA qualification directory.",
+  "sourceHashes": {
+    ".github/workflows/ci.yml": "c22efde319e98866dca5bb532116193f950f42808df2efb3c7f5aa9e1f96e763",
+    "Directory.Build.props": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a",
+    "Directory.Packages.props": "c2feeaa4b83144065c3959571e24c81abd922c2e7c914c480e2d876f74364d1e",
+    "THIRD_PARTY_NOTICES.md": "ac90f287efb359a3b243c202b56a031ce414c90197d74d12cd4b7397a35092c4",
+    "build/ComfySharp.Native.props": "5e414deb7e6cb1a4e4d8526aa67af6390e3acbf072d83b2752a93211679e53fd",
+    "global.json": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376",
+    "labs/lora-training-source/README.md": "ffb0bdcdb182b8a1b63de35e5fd053af43f62332fab6ac1e57e2c776c415e360",
+    "labs/lora-training-source/optimizers.py": "a9c2db233d2ed9ac674f6aca863280bf8a40769056764c9531cc940afd5cabaa",
+    "src/ComfySharp.Host/packages.win-x64.cuda.lock.json": "4288b0db1f5509a07e66568d956cd5c0168438c839545b91985b81b74d26b436",
+    "src/ComfySharp.Inference/LoraTrainingOptimizer.cs": "23a94deb48a9cec799d12a1a100d64214f8d62c5446e2ae54e482ef80f7332d3",
+    "src/ComfySharp.Inference/TrainingLoss.cs": "a1a9efaff4ed8aaabc113346d001812803881f2c964ed89b85c1df04710ee81a",
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": "9ef9868a29a68b13aa595a00f7252ba0d62d9d47f6e48ee0d51b0b07b74b10f9",
+    "tests/ComfySharp.Inference.Tests/Fixtures/lora-optimizers.reference.json": "8d62d993a41cbadd7347a1c291a1e2ca972113c7ea18fef14af7c9f91ceeef70",
+    "tests/ComfySharp.Inference.Tests/LoraOptimizerTests.cs": "53bdba108174d3eb895a3e91ed159589bcbff7babb9fd57dc67adc5b48f2c9dd",
+    "tools/ComfySharp.RuntimeProbe/SdLoraTrainingDiagnostic.cs": "69707fce25e46e8e835f0a604816b8a260db4c36ab80c79955d564daec824e66",
+    "tools/ComfySharp.RuntimeProbe/packages.win-x64.cuda.lock.json": "5b7f5badce2412a0111f9866e75d9b3381b557af1854c74191c9f60a5ae51d0b"
+  },
+  "previousCI": {
+    "run": 34704964248,
+    "commit": "25c8021abd2e7c40721bb8464d084e34a989f481",
+    "status": "completed",
+    "windows": "success",
+    "linux": "failure",
+    "macOS": "failure",
+    "trainingStep": "passed on all three OS"
+  },
+  "limitations": [
+    "Default source optimizer options and Float32 LoRA factors only.",
+    "Loss Float32 conversion does not qualify model mixed precision or GradScaler.",
+    "Native CUDA run uses a synthetic miniature raw-prediction target, not a dataset or denoising training objective.",
+    "No pretrained source gradient comparison, full training-node workflow, long VRAM-pressure campaign, Linux/CUDA or MPS qualification.",
+    "Optimizer update failures fault the session; in-progress native tensor updates cannot be rolled back atomically.",
+    "The independent export verifier decodes only F32/F64 payloads and is not the Python safetensors package."
+  ]
+}

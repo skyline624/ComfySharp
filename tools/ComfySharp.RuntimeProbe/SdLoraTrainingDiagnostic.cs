@@ -8,7 +8,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.RuntimeProbe;
 
 /// <summary>Explicit miniature raw-prediction training/serialization probe with real SD1.5 weights.
-/// This is not the TrainLoraNode dataset, noise schedule, optimizer suite or a style-quality test.</summary>
+/// This is not the TrainLoraNode dataset, noise schedule or a style-quality test.</summary>
 internal static class SdLoraTrainingDiagnostic
 {
     internal static int Run(string[] args, TextWriter output, TextWriter progress, CancellationToken cancellationToken)
@@ -20,8 +20,8 @@ internal static class SdLoraTrainingDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device"))
-                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--adapter-output" or "--report" or "--device" or "--optimizer" or "--loss" or "--accumulation-steps"))
+                    throw new ArgumentException("Usage: sd-lora-train --checkpoint FILE --adapter-output NEW.safetensors --report NEW.json --device cpu|cuda:0 [--optimizer Adam|AdamW|SGD|RMSprop --loss MSE|L1|Huber|SmoothL1 --accumulation-steps N]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -33,6 +33,11 @@ internal static class SdLoraTrainingDiagnostic
             if (!destination.EndsWith(".safetensors", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Adapter output requires .safetensors.");
             string requested = Required("--device");
             if (requested is not ("cpu" or "cuda:0")) throw new ArgumentException("Select cpu or cuda:0.");
+            string optimizerName = options.GetValueOrDefault("--optimizer", "SGD"), lossName = options.GetValueOrDefault("--loss", "MSE");
+            if (optimizerName is not ("Adam" or "AdamW" or "SGD" or "RMSprop") || lossName is not ("MSE" or "L1" or "Huber" or "SmoothL1"))
+                throw new ArgumentException("Unknown optimizer or training loss.");
+            if (!int.TryParse(options.GetValueOrDefault("--accumulation-steps", "1"), out int accumulationSteps) || accumulationSteps < 1 || accumulationSteps > 1024)
+                throw new ArgumentException("Accumulation steps must be between 1 and 1024.");
             using var file = new SafeTensorFile(checkpointPath);
             var plan = Sd15CheckpointLoader.Inspect(file, new() { UnclaimedTensors = Sd15UnclaimedTensorHandling.ReportAndIgnoreOutsideComponents }, cancellationToken);
             string modelHash = file.ComputeSha256(cancellationToken);
@@ -60,14 +65,19 @@ internal static class SdLoraTrainingDiagnostic
                 using var before = model.Forward(latent, timesteps, context, cancellationToken);
                 string baseHash = Hash(before);
                 var steps = new List<object>();
+                using var optimizer = new LoraTrainingOptimizer(patches.Values, optimizerName, .0005, accumulationSteps);
                 for (int step = 0; step < 2; step++)
                 {
                     cancellationToken.ThrowIfCancellationRequested(); using var iteration = NewDisposeScope();
-                    foreach (var patch in patches.Values) { using var u = patch.Up.grad; using var d = patch.Down.grad; u?.zero_(); d?.zero_(); }
-                    progress.WriteLine($"SD LoRA gradient probe: step {step + 1}/2 on {requested}");
-                    using var prediction = model.ForwardForTraining(latent, timesteps, context, patches, cancellationToken: cancellationToken);
-                    using var loss = (prediction - target).square().mean(); loss.backward();
-                    float lossValue = loss.item<float>(); if (!float.IsFinite(lossValue)) throw new ArithmeticException("Nonfinite training loss.");
+                    var microbatchLosses = new List<float>();
+                    for (int micro = 0; micro < accumulationSteps; micro++)
+                    {
+                        using var microScope = NewDisposeScope();
+                        progress.WriteLine($"SD LoRA {optimizerName}/{lossName}: step {step + 1}/2, microbatch {micro + 1}/{accumulationSteps} on {requested}");
+                        using var prediction = model.ForwardForTraining(latent, timesteps, context, patches, cancellationToken: cancellationToken);
+                        using var loss = TrainingLoss.Calculate(lossName, prediction, target);
+                        optimizer.Accumulate(loss, cancellationToken); microbatchLosses.Add(loss.item<float>());
+                    }
                     var norms = new Dictionary<string, object>(StringComparer.Ordinal);
                     foreach (var (name, patch) in patches)
                     {
@@ -77,11 +87,9 @@ internal static class SdLoraTrainingDiagnostic
                         double upNorm = up.norm().item<float>(), downNorm = down.norm().item<float>();
                         if (upNorm == 0 || downNorm == 0) throw new InvalidOperationException("Expected nonzero full-graph gradients.");
                         norms.Add(name, new { upNorm, downNorm });
-                        using var noGrad = no_grad();
-                        // Explicit vanilla SGD for this controlled diagnostic; no optimizer-state implementation is claimed.
-                        patch.Up.add_(up, alpha: -.0005); patch.Down.add_(down, alpha: -.0005);
                     }
-                    steps.Add(new { step = step + 1, loss = lossValue, gradientNorms = norms });
+                    optimizer.Step(cancellationToken);
+                    steps.Add(new { step = step + 1, loss = microbatchLosses.Average(), microbatchLosses, gradientNorms = norms });
                 }
                 using var baseAfter = model.Forward(latent, timesteps, context, cancellationToken);
                 if (Hash(baseAfter) != baseHash) throw new InvalidOperationException("Base model changed during adapter training.");
@@ -104,11 +112,12 @@ internal static class SdLoraTrainingDiagnostic
                         status = "ok", familyQualified = false, trainingNodeQualified = false, trainedStyleQualified = false,
                         checkpoint = Path.GetFileName(checkpointPath), modelSha256 = modelHash, checkpointBytes = file.FileSizeBytes,
                         backend = requested, dtype = "Float32", tf32Allowed = false, learningRate = .0005, rank = 2, alpha = 2.5, steps,
+                        optimizer = optimizerName, lossFunction = lossName, accumulationSteps, optimizerSteps = optimizer.CompletedSteps,
                         inputRecipe = new { latentShape = new[] { 1, 4, 8, 8 }, contextShape = new[] { 1, 3, 768 }, latentSeed = 111, contextSeed = 112, targetSeed = 110, timestep = 17.25 },
                         adapter = Path.GetFileName(destination), adapterBytes = adapterFile.FileSizeBytes, adapterSha256 = adapterFile.ComputeSha256(cancellationToken),
                         baseUnchanged = true, initialParameterHashes = initialHashes, updatedParameterHashes = parameterHashes,
                         reloadedPredictionIdentical = true, predictionSha256 = Hash(actual), elapsedSeconds = watch.Elapsed.TotalSeconds,
-                        scope = "Pretrained SD1.5 raw U-Net with synthetic miniature inputs/targets and two explicit SGD updates. No dataset training, denoising schedule, semantic/style quality or complete TrainLoraNode qualification."
+                        scope = "Pretrained SD1.5 raw U-Net with synthetic miniature inputs/targets, accumulated gradients and two optimizer updates. No dataset training, denoising schedule, semantic/style quality or complete TrainLoraNode qualification."
                     }, new JsonSerializerOptions { WriteIndented = true });
                     using var stream = new FileStream(report, FileMode.CreateNew, FileAccess.Write, FileShare.None); using var writer = new StreamWriter(stream); writer.Write(json);
                     output.WriteLine(json); return 0;
