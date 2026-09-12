@@ -2,6 +2,8 @@
 
 État mis à jour au 12 septembre 2026. **La migration complète n'est pas terminée et aucune famille de modèles n'est annoncée compatible.**
 
+L’[import des prompts API](API_PROMPT_IMPORT.md) reconstruit les JSON et les métadonnées PNG en documents éditables, conserve les identifiants et champs inconnus, puis compile les valeurs modifiées. Sa [campagne locale](qualification/api-prompt-import.json) passe **129 tests Workflow et 77 tests Desktop, dont 33 nouveaux**, sans échec ni test ignoré. Le build Release complet et le parcours natif d'import, édition et exécution avec Host séparé passent. Les autres projets de tests n'ont pas été répétés dans cette campagne ; aucun lot ni famille de modèles n'est fermé par ce résultat.
+
 L’[import des workflows PNG](PNG_WORKFLOW_IMPORT.md) ouvre maintenant le document graphique incorporé dans un nouvel onglet et propose une sauvegarde JSON distincte. Cette tranche passe **99 tests Workflow et 74 tests Desktop, dont 22 nouveaux**, ainsi qu’un cycle réel de création puis réimportation PNG avec le Host. Les reconstructions API/A1111, nombres non finis, autres médias et glisser-déposer restent ouverts.
 
 La [CI des aperçus bitmap au commit 7b172c1](qualification/bitmap-previews-ci-7b172c1.md) confirme les 26 nouveaux tests et le parcours natif sur les trois OS. Windows passe 2 511 tests distincts ; Linux conserve 12 échecs de premier accès natif et macOS deux échecs CLIP. Le succès de cette campagne Windows ne clôt pas l’enquête numérique.

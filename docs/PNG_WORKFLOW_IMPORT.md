@@ -14,7 +14,7 @@ Le profil limite le fichier parcouru à 128 MiB, les données cumulées des chun
 
 ## Périmètre restant
 
-La reconstruction d'un document à partir du seul `prompt` API, l'import des paramètres A1111, le remplacement des nombres non finis du JSON Python et les autres médias restent à porter. Un PNG sans workflow graphique valide reçoit un diagnostic ; il ne déclenche pas une reconstruction approchée ou une exécution. Les PNG sans métadonnées ne créent pas encore automatiquement un nœud LoadImage. L'import par glisser-déposer reste également ouvert.
+Le champ `prompt` seul est maintenant [reconstruit comme document API éditable](API_PROMPT_IMPORT.md). L'import des paramètres A1111, le remplacement des nombres non finis du JSON Python et les autres médias restent à porter. Un workflow graphique non vide conserve la priorité ; s'il est malformé, l'import échoue explicitement. Les PNG sans métadonnées ne créent pas encore automatiquement un nœud LoadImage. L'import par glisser-déposer reste également ouvert.
 
 Les contrôles de corruption et les limites sont plus stricts que ceux du lecteur frontend figé. Les cas malformés qu'il tolère ne sont pas déclarés compatibles. Les noms ou données contenus dans les métadonnées n'autorisent aucun accès à des fichiers, téléchargement de modèle ou code d'extension.
 

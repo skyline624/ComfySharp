@@ -41,7 +41,7 @@ public sealed class PngWorkflowEditorTests
         try
         {
             using var stream = new MemoryStream(PngMetadataFixture.Build(("tEXt", PngMetadataFixture.Text("tEXt", "prompt", "{}"))));
-            await Assert.ThrowsAsync<NotSupportedException>(() => window.ImportWorkflowAsync(stream, "prompt-only.png"));
+            await Assert.ThrowsAsync<FormatException>(() => window.ImportWorkflowAsync(stream, "prompt-only.png"));
             Assert.Same(original, window.ActiveEditor); Assert.Equal(before, original.Document.ToJson());
             Assert.Single(window.FindControl<TabControl>("Documents")!.Items);
         }

@@ -75,11 +75,12 @@ public sealed class PngWorkflowImportTests
     [Theory]
     [InlineData("prompt")]
     [InlineData("parameters")]
-    public async Task Prompt_only_and_parameters_only_imports_are_explicitly_unavailable(string key)
+    public async Task Invalid_prompt_and_unsupported_parameters_fail_explicitly(string key)
     {
         using var stream = new MemoryStream(PngMetadataFixture.Build(("tEXt", PngMetadataFixture.Text("tEXt", key, "{}"))));
         var metadata = await PngWorkflowImport.ReadMetadataAsync(stream);
-        Assert.Throws<NotSupportedException>(() => PngWorkflowImport.ReadWorkflow(metadata));
+        if (key == "prompt") Assert.Throws<FormatException>(() => PngWorkflowImport.ReadWorkflow(metadata));
+        else Assert.Throws<NotSupportedException>(() => PngWorkflowImport.ReadWorkflow(metadata));
     }
 
     [Fact]

@@ -280,7 +280,17 @@ public sealed partial class MainWindow : Window
         try { await imageReader(staleFile, lifetime.Token); throw new InvalidOperationException("Old image reader survived a Host restart."); }
         catch (OperationCanceledException) { }
         if (previews.Any(p => !p!.IsDisposed || p.Image is not null)) throw new InvalidOperationException("Host restart retained old bitmap resources.");
-        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata and PNG workflow reimport.");
+        using (var apiStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("""
+            {"source:01":{"class_type":"PrimitiveString","inputs":{"value":"before editing"}},
+             "preview":{"class_type":"PreviewAny","inputs":{"source":["source:01",0]}}}
+            """))) await ImportWorkflowAsync(apiStream, "smoke-api.json");
+        ActiveEditor.Document.SetWidgets(new("source:01"), new JsonObject { ["value"] = "API import edited and executed" });
+        accepted = await host.SubmitAsync(Compile(true), clientId, ["preview"]);
+        var apiEntry = await WaitForJobAsync(accepted["prompt_id"]!.GetValue<string>(), hostSession.Id, 200);
+        if (apiEntry["outputs"]?["preview"]?["text"]?[0]?.GetValue<string>() != "API import edited and executed")
+            throw new InvalidOperationException("Edited API import execution smoke failed.");
+        ActiveEditor.ApplyUiOutputs(apiEntry["outputs"]!.AsObject());
+        Console.WriteLine("ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows, four CaseConverter modes, four IMAGE primitives, ImageBatch resize, SaveImage/PreviewImage PNG bitmap decoding, batch navigation, workflow metadata, PNG workflow reimport and edited API prompt execution.");
     }
     private async Task<JsonObject> WaitForJobAsync(string jobId, int session, int? maxAttempts = null)
     {
@@ -312,15 +322,19 @@ public sealed partial class MainWindow : Window
         if (Path.GetExtension(filename).Equals(".png", StringComparison.OrdinalIgnoreCase))
         {
             var metadata = await PngWorkflowImport.ReadMetadataAsync(stream, lifetime.Token);
-            var document = PngWorkflowImport.ReadWorkflow(metadata); lifetime.Token.ThrowIfCancellationRequested();
+            var document = PngWorkflowImport.ReadWorkflow(metadata, NodeTemplates.Create); lifetime.Token.ThrowIfCancellationRequested();
             AddDocument(document, null, Path.GetFileNameWithoutExtension(filename) + ".json");
             Messages.Text = metadata.Warnings.Count == 0 ? "Workflow imported from PNG." : string.Join(Environment.NewLine, metadata.Warnings);
         }
         else
         {
             using var reader = new StreamReader(stream, leaveOpen: true);
-            var document = WorkflowDocument.Parse(await reader.ReadToEndAsync(lifetime.Token)); lifetime.Token.ThrowIfCancellationRequested();
-            AddDocument(document, localPath);
+            string json = await reader.ReadToEndAsync(lifetime.Token);
+            bool api = ApiPromptImport.IsPrompt(JsonNode.Parse(json));
+            var document = api ? ApiPromptImport.Parse(json, NodeTemplates.Create) : WorkflowDocument.Parse(json);
+            lifetime.Token.ThrowIfCancellationRequested();
+            AddDocument(document, api ? null : localPath, api ? Path.GetFileNameWithoutExtension(filename) + ".workflow.json" : null);
+            if (api) Messages.Text = "API prompt imported as an editable workflow. Save creates a workflow JSON file.";
         }
     }
     private static FilePickerFileType JsonType { get; } = new("Workflow JSON") { Patterns = ["*.json"] };

@@ -80,7 +80,7 @@ public static class PromptCompiler
             else if (values is JsonObject named)
             {
                 foreach (var pair in named)
-                    if (definition.Widgets.Any(w => w.Name == pair.Key && w.Serialize)) inputs[pair.Key] = Literal(pair.Value);
+                    if (HasNamedInputBinding(node, pair.Key) || definition.Widgets.Any(w => w.Name == pair.Key && w.Serialize)) inputs[pair.Key] = Literal(pair.Value);
                     else if (!definition.Widgets.Any(w => w.Name == pair.Key)) diagnostics.Add(new("unknown_widget", $"Widget {pair.Key} has no serialization contract.", node.Id));
             }
             var nodeInputs = node.Data["inputs"] as JsonArray ?? [];
@@ -110,7 +110,23 @@ public static class PromptCompiler
                 diagnostics.Add(new("missing_input", "CreateList requires a connection to inputs.input0.", node.Id));
             foreach (var widget in definition.Widgets.Where(w => w.Serialize))
                 if (!inputs.ContainsKey(widget.Name)) diagnostics.Add(new("missing_widgets", $"Required widget {widget.Name} has neither a persisted value nor an input connection.", node.Id));
-            prompt[node.Id.Value] = new JsonObject { ["class_type"] = definition.ClassType, ["inputs"] = inputs, ["_meta"] = new JsonObject { ["title"] = node.Title } };
+            var importData = (node.Data["properties"] as JsonObject)?[ApiPromptImport.PropertyName];
+            var imported = importData as JsonObject;
+            if (importData is not null && (imported is null || imported["version"] is not JsonValue importVersion ||
+                !importVersion.TryGetValue<int>(out var version) || version != 1 || imported["fields"] is not JsonObject ||
+                imported["title"] is not JsonValue importTitle || !importTitle.TryGetValue<string>(out _)))
+            {
+                diagnostics.Add(new("invalid_api_import", "The preserved API import metadata has an unsupported format.", node.Id));
+                continue;
+            }
+            var compiled = (imported?["fields"] as JsonObject)?.DeepClone().AsObject() ?? new JsonObject();
+            compiled["class_type"] = definition.ClassType; compiled["inputs"] = inputs;
+            if (imported is null || imported["title"]?.GetValue<string>() != node.Title)
+            {
+                var meta = (compiled["_meta"] as JsonObject)?.DeepClone().AsObject() ?? new JsonObject();
+                meta["title"] = node.Title; compiled["_meta"] = meta;
+            }
+            prompt[node.Id.Value] = compiled;
         }
         var allLinks = document.Links;
         if (allLinks.Select(l => l.Id).Distinct().Count() != allLinks.Count) diagnostics.Add(new("duplicate_link", "The document contains duplicate link IDs."));
@@ -174,4 +190,9 @@ public static class PromptCompiler
         return names;
     }
     private static JsonNode? Literal(JsonNode? value) => value is JsonArray ? new JsonObject { ["__value__"] = value.DeepClone() } : value?.DeepClone();
+    private static bool HasNamedInputBinding(GraphNode node, string name) =>
+        node.Data["inputs"] is JsonArray ports && ports.OfType<JsonObject>().Count(port =>
+            port["name"] is JsonValue value && value.TryGetValue<string>(out var inputName) && inputName == name &&
+            port["widget"] is JsonObject widget && widget["name"] is JsonValue binding &&
+            binding.TryGetValue<string>(out var widgetName) && widgetName == name) == 1;
 }

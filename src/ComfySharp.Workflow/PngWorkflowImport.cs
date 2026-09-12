@@ -121,7 +121,7 @@ public static class PngWorkflowImport
 
     private sealed class TextLimitException() : IOException("PNG metadata exceeds the aggregate text size limit.");
 
-    public static WorkflowDocument ReadWorkflow(PngMetadata metadata)
+    public static WorkflowDocument ReadWorkflow(PngMetadata metadata, Func<string, JsonObject>? templateFactory = null)
     {
         if (metadata.Text.TryGetValue("workflow", out string? workflow) && workflow.Length != 0)
         {
@@ -131,8 +131,10 @@ public static class PngWorkflowImport
             if (!document.ContainsKey("version")) document["version"] = 0.4;
             return WorkflowDocument.Parse(document.ToJsonString());
         }
-        if (metadata.Text.ContainsKey("prompt") || metadata.Text.ContainsKey("parameters"))
-            throw new NotSupportedException("This PNG has no graphical workflow. API-prompt and A1111 reconstruction are not yet available.");
+        if (metadata.Text.TryGetValue("prompt", out string? prompt) && prompt.Length != 0)
+            return ApiPromptImport.Parse(prompt, templateFactory);
+        if (metadata.Text.ContainsKey("parameters"))
+            throw new NotSupportedException("This PNG has no workflow or API prompt. A1111 reconstruction is not yet available.");
         throw new InvalidDataException("This PNG contains no graphical workflow metadata.");
     }
 }
