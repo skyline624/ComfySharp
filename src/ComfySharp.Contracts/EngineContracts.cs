@@ -92,7 +92,7 @@ public sealed record NodeSchema(string ClassType, string DisplayName, string Cat
     IReadOnlyList<InputSchema> Inputs, IReadOnlyList<OutputSchema> Outputs, bool OutputNode = false, bool InputIsList = false, bool Experimental = false,
     string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null,
     bool V3ObjectInfo = false, string? EssentialsCategory = null, bool Deprecated = false,
-    IReadOnlyList<HiddenInputSchema>? HiddenInputs = null);
+    IReadOnlyList<HiddenInputSchema>? HiddenInputs = null, bool OmitEmptyOptionalInputs = false);
 public sealed record EngineDiagnostic(string Code, string Message, string? NodeId = null, string? InputName = null, string? TargetId = null);
 public sealed record ValidationResult(IReadOnlyList<string> ValidTargets, IReadOnlyList<EngineDiagnostic> Diagnostics)
 {
@@ -126,6 +126,14 @@ public interface IRuntimeNode
     /// When mapped rows are blocked, only jointly sliced unblocked rows are supplied; an entirely
     /// blocked call skips this hook. Return the union of lazy names required by the supplied rows.</summary>
     IReadOnlyCollection<string> GetRequiredLazyInputs(IReadOnlyDictionary<string, IReadOnlyList<RuntimeValue>> resolvedInputs) => [];
+}
+
+/// <summary>A registered definition that needs a separate object for each graph node ID and class_type.
+/// Return a fresh instance with the same schema. The engine owns it and calls IDisposable when retired;
+/// the registered definition itself remains owned by its registrar. Outputs retain their own resource leases.</summary>
+public interface IRuntimeNodeFactory : IRuntimeNode
+{
+    IRuntimeNode CreateInstance();
 }
 
 /// <summary>JSON node adapter for the typed runtime. Each slot is a JSON value; IsList slots must hold a JsonArray.</summary>

@@ -13,12 +13,13 @@ public sealed class NodeRegistry
         nodes.Add(node.Schema.ClassType, node);
     }
     public bool TryGet(string classType, out IRuntimeNode node) => nodes.TryGetValue(classType, out node!);
-    public JsonObject ToObjectInfo()
+    public JsonObject ToObjectInfo() => Describe(nodes.Values.Select(n => n.Schema));
+    /// <summary>Projects schema metadata without constructing nodes or opening their configured services.</summary>
+    public static JsonObject Describe(IEnumerable<NodeSchema> schemas)
     {
         var result = new JsonObject();
-        foreach (var node in nodes.Values)
+        foreach (var s in schemas)
         {
-            var s = node.Schema;
             var required = new JsonObject();
             var optional = new JsonObject();
             var requiredOrder = new JsonArray();
@@ -46,6 +47,11 @@ public sealed class NodeRegistry
                 ["output_node"] = s.OutputNode, ["is_input_list"] = s.InputIsList, ["experimental"] = s.Experimental
             };
             var info = result[s.ClassType]!.AsObject();
+            if (s.OmitEmptyOptionalInputs && optional.Count == 0)
+            {
+                info["input"]!.AsObject().Remove("optional");
+                info["input_order"]!.AsObject().Remove("optional");
+            }
             if (s.HiddenInputs is { Count: > 0 } hiddenInputs)
             {
                 var hidden = new JsonObject();

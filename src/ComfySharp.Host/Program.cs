@@ -3,6 +3,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using ComfySharp.Contracts;
 using ComfySharp.Core;
 using ComfySharp.Host;
 using ComfySharp.Nodes.Tensor;
@@ -13,12 +14,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Prompt IDs, input names and literal dictionary keys are case-sensitive JSON data.
 builder.Services.ConfigureHttpJsonOptions(options => options.SerializerOptions.PropertyNameCaseInsensitive = false);
 if (builder.Configuration["urls"] is null) builder.WebHost.UseUrls("http://127.0.0.1:8189");
-builder.Services.AddSingleton(new EngineService(TensorNodes.CreateRegistry()));
+builder.Services.AddSingleton(sp =>
+{
+    var registry = TensorNodes.CreateRegistry();
+    ImageFileNodes.Register(registry, sp.GetRequiredService<IImageFileStore>(),
+        disableMetadata: builder.Configuration.GetValue<bool>("disable-metadata"));
+    return new EngineService(registry);
+});
 builder.Services.AddSingleton<EventHub>();
 builder.Services.AddSingleton<JobQueue>();
 builder.Services.AddHostedService(sp => sp.GetRequiredService<JobQueue>());
 builder.Services.AddSingleton(_ => new LocalStore(builder.Configuration["data-dir"] ??
     Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ComfySharp")));
+builder.Services.AddSingleton(_ => new ImageFileStore(builder.Configuration["data-dir"] ??
+    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ComfySharp")));
+builder.Services.AddSingleton<IImageFileStore>(sp => sp.GetRequiredService<ImageFileStore>());
 var app = builder.Build();
 app.Use(async (context, next) =>
 {
@@ -46,6 +56,25 @@ foreach (var prefix in new[] { "", "/api" })
     {
         var info = engine.Registry.ToObjectInfo();
         return info[nodeType] is { } node ? Results.Json(new JsonObject { [nodeType] = node.DeepClone() }) : Results.NotFound();
+    });
+    routes.MapMethods("/view", ["GET", "HEAD"], (HttpContext context, ImageFileStore store) =>
+    {
+        var query = context.Request.Query;
+        if (query.Keys.Any(key => key is not ("filename" or "subfolder" or "type")))
+            return Results.BadRequest(new { error = "unsupported_view_options", message = "This route currently serves original output/temp PNG files. Image conversions and annotated asset paths remain to be ported." });
+        string? filename = query["filename"].FirstOrDefault();
+        if (string.IsNullOrEmpty(filename)) return Results.BadRequest(new { error = "missing_filename" });
+        if (!filename.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+            return Results.BadRequest(new { error = "unsupported_image_format" });
+        var file = new ImageFileDescriptor(filename, query["subfolder"].FirstOrDefault() ?? "", query["type"].FirstOrDefault() ?? "output");
+        try
+        {
+            var stream = store.OpenRead(file);
+            context.Response.Headers.CacheControl = "no-store";
+            return Results.File(stream, "image/png", enableRangeProcessing: true);
+        }
+        catch (FileNotFoundException) { return Results.NotFound(); }
+        catch (DirectoryNotFoundException) { return Results.NotFound(); }
     });
     routes.MapPost("/prompt", (JsonObject request, EngineService engine, JobQueue queue) =>
     {

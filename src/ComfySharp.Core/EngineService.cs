@@ -5,9 +5,11 @@ using ComfySharp.Contracts;
 namespace ComfySharp.Core;
 
 /// <summary>Typed DAG executor. Each job owns its memo; returned values have independent disposable leases.</summary>
-public sealed class EngineService(NodeRegistry registry)
+public sealed class EngineService(NodeRegistry registry) : IDisposable
 {
     public NodeRegistry Registry { get; } = registry;
+    private readonly NodeObjectCache objects = new();
+    public void Dispose() => objects.Dispose();
 
     public ValidationResult Validate(JsonObject prompt, IReadOnlyCollection<string>? targets = null)
     {
@@ -125,7 +127,9 @@ public sealed class EngineService(NodeRegistry registry)
         // Freeze caller-owned JSON before the first await, so validation and execution see the same graph.
         prompt = prompt.DeepClone().AsObject();
         extraData = extraData?.DeepClone().AsObject();
+        objects.CheckAvailable();
         var validation = Validate(prompt, targets);
+        using var objectScope = validation.IsValid ? objects.BeginPrompt(prompt) : null;
         var diagnostics = validation.Diagnostics.ToList();
         var results = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
         var memo = new Dictionary<string, IReadOnlyList<IReadOnlyList<RuntimeValue>>>(StringComparer.Ordinal);
@@ -135,7 +139,7 @@ public sealed class EngineService(NodeRegistry registry)
         OwnedExecutionResult Complete(string status)
         {
             var result = new OwnedExecutionResult(status, results, diagnostics, uiOutputs, meta);
-            try { job.Dispose(); return result; }
+            try { job.Dispose(); objectScope?.Dispose(); return result; }
             catch { result.Dispose(); throw; }
         }
         async Task<OwnedExecutionResult> CompleteWithEvent(string status, string type)
@@ -179,11 +183,12 @@ public sealed class EngineService(NodeRegistry registry)
                 foreach (var input in node.Schema.HiddenInputs ?? [])
                     resolved[input.Name] = [nodeScope.Json(LegacyHiddenInputs.Resolve(input.Type, prompt, extraData, id))];
                 cancellationToken.ThrowIfCancellationRequested();
+                var instance = objectScope!.Get(id, node);
                 IReadOnlyCollection<string> lazyNames;
                 using (var lazyScope = new RuntimeNodeContext())
                 {
                     var lazySnapshot = LazySnapshot(lazyScope, resolved, node.Schema.InputIsList);
-                    lazyNames = lazySnapshot is null ? [] : node.GetRequiredLazyInputs(lazySnapshot).ToArray();
+                    lazyNames = lazySnapshot is null ? [] : instance.GetRequiredLazyInputs(lazySnapshot).ToArray();
                 }
                 foreach (var name in lazyNames.Distinct(StringComparer.Ordinal))
                 {
@@ -230,7 +235,7 @@ public sealed class EngineService(NodeRegistry registry)
                         var flatArguments = argumentOrder.Where(invocation.ContainsKey)
                             .ToDictionary(name => name, name => invocation[name], StringComparer.Ordinal);
                         var arguments = expanded.BindArguments(invocationScope, flatArguments, cancellationToken);
-                        returned = await node.ExecuteAsync(invocationScope, arguments, cancellationToken);
+                        returned = await instance.ExecuteAsync(invocationScope, arguments, cancellationToken);
                     }
                     if (returned.Ui is not null) invocationUis.Add(UiDocument.Snapshot(returned.Ui));
                     cancellationToken.ThrowIfCancellationRequested();

@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "baseCommit": "10b8a1d22035b1b49514731ade806c0a2e9c621b",
+  "platform": "Windows win-x64 CPU",
+  "passed": 2484,
+  "failedInFinalSelection": 0,
+  "skipped": 0,
+  "new": 34,
+  "excludedTests": [
+    {
+      "name": "ComfySharp.Host.Tests.ImageFileStoreTests.File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write",
+      "reason": "Local Windows symbolic-link privilege unavailable; test remains active in CI and passed on all three CI operating systems at 10b8a1d."
+    }
+  ],
+  "projects": {
+    "Core": 809,
+    "Workflow": 80,
+    "Tokenization": 540,
+    "Inference": 711,
+    "Desktop": 45,
+    "Host": 299
+  },
+  "newClasses": {
+    "NodeObjectCacheTests": 11,
+    "ImageFileWorkflowTests": 2,
+    "ImageFileNodeTests": 8,
+    "ImageFileEditorTests": 1,
+    "ImageFileHostTests": 12
+  },
+  "trx": [
+    {
+      "project": "Core",
+      "passed": 809,
+      "phase": "initial-suite",
+      "bytes": 1247923,
+      "sha256": "a8b58c3a204a58eac1affe5fabe7b3305aecba04fe2302f7911a4eb3da7d51eb"
+    },
+    {
+      "project": "Workflow",
+      "passed": 80,
+      "phase": "initial-suite",
+      "bytes": 123141,
+      "sha256": "865c5f1616b168c1c4fa3b2472f495bdf58c54edde09eaa82a993e1e2ea3fd68"
+    },
+    {
+      "project": "Tokenization",
+      "passed": 540,
+      "phase": "initial-suite",
+      "bytes": 814012,
+      "sha256": "9d36772a4ebd2e036ec03dbded8596aa821c395bd9651a26e1b0af9f8f2461b5"
+    },
+    {
+      "project": "Inference",
+      "passed": 711,
+      "phase": "initial-suite",
+      "bytes": 1134067,
+      "sha256": "1ef1508f5707b65ddda05cf63776953693c3cfccae989660f298f4a507a1656a"
+    },
+    {
+      "project": "Desktop",
+      "passed": 45,
+      "phase": "initial-suite",
+      "bytes": 67698,
+      "sha256": "d3412596b9cb0d301918a900d0930819d94655fd3336e725ae88c7f72eceb8b3"
+    },
+    {
+      "project": "Host",
+      "passed": 299,
+      "phase": "host-recheck",
+      "bytes": 841966,
+      "sha256": "7811943a64b3f353261191cc87cbec2540a7a92112ab12dd0220c807266bdcb0"
+    }
+  ],
+  "validationSequence": {
+    "initialSolutionRun": {
+      "passed": 2483,
+      "failed": 1,
+      "failures": [
+        "ComfySharp.Host.Tests.StringFormatHostTests.ObjectInfoPreservesNamesSchemaAndExplicitlyDeclaresThePartialProfile"
+      ]
+    },
+    "correction": "Only the existing Host catalogue count assertion changed from 35 to 37. Product, other tests and build settings retained identical hashes. Host rebuilt and all 299 selected Host cases passed; the five other projects were not repeated.",
+    "hostRecheck": {
+      "passed": 299,
+      "failed": 0
+    },
+    "initialTargetedRun": "A broad ImageFile filter also selected the existing privilege-dependent file-link fixture, which failed during setup. All 12 new Host cases passed in that run."
+  },
+  "commands": [
+    "dotnet build ComfySharp.slnx --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test ComfySharp.slnx --no-build --no-restore -c Release -p:NativeRuntime=win-x64 --filter Requires!=SymbolicLinks --logger trx --results-directory <local-evidence-directory>",
+    "dotnet build tests/ComfySharp.Host.Tests --no-restore -c Release -p:NativeRuntime=win-x64",
+    "dotnet test tests/ComfySharp.Host.Tests --no-build --no-restore -c Release -p:NativeRuntime=win-x64 --filter Requires!=SymbolicLinks --logger trx --results-directory <local-evidence-directory>"
+  ],
+  "logs": {
+    "build": {
+      "bytes": 3049,
+      "sha256": "dc10007181e1489ee10a2cafffef3eed083cdc5f00322eeef59f16c17fe9d9b7"
+    },
+    "tests": {
+      "bytes": 4252,
+      "sha256": "293d101b61e045f18ac86e02dc52d20311c8d5a8033be643052ef6673998d3f7"
+    },
+    "host-build": {
+      "bytes": 1570,
+      "sha256": "3168f05ac7fe66af6af8c452f1a5f94e48b4b40c8b249e31f5272fad09321f99"
+    },
+    "host-tests": {
+      "bytes": 566,
+      "sha256": "fd0e1d53285de067d5069e049bab48e8b9d6686c0beec53cb83fc4ff7b58a33f"
+    }
+  },
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "testedFiles": {
+    "src/ComfySharp.Contracts/EngineContracts.cs": {
+      "bytes": 10224,
+      "sha256": "1ef26ea1849e662f32a185bfbe0912bee33a7c1164726488f758a64ad4edb2c0"
+    },
+    "src/ComfySharp.Core/EngineService.cs": {
+      "bytes": 24828,
+      "sha256": "b1503e66bae25a0ff353306814d93bb4f75a4ddfe65867867b04b69ab18a09ff"
+    },
+    "src/ComfySharp.Core/NodeObjectCache.cs": {
+      "bytes": 3986,
+      "sha256": "73e9b65e8821deda83927c62418657a58dc31d739acf3fcb14d0b9838db35796"
+    },
+    "src/ComfySharp.Core/NodeRegistry.cs": {
+      "bytes": 5199,
+      "sha256": "ccda2334bf60afadb68081774d3ab307a818bdbf9c2af55d1461e8b197f73ece"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 14090,
+      "sha256": "66c81f4c80623bb6309f8100375e6baac9781ead75322672e53c3f6cb2350a73"
+    },
+    "src/ComfySharp.Host/Program.cs": {
+      "bytes": 11226,
+      "sha256": "2dd51841dcc751c0b606553211099026f2343e42ae5fd9eb50afce18beb0c79e"
+    },
+    "src/ComfySharp.Nodes.Tensor/ImageFileNodes.cs": {
+      "bytes": 5173,
+      "sha256": "e040157964aef1b8e944d27347d8fd5823145f95b80dc520565c1192947023d5"
+    },
+    "src/ComfySharp.Workflow/PromptCompiler.cs": {
+      "bytes": 13118,
+      "sha256": "e4a329f13b41b18daab85b82bcd27d5e0423fdc12c83a18ea3ab432ef20c3b3e"
+    },
+    "tests/ComfySharp.Core.Tests/NodeObjectCacheTests.cs": {
+      "bytes": 10753,
+      "sha256": "430dc8664b620ae458bdb8cacb45faed2c76c0be5e9cfe61881dc75d5b304b5b"
+    },
+    "tests/ComfySharp.Desktop.Tests/ImageFileEditorTests.cs": {
+      "bytes": 2080,
+      "sha256": "12a703d4e9692cd807869b33446afdcdf3dc460af14367210efe9d4d92518744"
+    },
+    "tests/ComfySharp.Host.Tests/ComfySharp.Host.Tests.csproj": {
+      "bytes": 1222,
+      "sha256": "95cce2a1e45165db73bcf3ee99c7425357d829318fe6a6c3d117dad75b7a2330"
+    },
+    "tests/ComfySharp.Host.Tests/ImageFileHostTests.cs": {
+      "bytes": 7577,
+      "sha256": "d61248dd112b88b054040284f363c624d73cb7c7687966a55261e7861b653ee6"
+    },
+    "tests/ComfySharp.Inference.Tests/ComfySharp.Inference.Tests.csproj": {
+      "bytes": 3019,
+      "sha256": "a2276de7c27a0fbeacb268c6dabf45a8e7aaf20c2d4d91387e11c73434427e17"
+    },
+    "tests/ComfySharp.Inference.Tests/ImageFileNodeTests.cs": {
+      "bytes": 9065,
+      "sha256": "4479b6a4f9d79fa4aa84336f07d271ba8333731873a8191cc092178a1c3e859f"
+    },
+    "tests/ComfySharp.Inference.Tests/ImagePngEncoderTests.cs": {
+      "bytes": 6561,
+      "sha256": "7c9a053177e84d0a018e8ef09d29d87d9391e1650240c29f11432f3c8b65d359"
+    },
+    "tests/ComfySharp.Workflow.Tests/ImageFileWorkflowTests.cs": {
+      "bytes": 2241,
+      "sha256": "074bcdac02dd1a15d515a43b03b47839f44db95a14896ceade509a10b6fbf4e1"
+    },
+    "tests/Shared/PngFixtureReader.cs": {
+      "bytes": 4368,
+      "sha256": "bc82cbe63d8dc58761faa67d3896fcccc7f4852384f691e2a0058fc50a43c5f6"
+    },
+    "global.json": {
+      "bytes": 95,
+      "sha256": "ab85fa8297af6b4c5d77b0208b49cb30d98cf09649e14e8c67c5e69d170f6376"
+    },
+    "Directory.Build.props": {
+      "bytes": 1137,
+      "sha256": "f99358a482ece24d827dff99839a8915efcef5508efc16bca88335c77dd1859a"
+    },
+    "Directory.Packages.props": {
+      "bytes": 1412,
+      "sha256": "5199e2ad8e9a04d0f3cdab32428a2f12c1ff74171d437d0f2dd890618640ffe9"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 14419,
+      "sha256": "829eb2fee443d3e2adcd318d73128cebc45eb6faa131f5223b2b4358ae4d3810"
+    },
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+      "bytes": 10659,
+      "sha256": "7b9dfefef9ab317f5a443c657454b0a9f7d6f59482fa80087b6e095891d36567"
+    }
+  },
+  "snapshotScope": "Changed source/tests/resources and build settings; a file snapshot, not loaded-assembly attestation.",
+  "snapshotPins": {
+    "before-build.json": {
+      "bytes": 3637,
+      "sha256": "effc6db224caf258ae4130b84fdcfab441373270106e12db104f620d211d5fc2"
+    },
+    "before-host-recheck.json": {
+      "bytes": 3673,
+      "sha256": "767b35f2b18f216ea111609f9b132ce45d3ab8a9cb5a7bbfe4cc1cd33d24be92"
+    },
+    "after-tests.json": {
+      "bytes": 3630,
+      "sha256": "fdd8ad87cc06bae172ebaeed7271b3c482d76e0440531e15c2572a634a623d0c"
+    }
+  },
+  "limits": [
+    "Component and HTTP tests use real native CPU tensors with explicit pixel expectations and a separate C# PNG reader; they do not validate pretrained model families.",
+    "Windows CPU evidence only for the new nodes. Earlier CI covers file/PNG foundations, not these nodes.",
+    "No Desktop bitmap decoding, new native window smoke, source SaveImage/Pillow corpus, model weights or GPU run in this tranche.",
+    "Frontend filename substitutions, other tensor dtypes/devices and complete /view behavior remain open.",
+    "File snapshots identify tested inputs, not loaded native DLLs. Earlier SD/CLIP numerical gates remain open."
+  ]
+}

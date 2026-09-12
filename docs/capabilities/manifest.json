@@ -27944,8 +27944,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2082",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -27969,7 +27969,8 @@
         "nodeId": "SaveImage",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Frontend filename substitutions, bitmap UI, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
     },
     {
       "id": "node:PreviewImage:nodes.py:2083",
@@ -27979,8 +27980,8 @@
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/nodes.py#L2083",
       "registration": "legacy_mapping_literal",
       "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -28004,7 +28005,8 @@
         "nodeId": "PreviewImage",
         "module": "nodes.py",
         "status": "resolved-static"
-      }
+      },
+      "limits": "CPU Float32 finite positive NHWC RGB/RGBA without gradients; PNG per-frame files, ordered JSON metadata, borrowed IMAGE output, static node-instance prefix lifetime, output/temp storage and original PNG HTTP GET/HEAD/ranges. Frontend filename substitutions, bitmap UI, other dtypes/devices, complete source comparison and platform qualification remain open. See docs/IMAGE_FILE_NODES.md."
     },
     {
       "id": "node:LoadImage:nodes.py:2084",

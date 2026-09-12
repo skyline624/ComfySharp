@@ -55,7 +55,8 @@ public static class PromptCompiler
         ["EmptyLatentImage"] = new("EmptyLatentImage", [new("width"), new("height"), new("batch_size")]),
         ["KSampler"] = new("KSampler", [new("seed"), new("control_after_generate", false), new("steps"), new("cfg"), new("sampler_name"), new("scheduler"), new("denoise")]),
         ["VAEDecode"] = new("VAEDecode", []),
-        ["SaveImage"] = new("SaveImage", [new("filename_prefix")])
+        ["SaveImage"] = new("SaveImage", [new("filename_prefix")]),
+        ["PreviewImage"] = new("PreviewImage", [])
     };
     public static CompilationResult Compile(WorkflowDocument document, IReadOnlyDictionary<string, NodeDefinition>? definitions = null, ISet<string>? availableNodes = null)
     {

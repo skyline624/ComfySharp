@@ -178,7 +178,8 @@ internal static class NodeTemplates
             case "EmptyLatentImage": widgets = new(512, 512, 1); Out("LATENT", "LATENT"); break;
             case "KSampler": widgets = new(0, "fixed", 20, 8.0, "euler", "normal", 1.0); In("model", "MODEL"); In("positive", "CONDITIONING"); In("negative", "CONDITIONING"); In("latent_image", "LATENT"); Out("LATENT", "LATENT"); break;
             case "VAEDecode": In("samples", "LATENT"); In("vae", "VAE"); Out("IMAGE", "IMAGE"); break;
-            case "SaveImage": widgets = new("ComfySharp"); In("images", "IMAGE"); break;
+            case "SaveImage": widgets = new("ComfyUI"); In("images", "IMAGE"); In("filename_prefix", "STRING"); Out("images", "IMAGE"); break;
+            case "PreviewImage": In("images", "IMAGE"); Out("images", "IMAGE"); break;
         }
         var template = new JsonObject { ["size"] = new JsonArray(230, type == "StringFormat" ? 720 : type == "CreateList" ? 360 : 160), ["flags"] = new JsonObject(), ["mode"] = 0, ["order"] = 0, ["properties"] = new JsonObject(), ["inputs"] = input, ["outputs"] = output, ["widgets_values"] = widgets };
         if (type == "ImageBatch") template["title"] = "Batch Images (DEPRECATED)";

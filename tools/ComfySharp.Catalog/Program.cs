@@ -3,6 +3,7 @@ using System.Text.Json.Nodes;
 using ComfySharp.Nodes;
 using ComfySharp.Nodes.Tensor;
 using ComfySharp.Catalog;
+using ComfySharp.Core;
 
 if (args.Length < 1)
 {
@@ -25,7 +26,8 @@ try
     var errors = new List<string>();
     var ids = new HashSet<string>(StringComparer.Ordinal);
     var localNodes = new HashSet<string>(StringComparer.Ordinal);
-    var registry = TensorNodes.CreateRegistry().ToObjectInfo();
+    // The Host configures its local image store. Describe these service-backed nodes without opening files in this audit tool.
+    var registry = NodeRegistry.Describe(TensorNodes.CreateRegistry().Nodes.Select(n => n.Schema).Concat(ImageFileNodes.Schemas));
     foreach (var row in capabilities)
     {
         var id = row["id"]!.GetValue<string>();

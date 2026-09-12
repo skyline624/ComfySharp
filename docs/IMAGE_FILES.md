@@ -1,6 +1,6 @@
 # Nommage et stockage des images
 
-Ces composants préparent le raccordement de `SaveImage` et `PreviewImage`. Ils sont utilisables par le code C#, mais **les deux nœuds ne sont pas encore enregistrés dans le Host**. L'API `/view`, les métadonnées incorporées par ces nœuds et les aperçus bitmap de Desktop restent à intégrer. Le catalogue demeure à 35 identifiants.
+Ces composants assurent le nommage et le stockage de `SaveImage` et `PreviewImage`, désormais enregistrés dans le Host. Leur [raccordement tensoriel, métadonnées et API `/view`](IMAGE_FILE_NODES.md) est documenté séparément. Le catalogue compte 37 identifiants ; les aperçus bitmap de Desktop restent à intégrer. Les résultats ci-dessous décrivent la campagne antérieure des fondations.
 
 ## Règles de nommage
 
@@ -28,4 +28,4 @@ Les tests de nommage utilisent des entrées de répertoire explicites. Les tests
 
 Le poste Windows local ne dispose pas du privilège de création de liens symboliques : le premier essai de ce test a échoué pendant la préparation de son environnement, avant l'accès au composant testé. Les jonctions sont testées localement ; le test de liens symboliques de fichiers doit être vérifié dans la CI ou sur un poste disposant du privilège requis. Il n'est pas assimilé à un test réussi.
 
-Les comparaisons exécutées contre les fonctions Python figées, les chemins sur les trois OS, les noms contenant des séquences UTF-16 invalides et le parcours tensoriel complet restent à qualifier. Aucun statut de compatibilité de `SaveImage`, `PreviewImage` ou d'une famille de modèles n'est déduit de ces fondations.
+Les comparaisons exécutées contre les fonctions Python figées et les noms contenant des séquences UTF-16 invalides restent à qualifier. Le parcours tensoriel est vérifié dans la [tranche suivante](IMAGE_FILE_NODES.md), dans son profil borné. Aucun statut complet de compatibilité de `SaveImage`, `PreviewImage` ou d'une famille de modèles n'est déduit de ces fondations.

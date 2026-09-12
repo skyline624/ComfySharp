@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><Compile Include="../Shared/PngFixtureReader.cs" Link="Support/PngFixtureReader.cs" /></ItemGroup>
   <PropertyGroup><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/ComfySharp.Inference/ComfySharp.Inference.csproj" />
