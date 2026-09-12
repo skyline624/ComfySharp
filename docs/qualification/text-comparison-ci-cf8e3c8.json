@@ -1,0 +1,1759 @@
+{
+  "schema": 1,
+  "scope": "224 new text comparison cases, five application suites, and actual compiled Desktop/Host smoke. Numerical gates remain separate.",
+  "run": {
+    "headSha": "cf8e3c85dbd12b0210d4846bf6825a1d37c67e51",
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34669615538",
+    "status": "completed",
+    "conclusion": "failure",
+    "createdAt": "2026-09-12T03:09:45Z",
+    "updatedAt": "2026-09-12T03:14:23Z"
+  },
+  "platforms": {
+    "win-x64": {
+      "jobId": 103488363692,
+      "jobConclusion": "success",
+      "projects": {
+        "Core": {
+          "total": 525,
+          "outcomes": {
+            "Passed": 525
+          }
+        },
+        "Desktop": {
+          "total": 40,
+          "outcomes": {
+            "Passed": 40
+          }
+        },
+        "Host": {
+          "total": 225,
+          "outcomes": {
+            "Passed": 225
+          }
+        },
+        "Inference": {
+          "total": 574,
+          "outcomes": {
+            "Passed": 574
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 69,
+          "outcomes": {
+            "Passed": 69
+          }
+        },
+        "ClipStock": {
+          "total": 3,
+          "outcomes": {
+            "Passed": 3
+          }
+        }
+      },
+      "applicationExpected": 1399,
+      "applicationObserved": 1399,
+      "applicationOutcomes": {
+        "Passed": 1399
+      },
+      "ordinaryPlusStockObservedUnique": 1976,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1976
+      },
+      "newCaseGroups": [
+        {
+          "className": "TextComparisonNodeTests",
+          "expected": 35,
+          "observed": 35,
+          "outcomes": {
+            "Passed": 35
+          },
+          "sortedNamesLfSha256": "34942213dd2a000569a9cb1ff9f4eca81d71812c4464e18febbd545415bacdac",
+          "sortedIdsLfSha256": "594d0c8f4e7fec37f7e9ea544f99273471d591dc127b53b5f1544119e086fe5d"
+        },
+        {
+          "className": "PythonUnicodeLowerTests",
+          "expected": 48,
+          "observed": 48,
+          "outcomes": {
+            "Passed": 48
+          },
+          "sortedNamesLfSha256": "2990515071792f15c59e5ab786913621abd1c68fbacb1b2247685190a708f21e",
+          "sortedIdsLfSha256": "c0135af89abff93cbd5ba42e6fc17146e9c5ea682679b3f503a23ba8e04beadf"
+        },
+        {
+          "className": "PythonUnicodeLowerSourceReferenceTests",
+          "expected": 68,
+          "observed": 68,
+          "outcomes": {
+            "Passed": 68
+          },
+          "sortedNamesLfSha256": "0a2b7e7c247b96a966c7f063b31c54c549fb70356392ba93a3088ce754d052eb",
+          "sortedIdsLfSha256": "c55df23ccb4def7aaa26a98dff3cb659ef45307d7373f5368aba10cf6679df10"
+        },
+        {
+          "className": "TextComparisonSourceReferenceTests",
+          "expected": 40,
+          "observed": 40,
+          "outcomes": {
+            "Passed": 40
+          },
+          "sortedNamesLfSha256": "1eb3d4a47b9270f01fb37ad1be2f14fbc20fa11ca93f102403a43443533a50a8",
+          "sortedIdsLfSha256": "3b2b7820c97a723376adf8e530a388c765bc0211c0f2ca15115587ea5cfcdd87"
+        },
+        {
+          "className": "V3ComboProjectionTests",
+          "expected": 1,
+          "observed": 1,
+          "outcomes": {
+            "Passed": 1
+          },
+          "sortedNamesLfSha256": "e67052f64cd6467f65faa54e91eaa888cbe694af7aead8ea1254b5b83647e57e",
+          "sortedIdsLfSha256": "02542d05b7fded26f02a18565e15a438cbc120a3b65590cba9fdcefd8f774eea"
+        },
+        {
+          "className": "TextComparisonHostTests",
+          "expected": 24,
+          "observed": 24,
+          "outcomes": {
+            "Passed": 24
+          },
+          "sortedNamesLfSha256": "81d241f3ff137e6b998a851c41e4ac762def1b17200c06abd9a313f93287a6ef",
+          "sortedIdsLfSha256": "cebe6b73d5b2e08e442500105d25820e347d757c1964a56b5e680ca86bd319b5"
+        },
+        {
+          "className": "TextComparisonWorkflowTests",
+          "expected": 6,
+          "observed": 6,
+          "outcomes": {
+            "Passed": 6
+          },
+          "sortedNamesLfSha256": "cb9dc1a352bf86a2c00660d477ec2b8a5b226567eaa8b8a25038416da9ffbd23",
+          "sortedIdsLfSha256": "0f472e5c692c9c5f45754203d9174831b8aadeda2ff17c036f2175e53242a3a7"
+        },
+        {
+          "className": "TextComparisonEditorTests",
+          "expected": 2,
+          "observed": 2,
+          "outcomes": {
+            "Passed": 2
+          },
+          "sortedNamesLfSha256": "9a34d6b0255ac28a13b91cbb7539000b67efa6b9de97bdece4e20bd16c2a9ad4",
+          "sortedIdsLfSha256": "8804170155bf54b7ea30c94923c721ebb08656dd08cf52d027dbeef25878a543"
+        }
+      ],
+      "newCasesObserved": 224,
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "markers": [
+          "2026-09-12T03:12:18.7158387Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows and native preview."
+        ],
+        "observedRoute": "Compiled registered Contains/Compare workflows via supervised Host; exact True/False assertions are in pinned MainWindow code, success marker appears only after they pass."
+      },
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Exercise SD1.5 checkpoint assembly contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Exercise reduced SD1.5 pipeline contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Test inference contracts and CPU primitives",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "success"
+        },
+        {
+          "number": 16,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 22,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 23,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 24,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 25,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 26,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 27,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 53,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 54,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 55,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "firstNativeLogEvidence": {
+        "source": "Final job logs; first-use TRX and mathematical traces not downloaded.",
+        "processes": 9,
+        "passed": 194,
+        "failed": 0,
+        "skipped": 0,
+        "total": 194,
+        "failedNames": []
+      },
+      "trx": [
+        {
+          "logicalName": "tests-win-x64/Core.trx",
+          "bytes": 796097,
+          "sha256": "ee93669951f1680566dcf4b42ae17adcdd77082a8c8a0fb44b5880aae2c291e4",
+          "project": "Core",
+          "counters": {
+            "total": 525,
+            "executed": 525,
+            "passed": 525,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Desktop.trx",
+          "bytes": 59644,
+          "sha256": "57ec9c1ab5ba9ae09a57d968e141434be4c8f73736659033bd1f34c853b1d013",
+          "project": "Desktop",
+          "counters": {
+            "total": 40,
+            "executed": 40,
+            "passed": 40,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Host.trx",
+          "bytes": 551538,
+          "sha256": "da99d090d384c1012254f4601287e183ee5708a7ca37159015050e3bdc2f63bb",
+          "project": "Host",
+          "counters": {
+            "total": 225,
+            "executed": 225,
+            "passed": 225,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Inference.trx",
+          "bytes": 905707,
+          "sha256": "bab7dac9c69c5a142dfd49b3d5e47f3149b906e273d4e634c1ee9f23b436d52c",
+          "project": "Inference",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Tokenization.trx",
+          "bytes": 803199,
+          "sha256": "6c4816e95e138dbd28dbae2578579783932fc649c9f767c75f83f4e01a9dc961",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-win-x64/Workflow.trx",
+          "bytes": 105349,
+          "sha256": "1f719780e6bb13215189aad900f80d84e61df670d7e4870d3e8c5f29b84575eb",
+          "project": "Workflow",
+          "counters": {
+            "total": 69,
+            "executed": 69,
+            "passed": 69,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-stock-win-x64/ClipStock.trx",
+          "bytes": 10539,
+          "sha256": "768b2aad7aacc739b9165f9c158f629c96acc2beae02d45af17a11ccc68036cd",
+          "project": "ClipStock",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 3,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        }
+      ]
+    },
+    "linux-x64": {
+      "jobId": 103488363683,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": {
+          "total": 525,
+          "outcomes": {
+            "Passed": 525
+          }
+        },
+        "Desktop": {
+          "total": 40,
+          "outcomes": {
+            "Passed": 40
+          }
+        },
+        "Host": {
+          "total": 225,
+          "outcomes": {
+            "Passed": 225
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 69,
+          "outcomes": {
+            "Passed": 69
+          }
+        }
+      },
+      "applicationExpected": 1399,
+      "applicationObserved": 1399,
+      "applicationOutcomes": {
+        "Passed": 1399
+      },
+      "ordinaryPlusStockObservedUnique": 1399,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1399
+      },
+      "newCaseGroups": [
+        {
+          "className": "TextComparisonNodeTests",
+          "expected": 35,
+          "observed": 35,
+          "outcomes": {
+            "Passed": 35
+          },
+          "sortedNamesLfSha256": "34942213dd2a000569a9cb1ff9f4eca81d71812c4464e18febbd545415bacdac",
+          "sortedIdsLfSha256": "594d0c8f4e7fec37f7e9ea544f99273471d591dc127b53b5f1544119e086fe5d"
+        },
+        {
+          "className": "PythonUnicodeLowerTests",
+          "expected": 48,
+          "observed": 48,
+          "outcomes": {
+            "Passed": 48
+          },
+          "sortedNamesLfSha256": "2990515071792f15c59e5ab786913621abd1c68fbacb1b2247685190a708f21e",
+          "sortedIdsLfSha256": "c0135af89abff93cbd5ba42e6fc17146e9c5ea682679b3f503a23ba8e04beadf"
+        },
+        {
+          "className": "PythonUnicodeLowerSourceReferenceTests",
+          "expected": 68,
+          "observed": 68,
+          "outcomes": {
+            "Passed": 68
+          },
+          "sortedNamesLfSha256": "0a2b7e7c247b96a966c7f063b31c54c549fb70356392ba93a3088ce754d052eb",
+          "sortedIdsLfSha256": "c55df23ccb4def7aaa26a98dff3cb659ef45307d7373f5368aba10cf6679df10"
+        },
+        {
+          "className": "TextComparisonSourceReferenceTests",
+          "expected": 40,
+          "observed": 40,
+          "outcomes": {
+            "Passed": 40
+          },
+          "sortedNamesLfSha256": "1eb3d4a47b9270f01fb37ad1be2f14fbc20fa11ca93f102403a43443533a50a8",
+          "sortedIdsLfSha256": "3b2b7820c97a723376adf8e530a388c765bc0211c0f2ca15115587ea5cfcdd87"
+        },
+        {
+          "className": "V3ComboProjectionTests",
+          "expected": 1,
+          "observed": 1,
+          "outcomes": {
+            "Passed": 1
+          },
+          "sortedNamesLfSha256": "e67052f64cd6467f65faa54e91eaa888cbe694af7aead8ea1254b5b83647e57e",
+          "sortedIdsLfSha256": "02542d05b7fded26f02a18565e15a438cbc120a3b65590cba9fdcefd8f774eea"
+        },
+        {
+          "className": "TextComparisonHostTests",
+          "expected": 24,
+          "observed": 24,
+          "outcomes": {
+            "Passed": 24
+          },
+          "sortedNamesLfSha256": "81d241f3ff137e6b998a851c41e4ac762def1b17200c06abd9a313f93287a6ef",
+          "sortedIdsLfSha256": "cebe6b73d5b2e08e442500105d25820e347d757c1964a56b5e680ca86bd319b5"
+        },
+        {
+          "className": "TextComparisonWorkflowTests",
+          "expected": 6,
+          "observed": 6,
+          "outcomes": {
+            "Passed": 6
+          },
+          "sortedNamesLfSha256": "cb9dc1a352bf86a2c00660d477ec2b8a5b226567eaa8b8a25038416da9ffbd23",
+          "sortedIdsLfSha256": "0f472e5c692c9c5f45754203d9174831b8aadeda2ff17c036f2175e53242a3a7"
+        },
+        {
+          "className": "TextComparisonEditorTests",
+          "expected": 2,
+          "observed": 2,
+          "outcomes": {
+            "Passed": 2
+          },
+          "sortedNamesLfSha256": "9a34d6b0255ac28a13b91cbb7539000b67efa6b9de97bdece4e20bd16c2a9ad4",
+          "sortedIdsLfSha256": "ccc2cf7d07566ddc6a1df818fee62a6f2b014cb9e3711c7ef9f278f7a64dc2d2"
+        }
+      ],
+      "newCasesObserved": 224,
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "markers": [
+          "2026-09-12T03:11:22.4445121Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows and native preview."
+        ],
+        "observedRoute": "Compiled registered Contains/Compare workflows via supervised Host; exact True/False assertions are in pinned MainWindow code, success marker appears only after they pass."
+      },
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Exercise SD1.5 checkpoint assembly contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Exercise reduced SD1.5 pipeline contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "failure"
+        },
+        {
+          "number": 12,
+          "name": "Test inference contracts and CPU primitives",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 13,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 14,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 15,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 16,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 22,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 23,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 24,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 25,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 26,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 27,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 53,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 54,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 55,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "firstNativeLogEvidence": {
+        "source": "Final job logs; first-use TRX and mathematical traces not downloaded.",
+        "processes": 9,
+        "passed": 179,
+        "failed": 15,
+        "skipped": 0,
+        "total": 194,
+        "failedNames": [
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+          "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+          "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+          "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+          "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")"
+        ]
+      },
+      "trx": [
+        {
+          "logicalName": "tests-linux-x64/Core.trx",
+          "bytes": 806492,
+          "sha256": "b5213e1be5dbacbeb8bf062dcb61b777cb677973b16f10641b761142b6ab205a",
+          "project": "Core",
+          "counters": {
+            "total": 525,
+            "executed": 525,
+            "passed": 525,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Desktop.trx",
+          "bytes": 60339,
+          "sha256": "c71b62ac18ea10c3e60400fbc7a6b02e7644deb079969d2aab29eb28917c2b56",
+          "project": "Desktop",
+          "counters": {
+            "total": 40,
+            "executed": 40,
+            "passed": 40,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Host.trx",
+          "bytes": 542276,
+          "sha256": "e6e7fff4ded69d2e2f3b66c56850259294850f501e0062a9f39b2903d78747a3",
+          "project": "Host",
+          "counters": {
+            "total": 225,
+            "executed": 225,
+            "passed": 225,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Tokenization.trx",
+          "bytes": 813894,
+          "sha256": "6660abfcd2c67819cb118a12875e173ea4c626bbb11b5e9e447cc225697fe1bd",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-linux-x64/Workflow.trx",
+          "bytes": 106624,
+          "sha256": "6df5a3c1b66c34ad150df22b16ee4e72512a31fc4bb5f3313bb57e4e56454679",
+          "project": "Workflow",
+          "counters": {
+            "total": 69,
+            "executed": 69,
+            "passed": 69,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        }
+      ]
+    },
+    "osx-arm64": {
+      "jobId": 103488363526,
+      "jobConclusion": "failure",
+      "projects": {
+        "Core": {
+          "total": 525,
+          "outcomes": {
+            "Passed": 525
+          }
+        },
+        "Desktop": {
+          "total": 40,
+          "outcomes": {
+            "Passed": 40
+          }
+        },
+        "Host": {
+          "total": 225,
+          "outcomes": {
+            "Passed": 225
+          }
+        },
+        "Inference": {
+          "total": 574,
+          "outcomes": {
+            "Passed": 574
+          }
+        },
+        "Tokenization": {
+          "total": 540,
+          "outcomes": {
+            "Passed": 540
+          }
+        },
+        "Workflow": {
+          "total": 69,
+          "outcomes": {
+            "Passed": 69
+          }
+        },
+        "ClipStock": {
+          "total": 3,
+          "outcomes": {
+            "Passed": 1,
+            "Failed": 2
+          }
+        }
+      },
+      "applicationExpected": 1399,
+      "applicationObserved": 1399,
+      "applicationOutcomes": {
+        "Passed": 1399
+      },
+      "ordinaryPlusStockObservedUnique": 1976,
+      "ordinaryPlusStockOutcomes": {
+        "Passed": 1974,
+        "Failed": 2
+      },
+      "newCaseGroups": [
+        {
+          "className": "TextComparisonNodeTests",
+          "expected": 35,
+          "observed": 35,
+          "outcomes": {
+            "Passed": 35
+          },
+          "sortedNamesLfSha256": "34942213dd2a000569a9cb1ff9f4eca81d71812c4464e18febbd545415bacdac",
+          "sortedIdsLfSha256": "594d0c8f4e7fec37f7e9ea544f99273471d591dc127b53b5f1544119e086fe5d"
+        },
+        {
+          "className": "PythonUnicodeLowerTests",
+          "expected": 48,
+          "observed": 48,
+          "outcomes": {
+            "Passed": 48
+          },
+          "sortedNamesLfSha256": "2990515071792f15c59e5ab786913621abd1c68fbacb1b2247685190a708f21e",
+          "sortedIdsLfSha256": "c0135af89abff93cbd5ba42e6fc17146e9c5ea682679b3f503a23ba8e04beadf"
+        },
+        {
+          "className": "PythonUnicodeLowerSourceReferenceTests",
+          "expected": 68,
+          "observed": 68,
+          "outcomes": {
+            "Passed": 68
+          },
+          "sortedNamesLfSha256": "0a2b7e7c247b96a966c7f063b31c54c549fb70356392ba93a3088ce754d052eb",
+          "sortedIdsLfSha256": "c55df23ccb4def7aaa26a98dff3cb659ef45307d7373f5368aba10cf6679df10"
+        },
+        {
+          "className": "TextComparisonSourceReferenceTests",
+          "expected": 40,
+          "observed": 40,
+          "outcomes": {
+            "Passed": 40
+          },
+          "sortedNamesLfSha256": "1eb3d4a47b9270f01fb37ad1be2f14fbc20fa11ca93f102403a43443533a50a8",
+          "sortedIdsLfSha256": "3b2b7820c97a723376adf8e530a388c765bc0211c0f2ca15115587ea5cfcdd87"
+        },
+        {
+          "className": "V3ComboProjectionTests",
+          "expected": 1,
+          "observed": 1,
+          "outcomes": {
+            "Passed": 1
+          },
+          "sortedNamesLfSha256": "e67052f64cd6467f65faa54e91eaa888cbe694af7aead8ea1254b5b83647e57e",
+          "sortedIdsLfSha256": "02542d05b7fded26f02a18565e15a438cbc120a3b65590cba9fdcefd8f774eea"
+        },
+        {
+          "className": "TextComparisonHostTests",
+          "expected": 24,
+          "observed": 24,
+          "outcomes": {
+            "Passed": 24
+          },
+          "sortedNamesLfSha256": "81d241f3ff137e6b998a851c41e4ac762def1b17200c06abd9a313f93287a6ef",
+          "sortedIdsLfSha256": "cebe6b73d5b2e08e442500105d25820e347d757c1964a56b5e680ca86bd319b5"
+        },
+        {
+          "className": "TextComparisonWorkflowTests",
+          "expected": 6,
+          "observed": 6,
+          "outcomes": {
+            "Passed": 6
+          },
+          "sortedNamesLfSha256": "cb9dc1a352bf86a2c00660d477ec2b8a5b226567eaa8b8a25038416da9ffbd23",
+          "sortedIdsLfSha256": "0f472e5c692c9c5f45754203d9174831b8aadeda2ff17c036f2175e53242a3a7"
+        },
+        {
+          "className": "TextComparisonEditorTests",
+          "expected": 2,
+          "observed": 2,
+          "outcomes": {
+            "Passed": 2
+          },
+          "sortedNamesLfSha256": "9a34d6b0255ac28a13b91cbb7539000b67efa6b9de97bdece4e20bd16c2a9ad4",
+          "sortedIdsLfSha256": "530f92598c6fcdb7a9d5caa435b3d44781735f2fb2a89919a18bfd940bd40440"
+        }
+      ],
+      "newCasesObserved": 224,
+      "smoke": {
+        "conclusion": "success",
+        "step": 8,
+        "markers": [
+          "2026-09-12T03:10:51.5156240Z ComfySharp Desktop smoke passed: native window, supervised Host, text and CPU sigma graphs, case-sensitive UI history, StringFormat Host preview, text comparison workflows and native preview."
+        ],
+        "observedRoute": "Compiled registered Contains/Compare workflows via supervised Host; exact True/False assertions are in pinned MainWindow code, success marker appears only after they pass."
+      },
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Restore locked dependencies",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Build",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Test Core, Workflow, Tokenization, Desktop headless and Host contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Check catalogue consistency",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Start native Desktop and its supervised Host",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Exercise SD1.5 checkpoint assembly contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Exercise reduced SD1.5 pipeline contracts",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Exercise reference fixtures as the first native access in separate processes",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Test inference contracts and CPU primitives",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Inspect a safetensors file in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Tokenize CLIP text in a fresh process without libtorch",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Inspect CLIP metadata without native payload and encode a synthetic fixture",
+          "conclusion": "success"
+        },
+        {
+          "number": 16,
+          "name": "Exercise actual native CPU operations",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Compare full CLIP L and G dimensions in a separate CPU process",
+          "conclusion": "failure"
+        },
+        {
+          "number": 18,
+          "name": "Diagnose macOS native loader failures",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 22,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 23,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 24,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 25,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 26,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 27,
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "number": 53,
+          "name": "Post Run actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9",
+          "conclusion": "skipped"
+        },
+        {
+          "number": 54,
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "number": 55,
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "firstNativeLogEvidence": {
+        "source": "Final job logs; first-use TRX and mathematical traces not downloaded.",
+        "processes": 9,
+        "passed": 194,
+        "failed": 0,
+        "skipped": 0,
+        "total": 194,
+        "failedNames": []
+      },
+      "trx": [
+        {
+          "logicalName": "tests-osx-arm64/Core.trx",
+          "bytes": 832838,
+          "sha256": "104f44253bd886e6cddd9bfbaee014e678a2e907e2f4e1e38c0759307a01b6fa",
+          "project": "Core",
+          "counters": {
+            "total": 525,
+            "executed": 525,
+            "passed": 525,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Desktop.trx",
+          "bytes": 62435,
+          "sha256": "1b3350419099946718ecb0f6ed663e82aebd85a035388aec46e80094dba37db7",
+          "project": "Desktop",
+          "counters": {
+            "total": 40,
+            "executed": 40,
+            "passed": 40,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Host.trx",
+          "bytes": 553062,
+          "sha256": "897ca0694b7949894d0fb0cada0b47b66f91bf3450b9a4b9e6bcde4d1f35b61d",
+          "project": "Host",
+          "counters": {
+            "total": 225,
+            "executed": 225,
+            "passed": 225,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Inference.trx",
+          "bytes": 947794,
+          "sha256": "1a255e22c35d78b2a5f8e973149bf6ac9fd92b40703302560f7ea429539aed40",
+          "project": "Inference",
+          "counters": {
+            "total": 574,
+            "executed": 574,
+            "passed": 574,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Tokenization.trx",
+          "bytes": 840990,
+          "sha256": "6c451eb29af0bf53c8803f839a57706865005a5883d0a3a00efed5bf5dce0752",
+          "project": "Tokenization",
+          "counters": {
+            "total": 540,
+            "executed": 540,
+            "passed": 540,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-osx-arm64/Workflow.trx",
+          "bytes": 110170,
+          "sha256": "1f85d476b6e0220fac7ba974689d6e6d7710437aca1578421885ffc46720a226",
+          "project": "Workflow",
+          "counters": {
+            "total": 69,
+            "executed": 69,
+            "passed": 69,
+            "failed": 0,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Completed",
+          "runInfoOutcomes": [],
+          "failures": []
+        },
+        {
+          "logicalName": "tests-stock-osx-arm64/ClipStock.trx",
+          "bytes": 12902,
+          "sha256": "4d5662b389db59c72cb1ccd8dd3989ba70e965643774fb21b2d1ef3971e223c4",
+          "project": "ClipStock",
+          "counters": {
+            "total": 3,
+            "executed": 3,
+            "passed": 1,
+            "failed": 2,
+            "error": 0,
+            "timeout": 0,
+            "aborted": 0,
+            "inconclusive": 0,
+            "passedButRunAborted": 0,
+            "notRunnable": 0,
+            "notExecuted": 0,
+            "disconnected": 0,
+            "warning": 0,
+            "completed": 0,
+            "inProgress": 0,
+            "pending": 0
+          },
+          "summaryOutcome": "Failed",
+          "runInfoOutcomes": [
+            "Error",
+            "Error"
+          ],
+          "failures": [
+            {
+              "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/g\", tensorCount: 517, parameterCount: 694659840)",
+              "message": "stock/g/repeat-0/final[5]: actual=-0.8890677, expected=-0.8890026, error=6.508827209472656E-05, tolerance=5.667007863521576E-05."
+            },
+            {
+              "name": "ComfySharp.Inference.Tests.ClipStockReferenceTests.FullStockDimensionsMatchFrozenSourceAcrossRepeatedForwards(id: \"stock/l\", tensorCount: 197, parameterCount: 123650304)",
+              "message": "stock/l/repeat-0/final[27]: actual=0.4809644, expected=0.48100942, error=4.503130912780762E-05, tolerance=4.443028271198273E-05."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "selection": {
+    "expectedDistinct": 224,
+    "distinctObservedNames": 224,
+    "expectedExecutions": 672,
+    "observedExecutions": 672,
+    "outcomes": {
+      "Passed": 672
+    },
+    "crossPlatformMatch": "Exact full testName including arguments, no normalization; raw IDs retained in ignored matrix. Per-platform names and IDs SHA are published above.",
+    "nameOrArgumentNormalization": false,
+    "rawDistinctIdsAcrossPlatforms": 228,
+    "platformSpecificIds": [
+      "ComfySharp.Desktop.Tests.TextComparisonEditorTests.EditorConnectsSensitivityAndPreservesItsWidgetAcrossSaveDisconnectAndUndo",
+      "ComfySharp.Desktop.Tests.TextComparisonEditorTests.SelectorsCreateTextAndBooleanPortsWithSourceWidgetDefaults"
+    ]
+  },
+  "sourceComparisonScope": {
+    "collectorCommit": "5466f97312d8dbdbe5c656a6c31061895afc9af3",
+    "protocolSha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92",
+    "referenceSha256": "12935c33d4632a79e499a7c24b052d88036aee8323e45ea92d923443b2b9e04f",
+    "nodeCases": {
+      "comparable": 36,
+      "booleanOutputs": 39,
+      "blocker": 1,
+      "typedSourceErrorsWithDistinctEngineCoercion": 2,
+      "sourceEmptyOutputsVersusLocalComboRefusal": 2
+    },
+    "lowerPlans": 68,
+    "unicodePlanes": 17,
+    "fixedContexts": 4,
+    "sourcePasses": 3,
+    "managedPassesPerPlanPerCampaign": 1,
+    "allUnicodeStringsOrContextsQualified": false
+  },
+  "priorNumericalGateComparison": {
+    "win-x64": {
+      "previousRun": "https://github.com/skyline624/ComfySharp/actions/runs/34667426207",
+      "sameFirstNativeFailureNames": true,
+      "firstNativeAddedFailures": [],
+      "firstNativeNoLongerFailed": [],
+      "stockObservedInBothRuns": true,
+      "sameObservedStockFailureMessages": true,
+      "comparisonScope": "Names and recorded stock errors only; no new arithmetic traces or causal attribution."
+    },
+    "linux-x64": {
+      "previousRun": "https://github.com/skyline624/ComfySharp/actions/runs/34667426207",
+      "sameFirstNativeFailureNames": false,
+      "firstNativeAddedFailures": [
+        "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")"
+      ],
+      "firstNativeNoLongerFailed": [
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+        "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")"
+      ],
+      "stockObservedInBothRuns": false,
+      "sameObservedStockFailureMessages": null,
+      "comparisonScope": "Names and recorded stock errors only; no new arithmetic traces or causal attribution."
+    },
+    "osx-arm64": {
+      "previousRun": "https://github.com/skyline624/ComfySharp/actions/runs/34667426207",
+      "sameFirstNativeFailureNames": true,
+      "firstNativeAddedFailures": [],
+      "firstNativeNoLongerFailed": [],
+      "stockObservedInBothRuns": true,
+      "sameObservedStockFailureMessages": true,
+      "comparisonScope": "Names and recorded stock errors only; no new arithmetic traces or causal attribution."
+    }
+  },
+  "trxRehashed": 19,
+  "filesAtCommit": {
+    "src/ComfySharp.Core/NodeRegistry.cs": {
+      "bytes": 4125,
+      "sha256": "92e38d718ba62fbaf164ddebf57dd2bd6f3e92cb3243a04bb5af17331f2956b4"
+    },
+    "src/ComfySharp.Desktop/DocumentEditor.axaml.cs": {
+      "bytes": 13038,
+      "sha256": "2f1731e69946b5b295238770a442b6e8f9dffe40ae8259a79de86e33a164b1c9"
+    },
+    "src/ComfySharp.Desktop/MainWindow.axaml.cs": {
+      "bytes": 16810,
+      "sha256": "7aa4bcbd5d2c5772114e8c4b40d589667536314dd7b80f25c93100c986024c1a"
+    },
+    "src/ComfySharp.Nodes/BuiltInNodes.cs": {
+      "bytes": 7926,
+      "sha256": "d2e00d8da2e7f71a4f711386273dc62f9d75d9f339c94913380cd4e93850fbe3"
+    },
+    "src/ComfySharp.Nodes/ComfySharp.Nodes.csproj": {
+      "bytes": 324,
+      "sha256": "166afc9136469e9cbae287509fa0e67230e34cc8ed2cb9bc9984ad75e8c9f1a3"
+    },
+    "src/ComfySharp.Nodes/PythonUnicodeLower.cs": {
+      "bytes": 11342,
+      "sha256": "be2ab659d7e76818468d1d93eb22603a4bb69a1bef813b025f6306fae4ab540a"
+    },
+    "src/ComfySharp.Nodes/Resources/PythonUnicode/lower-3.12.10.json": {
+      "bytes": 29026,
+      "sha256": "6381d72114b8aa4ee5c0dd04fcbb55395964ab1ca92832e7784f887dfbf8b42c"
+    },
+    "src/ComfySharp.Nodes/TextComparisonNodes.cs": {
+      "bytes": 4425,
+      "sha256": "36dbf68cbc4da45ef1c8f13776692b9ec8c37d21379eee21e2eeb1c9c02bbecf"
+    },
+    "src/ComfySharp.Workflow/PromptCompiler.cs": {
+      "bytes": 12618,
+      "sha256": "89cffaaad79f828b26cc40b0498ba0f00d4316513c7ea4ac64ba77d4ca7a3554"
+    },
+    "tests/ComfySharp.Core.Tests/ComfySharp.Core.Tests.csproj": {
+      "bytes": 1814,
+      "sha256": "d282824981d20dab0cb5c735ab7624571176ab1f327085c7cf425d0b8d2fd271"
+    },
+    "tests/ComfySharp.Core.Tests/NodeParityTests.cs": {
+      "bytes": 3829,
+      "sha256": "bea3f9be2fb2cd020a441c50b5de8372e34e500914a00bd5aed6a900e5c61410"
+    },
+    "tests/ComfySharp.Core.Tests/PythonUnicodeLowerSourceReferenceTests.cs": {
+      "bytes": 10106,
+      "sha256": "0409b53d8bc0399bbb7307df321de2549bd740cde92487d857c5a9a35b0b3cad"
+    },
+    "tests/ComfySharp.Core.Tests/PythonUnicodeLowerTests.cs": {
+      "bytes": 8792,
+      "sha256": "42e2527987010fc0e7ff3cacac77feec8e06b423c22a643634b565c2bb807f96"
+    },
+    "tests/ComfySharp.Core.Tests/TextComparisonNodeTests.cs": {
+      "bytes": 6762,
+      "sha256": "ce3a77290e3a9a9c75414963bad6c519acca0cc8c82c42f41afaa3f71a946c1d"
+    },
+    "tests/ComfySharp.Core.Tests/TextComparisonSourceReferenceTests.cs": {
+      "bytes": 20519,
+      "sha256": "6894c6b2d3f62b6f0569f5c0c875ae957c4f68be451168b5a7fe42f47b6854fe"
+    },
+    "tests/ComfySharp.Core.Tests/V3ComboProjectionTests.cs": {
+      "bytes": 1136,
+      "sha256": "25f3c2fae96a972c0f85f4652cc0e9ea2640c646811f9ffa894f8a3bf558de9a"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.protocol.json": {
+      "bytes": 41632,
+      "sha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92"
+    },
+    "tests/ComfySharp.Core.Tests/Fixtures/text-comparison.reference.json": {
+      "bytes": 280652,
+      "sha256": "12935c33d4632a79e499a7c24b052d88036aee8323e45ea92d923443b2b9e04f"
+    },
+    "tests/ComfySharp.Desktop.Tests/TextComparisonEditorTests.cs": {
+      "bytes": 4364,
+      "sha256": "ef368f8e4dfe5e6f9a21c124f9fb6f38ce5ceda5919166820ac2fdd4e216adf4"
+    },
+    "tests/ComfySharp.Host.Tests/TextComparisonHostTests.cs": {
+      "bytes": 11968,
+      "sha256": "f31e3254d79e912ccdd3feaccdc83252efa9da581acbc577bc3b817d5107df23"
+    },
+    "tests/ComfySharp.Host.Tests/StringFormatHostTests.cs": {
+      "bytes": 10659,
+      "sha256": "1988531ac21405959c96ed213a33f631f8b8519cd12640f7c5da3c772b35322b"
+    },
+    "tests/ComfySharp.Workflow.Tests/TextComparisonWorkflowTests.cs": {
+      "bytes": 3796,
+      "sha256": "a85f5387c54f38eedcee0396bb049130f02b2d6fee4035b07788800a64a39054"
+    },
+    "tests/ComfySharp.Inference.Tests/TensorNodeTests.cs": {
+      "bytes": 12251,
+      "sha256": "a3bf9f222fd8d3ed9fa1f2c8dcf33f47500e078d9681bf8a4e9c82b4a1b01af0"
+    },
+    "labs/python-unicode-tables/extract.py": {
+      "bytes": 7302,
+      "sha256": "d689187a82da946fc0acc61da99026be24488172c666ae7ae32df88ee530162d"
+    },
+    "labs/python-unicode-tables/provenance.json": {
+      "bytes": 2473,
+      "sha256": "8193e086fb80c5597d7fc6c92ffc8749aab78b469b77bcd0681b3da82cb0eff6"
+    },
+    "labs/text-comparison-source/protocol.json": {
+      "bytes": 41632,
+      "sha256": "0d00fa0c7721b07b2fc12381f60ed364b286963553577fcdb6672c028e18aa92"
+    },
+    "labs/text-comparison-source/reference.py": {
+      "bytes": 16102,
+      "sha256": "df8297425891b959a3a657663ab972700a87792b189bc4644cfae5af6c098584"
+    },
+    "labs/text-comparison-source/README.md": {
+      "bytes": 6066,
+      "sha256": "8ab8beffaf0103e94be4c5128bd2c4c81bb23c19a575f78a3d84fd359a429462"
+    },
+    "docs/TEXT_COMPARISON.md": {
+      "bytes": 6646,
+      "sha256": "22024cbc2bea743da2e989a2a04f90734e2778b8cd9607e53adc18e35a2736c9"
+    },
+    "docs/capabilities/manifest.json": {
+      "bytes": 1303294,
+      "sha256": "fa8f0382cfd2b8febc9b90e6e238e22af9185d2e3ed4b9bcdf6a80d74a37ce5c"
+    },
+    "docs/qualification/text-comparison-source-5466f97.md": {
+      "bytes": 6460,
+      "sha256": "c83a2626087cf26ce36ddd6a3928d9b8d26753264591608470fcb6d9b7047509"
+    },
+    "docs/qualification/text-comparison-source-5466f97.json": {
+      "bytes": 67586,
+      "sha256": "45afe591ade5f1c8998a29cb96a915fbf85446ad36834b4c9779488d1751a8e9"
+    },
+    "labs/python-unicode-tables/README.md": {
+      "bytes": 7678,
+      "sha256": "170a0b66a8cfc32d87793f1ea53c76a28ba35b44a0cdfab3cc5f0cc31f5f2b4c"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "bytes": 18184,
+      "sha256": "d696a95421375a9e19630d9890efa6c10933d6bbffa5cc7cea90dc88bdceeadc"
+    },
+    "docs/licenses/CPython-3.12.10.txt": {
+      "bytes": 13936,
+      "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 13573,
+      "sha256": "44bcb4bd6bf4706880f20ccaa67c9454f852c3ed5ccad779f8903e452ad6651a"
+    },
+    "docs/qualification/text-comparison-integration.json": {
+      "bytes": 23453,
+      "sha256": "9e35cc08bf8a2edffdaf805589564708b16878e4996ce35e5e25db259e8e315f"
+    }
+  },
+  "metadataPins": {
+    "run.json": {
+      "bytes": 18474,
+      "sha256": "3f2363efc5a3997aac426eed8b2010da609bc9970ac4b1ea3d5588d96a763eb8"
+    },
+    "artifacts.json": {
+      "bytes": 17890,
+      "sha256": "91444c0c40ba1edf10f11296e771dae53b0f3df2ac4aced2eb17ead2f4abd67b"
+    },
+    "logs.txt": {
+      "bytes": 480042,
+      "sha256": "bd021330b8798f8e405ce80ca36dae1697678d29a64f41b6af2df8d7ce85faef"
+    },
+    "download-inventory.json": {
+      "bytes": 4549,
+      "sha256": "e8828757ca257547343360687671f70462e356fb0c64906f505319f814bc4029"
+    },
+    "case-matrix.json": {
+      "bytes": 122627,
+      "sha256": "f1a9883887e08800da086b305c910377b6ddcf3c796cf5ee3d80d8ac56434f44"
+    }
+  },
+  "downloadedArtifacts": [
+    {
+      "name": "tests-osx-arm64",
+      "id": 10290786075,
+      "archiveBytes": 445604,
+      "githubReportedDigest": "sha256:eb16de57d2a219a854fc8b263d01a31d26102ffd5f750540e410381eeb0d9776"
+    },
+    {
+      "name": "tests-win-x64",
+      "id": 10290767005,
+      "archiveBytes": 446794,
+      "githubReportedDigest": "sha256:42e3a2e57048cb864dd16dc4914ee8130ec125213ed51b1e1e12fb086cb21e43"
+    },
+    {
+      "name": "tests-stock-osx-arm64",
+      "id": 10290741014,
+      "archiveBytes": 2833,
+      "githubReportedDigest": "sha256:fdd7993f12e79cab1e2ef6aacab196801db7207530c030d6ac9a11b27d06000f"
+    },
+    {
+      "name": "tests-stock-win-x64",
+      "id": 10290602145,
+      "archiveBytes": 2427,
+      "githubReportedDigest": "sha256:bd1ca34a173f0d4746a8ab40e471ad96280231e67f444e35eb6a9a2b13a53008"
+    },
+    {
+      "name": "tests-linux-x64",
+      "id": 10290177468,
+      "archiveBytes": 302853,
+      "githubReportedDigest": "sha256:1e9a5cba4fd4f1cd1186a86bb2ecd9c4c2ea72d17478aa76a77d887f8f087baa"
+    }
+  ],
+  "limits": [
+    "Ordinary tests and stock are disjoint per OS. Targeted checkpoint/pipeline/first-use repetitions are not added to these totals.",
+    "Source-error and invalid-mode cases test explicitly distinct boundaries; they do not claim 40 Boolean parity successes.",
+    "One frozen source collection is reused across three OS, not three independent OS source oracles.",
+    "No full Unicode-string, complete-workflow, platform-wide or new numerical inference qualification. Existing numerical failures remain failures.",
+    "Build/step outcomes and marker evidence come from this exact CI head; no local .NET, native or source execution by this auditor.",
+    "Pinned committed files are not an attestation of every loaded binary. GitHub archive digest is retained separately from recomputed extracted TRX hashes."
+  ]
+}
