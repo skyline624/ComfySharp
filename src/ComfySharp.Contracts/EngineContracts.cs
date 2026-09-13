@@ -92,7 +92,10 @@ public sealed record NodeSchema(string ClassType, string DisplayName, string Cat
     IReadOnlyList<InputSchema> Inputs, IReadOnlyList<OutputSchema> Outputs, bool OutputNode = false, bool InputIsList = false, bool Experimental = false,
     string? Description = null, IReadOnlyList<string>? SearchAliases = null, string? PythonModule = null,
     bool V3ObjectInfo = false, string? EssentialsCategory = null, bool Deprecated = false,
-    IReadOnlyList<HiddenInputSchema>? HiddenInputs = null, bool OmitEmptyOptionalInputs = false);
+    IReadOnlyList<HiddenInputSchema>? HiddenInputs = null, bool OmitEmptyOptionalInputs = false,
+    IReadOnlyList<string>? V3HiddenInputs = null);
+/// <summary>Declared V3 metadata, separate from execute arguments. JSON objects belong to the current job.</summary>
+public sealed record RuntimeHiddenContext(JsonObject? Prompt=null,JsonNode? ExtraPngInfo=null,string? UniqueId=null);
 public sealed record EngineDiagnostic(string Code, string Message, string? NodeId = null, string? InputName = null, string? TargetId = null);
 public sealed record ValidationResult(IReadOnlyList<string> ValidTargets, IReadOnlyList<EngineDiagnostic> Diagnostics)
 {

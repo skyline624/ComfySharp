@@ -1,5 +1,15 @@
 # Backlog de migration
 
+Lot 9 : [LossGraphNode](LOSS_GRAPH.md) affiche les pertes via le Host et reçoit
+les métadonnées V3 séparément des arguments. Les 11 cas du graphe et trois cas
+de contexte caché passent ; la chaîne d'entraînement publique et la qualification
+du rendu sur les plateformes restent ouvertes. Aucun nouveau poids n'est écrit.
+
+Qualification prioritaire : la CI de reprise LoHa valide 87 tests ciblés par OS,
+mais conserve 23 échecs ordinaires Windows et 22 Linux, ainsi que des écarts CLIP.
+Identifier le runtime natif et le profil source impliqués avant toute qualification
+numérique supplémentaire ; conserver les assertions et les tolérances verrouillées.
+
 Lot 9 : les [fondations LoHa](LOHA_TRAINING.md) ajoutent la fabrique des 686 cibles
 SD, les gradients simples/Tucker, les snapshots et les exports aux clés Hadamard.
 Le [chargeur d'inférence](LOHA_INFERENCE.md) couvre maintenant DoRA et bypass

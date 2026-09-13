@@ -106,7 +106,112 @@
   "familyQualified": false,
   "platformsQualified": false,
   "ci": {
-    "status": "not-evaluated-for-this-change"
+    "runId": 34728727984,
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34728727984",
+    "commit": "95f939488ef0030e59515dcdff6cdeece871aaee",
+    "status": "completed",
+    "conclusion": "failure",
+    "results": {
+      "win-x64": {
+        "LohaTraining": {
+          "passed": 87,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "Inference": {
+          "passed": 1015,
+          "failed": 23,
+          "skipped": 0,
+          "failures": [
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-distinct-time\")",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+            "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"two-chunks-separate\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 0)",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"square\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"one-step\")",
+            "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")"
+          ]
+        }
+      },
+      "linux-x64": {
+        "LohaTraining": {
+          "passed": 87,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "Inference": {
+          "passed": 1016,
+          "failed": 22,
+          "skipped": 0,
+          "failures": [
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+            "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 2)",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-10\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)"
+          ]
+        }
+      },
+      "osx-arm64": {
+        "LohaTraining": {
+          "passed": 87,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "Inference": {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        }
+      }
+    },
+    "windowsConclusion": "failure",
+    "linuxConclusion": "failure",
+    "macosConclusion": "failure",
+    "windowsStockFailures": [
+      "stock/l",
+      "stock/g"
+    ],
+    "note": "All 87 LoHa cases pass on each CPU OS. Ordinary inference fails 23 cases on Windows and 22 on Linux; macOS passes all 1038 ordinary cases. Windows stock/l and stock/g also fail in their separate process. Cause of the new Windows failures remains unestablished; no assertion or tolerance is relaxed.",
+    "assertionsRelaxed": false,
+    "familyOrPlatformQualification": false
   },
   "remaining": [
     "Full TrainLoraNode and options",
@@ -114,6 +219,6 @@
     "Mixed precision, offload and checkpointing",
     "Real image datasets and pretrained source-gradient comparisons",
     "CUDA/MPS and required platform qualification",
-    "Previously observed Linux numerical and macOS CLIP failures"
+    "Observed Windows/Linux numerical and stock CLIP CI failures; runtime/source-profile investigation remains open"
   ]
 }

@@ -23,6 +23,8 @@ builder.Services.AddSingleton(sp =>
     LoraNodes.Register(registry, builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]);
     registry.Register(new SaveLoraNode(sp.GetRequiredService<ImageFileStore>()));
     registry.Register(new LoraModelLoaderNode());
+    registry.Register(new LossGraphNode(ComfySharp.Media.NativeLossGraphRenderer.Render,sp.GetRequiredService<IImageFileStore>(),
+        disableMetadata:builder.Configuration.GetValue<bool>("disable-metadata")));
     Sd15Nodes.Register(registry, new CheckpointFiles(builder.Configuration["models-dir"] ?? builder.Configuration["COMFYSHARP_MODELS_DIR"]),
         cpuThreads: builder.Configuration.GetValue<int?>("cpu-threads") ?? Math.Min(16, Environment.ProcessorCount),
         inferenceDevice: builder.Configuration["inference-device"] ?? "cpu");

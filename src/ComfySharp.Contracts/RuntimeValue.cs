@@ -134,6 +134,9 @@ public sealed class RuntimeValue : IDisposable
 /// </summary>
 public sealed class RuntimeNodeContext : IDisposable
 {
+    public RuntimeHiddenContext Hidden { get; }
+    public RuntimeNodeContext():this(new RuntimeHiddenContext()) { }
+    public RuntimeNodeContext(RuntimeHiddenContext hidden)=>Hidden=hidden??throw new ArgumentNullException(nameof(hidden));
     private readonly object gate = new();
     private readonly List<RuntimeValue> values = [];
     private readonly Dictionary<object, RuntimeValue> resources = new(ReferenceEqualityComparer.Instance);

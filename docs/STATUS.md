@@ -1,5 +1,21 @@
 # État du port — 0.1.0-dev
 
+Le [graphe des pertes](LOSS_GRAPH.md) est raccordé au Host avec les métadonnées
+cachées V3. **51 types sont enregistrés**. Les contrôles locaux comptent
+821 tests moteur, 1 038 tests ordinaires d'inférence et 325 tests Host réussis.
+Un test Host échoue faute de privilège Windows pour créer un lien symbolique ;
+il reste actif. L'aperçu des pertes SD1.5 existantes est vérifié par HTTP et
+visuellement. Le producteur reste réservé au test, le nœud d'entraînement complet
+et la fidélité des pixels/polices restent ouverts.
+
+La [CI de reprise LoHa 34728727984](https://github.com/skyline624/ComfySharp/actions/runs/34728727984)
+valide les **87 tests LoHa sur chacun des trois OS CPU**, mais échoue globalement.
+L'inférence ordinaire compte 23 échecs Windows et 22 Linux ; macOS passe ses
+1 038 tests ordinaires. Windows échoue aussi sur CLIP stock/l et stock/g dans
+un processus distinct. La cause des nouveaux écarts Windows reste à établir ;
+aucun seuil n'est modifié. Voir [la preuve actualisée](qualification/loha-resume.json).
+Les paragraphes suivants conservent les résultats des jalons antérieurs.
+
 La [reprise LoHa](LOHA_RESUME.md) recharge désormais les facteurs simples/Tucker
 et leurs mélanges avec LoRA en conservant la fabrique source, les règles alpha
 et le RNG. **1 038 tests ordinaires passent localement**, dont 11 tests de reprise
@@ -11,7 +27,7 @@ La [CI du chargement LoHa 34728064909](https://github.com/skyline624/ComfySharp/
 valide les 76 tests LoHa de ce jalon sur les trois OS. Windows passe toute la CI ;
 macOS passe les 1 027 tests ordinaires mais conserve deux échecs CLIP. Linux
 compte 22 échecs sur les 1 027 tests ordinaires. Ces résultats concernent le
-commit précédent ; la reprise ci-dessus attend sa propre qualification CI.
+commit précédent ; la CI de reprise est désormais décrite en tête de page.
 
 Le [chargement LoHa](LOHA_INFERENCE.md) et sa réutilisation couvrent maintenant
 les snapshots/fichiers, DoRA et le bypass d'inférence linear/Conv2d. Les

@@ -1,0 +1,73 @@
+{
+  "scope": "LossGraphNode native preview and declared V3 hidden metadata; full training workflow remains incomplete",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "implementation": "partial",
+  "registeredNodeCount": 51,
+  "fixture": {
+    "sha256": "cae0f108105347b04375684a3f7f868495f909e7bedb0357517e30375d3b49e2",
+    "cases": 8,
+    "sourceExecution": "Actual frozen class; drawing, fonts and PreviewImage replaced by spies",
+    "comparison": "Exact coordinates and strings, source empty/constant failure behavior",
+    "pixelParity": false
+  },
+  "localValidation": {
+    "platform": "win-x64-cpu",
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "core": {
+      "passed": 821,
+      "failed": 0,
+      "skipped": 0
+    },
+    "inference": {
+      "passed": 1038,
+      "failed": 0,
+      "skipped": 0,
+      "filter": "FullyQualifiedName!~ClipStockReferenceTests"
+    },
+    "host": {
+      "passed": 325,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "ImageFileStoreTests.File_links_are_resolved_inside_media_root_and_cannot_escape_on_read_or_write: Windows symbolic-link privilege unavailable; test retained."
+    },
+    "lossGraphCases": 11,
+    "v3HiddenCases": 3,
+    "catalogue": {
+      "rows": 1171,
+      "localNodeDeclarations": 664,
+      "registeredNodes": 51,
+      "errors": 0,
+      "complete": false
+    }
+  },
+  "recordedTrainingPreview": {
+    "source": "loha-resume.json pretrainedDiagnostic",
+    "losses": [
+      0.83137566,
+      0.7629695
+    ],
+    "width": 840,
+    "height": 520,
+    "pngSha256": "57305e493ccfef323f0db528fd524f57a6058a2872c9e7f56461769597824236",
+    "path": "Host /prompt -> queue -> LossGraphNode -> temp PNG -> /view",
+    "passed": true,
+    "visuallyInspected": true,
+    "producer": "TestTrainingLoss, test-only, reading previously recorded real SD1.5 losses",
+    "trainingRerun": false
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newAdapterFiles": 0,
+  "realWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "ci": {
+    "status": "not-evaluated-for-this-change"
+  },
+  "remaining": [
+    "Full production TrainLoraNode workflow",
+    "Font and raster differences against Pillow; no pixel-parity claim",
+    "Required platform and real-window qualification",
+    "DynamicPrompt and remaining V3 hidden context capabilities"
+  ]
+}

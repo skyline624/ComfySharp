@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup><Using Include="Xunit" /></ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Fixtures/loss-graph.reference.json" />
     <EmbeddedResource Include="Fixtures/prompt-values.reference.json" LogicalName="ComfySharp.Host.Tests.Fixtures.prompt-values.reference.json" />
     <EmbeddedResource Include="Fixtures/input-*" />
     <EmbeddedResource Include="Fixtures/prompt-values.protocol.json" LogicalName="ComfySharp.Host.Tests.Fixtures.prompt-values.protocol.json" />

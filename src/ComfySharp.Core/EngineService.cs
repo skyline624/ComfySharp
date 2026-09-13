@@ -205,7 +205,7 @@ public sealed class EngineService(NodeRegistry registry) : IDisposable
                 for (var index = 0; index < count; index++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    using var invocationScope = new RuntimeNodeContext();
+                    using var invocationScope = new RuntimeNodeContext(LegacyHiddenInputs.V3Context(node.Schema,prompt,extraData,id));
                     var invocation = new Dictionary<string, RuntimeValue>(StringComparer.Ordinal);
                     foreach (var (name, values) in resolved)
                     {

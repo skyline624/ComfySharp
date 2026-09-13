@@ -12,6 +12,8 @@ public static class ImageFileNodes
 {
     private const string PreviewAlphabet = "abcdefghijklmnopqrstupvxyz";
     public static IReadOnlyList<NodeSchema> Schemas { get; } = Array.AsReadOnly(new[] { Describe(false), Describe(true) });
+    internal static IRuntimeNode CreatePreview(IImageFileStore store,TimeProvider? time=null,bool disableMetadata=false)
+        =>new FileNode(store,true,time??TimeProvider.System,disableMetadata);
     public static void Register(NodeRegistry registry, IImageFileStore store, TimeProvider? timeProvider = null,
         bool disableMetadata = false)
     {

@@ -25141,11 +25141,11 @@
       "name": "LossGraphNode",
       "kind": "node",
       "scope": "local",
-      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1412",
+      "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy_extras/nodes_train.py#L1408",
       "registration": "schema_node_id_literal",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "frozen-loss-map-preview-profile",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -25155,7 +25155,12 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": [
+        "../LOSS_GRAPH.md",
+        "../qualification/loss-graph.json",
+        "../../tests/ComfySharp.Host.Tests/LossGraphTests.cs",
+        "../../tests/ComfySharp.Core.Tests/V3HiddenContextTests.cs"
+      ],
       "scenario": "contract:LossGraphNode",
       "registrationStatus": "builtin-candidate",
       "sourceClass": "LossGraphNode",
@@ -25168,7 +25173,7 @@
         "file": "node-schemas.json",
         "nodeId": "LossGraphNode",
         "module": "comfy_extras/nodes_train.py",
-        "status": "partial-static"
+        "status": "resolved-static"
       }
     },
     {

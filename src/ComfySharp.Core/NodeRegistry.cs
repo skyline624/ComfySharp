@@ -60,6 +60,12 @@ public sealed class NodeRegistry
                 info["input"]!["hidden"] = hidden;
                 info["input_order"]!["hidden"] = order;
             }
+            if(s.V3HiddenInputs is {Count:>0} v3Hidden)
+            {
+                var hidden=new JsonObject();var order=new JsonArray();
+                foreach(string type in v3Hidden){string name=type.ToLowerInvariant();hidden[name]=new JsonArray(type);order.Add(name);}
+                info["input"]!["hidden"]=hidden;info["input_order"]!["hidden"]=order;
+            }
             if (s.Description is not null) info["description"] = s.Description;
             if (s.SearchAliases is not null) info["search_aliases"] = new JsonArray(s.SearchAliases.Select(a => (JsonNode?)JsonValue.Create(a)).ToArray());
             if (s.PythonModule is not null) info["python_module"] = s.PythonModule;
