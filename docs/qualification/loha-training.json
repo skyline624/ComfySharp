@@ -6,8 +6,8 @@
     "fixtureSha256": "cfa3149c52cb10031e92cb648543a82d143aa9a81bb94f8110f83e3b61c288db",
     "cases": 16,
     "updates": 32,
-    "absoluteTolerance": 3e-05,
-    "relativeTolerance": 3e-05,
+    "absoluteTolerance": 3E-05,
+    "relativeTolerance": 3E-05,
     "sourceBackwardPreserved": true,
     "alphaGradient": "null"
   },
@@ -99,7 +99,36 @@
   "adaptersWritten": false,
   "familyQualified": false,
   "platformsQualified": false,
-  "ci": "pending",
+  "ci": {
+    "runId": 34726797658,
+    "commit": "63fd1418121a862e188b0b99f5f68f454d964fd6",
+    "conclusion": "failure",
+    "lohaTestsEachPlatform": {
+      "skipped": 0,
+      "passed": 23,
+      "failed": 0
+    },
+    "windows": {
+      "ordinaryInferenceFailed": 0,
+      "ordinaryInferencePassed": 974,
+      "conclusion": "success"
+    },
+    "macos": {
+      "ordinaryInferenceFailed": 0,
+      "ordinaryInferencePassed": 974,
+      "stockClipFailures": 2,
+      "conclusion": "failure"
+    },
+    "linux": {
+      "ordinaryInferenceFailed": 22,
+      "priorOrdinaryInferenceFailures": 20,
+      "ordinaryInferencePassed": 952,
+      "note": "The failing set differs from the prior run; the causes are not established by this count. All 23 LoHa tests pass, including in the ordinary suite. Other numerical reference failures remain open.",
+      "conclusion": "failure"
+    },
+    "assertionsRelaxed": false,
+    "familyOrPlatformQualification": false
+  },
   "remaining": [
     "LoHa inference loader and DoRA/bypass",
     "LoHa resume factory",

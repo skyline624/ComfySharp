@@ -7,6 +7,12 @@ la sauvegarde. **974 tests ordinaires d'inférence passent localement**, dont
 686 cibles/1 814 paramètres, avec 1 532 gradients finis et 282 gradients alpha
 absents comme dans la source. Aucun modèle/adapter n'est écrit. Chargement,
 reprise LoHa, nœud public et qualification complète restent à réaliser.
+La [CI LoHa 34726797658](https://github.com/skyline624/ComfySharp/actions/runs/34726797658)
+valide les **23 tests LoHa sur chaque OS**. Windows passe la CI complète ;
+Windows et macOS passent les 974 tests ordinaires. macOS conserve deux échecs
+CLIP et Linux compte 22 échecs dans les tests ordinaires. Le passage de 20 à
+22 ne suffit pas à attribuer leur cause ; les seuils restent inchangés et aucune
+qualification de famille ou de plateforme n'est déduite de ces tests.
 
 La [correction des références de reprise LoRA](LORA_RESUME.md) est vérifiée dans la
 [CI 34725800282](https://github.com/skyline624/ComfySharp/actions/runs/34725800282) :
