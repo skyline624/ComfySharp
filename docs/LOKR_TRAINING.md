@@ -48,7 +48,8 @@ préentraîné n'est inclus. Les profils numériques restent `3e-5` absolu et re
 
 Le [chargement LoKr d'inférence et DoRA](LOKR_INFERENCE.md) dispose maintenant de
 références source et d'un diagnostic SD1.5 CPU entraîné puis rechargé en mémoire.
-La reprise d'entraînement de fichiers LoKr, le bypass, les workflows complets,
+La [reprise d'entraînement de fichiers LoKr](LOKR_RESUME.md) est également portée
+pour les facteurs Float32 et vérifiée contre la fabrique source. Le bypass, les workflows complets,
 les autres précisions et les plateformes restent à vérifier ou porter.
 Le bypass d'entraînement est refusé explicitement tant que son chemin
 opérationnel n'est pas porté ; une reconstruction des poids ne le remplace pas.

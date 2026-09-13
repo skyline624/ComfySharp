@@ -1,0 +1,227 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/weight_adapter/loha.py": "579ca1e33e0d244e0d7eedd30fb727913341f8e7bfbd74b51221f567612286d5",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4",
+    "comfy_extras/nodes_train.py": "e6df99f2772af9ad949db6d3d478811cf3e4583ef9f65c525ada56b9cb4cacea"
+  },
+  "fixture": {
+    "compressedSha256": "fa21a17ee89d236f671c7bf7e9e4e0e7e635b74d1f13957631ad780222967f3c",
+    "uncompressedSha256": "c274f36962f53f14d745a23de19ea817f857d7dc532857f7e454f01485a4e470",
+    "compressedBytes": 9872307,
+    "uncompressedBytes": 14792214,
+    "payloadEncoding": "base64-f32-little-endian",
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "cases": [
+      {
+        "linearProjection": false,
+        "dtype": "torch.float32",
+        "algorithm": "LoKr",
+        "seed": 317,
+        "freshRank": 2,
+        "parameterBytes": 8601872,
+        "parameterCount": 1261,
+        "randomStateSha256": "d42e5337725a4a8e6d44eeec10dc949e227e349de4a40ba0ee293349ea8b81b2",
+        "resumed": [
+          "time_embed.0.weight",
+          "time_embed.2.weight",
+          "input_blocks.0.0.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight",
+          "input_blocks.3.0.op.weight",
+          "out.2.weight"
+        ]
+      },
+      {
+        "linearProjection": true,
+        "dtype": "torch.float16",
+        "algorithm": "LoKr",
+        "seed": 317,
+        "freshRank": 2,
+        "parameterBytes": 8601872,
+        "parameterCount": 1261,
+        "randomStateSha256": "d42e5337725a4a8e6d44eeec10dc949e227e349de4a40ba0ee293349ea8b81b2",
+        "resumed": [
+          "time_embed.0.weight",
+          "time_embed.2.weight",
+          "input_blocks.0.0.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight",
+          "input_blocks.3.0.op.weight",
+          "out.2.weight"
+        ]
+      },
+      {
+        "linearProjection": false,
+        "dtype": "torch.bfloat16",
+        "algorithm": "LoHa",
+        "seed": 317,
+        "freshRank": 2,
+        "parameterBytes": 1833424,
+        "parameterCount": 1813,
+        "randomStateSha256": "bc8a6f5abd769d47183303bba90cc46810ff04c68f6a531989ff8af8f7762809",
+        "resumed": [
+          "time_embed.0.weight",
+          "time_embed.2.weight",
+          "input_blocks.0.0.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight",
+          "input_blocks.3.0.op.weight",
+          "out.2.weight"
+        ]
+      },
+      {
+        "linearProjection": true,
+        "dtype": "torch.float64",
+        "algorithm": "LoRA",
+        "seed": 317,
+        "freshRank": 2,
+        "parameterBytes": 1011408,
+        "parameterCount": 1261,
+        "randomStateSha256": "bc8a6f5abd769d47183303bba90cc46810ff04c68f6a531989ff8af8f7762809",
+        "resumed": [
+          "time_embed.0.weight",
+          "time_embed.2.weight",
+          "input_blocks.0.0.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight",
+          "input_blocks.3.0.op.weight",
+          "out.2.weight"
+        ]
+      }
+    ]
+  },
+  "localTests": {
+    "targeted": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ordinary": {
+      "passed": 1259,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "realWeightsDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 7,
+    "algorithm": "LoKr",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 137523272,
+    "changedParameterCount": 960,
+    "InitialCpuRandomStateSha256": "f3ff817d3895a08bfafd570b6df509be1b8cb3fe235713d500360fa24ba6a9eb",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 1.1707271,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 964,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": false,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1250,
+      "predictionExact": true,
+      "predictionSha256": "3f77c9d644c6d9b93943269c7662a06e9f76ee7583501d94205b4163dad0d377"
+    },
+    "trainingResumeRoundtrip": {
+      "source": "in-memory native factors",
+      "resumedTargets": 282,
+      "retainedFactors": 564,
+      "resetDifferences": 404,
+      "resetAlphas": 282,
+      "ignoredKeys": 686,
+      "parameterBytes": 137523272,
+      "changedParameterCount": 961,
+      "steps": [
+        {
+          "step": 1,
+          "loss": 1.1825215,
+          "finiteGradientLeaves": 968,
+          "nonzeroGradientLeaves": 964,
+          "nullAlphaGradients": 282
+        },
+        {
+          "step": 2,
+          "loss": 1.1677487,
+          "finiteGradientLeaves": 968,
+          "nonzeroGradientLeaves": 964,
+          "nullAlphaGradients": 282
+        }
+      ],
+      "InitialCpuRandomStateSha256": "841728ae1083c7bde999867d3cc5e1a9dd6bb88d80512069e0666a678bd31e06",
+      "InitialDeviceRandomStateSha256": null,
+      "baseUnchanged": true,
+      "reloadPredictionExact": true,
+      "predictionSha256": "f781d97c9939ffe688e68e86576a51cdc61de397bb201eb8d17bd49e76adc5db"
+    },
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 86.4738851,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa and direct LoKr alpha have no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "realImageWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "Training and inference bypass",
+    "Other training dtypes",
+    "OFT and other algorithms",
+    "Full TrainLoraNode and image workflows",
+    "Pretrained source gradients and required hardware/OS qualification"
+  ],
+  "ci": {
+    "status": "not-yet-evaluated"
+  }
+}

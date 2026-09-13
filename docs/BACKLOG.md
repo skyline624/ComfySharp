@@ -4,8 +4,9 @@ Lot 9 : les [fondations LoKr](LOKR_TRAINING.md) et le [chargement d'inférence](
 couvrent facteurs directs/décomposés/Tucker, DoRA, initialisation SD et sauvegarde.
 52 tests d'entraînement et 155 tests d'inférence sont disponibles. Le diagnostic
 SD1.5 CPU entraîne 686 cibles puis retrouve exactement la prédiction après
-rechargement en mémoire, sans nouveau fichier de poids. Suite : reprise LoKr,
-bypass et workflow sur images ; OFT et le nœud public restent ouverts.
+rechargement en mémoire, sans nouveau fichier de poids. La [reprise LoKr](LOKR_RESUME.md)
+ajoute 13 tests et un second entraînement SD1.5 en mémoire. Suite : bypass et
+workflow sur images ; OFT et le nœud public restent ouverts.
 
 Lot 9 : [LossGraphNode](LOSS_GRAPH.md) affiche les pertes via le Host et reçoit
 les métadonnées V3 séparément des arguments. Les 11 cas du graphe et trois cas

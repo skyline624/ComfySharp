@@ -7,7 +7,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Owns LoRA/LoHa/LoKr and BiasDiff targets in the frozen plain SD module traversal order.
-/// Fresh Float32 adapters and resumed LoRA/LoHa; LoKr resume remains a separate capability.</summary>
+/// Fresh Float32 adapters and resumed LoRA/LoHa/LoKr using the source provider order.</summary>
 public sealed class SdTrainableAdapterSet : IDisposable
 {
     private readonly Dictionary<string, TrainableWeightPatch> patches;
@@ -40,7 +40,7 @@ public sealed class SdTrainableAdapterSet : IDisposable
             var shape = schema[name];
             long actualRank = resume?.Targets.GetValueOrDefault(name)?.Rank ?? rank;
             int pairs = algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true ? 2 : 1;
-            long count = resume?.Targets.GetValueOrDefault(name) is { Loha:not null } loha ? loha.ParameterElements
+            long count = resume?.Targets.GetValueOrDefault(name) is { ParameterElements:>0 } selected ? selected.ParameterElements
                 : shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank * pairs) + 1);
             if(shape.Count>1&&algorithm=="LoKr"&&resume?.Targets.ContainsKey(name)!=true)
             {
@@ -97,17 +97,25 @@ public sealed class SdTrainableAdapterSet : IDisposable
                     {
                         var keys=resumedLoha.Loha;
                         Tensor Read(string key)=>existing!.ReadTensor(key,cancellationToken).to_type(ScalarType.Float32).to(device);
-                        patches.Add(name,new TrainableLohaPatch(Read(resumedLoha.Up),Read(resumedLoha.Down),Read(keys.W2A),Read(keys.W2B),alpha,
+                        patches.Add(name,new TrainableLohaPatch(Read(resumedLoha.Up!),Read(resumedLoha.Down!),Read(keys.W2A),Read(keys.W2B),alpha,
                             keys.T1 is null?null:Read(keys.T1),keys.T2 is null?null:Read(keys.T2)));
                         continue; // LohaDiff wraps the existing factors directly, without random Linear constructors.
+                    }
+                    if(resume?.Targets.GetValueOrDefault(name) is { Lokr:not null } resumedLokr)
+                    {
+                        Tensor? Read(string key)=>resumedLokr.Lokr.TryGetValue(key,out var name)
+                            ?existing!.ReadTensor(name,cancellationToken).to_type(ScalarType.Float32).to(device):null;
+                        patches.Add(name,new TrainableLokrPatch(Read("lokr_w1"),Read("lokr_w2"),alpha,
+                            Read("lokr_w1_a"),Read("lokr_w1_b"),Read("lokr_w2_a"),Read("lokr_w2_b"),Read("lokr_t2")));
+                        continue; // Existing LokrDiff factors consume no random constructors.
                     }
                     long actualRank = rank; Tensor up, down;
                     if (resume?.Targets.TryGetValue(name,out var factors) == true)
                     {
                         actualRank = factors.Rank;
                         // LoraDiff copies source weights into default CPU Float32 Linear layers before moving them.
-                        up = existing!.ReadTensor(factors.Up,cancellationToken).to_type(ScalarType.Float32).to(device);
-                        down = existing.ReadTensor(factors.Down,cancellationToken).to_type(ScalarType.Float32).to(device);
+                        up = existing!.ReadTensor(factors.Up!,cancellationToken).to_type(ScalarType.Float32).to(device);
+                        down = existing.ReadTensor(factors.Down!,cancellationToken).to_type(ScalarType.Float32).to(device);
                     }
                     else
                     {

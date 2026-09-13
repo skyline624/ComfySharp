@@ -18,8 +18,8 @@ internal static class SdAllAdapterDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass" or "--resume" or "--algorithm" or "--rank"))
-                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--algorithm LoRA|LoHa|LoKr --rank 1..1024 --adapter NEW.safetensors --bypass true|false --resume EXISTING.safetensors]");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass" or "--resume" or "--algorithm" or "--rank" or "--resume-roundtrip"))
+                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--algorithm LoRA|LoHa|LoKr --rank 1..1024 --adapter NEW.safetensors --bypass true|false --resume EXISTING.safetensors --resume-roundtrip true|false]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -34,6 +34,8 @@ internal static class SdAllAdapterDiagnostic
             if (algorithm is not ("LoRA" or "LoHa" or "LoKr")) throw new NotSupportedException("Select LoRA, LoHa or LoKr.");
             if (!int.TryParse(options.GetValueOrDefault("--rank","2"), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out int rank) || rank<1 || rank>1024)
                 throw new ArgumentException("Rank must be an integer from 1 to 1024.");
+            if (!bool.TryParse(options.GetValueOrDefault("--resume-roundtrip","false"),out bool resumeRoundtrip))throw new ArgumentException("Resume roundtrip must be true or false.");
+            if(resumeRoundtrip&&(algorithm!="LoKr"||bypassMode||options.ContainsKey("--resume")))throw new ArgumentException("Memory resume roundtrip currently qualifies fresh ordinary LoKr only.");
             cancellationToken.ThrowIfCancellationRequested();
             using var file = new SafeTensorFile(checkpoint);
             using var existingFile = options.TryGetValue("--resume",out var resumePath) ? new SafeTensorFile(Path.GetFullPath(resumePath)) : null;
@@ -89,6 +91,7 @@ internal static class SdAllAdapterDiagnostic
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
             object? inMemoryReload = null;
+            object? trainingResumeRoundtrip = null;
             if (bypassMode || existingFile is not null || algorithm is "LoHa" or "LoKr")
             {
                 using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
@@ -101,6 +104,65 @@ internal static class SdAllAdapterDiagnostic
                 using var predicted = inference.Forward(input,time,context,cancellationToken);
                 if (Hash(trained) != Hash(predicted)) throw new InvalidOperationException("In-memory reload differs from trained prediction.");
                 inMemoryReload = new { targets=snapshotPlan.Bindings.Count,tensors=snapshot.Tensors.Count,predictionExact=true,predictionSha256=Hash(predicted) };
+                if(resumeRoundtrip)
+                {
+                    using var resumed=new SdTrainableAdapterSet(model.Config,rank,317,device,existing:source,algorithm:algorithm,cancellationToken:cancellationToken);
+                    int resetDifferences=0,resetAlphas=0,retainedFactors=0;
+                    foreach(var(name,patch)in resumed.Patches)
+                    {
+                        if(patch is TrainableDifferencePatch difference)
+                        {
+                            if(difference.Difference.count_nonzero().item<long>()!=0)throw new InvalidOperationException("Source-reset difference is nonzero.");
+                            resetDifferences++;continue;
+                        }
+                        var lokr=patch as TrainableLokrPatch??throw new InvalidOperationException("LoKr resume selected an unexpected provider.");
+                        foreach(var(key,value)in lokr.NamedParameters)
+                        {
+                            if(key=="alpha")
+                            {
+                                if(value.item<float>()!=1)throw new InvalidOperationException("Ordinary export alpha was not reset by source factory.");
+                                resetAlphas++;continue;
+                            }
+                            if(Hash(value)!=Hash(snapshot.Tensors["diffusion_model."+name[..^7]+"."+key]))throw new InvalidOperationException("Resume changed an existing LoKr factor.");
+                            retainedFactors++;
+                        }
+                    }
+                    var resumedLeaves=resumed.Patches.SelectMany(p=>p.Value.Parameters.Select(v=>(Name:p.Key,Value:v,
+                        IsAlpha:p.Value is TrainableLokrPatch k&&ReferenceEquals(v,k.NamedParameters["alpha"])))).ToArray();
+                    var beforeResume=resumedLeaves.Select(p=>Hash(p.Value)).ToArray();var resumeSteps=new List<object>();
+                    using var resumedOptimizer=new LoraTrainingOptimizer(resumed.Patches.Values,"SGD",.01);
+                    for(int step=0;step<2;step++)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();using var iteration=NewDisposeScope();
+                        progress.WriteLine($"SD LoKr memory resume: {step+1}/2, {resumed.Patches.Count} targets on {requested}");
+                        using var resumedPrediction=model.ForwardForTraining(input,time,context,resumed.Patches,4L*1024*1024*1024,cancellationToken);
+                        using var resumedLoss=TrainingLoss.Calculate("MSE",resumedPrediction,target);resumedOptimizer.Accumulate(resumedLoss,cancellationToken);
+                        int finite=0,nonzero=0,nullAlpha=0;
+                        foreach(var leaf in resumedLeaves)
+                        {
+                            using var gradient=leaf.Value.grad;
+                            if(leaf.IsAlpha){if(gradient is not null)throw new InvalidOperationException("Direct resumed LoKr alpha acquired a gradient.");nullAlpha++;continue;}
+                            if(gradient is null||!gradient.isfinite().all().item<bool>())throw new ArithmeticException("Invalid resumed gradient: "+leaf.Name);
+                            finite++;if(gradient.abs().sum().item<float>()>0)nonzero++;
+                        }
+                        resumedOptimizer.Step(cancellationToken);resumeSteps.Add(new{step=step+1,loss=resumedLoss.item<float>(),finiteGradientLeaves=finite,nonzeroGradientLeaves=nonzero,nullAlphaGradients=nullAlpha});
+                    }
+                    int changedAfterResume=resumedLeaves.Where((leaf,index)=>Hash(leaf.Value)!=beforeResume[index]).Count();
+                    if(changedAfterResume==0)throw new InvalidOperationException("Resumed training did not update any parameter.");
+                    using var resumedOutput=model.ForwardForTraining(input,time,context,resumed.Patches,4L*1024*1024*1024,cancellationToken);
+                    using var resumedSnapshot=LoraTrainingState.Capture(resumed.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
+                    using var resumedSource=new NativeLoraTensorSource(resumedSnapshot.Tensors,cancellationToken:cancellationToken);
+                    var resumedPlan=LoraFileLoader.Inspect(resumedSource,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
+                    using var resumedFrozen=LoraFileLoader.Load(resumedSource,resumedPlan,cancellationToken:cancellationToken);
+                    using var resumedModel=resumedFrozen.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
+                    using var resumedReload=resumedModel.Forward(input,time,context,cancellationToken);
+                    if(Hash(resumedOutput)!=Hash(resumedReload))throw new InvalidOperationException("Resumed trained prediction differs after inference reload.");
+                    using var stillUnchanged=model.Forward(input,time,context,cancellationToken);
+                    if(Hash(stillUnchanged)!=baseHash)throw new InvalidOperationException("Resumed training modified the base model.");
+                    trainingResumeRoundtrip=new{source="in-memory native factors",resumedTargets=resumed.ResumedTargets.Count,retainedFactors,resetDifferences,resetAlphas,
+                        ignoredKeys=resumed.IgnoredExistingKeys.Count,parameterBytes=resumed.ParameterBytes,changedParameterCount=changedAfterResume,steps=resumeSteps,
+                        resumed.InitialCpuRandomStateSha256,resumed.InitialDeviceRandomStateSha256,baseUnchanged=true,reloadPredictionExact=true,predictionSha256=Hash(resumedReload)};
+                }
             }
             object? export=null;
             if(adapterPath is not null)
@@ -143,7 +205,7 @@ internal static class SdAllAdapterDiagnostic
                 checkpointBytes = file.FileSizeBytes, backend = requested, dtype = "Float32", tf32Allowed = false, seed = 317, rank,
                 algorithm, optimizer = "SGD", learningRate = .01, targetCount = adapters.Patches.Count, parameterCount = leaves.Length,
                 alphaParameters = leaves.Count(p => p.IsAlpha), adapterParameterBytes = adapters.ParameterBytes, changedParameterCount = changed,
-                adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true, export, bypassMode, inMemoryReload,
+                adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true, export, bypassMode, inMemoryReload, trainingResumeRoundtrip,
                 resume = existingFile is null ? null : new { fileSha256=resumeSha256, factorTargets=adapters.ResumedTargets.Count,
                     ignoredKeys=adapters.IgnoredExistingKeys.Count, rules="Frozen weight factory only: norm/bias reset and module.weight.alpha lookup. Filename step counter is tested separately, not used by this diagnostic." },
                 inputRecipe = new { shape = new[] { 1, 4, 8, 8 }, inputSeed = 511, contextShape = new[] { 1, 3, 768 }, contextSeed = 512, targetSeed = 513, timestep = 17.25 },

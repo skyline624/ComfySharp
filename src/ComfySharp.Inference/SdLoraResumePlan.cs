@@ -4,7 +4,8 @@ namespace ComfySharp.Inference;
 /// alpha keys and difference loading. Metadata only; supplied source is borrowed.</summary>
 internal sealed class SdLoraResumePlan
 {
-    internal sealed record Factors(string Up, string Down, long Rank, LohaFactorKeys? Loha=null, long ParameterElements=0);
+    internal sealed record Factors(string? Up, string? Down, long Rank, LohaFactorKeys? Loha=null, long ParameterElements=0,
+        IReadOnlyDictionary<string,string>? Lokr=null);
     internal Dictionary<string, Factors> Targets { get; } = new(StringComparer.Ordinal);
     internal Dictionary<string, string> Alphas { get; } = new(StringComparer.Ordinal);
     internal IReadOnlyList<string> IgnoredKeys { get; private set; } = Array.Empty<string>();
@@ -41,7 +42,7 @@ internal sealed class SdLoraResumePlan
                 plan.Targets.Add(name,new(up,down,d.Shape[0])); consumed.Add(up); consumed.Add(down);
                 selected = true; break;
             }
-            // Training stops at the first provider (LoRA, then LoHa), unlike inference load_lora.
+            // Training stops at the first provider (LoRA, then LoHa, then LoKr), unlike inference load_lora.
             if(!selected&&source.Tensors.ContainsKey(prefix+".hada_w1_a"))
             {
                 string Required(string suffix)
@@ -65,8 +66,36 @@ internal sealed class SdLoraResumePlan
                 long count=checked(Elements(a)+Elements(b)+Elements(c)+Elements(d)+(t1 is null?0:Elements(t1)+Elements(t2!))+1);
                 plan.Targets.Add(name,new(first,second,b[0],loha,count));selected=true;
             }
+            if(!selected&&new[]{"lokr_w1","lokr_w2","lokr_w1_a","lokr_w2_a"}.Any(k=>source.Tensors.ContainsKey(prefix+"."+k)))
+            {
+                var keys=new Dictionary<string,string>(StringComparer.Ordinal);
+                bool Present(string key)=>source.Tensors.ContainsKey(prefix+"."+key);
+                void Required(string key)
+                {
+                    string full=prefix+"."+key;
+                    if(!source.Tensors.TryGetValue(full,out var value))throw new InvalidDataException("Missing LoKr resume factor: "+full);
+                    if(value.DType is not("F32" or "F16" or "BF16" or "F64")||value.Shape.Count<2||value.Shape.Any(n=>n<=0)||
+                        key is not("lokr_w2" or "lokr_t2")&&value.Shape.Count!=2)
+                        throw new InvalidDataException("LoKr resume requires nonempty floating-point factors with source dimensions: "+full);
+                    keys.Add(key,full);consumed.Add(full);
+                }
+                // LokrDiff registers decomposed pairs even when direct sides win.
+                // Orphan b/core tensors are loaded by LoKrAdapter but never registered.
+                if(Present("lokr_w1_a")){Required("lokr_w1_a");Required("lokr_w1_b");}
+                if(Present("lokr_w2_a")){Required("lokr_w2_a");Required("lokr_w2_b");if(Present("lokr_t2"))Required("lokr_t2");}
+                if(Present("lokr_w1"))Required("lokr_w1");if(Present("lokr_w2"))Required("lokr_w2");
+                long Elements(IReadOnlyList<long> dims)=>dims.Aggregate(1L,(x,y)=>checked(x*y));
+                try
+                {
+                    var rebuilt=LokrMath.ReconstructedShape(keys.ToDictionary(p=>p.Key,p=>source.Tensors[p.Value].Shape,StringComparer.Ordinal));
+                    if(Elements(rebuilt)!=Elements(shape))throw new ArgumentException("Reconstructed element count differs.");
+                }
+                catch(ArgumentException error){throw new InvalidDataException("LoKr resume geometry differs from the target: "+prefix,error);}
+                long count=checked(keys.Values.Sum(k=>Elements(source.Tensors[k].Shape))+1);
+                plan.Targets.Add(name,new(null,null,0,ParameterElements:count,Lokr:new System.Collections.ObjectModel.ReadOnlyDictionary<string,string>(keys)));selected=true;
+            }
             // Later adapter loaders would claim these formats; never silently replace them by fresh LoRA.
-            bool otherAlgorithm = new[]{".lokr_w1", ".lokr_w2", ".lokr_w1_a", ".lokr_w2_a", ".a1.weight"}
+            bool otherAlgorithm = new[]{".a1.weight"}
                 .Any(suffix => source.Tensors.ContainsKey(prefix + suffix)) ||
                 source.Tensors.TryGetValue(prefix + ".oft_blocks",out var blocks) && blocks.Shape.Count is 3 or 4;
             if (!selected && otherAlgorithm)

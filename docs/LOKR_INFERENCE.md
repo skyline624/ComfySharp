@@ -58,9 +58,10 @@ sauvegardé lors de ce diagnostic. Voir [la preuve détaillée](qualification/lo
 dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd-all-adapter-train --algorithm LoKr --rank 7 --checkpoint <checkpoint-existant.safetensors> --report <nouveau.json> --device cpu
 ```
 
-Ce parcours utilise des entrées de prédiction synthétiques réduites avec de vrais
-poids. Il ne valide pas un entraînement complet sur images, les gradients du modèle
-préentraîné contre ComfyUI, la reprise d'entraînement LoKr, le bypass, les autres
+La [reprise d'entraînement LoKr](LOKR_RESUME.md) possède maintenant un chemin
+distinct et ses propres références. Ce parcours utilise des entrées de prédiction
+synthétiques réduites avec de vrais poids. Il ne valide pas un entraînement complet
+sur images, les gradients du modèle préentraîné contre ComfyUI, le bypass, les autres
 précisions ou CUDA/MPS. Les 155 tests ne qualifient aucune famille complète.
 Le nœud public `TrainLoraNode`, les workflows réels et les plateformes restent
 requis pour la V1. Le bypass LoKr est refusé explicitement tant qu'il n'est pas porté.

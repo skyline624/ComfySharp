@@ -221,3 +221,10 @@ The separate collectors `lokr.py`, `lokr_factory.py` and `lokr_inference.py` und
 `labs/lora-training-source` execute those source definitions to produce static
 fixtures. Native ownership and explicit error propagation are C# adaptations;
 see [training](docs/LOKR_TRAINING.md) and [inference scope](docs/LOKR_INFERENCE.md).
+
+LoKr resume selection and creation adapt `_create_weight_adapter` and
+`_setup_lora_adapters` in frozen `comfy_extras/nodes_train.py`, and
+`LoKrAdapter.load/to_train` in `comfy/weight_adapter/lokr.py`, under the same
+ComfyUI GPLv3-or-later provenance. The separate `lokr_resume.py` source collector
+provides complete reduced SD parameter and RNG references. See
+[resume scope](docs/LOKR_RESUME.md), including inactive/orphan factors and reset rules.

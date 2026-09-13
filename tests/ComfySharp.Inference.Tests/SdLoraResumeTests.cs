@@ -119,7 +119,7 @@ public sealed class SdLoraResumeTests
     }
 
     [Theory]
-    [InlineData("missing")] [InlineData("shape")] [InlineData("mid")] [InlineData("other")] [InlineData("alpha")] [InlineData("nonfinite")]
+    [InlineData("missing")] [InlineData("shape")] [InlineData("mid")] [InlineData("other")] [InlineData("incomplete-lokr")] [InlineData("alpha")] [InlineData("nonfinite")]
     public void Invalid_resume_is_atomic_and_preserves_the_source(string kind)
     {
         NativeRuntimeBootstrap.Initialize();long before=Tensor.TotalCount;
@@ -130,7 +130,8 @@ public sealed class SdLoraResumeTests
             if(kind=="missing")values.Remove(prefix+".lora_down.weight");
             if(kind=="shape")values[prefix+".lora_down.weight"]=ones([1,12]);
             if(kind=="mid")values[prefix+".lora_mid.weight"]=ones([1,1,1,1]);
-            if(kind=="other"){values.Clear();values[prefix+".lokr_w1"]=ones([4,1]);}
+            if(kind=="other"){values.Clear();values[prefix+".oft_blocks"]=ones([1,2,2]);} // OFT resume remains unported.
+            if(kind=="incomplete-lokr"){values.Clear();values[prefix+".lokr_w1"]=ones([4,1]);} // Recognized now, but incomplete geometry.
             if(kind=="alpha")values[prefix+".weight.alpha"]=ones([2]);
             if(kind=="nonfinite")values[prefix+".weight.alpha"]=tensor(float.NaN);
             using var source=new NativeLoraTensorSource(values);
