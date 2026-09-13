@@ -1,0 +1,146 @@
+{
+  "scope": "LoHa factor loading, ordinary/DoRA arithmetic and linear/Conv2d inference bypass; trained SD1.5 export and reload",
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "fixture": {
+    "sha256": "d5d66d9add1dc642159f64f56864e8cea08522d47af61b24cf5be3b88d1cd426",
+    "arithmeticCases": 48,
+    "loaderCases": 4,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "platform": "win-x64-cpu",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy/weight_adapter/loha.py": "579ca1e33e0d244e0d7eedd30fb727913341f8e7bfbd74b51221f567612286d5",
+      "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+    }
+  },
+  "localTests": {
+    "lohaInferencePassed": 53,
+    "lohaTrainingPassed": 23,
+    "ordinaryInferencePassed": 1027,
+    "failed": 0,
+    "skipped": 0,
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "pretrainedDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 2,
+    "algorithm": "LoHa",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1814,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 18707960,
+    "changedParameterCount": 1463,
+    "InitialCpuRandomStateSha256": "92d7e2ab9de9e3b5143060f3ca60026d0b51fd0456f40a087e61279f6812e5df",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 1532,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 0.9327829,
+        "finiteGradientLeaves": 1532,
+        "nonzeroGradientLeaves": 1524,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": {
+      "adapter": "sd15-loha-trained-cpu.safetensors",
+      "adapterSha256": "084f56c9e1105a7d32aa6bca25309ca22173d61864ed238144bb4edc4bc4387a",
+      "bytes": 18946320,
+      "tensors": 1814,
+      "targets": 686,
+      "predictionSha256": "a40be83364e956b91d0609a2769ee4698571df31ee4f5995d46516e87020df4e",
+      "reloadPredictionExact": true
+    },
+    "bypassMode": false,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1814,
+      "predictionExact": true,
+      "predictionSha256": "a40be83364e956b91d0609a2769ee4698571df31ee4f5995d46516e87020df4e"
+    },
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 58.1946715,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa alpha has no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "independentExportVerification": {
+    "status": "ok",
+    "sourceCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+    "sourceHashes": {
+      "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+      "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+      "comfy/weight_adapter/loha.py": "579ca1e33e0d244e0d7eedd30fb727913341f8e7bfbd74b51221f567612286d5",
+      "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+    },
+    "adapterSha256": "084f56c9e1105a7d32aa6bca25309ca22173d61864ed238144bb4edc4bc4387a",
+    "payloadCount": 1814,
+    "allPayloadHashesMatch": true,
+    "sourceAcceptedTargets": 686,
+    "kinds": {
+      "loha": 282,
+      "weightDifferences": 109,
+      "biasDifferences": 295
+    },
+    "sourceAdditiveApplicationsExact": true,
+    "scope": "Restricted independent F32 byte decoder, actual frozen mixed loader and additive application. Does not claim safetensors-package, pretrained source-forward/gradient or full training-node qualification."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newAdapterFiles": 1,
+  "ci": {
+    "status": "not-yet-submitted"
+  },
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "LoHa trainable resume",
+    "Full TrainLoraNode and options",
+    "Mixed precision, offload and checkpointing",
+    "Inference bypass Conv1d/Conv3d and other module geometries",
+    "Real image datasets and pretrained source-gradient comparison",
+    "CUDA/MPS and required platform qualification",
+    "Previously observed Linux numerical and macOS CLIP failures"
+  ]
+}

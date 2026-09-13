@@ -3,7 +3,8 @@ namespace ComfySharp.Inference;
 
 public sealed record LoraTarget(string Component,string Weight,IReadOnlyList<long> Shape);
 public sealed record LoraAlias(string Prefix,LoraTarget Target);
-public sealed record LoraBinding(string Prefix,LoraTarget Target,string? Up,string? Down,string? Mid,string? Alpha,string? Dora,string? Difference=null);
+public sealed record LohaFactorKeys(string W2A,string W2B,string? T1=null,string? T2=null);
+public sealed record LoraBinding(string Prefix,LoraTarget Target,string? Up,string? Down,string? Mid,string? Alpha,string? Dora,string? Difference=null,LohaFactorKeys? Loha=null);
 
 /// <summary>Metadata-only selection tied to one tensor source. Alias order is authoritative:
 /// later aliases overwrite earlier bindings for the same target, as frozen load_lora does.</summary>
@@ -61,6 +62,26 @@ public static class LoraFileLoader
                 var identity=(target.Component,target.Weight);
                 if(selected.TryGetValue(identity,out var prior))shadowed.Add(prior.Prefix);
                 selected[identity]=binding;break;
+            }
+            // Frozen load_lora continues through providers: LoHa overwrites LoRA for the same alias.
+            if(file.Tensors.ContainsKey(alias.Prefix+".hada_w1_a"))
+            {
+                string Required(string suffix)
+                {
+                    string key=alias.Prefix+suffix;
+                    if(!file.Tensors.ContainsKey(key))throw new InvalidDataException($"LoHa adapter '{alias.Prefix}' is missing '{key}'.");
+                    return key;
+                }
+                string? Present(string suffix)=>file.Tensors.ContainsKey(alias.Prefix+suffix)?alias.Prefix+suffix:null;
+                var first=Present(".hada_t1");
+                var factors=new LohaFactorKeys(Required(".hada_w2_a"),Required(".hada_w2_b"),first,first is null?null:Required(".hada_t2"));
+                var binding=new LoraBinding(alias.Prefix,target,Required(".hada_w1_a"),Required(".hada_w1_b"),null,Present(".alpha"),Present(".dora_scale"),Loha:factors);
+                Validate(file,binding);
+                foreach(string key in FactorKeys(binding))claimed.Add(key);
+                if(binding.Alpha is not null)claimed.Add(binding.Alpha);
+                var identity=(target.Component,target.Weight);
+                if(selected.TryGetValue(identity,out var prior)&&prior.Prefix!=alias.Prefix)shadowed.Add(prior.Prefix);
+                selected[identity]=binding;
             }
             void Difference(string suffix,bool bias=false)
             {
@@ -120,7 +141,11 @@ public static class LoraFileLoader
                     var value=file.ReadTensor(binding.Alpha,cancellationToken).to_type(ScalarType.Float64);alpha=value.item<double>();
                     if(!double.IsFinite(alpha.Value))throw new InvalidDataException($"Nonfinite LoRA alpha '{binding.Alpha}'.");
                 }
-                var patch=new LoraWeightPatch(up,down,strengths.GetValueOrDefault(binding.Target.Component,1.0),alpha,mid,dora);
+                double strength=strengths.GetValueOrDefault(binding.Target.Component,1.0);
+                var patch=binding.Loha is { } loha
+                    ?LoraWeightPatch.FromLoha(up,down,file.ReadTensor(loha.W2A,cancellationToken),file.ReadTensor(loha.W2B,cancellationToken),strength,alpha,
+                        loha.T1 is null?null:file.ReadTensor(loha.T1,cancellationToken),loha.T2 is null?null:file.ReadTensor(loha.T2,cancellationToken),dora)
+                    :new LoraWeightPatch(up,down,strength,alpha,mid,dora);
                 patches.Add((binding.Target.Component,binding.Target.Weight),patch);
             }
             cancellationToken.ThrowIfCancellationRequested();var result=new LoraAdapterSet(plan,patches);patches=[];return result;
@@ -129,7 +154,12 @@ public static class LoraFileLoader
     }
 
     private static IEnumerable<string> FactorKeys(LoraBinding binding)
-    {if(binding.Difference is { } diff){yield return diff;yield break;}yield return binding.Up!;yield return binding.Down!;if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;}
+    {
+        if(binding.Difference is { } diff){yield return diff;yield break;}
+        yield return binding.Up!;yield return binding.Down!;
+        if(binding.Loha is { } loha){yield return loha.W2A;yield return loha.W2B;if(loha.T1 is not null)yield return loha.T1;if(loha.T2 is not null)yield return loha.T2;}
+        if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;
+    }
     private static long Elements(IReadOnlyList<long> shape)=>shape.Aggregate(1L,(n,d)=>checked(n*d));
     private static void Validate(ILoraTensorSource file,LoraBinding binding)
     {
@@ -146,15 +176,26 @@ public static class LoraFileLoader
         }
         if(binding.Target.Shape.Count<2)throw new InvalidDataException("LoRA factors require a target with at least two dimensions.");
         var up=file.Tensors[binding.Up!].Shape;var down=file.Tensors[binding.Down!].Shape;
-        if(up.Count<2||down.Count<2)throw new InvalidDataException("LoRA up/down factors require at least two dimensions.");
-        long columns=Elements(down)/down[0];
-        if(binding.Mid is not null)
+        if(binding.Loha is { } loha)
         {
-            var mid=file.Tensors[binding.Mid].Shape;
-            if(mid.Count!=4||Elements(down)/down[1]!=mid[1]||mid[0]!=down[0])throw new InvalidDataException("LoCon mid/down shapes are incompatible.");
-            columns=checked(down[1]*mid[2]*mid[3]);
+            long[] shape;
+            try {shape=LohaMath.ReconstructedShape(up,down,file.Tensors[loha.W2A].Shape,file.Tensors[loha.W2B].Shape,
+                loha.T1 is null?null:file.Tensors[loha.T1].Shape,loha.T2 is null?null:file.Tensors[loha.T2].Shape);}
+            catch(ArgumentException error){throw new InvalidDataException("LoHa factor geometry is incompatible.",error);}
+            if(Elements(shape)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoHa factors cannot reshape to '{binding.Target.Weight}'.");
         }
-        if(Elements(up)/up[0]!=down[0]||checked(up[0]*columns)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoRA factors cannot reshape to '{binding.Target.Weight}'.");
+        else
+        {
+            if(up.Count<2||down.Count<2)throw new InvalidDataException("LoRA up/down factors require at least two dimensions.");
+            long columns=Elements(down)/down[0];
+            if(binding.Mid is not null)
+            {
+                var mid=file.Tensors[binding.Mid].Shape;
+                if(mid.Count!=4||Elements(down)/down[1]!=mid[1]||mid[0]!=down[0])throw new InvalidDataException("LoCon mid/down shapes are incompatible.");
+                columns=checked(down[1]*mid[2]*mid[3]);
+            }
+            if(Elements(up)/up[0]!=down[0]||checked(up[0]*columns)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoRA factors cannot reshape to '{binding.Target.Weight}'.");
+        }
         if(binding.Alpha is not null)
         {
             var alpha=file.Tensors[binding.Alpha];

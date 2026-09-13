@@ -6,8 +6,8 @@
     "fixtureSha256": "cfa3149c52cb10031e92cb648543a82d143aa9a81bb94f8110f83e3b61c288db",
     "cases": 16,
     "updates": 32,
-    "absoluteTolerance": 3E-05,
-    "relativeTolerance": 3E-05,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
     "sourceBackwardPreserved": true,
     "alphaGradient": "null"
   },
@@ -130,11 +130,11 @@
     "familyOrPlatformQualification": false
   },
   "remaining": [
-    "LoHa inference loader and DoRA/bypass",
     "LoHa resume factory",
     "Full TrainLoraNode and options",
     "Mixed precision, offload, checkpointing",
     "Real image datasets and pretrained source-gradient comparisons",
     "CPU/CUDA/MPS platform qualification"
-  ]
+  ],
+  "inferenceFollowup": "loha-inference.json"
 }

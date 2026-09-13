@@ -134,6 +134,19 @@ public sealed class LohaTrainingTests
             }
             optimizer.Step(); using var changed = model.ForwardForTraining(input, time, context, patches);
             Assert.NotEqual(prediction.bytes.ToArray(), changed.bytes.ToArray());
+            using var state=LoraTrainingState.Capture(patches,ScalarType.Float32);
+            using var source=new NativeLoraTensorSource(state.Tensors);
+            var plan=LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(config));
+            using var frozen=LoraFileLoader.Load(source,plan);
+            using var baked=frozen.ApplyTo(model);
+            using var bypass=frozen.ApplyBypassTo(model,maxPatchedWeightBytes:0);
+            using var retained=bypass.Retain();using var moved=bypass.To(CPU);
+            frozen.Dispose();source.Dispose();state.Dispose();bypass.Dispose();
+            using var bakedPrediction=baked.Forward(input,time,context);
+            Assert.Equal(changed.bytes.ToArray(),bakedPrediction.bytes.ToArray());
+            using var bypassPrediction=retained.Forward(input,time,context);using var movedPrediction=moved.Forward(input,time,context);
+            Assert.Equal(bypassPrediction.bytes.ToArray(),movedPrediction.bytes.ToArray());
+            Assert.True(allclose(bakedPrediction,bypassPrediction,rtol:3e-5,atol:3e-5));
             Assert.Throws<NotSupportedException>(() => model.ForwardForTraining(input, time, context, patches, bypassMode: true));
             using var unchanged = model.Forward(input, time, context); Assert.Equal(baseline.bytes.ToArray(), unchanged.bytes.ToArray());
         }

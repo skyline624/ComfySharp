@@ -1,12 +1,12 @@
 using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
-/// <summary>An immutable, independently disposable snapshot of LoRA factors or an additive difference for inference baking.
+/// <summary>An immutable, independently disposable snapshot of LoRA/LoHa factors or an additive difference for inference baking.
 /// Low-level trainable operations use LoraMath directly; this owner intentionally freezes its factors.</summary>
 public sealed class LoraWeightPatch : IDisposable
 {
     private readonly object gate=new();
-    private Tensor? up,down,mid,dora,difference;
+    private Tensor? up,down,mid,dora,difference,up2,down2,t1,t2;
     public double Strength { get; }
     public double? Alpha { get; }
     internal bool IsDifference { get { lock(gate) { ObjectDisposedException.ThrowIf(up is null && difference is null,this); return difference is not null; } } }
@@ -14,12 +14,16 @@ public sealed class LoraWeightPatch : IDisposable
     {
         using var owner = Retain(); using var scope = NewDisposeScope();
         if (owner.difference is { } diff) return FromDifference(diff.to(device), Strength);
+        if (owner.up2 is not null) return FromLoha(owner.up!.to(device), owner.down!.to(device), owner.up2.to(device), owner.down2!.to(device),
+            Strength, Alpha, owner.t1?.to(device), owner.t2?.to(device), owner.dora?.to(device));
         return new(owner.up!.to(device), owner.down!.to(device), Strength, Alpha, owner.mid?.to(device), owner.dora?.to(device));
     }
     internal Tensor ApplyBypass(Tensor input, Tensor baseOutput, IReadOnlyList<long>? kernelSize = null, long stride = 1, long padding = 0)
     {
         using var owner = Retain();
         if (owner.difference is not null) throw new InvalidOperationException("Additive differences use ordinary weight patching.");
+        if (owner.up2 is not null) return LohaMath.ApplyBypass(input, baseOutput, owner.up!, owner.down!, owner.up2, owner.down2!,
+            Strength, Alpha, owner.t1, owner.t2, kernelSize, stride, padding);
         // Frozen LoRAAdapter.h uses up/down/alpha/mid; its inherited g is identity, including when a DoRA field is present.
         return LoraBypassMath.Apply(input, baseOutput, owner.up!, owner.down!, Strength, Alpha, owner.mid, kernelSize, stride, padding);
     }
@@ -33,6 +37,23 @@ public sealed class LoraWeightPatch : IDisposable
         this.difference=copy.DetachFromDisposeScope();Strength=strength;
     }
     public static LoraWeightPatch FromDifference(Tensor difference,double strength=1)=>new(difference,strength);
+    public static LoraWeightPatch FromLoha(Tensor w1a, Tensor w1b, Tensor w2a, Tensor w2b,
+        double strength=1, double? alpha=null, Tensor? t1=null, Tensor? t2=null, Tensor? doraScale=null)
+        => new(w1a,w1b,w2a,w2b,strength,alpha,t1,t2,doraScale);
+    private LoraWeightPatch(Tensor w1a, Tensor w1b, Tensor w2a, Tensor w2b,
+        double strength, double? alpha, Tensor? core1, Tensor? core2, Tensor? doraScale)
+    {
+        NativeRuntimeBootstrap.Initialize(); using var scope=NewDisposeScope(); using var noGrad=no_grad();
+        if(!double.IsFinite(strength)||alpha is not null&&!double.IsFinite(alpha.Value))throw new ArgumentOutOfRangeException(nameof(strength));
+        var a=Copy(w1a); var b=Copy(w1b); var c=Copy(w2a); var d=Copy(w2b);
+        var first=core1 is null?null:Copy(core1); var second=core2 is null?null:Copy(core2); var scale=doraScale is null?null:Copy(doraScale);
+        LohaMath.ReconstructedShape(a.shape,b.shape,c.shape,d.shape,first?.shape,second?.shape);
+        foreach(var value in new[]{a,b,c,d,first,second,scale}.OfType<Tensor>())
+            if(!value.isfinite().all().item<bool>())throw new InvalidDataException("LoHa snapshots require finite factors.");
+        up=a.DetachFromDisposeScope(); down=b.DetachFromDisposeScope(); up2=c.DetachFromDisposeScope(); down2=d.DetachFromDisposeScope();
+        t1=first?.DetachFromDisposeScope(); t2=second?.DetachFromDisposeScope(); dora=scale?.DetachFromDisposeScope();
+        Strength=strength; Alpha=alpha;
+    }
     public LoraWeightPatch(Tensor up,Tensor down,double strength=1,double? alpha=null,Tensor? mid=null,Tensor? doraScale=null)
     {
         NativeRuntimeBootstrap.Initialize(); using var scope=NewDisposeScope(); using var noGrad=no_grad();
@@ -45,7 +66,9 @@ public sealed class LoraWeightPatch : IDisposable
     {
         using var scope=NewDisposeScope();
         var u=source.up?.alias();var d=source.down?.alias();var m=source.mid?.alias();var s=source.dora?.alias();var diff=source.difference?.alias();
+        var u2=source.up2?.alias();var d2=source.down2?.alias();var first=source.t1?.alias();var second=source.t2?.alias();
         up=u?.DetachFromDisposeScope();down=d?.DetachFromDisposeScope();mid=m?.DetachFromDisposeScope();dora=s?.DetachFromDisposeScope();difference=diff?.DetachFromDisposeScope();
+        up2=u2?.DetachFromDisposeScope();down2=d2?.DetachFromDisposeScope();t1=first?.DetachFromDisposeScope();t2=second?.DetachFromDisposeScope();
         Strength=source.Strength;Alpha=source.Alpha;
     }
     public LoraWeightPatch Retain()
@@ -66,6 +89,8 @@ public sealed class LoraWeightPatch : IDisposable
         // Copy factors to the weight device only for this operation; source snapshots remain immutable.
         var u=operation.up!.to(weight.device);var d=operation.down!.to(weight.device);
         var m=operation.mid?.to(weight.device);var s=operation.dora?.to(weight.device);
+        if(operation.up2 is not null) return LohaMath.Apply(weight,u,d,operation.up2.to(weight.device),operation.down2!.to(weight.device),
+            Strength,Alpha,operation.t1?.to(weight.device),operation.t2?.to(weight.device),s,cancellationToken);
         return LoraMath.Apply(weight,u,d,Strength,Alpha,m,s,cancellationToken);
     }
     private static Tensor Copy(Tensor tensor)
@@ -77,8 +102,9 @@ public sealed class LoraWeightPatch : IDisposable
     }
     public void Dispose()
     {
-        Tensor? u,d,m,s,diff;
-        lock(gate){u=up;d=down;m=mid;s=dora;diff=difference;up=down=mid=dora=difference=null;}
+        Tensor? u,d,m,s,diff,u2,d2,first,second;
+        lock(gate){u=up;d=down;m=mid;s=dora;diff=difference;u2=up2;d2=down2;first=t1;second=t2;up=down=mid=dora=difference=up2=down2=t1=t2=null;}
         u?.Dispose();d?.Dispose();m?.Dispose();s?.Dispose();diff?.Dispose();
+        u2?.Dispose();d2?.Dispose();first?.Dispose();second?.Dispose();
     }
 }

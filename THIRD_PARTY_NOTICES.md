@@ -199,3 +199,9 @@ The trainable bypass adapts `LoraDiff.h` and `_setup_lora_adapters_bypass` from 
 The SD resume factory and filename counter adapt `_create_weight_adapter`, `_setup_lora_adapters`, `_load_existing_lora`, `LoraDiff` and `LoRAAdapter.load` from that frozen ComfyUI revision (ComfyUI contributors, GPLv3-or-later). Source comparison collectors are `labs/lora-training-source/resume.py` and `resume_steps.py`. [Resume scope](docs/LORA_RESUME.md) documents the preserved alpha lookup and reset rules, with remaining algorithms and full-node work explicit.
 
 `TrainableLohaPatch` and the SD LoHa factory adapt `LohaDiff`, `HadaWeight`, `HadaWeightTucker` and `LoHaAdapter.create_train` from frozen `comfy/weight_adapter/loha.py`, with `_setup_lora_adapters` in `comfy_extras/nodes_train.py` (same ComfyUI revision, contributors, GPLv3-or-later). The C# implementation adds owned snapshots and deterministic disposal and expresses the source's custom first-order Tucker derivatives with native stop-gradient operations. Separate source collectors are `labs/lora-training-source/loha.py` and `loha_factory.py`; see [scope](docs/LOHA_TRAINING.md).
+
+`LohaMath`, LoHa snapshots and loading adapt `LoHaAdapter.load/calculate_weight/h`,
+`weight_decompose` in `comfy/weight_adapter/base.py`, and `load_lora` in `comfy/lora.py`
+from the same frozen ComfyUI revision and GPLv3-or-later source. The separate
+`labs/lora-training-source/loha_inference.py` collector produces static references
+from those source definitions; see [inference scope](docs/LOHA_INFERENCE.md).

@@ -28,6 +28,16 @@ public static class LoraMath
         if (leftMatrix.shape[1]!=rightMatrix.shape[0] || checked(leftMatrix.shape[0]*rightMatrix.shape[1])!=weight.numel())
             throw new ArgumentException("LoRA factors do not match the destination weight shape.");
         var diff = mm(leftMatrix,rightMatrix).reshape(weight.shape);
+        var result = ApplyDifference(weight, diff, strength, scale, doraScale);
+        cancellationToken.ThrowIfCancellationRequested();
+        if (!result.isfinite().all().item<bool>()) throw new ArithmeticException("LoRA produced nonfinite weights.");
+        return result.DetachFromDisposeScope();
+    }
+
+    // Shared frozen weight_decompose contract for LoRA and LoHa. Inputs already validated by their callers.
+    internal static Tensor ApplyDifference(Tensor weight, Tensor diff, double strength, double scale, Tensor? doraScale)
+    {
+        using var scope = NewDisposeScope();
         Tensor result;
         if (doraScale is null) result = weight + (strength * scale) * diff;
         else
@@ -48,9 +58,7 @@ public static class LoraMath
             if(!normalized.shape.SequenceEqual(weight.shape)) throw new ArgumentException("DoRA scale broadcasts beyond the destination weight shape.",nameof(doraScale));
             result=strength==1.0 ? normalized : weight + strength * (normalized-weight);
         }
-        cancellationToken.ThrowIfCancellationRequested();
-        if (!result.isfinite().all().item<bool>()) throw new ArithmeticException("LoRA produced nonfinite weights.");
-        return result.DetachFromDisposeScope();
+        return result.MoveToOuterDisposeScope();
     }
 
     private static void Validate(Tensor tensor,string name)

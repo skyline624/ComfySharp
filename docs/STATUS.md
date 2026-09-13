@@ -1,5 +1,16 @@
 # État du port — 0.1.0-dev
 
+Le [chargement LoHa](LOHA_INFERENCE.md) et sa réutilisation couvrent maintenant
+les snapshots/fichiers, DoRA et le bypass d'inférence linear/Conv2d. Les
+53 nouveaux tests comprennent 48 références de calcul et quatre références
+de priorité du chargeur. **1 027 tests ordinaires d'inférence passent localement**.
+Le vrai SD1.5 CPU sauvegarde puis recharge un adapter
+de 18,95 Mo avec prédiction exactement identique après entraînement ; ComfyUI
+accepte les 686 cibles et les 1 814 hashes de tenseurs sont vérifiés indépendamment.
+Reprise entraînable, nœud public complet, autres géométries et qualifications
+de famille/plateforme restent ouverts. Les preuves antérieures ci-dessous
+décrivent les jalons précédents ; voir [la preuve actuelle](qualification/loha-inference.json).
+
 Les [fondations d'entraînement LoHa](LOHA_TRAINING.md) couvrent les facteurs
 simples/Tucker, les gradients personnalisés de la source, la fabrique SD et
 la sauvegarde. **974 tests ordinaires d'inférence passent localement**, dont

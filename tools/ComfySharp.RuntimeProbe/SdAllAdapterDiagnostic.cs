@@ -32,8 +32,8 @@ internal static class SdAllAdapterDiagnostic
             if (!bool.TryParse(options.GetValueOrDefault("--bypass", "false"), out bool bypassMode)) throw new ArgumentException("Bypass must be true or false.");
             string algorithm = options.GetValueOrDefault("--algorithm", "LoRA");
             if (algorithm is not ("LoRA" or "LoHa")) throw new NotSupportedException("Select LoRA or LoHa.");
-            if (algorithm == "LoHa" && (adapterPath is not null || bypassMode || options.ContainsKey("--resume")))
-                throw new NotSupportedException("This LoHa diagnostic covers fresh ordinary training. Inference reload/resume is not yet connected; source trainable LoHa has no bypass.");
+            if (algorithm == "LoHa" && (bypassMode || options.ContainsKey("--resume")))
+                throw new NotSupportedException("LoHa resume is not yet connected; source trainable LoHa has no bypass. Ordinary training, export and inference reload are supported.");
             cancellationToken.ThrowIfCancellationRequested();
             using var file = new SafeTensorFile(checkpoint);
             using var existingFile = options.TryGetValue("--resume",out var resumePath) ? new SafeTensorFile(Path.GetFullPath(resumePath)) : null;
@@ -87,7 +87,7 @@ internal static class SdAllAdapterDiagnostic
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
             object? inMemoryReload = null;
-            if (bypassMode || existingFile is not null)
+            if (bypassMode || existingFile is not null || algorithm == "LoHa")
             {
                 using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
                 using var snapshot = LoraTrainingState.Capture(adapters.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
@@ -114,6 +114,8 @@ internal static class SdAllAdapterDiagnostic
                         parameterHashes.Add(prefix+".lora_up.weight",Hash(lora.Up));parameterHashes.Add(prefix+".lora_down.weight",Hash(lora.Down));
                         parameterHashes.Add(prefix+".alpha",Hash(lora.AlphaParameter!));
                     }
+                    else if(patch is TrainableLohaPatch loha)
+                        foreach(var (key,value) in loha.NamedParameters)parameterHashes.Add(prefix+"."+key,Hash(value));
                 }
                 string trainedPrediction;
                 using(var noGrad=no_grad())

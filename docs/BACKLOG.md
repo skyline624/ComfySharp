@@ -2,9 +2,11 @@
 
 Lot 9 : les [fondations LoHa](LOHA_TRAINING.md) ajoutent la fabrique des 686 cibles
 SD, les gradients simples/Tucker, les snapshots et les exports aux clés Hadamard.
-Priorité suivante pour LoHa : chargeur d'inférence (DoRA/bypass inclus), reprise
-des facteurs existants, puis raccordement au nœud d'entraînement complet.
-Les 23 tests ciblés et le diagnostic préentraîné à entrées synthétiques ne
+Le [chargeur d'inférence](LOHA_INFERENCE.md) couvre maintenant DoRA et bypass
+linear/Conv2d, avec sauvegarde/rechargement de toutes les cibles sur SD1.5 CPU.
+Priorité suivante pour LoHa : reprise des facteurs existants, puis raccordement
+au nœud d'entraînement complet et autres géométries/précisions.
+Les tests ciblés et le diagnostic préentraîné à entrées synthétiques ne
 qualifient ni une famille ni les plateformes cibles.
 
 Lot 9 : [LoraModelLoader](LORA_MEMORY_LOADING.md) consomme le `LORA_MODEL` natif en modes ordinaire et bypass SD Float32. Le [bypass d'entraînement avec alpha](LORA_TRAINING_BYPASS.md) traverse le débruiteur et les lots ; la [reprise des facteurs LoRA](LORA_RESUME.md) reproduit maintenant les conversions, les règles alpha/différences et le RNG de la source. Priorités restantes : autres algorithmes d'adapters et leur reprise, précision mixte, vrai TrainLoraNode avec compteur, checkpointing/offload, autres architectures et parcours complet. Les 949 tests locaux et le diagnostic à entrées synthétiques ne ferment pas ces exigences.

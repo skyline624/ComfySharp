@@ -25,7 +25,7 @@ les autres rangs peuvent différer. Les géométries incompatibles sont refusée
 avant allocation des paramètres. Les dérivées d'ordre supérieur ne sont pas
 qualifiées. Le `LohaDiff` entraînable source n'implémente pas `h()` : demander
 le bypass d'entraînement produit une erreur explicite. Le bypass du chargeur
-LoHa d'inférence est une capacité distincte restant à porter.
+LoHa d'inférence est une [capacité distincte maintenant portée pour SD](LOHA_INFERENCE.md).
 
 `SdTrainableAdapterSet(..., algorithm: "LoHa")` crée les adapters de toutes les
 couches SD et conserve les différences de normalisation/biais. Les tirages
@@ -34,7 +34,7 @@ la source ; le quatrième facteur utilise une moyenne de 0,01. Le deuxième est
 nul. Aucun constructeur Linear ne consomme de RNG supplémentaire pour LoHa.
 Les générateurs privés et le budget couvrent les **686 cibles et 1 814 paramètres**.
 La reprise existante reste celle de LoRA ; les fichiers LoHa ne sont pas encore
-admis par les fabriques de reprise et les chargeurs d'inférence.
+admis par les fabriques de reprise. Le chargeur d'inférence accepte leurs facteurs.
 
 Les collecteurs Python sont limités au laboratoire séparé. Seize références
 matrice, Conv2d et Tucker 1D/2D comparent toutes les sorties, tous les gradients
@@ -54,10 +54,11 @@ dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd-all-adapter-
 Sur le vrai SD1.5, il effectue deux mises à jour sur toutes les cibles : 1 532
 gradients finis et 282 gradients alpha absents à chaque étape, avec base inchangée.
 Les entrées sont synthétiques et petites (latent 8 × 8, contexte brut). Aucun
-fichier de poids n'est écrit. Ce diagnostic ne qualifie ni une famille de modèles,
+fichier de poids n'est écrit sans l'option explicite `--adapter`. Le rechargement
+en mémoire est vérifié après les mises à jour. Ce diagnostic ne qualifie ni une famille de modèles,
 ni la qualité sur images, ni les gradients préentraînés par comparaison à ComfyUI.
 
-Restent requis : chargement/reprise LoHa, inférence ordinaire/DoRA/bypass,
+Restent requis : reprise LoHa et autres géométries/précisions d'inférence,
 intégration au nœud public `TrainLoraNode`, précision mixte, offload, datasets
 réels et preuves CPU/GPU sur les plateformes cibles. Cette étape ne ferme pas
 le lot 9 ni le catalogue complet de la V1.
