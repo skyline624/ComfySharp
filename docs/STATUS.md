@@ -1,21 +1,36 @@
 # État du port — 0.1.0-dev
 
+Le [bypass LoKr](LOKR_BYPASS.md) dispose de 252 tests locaux pour les opérateurs,
+gradients, erreurs source, snapshots et un U-Net réduit. **1 511 tests ordinaires
+d'inférence passent localement**, sans échec ni test ignoré ; le filtre CLIP stock
+reste séparé. Le vrai checkpoint SD1.5 partagé atteint deux pas d'entraînement,
+mais le contrôle exact après rechargement échoue : écart maximal `2,413988e-6`.
+Désactiver autograd seul ne le supprime pas ; figer les feuilles sur les mêmes
+storages le supprime. La cause au niveau des opérateurs reste à isoler. Ce
+diagnostic est conservé en échec, sans changer ses assertions ni les tolérances.
+La qualification réelle du bypass, sa validation de fichiers, OFT, le nœud public
+et les workflows d'entraînement sur images restent ouverts. Aucun nouveau poids
+n'est téléchargé, copié ou écrit pour ce jalon.
+
 Les [fondations LoKr](LOKR_TRAINING.md) et le [chargement d'inférence](LOKR_INFERENCE.md)
 couvrent reconstruction, gradients, quatre optimisateurs, fabrique SD, sauvegarde,
 DoRA et rechargement. La [reprise LoKr](LOKR_RESUME.md) ajoute les fichiers mixtes,
-les règles de réinitialisation et la poursuite d'entraînement. **1 259 tests
-ordinaires passent localement**, dont 52 tests d'entraînement, 155 d'inférence
+les règles de réinitialisation et la poursuite d'entraînement. Le jalon précédent
+validait 1 259 tests ordinaires localement, dont 52 tests d'entraînement, 155 d'inférence
 et 13 de reprise LoKr. Le checkpoint SD1.5 partagé a permis deux mises à jour sur
 686 cibles, suivies d'une reprise et de deux mises à jour supplémentaires.
 Les prédictions après rechargement en mémoire sont exactes et la base reste
-inchangée. Aucun nouveau fichier de poids n'a été écrit. Le bypass, le nœud public
-complet, les workflows sur images et la qualification des plateformes restent ouverts.
+inchangée. Ces prédictions exactes concernent le chemin ordinaire, sans bypass.
+Aucun nouveau fichier de poids n'a été écrit.
 
 La [CI du jalon d'inférence LoKr 34732341451](https://github.com/skyline624/ComfySharp/actions/runs/34732341451)
 valide 52 tests d'entraînement LoKr, 155 d'inférence LoKr et 87 tests LoHa sur chaque
 OS. Windows passe le job complet ; Linux garde 22 échecs sur 1 245 tests ordinaires,
-et Linux/macOS gardent des écarts CLIP stock. Ces résultats concernent le jalon
-précédent ; la CI de reprise doit encore être évaluée. Aucune plateforme n'est qualifiée.
+et Linux/macOS gardent des écarts CLIP stock. La [CI de reprise 34742063684](https://github.com/skyline624/ComfySharp/actions/runs/34742063684)
+valide ensuite 307 tests ciblés sur chaque OS, dont les 13 nouveaux cas de reprise.
+Windows passe le job complet ; Linux conserve 20 échecs ordinaires sur 1 259 cas,
+et macOS passe les tests ordinaires mais échoue sur CLIP stock. Ces résultats
+précèdent le bypass. Aucune plateforme n'est qualifiée.
 
 Le [diagnostic Windows 34730514656](https://github.com/skyline624/ComfySharp/actions/runs/34730514656)
 réussit sur AMD EPYC 7763 : chacun des trois profils passe 1 038 tests ordinaires

@@ -1,12 +1,21 @@
 # Backlog de migration
 
+Lot 9 : le [bypass LoKr](LOKR_BYPASS.md) ajoute 252 tests locaux (opérateurs,
+gradients, erreurs, snapshots et U-Net réduit). Le diagnostic sur le SD1.5 partagé
+échoue à l'égalité exacte après rechargement malgré deux pas d'entraînement.
+Priorités : isoler l'effet des feuilles `requires_grad` sur les opérateurs natifs,
+conserver cet échec comme tel, puis qualifier la validation des fichiers pour le
+mode bypass et les workflows réels. Les deux contrôles source isolés ne reproduisent
+pas l'écart du modèle complet. Les tolérances existantes restent verrouillées.
+
 Lot 9 : les [fondations LoKr](LOKR_TRAINING.md) et le [chargement d'inférence](LOKR_INFERENCE.md)
 couvrent facteurs directs/décomposés/Tucker, DoRA, initialisation SD et sauvegarde.
 52 tests d'entraînement et 155 tests d'inférence sont disponibles. Le diagnostic
 SD1.5 CPU entraîne 686 cibles puis retrouve exactement la prédiction après
 rechargement en mémoire, sans nouveau fichier de poids. La [reprise LoKr](LOKR_RESUME.md)
-ajoute 13 tests et un second entraînement SD1.5 en mémoire. Suite : bypass et
-workflow sur images ; OFT et le nœud public restent ouverts.
+ajoute 13 tests et un second entraînement SD1.5 en mémoire. Ces succès concernent
+le chemin ordinaire. Suite : qualification du bypass et workflows sur images ;
+OFT et le nœud public restent ouverts.
 
 Lot 9 : [LossGraphNode](LOSS_GRAPH.md) affiche les pertes via le Host et reçoit
 les métadonnées V3 séparément des arguments. Les 11 cas du graphe et trois cas

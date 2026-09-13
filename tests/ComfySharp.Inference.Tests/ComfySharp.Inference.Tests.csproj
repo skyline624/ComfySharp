@@ -25,6 +25,7 @@
     <EmbeddedResource Include="Fixtures/lokr-training.reference.json" />
     <EmbeddedResource Include="Fixtures/lokr-inference.reference.json" />
     <EmbeddedResource Include="Fixtures/lokr-resume.reference.json.gz" />
+    <EmbeddedResource Include="Fixtures/lokr-bypass.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/lokr-factory.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/loha-inference.reference.json" />
     <EmbeddedResource Include="Fixtures/loha-resume.reference.json.gz" />

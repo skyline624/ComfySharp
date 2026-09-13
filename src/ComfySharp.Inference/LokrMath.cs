@@ -18,14 +18,19 @@ public static class LokrMath
                 if(full.Count<2||full.Count>(second?5:2)||full.Any(v=>v<=0))throw new ArgumentException("Unsupported direct LoKr side shape.");
                 return full.ToArray();
             }
-            var left=Required(a);var right=Required(b);Matrix(left);Matrix(right);
+            var left=Required(a);var right=Required(b);Matrix(left);
+            if(!second)Matrix(right);
             if(second&&factors.TryGetValue("lokr_t2",out var core))
             {
+                Matrix(right);
                 if(core.Count!=4||core.Any(v=>v<=0)||core[0]!=left[0]||core[1]!=right[0])throw new ArgumentException("LoKr Tucker core differs from its factors.");
                 return[left[1],right[1],core[2],core[3]];
             }
+            // A spatial second B factor is used by LoKrAdapter.h. Its ordinary
+            // calculate_weight mm still fails as in source; only bypass accepts it.
+            if(second&&(right.Count<2||right.Count>5||right.Any(v=>v<=0)))throw new ArgumentException("Invalid LoKr second side factor.");
             if(left[1]!=right[0])throw new ArgumentException("LoKr matrix ranks differ.");
-            return[left[0],right[1]];
+            return new[]{left[0]}.Concat(right.Skip(1)).ToArray();
         }
         var first=Side("lokr_w1","lokr_w1_a","lokr_w1_b",false);var second=Side("lokr_w2","lokr_w2_a","lokr_w2_b",true);
         // Inference source appends axes ONLY for four-dimensional w2. Other

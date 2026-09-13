@@ -24,7 +24,7 @@ public sealed class LoraWeightPatch : IDisposable
     {
         using var owner = Retain();
         if (owner.difference is not null) throw new InvalidOperationException("Additive differences use ordinary weight patching.");
-        if (owner.lokr is not null) throw new NotSupportedException("LoKr inference bypass is not ported yet; baking cannot substitute for its operator path.");
+        if (owner.lokr is not null) return LokrBypassMath.Apply(input,baseOutput,owner.lokr,Strength,Alpha,kernelSize,stride,padding);
         if (owner.up2 is not null) return LohaMath.ApplyBypass(input, baseOutput, owner.up!, owner.down!, owner.up2, owner.down2!,
             Strength, Alpha, owner.t1, owner.t2, kernelSize, stride, padding);
         // Frozen LoRAAdapter.h uses up/down/alpha/mid; its inherited g is identity, including when a DoRA field is present.

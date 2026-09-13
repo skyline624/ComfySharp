@@ -66,7 +66,7 @@ public sealed class TrainableLoraPatch : TrainableWeightPatch
         return LoraMath.Apply(weight, operation.Up, operation.Down, alpha: operation.Alpha, cancellationToken: cancellationToken);
     }
     /// <summary>Frozen LoraDiff.h for new two-factor Float32 SD adapters, preserving trainable alpha.</summary>
-    internal Tensor ApplyBypass(Tensor input, Tensor baseOutput, IReadOnlyList<long>? kernelSize, long stride, long padding)
+    internal override Tensor ApplyBypass(Tensor input, Tensor baseOutput, IReadOnlyList<long>? kernelSize, long stride, long padding)
     {
         using var operation = Retain(); using var scope = NewDisposeScope();
         if (input.dtype != ScalarType.Float32 || baseOutput.dtype != ScalarType.Float32 || input.is_sparse || baseOutput.is_sparse)

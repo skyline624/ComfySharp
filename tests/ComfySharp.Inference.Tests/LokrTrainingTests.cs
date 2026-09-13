@@ -66,7 +66,7 @@ public sealed class LokrTrainingTests
         Assert.Equal(before,Tensor.TotalCount);
     }
     [Theory] [InlineData(false)] [InlineData(true)]
-    public void Unet_reconstruction_keeps_base_and_trains_factors_without_substituting_bypass(bool rebuilt)
+    public void Unet_reconstruction_and_bypass_keep_base_and_train_factors(bool rebuilt)
     {
         NativeRuntimeBootstrap.Initialize();long before=Tensor.TotalCount;int threads=get_num_threads();set_num_threads(1);
         try
@@ -95,7 +95,8 @@ public sealed class LokrTrainingTests
             // sides intentionally differ between source training and inference.
             Assert.True(allclose(changed,reloaded,rtol:3e-5,atol:3e-5));
             if(!rebuilt)Assert.Equal(changed.bytes.ToArray(),reloaded.bytes.ToArray());
-            Assert.Throws<NotSupportedException>(()=>model.ForwardForTraining(input,time,context,patches,bypassMode:true));
+            using var bypass=model.ForwardForTraining(input,time,context,patches,maxPatchedWeightBytes:0,bypassMode:true);
+            Assert.True(allclose(changed,bypass,rtol:3e-5,atol:3e-5));
             using var unchanged=model.Forward(input,time,context);Assert.Equal(baseline.bytes.ToArray(),unchanged.bytes.ToArray());
         }
         finally{set_num_threads(threads);}

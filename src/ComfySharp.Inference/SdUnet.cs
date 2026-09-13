@@ -73,8 +73,14 @@ public sealed class SdUnet : IDisposable
         return ForwardCore(latentNchw, timesteps, context, TrainableWeightPatch.Widen(patches), maxPatchedWeightBytes, cancellationToken, bypassMode);
     }
 
+    // Laboratory control: keep the identical training owners/operators while changing
+    // only autograd mode. Public training always enables autograd.
+    internal Tensor ForwardTrainingDiagnostic(Tensor latentNchw,Tensor timesteps,Tensor context,
+        IReadOnlyDictionary<string,TrainableWeightPatch> patches,long maxPatchedWeightBytes,CancellationToken cancellationToken,bool bypassMode,bool autogradEnabled)
+        =>ForwardCore(latentNchw,timesteps,context,patches,maxPatchedWeightBytes,cancellationToken,bypassMode,autogradEnabled);
+
     private Tensor ForwardCore(Tensor latentNchw, Tensor timesteps, Tensor context,
-        IReadOnlyDictionary<string, TrainableWeightPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken, bool bypassMode = false)
+        IReadOnlyDictionary<string, TrainableWeightPatch>? patches, long maxPatchedWeightBytes, CancellationToken cancellationToken, bool bypassMode = false,bool? diagnosticAutograd=null)
     {
         cancellationToken.ThrowIfCancellationRequested();
         using var source = RetainWeights();
@@ -85,7 +91,7 @@ public sealed class SdUnet : IDisposable
         InferenceDevice.RequireSame(source.Device, timesteps, nameof(timesteps));
         InferenceDevice.RequireSame(source.Device, context, nameof(context));
         using var scope = NewDisposeScope();
-        using var gradMode = set_grad_enabled(patches is not null);
+        using var gradMode = set_grad_enabled(diagnosticAutograd??(patches is not null));
         using var operation = patches is null ? source.Retain() : bypassMode
             ? source.WithTrainingBypassLora(patches, maxPatchedWeightBytes, cancellationToken)
             : source.WithTrainingLora(patches, maxPatchedWeightBytes, cancellationToken);

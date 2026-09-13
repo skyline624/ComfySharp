@@ -1,0 +1,332 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4"
+  },
+  "fixture": {
+    "compressedSha256": "1adbce39371b81dcd276d52debad4dc18b63a8794acaa88f8075486e0ad2017a",
+    "uncompressedSha256": "f0259fd9635ea6bc3833d74c7786915c33f8f35226c363bd053106af9c76dfe0",
+    "compressedBytes": 135195,
+    "uncompressedBytes": 616597,
+    "configurations": 125,
+    "inferenceSuccessCases": 85,
+    "inferenceExpectedErrorCases": 40,
+    "trainingSuccessCases": 85,
+    "trainingExpectedErrorCases": 40,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "factorSourceDtypes": [
+      "Float32",
+      "Float16",
+      "BFloat16"
+    ],
+    "activationAndTrainingDtype": "Float32"
+  },
+  "localTests": {
+    "targeted": {
+      "total": 252,
+      "passed": 252,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "ordinary": {
+      "total": 1511,
+      "passed": 1511,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests",
+    "platform": "win-x64",
+    "backend": "cpu"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "realWeightsDiagnostic": {
+    "status": "failed",
+    "failure": {
+      "status": "error",
+      "error": "InvalidOperationException",
+      "Message": "In-memory reload differs from trained prediction."
+    },
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "algorithm": "LoKr",
+    "bypassMode": true,
+    "rank": 7,
+    "seed": 317,
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "trainingStepsReached": 2,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "controls": [
+      {
+        "phase": "in-memory-reload-mismatch",
+        "algorithm": "LoKr",
+        "bypassMode": true,
+        "trainedSha256": "238604dadf377cdde7809aa22bd92afb56473acb3315ea1c65e99117ce415dba",
+        "reloadedSha256": "000ae8774b545dd1124e326038f9c0856c74fa448c567c87f91c9fa424b4a431",
+        "maxAbsoluteError": 2.413988e-06
+      },
+      {
+        "phase": "reload-stage-comparison",
+        "stages": [
+          {
+            "name": "timeEmbedding",
+            "elements": 1280,
+            "differing": 0,
+            "maxAbsoluteError": 0
+          },
+          {
+            "name": "down0",
+            "elements": 20480,
+            "differing": 19598,
+            "maxAbsoluteError": 4.5299530029296875e-06
+          },
+          {
+            "name": "down1",
+            "elements": 10240,
+            "differing": 9937,
+            "maxAbsoluteError": 6.4849853515625e-05
+          },
+          {
+            "name": "down2",
+            "elements": 5120,
+            "differing": 5039,
+            "maxAbsoluteError": 9.5367431640625e-06
+          },
+          {
+            "name": "down3",
+            "elements": 1280,
+            "differing": 1253,
+            "maxAbsoluteError": 1.3172626495361328e-05
+          },
+          {
+            "name": "middle",
+            "elements": 1280,
+            "differing": 1253,
+            "maxAbsoluteError": 1.9073486328125e-05
+          },
+          {
+            "name": "up0",
+            "elements": 5120,
+            "differing": 5023,
+            "maxAbsoluteError": 1.3828277587890625e-05
+          },
+          {
+            "name": "up1",
+            "elements": 20480,
+            "differing": 20354,
+            "maxAbsoluteError": 0.00012874603271484375
+          },
+          {
+            "name": "up2",
+            "elements": 40960,
+            "differing": 40660,
+            "maxAbsoluteError": 7.581710815429688e-05
+          }
+        ],
+        "observedTrainingSha256": "238604dadf377cdde7809aa22bd92afb56473acb3315ea1c65e99117ce415dba",
+        "observedInferenceSha256": "000ae8774b545dd1124e326038f9c0856c74fa448c567c87f91c9fa424b4a431"
+      },
+      {
+        "phase": "identical-training-owners-without-autograd",
+        "sha256": "238604dadf377cdde7809aa22bd92afb56473acb3315ea1c65e99117ce415dba",
+        "matchesInference": false,
+        "maxAbsoluteError": 2.413988e-06
+      },
+      {
+        "phase": "identical-training-storage-with-frozen-leaves",
+        "sha256": "000ae8774b545dd1124e326038f9c0856c74fa448c567c87f91c9fa424b4a431",
+        "matchesInference": true,
+        "maxAbsoluteError": 0
+      }
+    ],
+    "sourceIsolatedControls": [
+      {
+        "recipe": "periodic",
+        "results": [
+          {
+            "shape": [
+              320,
+              4,
+              3,
+              3
+            ],
+            "training": "613d3e05dc368d143fa1e1f712ad8c4e6bf090ed8b9463460f240fa3c32d1278",
+            "inference": "613d3e05dc368d143fa1e1f712ad8c4e6bf090ed8b9463460f240fa3c32d1278",
+            "disabled": "613d3e05dc368d143fa1e1f712ad8c4e6bf090ed8b9463460f240fa3c32d1278",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              320,
+              320,
+              3,
+              3
+            ],
+            "training": "a968d96c612e50d06700bf0f8f0e204c526b96acba6b9b3263f1c0913f5d0a1e",
+            "inference": "a968d96c612e50d06700bf0f8f0e204c526b96acba6b9b3263f1c0913f5d0a1e",
+            "disabled": "a968d96c612e50d06700bf0f8f0e204c526b96acba6b9b3263f1c0913f5d0a1e",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              640,
+              320,
+              3,
+              3
+            ],
+            "training": "08cdb16185d3a2ffde385c8e07e834a5b77631ca173f6c56968c35deab2eb632",
+            "inference": "08cdb16185d3a2ffde385c8e07e834a5b77631ca173f6c56968c35deab2eb632",
+            "disabled": "08cdb16185d3a2ffde385c8e07e834a5b77631ca173f6c56968c35deab2eb632",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              1280,
+              640,
+              3,
+              3
+            ],
+            "training": "66d49a4df02391d82a8aa189c24a2ddebdc7f5fc9cd03056d90e001809321484",
+            "inference": "66d49a4df02391d82a8aa189c24a2ddebdc7f5fc9cd03056d90e001809321484",
+            "disabled": "66d49a4df02391d82a8aa189c24a2ddebdc7f5fc9cd03056d90e001809321484",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              1280,
+              1280,
+              1,
+              1
+            ],
+            "training": "d3c1657ae59da715e7f4a9fb120d909452692148e46da6889a15454b0f350b84",
+            "inference": "d3c1657ae59da715e7f4a9fb120d909452692148e46da6889a15454b0f350b84",
+            "disabled": "d3c1657ae59da715e7f4a9fb120d909452692148e46da6889a15454b0f350b84",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          }
+        ]
+      },
+      {
+        "recipe": "random",
+        "results": [
+          {
+            "shape": [
+              320,
+              4,
+              3,
+              3
+            ],
+            "training": "9996e1258007ca2466c647e7072b9adf9ae779ed3c7549b1130aa91c8717132e",
+            "inference": "9996e1258007ca2466c647e7072b9adf9ae779ed3c7549b1130aa91c8717132e",
+            "disabled": "9996e1258007ca2466c647e7072b9adf9ae779ed3c7549b1130aa91c8717132e",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              320,
+              320,
+              3,
+              3
+            ],
+            "training": "81dcca81b5dc304c0801d1aba0020f5890364776e6ae6d89793370550d3283ed",
+            "inference": "81dcca81b5dc304c0801d1aba0020f5890364776e6ae6d89793370550d3283ed",
+            "disabled": "81dcca81b5dc304c0801d1aba0020f5890364776e6ae6d89793370550d3283ed",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              640,
+              320,
+              3,
+              3
+            ],
+            "training": "28fcd3d0ba4e9bbb30d5d68a3b0580ded86e3c18f5f66c564a1e089f4c68bbb8",
+            "inference": "28fcd3d0ba4e9bbb30d5d68a3b0580ded86e3c18f5f66c564a1e089f4c68bbb8",
+            "disabled": "28fcd3d0ba4e9bbb30d5d68a3b0580ded86e3c18f5f66c564a1e089f4c68bbb8",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              1280,
+              640,
+              3,
+              3
+            ],
+            "training": "e7d801208a8c25d4a37240387c68d1b2e752164cd1b04b59d610c2bd42004c3e",
+            "inference": "e7d801208a8c25d4a37240387c68d1b2e752164cd1b04b59d610c2bd42004c3e",
+            "disabled": "e7d801208a8c25d4a37240387c68d1b2e752164cd1b04b59d610c2bd42004c3e",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          },
+          {
+            "shape": [
+              1280,
+              1280,
+              1,
+              1
+            ],
+            "training": "7b15af0022108138f26251ba63788878c99f06ab6cd1cf345b4af1ea86b345e8",
+            "inference": "7b15af0022108138f26251ba63788878c99f06ab6cd1cf345b4af1ea86b345e8",
+            "disabled": "7b15af0022108138f26251ba63788878c99f06ab6cd1cf345b4af1ea86b345e8",
+            "maxDifference": 0.0,
+            "disabledMaxDifference": 0.0
+          }
+        ]
+      }
+    ],
+    "sourceMismatchReproduced": false,
+    "causeIdentified": false,
+    "strictReloadAssertionRetained": true,
+    "note": "Changing leaf requires_grad flags isolates a native execution difference on identical storage, but the responsible operator in the complete U-Net remains unidentified. No tolerance was changed and the failed reload is not qualified."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "realImageWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "Real SD1.5 strict reload mismatch investigation",
+    "Bypass-specific file geometry validation",
+    "Mixed precision and non-SD modules",
+    "Full TrainLoraNode and image workflows",
+    "Required GPU/OS qualification"
+  ],
+  "ci": {
+    "status": "not_run_for_this_change"
+  }
+}

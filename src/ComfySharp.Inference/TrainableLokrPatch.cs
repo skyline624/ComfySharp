@@ -102,6 +102,20 @@ public sealed class TrainableLokrPatch : TrainableWeightPatch
         var result=weight+diff.reshape(weight.shape).to_type(weight.dtype);
         cancellationToken.ThrowIfCancellationRequested();return result.MoveToOuterDisposeScope();
     }
+    internal override Tensor ApplyBypass(Tensor input,Tensor baseOutput,IReadOnlyList<long>? kernelSize,long stride,long padding)
+    {
+        using var owner=Retain();using var scope=NewDisposeScope();
+        int dims=LokrBypassMath.Validate(input,baseOutput,kernelSize,stride,padding);
+        if(input.dtype!=ScalarType.Float32)throw new ArgumentException("Trainable LoKr bypass currently requires Float32 activations.");
+        InferenceDevice.RequireSame(input.device,shared.Parameters[0],"factor");
+        var(first,second)=Sides();var grouped=LokrBypassMath.Group(input,first.shape[1],dims);
+        if(dims>0&&second.dim()==2)second=second.view(second.shape.Concat(Enumerable.Repeat(1L,dims)).ToArray());
+        var hidden=LokrBypassMath.Op(grouped,second,dims,stride,padding);
+        // Source LokrDiff.h always multiplies by the injected multiplier (1.0
+        // for the training group), retaining this native operation and its layout.
+        var delta=LokrBypassMath.Cross(hidden,first,input.shape[0],dims)*1.0;
+        return LokrBypassMath.Combine(delta,baseOutput).MoveToOuterDisposeScope();
+    }
     private void ThrowIfDisposed()=>ObjectDisposedException.ThrowIf(disposed,this);
     public override void Dispose(){lock(shared.Gate){if(disposed)return;disposed=true;if(--shared.Owners==0)foreach(var value in shared.Parameters)value.Dispose();}}
 }

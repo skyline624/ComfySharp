@@ -60,5 +60,6 @@ Ce diagnostic relit le checkpoint partagé et reprend l'adapter en mémoire. Il
 n'écrit aucun nouveau fichier de poids. Les entrées sont des tenseurs de prédiction
 synthétiques réduits ; ce n'est pas une qualification de workflow sur images,
 de gradients préentraînés contre Python, du nœud public complet ou des GPU.
-Les bypass LoKr d'entraînement et d'inférence, les autres précisions, OFT et la
-qualification des plateformes restent nécessaires à la V1.
+Les [bypass LoKr d'entraînement et d'inférence](LOKR_BYPASS.md) disposent depuis
+de tests d'opérateurs, mais leur diagnostic SD1.5 reste en échec. Leur qualification,
+les autres précisions, OFT et les plateformes restent nécessaires à la V1.

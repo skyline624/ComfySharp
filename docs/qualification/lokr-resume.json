@@ -222,6 +222,99 @@
     "Pretrained source gradients and required hardware/OS qualification"
   ],
   "ci": {
-    "status": "not-yet-evaluated"
+    "runId": 34742063684,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34742063684",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "LohaTraining": {
+          "total": 307,
+          "passed": 307,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrInferenceTests": {
+          "passed": 155,
+          "failed": 0,
+          "total": 155
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        "SdLokrResumeTests": {
+          "passed": 13,
+          "failed": 0,
+          "total": 13
+        },
+        "Inference": {
+          "total": 1259,
+          "passed": 1259,
+          "failed": 0,
+          "notExecuted": 0
+        }
+      },
+      "linux-x64": {
+        "LohaTraining": {
+          "total": 307,
+          "passed": 307,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrInferenceTests": {
+          "passed": 155,
+          "failed": 0,
+          "total": 155
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        "SdLokrResumeTests": {
+          "passed": 13,
+          "failed": 0,
+          "total": 13
+        },
+        "Inference": {
+          "total": 1259,
+          "passed": 1239,
+          "failed": 20,
+          "notExecuted": 0
+        }
+      },
+      "osx-arm64": {
+        "LohaTraining": {
+          "total": 307,
+          "passed": 307,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrInferenceTests": {
+          "passed": 155,
+          "failed": 0,
+          "total": 155
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        "SdLokrResumeTests": {
+          "passed": 13,
+          "failed": 0,
+          "total": 13
+        },
+        "Inference": {
+          "total": 1259,
+          "passed": 1259,
+          "failed": 0,
+          "notExecuted": 0
+        }
+      }
+    },
+    "note": "LohaTraining group contains 87 LoHa plus 52 LoKr training, 155 LoKr inference and 13 LoKr resume tests. Windows job passed; Linux numerical tests and macOS stock CLIP failed. No platform qualification."
   }
 }

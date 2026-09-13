@@ -228,3 +228,10 @@ LoKr resume selection and creation adapt `_create_weight_adapter` and
 ComfyUI GPLv3-or-later provenance. The separate `lokr_resume.py` source collector
 provides complete reduced SD parameter and RNG references. See
 [resume scope](docs/LOKR_RESUME.md), including inactive/orphan factors and reset rules.
+
+`LokrBypassMath`, trainable LoKr bypass and their U-Net integration adapt
+`LoKrAdapter.h` and `LokrDiff.h` from the same frozen `comfy/weight_adapter/lokr.py`
+(ComfyUI contributors, GPLv3-or-later). The independent `lokr_bypass.py` collector
+executes these definitions for grouped operators, gradients, SGD updates and
+explicit source failures. Native resource ownership and validation are C#
+adaptations. See [partial scope and failed model diagnostic](docs/LOKR_BYPASS.md).

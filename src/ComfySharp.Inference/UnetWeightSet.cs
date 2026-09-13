@@ -7,17 +7,17 @@ public sealed class UnetWeightSet : IDisposable
 {
     private readonly CpuModelWeightBank bank;
     private readonly IReadOnlyDictionary<string, LoraWeightPatch> bypass;
-    private readonly IReadOnlyDictionary<string, TrainableLoraPatch> trainingBypass;
+    private readonly IReadOnlyDictionary<string, TrainableWeightPatch> trainingBypass;
     public SdUnetConfig Config { get; }
     public torch.Device Device => bank.Device;
     public UnetWeightSet To(torch.Device device, CancellationToken cancellationToken = default) => Copy(bank.To(device, cancellationToken), bypass, p => p.To(device), cancellationToken);
     private UnetWeightSet(SdUnetConfig config, CpuModelWeightBank bank, IReadOnlyDictionary<string, LoraWeightPatch>? bypass = null,
-        IReadOnlyDictionary<string, TrainableLoraPatch>? trainingBypass = null)
-    { Config = config; this.bank = bank; this.bypass = bypass ?? new Dictionary<string, LoraWeightPatch>(); this.trainingBypass = trainingBypass ?? new Dictionary<string, TrainableLoraPatch>(); }
+        IReadOnlyDictionary<string, TrainableWeightPatch>? trainingBypass = null)
+    { Config = config; this.bank = bank; this.bypass = bypass ?? new Dictionary<string, LoraWeightPatch>(); this.trainingBypass = trainingBypass ?? new Dictionary<string, TrainableWeightPatch>(); }
     private UnetWeightSet Copy(CpuModelWeightBank next, IReadOnlyDictionary<string, LoraWeightPatch> factors, Func<LoraWeightPatch, LoraWeightPatch> retain, CancellationToken cancellationToken = default)
     {
         var owned = new Dictionary<string, LoraWeightPatch>(StringComparer.Ordinal);
-        var training = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        var training = new Dictionary<string, TrainableWeightPatch>(StringComparer.Ordinal);
         try
         {
             foreach (var (name, patch) in factors) { cancellationToken.ThrowIfCancellationRequested(); owned.Add(name, retain(patch)); }
@@ -25,7 +25,7 @@ public sealed class UnetWeightSet : IDisposable
             foreach (var (name, patch) in trainingBypass)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                InferenceDevice.RequireSame(next.Device, patch.Up, name);
+                foreach(var value in patch.Parameters)InferenceDevice.RequireSame(next.Device,value,name);
                 training.Add(name, patch.Retain());
             }
             return new(Config, next, owned, training);
@@ -87,7 +87,7 @@ public sealed class UnetWeightSet : IDisposable
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(patches);
         if (patches.Count == 0) throw new ArgumentException("Training requires at least one adapter.", nameof(patches));
         if (maxPatchedWeightBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxPatchedWeightBytes));
-        var factors = new Dictionary<string, TrainableLoraPatch>(StringComparer.Ordinal);
+        var factors = new Dictionary<string, TrainableWeightPatch>(StringComparer.Ordinal);
         var regular = new Dictionary<string, TrainableWeightPatch>(StringComparer.Ordinal);
         CpuModelWeightBank? next = null;
         var frozen = new Dictionary<string, LoraWeightPatch>(StringComparer.Ordinal);
@@ -108,8 +108,14 @@ public sealed class UnetWeightSet : IDisposable
                 }
                 else if (patch is TrainableLohaPatch)
                     throw new NotSupportedException("The frozen trainable LohaDiff does not implement bypass execution.");
-                else if (patch is TrainableLokrPatch)
-                    throw new NotSupportedException("LoKr training bypass is not ported yet; weight reconstruction cannot substitute for it.");
+                else if (patch is TrainableLokrPatch lokr)
+                {
+                    using var retained=lokr.Retain();
+                    if(weight.dim()<2||!name.EndsWith(".weight",StringComparison.Ordinal))throw new ArgumentException("Trainable LoKr bypass needs a module weight: "+name);
+                    foreach(var value in retained.Parameters)InferenceDevice.RequireSame(Device,value,name);
+                    // Kernel/module details are checked by the actual operator at execution.
+                    factors.Add(name,retained.Retain());
+                }
                 else regular.Add(name, patch);
             }
             next = regular.Count == 0 ? bank.Retain() : bank.WithTrainingLora(regular, maxPatchedWeightBytes, cancellationToken);

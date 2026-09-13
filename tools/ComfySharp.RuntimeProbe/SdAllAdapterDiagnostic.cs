@@ -102,7 +102,42 @@ internal static class SdAllAdapterDiagnostic
                 using var inference = bypassMode ? frozen.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)
                     : frozen.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
                 using var predicted = inference.Forward(input,time,context,cancellationToken);
-                if (Hash(trained) != Hash(predicted)) throw new InvalidOperationException("In-memory reload differs from trained prediction.");
+                if (Hash(trained) != Hash(predicted))
+                {
+                    progress.WriteLine(JsonSerializer.Serialize(new{phase="in-memory-reload-mismatch",algorithm,bypassMode,
+                        trainedSha256=Hash(trained),reloadedSha256=Hash(predicted),maxAbsoluteError=(trained-predicted).abs().max().item<float>()}));
+                    var observed=new Dictionary<string,float[]>(StringComparer.Ordinal);var comparisons=new List<object>();
+                    model.DiagnosticObserver=(name,value)=>{if(value.is_contiguous())observed[name]=value.data<float>().ToArray();};
+                    inference.DiagnosticObserver=(name,value)=>
+                    {
+                        if(!value.is_contiguous()||!observed.TryGetValue(name,out var expected))return;
+                        var actual=value.data<float>().ToArray();int differing=0;double maximum=0;
+                        for(int i=0;i<actual.Length;i++){if(BitConverter.SingleToInt32Bits(actual[i])!=BitConverter.SingleToInt32Bits(expected[i]))differing++;maximum=Math.Max(maximum,Math.Abs((double)actual[i]-expected[i]));}
+                        comparisons.Add(new{name,elements=actual.Length,differing,maxAbsoluteError=maximum});
+                    };
+                    try
+                    {
+                        using var traceTraining=model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
+                        using var traceInference=inference.Forward(input,time,context,cancellationToken);
+                        progress.WriteLine(JsonSerializer.Serialize(new{phase="reload-stage-comparison",stages=comparisons,
+                            observedTrainingSha256=Hash(traceTraining),observedInferenceSha256=Hash(traceInference)}));
+                        model.DiagnosticObserver=null;
+                        using var noAutograd=model.ForwardTrainingDiagnostic(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode,false);
+                        progress.WriteLine(JsonSerializer.Serialize(new{phase="identical-training-owners-without-autograd",sha256=Hash(noAutograd),
+                            matchesInference=Hash(noAutograd)==Hash(predicted),maxAbsoluteError=(noAutograd-predicted).abs().max().item<float>()}));
+                        var savedFlags=adapters.Patches.Values.SelectMany(p=>p.Parameters).Select(value=>(Value:value,Enabled:value.requires_grad)).ToArray();
+                        try
+                        {
+                            foreach(var item in savedFlags)item.Value.requires_grad_(false);
+                            using var frozenOwners=model.ForwardTrainingDiagnostic(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode,false);
+                            progress.WriteLine(JsonSerializer.Serialize(new{phase="identical-training-storage-with-frozen-leaves",sha256=Hash(frozenOwners),
+                                matchesInference=Hash(frozenOwners)==Hash(predicted),maxAbsoluteError=(frozenOwners-predicted).abs().max().item<float>()}));
+                        }
+                        finally{foreach(var item in savedFlags)item.Value.requires_grad_(item.Enabled);}
+                    }
+                    finally{model.DiagnosticObserver=null;inference.DiagnosticObserver=null;}
+                    throw new InvalidOperationException("In-memory reload differs from trained prediction.");
+                }
                 inMemoryReload = new { targets=snapshotPlan.Bindings.Count,tensors=snapshot.Tensors.Count,predictionExact=true,predictionSha256=Hash(predicted) };
                 if(resumeRoundtrip)
                 {

@@ -10,6 +10,8 @@ public abstract class TrainableWeightPatch : IDisposable
     public abstract IReadOnlyList<Tensor> Parameters { get; }
     public abstract TrainableWeightPatch Retain();
     internal abstract Tensor Apply(Tensor weight, CancellationToken cancellationToken);
+    internal virtual Tensor ApplyBypass(Tensor input,Tensor baseOutput,IReadOnlyList<long>? kernelSize,long stride,long padding)
+        =>throw new NotSupportedException("This trainable adapter has no implemented bypass operator.");
     public abstract void Dispose();
 
     internal static IReadOnlyDictionary<string, TrainableWeightPatch> Widen<T>(IReadOnlyDictionary<string, T> patches)
