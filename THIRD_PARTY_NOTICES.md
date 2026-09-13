@@ -205,3 +205,9 @@ The SD resume factory and filename counter adapt `_create_weight_adapter`, `_set
 from the same frozen ComfyUI revision and GPLv3-or-later source. The separate
 `labs/lora-training-source/loha_inference.py` collector produces static references
 from those source definitions; see [inference scope](docs/LOHA_INFERENCE.md).
+
+LoHa resume selection and parameter creation adapt `_create_weight_adapter` and
+`_setup_lora_adapters` in `comfy_extras/nodes_train.py`, and `LoHaAdapter.load/to_train`
+in `comfy/weight_adapter/loha.py` from the same frozen GPLv3-or-later sources.
+`labs/lora-training-source/loha_resume.py` collects the independent factory values
+and RNG references; see [resume scope](docs/LOHA_RESUME.md).

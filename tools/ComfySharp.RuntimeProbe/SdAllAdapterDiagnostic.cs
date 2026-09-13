@@ -32,8 +32,6 @@ internal static class SdAllAdapterDiagnostic
             if (!bool.TryParse(options.GetValueOrDefault("--bypass", "false"), out bool bypassMode)) throw new ArgumentException("Bypass must be true or false.");
             string algorithm = options.GetValueOrDefault("--algorithm", "LoRA");
             if (algorithm is not ("LoRA" or "LoHa")) throw new NotSupportedException("Select LoRA or LoHa.");
-            if (algorithm == "LoHa" && (bypassMode || options.ContainsKey("--resume")))
-                throw new NotSupportedException("LoHa resume is not yet connected; source trainable LoHa has no bypass. Ordinary training, export and inference reload are supported.");
             cancellationToken.ThrowIfCancellationRequested();
             using var file = new SafeTensorFile(checkpoint);
             using var existingFile = options.TryGetValue("--resume",out var resumePath) ? new SafeTensorFile(Path.GetFullPath(resumePath)) : null;
@@ -51,6 +49,8 @@ internal static class SdAllAdapterDiagnostic
             using var input = Noise([1, 4, 8, 8], 511); using var context = Noise([1, 3, 768], 512);
             using var target = Noise([1, 4, 8, 8], 513); using var time = tensor(new[] { 17.25f }, device: device);
             using var adapters = new SdTrainableAdapterSet(model.Config, 2, 317, device, cancellationToken: cancellationToken, existing:existingFile, algorithm:algorithm);
+            if(bypassMode&&adapters.Patches.Values.Any(p=>p is TrainableLohaPatch))
+                throw new NotSupportedException("Source trainable LoHa has no bypass; use ordinary training for these targets.");
             var leaves = adapters.Patches.SelectMany(p => p.Value.Parameters.Select((v, i) => (Name: p.Key + "/" + i, Value: v,
                 IsAlpha: p.Value is TrainableLoraPatch l && ReferenceEquals(v, l.AlphaParameter) || p.Value is TrainableLohaPatch h && ReferenceEquals(v,h.NamedParameters["alpha"]),
                 ExpectsNullGradient: p.Value is TrainableLohaPatch loha && ReferenceEquals(v,loha.NamedParameters["alpha"])))).ToArray();
@@ -83,7 +83,7 @@ internal static class SdAllAdapterDiagnostic
             }
             using var unchanged = model.Forward(input, time, context, cancellationToken);
             if (Hash(unchanged) != baseHash) throw new InvalidOperationException("Base model changed.");
-            if (algorithm == "LoRA" && lastNonzeroAlpha == 0) throw new InvalidOperationException("No alpha gradient reached the second update.");
+            if (leaves.Any(p=>p.IsAlpha&&!p.ExpectsNullGradient) && lastNonzeroAlpha == 0) throw new InvalidOperationException("No trainable LoRA alpha gradient reached the second update.");
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
             object? inMemoryReload = null;

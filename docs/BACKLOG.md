@@ -4,8 +4,9 @@ Lot 9 : les [fondations LoHa](LOHA_TRAINING.md) ajoutent la fabrique des 686 cib
 SD, les gradients simples/Tucker, les snapshots et les exports aux clés Hadamard.
 Le [chargeur d'inférence](LOHA_INFERENCE.md) couvre maintenant DoRA et bypass
 linear/Conv2d, avec sauvegarde/rechargement de toutes les cibles sur SD1.5 CPU.
-Priorité suivante pour LoHa : reprise des facteurs existants, puis raccordement
-au nœud d'entraînement complet et autres géométries/précisions.
+La [reprise des facteurs existants](LOHA_RESUME.md) couvre LoHa/Tucker, les mélanges
+avec LoRA, les règles alpha et le RNG. Priorités suivantes : raccordement au nœud
+d'entraînement complet, autres algorithmes et géométries/précisions.
 Les tests ciblés et le diagnostic préentraîné à entrées synthétiques ne
 qualifient ni une famille ni les plateformes cibles.
 

@@ -22,7 +22,8 @@ Le bypass d'inférence linear/Conv2d reconstruit et met à l'échelle la différ
 avant l'opération. Il ignore DoRA comme `LoHaAdapter.h` et conserve le gradient
 des activations. Les hooks SD réutilisent ces snapshots après clone/transfert.
 Le bypass **d'entraînement** LoHa demeure refusé : `LohaDiff.h` n'existe pas
-dans la référence. La reprise des facteurs entraînables est encore à porter.
+dans la référence. La [reprise des facteurs entraînables](LOHA_RESUME.md) utilise
+un contrat séparé, avec priorité LoRA et règles alpha propres à la fabrique.
 
 Le laboratoire séparé `labs/lora-training-source/loha_inference.py` exécute les
 définitions AST du commit figé. Seule la conversion vers le device est adaptée

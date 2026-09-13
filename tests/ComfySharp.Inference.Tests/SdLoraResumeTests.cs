@@ -130,7 +130,7 @@ public sealed class SdLoraResumeTests
             if(kind=="missing")values.Remove(prefix+".lora_down.weight");
             if(kind=="shape")values[prefix+".lora_down.weight"]=ones([1,12]);
             if(kind=="mid")values[prefix+".lora_mid.weight"]=ones([1,1,1,1]);
-            if(kind=="other"){values.Clear();values[prefix+".hada_w1_a"]=ones([4,1]);}
+            if(kind=="other"){values.Clear();values[prefix+".lokr_w1"]=ones([4,1]);}
             if(kind=="alpha")values[prefix+".weight.alpha"]=ones([2]);
             if(kind=="nonfinite")values[prefix+".weight.alpha"]=tensor(float.NaN);
             using var source=new NativeLoraTensorSource(values);

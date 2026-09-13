@@ -1,29 +1,25 @@
 {
-  "scope": "Fresh SD LoHa factory, first-order plain/Tucker gradients and factor snapshots/export",
+  "scope": "Mixed SD LoRA/LoHa resume factory and continued ordinary training",
   "implementation": "partial",
   "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
-  "primitives": {
-    "fixtureSha256": "cfa3149c52cb10031e92cb648543a82d143aa9a81bb94f8110f83e3b61c288db",
-    "cases": 16,
-    "updates": 32,
+  "fixture": {
+    "sha256": "8c3cacc79a7f02432c08c1726ba0a9a104e83d38d22dfec9aea0e67113579b92",
+    "compressedSha256": "943f420356848ea494810d22361db25b360bb94a7d5c79600cdcd6fbbc198f74",
+    "compressedBytes": 9190119,
+    "cases": 4,
+    "targetsPerCase": 686,
     "absoluteTolerance": 3e-05,
     "relativeTolerance": 3e-05,
-    "sourceBackwardPreserved": true,
-    "alphaGradient": "null"
-  },
-  "factory": {
-    "fixtureSha256": "d81c773f5d714c6e5e5e32bf683ee6d53c71ca8afaae080cb422d5262b2fcd9d",
-    "targets": 686,
-    "parameters": 1814,
-    "sourceFixturePlatform": "win-x64-cpu",
-    "parameterComparison": "atol=rtol=3e-5",
-    "randomStateComparison": "exact SHA256"
+    "resumedParameterComparison": "exact Float32 values",
+    "freshParameterComparison": "atol=rtol=3e-5",
+    "randomStateComparison": "exact SHA256",
+    "sourcePlatform": "win-x64-cpu"
   },
   "localTests": {
-    "lohaPassed": 23,
+    "lohaResumePassed": 11,
+    "ordinaryInferencePassed": 1038,
     "failed": 0,
     "skipped": 0,
-    "ordinaryInferencePassed": 974,
     "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
   },
   "build": {
@@ -49,21 +45,21 @@
     "parameterCount": 1814,
     "alphaParameters": 282,
     "adapterParameterBytes": 18707960,
-    "changedParameterCount": 1463,
-    "InitialCpuRandomStateSha256": "92d7e2ab9de9e3b5143060f3ca60026d0b51fd0456f40a087e61279f6812e5df",
+    "changedParameterCount": 1476,
+    "InitialCpuRandomStateSha256": "841728ae1083c7bde999867d3cc5e1a9dd6bb88d80512069e0666a678bd31e06",
     "InitialDeviceRandomStateSha256": null,
     "steps": [
       {
         "step": 1,
-        "loss": 1.1856256,
+        "loss": 0.83137566,
         "finiteGradientLeaves": 1532,
-        "nonzeroGradientLeaves": 684,
+        "nonzeroGradientLeaves": 1524,
         "nonzeroAlphaGradients": 0,
         "nullSourceGradients": 282
       },
       {
         "step": 2,
-        "loss": 0.9327829,
+        "loss": 0.7629695,
         "finiteGradientLeaves": 1532,
         "nonzeroGradientLeaves": 1524,
         "nonzeroAlphaGradients": 0,
@@ -73,8 +69,18 @@
     "baseUnchanged": true,
     "export": null,
     "bypassMode": false,
-    "inMemoryReload": null,
-    "resume": null,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1814,
+      "predictionExact": true,
+      "predictionSha256": "3d78753e2d61e28f72ae56b9469d8e115feac9e58d4696deeb2cb0c4c41d7b16"
+    },
+    "resume": {
+      "fileSha256": "084f56c9e1105a7d32aa6bca25309ca22173d61864ed238144bb4edc4bc4387a",
+      "factorTargets": 282,
+      "ignoredKeys": 686,
+      "rules": "Frozen weight factory only: norm/bias reset and module.weight.alpha lookup. Filename step counter is tested separately, not used by this diagnostic."
+    },
     "inputRecipe": {
       "shape": [
         1,
@@ -92,49 +98,22 @@
       "targetSeed": 513,
       "timestep": 17.25
     },
-    "elapsedSeconds": 31.2385927,
+    "elapsedSeconds": 45.0053232,
     "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa alpha has no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
   },
   "modelsCopiedOrDownloaded": false,
-  "adaptersWritten": false,
+  "newAdapterFiles": 0,
   "familyQualified": false,
   "platformsQualified": false,
   "ci": {
-    "runId": 34726797658,
-    "commit": "63fd1418121a862e188b0b99f5f68f454d964fd6",
-    "conclusion": "failure",
-    "lohaTestsEachPlatform": {
-      "skipped": 0,
-      "passed": 23,
-      "failed": 0
-    },
-    "windows": {
-      "ordinaryInferenceFailed": 0,
-      "ordinaryInferencePassed": 974,
-      "conclusion": "success"
-    },
-    "macos": {
-      "ordinaryInferenceFailed": 0,
-      "ordinaryInferencePassed": 974,
-      "stockClipFailures": 2,
-      "conclusion": "failure"
-    },
-    "linux": {
-      "ordinaryInferenceFailed": 22,
-      "priorOrdinaryInferenceFailures": 20,
-      "ordinaryInferencePassed": 952,
-      "note": "The failing set differs from the prior run; the causes are not established by this count. All 23 LoHa tests pass, including in the ordinary suite. Other numerical reference failures remain open.",
-      "conclusion": "failure"
-    },
-    "assertionsRelaxed": false,
-    "familyOrPlatformQualification": false
+    "status": "not-evaluated-for-this-change"
   },
   "remaining": [
     "Full TrainLoraNode and options",
-    "Mixed precision, offload, checkpointing",
+    "Other adapter algorithms",
+    "Mixed precision, offload and checkpointing",
     "Real image datasets and pretrained source-gradient comparisons",
-    "CPU/CUDA/MPS platform qualification"
-  ],
-  "inferenceFollowup": "loha-inference.json",
-  "resumeFollowup": "loha-resume.json"
+    "CUDA/MPS and required platform qualification",
+    "Previously observed Linux numerical and macOS CLIP failures"
+  ]
 }

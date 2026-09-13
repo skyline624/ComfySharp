@@ -7,7 +7,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Owns LoRA/LoHa and BiasDiff targets in the frozen plain SD module traversal order.
-/// Fresh Float32 LoRA/LoHa and resumed two-factor LoRA; other resume algorithms remain separate capabilities.</summary>
+/// Fresh/resumed Float32 LoRA/LoHa; other resume algorithms remain separate capabilities.</summary>
 public sealed class SdTrainableAdapterSet : IDisposable
 {
     private readonly Dictionary<string, TrainableWeightPatch> patches;
@@ -40,7 +40,8 @@ public sealed class SdTrainableAdapterSet : IDisposable
             var shape = schema[name];
             long actualRank = resume?.Targets.GetValueOrDefault(name)?.Rank ?? rank;
             int pairs = algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true ? 2 : 1;
-            long count = shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank * pairs) + 1);
+            long count = resume?.Targets.GetValueOrDefault(name) is { Loha:not null } loha ? loha.ParameterElements
+                : shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank * pairs) + 1);
             bytes = checked(bytes + checked(count * sizeof(float)));
         }
         if (bytes > maxParameterBytes) throw new NotSupportedException("Adapter leaves exceed the configured allowance; temporary tensors and optimizer state are additional.");
@@ -77,6 +78,14 @@ public sealed class SdTrainableAdapterSet : IDisposable
                         using var value = existing!.ReadTensor(alphaKey,cancellationToken);
                         alpha = value.to_type(ScalarType.Float64).item<double>();
                         if (!double.IsFinite(alpha) || !float.IsFinite((float)alpha)) throw new InvalidDataException("Resume alpha must be finite Float32: " + alphaKey);
+                    }
+                    if(resume?.Targets.GetValueOrDefault(name) is { Loha:not null } resumedLoha)
+                    {
+                        var keys=resumedLoha.Loha;
+                        Tensor Read(string key)=>existing!.ReadTensor(key,cancellationToken).to_type(ScalarType.Float32).to(device);
+                        patches.Add(name,new TrainableLohaPatch(Read(resumedLoha.Up),Read(resumedLoha.Down),Read(keys.W2A),Read(keys.W2B),alpha,
+                            keys.T1 is null?null:Read(keys.T1),keys.T2 is null?null:Read(keys.T2)));
+                        continue; // LohaDiff wraps the existing factors directly, without random Linear constructors.
                     }
                     long actualRank = rank; Tensor up, down;
                     if (resume?.Targets.TryGetValue(name,out var factors) == true)

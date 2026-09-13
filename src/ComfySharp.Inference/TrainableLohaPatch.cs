@@ -38,30 +38,38 @@ public sealed class TrainableLohaPatch : TrainableWeightPatch
                 throw new ArgumentException("Trainable LoHa requires finite dense Float32 factors: " + name);
             InferenceDevice.RequireSame(w1a.device, value, name);
         }
-        if (new[] { w1a, w1b, w2a, w2b }.Any(value => value.dim() != 2))
-            throw new ArgumentException("LoHa side factors must be matrices.");
-        if (t1 is null)
-        {
-            if (w1a.shape[1] != w1b.shape[0] || w2a.shape[1] != w2b.shape[0] ||
-                w1a.shape[0] != w2a.shape[0] || w1b.shape[1] != w2b.shape[1])
-                throw new ArgumentException("LoHa matrix products must have matching output shapes.");
-        }
-        else
-        {
-            if (t1.shape[0] != w1a.shape[0] || t1.shape[1] != w1b.shape[0] ||
-                t2!.shape[0] != w2a.shape[0] || t2.shape[1] != w2b.shape[0] ||
-                w1a.shape[1] != w2a.shape[1] || w1b.shape[1] != w2b.shape[1] ||
-                !t1.shape.Skip(2).SequenceEqual(t2.shape.Skip(2)))
-                throw new ArgumentException("LoHa Tucker core and factor shapes differ.");
-            // The frozen backward returns each a-gradient using the opposite side's i dimension.
-            if (w1a.shape[0] != w2a.shape[0])
-                throw new NotSupportedException("Frozen LoHa Tucker backward cannot return valid a-gradients for different side ranks.");
-        }
+        ValidateGeometry(w1a.shape,w1b.shape,w2a.shape,w2b.shape,t1?.shape,t2?.shape);
         var snapshots = originals.ToDictionary(p => p.Key, p => p.Value.detach().clone().requires_grad_(), StringComparer.Ordinal);
         // Source setup enables requires_grad on alpha, but HadaWeight backward returns no alpha gradient.
         snapshots.Add("alpha", tensor((float)alpha, device: w1a.device).requires_grad_());
         shared = new(snapshots);
         foreach (var value in snapshots.Values) value.DetachFromDisposeScope();
+    }
+
+    internal static void ValidateGeometry(IReadOnlyList<long> a,IReadOnlyList<long> b,IReadOnlyList<long> c,IReadOnlyList<long> d,
+        IReadOnlyList<long>? t1,IReadOnlyList<long>? t2,IReadOnlyList<long>? target=null)
+    {
+        if (new[] { a,b,c,d }.Any(value => value.Count != 2 || value.Any(n=>n<=0)))
+            throw new ArgumentException("LoHa side factors must be matrices.");
+        if((t1 is null)!=(t2 is null))throw new ArgumentException("LoHa Tucker requires both cores.");
+        if (t1 is null)
+        {
+            if (a[1] != b[0] || c[1] != d[0] || a[0] != c[0] || b[1] != d[1])
+                throw new ArgumentException("LoHa matrix products must have matching output shapes.");
+        }
+        else
+        {
+            if(t1.Count<2||t2!.Count<2||t1.Concat(t2).Any(n=>n<=0)||
+                t1[0] != a[0] || t1[1] != b[0] || t2[0] != c[0] || t2[1] != d[0] ||
+                a[1] != c[1] || b[1] != d[1] || !t1.Skip(2).SequenceEqual(t2.Skip(2)))
+                throw new ArgumentException("LoHa Tucker core and factor shapes differ.");
+            // The frozen backward returns each a-gradient using the opposite side's i dimension.
+            if (a[0] != c[0])
+                throw new NotSupportedException("Frozen LoHa Tucker backward cannot return valid a-gradients for different side ranks.");
+        }
+        long rows=a[t1 is null?0:1],spatial=t1 is null?1:t1.Skip(2).Aggregate(1L,(x,y)=>checked(x*y));
+        if(target is not null&&(target.Count<2||target[0]!=rows||target.Aggregate(1L,(x,y)=>checked(x*y))!=checked(rows*b[1]*spatial)))
+            throw new ArgumentException("LoHa reconstruction differs from the training target.");
     }
 
     public IReadOnlyDictionary<string, Tensor> NamedParameters { get { lock (shared.Gate) { ThrowIfDisposed(); return shared.Named; } } }

@@ -4,7 +4,7 @@ namespace ComfySharp.Inference;
 /// alpha keys and difference loading. Metadata only; supplied source is borrowed.</summary>
 internal sealed class SdLoraResumePlan
 {
-    internal sealed record Factors(string Up, string Down, long Rank);
+    internal sealed record Factors(string Up, string Down, long Rank, LohaFactorKeys? Loha=null, long ParameterElements=0);
     internal Dictionary<string, Factors> Targets { get; } = new(StringComparer.Ordinal);
     internal Dictionary<string, string> Alphas { get; } = new(StringComparer.Ordinal);
     internal IReadOnlyList<string> IgnoredKeys { get; private set; } = Array.Empty<string>();
@@ -41,8 +41,32 @@ internal sealed class SdLoraResumePlan
                 plan.Targets.Add(name,new(up,down,d.Shape[0])); consumed.Add(up); consumed.Add(down);
                 selected = true; break;
             }
+            // Training stops at the first provider (LoRA, then LoHa), unlike inference load_lora.
+            if(!selected&&source.Tensors.ContainsKey(prefix+".hada_w1_a"))
+            {
+                string Required(string suffix)
+                {
+                    string key=prefix+suffix;
+                    if(!source.Tensors.TryGetValue(key,out var value))throw new InvalidDataException("Missing LoHa resume factor: "+key);
+                    if(value.DType is not("F32" or "F16" or "BF16" or "F64")||value.Shape.Any(n=>n<=0))
+                        throw new InvalidDataException("LoHa resume requires nonempty floating-point factors: "+key);
+                    consumed.Add(key);return key;
+                }
+                string first=Required(".hada_w1_a"),second=Required(".hada_w1_b");
+                var loha=new LohaFactorKeys(Required(".hada_w2_a"),Required(".hada_w2_b"),
+                    source.Tensors.ContainsKey(prefix+".hada_t1")?Required(".hada_t1"):null,
+                    source.Tensors.ContainsKey(prefix+".hada_t1")?Required(".hada_t2"):null);
+                var a=source.Tensors[first].Shape;var b=source.Tensors[second].Shape;
+                var c=source.Tensors[loha.W2A].Shape;var d=source.Tensors[loha.W2B].Shape;
+                var t1=loha.T1 is null?null:source.Tensors[loha.T1].Shape;var t2=loha.T2 is null?null:source.Tensors[loha.T2].Shape;
+                try {TrainableLohaPatch.ValidateGeometry(a,b,c,d,t1,t2,shape);}
+                catch(ArgumentException error){throw new InvalidDataException("LoHa resume geometry differs from the target: "+prefix,error);}
+                long Elements(IReadOnlyList<long> dims)=>dims.Aggregate(1L,(x,y)=>checked(x*y));
+                long count=checked(Elements(a)+Elements(b)+Elements(c)+Elements(d)+(t1 is null?0:Elements(t1)+Elements(t2!))+1);
+                plan.Targets.Add(name,new(first,second,b[0],loha,count));selected=true;
+            }
             // Later adapter loaders would claim these formats; never silently replace them by fresh LoRA.
-            bool otherAlgorithm = new[]{".hada_w1_a", ".lokr_w1", ".lokr_w2", ".lokr_w1_a", ".lokr_w2_a", ".a1.weight"}
+            bool otherAlgorithm = new[]{".lokr_w1", ".lokr_w2", ".lokr_w1_a", ".lokr_w2_a", ".a1.weight"}
                 .Any(suffix => source.Tensors.ContainsKey(prefix + suffix)) ||
                 source.Tensors.TryGetValue(prefix + ".oft_blocks",out var blocks) && blocks.Shape.Count is 3 or 4;
             if (!selected && otherAlgorithm)

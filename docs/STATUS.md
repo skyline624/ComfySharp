@@ -1,5 +1,18 @@
 # État du port — 0.1.0-dev
 
+La [reprise LoHa](LOHA_RESUME.md) recharge désormais les facteurs simples/Tucker
+et leurs mélanges avec LoRA en conservant la fabrique source, les règles alpha
+et le RNG. **1 038 tests ordinaires passent localement**, dont 11 tests de reprise
+LoHa. Le vrai SD1.5 reprend les 282 adapters déjà sauvegardés, effectue deux mises
+à jour et recharge les facteurs en mémoire avec prédiction exactement identique,
+sans écrire de nouveau poids. Le nœud d'entraînement public complet reste ouvert.
+
+La [CI du chargement LoHa 34728064909](https://github.com/skyline624/ComfySharp/actions/runs/34728064909)
+valide les 76 tests LoHa de ce jalon sur les trois OS. Windows passe toute la CI ;
+macOS passe les 1 027 tests ordinaires mais conserve deux échecs CLIP. Linux
+compte 22 échecs sur les 1 027 tests ordinaires. Ces résultats concernent le
+commit précédent ; la reprise ci-dessus attend sa propre qualification CI.
+
 Le [chargement LoHa](LOHA_INFERENCE.md) et sa réutilisation couvrent maintenant
 les snapshots/fichiers, DoRA et le bypass d'inférence linear/Conv2d. Les
 53 nouveaux tests comprennent 48 références de calcul et quatre références
