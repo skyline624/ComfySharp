@@ -235,3 +235,8 @@ provides complete reduced SD parameter and RNG references. See
 executes these definitions for grouped operators, gradients, SGD updates and
 explicit source failures. Native resource ownership and validation are C#
 adaptations. See [partial scope and failed model diagnostic](docs/LOKR_BYPASS.md).
+
+`lokr_linear_dispatch.py` executes the same frozen LoKr definitions and uses the
+PyTorch CPU profiler to record native linear dispatch. Its synthetic fixture and
+the C# comparisons retain the source's trainable/frozen distinction. The diagnostic
+evaluation wrapper is original C# code; see [evidence](docs/LOKR_LINEAR_DISPATCH.md).

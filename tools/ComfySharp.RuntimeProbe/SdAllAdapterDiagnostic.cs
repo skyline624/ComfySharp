@@ -95,6 +95,12 @@ internal static class SdAllAdapterDiagnostic
             if (bypassMode || existingFile is not null || algorithm is "LoHa" or "LoKr")
             {
                 using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
+                // LoKr's transposed ND linear selects mm or bmm from leaf metadata,
+                // even under no_grad. Compare reloads in the same frozen mode;
+                // record the training-mode difference without hiding it or changing tolerances.
+                using var reloadReference=algorithm=="LoKr"&&bypassMode
+                    ?FrozenAdapterEvaluation.Run(adapters.Patches.Values,()=>model.ForwardTrainingDiagnostic(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode,false))
+                    :trained.alias();
                 using var snapshot = LoraTrainingState.Capture(adapters.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
                 using var source = new NativeLoraTensorSource(snapshot.Tensors,cancellationToken:cancellationToken);
                 var snapshotPlan = LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
@@ -102,11 +108,27 @@ internal static class SdAllAdapterDiagnostic
                 using var inference = bypassMode ? frozen.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)
                     : frozen.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
                 using var predicted = inference.Forward(input,time,context,cancellationToken);
-                if (Hash(trained) != Hash(predicted))
+                if (Hash(reloadReference) != Hash(predicted))
                 {
                     progress.WriteLine(JsonSerializer.Serialize(new{phase="in-memory-reload-mismatch",algorithm,bypassMode,
-                        trainedSha256=Hash(trained),reloadedSha256=Hash(predicted),maxAbsoluteError=(trained-predicted).abs().max().item<float>()}));
+                        trainedSha256=Hash(trained),referenceSha256=Hash(reloadReference),reloadedSha256=Hash(predicted),maxAbsoluteError=(reloadReference-predicted).abs().max().item<float>()}));
                     var observed=new Dictionary<string,float[]>(StringComparer.Ordinal);var comparisons=new List<object>();
+                    var layers=new Dictionary<string,(string Input,string Base,float[] Output)>(StringComparer.Ordinal);
+                    var layerDifferences=new List<object>();
+                    static bool Readable(Tensor value)=>value.device_type==DeviceType.CPU&&value.is_contiguous();
+                    static string BorrowedHash(Tensor value)=>Convert.ToHexStringLower(SHA256.HashData(value.bytes));
+                    model.BypassDiagnosticObserver=(name,x,y,z)=>
+                    {
+                        if(Readable(x)&&Readable(y)&&Readable(z))layers[name]=(BorrowedHash(x),BorrowedHash(y),z.data<float>().ToArray());
+                    };
+                    inference.BypassDiagnosticObserver=(name,x,y,z)=>
+                    {
+                        if(layerDifferences.Count>=8||!Readable(x)||!Readable(y)||!Readable(z)||!layers.TryGetValue(name,out var expected))return;
+                        var actual=z.data<float>().ToArray();if(actual.Length!=expected.Output.Length)throw new InvalidOperationException("Diagnostic output shape changed.");
+                        int differing=0;double maximum=0;
+                        for(int i=0;i<actual.Length;i++){if(BitConverter.SingleToInt32Bits(actual[i])!=BitConverter.SingleToInt32Bits(expected.Output[i]))differing++;maximum=Math.Max(maximum,Math.Abs((double)actual[i]-expected.Output[i]));}
+                        if(differing>0)layerDifferences.Add(new{name,inputExact=BorrowedHash(x)==expected.Input,baseOutputExact=BorrowedHash(y)==expected.Base,inputShape=x.shape,outputShape=z.shape,differing,maxAbsoluteError=maximum});
+                    };
                     model.DiagnosticObserver=(name,value)=>{if(value.is_contiguous())observed[name]=value.data<float>().ToArray();};
                     inference.DiagnosticObserver=(name,value)=>
                     {
@@ -121,6 +143,8 @@ internal static class SdAllAdapterDiagnostic
                         using var traceInference=inference.Forward(input,time,context,cancellationToken);
                         progress.WriteLine(JsonSerializer.Serialize(new{phase="reload-stage-comparison",stages=comparisons,
                             observedTrainingSha256=Hash(traceTraining),observedInferenceSha256=Hash(traceInference)}));
+                        progress.WriteLine(JsonSerializer.Serialize(new{phase="first-bypass-layer-differences",capturedLayers=layers.Count,layers=layerDifferences}));
+                        model.BypassDiagnosticObserver=null;inference.BypassDiagnosticObserver=null;
                         model.DiagnosticObserver=null;
                         using var noAutograd=model.ForwardTrainingDiagnostic(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode,false);
                         progress.WriteLine(JsonSerializer.Serialize(new{phase="identical-training-owners-without-autograd",sha256=Hash(noAutograd),
@@ -135,10 +159,13 @@ internal static class SdAllAdapterDiagnostic
                         }
                         finally{foreach(var item in savedFlags)item.Value.requires_grad_(item.Enabled);}
                     }
-                    finally{model.DiagnosticObserver=null;inference.DiagnosticObserver=null;}
+                    finally{model.DiagnosticObserver=null;inference.DiagnosticObserver=null;model.BypassDiagnosticObserver=null;inference.BypassDiagnosticObserver=null;}
                     throw new InvalidOperationException("In-memory reload differs from trained prediction.");
                 }
-                inMemoryReload = new { targets=snapshotPlan.Bindings.Count,tensors=snapshot.Tensors.Count,predictionExact=true,predictionSha256=Hash(predicted) };
+                inMemoryReload = new { targets=snapshotPlan.Bindings.Count,tensors=snapshot.Tensors.Count,predictionExact=true,predictionSha256=Hash(predicted),
+                    comparison=algorithm=="LoKr"&&bypassMode?"frozen training owners versus loaded inference":"training versus loaded inference",
+                    trainingPredictionSha256=Hash(trained),trainingPredictionExact=Hash(trained)==Hash(predicted),
+                    trainingPredictionMaxAbsoluteDifference=(trained-predicted).abs().max().item<float>() };
                 if(resumeRoundtrip)
                 {
                     using var resumed=new SdTrainableAdapterSet(model.Config,rank,317,device,existing:source,algorithm:algorithm,cancellationToken:cancellationToken);
@@ -218,9 +245,14 @@ internal static class SdAllAdapterDiagnostic
                     else if(patch is TrainableLokrPatch lokr)
                         foreach(var (key,value) in lokr.NamedParameters)parameterHashes.Add(prefix+"."+key,Hash(value));
                 }
-                string trainedPrediction;
-                using(var noGrad=no_grad())
+                string trainedPrediction,referencePrediction;
                 using(var prediction=model.ForwardForTraining(input,time,context,adapters.Patches,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken,bypassMode))trainedPrediction=Hash(prediction);
+                if(algorithm=="LoKr"&&bypassMode)
+                {
+                    using var reference=FrozenAdapterEvaluation.Run(adapters.Patches.Values,()=>model.ForwardTrainingDiagnostic(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode,false));
+                    referencePrediction=Hash(reference);
+                }
+                else referencePrediction=trainedPrediction;
                 LoraTrainingFile.SaveTargetsNew(adapterPath,adapters.Patches,maxFactorBytes:adapters.ParameterBytes,cancellationToken:cancellationToken);
                 using var adapterFile=new SafeTensorFile(adapterPath);
                 var adapterPlan=LoraFileLoader.Inspect(adapterFile,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
@@ -229,10 +261,11 @@ internal static class SdAllAdapterDiagnostic
                 using var baked=bypassMode ? snapshots.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)
                     : snapshots.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
                 using var reloaded=baked.Forward(input,time,context,cancellationToken);
-                if(Hash(reloaded)!=trainedPrediction)throw new InvalidOperationException("Reloaded mixed adapter prediction differs from trained parameters.");
+                if(Hash(reloaded)!=referencePrediction)throw new InvalidOperationException("Reloaded mixed adapter prediction differs from its reference evaluation.");
                 export=new{adapter=Path.GetFileName(adapterPath),adapterSha256=adapterFile.ComputeSha256(cancellationToken),bytes=adapterFile.FileSizeBytes,
-                    tensors=adapterFile.Tensors.Count,targets=adapterPlan.Bindings.Count,parameterHashes,predictionSha256=trainedPrediction,reloadPredictionExact=true};
-                progress.WriteLine("Mixed adapter exported and reloaded: all targets retained, prediction exactly matches trained parameters.");
+                    tensors=adapterFile.Tensors.Count,targets=adapterPlan.Bindings.Count,parameterHashes,predictionSha256=referencePrediction,reloadPredictionExact=true,
+                    trainingPredictionSha256=trainedPrediction,trainingPredictionExact=trainedPrediction==referencePrediction};
+                progress.WriteLine("Mixed adapter exported and reloaded: all targets retained, prediction exactly matches its reference evaluation.");
             }
             string json = JsonSerializer.Serialize(new
             {

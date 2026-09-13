@@ -1,13 +1,30 @@
 # État du port — 0.1.0-dev
 
+Le [diagnostic des modes LoKr](LOKR_LINEAR_DISPATCH.md) reproduit l'écart dans
+la source et isole le choix natif `mm`/`bmm` des couches linéaires. Le rechargement
+SD1.5 passe maintenant une comparaison exacte entre paramètres figés avant capture
+et paramètres rechargés. L'écart avec l'entraînement reste visible, sans augmenter
+les tolérances ni modifier les calculs d'entraînement. Sept nouveaux tests couvrent
+les références et la restauration des indicateurs ; le total local est de 1 518
+tests ordinaires d'inférence. Ce jalon ne qualifie ni la famille ni les plateformes.
+
+La CI 34743858674 du jalon précédent est terminée en échec : Windows passe 251/252
+tests bypass et 1 487/1 511 tests ordinaires ; Linux passe 252/252 tests bypass et
+1 489/1 511 tests ordinaires ;
+macOS passe les 1 511 tests ordinaires mais échoue sur CLIP stock. Le test bypass
+Windows utilisait l'égalité incorrecte entre modes, corrigée dans le présent jalon.
+Les autres échecs numériques ne sont pas déclarés résolus.
+
+Historique du bypass initial :
+
 Le [bypass LoKr](LOKR_BYPASS.md) dispose de 252 tests locaux pour les opérateurs,
 gradients, erreurs source, snapshots et un U-Net réduit. **1 511 tests ordinaires
 d'inférence passent localement**, sans échec ni test ignoré ; le filtre CLIP stock
 reste séparé. Le vrai checkpoint SD1.5 partagé atteint deux pas d'entraînement,
 mais le contrôle exact après rechargement échoue : écart maximal `2,413988e-6`.
 Désactiver autograd seul ne le supprime pas ; figer les feuilles sur les mêmes
-storages le supprime. La cause au niveau des opérateurs reste à isoler. Ce
-diagnostic est conservé en échec, sans changer ses assertions ni les tolérances.
+storages le supprime. Cet ancien diagnostic reste conservé en échec ; le suivi
+ci-dessus explique la correction de son invariant de comparaison.
 La qualification réelle du bypass, sa validation de fichiers, OFT, le nœud public
 et les workflows d'entraînement sur images restent ouverts. Aucun nouveau poids
 n'est téléchargé, copié ou écrit pour ce jalon.

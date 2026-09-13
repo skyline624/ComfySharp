@@ -327,6 +327,62 @@
     "Required GPU/OS qualification"
   ],
   "ci": {
-    "status": "not_run_for_this_change"
-  }
+    "runId": 34743858674,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34743858674",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1487,
+          "failed": 24,
+          "bypassTotal": 252,
+          "bypassPassed": 251
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 558,
+          "failed": 1,
+          "bypassTotal": 252,
+          "bypassPassed": 251
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1489,
+          "failed": 22,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 559,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1511,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 559,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        }
+      }
+    },
+    "note": "Windows reduced bypass reload used the invalid cross-mode bitwise invariant. Other numerical and stock CLIP failures remain open."
+  },
+  "historicalDiagnostic": true,
+  "followUp": "lokr-linear-dispatch.json"
 }

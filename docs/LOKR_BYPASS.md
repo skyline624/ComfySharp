@@ -1,5 +1,10 @@
 # Bypass LoKr : opérateurs et gradients
 
+Le diagnostic de rechargement initial décrit ci-dessous a été expliqué et corrigé
+par [la distinction des modes natifs `mm`/`bmm`](LOKR_LINEAR_DISPATCH.md).
+Le rechargement SD1.5 est maintenant exact en mode inférence ; l'écart avec
+l'entraînement reste publié. Le catalogue et les plateformes ne sont pas qualifiés.
+
 Les chemins `LoKrAdapter.h` et `LokrDiff.h` sont portés en opérations natives
 groupées pour les couches linéaires et les convolutions 1D, 2D et 3D. Ils divisent
 les canaux d'entrée en groupes, appliquent le second côté, puis mélangent les
@@ -39,7 +44,7 @@ Les tolérances des références restent `atol=rtol=3e-5`. Les snapshots retenus
 transférés survivent à leurs sources ; les compteurs de tenseurs reviennent à leur
 valeur initiale après succès ou erreur. Les tests distribués n'exécutent pas Python.
 
-Le diagnostic sur le vrai SD1.5 CPU atteint deux pas d'entraînement, mais son
+Le diagnostic initial sur le vrai SD1.5 CPU atteint deux pas d'entraînement, mais son
 contrôle d'égalité exacte après rechargement a échoué. Ce parcours ne constitue
 donc pas une qualification réussie. Les hashes, mesures et contrôles de mode
 autograd sont conservés dans [la preuve](qualification/lokr-bypass.json) ;
@@ -51,9 +56,9 @@ l'écart maximal `2,413988e-6`. Le contrôle qui désactive temporairement
 `requires_grad` sur les mêmes feuilles retrouve exactement l'inférence, puis
 restaure tous les indicateurs. Il sert uniquement au diagnostic après échec.
 Deux contrôles Python séparés sur cinq géométries chacun ne reproduisent pas
-cet écart ; l'opérateur responsable dans le modèle complet n'est pas encore
-isolé. Ces observations ne prouvent ni une corruption des poids ni une parité
-numérique complète avec la source.
+cet écart. Les contrôles linéaires ajoutés ensuite l'isolent et le reproduisent
+dans la source ; voir le suivi en tête de page. Les anciennes observations restent
+conservées et ne prouvent pas une parité numérique complète avec la source.
 
 ```text
 dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd-all-adapter-train --algorithm LoKr --rank 7 --checkpoint <checkpoint-existant.safetensors> --report <nouveau.json> --device cpu --bypass true

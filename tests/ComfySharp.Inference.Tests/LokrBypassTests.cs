@@ -131,10 +131,14 @@ public sealed class LokrBypassTests
             using var diagnostic=model.ForwardTrainingDiagnostic(input,time,context,patches,0,default,true,false);
             Assert.True(trained.requires_grad);Assert.False(diagnostic.requires_grad);
             Assert.True(allclose(trained,diagnostic,rtol:3e-5,atol:3e-5));
+            using var reference=ComfySharp.RuntimeProbe.FrozenAdapterEvaluation.Run(patches.Values,
+                ()=>model.ForwardTrainingDiagnostic(input,time,context,patches,0,default,true,false));
+            Assert.All(patches.Values.SelectMany(p=>p.Parameters),p=>Assert.True(p.requires_grad));
             using var state=LoraTrainingState.Capture(patches,ScalarType.Float32);using var source=new NativeLoraTensorSource(state.Tensors);
             var plan=LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(config));using var frozen=LoraFileLoader.Load(source,plan);
             using var inference=frozen.ApplyBypassTo(model,maxPatchedWeightBytes:0);source.Dispose();state.Dispose();conv.Dispose();linear.Dispose();
-            using var reloaded=inference.Forward(input,time,context);Assert.Equal(trained.bytes.ToArray(),reloaded.bytes.ToArray());
+            using var reloaded=inference.Forward(input,time,context);Assert.Equal(reference.bytes.ToArray(),reloaded.bytes.ToArray());
+            Assert.True(allclose(trained,reloaded,rtol:3e-5,atol:3e-5));
             using var unchanged=model.Forward(input,time,context);Assert.Equal(baseline.bytes.ToArray(),unchanged.bytes.ToArray());
         }
         finally{set_num_threads(threads);}

@@ -1,0 +1,498 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4"
+  },
+  "nativeSource": "https://github.com/pytorch/pytorch/blob/v2.10.0/aten/src/ATen/native/LinearAlgebra.cpp#L1787",
+  "fixture": {
+    "compressedSha256": "e8ec49c3c53daedfc42a7a3689d56abce2586fffa9be63b436a65b04487cf43c",
+    "rawSha256": "2f903ae234d820cf5244b3ae0244fd7a932f16256dd1cdf82da6cb2bdf53b7fa",
+    "compressedBytes": 1146988,
+    "rawBytes": 1577279,
+    "torchVersion": "2.10.0+cpu",
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "cases": [
+      {
+        "hiddenShape": [
+          1,
+          64,
+          64,
+          5
+        ],
+        "hiddenStride": [
+          20480,
+          320,
+          1,
+          64
+        ],
+        "profiles": [
+          {
+            "requiresGrad": true,
+            "operators": {
+              "aten::mm": 1
+            }
+          },
+          {
+            "requiresGrad": false,
+            "operators": {
+              "aten::bmm": 1
+            }
+          }
+        ],
+        "maxAbsoluteDifference": 1.4901161193847656e-08
+      },
+      {
+        "hiddenShape": [
+          1,
+          3,
+          64,
+          6
+        ],
+        "hiddenStride": [
+          1152,
+          384,
+          1,
+          64
+        ],
+        "profiles": [
+          {
+            "requiresGrad": true,
+            "operators": {
+              "aten::mm": 1
+            }
+          },
+          {
+            "requiresGrad": false,
+            "operators": {
+              "aten::bmm": 1
+            }
+          }
+        ],
+        "maxAbsoluteDifference": 1.4901161193847656e-08
+      },
+      {
+        "hiddenShape": [
+          1,
+          3,
+          512,
+          5
+        ],
+        "hiddenStride": [
+          7680,
+          2560,
+          1,
+          512
+        ],
+        "profiles": [
+          {
+            "requiresGrad": true,
+            "operators": {
+              "aten::mm": 1
+            }
+          },
+          {
+            "requiresGrad": false,
+            "operators": {
+              "aten::bmm": 1
+            }
+          }
+        ],
+        "maxAbsoluteDifference": 1.4901161193847656e-08
+      },
+      {
+        "hiddenShape": [
+          1,
+          3,
+          64,
+          5
+        ],
+        "hiddenStride": [
+          960,
+          320,
+          1,
+          64
+        ],
+        "profiles": [
+          {
+            "requiresGrad": true,
+            "operators": {
+              "aten::mm": 1
+            }
+          },
+          {
+            "requiresGrad": false,
+            "operators": {
+              "aten::bmm": 1
+            }
+          }
+        ],
+        "maxAbsoluteDifference": 1.4901161193847656e-08
+      },
+      {
+        "hiddenShape": [
+          1,
+          3,
+          256,
+          5
+        ],
+        "hiddenStride": [
+          3840,
+          1280,
+          1,
+          256
+        ],
+        "profiles": [
+          {
+            "requiresGrad": true,
+            "operators": {
+              "aten::mm": 1
+            }
+          },
+          {
+            "requiresGrad": false,
+            "operators": {
+              "aten::bmm": 1
+            }
+          }
+        ],
+        "maxAbsoluteDifference": 1.4901161193847656e-08
+      }
+    ]
+  },
+  "localTests": {
+    "ordinary": {
+      "total": 1518,
+      "passed": 1518,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "targeted": {
+      "LokrBypassTests": {
+        "total": 252,
+        "passed": 252,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "LokrLinearDispatchTests": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "FrozenAdapterEvaluationTests": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "firstRealModelDivergence": {
+    "phase": "first-bypass-layer-differences",
+    "capturedLayers": 282,
+    "layers": [
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.attn1.to_q",
+        "inputExact": true,
+        "baseOutputExact": true,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 1,
+        "maxAbsoluteError": 1.4551915228366852e-11
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.attn1.to_v",
+        "inputExact": true,
+        "baseOutputExact": true,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 7,
+        "maxAbsoluteError": 9.313225746154785e-10
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.attn1.to_out.0",
+        "inputExact": true,
+        "baseOutputExact": true,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 12,
+        "maxAbsoluteError": 7.450580596923828e-09
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.attn2.to_q",
+        "inputExact": false,
+        "baseOutputExact": false,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 18,
+        "maxAbsoluteError": 1.1920928955078125e-07
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.attn2.to_out.0",
+        "inputExact": false,
+        "baseOutputExact": false,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 260,
+        "maxAbsoluteError": 2.980232238769531e-08
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.ff.net.0.proj",
+        "inputExact": false,
+        "baseOutputExact": false,
+        "inputShape": [
+          1,
+          64,
+          320
+        ],
+        "outputShape": [
+          1,
+          64,
+          2560
+        ],
+        "differing": 2954,
+        "maxAbsoluteError": 4.76837158203125e-07
+      },
+      {
+        "name": "input_blocks.1.1.transformer_blocks.0.ff.net.2",
+        "inputExact": false,
+        "baseOutputExact": false,
+        "inputShape": [
+          1,
+          64,
+          1280
+        ],
+        "outputShape": [
+          1,
+          64,
+          320
+        ],
+        "differing": 1023,
+        "maxAbsoluteError": 2.7194619178771973e-07
+      },
+      {
+        "name": "input_blocks.1.1.proj_out",
+        "inputExact": false,
+        "baseOutputExact": false,
+        "inputShape": [
+          1,
+          320,
+          8,
+          8
+        ],
+        "outputShape": [
+          1,
+          320,
+          8,
+          8
+        ],
+        "differing": 1727,
+        "maxAbsoluteError": 3.5762786865234375e-07
+      }
+    ]
+  },
+  "realWeightsDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 7,
+    "algorithm": "LoKr",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 137523272,
+    "changedParameterCount": 960,
+    "InitialCpuRandomStateSha256": "f3ff817d3895a08bfafd570b6df509be1b8cb3fe235713d500360fa24ba6a9eb",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 1.1707273,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 964,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": true,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1250,
+      "predictionExact": true,
+      "predictionSha256": "000ae8774b545dd1124e326038f9c0856c74fa448c567c87f91c9fa424b4a431",
+      "comparison": "frozen training owners versus loaded inference",
+      "trainingPredictionSha256": "238604dadf377cdde7809aa22bd92afb56473acb3315ea1c65e99117ce415dba",
+      "trainingPredictionExact": false,
+      "trainingPredictionMaxAbsoluteDifference": 2.413988e-06
+    },
+    "trainingResumeRoundtrip": null,
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 18.9412946,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa and direct LoKr alpha have no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "comparisonCorrection": {
+    "previous": "Trainable leaves versus frozen loaded inference",
+    "current": "Frozen evaluation on original parameter storage versus frozen loaded inference",
+    "exactReloadRetained": true,
+    "tolerancesIncreased": false,
+    "trainingOperatorsChanged": false,
+    "sourceDifferenceReproduced": true,
+    "previousFailureRetained": "lokr-bypass.json",
+    "leafFlagsRestoredOnSuccessAndFailure": true
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "realImageWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "previousCi": {
+    "runId": 34743858674,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34743858674",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1487,
+          "failed": 24,
+          "bypassTotal": 252,
+          "bypassPassed": 251
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 558,
+          "failed": 1,
+          "bypassTotal": 252,
+          "bypassPassed": 251
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1489,
+          "failed": 22,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 559,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1511,
+          "passed": 1511,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        },
+        "LohaTraining": {
+          "total": 559,
+          "passed": 559,
+          "failed": 0,
+          "bypassTotal": 252,
+          "bypassPassed": 252
+        }
+      }
+    },
+    "note": "Windows reduced bypass reload used the invalid cross-mode bitwise invariant. Other numerical and stock CLIP failures remain open."
+  },
+  "ci": {
+    "status": "not_run_for_this_change"
+  },
+  "remaining": [
+    "Bypass-specific file geometry validation",
+    "OFT and full TrainLoraNode",
+    "Image training workflows",
+    "Mixed precision and required GPU/OS qualification"
+  ]
+}

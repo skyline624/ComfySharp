@@ -65,4 +65,5 @@ sur images, les gradients du modèle préentraîné contre ComfyUI, le bypass, l
 précisions ou CUDA/MPS. Les 155 tests ne qualifient aucune famille complète.
 Le nœud public `TrainLoraNode`, les workflows réels et les plateformes restent
 requis pour la V1. Le [bypass LoKr](LOKR_BYPASS.md) dispose depuis d'opérateurs
-et de tests dédiés ; sa qualification sur le vrai SD1.5 reste en échec.
+et de tests dédiés ; le [rechargement SD1.5](LOKR_LINEAR_DISPATCH.md) est exact
+dans le même mode inférence, sans qualifier encore la famille complète.

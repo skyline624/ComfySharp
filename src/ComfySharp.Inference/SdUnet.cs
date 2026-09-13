@@ -45,6 +45,10 @@ public sealed class SdUnet : IDisposable
     // The same borrowing rules apply; observers must not allocate native tensors.
     internal Action<string, Tensor>? FineDiagnosticObserver { get; set; }
 
+    // Borrows the input, ordinary output and combined output at each bypass boundary.
+    // Observers must not allocate native tensors or retain these borrowed wrappers.
+    internal Action<string, Tensor, Tensor, Tensor>? BypassDiagnosticObserver { get; set; }
+
     public SdUnet Retain()
     {
         lock (gate)
@@ -98,6 +102,7 @@ public sealed class SdUnet : IDisposable
         cancellationToken.ThrowIfCancellationRequested();
         var observer = DiagnosticObserver;
         var fineObserver = FineDiagnosticObserver;
+        operation.BypassDiagnosticObserver = BypassDiagnosticObserver;
 
         // Borrowed managed buffers and offset views can select a different CPU linear
         // reduction path. Canonicalize only unaligned context storage, without changing

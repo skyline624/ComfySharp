@@ -8,6 +8,7 @@ public sealed class UnetWeightSet : IDisposable
     private readonly CpuModelWeightBank bank;
     private readonly IReadOnlyDictionary<string, LoraWeightPatch> bypass;
     private readonly IReadOnlyDictionary<string, TrainableWeightPatch> trainingBypass;
+    internal Action<string, torch.Tensor, torch.Tensor, torch.Tensor>? BypassDiagnosticObserver { get; set; }
     public SdUnetConfig Config { get; }
     public torch.Device Device => bank.Device;
     public UnetWeightSet To(torch.Device device, CancellationToken cancellationToken = default) => Copy(bank.To(device, cancellationToken), bypass, p => p.To(device), cancellationToken);
@@ -74,6 +75,7 @@ public sealed class UnetWeightSet : IDisposable
             ? patch.ApplyBypass(input, baseOutput, kernelSize, stride, padding) : baseOutput;
         if (trainingBypass.TryGetValue(prefix + ".weight", out var training))
             result = training.ApplyBypass(input, result, kernelSize, stride, padding);
+        BypassDiagnosticObserver?.Invoke(prefix, input, baseOutput, result);
         // Borrowed baseOutput belongs to the caller's scope and must not be moved out of it.
         return ReferenceEquals(result, baseOutput) ? result : result.MoveToOuterDisposeScope();
     }

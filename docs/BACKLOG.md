@@ -1,12 +1,18 @@
 # Backlog de migration
 
+Lot 9 : [l'écart des bypass linéaires LoKr](LOKR_LINEAR_DISPATCH.md) est reproduit
+dans la source (`mm`/`bmm` selon les feuilles). Le diagnostic SD1.5 est exact après
+rechargement dans le même mode inférence. La priorité suivante est la validation
+des fichiers propre au bypass, puis OFT et le workflow public sur images.
+Les autres écarts numériques de CI gardent leurs assertions et restent ouverts.
+
 Lot 9 : le [bypass LoKr](LOKR_BYPASS.md) ajoute 252 tests locaux (opérateurs,
 gradients, erreurs, snapshots et U-Net réduit). Le diagnostic sur le SD1.5 partagé
 échoue à l'égalité exacte après rechargement malgré deux pas d'entraînement.
-Priorités : isoler l'effet des feuilles `requires_grad` sur les opérateurs natifs,
-conserver cet échec comme tel, puis qualifier la validation des fichiers pour le
-mode bypass et les workflows réels. Les deux contrôles source isolés ne reproduisent
-pas l'écart du modèle complet. Les tolérances existantes restent verrouillées.
+Le suivi ci-dessus explique maintenant l'effet des feuilles `requires_grad`.
+Cet échec initial reste archivé. Les deux contrôles source de convolution ne
+reproduisent pas l'écart, à la différence des contrôles linéaires ajoutés ensuite.
+Les tolérances existantes restent verrouillées.
 
 Lot 9 : les [fondations LoKr](LOKR_TRAINING.md) et le [chargement d'inférence](LOKR_INFERENCE.md)
 couvrent facteurs directs/décomposés/Tucker, DoRA, initialisation SD et sauvegarde.

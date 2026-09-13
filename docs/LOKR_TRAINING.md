@@ -50,8 +50,9 @@ Le [chargement LoKr d'inférence et DoRA](LOKR_INFERENCE.md) dispose maintenant 
 références source et d'un diagnostic SD1.5 CPU entraîné puis rechargé en mémoire.
 La [reprise d'entraînement de fichiers LoKr](LOKR_RESUME.md) est également portée
 pour les facteurs Float32 et vérifiée contre la fabrique source. Le [bypass](LOKR_BYPASS.md)
-dispose depuis d'opérateurs groupés et de tests dédiés, mais son diagnostic réel
-SD1.5 reste en échec. Sa qualification, les workflows complets, les autres
+dispose depuis d'opérateurs groupés et de tests dédiés. Le [diagnostic SD1.5](LOKR_LINEAR_DISPATCH.md)
+vérifie maintenant exactement le rechargement dans le même mode inférence.
+Sa qualification complète, les workflows complets, les autres
 précisions et les plateformes restent à vérifier ou porter.
 Le nœud `TrainLoraNode` public reste incomplet. Aucune famille ni plateforme n'est
 qualifiée par les tests réduits. Voir [la preuve](qualification/lokr-training.json).
