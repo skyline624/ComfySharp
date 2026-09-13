@@ -246,3 +246,9 @@ the operator shapes in the frozen `LoKrAdapter.h` and the addition in
 `comfy/weight_adapter/bypass.py` (same ComfyUI revision and GPLv3-or-later).
 The separate `lokr_bypass_loading.py` collector captures these contracts, including
 source errors. See [loading scope](docs/LOKR_BYPASS_LOADING.md).
+
+`AdapterBypassGeometry` and the LoRA/LoHa convolution and broadcast paths adapt
+the frozen `LoRAAdapter.h`, `LoHaAdapter.h` and bypass injection (same ComfyUI
+revision, contributors and GPLv3-or-later provenance). The separate collector
+`lora_loha_bypass_loading.py` omits only the one-time inefficiency warning while
+executing the actual arithmetic. See [scope](docs/LORA_LOHA_BYPASS_LOADING.md).

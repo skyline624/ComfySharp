@@ -28,6 +28,7 @@
     <EmbeddedResource Include="Fixtures/lokr-bypass.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/lokr-linear-dispatch.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/lokr-bypass-loading.reference.json.gz" />
+    <EmbeddedResource Include="Fixtures/lora-loha-bypass-loading.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/lokr-factory.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/loha-inference.reference.json" />
     <EmbeddedResource Include="Fixtures/loha-resume.reference.json.gz" />

@@ -59,8 +59,8 @@ prédiction brute sur tenseurs réduits, sans qualification de workflow sur imag
 
 ## Limites restantes
 
-Cette qualification de géométrie concerne LoKr. Les branches LoRA et LoHa du
-chargeur conservent leurs contrôles existants ; leur couverture des géométries
-propres au bypass doit être examinée séparément. Les précisions mixtes, autres
+Cette qualification de géométrie concerne LoKr. Les branches LoRA et LoHa disposent
+depuis de [références et validations propres au bypass](LORA_LOHA_BYPASS_LOADING.md).
+Les précisions mixtes, autres
 familles de modèles, entraînement complet sur images et GPU restent à qualifier.
 Les tolérances des références restent `atol=rtol=3e-5`, sans modification.

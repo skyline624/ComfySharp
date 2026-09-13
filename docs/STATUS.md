@@ -1,5 +1,20 @@
 # État du port — 0.1.0-dev
 
+Le [chargement LoRA/LoHa en bypass](LORA_LOHA_BYPASS_LOADING.md) couvre désormais
+les chaînes avec facteur intermédiaire, les convolutions 1D/2D/3D et l'addition
+avec diffusion des dimensions. 96 cas source et deux nouveaux tests du nœud
+public conservent les contrôles ordinaires, la durée de vie et les erreurs.
+Les facteurs de référence sont F32/F16/BF16 avec activations Float32.
+Les 1 650 tests ordinaires d'inférence passent localement. Les adapters LoRA et
+LoHa existants sont relus depuis le dossier partagé avec SD1.5 : chacun donne
+trois prédictions de bypass identiques, modifie la prédiction et conserve la
+base. Les écarts avec le chemin ordinaire restent des observations publiées.
+
+La CI 34745251627 du jalon LoKr précédent valide 599 tests ciblés et les sept
+tests `LoraModelLoaderNode` sur chacun des trois OS. Elle échoue globalement :
+23 tests ordinaires Windows, 22 Linux, et CLIP stock restent en échec. macOS
+passe les 1 552 tests ordinaires. Aucune plateforme n'est qualifiée.
+
 Le [chargement LoKr en mode bypass](LOKR_BYPASS_LOADING.md) distingue désormais
 les opérateurs de la reconstruction des poids. 33 nouveaux tests couvrent les
 fichiers, la mémoire, les erreurs et les formes à refuser en mode ordinaire ; un

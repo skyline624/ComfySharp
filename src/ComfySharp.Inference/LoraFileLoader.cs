@@ -215,11 +215,23 @@ public static class LoraFileLoader
             try {shape=LohaMath.ReconstructedShape(up,down,file.Tensors[loha.W2A].Shape,file.Tensors[loha.W2B].Shape,
                 loha.T1 is null?null:file.Tensors[loha.T1].Shape,loha.T2 is null?null:file.Tensors[loha.T2].Shape);}
             catch(ArgumentException error){throw new InvalidDataException("LoHa factor geometry is incompatible.",error);}
-            if(Elements(shape)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoHa factors cannot reshape to '{binding.Target.Weight}'.");
+            if(mode==LoraLoadMode.Bypass)
+            {
+                try{AdapterBypassGeometry.Loha(shape,binding.Target.Shape);}
+                catch(ArgumentException error){throw new InvalidDataException("LoHa bypass geometry is incompatible.",error);}
+            }
+            else if(Elements(shape)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoHa factors cannot reshape to '{binding.Target.Weight}'.");
         }
         else
         {
             var up=file.Tensors[binding.Up!].Shape;var down=file.Tensors[binding.Down!].Shape;
+            if(mode==LoraLoadMode.Bypass)
+            {
+                try{AdapterBypassGeometry.Lora(up,down,binding.Mid is null?null:file.Tensors[binding.Mid].Shape,binding.Target.Shape);}
+                catch(ArgumentException error){throw new InvalidDataException("LoRA bypass geometry is incompatible.",error);}
+            }
+            else
+            {
             if(up.Count<2||down.Count<2)throw new InvalidDataException("LoRA up/down factors require at least two dimensions.");
             long columns=Elements(down)/down[0];
             if(binding.Mid is not null)
@@ -229,13 +241,14 @@ public static class LoraFileLoader
                 columns=checked(down[1]*mid[2]*mid[3]);
             }
             if(Elements(up)/up[0]!=down[0]||checked(up[0]*columns)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoRA factors cannot reshape to '{binding.Target.Weight}'.");
+            }
         }
         if(binding.Alpha is not null)
         {
             var alpha=file.Tensors[binding.Alpha];
             if(!SafeTensorFile.SupportsTensorDType(alpha.DType)||Elements(alpha.Shape)!=1)throw new InvalidDataException("LoRA alpha requires a single supported scalar value.");
         }
-        if(binding.Dora is not null&&!(binding.Lokr is not null&&mode==LoraLoadMode.Bypass))
+        if(binding.Dora is not null&&mode!=LoraLoadMode.Bypass)
         {
             var shape=file.Tensors[binding.Dora].Shape;var target=binding.Target.Shape;
             if(shape.Count<1||shape.Count>target.Count)throw new InvalidDataException("DoRA scale cannot broadcast to the target weight.");

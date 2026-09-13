@@ -43,14 +43,16 @@ internal static class SdLoraBypassDiagnostic
             }
             using var source = Capture(); var loadPlan = LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:token);
             using var adapters = LoraFileLoader.Load(source,loadPlan,cancellationToken:token);
+            var bypassPlan=LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:token,mode:LoraLoadMode.Bypass);
+            using var bypassAdapters=LoraFileLoader.Load(source,bypassPlan,cancellationToken:token);
             Tensor ordinary;
             progress.WriteLine("Computing ordinary adapter prediction.");
             using(var baked=adapters.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:token))
                 ordinary=baked.Forward(input,time,context,token);
             using(ordinary)
-            using(var bypass=adapters.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:token))
+            using(var bypass=bypassAdapters.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:token))
             {
-                adapters.Dispose(); source.Dispose(); adapterFile.Dispose();
+                adapters.Dispose();bypassAdapters.Dispose();source.Dispose(); adapterFile.Dispose();
                 var hashes=new List<string>();double maxAbsolute=0,meanAbsolute=0;
                 for(int iteration=0;iteration<3;iteration++)
                 {
@@ -66,7 +68,7 @@ internal static class SdLoraBypassDiagnostic
                     throw new InvalidOperationException("Bypass repeatability, base preservation or adapter effect check failed.");
                 token.ThrowIfCancellationRequested();
                 var report=new{status="ok",checkpointSha256=checkpointHash,adapterSha256=adapterHash,device="cpu",threads=get_num_threads(),
-                    matchedTargets=loadPlan.Bindings.Count,baselineSha256=baselineHash,ordinarySha256=Hash(ordinary),bypassSha256=hashes[0],
+                    matchedTargets=bypassPlan.Bindings.Count,inspectionMode=bypassPlan.Mode.ToString(),baselineSha256=baselineHash,ordinarySha256=Hash(ordinary),bypassSha256=hashes[0],
                     repeats=hashes.Count,repeatable=true,basePredictionUnchanged=true,adapterChangesPrediction=true,
                     comparison=new{maxAbsolute,meanAbsolute,acceptance="observation_only_no_model_tolerance_acceptance"},
                     elapsedSeconds=watch.Elapsed.TotalSeconds,familyQualified=false,

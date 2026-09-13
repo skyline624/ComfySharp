@@ -1,0 +1,1356 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/weight_adapter/loha.py": "579ca1e33e0d244e0d7eedd30fb727913341f8e7bfbd74b51221f567612286d5"
+  },
+  "fixture": {
+    "compressedSha256": "429a2b55aaafd0c39dca04630ad62d185628acfc42e3127b3c2cb151d257c8e8",
+    "rawSha256": "713b1afe5d4be8936682564182574090a3dc411a3caa6e7648efff6b7ad9cdbb",
+    "compressedBytes": 22150,
+    "rawBytes": 118463,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "successCases": 72,
+    "expectedSourceErrors": 24,
+    "factorDtypes": [
+      "Float32",
+      "Float16",
+      "BFloat16"
+    ],
+    "activationDtype": "Float32",
+    "cases": [
+      {
+        "kind": "LoRA",
+        "name": "linear",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "linear",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "linear",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "linear-mid",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "linear-mid",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "linear-mid",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-1",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-1",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-1",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-1",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-1",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-1",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-1",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-1",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-1",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-2",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-2",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-2",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-2",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-2",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-2",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-2",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-2",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-2",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-3",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-3",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "flat-conv-3",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-3",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-3",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "mid-conv-3",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-3",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-3",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "sequential-spatial-3",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-output",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-output",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-output",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-output",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-output",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-output",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-spatial",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-spatial",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-spatial",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-rank",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "mat1 and mat2 shapes cannot be multiplied (3x2 and 3x3)"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-rank",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "mat1 and mat2 shapes cannot be multiplied (3x2 and 3x3)"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-rank",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "mat1 and mat2 shapes cannot be multiplied (3x2 and 3x3)"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-flatten",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[2, 2, 3]' is invalid for input of size 10"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-flatten",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[2, 2, 3]' is invalid for input of size 10"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-flatten",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[2, 2, 3]' is invalid for input of size 10"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-kernel-dim",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [2, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-kernel-dim",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [2, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-kernel-dim",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [2, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-spatial",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 2"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-spatial",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 2"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoRA",
+        "name": "error-spatial",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 2"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "linear",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "linear",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "linear",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-1",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-1",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-1",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-2",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-2",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-2",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-3",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-3",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "flat-conv-3",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "tucker",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "tucker",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "tucker",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          2,
+          2
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-spatial",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-spatial",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-spatial",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.float32",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.float16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "broadcast-base-spatial",
+        "dtype": "torch.bfloat16",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          3,
+          3
+        ]
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-flatten",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[3, 2, 3]' is invalid for input of size 15"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-flatten",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[3, 2, 3]' is invalid for input of size 15"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-flatten",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[3, 2, 3]' is invalid for input of size 15"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv1",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [3, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv1",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [3, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv1",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Expected 4-dimensional input for 4-dimensional weight [3, 2, 3, 3], but got 3-dimensional input of size [1, 2, 4] instead"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv3",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "expected stride to be a single integer value or a list of 2 values to match the convolution dimensions, but got stride=[1, 1, 1]"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv3",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "expected stride to be a single integer value or a list of 2 values to match the convolution dimensions, but got stride=[1, 1, 1]"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-core-conv3",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "expected stride to be a single integer value or a list of 2 values to match the convolution dimensions, but got stride=[1, 1, 1]"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-spatial",
+        "dtype": "torch.float32",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 3"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-spatial",
+        "dtype": "torch.float16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 3"
+        },
+        "outputShape": null
+      },
+      {
+        "kind": "LoHa",
+        "name": "error-spatial",
+        "dtype": "torch.bfloat16",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 3"
+        },
+        "outputShape": null
+      }
+    ]
+  },
+  "localTests": {
+    "targeted": {
+      "LoraLohaBypassLoadingTests": {
+        "total": 96,
+        "passed": 96,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "LoraModelLoaderNodeTests": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    "newTests": 98,
+    "ordinary": {
+      "total": 1650,
+      "passed": 1650,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "realWeightsDiagnostics": {
+    "lora": {
+      "status": "ok",
+      "checkpointSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+      "adapterSha256": "2aec13e2bd5b7bb1c02b74440d15d358a304f618500ff540cb48e14a1678164f",
+      "device": "cpu",
+      "threads": 16,
+      "matchedTargets": 686,
+      "inspectionMode": "Bypass",
+      "baselineSha256": "30209e6388e0822283f6ac5e38fe3d76de9bea561479629f7bc2529e4f1e3f75",
+      "ordinarySha256": "cdb8b63997b10f77bb615b1a6ab032058213673039fbe1fba9743c45d6eea18e",
+      "bypassSha256": "b3a39f7934b7bf76a80314271a3fa4f61f2c32ce16eabd7fae6966ee13776701",
+      "repeats": 3,
+      "repeatable": true,
+      "basePredictionUnchanged": true,
+      "adapterChangesPrediction": true,
+      "comparison": {
+        "maxAbsolute": 3.933906555175781e-06,
+        "meanAbsolute": 9.658169801696204e-07,
+        "acceptance": "observation_only_no_model_tolerance_acceptance"
+      },
+      "elapsedSeconds": 11.5995339,
+      "familyQualified": false,
+      "scope": "Existing pretrained SD1.5 and trained adapter; synthetic 8x8 latent and text context. Raw CPU predictions only, no generation or training rerun."
+    },
+    "loha": {
+      "status": "ok",
+      "checkpointSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+      "adapterSha256": "084f56c9e1105a7d32aa6bca25309ca22173d61864ed238144bb4edc4bc4387a",
+      "device": "cpu",
+      "threads": 16,
+      "matchedTargets": 686,
+      "inspectionMode": "Bypass",
+      "baselineSha256": "30209e6388e0822283f6ac5e38fe3d76de9bea561479629f7bc2529e4f1e3f75",
+      "ordinarySha256": "68f90545b9c55004add6b5711029bbf786e8d0aac317fb07b58553455c42cf2e",
+      "bypassSha256": "028387bac4290831388e9b790b24741f56f97fcbb340e8fadecf9966778fabf0",
+      "repeats": 3,
+      "repeatable": true,
+      "basePredictionUnchanged": true,
+      "adapterChangesPrediction": true,
+      "comparison": {
+        "maxAbsolute": 3.0100345611572266e-06,
+        "meanAbsolute": 7.382077455986291e-07,
+        "acceptance": "observation_only_no_model_tolerance_acceptance"
+      },
+      "elapsedSeconds": 17.9593273,
+      "familyQualified": false,
+      "scope": "Existing pretrained SD1.5 and trained adapter; synthetic 8x8 latent and text context. Raw CPU predictions only, no generation or training rerun."
+    }
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "temporarySyntheticAdapterFilesCleaned": true,
+  "realImageWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "previousCi": {
+    "runId": 34745251627,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34745251627",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1529,
+          "failed": 23,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1530,
+          "failed": 22,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1552,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      }
+    },
+    "note": "All 599 targeted and seven model loader tests pass on each OS. Windows has 23 ordinary failures, Linux 22; macOS ordinary tests pass but stock CLIP fails. No platform qualification."
+  },
+  "ci": {
+    "status": "not_run_for_this_change"
+  },
+  "remaining": [
+    "reshape_weight and quantized model injection",
+    "OFT and full TrainLoraNode",
+    "Image training workflows",
+    "Other model families, mixed precision and required GPU/OS qualification"
+  ]
+}

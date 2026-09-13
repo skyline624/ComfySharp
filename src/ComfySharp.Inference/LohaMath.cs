@@ -92,11 +92,11 @@ public static class LohaMath
         }
         else
         {
-            if (input.dim() != 4 || kernelSize.Count != 2 || kernelSize.Any(n => n <= 0)) throw new ArgumentException("SD LoHa bypass requires Conv2d geometry.");
-            if (diff.dim() == 2) diff = diff.reshape(diff.shape[0], input.shape[1], kernelSize[0], kernelSize[1]);
-            output = nn.functional.conv2d(input, diff, strides: new[] { stride, stride }, padding: new[] { padding, padding });
+            int dimensions=kernelSize.Count;
+            if (dimensions is <1 or >3 || input.dim()!=dimensions+2 || kernelSize.Any(n => n <= 0)) throw new ArgumentException("LoHa bypass requires matching convolution input/kernel dimensions.");
+            if (diff.dim() == 2) diff = diff.view(new[]{diff.shape[0],input.shape[1]}.Concat(kernelSize).ToArray());
+            output = LokrBypassMath.Op(input,diff,dimensions,stride,padding);
         }
-        if (!output.shape.SequenceEqual(baseOutput.shape)) throw new ArgumentException("LoHa bypass output differs from the base module shape.");
         cancellationToken.ThrowIfCancellationRequested(); return (baseOutput + output).MoveToOuterDisposeScope();
     }
 }

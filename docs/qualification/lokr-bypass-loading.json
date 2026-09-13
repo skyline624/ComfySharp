@@ -476,12 +476,169 @@
     "note": "All 566 targeted tests pass on each OS. Windows full job succeeds; Linux has 20 ordinary numerical failures; macOS ordinary tests pass but stock CLIP fails. No platform qualification."
   },
   "ci": {
-    "status": "not_run_for_this_change"
+    "runId": 34745251627,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34745251627",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1529,
+          "failed": 23,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1530,
+          "failed": 22,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1552,
+          "passed": 1552,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "LohaTraining": {
+          "total": 599,
+          "passed": 599,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 33,
+            "passed": 33,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "newFailures": []
+        },
+        "SaveLoRA": {
+          "total": 59,
+          "passed": 59,
+          "failed": 0,
+          "LokrBypassLoadingTests": {
+            "total": 0,
+            "passed": 0,
+            "failed": 0
+          },
+          "LoraModelLoaderNodeTests": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0
+          },
+          "newFailures": []
+        }
+      }
+    },
+    "note": "All 599 targeted and seven model loader tests pass on each OS. Windows has 23 ordinary failures, Linux 22; macOS ordinary tests pass but stock CLIP fails. No platform qualification."
   },
   "remaining": [
     "LoRA/LoHa bypass-specific geometry audit",
     "OFT and full TrainLoraNode",
     "Image training workflows",
     "Other model families, mixed precision and required GPU/OS qualification"
-  ]
+  ],
+  "followUp": "lora-loha-bypass-loading.json"
 }

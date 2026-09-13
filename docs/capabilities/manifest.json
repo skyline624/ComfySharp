@@ -34143,7 +34143,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": ["../LOHA_TRAINING.md", "../LOHA_INFERENCE.md", "../LOHA_RESUME.md", "../qualification/loha-resume.json"],
+      "evidence": ["../LORA_LOHA_BYPASS_LOADING.md", "../qualification/lora-loha-bypass-loading.json", "../LOHA_TRAINING.md", "../LOHA_INFERENCE.md", "../LOHA_RESUME.md", "../qualification/loha-resume.json"],
       "scenario": "weight-adapter:loha:reference-workflow"
     },
     {
@@ -34185,7 +34185,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": ["../LORA_NODES.md", "../LORA_TRAINING.md", "../LORA_RESUME.md", "../qualification/lora-training.json"],
+      "evidence": ["../LORA_LOHA_BYPASS_LOADING.md", "../qualification/lora-loha-bypass-loading.json", "../LORA_NODES.md", "../LORA_TRAINING.md", "../LORA_RESUME.md", "../qualification/lora-training.json"],
       "scenario": "weight-adapter:lora:reference-workflow"
     },
     {

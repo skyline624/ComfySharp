@@ -9,6 +9,37 @@ namespace ComfySharp.Inference.Tests;
 [Collection("Classical VAE")]
 public sealed class LoraModelLoaderNodeTests
 {
+    [Theory] [InlineData(false)] [InlineData(true)]
+    public async Task Bypass_node_uses_Lora_mid_chain_or_Loha_broadcast_without_weight_reconstruction(bool loha)
+    {
+        NativeRuntimeBootstrap.Initialize();long before=Tensor.TotalCount;int threads=get_num_threads();set_num_threads(1);
+        try
+        {
+            using var scope=NewDisposeScope();using var producer=new RuntimeNodeContext();using var output=new RuntimeNodeContext();
+            var config=new SdUnetConfig(32,16,SdAttentionHeadMode.FixedCount,4,false);using var bank=SdSyntheticInputs.CreateUnet(config);using var model=new SdUnet(bank);
+            var factors=loha?new Dictionary<string,Tensor>{{"hada_w1_a",ones(1,2)*.1},{"hada_w1_b",ones(2,32)*.1},{"hada_w2_a",ones(1,2)*.1},{"hada_w2_b",ones(2,32)*.1}}
+                :new Dictionary<string,Tensor>{{"lora_up.weight",ones(32,4)*.01},{"lora_down.weight",ones(2,32)*.01},{"lora_mid.weight",ones(4,2)*.01}};
+            using var patch=loha?LoraWeightPatch.FromLoha(factors["hada_w1_a"],factors["hada_w1_b"],factors["hada_w2_a"],factors["hada_w2_b"],strength:.7)
+                :new LoraWeightPatch(factors["lora_up.weight"],factors["lora_down.weight"],strength:.7,mid:factors["lora_mid.weight"]);
+            const string target="input_blocks.1.1.transformer_blocks.0.attn1.to_q";
+            using var expectedModel=model.WithBypassLora(new Dictionary<string,LoraWeightPatch>{{target+".weight",patch}},maxPatchedWeightBytes:0);
+            var state=producer.Map(factors.ToDictionary(p=>"diffusion_model."+target+"."+p.Key,p=>producer.Own(p.Value.clone())));
+            var inputs=new Dictionary<string,RuntimeValue>{{"model",producer.Own(model.Retain())},{"lora",state},
+                {"strength_model",producer.Json(JsonValue.Create(.7))},{"bypass",producer.Json(JsonValue.Create(true))}};
+            var result=await new LoraModelLoaderNode(0).ExecuteAsync(output,inputs,default);
+            inputs["bypass"]=producer.Json(JsonValue.Create(false));
+            await Assert.ThrowsAsync<InvalidDataException>(async()=>await new LoraModelLoaderNode().ExecuteAsync(output,inputs,default));
+            producer.Dispose();patch.Dispose();foreach(var value in factors.Values)value.fill_(0);
+            using var input=NativeMath.CpuNoise([1,4,8,8],51);using var context=NativeMath.CpuNoise([1,3,16],52);using var time=tensor(new[]{17.25f});
+            using var baseline=model.Forward(input,time,context);using var expected=expectedModel.Forward(input,time,context);
+            using var actual=result.Result[0].GetNative<SdUnet>().Forward(input,time,context);
+            Assert.Equal(expected.bytes.ToArray(),actual.bytes.ToArray());Assert.NotEqual(baseline.bytes.ToArray(),actual.bytes.ToArray());
+            using var unchanged=model.Forward(input,time,context);Assert.Equal(baseline.bytes.ToArray(),unchanged.bytes.ToArray());
+        }
+        finally{set_num_threads(threads);}
+        Assert.Equal(before,Tensor.TotalCount);
+    }
+
     [Fact]
     public async Task Bypass_node_accepts_source_Tucker_operator_geometry_that_cannot_be_baked()
     {

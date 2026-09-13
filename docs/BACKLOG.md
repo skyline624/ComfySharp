@@ -1,5 +1,10 @@
 # Backlog de migration
 
+Lot 9 : la [validation des fichiers LoRA/LoHa en bypass](LORA_LOHA_BYPASS_LOADING.md)
+couvre les opérateurs et leur addition, avec 98 nouveaux tests. Priorité suivante :
+OFT et les options encore absentes de `TrainLoraNode`, puis le workflow public
+d'entraînement sur images. Les autres échecs numériques de CI restent ouverts.
+
 Lot 9 : le [chargement des géométries LoKr de bypass](LOKR_BYPASS_LOADING.md)
 utilise les opérateurs, conserve les contrôles ordinaires et alimente le nœud
 public. Suite : examiner séparément les géométries LoRA/LoHa, puis porter OFT

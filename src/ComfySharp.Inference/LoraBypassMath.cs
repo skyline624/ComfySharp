@@ -3,7 +3,7 @@ using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
 /// <summary>Frozen ordinary LoRA bypass: base output + up(mid(down(input))) * scale.
-/// Uses module geometry only, never original weight values. Plain SD linear/Conv2d path.</summary>
+/// Uses module geometry only, never original weight values. Linear/Conv1d/2d/3d path.</summary>
 public static class LoraBypassMath
 {
     public static Tensor Apply(Tensor input, Tensor baseOutput, Tensor up, Tensor down,
@@ -37,20 +37,20 @@ public static class LoraBypassMath
         }
         else
         {
-            if (input.dim() != 4 || kernelSize.Count != 2 || kernelSize.Any(d => d <= 0)) throw new ArgumentException("Conv2d bypass requires NCHW input and two kernel dimensions.");
-            if (d.dim() == 2) d = d.reshape(d.shape[0], input.shape[1], kernelSize[0], kernelSize[1]);
-            if (u.dim() == 2) u = u.reshape(u.shape[0], u.shape[1], 1, 1);
-            if (m is not null && m.dim() == 2) m = m.reshape(m.shape[0], m.shape[1], 1, 1);
+            int dimensions=kernelSize.Count;
+            if (dimensions is <1 or >3 || input.dim()!=dimensions+2 || kernelSize.Any(d => d <= 0)) throw new ArgumentException("Convolution bypass requires matching input and kernel dimensions.");
+            if (d.dim() == 2) d = d.view(new[]{d.shape[0],input.shape[1]}.Concat(kernelSize).ToArray());
+            if (u.dim() == 2) u = u.view(u.shape.Concat(Enumerable.Repeat(1L,dimensions)).ToArray());
+            if (m is not null && m.dim() == 2) m = m.view(m.shape.Concat(Enumerable.Repeat(1L,dimensions)).ToArray());
             if (m is null)
-                hidden = nn.functional.conv2d(input, d, strides: new[] { stride, stride }, padding: new[] { padding, padding });
+                hidden = LokrBypassMath.Op(input,d,dimensions,stride,padding);
             else
             {
-                hidden = nn.functional.conv2d(input, d);
-                hidden = nn.functional.conv2d(hidden, m, strides: new[] { stride, stride }, padding: new[] { padding, padding });
+                hidden = LokrBypassMath.Op(input,d,dimensions);
+                hidden = LokrBypassMath.Op(hidden,m,dimensions,stride,padding);
             }
-            result = nn.functional.conv2d(hidden, u);
+            result = LokrBypassMath.Op(hidden,u,dimensions);
         }
-        if (!result.shape.SequenceEqual(baseOutput.shape)) throw new ArgumentException("Bypass output shape differs from the base module output.");
         // Alpha is a Python scalar after load_lora's item(), so compute its scalar scale before multiplication.
         var combined = baseOutput + result * ((alpha is null ? 1.0 : alpha.Value / down.shape[0]) * strength);
         cancellationToken.ThrowIfCancellationRequested(); return combined.MoveToOuterDisposeScope();
