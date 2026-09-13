@@ -1,5 +1,9 @@
 # LoKr : comparer le rechargement dans le même mode de calcul
 
+Les [géométries propres au bypass LoKr](LOKR_BYPASS_LOADING.md) sont maintenant
+inspectées selon leurs opérateurs. Cette évolution ne change pas la distinction
+entre les modes de calcul expliquée ici.
+
 Le diagnostic initial supposait que la prédiction d'entraînement et la prédiction
 d'inférence devaient être identiques bit à bit après une sauvegarde sans perte.
 Cette hypothèse est fausse pour certains bypass linéaires de la source ComfyUI.

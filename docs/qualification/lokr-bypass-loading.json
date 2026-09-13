@@ -1,0 +1,487 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4",
+    "comfy/weight_adapter/bypass.py": "618c286c5f74e823318f41774e02cfcfa02d74ee9d51320ec0aa2694cd74aa8e"
+  },
+  "fixture": {
+    "compressedSha256": "be9918b7cd2ebfb413f387bbecb0eaf8b44b4254b8da8eb5fab5cc889a13fa23",
+    "rawSha256": "2b18d476cfe48f06d9fc2cbd9f1002bbc658428cf75284496fc298ed9fc147e8",
+    "compressedBytes": 7189,
+    "rawBytes": 30345,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "successCases": 15,
+    "expectedSourceErrors": 7,
+    "cases": [
+      {
+        "name": "linear",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "name": "linear-broadcast-delta",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "name": "linear-broadcast-base",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "name": "spatial-b-1",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2
+        ]
+      },
+      {
+        "name": "tucker-1",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2
+        ]
+      },
+      {
+        "name": "spatial-b-2",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "tucker-2",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "spatial-b-3",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "tucker-3",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "matrix-tucker-core",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          4
+        ]
+      },
+      {
+        "name": "sequential-spatial",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2,
+          2
+        ]
+      },
+      {
+        "name": "conv-broadcast-channels",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          2
+        ]
+      },
+      {
+        "name": "conv-broadcast-delta-spatial",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          3,
+          3
+        ]
+      },
+      {
+        "name": "conv-broadcast-base-spatial",
+        "error": null,
+        "outputShape": [
+          1,
+          6,
+          3,
+          3
+        ]
+      },
+      {
+        "name": "linear-ignores-core",
+        "error": null,
+        "outputShape": [
+          1,
+          3,
+          6
+        ]
+      },
+      {
+        "name": "error-linear-rank",
+        "error": {
+          "type": "RuntimeError",
+          "message": "mat1 and mat2 shapes cannot be multiplied (6x1 and 2x3)"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-conv-direct-matrix",
+        "error": {
+          "type": "RuntimeError",
+          "message": "weight should have at least three dimensions"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-conv-decomposed-matrix",
+        "error": {
+          "type": "RuntimeError",
+          "message": "weight should have at least three dimensions"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-tucker-channels",
+        "error": {
+          "type": "RuntimeError",
+          "message": "Given groups=1, weight of size [4, 2, 3, 3], expected input[2, 1, 4, 4] to have 2 channels, but got 1 channels instead"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-input-channels",
+        "error": {
+          "type": "RuntimeError",
+          "message": "shape '[1, 3, 2, -1]' is invalid for input of size 15"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-output-channels",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (6) must match the size of tensor b (2) at non-singleton dimension 2"
+        },
+        "outputShape": null
+      },
+      {
+        "name": "error-output-spatial",
+        "error": {
+          "type": "RuntimeError",
+          "message": "The size of tensor a (3) must match the size of tensor b (2) at non-singleton dimension 3"
+        },
+        "outputShape": null
+      }
+    ]
+  },
+  "localTests": {
+    "targeted": {
+      "LokrBypassLoadingTests": {
+        "total": 33,
+        "passed": 33,
+        "failed": 0,
+        "notExecuted": 0
+      },
+      "LoraModelLoaderNodeTests": {
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "notExecuted": 0
+      }
+    },
+    "newTests": 34,
+    "ordinary": {
+      "total": 1552,
+      "passed": 1552,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "realWeightsDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 7,
+    "algorithm": "LoKr",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 137523272,
+    "changedParameterCount": 960,
+    "InitialCpuRandomStateSha256": "f3ff817d3895a08bfafd570b6df509be1b8cb3fe235713d500360fa24ba6a9eb",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 1.1707273,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 964,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": true,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1250,
+      "predictionExact": true,
+      "predictionSha256": "000ae8774b545dd1124e326038f9c0856c74fa448c567c87f91c9fa424b4a431",
+      "comparison": "frozen training owners versus loaded inference",
+      "trainingPredictionSha256": "238604dadf377cdde7809aa22bd92afb56473acb3315ea1c65e99117ce415dba",
+      "trainingPredictionExact": false,
+      "trainingPredictionMaxAbsoluteDifference": 2.413988e-06
+    },
+    "trainingResumeRoundtrip": null,
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 19.3317418,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa and direct LoKr alpha have no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "modes": {
+    "default": "Weights",
+    "bypass": "Operator channels plus runtime spatial validation and broadcast addition",
+    "bypassPlanMayBake": false,
+    "doraInLokrBypass": "Preserved and ignored",
+    "otherProviderBypassGeometry": "Existing LoRA/LoHa checks unchanged; separate qualification remains"
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "temporarySyntheticAdapterFilesCleaned": true,
+  "realImageWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "previousCi": {
+    "runId": 34744526313,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34744526313",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1518,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1498,
+          "failed": 20,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1518,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      }
+    },
+    "note": "All 566 targeted tests pass on each OS. Windows full job succeeds; Linux has 20 ordinary numerical failures; macOS ordinary tests pass but stock CLIP fails. No platform qualification."
+  },
+  "ci": {
+    "status": "not_run_for_this_change"
+  },
+  "remaining": [
+    "LoRA/LoHa bypass-specific geometry audit",
+    "OFT and full TrainLoraNode",
+    "Image training workflows",
+    "Other model families, mixed precision and required GPU/OS qualification"
+  ]
+}

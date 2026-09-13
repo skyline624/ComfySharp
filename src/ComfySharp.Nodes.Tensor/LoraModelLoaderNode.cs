@@ -32,7 +32,8 @@ public sealed class LoraModelLoaderNode(long maxPatchedWeightBytes = 4L * 1024 *
         var model = inputs["model"].GetNative<SdUnet>();
         var tensors = inputs["lora"].Properties.ToDictionary(p => p.Key, p => p.Value.GetNative<TorchSharp.torch.Tensor>(), StringComparer.Ordinal);
         using var source = new NativeLoraTensorSource(tensors, cancellationToken: cancellationToken);
-        var plan = LoraFileLoader.Inspect(source, LoraModelAliases.ForUnet(model.Config), allowUnclaimedKeys: true, cancellationToken: cancellationToken);
+        var plan = LoraFileLoader.Inspect(source, LoraModelAliases.ForUnet(model.Config), allowUnclaimedKeys: true, cancellationToken: cancellationToken,
+            mode: useBypass ? LoraLoadMode.Bypass : LoraLoadMode.Weights);
         using var adapter = LoraFileLoader.Load(source, plan, new Dictionary<string, double> { ["model"] = strength }, cancellationToken);
         var modified = useBypass ? adapter.ApplyBypassTo(model, maxPatchedWeightBytes: maxPatchedWeightBytes, cancellationToken: cancellationToken)
             : adapter.ApplyTo(model, maxPatchedWeightBytes: maxPatchedWeightBytes, cancellationToken: cancellationToken);

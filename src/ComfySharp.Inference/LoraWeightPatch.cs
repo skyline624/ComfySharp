@@ -48,7 +48,7 @@ public sealed class LoraWeightPatch : IDisposable
         if(!double.IsFinite(strength)||alpha is not null&&!double.IsFinite(alpha.Value))throw new ArgumentOutOfRangeException(nameof(strength));
         if(factors.Keys.Any(k=>!LokrMath.Names.Contains(k,StringComparer.Ordinal)))throw new ArgumentException("Unknown LoKr factor key.");
         var copied=factors.ToDictionary(p=>p.Key,p=>Copy(p.Value),StringComparer.Ordinal);var scale=doraScale is null?null:Copy(doraScale);
-        LokrMath.ReconstructedShape(copied.ToDictionary(p=>p.Key,p=>(IReadOnlyList<long>)p.Value.shape,StringComparer.Ordinal));
+        LokrBypassGeometry.ValidateStorage(copied.ToDictionary(p=>p.Key,p=>(IReadOnlyList<long>)p.Value.shape,StringComparer.Ordinal));
         foreach(var value in copied.Values.Append(scale).OfType<Tensor>())if(!value.isfinite().all().item<bool>())throw new InvalidDataException("LoKr snapshots require finite factors.");
         foreach(var value in copied.Values)value.DetachFromDisposeScope();lokr=copied;dora=scale?.DetachFromDisposeScope();Strength=strength;Alpha=alpha;
     }

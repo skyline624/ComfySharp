@@ -103,7 +103,7 @@ internal static class SdAllAdapterDiagnostic
                     :trained.alias();
                 using var snapshot = LoraTrainingState.Capture(adapters.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
                 using var source = new NativeLoraTensorSource(snapshot.Tensors,cancellationToken:cancellationToken);
-                var snapshotPlan = LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
+                var snapshotPlan = LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken,mode:bypassMode?LoraLoadMode.Bypass:LoraLoadMode.Weights);
                 using var frozen = LoraFileLoader.Load(source,snapshotPlan,cancellationToken:cancellationToken);
                 using var inference = bypassMode ? frozen.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)
                     : frozen.ApplyTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken);
@@ -255,7 +255,7 @@ internal static class SdAllAdapterDiagnostic
                 else referencePrediction=trainedPrediction;
                 LoraTrainingFile.SaveTargetsNew(adapterPath,adapters.Patches,maxFactorBytes:adapters.ParameterBytes,cancellationToken:cancellationToken);
                 using var adapterFile=new SafeTensorFile(adapterPath);
-                var adapterPlan=LoraFileLoader.Inspect(adapterFile,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken);
+                var adapterPlan=LoraFileLoader.Inspect(adapterFile,LoraModelAliases.ForUnet(model.Config),cancellationToken:cancellationToken,mode:bypassMode?LoraLoadMode.Bypass:LoraLoadMode.Weights);
                 if(adapterPlan.Bindings.Count!=adapters.Patches.Count)throw new InvalidDataException("Export lost adapter targets.");
                 using var snapshots=LoraFileLoader.Load(adapterFile,adapterPlan,cancellationToken:cancellationToken);
                 using var baked=bypassMode ? snapshots.ApplyBypassTo(model,maxPatchedWeightBytes:4L*1024*1024*1024,cancellationToken:cancellationToken)

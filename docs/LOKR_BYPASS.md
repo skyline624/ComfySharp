@@ -64,11 +64,10 @@ conservées et ne prouvent pas une parité numérique complète avec la source.
 dotnet run -c Release --project tools/ComfySharp.RuntimeProbe -- sd-all-adapter-train --algorithm LoKr --rank 7 --checkpoint <checkpoint-existant.safetensors> --report <nouveau.json> --device cpu --bypass true
 ```
 
-Le chargeur de fichiers conserve sa validation stricte du nombre d'éléments du
-poids cible. Certaines formes matricielles que `h` peut exécuter directement
-restent donc refusées à cette frontière lorsque leur reconstruction n'a pas la
-taille du poids cible ; une sélection et validation spécifiques au mode bypass
-restent à qualifier. Les activations en précision mixte, modules hors SD,
+Le chargeur possède désormais une [validation spécifique au bypass LoKr](LOKR_BYPASS_LOADING.md),
+séparée des contrôles stricts du mode ordinaire. Elle couvre les opérateurs
+spatiaux/Tucker et l'addition avec diffusion des dimensions de taille 1.
+Les activations en précision mixte, modules hors SD,
 workflows d'entraînement sur images, nœud public complet et plateformes GPU
 restent également ouverts. Aucun modèle n'a été téléchargé, copié ou sauvegardé
 pour ces vérifications ; le checkpoint partagé est relu directement.

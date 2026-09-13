@@ -1,5 +1,11 @@
 # Backlog de migration
 
+Lot 9 : le [chargement des géométries LoKr de bypass](LOKR_BYPASS_LOADING.md)
+utilise les opérateurs, conserve les contrôles ordinaires et alimente le nœud
+public. Suite : examiner séparément les géométries LoRA/LoHa, puis porter OFT
+et compléter `TrainLoraNode` et les workflows sur images. Les échecs numériques
+de CI hors de ces cas restent ouverts.
+
 Lot 9 : [l'écart des bypass linéaires LoKr](LOKR_LINEAR_DISPATCH.md) est reproduit
 dans la source (`mm`/`bmm` selon les feuilles). Le diagnostic SD1.5 est exact après
 rechargement dans le même mode inférence. La priorité suivante est la validation

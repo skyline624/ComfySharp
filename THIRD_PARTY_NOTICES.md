@@ -240,3 +240,9 @@ adaptations. See [partial scope and failed model diagnostic](docs/LOKR_BYPASS.md
 PyTorch CPU profiler to record native linear dispatch. Its synthetic fixture and
 the C# comparisons retain the source's trainable/frozen distinction. The diagnostic
 evaluation wrapper is original C# code; see [evidence](docs/LOKR_LINEAR_DISPATCH.md).
+
+`LokrBypassGeometry`, mode-aware LoKr loading and native broadcast addition adapt
+the operator shapes in the frozen `LoKrAdapter.h` and the addition in
+`comfy/weight_adapter/bypass.py` (same ComfyUI revision and GPLv3-or-later).
+The separate `lokr_bypass_loading.py` collector captures these contracts, including
+source errors. See [loading scope](docs/LOKR_BYPASS_LOADING.md).

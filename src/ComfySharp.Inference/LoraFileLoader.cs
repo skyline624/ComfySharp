@@ -4,6 +4,7 @@ namespace ComfySharp.Inference;
 public sealed record LoraTarget(string Component,string Weight,IReadOnlyList<long> Shape);
 public sealed record LoraAlias(string Prefix,LoraTarget Target);
 public sealed record LohaFactorKeys(string W2A,string W2B,string? T1=null,string? T2=null);
+public enum LoraLoadMode { Weights, Bypass }
 public sealed record LoraBinding(string Prefix,LoraTarget Target,string? Up,string? Down,string? Mid,string? Alpha,string? Dora,string? Difference=null,LohaFactorKeys? Loha=null,IReadOnlyDictionary<string,string>? Lokr=null);
 
 /// <summary>Metadata-only selection tied to one tensor source. Alias order is authoritative:
@@ -16,8 +17,9 @@ public sealed class LoraLoadPlan
     public IReadOnlyList<string> ShadowedPrefixes { get; }
     public IReadOnlyList<string> Components { get; }
     public long ResidentFactorBytes { get; }
-    internal LoraLoadPlan(ILoraTensorSource file,LoraBinding[] bindings,string[] unclaimed,string[] shadowed,string[] components,long bytes)
-    {Source=file;Bindings=Array.AsReadOnly(bindings);UnclaimedKeys=Array.AsReadOnly(unclaimed);ShadowedPrefixes=Array.AsReadOnly(shadowed);Components=Array.AsReadOnly(components);ResidentFactorBytes=bytes;}
+    public LoraLoadMode Mode { get; }
+    internal LoraLoadPlan(ILoraTensorSource file,LoraBinding[] bindings,string[] unclaimed,string[] shadowed,string[] components,long bytes,LoraLoadMode mode)
+    {Source=file;Bindings=Array.AsReadOnly(bindings);UnclaimedKeys=Array.AsReadOnly(unclaimed);ShadowedPrefixes=Array.AsReadOnly(shadowed);Components=Array.AsReadOnly(components);ResidentFactorBytes=bytes;Mode=mode;}
 }
 
 public static class LoraFileLoader
@@ -30,10 +32,11 @@ public static class LoraFileLoader
         (".lora_B.default.weight",".lora_A.default.weight",false)];
 
     public static LoraLoadPlan Inspect(ILoraTensorSource file,IReadOnlyList<LoraAlias> aliases,
-        bool allowUnclaimedKeys=false,long maxResidentFactorBytes=512L*1024*1024,CancellationToken cancellationToken=default)
+        bool allowUnclaimedKeys=false,long maxResidentFactorBytes=512L*1024*1024,CancellationToken cancellationToken=default,LoraLoadMode mode=LoraLoadMode.Weights)
     {
         ArgumentNullException.ThrowIfNull(file);ArgumentNullException.ThrowIfNull(aliases);
         cancellationToken.ThrowIfCancellationRequested();
+        if(!Enum.IsDefined(mode))throw new ArgumentOutOfRangeException(nameof(mode));
         if(maxResidentFactorBytes<0)throw new ArgumentOutOfRangeException(nameof(maxResidentFactorBytes));
         var selected=new Dictionary<(string,string),LoraBinding>();var claimed=new HashSet<string>(StringComparer.Ordinal);
         var prefixes=new HashSet<string>(StringComparer.Ordinal);var components=new HashSet<string>(StringComparer.Ordinal);var shadowed=new List<string>();
@@ -56,7 +59,7 @@ public static class LoraFileLoader
                 if(file.Tensors.ContainsKey(alias.Prefix+".reshape_weight"))throw new NotSupportedException($"LoRA reshape_weight is not implemented for '{alias.Prefix}'.");
                 string? Present(string suffix)=>file.Tensors.ContainsKey(alias.Prefix+suffix)?alias.Prefix+suffix:null;
                 var binding=new LoraBinding(alias.Prefix,target,up,down,format.Mid?Present(".lora_mid.weight"):null,Present(".alpha"),Present(".dora_scale"));
-                Validate(file,binding);
+                Validate(file,binding,mode);
                 foreach(string key in FactorKeys(binding))claimed.Add(key);
                 if(binding.Alpha is not null)claimed.Add(binding.Alpha);
                 var identity=(target.Component,target.Weight);
@@ -76,7 +79,7 @@ public static class LoraFileLoader
                 var first=Present(".hada_t1");
                 var factors=new LohaFactorKeys(Required(".hada_w2_a"),Required(".hada_w2_b"),first,first is null?null:Required(".hada_t2"));
                 var binding=new LoraBinding(alias.Prefix,target,Required(".hada_w1_a"),Required(".hada_w1_b"),null,Present(".alpha"),Present(".dora_scale"),Loha:factors);
-                Validate(file,binding);
+                Validate(file,binding,mode);
                 foreach(string key in FactorKeys(binding))claimed.Add(key);
                 if(binding.Alpha is not null)claimed.Add(binding.Alpha);
                 var identity=(target.Component,target.Weight);
@@ -91,7 +94,7 @@ public static class LoraFileLoader
                 string? Present(string suffix)=>file.Tensors.ContainsKey(alias.Prefix+suffix)?alias.Prefix+suffix:null;
                 var binding=new LoraBinding(alias.Prefix,target,null,null,null,Present(".alpha"),Present(".dora_scale"),
                     Lokr:new System.Collections.ObjectModel.ReadOnlyDictionary<string,string>(keys));
-                Validate(file,binding);foreach(string key in FactorKeys(binding))claimed.Add(key);if(binding.Alpha is not null)claimed.Add(binding.Alpha);
+                Validate(file,binding,mode);foreach(string key in FactorKeys(binding))claimed.Add(key);if(binding.Alpha is not null)claimed.Add(binding.Alpha);
                 var identity=(target.Component,target.Weight);
                 if(selected.TryGetValue(identity,out var prior)&&prior.Prefix!=alias.Prefix)shadowed.Add(prior.Prefix);
                 selected[identity]=binding;
@@ -104,7 +107,7 @@ public static class LoraFileLoader
                     throw new InvalidDataException("A bias difference alias must identify its module weight.");
                 var destination=bias?target with{Weight=target.Weight[..^7]+".bias",Shape=Array.AsReadOnly(new[]{target.Shape[0]})}:target;
                 var binding=new LoraBinding(alias.Prefix,destination,null,null,null,null,null,key);
-                Validate(file,binding);claimed.Add(key);
+                Validate(file,binding,mode);claimed.Add(key);
                 var identity=(destination.Component,destination.Weight);
                 if(selected.TryGetValue(identity,out var prior)&&prior.Prefix!=alias.Prefix)shadowed.Add(prior.Prefix);
                 selected[identity]=binding;
@@ -121,7 +124,7 @@ public static class LoraFileLoader
             foreach(string key in FactorKeys(binding))resident=checked(resident+Elements(file.Tensors[key].Shape)*4);
         if(resident>maxResidentFactorBytes)throw new NotSupportedException("LoRA resident factors exceed the configured allowance; read/conversion temporaries are additional.");
         cancellationToken.ThrowIfCancellationRequested();
-        return new(file,selected.Values.ToArray(),unclaimed,shadowed.ToArray(),components.ToArray(),resident);
+        return new(file,selected.Values.ToArray(),unclaimed,shadowed.ToArray(),components.ToArray(),resident,mode);
     }
 
     public static LoraAdapterSet Load(ILoraTensorSource file,LoraLoadPlan plan,
@@ -181,7 +184,7 @@ public static class LoraFileLoader
         if(binding.Mid is not null)yield return binding.Mid;if(binding.Dora is not null)yield return binding.Dora;
     }
     private static long Elements(IReadOnlyList<long> shape)=>shape.Aggregate(1L,(n,d)=>checked(n*d));
-    private static void Validate(ILoraTensorSource file,LoraBinding binding)
+    private static void Validate(ILoraTensorSource file,LoraBinding binding,LoraLoadMode mode)
     {
         foreach(string key in FactorKeys(binding))
         {
@@ -197,10 +200,13 @@ public static class LoraFileLoader
         if(binding.Target.Shape.Count<2)throw new InvalidDataException("LoRA factors require a target with at least two dimensions.");
         if(binding.Lokr is { } lokr)
         {
-            long[] shape;
-            try{shape=LokrMath.ReconstructedShape(lokr.ToDictionary(p=>p.Key,p=>file.Tensors[p.Value].Shape,StringComparer.Ordinal));}
+            try
+            {
+                var factors=lokr.ToDictionary(p=>p.Key,p=>file.Tensors[p.Value].Shape,StringComparer.Ordinal);
+                if(mode==LoraLoadMode.Bypass)LokrBypassGeometry.ValidateTarget(factors,binding.Target.Shape);
+                else if(Elements(LokrMath.ReconstructedShape(factors))!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoKr factors cannot reshape to '{binding.Target.Weight}'.");
+            }
             catch(ArgumentException error){throw new InvalidDataException("LoKr factor geometry is incompatible.",error);}
-            if(Elements(shape)!=Elements(binding.Target.Shape))throw new InvalidDataException($"LoKr factors cannot reshape to '{binding.Target.Weight}'.");
         }
         else if(binding.Loha is { } loha)
         {
@@ -229,7 +235,7 @@ public static class LoraFileLoader
             var alpha=file.Tensors[binding.Alpha];
             if(!SafeTensorFile.SupportsTensorDType(alpha.DType)||Elements(alpha.Shape)!=1)throw new InvalidDataException("LoRA alpha requires a single supported scalar value.");
         }
-        if(binding.Dora is not null)
+        if(binding.Dora is not null&&!(binding.Lokr is not null&&mode==LoraLoadMode.Bypass))
         {
             var shape=file.Tensors[binding.Dora].Shape;var target=binding.Target.Shape;
             if(shape.Count<1||shape.Count>target.Count)throw new InvalidDataException("DoRA scale cannot broadcast to the target weight.");
@@ -247,6 +253,7 @@ public sealed class LoraAdapterSet : IDisposable
     internal LoraAdapterSet(LoraLoadPlan plan,Dictionary<(string,string),LoraWeightPatch> patches){Plan=plan;this.patches=patches;}
     public Tensor Apply(string component,string weight,Tensor source,CancellationToken cancellationToken=default)
     {
+        RequireWeightPlan();
         cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(source);LoraWeightPatch owned;
         var binding=Plan.Bindings.Single(b=>b.Target.Component==component&&b.Target.Weight==weight);
         if(!binding.Target.Shape.SequenceEqual(source.shape))throw new InvalidDataException("The target weight shape differs from the inspected LoRA plan.");
@@ -254,11 +261,27 @@ public sealed class LoraAdapterSet : IDisposable
         using(owned)return owned.Apply(source,cancellationToken);
     }
     public SdUnet ApplyTo(SdUnet model,string component="model",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
-    {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(model);ValidateTargets(component,UnetWeightSchema.Describe(model.Config));return WithPatches(component,p=>model.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
+    {RequireWeightPlan();cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(model);ValidateTargets(component,UnetWeightSchema.Describe(model.Config));return WithPatches(component,p=>model.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
     public SdUnet ApplyBypassTo(SdUnet model,string component="model",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
     {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(model);ValidateTargets(component,UnetWeightSchema.Describe(model.Config));return WithPatches(component,p=>model.WithBypassLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
     public ComfyClipEncoder ApplyTo(ComfyClipEncoder clip,string component="clip",long maxPatchedWeightBytes=512L*1024*1024,CancellationToken cancellationToken=default)
-    {cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(clip);ValidateTargets(component,ClipWeightSchema.Describe(clip.Config));return WithPatches(component,p=>clip.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
+    {RequireWeightPlan();cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(clip);ValidateTargets(component,ClipWeightSchema.Describe(clip.Config));return WithPatches(component,p=>clip.WithLora(p,maxPatchedWeightBytes,cancellationToken),cancellationToken);}
+    public Tensor ApplyBypass(string component,string weight,Tensor input,Tensor baseOutput,long stride=1,long padding=0,CancellationToken cancellationToken=default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();ArgumentNullException.ThrowIfNull(input);ArgumentNullException.ThrowIfNull(baseOutput);
+        var binding=Plan.Bindings.Single(b=>b.Target.Component==component&&b.Target.Weight==weight);
+        var shape=binding.Target.Shape;
+        if(shape.Count<2||input.dim()<1||baseOutput.dim()<1||
+            shape.Count>2&&(input.dim()!=shape.Count||baseOutput.dim()!=shape.Count)||
+            input.shape[shape.Count==2?^1:1]!=shape[1]||baseOutput.shape[shape.Count==2?^1:1]!=shape[0])
+            throw new InvalidDataException("Bypass activations do not match the inspected module channels/rank.");
+        LoraWeightPatch owned;lock(gate){ObjectDisposedException.ThrowIf(patches is null,this);owned=patches[(component,weight)].Retain();}
+        using(owned)return owned.ApplyBypass(input,baseOutput,shape.Count==2?null:shape.Skip(2).ToArray(),stride,padding);
+    }
+    private void RequireWeightPlan()
+    {
+        if(Plan.Mode!=LoraLoadMode.Weights)throw new InvalidOperationException("A bypass-inspected adapter cannot be baked; inspect again in weight mode.");
+    }
     private void ValidateTargets(string component,IReadOnlyDictionary<string,IReadOnlyList<long>> schema)
     {
         foreach(var binding in Plan.Bindings.Where(b=>b.Target.Component==component))

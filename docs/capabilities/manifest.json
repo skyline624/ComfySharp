@@ -34164,7 +34164,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": ["../LOKR_TRAINING.md", "../LOKR_INFERENCE.md", "../LOKR_RESUME.md", "../LOKR_BYPASS.md", "../qualification/lokr-training.json", "../qualification/lokr-inference.json", "../qualification/lokr-resume.json", "../qualification/lokr-bypass.json", "../LOKR_LINEAR_DISPATCH.md", "../qualification/lokr-linear-dispatch.json"],
+      "evidence": ["../LOKR_TRAINING.md", "../LOKR_INFERENCE.md", "../LOKR_RESUME.md", "../LOKR_BYPASS.md", "../qualification/lokr-training.json", "../qualification/lokr-inference.json", "../qualification/lokr-resume.json", "../qualification/lokr-bypass.json", "../LOKR_LINEAR_DISPATCH.md", "../qualification/lokr-linear-dispatch.json", "../LOKR_BYPASS_LOADING.md", "../qualification/lokr-bypass-loading.json"],
       "scenario": "weight-adapter:lokr:reference-workflow"
     },
     {

@@ -487,12 +487,151 @@
     "note": "Windows reduced bypass reload used the invalid cross-mode bitwise invariant. Other numerical and stock CLIP failures remain open."
   },
   "ci": {
-    "status": "not_run_for_this_change"
+    "runId": 34744526313,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34744526313",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1518,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      },
+      "linux-x64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1498,
+          "failed": 20,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      },
+      "osx-arm64": {
+        "Inference": {
+          "total": 1518,
+          "passed": 1518,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        },
+        "LohaTraining": {
+          "total": 566,
+          "passed": 566,
+          "failed": 0,
+          "notExecuted": 0,
+          "LokrBypassTests": {
+            "total": 252,
+            "passed": 252,
+            "failed": 0
+          },
+          "LokrLinearDispatchTests": {
+            "total": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "FrozenAdapterEvaluationTests": {
+            "total": 2,
+            "passed": 2,
+            "failed": 0
+          }
+        }
+      }
+    },
+    "note": "All 566 targeted tests pass on each OS. Windows full job succeeds; Linux has 20 ordinary numerical failures; macOS ordinary tests pass but stock CLIP fails. No platform qualification."
   },
   "remaining": [
     "Bypass-specific file geometry validation",
     "OFT and full TrainLoraNode",
     "Image training workflows",
     "Mixed precision and required GPU/OS qualification"
-  ]
+  ],
+  "followUp": "lokr-bypass-loading.json"
 }

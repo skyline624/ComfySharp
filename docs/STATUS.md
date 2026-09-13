@@ -1,5 +1,20 @@
 # État du port — 0.1.0-dev
 
+Le [chargement LoKr en mode bypass](LOKR_BYPASS_LOADING.md) distingue désormais
+les opérateurs de la reconstruction des poids. 33 nouveaux tests couvrent les
+fichiers, la mémoire, les erreurs et les formes à refuser en mode ordinaire ; un
+test supplémentaire vérifie le nœud public avec une chaîne Tucker et un budget
+de poids reconstruits nul. Cette couverture ne qualifie pas les autres familles.
+Les 1 552 tests ordinaires d'inférence passent localement, sans échec ni test
+ignoré. Le diagnostic SD1.5 partagé conserve le même hash après rechargement
+avec l'inspection de bypass et laisse la base inchangée.
+
+La [CI 34744526313](https://github.com/skyline624/ComfySharp/actions/runs/34744526313)
+du jalon de correction des modes est terminée : 566 tests ciblés passent sur
+chacun des trois OS. Windows passe le job complet ; Linux conserve 20 échecs sur
+1 518 tests ordinaires, et macOS passe ces 1 518 tests mais échoue sur CLIP stock.
+La géométrie ajoutée depuis doit encore passer sa propre CI.
+
 Le [diagnostic des modes LoKr](LOKR_LINEAR_DISPATCH.md) reproduit l'écart dans
 la source et isole le choix natif `mm`/`bmm` des couches linéaires. Le rechargement
 SD1.5 passe maintenant une comparaison exacte entre paramètres figés avant capture

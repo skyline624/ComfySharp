@@ -10,6 +10,36 @@ namespace ComfySharp.Inference.Tests;
 public sealed class LoraModelLoaderNodeTests
 {
     [Fact]
+    public async Task Bypass_node_accepts_source_Tucker_operator_geometry_that_cannot_be_baked()
+    {
+        NativeRuntimeBootstrap.Initialize();long before=Tensor.TotalCount;int threads=get_num_threads();set_num_threads(1);
+        try
+        {
+            using var scope=NewDisposeScope();using var producer=new RuntimeNodeContext();using var output=new RuntimeNodeContext();
+            var config=new SdUnetConfig(32,16,SdAttentionHeadMode.FixedCount,4,false);using var bank=SdSyntheticInputs.CreateUnet(config);using var model=new SdUnet(bank);
+            var factors=new Dictionary<string,Tensor>{{"lokr_w1",ones(2,2)*.01},{"lokr_w2_a",ones(16,3)*.02},
+                {"lokr_w2_b",ones(1,2)*.03},{"lokr_t2",NativeMath.CpuNoise([3,1,3,3],17)*.01}};
+            using var patch=LoraWeightPatch.FromLokr(factors,strength:.7);
+            using var expectedModel=model.WithBypassLora(new Dictionary<string,LoraWeightPatch>{{"input_blocks.0.0.weight",patch}},maxPatchedWeightBytes:0);
+            var state=producer.Map(factors.ToDictionary(p=>"diffusion_model.input_blocks.0.0."+p.Key,p=>producer.Own(p.Value.clone())));
+            var inputs=new Dictionary<string,RuntimeValue>{{"model",producer.Own(model.Retain())},{"lora",state},
+                {"strength_model",producer.Json(JsonValue.Create(.7))},{"bypass",producer.Json(JsonValue.Create(true))}};
+            var result=await new LoraModelLoaderNode(0).ExecuteAsync(output,inputs,default);
+            Assert.Equal(1,result.Ui!["comfysharp_lora"]![0]!["matched_targets"]!.GetValue<int>());
+            inputs["bypass"]=producer.Json(JsonValue.Create(false));
+            await Assert.ThrowsAsync<InvalidDataException>(async()=>await new LoraModelLoaderNode().ExecuteAsync(output,inputs,default));
+            producer.Dispose();patch.Dispose();foreach(var value in factors.Values)value.fill_(0);
+            using var input=NativeMath.CpuNoise([1,4,8,8],51);using var context=NativeMath.CpuNoise([1,3,16],52);using var time=tensor(new[]{17.25f});
+            using var baseline=model.Forward(input,time,context);using var expected=expectedModel.Forward(input,time,context);
+            using var actual=result.Result[0].GetNative<SdUnet>().Forward(input,time,context);
+            Assert.Equal(expected.bytes.ToArray(),actual.bytes.ToArray());Assert.NotEqual(baseline.bytes.ToArray(),actual.bytes.ToArray());
+            using var unchanged=model.Forward(input,time,context);Assert.Equal(baseline.bytes.ToArray(),unchanged.bytes.ToArray());
+        }
+        finally{set_num_threads(threads);}
+        Assert.Equal(before,Tensor.TotalCount);
+    }
+
+    [Fact]
     public async Task Bypass_node_keeps_factor_application_in_forward_with_zero_patched_weight_budget()
     {
         NativeRuntimeBootstrap.Initialize(); long before = Tensor.TotalCount; int threads = get_num_threads(); set_num_threads(1);

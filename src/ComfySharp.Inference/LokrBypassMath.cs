@@ -43,7 +43,8 @@ public static class LokrBypassMath
     }
     internal static Tensor Combine(Tensor delta,Tensor baseOutput)
     {
-        if(!delta.shape.SequenceEqual(baseOutput.shape))throw new ArgumentException("LoKr bypass output shape differs from the base module.");
+        // Frozen bypass injection adds h(x) with native broadcasting, including
+        // channel/spatial dimensions of size one; incompatible dimensions still fail.
         return baseOutput+delta;
     }
     public static Tensor Apply(Tensor input,Tensor baseOutput,IReadOnlyDictionary<string,Tensor> factors,double strength=1,double? alpha=null,
