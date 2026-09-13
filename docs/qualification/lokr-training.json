@@ -80,10 +80,73 @@
   "familyQualified": false,
   "platformsQualified": false,
   "ci": {
-    "status": "not-yet-evaluated"
+    "runId": 34731449101,
+    "url": "https://github.com/skyline624/ComfySharp/actions/runs/34731449101",
+    "status": "completed",
+    "conclusion": "failure",
+    "tests": {
+      "win-x64": {
+        "LohaTraining": {
+          "total": 139,
+          "passed": 139,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0
+        },
+        "Inference": {
+          "total": 1090,
+          "passed": 1090,
+          "failed": 0,
+          "notExecuted": 0
+        }
+      },
+      "linux-x64": {
+        "LohaTraining": {
+          "total": 139,
+          "passed": 139,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0
+        },
+        "Inference": {
+          "total": 1090,
+          "passed": 1068,
+          "failed": 22,
+          "notExecuted": 0
+        }
+      },
+      "osx-arm64": {
+        "LohaTraining": {
+          "total": 139,
+          "passed": 139,
+          "failed": 0,
+          "notExecuted": 0
+        },
+        "LokrTrainingTests": {
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0
+        },
+        "Inference": {
+          "total": 1090,
+          "passed": 1090,
+          "failed": 0,
+          "notExecuted": 0
+        }
+      }
+    },
+    "note": "LohaTraining group is 87 LoHa plus 52 LoKr tests. Windows job passed; Linux numerical tests and macOS stock CLIP failed. No platform qualification."
   },
   "remaining": [
-    "LoKr inference loader and DoRA",
+    "Additional LoKr inference geometries and precisions; implemented Float32 loader and DoRA documented in lokr-inference.json",
     "LoKr resume",
     "Bypass operators and native training integration",
     "Other training dtypes",

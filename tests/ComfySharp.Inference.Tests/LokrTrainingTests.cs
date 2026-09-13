@@ -85,6 +85,16 @@ public sealed class LokrTrainingTests
                 else{Assert.NotNull(gradient);Assert.True(gradient!.isfinite().all().item<bool>());Assert.True(gradient.abs().sum().item<float>()>0);}
             }
             optimizer.Step();using var changed=model.ForwardForTraining(input,time,context,patches);Assert.NotEqual(prediction.bytes.ToArray(),changed.bytes.ToArray());
+            using var state=LoraTrainingState.Capture(patches,ScalarType.Float32);
+            using var source=new NativeLoraTensorSource(state.Tensors);
+            var loadPlan=LoraFileLoader.Inspect(source,LoraModelAliases.ForUnet(config));
+            Assert.NotNull(Assert.Single(loadPlan.Bindings).Lokr);
+            using var frozen=LoraFileLoader.Load(source,loadPlan);source.Dispose();state.Dispose();
+            using var baked=frozen.ApplyTo(model);using var reloaded=baked.Forward(input,time,context);
+            // This one-rebuilt-side case has matching alpha semantics. Both rebuilt
+            // sides intentionally differ between source training and inference.
+            Assert.True(allclose(changed,reloaded,rtol:3e-5,atol:3e-5));
+            if(!rebuilt)Assert.Equal(changed.bytes.ToArray(),reloaded.bytes.ToArray());
             Assert.Throws<NotSupportedException>(()=>model.ForwardForTraining(input,time,context,patches,bypassMode:true));
             using var unchanged=model.Forward(input,time,context);Assert.Equal(baseline.bytes.ToArray(),unchanged.bytes.ToArray());
         }

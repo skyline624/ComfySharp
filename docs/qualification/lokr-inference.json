@@ -1,0 +1,118 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lora.py": "e506062b4eb189be4c36f88270e0fd4dcce038c79a98f7163604ed6b44efe4b5",
+    "comfy/weight_adapter/loha.py": "579ca1e33e0d244e0d7eedd30fb727913341f8e7bfbd74b51221f567612286d5",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4",
+    "comfy/lora.py": "502b0118ff179d9c167a8fb5b05b72a7736eb69d948750c0137f57461686d6ff"
+  },
+  "fixtureSha256": "92aff7aef2282cd22e51971e33526a9cdf7300b1667e5bb72d5a345923c3fcff",
+  "successfulSourceCases": 135,
+  "sourceLoggedErrorCases": 15,
+  "loaderCases": 4,
+  "absoluteTolerance": 3e-05,
+  "relativeTolerance": 3e-05,
+  "sourceErrorPolicy": "Surface native failure instead of logging and returning unchanged weight. No contiguous workaround or successful reconstruction claim.",
+  "localTargetedTests": {
+    "passed": 155,
+    "failed": 0,
+    "skipped": 0
+  },
+  "realWeightsDiagnostic": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "checkpointBytes": 4265146304,
+    "backend": "cpu",
+    "dtype": "Float32",
+    "tf32Allowed": false,
+    "seed": 317,
+    "rank": 7,
+    "algorithm": "LoKr",
+    "optimizer": "SGD",
+    "learningRate": 0.01,
+    "targetCount": 686,
+    "parameterCount": 1250,
+    "alphaParameters": 282,
+    "adapterParameterBytes": 137523272,
+    "changedParameterCount": 960,
+    "InitialCpuRandomStateSha256": "f3ff817d3895a08bfafd570b6df509be1b8cb3fe235713d500360fa24ba6a9eb",
+    "InitialDeviceRandomStateSha256": null,
+    "steps": [
+      {
+        "step": 1,
+        "loss": 1.1856256,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 684,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      },
+      {
+        "step": 2,
+        "loss": 1.1707271,
+        "finiteGradientLeaves": 968,
+        "nonzeroGradientLeaves": 964,
+        "nonzeroAlphaGradients": 0,
+        "nullSourceGradients": 282
+      }
+    ],
+    "baseUnchanged": true,
+    "export": null,
+    "bypassMode": false,
+    "inMemoryReload": {
+      "targets": 686,
+      "tensors": 1250,
+      "predictionExact": true,
+      "predictionSha256": "3f77c9d644c6d9b93943269c7662a06e9f76ee7583501d94205b4163dad0d377"
+    },
+    "resume": null,
+    "inputRecipe": {
+      "shape": [
+        1,
+        4,
+        8,
+        8
+      ],
+      "inputSeed": 511,
+      "contextShape": [
+        1,
+        3,
+        768
+      ],
+      "contextSeed": 512,
+      "targetSeed": 513,
+      "timestep": 17.25
+    },
+    "elapsedSeconds": 46.5040387,
+    "scope": "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa and direct LoKr alpha have no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+  },
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "remaining": [
+    "Training resume",
+    "Inference and training bypass",
+    "Mixed precision",
+    "Full TrainLoraNode and image workflow",
+    "Pretrained source gradients",
+    "Required GPU and OS qualification"
+  ],
+  "ci": {
+    "status": "not-yet-evaluated"
+  },
+  "localOrdinaryTests": {
+    "passed": 1245,
+    "failed": 0,
+    "skipped": 0,
+    "filter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  }
+}

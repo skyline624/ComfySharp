@@ -1,19 +1,21 @@
 using static TorchSharp.torch;
 namespace ComfySharp.Inference;
 
-/// <summary>An immutable, independently disposable snapshot of LoRA/LoHa factors or an additive difference for inference baking.
+/// <summary>An immutable, independently disposable snapshot of LoRA/LoHa/LoKr factors or an additive difference for inference baking.
 /// Low-level trainable operations use LoraMath directly; this owner intentionally freezes its factors.</summary>
 public sealed class LoraWeightPatch : IDisposable
 {
     private readonly object gate=new();
     private Tensor? up,down,mid,dora,difference,up2,down2,t1,t2;
+    private Dictionary<string,Tensor>? lokr;
     public double Strength { get; }
     public double? Alpha { get; }
-    internal bool IsDifference { get { lock(gate) { ObjectDisposedException.ThrowIf(up is null && difference is null,this); return difference is not null; } } }
+    internal bool IsDifference { get { lock(gate) { ObjectDisposedException.ThrowIf(up is null && difference is null && lokr is null,this); return difference is not null; } } }
     internal LoraWeightPatch To(Device device)
     {
         using var owner = Retain(); using var scope = NewDisposeScope();
         if (owner.difference is { } diff) return FromDifference(diff.to(device), Strength);
+        if (owner.lokr is not null) return FromLokr(owner.lokr.ToDictionary(p=>p.Key,p=>p.Value.to(device),StringComparer.Ordinal),Strength,Alpha,owner.dora?.to(device));
         if (owner.up2 is not null) return FromLoha(owner.up!.to(device), owner.down!.to(device), owner.up2.to(device), owner.down2!.to(device),
             Strength, Alpha, owner.t1?.to(device), owner.t2?.to(device), owner.dora?.to(device));
         return new(owner.up!.to(device), owner.down!.to(device), Strength, Alpha, owner.mid?.to(device), owner.dora?.to(device));
@@ -22,6 +24,7 @@ public sealed class LoraWeightPatch : IDisposable
     {
         using var owner = Retain();
         if (owner.difference is not null) throw new InvalidOperationException("Additive differences use ordinary weight patching.");
+        if (owner.lokr is not null) throw new NotSupportedException("LoKr inference bypass is not ported yet; baking cannot substitute for its operator path.");
         if (owner.up2 is not null) return LohaMath.ApplyBypass(input, baseOutput, owner.up!, owner.down!, owner.up2, owner.down2!,
             Strength, Alpha, owner.t1, owner.t2, kernelSize, stride, padding);
         // Frozen LoRAAdapter.h uses up/down/alpha/mid; its inherited g is identity, including when a DoRA field is present.
@@ -37,6 +40,18 @@ public sealed class LoraWeightPatch : IDisposable
         this.difference=copy.DetachFromDisposeScope();Strength=strength;
     }
     public static LoraWeightPatch FromDifference(Tensor difference,double strength=1)=>new(difference,strength);
+    public static LoraWeightPatch FromLokr(IReadOnlyDictionary<string,Tensor> factors,double strength=1,double? alpha=null,Tensor? doraScale=null)
+        =>new(factors,strength,alpha,doraScale);
+    private LoraWeightPatch(IReadOnlyDictionary<string,Tensor> factors,double strength,double? alpha,Tensor? doraScale)
+    {
+        ArgumentNullException.ThrowIfNull(factors);NativeRuntimeBootstrap.Initialize();using var scope=NewDisposeScope();using var noGrad=no_grad();
+        if(!double.IsFinite(strength)||alpha is not null&&!double.IsFinite(alpha.Value))throw new ArgumentOutOfRangeException(nameof(strength));
+        if(factors.Keys.Any(k=>!LokrMath.Names.Contains(k,StringComparer.Ordinal)))throw new ArgumentException("Unknown LoKr factor key.");
+        var copied=factors.ToDictionary(p=>p.Key,p=>Copy(p.Value),StringComparer.Ordinal);var scale=doraScale is null?null:Copy(doraScale);
+        LokrMath.ReconstructedShape(copied.ToDictionary(p=>p.Key,p=>(IReadOnlyList<long>)p.Value.shape,StringComparer.Ordinal));
+        foreach(var value in copied.Values.Append(scale).OfType<Tensor>())if(!value.isfinite().all().item<bool>())throw new InvalidDataException("LoKr snapshots require finite factors.");
+        foreach(var value in copied.Values)value.DetachFromDisposeScope();lokr=copied;dora=scale?.DetachFromDisposeScope();Strength=strength;Alpha=alpha;
+    }
     public static LoraWeightPatch FromLoha(Tensor w1a, Tensor w1b, Tensor w2a, Tensor w2b,
         double strength=1, double? alpha=null, Tensor? t1=null, Tensor? t2=null, Tensor? doraScale=null)
         => new(w1a,w1b,w2a,w2b,strength,alpha,t1,t2,doraScale);
@@ -67,13 +82,15 @@ public sealed class LoraWeightPatch : IDisposable
         using var scope=NewDisposeScope();
         var u=source.up?.alias();var d=source.down?.alias();var m=source.mid?.alias();var s=source.dora?.alias();var diff=source.difference?.alias();
         var u2=source.up2?.alias();var d2=source.down2?.alias();var first=source.t1?.alias();var second=source.t2?.alias();
+        var kr=source.lokr?.ToDictionary(p=>p.Key,p=>p.Value.alias(),StringComparer.Ordinal);
         up=u?.DetachFromDisposeScope();down=d?.DetachFromDisposeScope();mid=m?.DetachFromDisposeScope();dora=s?.DetachFromDisposeScope();difference=diff?.DetachFromDisposeScope();
         up2=u2?.DetachFromDisposeScope();down2=d2?.DetachFromDisposeScope();t1=first?.DetachFromDisposeScope();t2=second?.DetachFromDisposeScope();
+        if(kr is not null)foreach(var value in kr.Values)value.DetachFromDisposeScope();lokr=kr;
         Strength=source.Strength;Alpha=source.Alpha;
     }
     public LoraWeightPatch Retain()
     {
-        lock(gate){ObjectDisposedException.ThrowIf(up is null&&difference is null,this);return new(this);}
+        lock(gate){ObjectDisposedException.ThrowIf(up is null&&difference is null&&lokr is null,this);return new(this);}
     }
     public Tensor Apply(Tensor weight,CancellationToken cancellationToken=default)
     {
@@ -87,6 +104,8 @@ public sealed class LoraWeightPatch : IDisposable
             cancellationToken.ThrowIfCancellationRequested();return result.MoveToOuterDisposeScope();
         }
         // Copy factors to the weight device only for this operation; source snapshots remain immutable.
+        if(operation.lokr is not null)return LokrMath.Apply(weight,operation.lokr.ToDictionary(p=>p.Key,p=>p.Value.to(weight.device),StringComparer.Ordinal),
+            Strength,Alpha,operation.dora?.to(weight.device),cancellationToken);
         var u=operation.up!.to(weight.device);var d=operation.down!.to(weight.device);
         var m=operation.mid?.to(weight.device);var s=operation.dora?.to(weight.device);
         if(operation.up2 is not null) return LohaMath.Apply(weight,u,d,operation.up2.to(weight.device),operation.down2!.to(weight.device),
@@ -103,8 +122,10 @@ public sealed class LoraWeightPatch : IDisposable
     public void Dispose()
     {
         Tensor? u,d,m,s,diff,u2,d2,first,second;
-        lock(gate){u=up;d=down;m=mid;s=dora;diff=difference;u2=up2;d2=down2;first=t1;second=t2;up=down=mid=dora=difference=up2=down2=t1=t2=null;}
+        Dictionary<string,Tensor>? kr;
+        lock(gate){u=up;d=down;m=mid;s=dora;diff=difference;u2=up2;d2=down2;first=t1;second=t2;kr=lokr;lokr=null;up=down=mid=dora=difference=up2=down2=t1=t2=null;}
         u?.Dispose();d?.Dispose();m?.Dispose();s?.Dispose();diff?.Dispose();
         u2?.Dispose();d2?.Dispose();first?.Dispose();second?.Dispose();
+        if(kr is not null)foreach(var value in kr.Values)value.Dispose();
     }
 }

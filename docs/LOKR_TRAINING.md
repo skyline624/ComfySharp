@@ -46,9 +46,11 @@ préentraîné n'est inclus. Les profils numériques restent `3e-5` absolu et re
 
 ## Travail restant
 
-Le chargement LoKr d'inférence, DoRA, la reprise de fichiers LoKr, le bypass,
-les modèles réels, les autres précisions et les plateformes restent à vérifier
-ou porter. Le bypass d'entraînement est refusé explicitement tant que son chemin
+Le [chargement LoKr d'inférence et DoRA](LOKR_INFERENCE.md) dispose maintenant de
+références source et d'un diagnostic SD1.5 CPU entraîné puis rechargé en mémoire.
+La reprise d'entraînement de fichiers LoKr, le bypass, les workflows complets,
+les autres précisions et les plateformes restent à vérifier ou porter.
+Le bypass d'entraînement est refusé explicitement tant que son chemin
 opérationnel n'est pas porté ; une reconstruction des poids ne le remplace pas.
 Le nœud `TrainLoraNode` public reste incomplet. Aucune famille ni plateforme n'est
 qualifiée par les tests réduits. Voir [la preuve](qualification/lokr-training.json).

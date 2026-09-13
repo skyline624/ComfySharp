@@ -1,11 +1,19 @@
 # État du port — 0.1.0-dev
 
-Les [fondations LoKr](LOKR_TRAINING.md) couvrent la reconstruction, les gradients,
-les quatre optimisateurs, la fabrique SD et la sauvegarde des facteurs.
-**1 090 tests ordinaires passent localement**, dont 52 nouveaux tests LoKr.
-Les quatre fabriques source SD1/SD2 aux rangs 2 et 7 vérifient les 686 cibles,
-1 250 paramètres et états RNG. Chargement d'inférence, reprise LoKr, bypass,
-nœud d'entraînement public et qualification avec de vrais modèles restent ouverts.
+Les [fondations LoKr](LOKR_TRAINING.md) et le [chargement d'inférence](LOKR_INFERENCE.md)
+couvrent reconstruction, gradients, quatre optimisateurs, fabrique SD, sauvegarde,
+DoRA et rechargement. **1 245 tests ordinaires passent localement**, dont 52 tests
+d'entraînement et 155 tests d'inférence LoKr. Le checkpoint SD1.5 partagé a permis
+deux mises à jour sur 686 cibles ; la prédiction après rechargement en mémoire est
+exacte et la base reste inchangée. Aucun nouveau fichier de poids n'a été écrit.
+La reprise d'entraînement LoKr, le bypass, le nœud public complet, les workflows
+sur images et la qualification des plateformes restent ouverts.
+
+La [CI du jalon d'entraînement LoKr 34731449101](https://github.com/skyline624/ComfySharp/actions/runs/34731449101)
+valide 52 tests LoKr et 87 tests LoHa sur chaque OS. Windows passe le job complet ;
+Linux garde 22 échecs sur 1 090 tests ordinaires, et Linux/macOS gardent des écarts
+CLIP stock. Ces résultats concernent le jalon précédent ; la CI du nouveau
+chargement d'inférence doit encore être évaluée. Aucune plateforme n'est qualifiée.
 
 Le [diagnostic Windows 34730514656](https://github.com/skyline624/ComfySharp/actions/runs/34730514656)
 réussit sur AMD EPYC 7763 : chacun des trois profils passe 1 038 tests ordinaires

@@ -18,8 +18,8 @@ internal static class SdAllAdapterDiagnostic
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             for (int i = 0; i < args.Length; i += 2)
             {
-                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass" or "--resume" or "--algorithm"))
-                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--algorithm LoRA|LoHa --adapter NEW.safetensors --bypass true|false --resume EXISTING.safetensors]");
+                if (i + 1 >= args.Length || args[i] is not ("--checkpoint" or "--report" or "--device" or "--adapter" or "--bypass" or "--resume" or "--algorithm" or "--rank"))
+                    throw new ArgumentException("Usage: sd-all-adapter-train --checkpoint FILE --report NEW.json --device cpu|cuda:0 [--algorithm LoRA|LoHa|LoKr --rank 1..1024 --adapter NEW.safetensors --bypass true|false --resume EXISTING.safetensors]");
                 options.Add(args[i], args[i + 1]);
             }
             string Required(string name) => options.TryGetValue(name, out var value) && !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Missing " + name);
@@ -31,7 +31,9 @@ internal static class SdAllAdapterDiagnostic
             if (requested is not ("cpu" or "cuda:0")) throw new ArgumentException("Select cpu or cuda:0.");
             if (!bool.TryParse(options.GetValueOrDefault("--bypass", "false"), out bool bypassMode)) throw new ArgumentException("Bypass must be true or false.");
             string algorithm = options.GetValueOrDefault("--algorithm", "LoRA");
-            if (algorithm is not ("LoRA" or "LoHa")) throw new NotSupportedException("Select LoRA or LoHa.");
+            if (algorithm is not ("LoRA" or "LoHa" or "LoKr")) throw new NotSupportedException("Select LoRA, LoHa or LoKr.");
+            if (!int.TryParse(options.GetValueOrDefault("--rank","2"), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out int rank) || rank<1 || rank>1024)
+                throw new ArgumentException("Rank must be an integer from 1 to 1024.");
             cancellationToken.ThrowIfCancellationRequested();
             using var file = new SafeTensorFile(checkpoint);
             using var existingFile = options.TryGetValue("--resume",out var resumePath) ? new SafeTensorFile(Path.GetFullPath(resumePath)) : null;
@@ -48,12 +50,12 @@ internal static class SdAllAdapterDiagnostic
             Tensor Noise(long[] shape, ulong seed) { using var noise = NativeMath.CpuNoise(shape, seed, cancellationToken); return noise.to(device); }
             using var input = Noise([1, 4, 8, 8], 511); using var context = Noise([1, 3, 768], 512);
             using var target = Noise([1, 4, 8, 8], 513); using var time = tensor(new[] { 17.25f }, device: device);
-            using var adapters = new SdTrainableAdapterSet(model.Config, 2, 317, device, cancellationToken: cancellationToken, existing:existingFile, algorithm:algorithm);
+            using var adapters = new SdTrainableAdapterSet(model.Config, rank, 317, device, cancellationToken: cancellationToken, existing:existingFile, algorithm:algorithm);
             if(bypassMode&&adapters.Patches.Values.Any(p=>p is TrainableLohaPatch))
                 throw new NotSupportedException("Source trainable LoHa has no bypass; use ordinary training for these targets.");
             var leaves = adapters.Patches.SelectMany(p => p.Value.Parameters.Select((v, i) => (Name: p.Key + "/" + i, Value: v,
-                IsAlpha: p.Value is TrainableLoraPatch l && ReferenceEquals(v, l.AlphaParameter) || p.Value is TrainableLohaPatch h && ReferenceEquals(v,h.NamedParameters["alpha"]),
-                ExpectsNullGradient: p.Value is TrainableLohaPatch loha && ReferenceEquals(v,loha.NamedParameters["alpha"])))).ToArray();
+                IsAlpha: p.Value is TrainableLoraPatch l && ReferenceEquals(v, l.AlphaParameter) || p.Value is TrainableLohaPatch h && ReferenceEquals(v,h.NamedParameters["alpha"]) || p.Value is TrainableLokrPatch k && ReferenceEquals(v,k.NamedParameters["alpha"]),
+                ExpectsNullGradient: p.Value is TrainableLohaPatch loha && ReferenceEquals(v,loha.NamedParameters["alpha"]) || p.Value is TrainableLokrPatch lokr && lokr.NamedParameters.ContainsKey("lokr_w1") && lokr.NamedParameters.ContainsKey("lokr_w2") && ReferenceEquals(v,lokr.NamedParameters["alpha"])))).ToArray();
             var initialHashes = leaves.ToDictionary(p => p.Name, p => Hash(p.Value));
             using var baseline = model.Forward(input, time, context, cancellationToken); string baseHash = Hash(baseline);
             using var optimizer = new LoraTrainingOptimizer(adapters.Patches.Values, "SGD", .01);
@@ -71,7 +73,7 @@ internal static class SdAllAdapterDiagnostic
                     using var gradient = leaf.Value.grad;
                     if (leaf.ExpectsNullGradient)
                     {
-                        if (gradient is not null) throw new InvalidOperationException("Frozen LoHa alpha unexpectedly received a gradient.");
+                        if (gradient is not null) throw new InvalidOperationException("Source-inactive adapter alpha unexpectedly received a gradient.");
                         nullSourceGradients++; continue;
                     }
                     if (gradient is null) throw new InvalidOperationException("Missing adapter gradient: " + leaf.Name);
@@ -87,7 +89,7 @@ internal static class SdAllAdapterDiagnostic
             int changed = leaves.Count(p => Hash(p.Value) != initialHashes[p.Name]);
             if (changed == 0) throw new InvalidOperationException("No adapter parameter changed.");
             object? inMemoryReload = null;
-            if (bypassMode || existingFile is not null || algorithm == "LoHa")
+            if (bypassMode || existingFile is not null || algorithm is "LoHa" or "LoKr")
             {
                 using var trained = model.ForwardForTraining(input,time,context,adapters.Patches,4L*1024*1024*1024,cancellationToken,bypassMode);
                 using var snapshot = LoraTrainingState.Capture(adapters.Patches,ScalarType.Float32,cancellationToken:cancellationToken);
@@ -116,6 +118,8 @@ internal static class SdAllAdapterDiagnostic
                     }
                     else if(patch is TrainableLohaPatch loha)
                         foreach(var (key,value) in loha.NamedParameters)parameterHashes.Add(prefix+"."+key,Hash(value));
+                    else if(patch is TrainableLokrPatch lokr)
+                        foreach(var (key,value) in lokr.NamedParameters)parameterHashes.Add(prefix+"."+key,Hash(value));
                 }
                 string trainedPrediction;
                 using(var noGrad=no_grad())
@@ -136,7 +140,7 @@ internal static class SdAllAdapterDiagnostic
             string json = JsonSerializer.Serialize(new
             {
                 status = "ok", familyQualified = false, trainingNodeQualified = false, checkpoint = Path.GetFileName(checkpoint), modelSha256,
-                checkpointBytes = file.FileSizeBytes, backend = requested, dtype = "Float32", tf32Allowed = false, seed = 317, rank = 2,
+                checkpointBytes = file.FileSizeBytes, backend = requested, dtype = "Float32", tf32Allowed = false, seed = 317, rank,
                 algorithm, optimizer = "SGD", learningRate = .01, targetCount = adapters.Patches.Count, parameterCount = leaves.Length,
                 alphaParameters = leaves.Count(p => p.IsAlpha), adapterParameterBytes = adapters.ParameterBytes, changedParameterCount = changed,
                 adapters.InitialCpuRandomStateSha256, adapters.InitialDeviceRandomStateSha256, steps, baseUnchanged = true, export, bypassMode, inMemoryReload,
@@ -144,7 +148,7 @@ internal static class SdAllAdapterDiagnostic
                     ignoredKeys=adapters.IgnoredExistingKeys.Count, rules="Frozen weight factory only: norm/bias reset and module.weight.alpha lookup. Filename step counter is tested separately, not used by this diagnostic." },
                 inputRecipe = new { shape = new[] { 1, 4, 8, 8 }, inputSeed = 511, contextShape = new[] { 1, 3, 768 }, contextSeed = 512, targetSeed = 513, timestep = 17.25 },
                 elapsedSeconds = watch.Elapsed.TotalSeconds,
-                scope = "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa alpha has no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
+                scope = "Real SD1.5 all-target selected adapter/BiasDiff gradients with synthetic miniature raw-prediction inputs. LoHa and direct LoKr alpha have no source gradient. Bypass mode and optional export are reported separately. No image-dataset, complete node, pretrained source-gradient or platform qualification."
             }, new JsonSerializerOptions { WriteIndented = true });
             using var stream = new FileStream(report, FileMode.CreateNew, FileAccess.Write, FileShare.None); using var writer = new StreamWriter(stream); writer.Write(json);
             output.WriteLine(json); return 0;

@@ -211,3 +211,13 @@ LoHa resume selection and parameter creation adapt `_create_weight_adapter` and
 in `comfy/weight_adapter/loha.py` from the same frozen GPLv3-or-later sources.
 `labs/lora-training-source/loha_resume.py` collects the independent factory values
 and RNG references; see [resume scope](docs/LOHA_RESUME.md).
+
+`TrainableLokrPatch`, the SD LoKr factory, `LokrMath` and LoKr file/snapshot
+handling adapt `LokrDiff`, `LoKrAdapter.load/calculate_weight/create_train` and
+`factorization` from `comfy/weight_adapter/lokr.py` and `base.py`, plus the
+provider ordering in `comfy/lora.py`, frozen at
+`1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a` (ComfyUI contributors, GPLv3-or-later).
+The separate collectors `lokr.py`, `lokr_factory.py` and `lokr_inference.py` under
+`labs/lora-training-source` execute those source definitions to produce static
+fixtures. Native ownership and explicit error propagation are C# adaptations;
+see [training](docs/LOKR_TRAINING.md) and [inference scope](docs/LOKR_INFERENCE.md).
