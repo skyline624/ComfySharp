@@ -108,6 +108,8 @@ public sealed class UnetWeightSet : IDisposable
                 }
                 else if (patch is TrainableLohaPatch)
                     throw new NotSupportedException("The frozen trainable LohaDiff does not implement bypass execution.");
+                else if (patch is TrainableLokrPatch)
+                    throw new NotSupportedException("LoKr training bypass is not ported yet; weight reconstruction cannot substitute for it.");
                 else regular.Add(name, patch);
             }
             next = regular.Count == 0 ? bank.Retain() : bank.WithTrainingLora(regular, maxPatchedWeightBytes, cancellationToken);

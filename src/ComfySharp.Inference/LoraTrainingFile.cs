@@ -56,6 +56,7 @@ public static class LoraTrainingFile
                     TrainableLoraPatch lora=>checked((lora.Up.numel()+lora.Down.numel())*4+(lora.AlphaParameter is null?8:4)),
                     TrainableDifferencePatch diff=>checked(diff.Difference.numel()*4),
                     TrainableLohaPatch loha=>checked(loha.Parameters.Sum(p=>p.numel())*4),
+                    TrainableLokrPatch lokr=>checked(lokr.Parameters.Sum(p=>p.numel())*4),
                     _=>throw new NotSupportedException("Unknown trainable adapter kind.")
                 }));
                 if (bytes > maxFactorBytes) throw new NotSupportedException("LoRA export snapshots exceed the configured factor allowance.");
@@ -78,6 +79,9 @@ public static class LoraTrainingFile
                 }
                 else if(patch is TrainableLohaPatch loha)
                     foreach(var (key,value) in loha.NamedParameters)
+                        tensors.Add(prefix+"."+key,value.detach().to(CPU,copy:true).contiguous());
+                else if(patch is TrainableLokrPatch lokr)
+                    foreach(var (key,value) in lokr.NamedParameters)
                         tensors.Add(prefix+"."+key,value.detach().to(CPU,copy:true).contiguous());
             }
             var header = new Dictionary<string, object>(StringComparer.Ordinal); long offset = 0;

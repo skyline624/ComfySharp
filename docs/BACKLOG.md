@@ -1,5 +1,10 @@
 # Backlog de migration
 
+Lot 9 : les [fondations LoKr](LOKR_TRAINING.md) ajoutent les facteurs directs,
+décomposés et Tucker, l'initialisation de toutes les cibles SD et la sauvegarde.
+52 tests passent. Suite : chargement LoKr d'inférence, reprise et bypass, puis
+parcours complet sur les poids partagés ; OFT et le nœud public restent ouverts.
+
 Lot 9 : [LossGraphNode](LOSS_GRAPH.md) affiche les pertes via le Host et reçoit
 les métadonnées V3 séparément des arguments. Les 11 cas du graphe et trois cas
 de contexte caché passent ; la chaîne d'entraînement publique et la qualification

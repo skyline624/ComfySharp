@@ -363,7 +363,137 @@
   "familyQualified": false,
   "platformsQualified": false,
   "ci": {
-    "status": "not-yet-started"
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34730514656",
+    "commit": "3c480a29cf257ac6ccf3bfd6e9a62cd08439adfe",
+    "status": "completed",
+    "conclusion": "success",
+    "reportSha256": "2325cd5a729dd9b61856c6b5f9d25a72ea348ff516c1d8d9becaba5afdcec3cf",
+    "cpu": {
+      "Name": "AMD EPYC 7763 64-Core Processor                ",
+      "Manufacturer": "AuthenticAMD"
+    },
+    "profiles": {
+      "auto": {
+        "training": {
+          "exitCode": 0,
+          "seconds": 5.458690200000035,
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "ordinary": {
+          "exitCode": 0,
+          "seconds": 45.08655820000001,
+          "total": 1038,
+          "passed": 1038,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "sameHostComparisons": [
+          {
+            "case": 0,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          },
+          {
+            "case": 1,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          }
+        ],
+        "nativeCapability": "AVX2",
+        "sourceCapability": "AVX2",
+        "sameBuildConfiguration": true
+      },
+      "aten-avx2": {
+        "training": {
+          "exitCode": 0,
+          "seconds": 5.103469000000018,
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "ordinary": {
+          "exitCode": 0,
+          "seconds": 44.68966899999998,
+          "total": 1038,
+          "passed": 1038,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "sameHostComparisons": [
+          {
+            "case": 0,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          },
+          {
+            "case": 1,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          }
+        ],
+        "nativeCapability": "AVX2",
+        "sourceCapability": "AVX2",
+        "sameBuildConfiguration": true
+      },
+      "math-avx2": {
+        "training": {
+          "exitCode": 0,
+          "seconds": 5.028189500000053,
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "ordinary": {
+          "exitCode": 0,
+          "seconds": 50.61619279999991,
+          "total": 1038,
+          "passed": 1038,
+          "failed": 0,
+          "notExecuted": 0,
+          "failures": []
+        },
+        "sameHostComparisons": [
+          {
+            "case": 0,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          },
+          {
+            "case": 1,
+            "captures": 141,
+            "exactCaptures": 141,
+            "baseWeightDifferences": [],
+            "outsideOriginalTolerance": []
+          }
+        ],
+        "nativeCapability": "AVX2",
+        "sourceCapability": "AVX2",
+        "sameBuildConfiguration": true
+      }
+    },
+    "intelAvx512Reproduced": false,
+    "familyOrPlatformQualified": false,
+    "note": "The runner was AMD EPYC7763. Success here does not establish the cause of the earlier Intel runner failures."
   },
   "remaining": [
     "Same controls on CI hardware, especially the observed Intel AVX512 runner",

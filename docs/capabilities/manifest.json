@@ -34131,9 +34131,9 @@
       "kind": "weight-adapter",
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/weight_adapter/loha.py#L1",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "frozen-float32-training-and-inference-profile",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34143,7 +34143,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../LOHA_TRAINING.md", "../LOHA_INFERENCE.md", "../LOHA_RESUME.md", "../qualification/loha-resume.json"],
       "scenario": "weight-adapter:loha:reference-workflow"
     },
     {
@@ -34152,9 +34152,9 @@
       "kind": "weight-adapter",
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/weight_adapter/lokr.py#L1",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "frozen-float32-training-foundations",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34164,7 +34164,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../LOKR_TRAINING.md", "../qualification/lokr-training.json"],
       "scenario": "weight-adapter:lokr:reference-workflow"
     },
     {
@@ -34173,9 +34173,9 @@
       "kind": "weight-adapter",
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/weight_adapter/lora.py#L1",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "frozen-float32-training-and-inference-profile",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34185,7 +34185,7 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../LORA_NODES.md", "../LORA_TRAINING.md", "../LORA_RESUME.md", "../qualification/lora-training.json"],
       "scenario": "weight-adapter:lora:reference-workflow"
     },
     {

@@ -22,6 +22,8 @@
     <EmbeddedResource Include="Fixtures/lora-aliases.reference.json" />
     <EmbeddedResource Include="Fixtures/lora-training.reference.json" />
     <EmbeddedResource Include="Fixtures/loha-training.reference.json" />
+    <EmbeddedResource Include="Fixtures/lokr-training.reference.json" />
+    <EmbeddedResource Include="Fixtures/lokr-factory.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/loha-inference.reference.json" />
     <EmbeddedResource Include="Fixtures/loha-resume.reference.json.gz" />
     <EmbeddedResource Include="Fixtures/loha-factory.reference.json.gz" />

@@ -6,8 +6,8 @@ using static TorchSharp.torch;
 
 namespace ComfySharp.Inference;
 
-/// <summary>Owns LoRA/LoHa and BiasDiff targets in the frozen plain SD module traversal order.
-/// Fresh/resumed Float32 LoRA/LoHa; other resume algorithms remain separate capabilities.</summary>
+/// <summary>Owns LoRA/LoHa/LoKr and BiasDiff targets in the frozen plain SD module traversal order.
+/// Fresh Float32 adapters and resumed LoRA/LoHa; LoKr resume remains a separate capability.</summary>
 public sealed class SdTrainableAdapterSet : IDisposable
 {
     private readonly Dictionary<string, TrainableWeightPatch> patches;
@@ -26,7 +26,7 @@ public sealed class SdTrainableAdapterSet : IDisposable
     {
         cancellationToken.ThrowIfCancellationRequested(); ArgumentNullException.ThrowIfNull(config);
         if (rank < 1 || rank > 1024) throw new ArgumentOutOfRangeException(nameof(rank));
-        if (algorithm is not ("LoRA" or "LoHa")) throw new NotSupportedException("This SD training adapter algorithm remains unported: " + algorithm);
+        if (algorithm is not ("LoRA" or "LoHa" or "LoKr")) throw new NotSupportedException("This SD training adapter algorithm remains unported: " + algorithm);
         if (maxParameterBytes < 0) throw new ArgumentOutOfRangeException(nameof(maxParameterBytes));
         var schema = UnetWeightSchema.Describe(config); var order = Order.Value;
         if (order.Length != schema.Count || !order.ToHashSet(StringComparer.Ordinal).SetEquals(schema.Keys))
@@ -42,6 +42,11 @@ public sealed class SdTrainableAdapterSet : IDisposable
             int pairs = algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true ? 2 : 1;
             long count = resume?.Targets.GetValueOrDefault(name) is { Loha:not null } loha ? loha.ParameterElements
                 : shape.Count == 1 ? shape[0] : checked(checked((shape[0] + shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b))) * actualRank * pairs) + 1);
+            if(shape.Count>1&&algorithm=="LoKr"&&resume?.Targets.ContainsKey(name)!=true)
+            {
+                var (ol,ok)=TrainableLokrPatch.Factorize(shape[0],rank);var(im,inn)=TrainableLokrPatch.Factorize(shape[1],rank);
+                count=checked(ol*im+ok*inn*shape.Skip(2).Aggregate(1L,(a,b)=>checked(a*b))+1);
+            }
             bytes = checked(bytes + checked(count * sizeof(float)));
         }
         if (bytes > maxParameterBytes) throw new NotSupportedException("Adapter leaves exceed the configured allowance; temporary tensors and optimizer state are additional.");
@@ -61,6 +66,15 @@ public sealed class SdTrainableAdapterSet : IDisposable
                 else
                 {
                     long columns = shape.Skip(1).Aggregate(1L, (a, b) => checked(a * b));
+                    if(algorithm=="LoKr"&&resume?.Targets.ContainsKey(name)!=true)
+                    {
+                        var(ol,ok)=TrainableLokrPatch.Factorize(shape[0],rank);var(im,inn)=TrainableLokrPatch.Factorize(shape[1],rank);
+                        var first=zeros([ol,im],device:device);
+                        var second=empty(new[]{ok,inn}.Concat(shape.Skip(2)).ToArray(),device:device);
+                        Kaiming(second,inn*shape.Skip(2).Aggregate(1L,(a,b)=>checked(a*b)),weightGenerator);
+                        patches.Add(name,new TrainableLokrPatch(first,second));
+                        continue; // Fresh LokrDiff has no random Linear constructors and ignores alpha in both direct sides.
+                    }
                     if (algorithm == "LoHa" && resume?.Targets.ContainsKey(name) != true)
                     {
                         // In source normal_(tensor, 0.1), 0.1 is the mean; std remains 1.

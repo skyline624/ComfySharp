@@ -71,3 +71,13 @@ Ce résultat local ne reproduit pas l'échec observé sur le Xeon de la CI. Le
 contrôle initial avait échoué avec un ancien bridge local sans exports
 d'identité ; sa recompilation depuis le code actuel a permis la collecte.
 Aucune bibliothèque libtorch ni assertion du produit n'a été changée.
+
+## Résultat CI
+
+La [campagne 34730514656](https://github.com/skyline624/ComfySharp/actions/runs/34730514656)
+termine avec succès au commit `3c480a2`, sur AMD EPYC 7763. Chaque profil passe
+les trois tests d'entraînement et 1 038 tests ordinaires, avec les 282 captures
+source exactement reproduites. Les builds et le mode natif AVX2 correspondent.
+Le collecteur publié, incluant ses gardes d'inventaire, est ainsi exécuté en CI.
+Ce runner n'est pas le Xeon du relevé en échec : la cause Intel et les écarts
+Linux/CLIP restent ouverts.

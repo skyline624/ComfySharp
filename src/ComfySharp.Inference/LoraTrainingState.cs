@@ -65,6 +65,9 @@ public sealed class LoraTrainingState : IDisposable
                     case TrainableLohaPatch loha when !bias:
                         foreach (var (key, value) in loha.NamedParameters) Add(prefix + "." + key, value, 0, value.device);
                         break;
+                    case TrainableLokrPatch lokr when !bias:
+                        foreach (var (key, value) in lokr.NamedParameters) Add(prefix + "." + key, value, 0, value.device);
+                        break;
                     default: throw new NotSupportedException("This adapter target is not a supported trainable weight or additive difference.");
                 }
             }

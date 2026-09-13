@@ -1,0 +1,93 @@
+{
+  "scope": "LoKr Float32 training reconstruction, complete reduced SD factory and factor snapshots; not full LoKr inference or workflow qualification",
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/lokr.py": "b4763cc32215a47e4d906cfa6cbad9cf893f6a1329ada2225fda81fd99fcfeb4"
+  },
+  "primitive": {
+    "sha256": "46856bedcf23b203e3ac1344e700f164cd7ef4692d5aaa1ba226d54f0c7c6e75",
+    "successfulCases": 36,
+    "sourceErrorCases": 4,
+    "updates": 72,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05
+  },
+  "factory": {
+    "compressedSha256": "ab6d955a8c35e59d2c47ba2aab2768799e75861482dabf316047d590588bfa5a",
+    "uncompressedSha256": "216fe9c36089b5e474fec5200a64cc35f40e9a0f2de6b1e3ea7545356349f2b9",
+    "compressedBytes": 10570516,
+    "uncompressedBytes": 15339810,
+    "factorizations": 72,
+    "cases": [
+      {
+        "linear": false,
+        "rank": 2,
+        "seed": 317,
+        "parameterCount": 1250,
+        "parameterBytes": 8624280,
+        "randomStateSha256": "7f766ddb7accd90e6dfbfa207defb2257eb1f07271d50f43ad5b9af167761fdd"
+      },
+      {
+        "linear": false,
+        "rank": 7,
+        "seed": 317,
+        "parameterCount": 1250,
+        "parameterBytes": 2269368,
+        "randomStateSha256": "da23778d86df92bd40416108014f5766e286bfcfd12ae49f8a0c4debf14b3d38"
+      },
+      {
+        "linear": true,
+        "rank": 2,
+        "seed": 317,
+        "parameterCount": 1250,
+        "parameterBytes": 8624280,
+        "randomStateSha256": "7f766ddb7accd90e6dfbfa207defb2257eb1f07271d50f43ad5b9af167761fdd"
+      },
+      {
+        "linear": true,
+        "rank": 7,
+        "seed": 317,
+        "parameterCount": 1250,
+        "parameterBytes": 2269368,
+        "randomStateSha256": "da23778d86df92bd40416108014f5766e286bfcfd12ae49f8a0c4debf14b3d38"
+      }
+    ],
+    "encodingEquivalence": "All 5000 original source JSON parameter records equal packed Float32 bytes; shapes, hashes and RNG unchanged."
+  },
+  "localTests": {
+    "lokr": {
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ordinary": {
+      "passed": 1090,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ordinaryFilter": "FullyQualifiedName!~ClipStockReferenceTests"
+  },
+  "build": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "registeredNodeCount": 51,
+  "modelsCopiedOrDownloaded": false,
+  "newPretrainedAdapterFiles": 0,
+  "realWorkflow": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "ci": {
+    "status": "not-yet-evaluated"
+  },
+  "remaining": [
+    "LoKr inference loader and DoRA",
+    "LoKr resume",
+    "Bypass operators and native training integration",
+    "Other training dtypes",
+    "Full TrainLoraNode",
+    "Pretrained model workflow and required platform qualification"
+  ]
+}

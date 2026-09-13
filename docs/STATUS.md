@@ -1,5 +1,17 @@
 # État du port — 0.1.0-dev
 
+Les [fondations LoKr](LOKR_TRAINING.md) couvrent la reconstruction, les gradients,
+les quatre optimisateurs, la fabrique SD et la sauvegarde des facteurs.
+**1 090 tests ordinaires passent localement**, dont 52 nouveaux tests LoKr.
+Les quatre fabriques source SD1/SD2 aux rangs 2 et 7 vérifient les 686 cibles,
+1 250 paramètres et états RNG. Chargement d'inférence, reprise LoKr, bypass,
+nœud d'entraînement public et qualification avec de vrais modèles restent ouverts.
+
+Le [diagnostic Windows 34730514656](https://github.com/skyline624/ComfySharp/actions/runs/34730514656)
+réussit sur AMD EPYC 7763 : chacun des trois profils passe 1 038 tests ordinaires
+et reproduit exactement 282 captures d'entraînement source. Le mode natif et le
+build correspondent. Cela ne reproduit pas encore le cas Intel AVX-512 en échec.
+
 La [CI du graphe des pertes 34729911360](https://github.com/skyline624/ComfySharp/actions/runs/34729911360)
 valide **11 tests du graphe, trois tests de contexte V3, 821 tests moteur et
 326 tests Host sur chacun des trois OS**. Windows passe la CI complète.
