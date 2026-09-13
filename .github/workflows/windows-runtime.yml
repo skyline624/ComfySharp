@@ -1,0 +1,62 @@
+name: Windows same-host native CPU controls
+on:
+  push:
+    paths:
+      - 'labs/windows-runtime/**'
+      - '.github/workflows/windows-runtime.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: comfy-org/ComfyUI
+          ref: 1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a
+          path: upstream-source
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9
+        with:
+          global-json-file: global.json
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12.10'
+      - name: Prepare separate pinned source laboratory
+        shell: pwsh
+        run: |
+          python -m venv "$env:RUNNER_TEMP/runtime-source"
+          if ($LASTEXITCODE) { throw 'Laboratory creation failed.' }
+          & "$env:RUNNER_TEMP/runtime-source/Scripts/python.exe" -I -m pip --isolated --disable-pip-version-check install --no-cache-dir --require-hashes --only-binary=:all: -r labs/clip-source/requirements-win-x64.txt
+          if ($LASTEXITCODE) { throw 'Pinned laboratory restore failed.' }
+      - name: Build identity bridge against matching CPU SDK
+        shell: pwsh
+        run: |
+          $vsRoot = & "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          Import-Module (Join-Path $vsRoot 'Common7/Tools/Microsoft.VisualStudio.DevShell.dll')
+          Enter-VsDevShell -VsInstallPath $vsRoot -SkipAutomaticLocation -DevCmdArguments '-arch=x64 -host_arch=x64'
+          $sdk = Join-Path $env:RUNNER_TEMP 'runtime-source/Lib/site-packages/torch'
+          $native = Join-Path $env:RUNNER_TEMP 'runtime-native'
+          New-Item -ItemType Directory -Path $native | Out-Null
+          & cl.exe /nologo /std:c++17 /EHsc /MD /O2 /LD /I"$sdk/include" /I"$sdk/include/torch/csrc/api/include" native/ComfySharp.NativeGenerator/generator.cpp /Fo"$native/generator.obj" /link /LIBPATH:"$sdk/lib" torch_cpu.lib c10.lib /OUT:"$native/ComfySharp.Native.dll" /IMPLIB:"$native/ComfySharp.Native.lib"
+          if ($LASTEXITCODE) { throw 'Native identity bridge build failed.' }
+      - run: dotnet restore tests/ComfySharp.Inference.Tests --locked-mode -p:NativeRuntime=win-x64
+      - run: dotnet build tests/ComfySharp.Inference.Tests --no-restore -c Release -p:NativeRuntime=win-x64 -p:NativeGeneratorBridge=${{ runner.temp }}/runtime-native/ComfySharp.Native.dll
+      - name: Compare fresh source and product processes on this runner
+        shell: pwsh
+        run: |
+          & "$env:RUNNER_TEMP/runtime-source/Scripts/python.exe" -I -B labs/windows-runtime/run.py --source upstream-source --output "$env:RUNNER_TEMP/windows-runtime-evidence"
+          if ($LASTEXITCODE) { throw 'Original test failures or diagnostic integrity errors remain; inspect evidence.' }
+      - name: Verify tracked sources unchanged
+        if: always()
+        run: git diff --exit-code HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: windows-runtime-evidence
+          path: ${{ runner.temp }}/windows-runtime-evidence
+          if-no-files-found: warn

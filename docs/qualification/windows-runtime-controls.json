@@ -1,0 +1,373 @@
+{
+  "scope": "Same-host reduced SD training and historical ordinary CPU tests; no pretrained model qualification",
+  "testedProductCommit": "5d5db34a9967a52e62300d0633aa25f7d23ee450",
+  "localReportSha256": "064bcc2b395faab973b116e07f51946cac45fd9fdd41a5753b5ea08370e583e8",
+  "executedCollectorSha256": "67e3bfb6942bf0b433987078b1e9984fb0dad3125a5f0aa62b013a022568b5e6",
+  "publishedCollectorSha256": "12d0ecc372ea41de1ba5bd47679e4f6c59745ac53cfc3b962736d0ccfce71442",
+  "collectorFollowup": "Added explicit test-count and Windows-target guards after the local process began. Local artifacts independently satisfy these guards; the published collector will be exercised in CI.",
+  "cpu": {
+    "Name": "AMD Eng Sample: 100-000000053-04_32/20_N       ",
+    "Manufacturer": "AuthenticAMD"
+  },
+  "profiles": {
+    "auto": {
+      "requestedControls": {},
+      "training": {
+        "exitCode": 0,
+        "seconds": 6.164592799999809,
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "ordinary": {
+        "exitCode": 0,
+        "seconds": 52.78121209999881,
+        "total": 1038,
+        "passed": 1038,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "sameHostComparisons": [
+        {
+          "case": 0,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        },
+        {
+          "case": 1,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        }
+      ],
+      "native": [
+        {
+          "case": 0,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        },
+        {
+          "case": 1,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        }
+      ]
+    },
+    "aten-avx2": {
+      "requestedControls": {
+        "ATEN_CPU_CAPABILITY": "avx2"
+      },
+      "training": {
+        "exitCode": 0,
+        "seconds": 5.910562700002629,
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "ordinary": {
+        "exitCode": 0,
+        "seconds": 54.859073999999964,
+        "total": 1038,
+        "passed": 1038,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "sameHostComparisons": [
+        {
+          "case": 0,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        },
+        {
+          "case": 1,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        }
+      ],
+      "native": [
+        {
+          "case": 0,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        },
+        {
+          "case": 1,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        }
+      ]
+    },
+    "math-avx2": {
+      "requestedControls": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+        "ONEDNN_MAX_CPU_ISA": "AVX2",
+        "DNNL_MAX_CPU_ISA": "AVX2"
+      },
+      "training": {
+        "exitCode": 0,
+        "seconds": 5.955422700000781,
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "ordinary": {
+        "exitCode": 0,
+        "seconds": 52.73232300000018,
+        "total": 1038,
+        "passed": 1038,
+        "failed": 0,
+        "notExecuted": 0,
+        "failures": []
+      },
+      "sameHostComparisons": [
+        {
+          "case": 0,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        },
+        {
+          "case": 1,
+          "captures": 141,
+          "exactCaptures": 141,
+          "baseWeightDifferences": [],
+          "outsideOriginalTolerance": []
+        }
+      ],
+      "native": [
+        {
+          "case": 0,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        },
+        {
+          "case": 1,
+          "actual": {
+            "cpuCapability": "AVX2",
+            "buildConfiguration": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 194234444\n  - Intel(R) oneAPI Math Kernel Library Version 2025.3-Product Build 20251007 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+            "libraries": [
+              {
+                "name": "ComfySharp.Native.dll",
+                "bytes": 25088,
+                "sha256": "7d5c95a78582368a1c6fa1c1fb5dadb0fea3e8ae895006015d9cf735cf0118b9"
+              },
+              {
+                "name": "LibTorchSharp.DLL",
+                "bytes": 1324984,
+                "sha256": "8552d2fd6d045a5a9fd2315300f6f6aac7770433beeb4a743e22d59d77ed1858"
+              },
+              {
+                "name": "c10.dll",
+                "bytes": 1081344,
+                "sha256": "a057ab00ec2edceec9198e87bd417843489f9bb4b937ff2cf22503e699383063"
+              },
+              {
+                "name": "libiomp5md.dll",
+                "bytes": 1614192,
+                "sha256": "d41a71c38f627a95748596820ab380135dcccc4ceecd6fe7d4e247d015bf55a4"
+              },
+              {
+                "name": "torch_cpu.DLL",
+                "bytes": 264955904,
+                "sha256": "c75772dea925c23ea45fbf39502d48d4e87350249e75050d43bea2c12fdd3a1b"
+              }
+            ]
+          },
+          "sourceCpuCapability": "AVX2",
+          "sameCpuCapability": true,
+          "sameBuildConfiguration": true
+        }
+      ]
+    }
+  },
+  "nativeBuildWarnings": 0,
+  "nativeBuildErrors": 0,
+  "modelsCopiedOrDownloaded": false,
+  "familyQualified": false,
+  "platformsQualified": false,
+  "ci": {
+    "status": "not-yet-started"
+  },
+  "remaining": [
+    "Same controls on CI hardware, especially the observed Intel AVX512 runner",
+    "Resolve Linux and stock CLIP numerical discrepancies",
+    "Explicit native/source profile qualification before selecting profiles or bundles"
+  ]
+}

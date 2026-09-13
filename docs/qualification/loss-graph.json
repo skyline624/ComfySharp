@@ -62,7 +62,143 @@
   "familyQualified": false,
   "platformsQualified": false,
   "ci": {
-    "status": "not-evaluated-for-this-change"
+    "commit": "5d5db34a9967a52e62300d0633aa25f7d23ee450",
+    "run": "https://github.com/skyline624/ComfySharp/actions/runs/34729911360",
+    "status": "completed",
+    "conclusion": "failure",
+    "windowsConclusion": "success",
+    "linuxConclusion": "failure",
+    "macosConclusion": "failure",
+    "results": {
+      "win-x64": {
+        "Core": {
+          "passed": 821,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "V3HiddenContextTests": {
+          "passed": 3,
+          "failed": 0,
+          "total": 3
+        },
+        "Host": {
+          "passed": 326,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "LossGraphTests": {
+          "passed": 11,
+          "failed": 0,
+          "total": 11
+        },
+        "Inference": {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "stock": {
+          "passed": 3,
+          "failed": 0,
+          "notExecuted": 0
+        }
+      },
+      "linux-x64": {
+        "Core": {
+          "passed": 821,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "V3HiddenContextTests": {
+          "passed": 3,
+          "failed": 0,
+          "total": 3
+        },
+        "Host": {
+          "passed": 326,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "LossGraphTests": {
+          "passed": 11,
+          "failed": 0,
+          "total": 11
+        },
+        "Inference": {
+          "passed": 1018,
+          "failed": 20,
+          "skipped": 0,
+          "failures": [
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"velocity-three-step\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-disabled\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"odd-rectangle\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"concatenateCompatible\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-concatenated\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"unequal-separate\")",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd15-reduced\", caseName: \"batch-distinct-time\")",
+            "ComfySharp.Inference.Tests.SdTrainingBatchTests.Dataset_batches_noise_sigmas_and_rng_states_match_frozen_source(caseIndex: 3)",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-present\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"near-one-null\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-2-3\", policy: \"separate\")",
+            "ComfySharp.Inference.Tests.SdLoraObjectiveTests.Denoised_latent_loss_and_gradients_match_frozen_training_sampler(caseIndex: 4)",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 1)",
+            "ComfySharp.Inference.Tests.SdUnetReferenceTests.FullGraphMatchesSamePlatformFrozenSource(modelId: \"sd2-reduced\", caseName: \"batch-shared-time-odd\")",
+            "ComfySharp.Inference.Tests.SdEulerReferenceTests.TrajectoryMatchesItsSamePlatformFrozenSource(identifier: \"three-step-batch\")",
+            "ComfySharp.Inference.Tests.SdAdapterInitializationTests.All_targets_initialization_rng_gradients_and_updates_follow_frozen_source(caseIndex: 0)",
+            "ComfySharp.Inference.Tests.Sd15PipelineReferenceTests.PipelineMatchesItsSamePlatformFrozenSource(identifier: \"maximum-start\")",
+            "ComfySharp.Inference.Tests.SdDenoiserReferenceTests.PolicyMatchesItsSamePlatformSource(identifier: \"guidance-3-3\", policy: \"separate\")"
+          ]
+        },
+        "stock": {
+          "passed": 1,
+          "failed": 2,
+          "notExecuted": 0
+        }
+      },
+      "osx-arm64": {
+        "Core": {
+          "passed": 821,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "V3HiddenContextTests": {
+          "passed": 3,
+          "failed": 0,
+          "total": 3
+        },
+        "Host": {
+          "passed": 326,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "LossGraphTests": {
+          "passed": 11,
+          "failed": 0,
+          "total": 11
+        },
+        "Inference": {
+          "passed": 1038,
+          "failed": 0,
+          "skipped": 0,
+          "failures": []
+        },
+        "stock": {
+          "passed": 1,
+          "failed": 2,
+          "notExecuted": 0
+        }
+      }
+    },
+    "assertionsRelaxed": false,
+    "familyOrPlatformQualified": false
   },
   "remaining": [
     "Full production TrainLoraNode workflow",

@@ -1,5 +1,13 @@
 # État du port — 0.1.0-dev
 
+La [CI du graphe des pertes 34729911360](https://github.com/skyline624/ComfySharp/actions/runs/34729911360)
+valide **11 tests du graphe, trois tests de contexte V3, 821 tests moteur et
+326 tests Host sur chacun des trois OS**. Windows passe la CI complète.
+Linux conserve 20 échecs ordinaires et deux échecs CLIP ; macOS passe les
+1 038 tests ordinaires mais échoue aussi sur les deux comparaisons CLIP.
+Les [contrôles CPU Windows](qualification/windows-runtime-controls.md) étudient
+la variation entre runners avec les mêmes bibliothèques ; les seuils sont inchangés.
+
 Le [graphe des pertes](LOSS_GRAPH.md) est raccordé au Host avec les métadonnées
 cachées V3. **51 types sont enregistrés**. Les contrôles locaux comptent
 821 tests moteur, 1 038 tests ordinaires d'inférence et 325 tests Host réussis.
