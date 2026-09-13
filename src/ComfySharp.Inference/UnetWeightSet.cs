@@ -118,6 +118,16 @@ public sealed class UnetWeightSet : IDisposable
                     // Kernel/module details are checked by the actual operator at execution.
                     factors.Add(name,retained.Retain());
                 }
+                else if (patch is TrainableOftPatch oft)
+                {
+                    using var retained = oft.Retain();
+                    var blocks = retained.NamedParameters["oft_blocks"];
+                    if (weight.dim() < 2 || !name.EndsWith(".weight", StringComparison.Ordinal) ||
+                        weight.shape[0] != checked(blocks.shape[0] * blocks.shape[1]))
+                        throw new ArgumentException("Trainable OFT bypass target channels differ: " + name);
+                    InferenceDevice.RequireSame(Device, blocks, name);
+                    factors.Add(name, retained.Retain());
+                }
                 else regular.Add(name, patch);
             }
             next = regular.Count == 0 ? bank.Retain() : bank.WithTrainingLora(regular, maxPatchedWeightBytes, cancellationToken);

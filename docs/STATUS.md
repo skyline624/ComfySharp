@@ -1,5 +1,21 @@
 # État du port — 0.1.0-dev
 
+Les [fondations OFT](OFT_TRAINING.md) ajoutent la rotation des poids et le bypass
+d'entraînement, leurs gradients et l'export. Les 192 cas numériques amont sont
+comparés en C# et un diagnostic sur le SD1.5 partagé entraîne deux cibles dans
+les deux modes, sans nouveau fichier de modèle. Les prédictions sont retrouvées
+exactement après reconstruction des feuilles en mémoire ; cela ne valide pas
+encore le chargeur d'inférence ni la fabrique de reprise OFT.
+La compilation complète ne produit aucun avertissement ni erreur ; les 1 847
+tests ordinaires d'inférence passent localement, dont 197 nouveaux tests OFT,
+sans échec ni test ignoré. Le groupe CLIP stock reste testé séparément en CI.
+
+La CI 34745828612 du jalon LoRA/LoHa est terminée : Windows réussit ; les
+695 tests ciblés et les 61 tests du groupe SaveLoRA passent sur les trois OS.
+Les 1 650 tests ordinaires passent sur Windows et macOS ; Linux en conserve
+22 en échec. Les écarts CLIP empêchent également la réussite globale sur macOS.
+Les [preuves détaillées](qualification/lora-loha-bypass-loading.json) sont conservées.
+
 Le [chargement LoRA/LoHa en bypass](LORA_LOHA_BYPASS_LOADING.md) couvre désormais
 les chaînes avec facteur intermédiaire, les convolutions 1D/2D/3D et l'addition
 avec diffusion des dimensions. 96 cas source et deux nouveaux tests du nœud

@@ -6,7 +6,7 @@ using static TorchSharp.torch;
 
 if(args.Length>0&&args[0]=="runtime-info")return ComfySharp.RuntimeProbe.RuntimeIdentityDiagnostic.Run(args[1..],Console.Out);
 
-if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline" or "sd15-generate" or "sd-lora-train" or "sd-all-adapter-train" or "sd-lora-bypass")
+if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline" or "sd15-generate" or "sd-lora-train" or "sd-all-adapter-train" or "sd-lora-bypass" or "sd-oft-train")
 {
     using var cancellation = new CancellationTokenSource();
     ConsoleCancelEventHandler cancel = (_, eventArgs) => { eventArgs.Cancel = true; cancellation.Cancel(); };
@@ -21,6 +21,7 @@ if (args.Length > 0 && args[0] is "clip" or "sd" or "sd15-pipeline" or "sd15-gen
             "sd-lora-train" => ComfySharp.RuntimeProbe.SdLoraTrainingDiagnostic.Run(args[1..], Console.Out, Console.Error, cancellation.Token),
             "sd-all-adapter-train" => ComfySharp.RuntimeProbe.SdAllAdapterDiagnostic.Run(args[1..], Console.Out, Console.Error, cancellation.Token),
             "sd-lora-bypass" => ComfySharp.RuntimeProbe.SdLoraBypassDiagnostic.Run(args[1..], Console.Out, Console.Error, cancellation.Token),
+            "sd-oft-train" => ComfySharp.RuntimeProbe.SdOftTrainingDiagnostic.Run(args[1..], Console.Out, Console.Error, cancellation.Token),
             _ => ComfySharp.RuntimeProbe.Sd15PipelineDiagnostic.Run(args[1..], Console.Out, cancellation.Token)
         };
     }

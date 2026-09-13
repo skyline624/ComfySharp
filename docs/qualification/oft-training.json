@@ -1,0 +1,125 @@
+{
+  "implementation": "partial",
+  "backendCommit": "1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a",
+  "sourceHashes": {
+    "comfy/weight_adapter/base.py": "484f0d83a96e700f80c793e4bcc6a897d633233e51a59191d91da5e59da345c7",
+    "comfy/weight_adapter/oft.py": "88be3c32f610478bc6900a10009eaadf6fe2af973ed4861731e4f21e1afacf89"
+  },
+  "fixture": {
+    "path": "tests/ComfySharp.Inference.Tests/Fixtures/oft-training.reference.json.gz",
+    "compressedSha256": "8f2b11934ca8da8a7c5fa8371af28e19f2baf4165c8dd8e1b43a5d9f5b205eed",
+    "rawSha256": "655c6c2a200c407252dde2362db5eca93131e61bb4a9b047f8b1d7d65634e74a",
+    "compressedBytes": 340240,
+    "rawBytes": 3101701,
+    "cases": 192,
+    "absoluteTolerance": 3e-05,
+    "relativeTolerance": 3e-05,
+    "scope": "Frozen OFTDiff.__call__, h and g, 1D/2D/3D convolution and rank-three linear layouts, Float32 leaves, Float32/Float16/BFloat16 weights and Float32 bypass. Negative/zero/clamped/unclamped captured constraints, scalar/channel rescale, non-contiguous inputs, all gradients and SGD update. No inference loader, resume factory, complete model workflow or hardware qualification."
+  },
+  "localTests": {
+    "status": "passed",
+    "buildWarnings": 0,
+    "buildErrors": 0,
+    "ordinaryTotal": 1847,
+    "ordinaryPassed": 1847,
+    "ordinaryFailed": 0,
+    "ordinarySkipped": 0,
+    "filter": "FullyQualifiedName!~ClipStockReferenceTests",
+    "oftTotal": 197,
+    "oftPassed": 197,
+    "trxSha256": "ea3f1ddbe4fa0a7dc07baf2c4deff472e65bd2860e302d66d766b7176429f86e",
+    "catalogue": {
+      "rows": 1171,
+      "localNodeDeclarations": 664,
+      "registeredNodes": 51,
+      "errors": 0,
+      "catalogueComplete": false,
+      "releaseReady": false
+    }
+  },
+  "realWeightObservation": {
+    "status": "ok",
+    "familyQualified": false,
+    "trainingNodeQualified": false,
+    "inferenceLoaderQualified": false,
+    "checkpoint": "v1-5-pruned-emaonly.safetensors",
+    "modelSha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+    "backend": "cpu",
+    "dtype": "Float32",
+    "threads": 16,
+    "algorithm": "OFT",
+    "scope": "Two existing SD1.5 targets, two SGD steps in each training mode, in-memory leaf reconstruction; no image generation or full factory/resume qualification.",
+    "baselinePredictionSha256": "30209e6388e0822283f6ac5e38fe3d76de9bea561479629f7bc2529e4f1e3f75",
+    "modes": [
+      {
+        "bypassMode": false,
+        "targets": [
+          "out.2.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight"
+        ],
+        "steps": [
+          {
+            "step": 1,
+            "loss": 1.1856256,
+            "gradientAbsoluteSums": {
+              "out.2.weight": 0.80440664,
+              "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight": 1.0467818
+            }
+          },
+          {
+            "step": 2,
+            "loss": 1.184864,
+            "gradientAbsoluteSums": {
+              "out.2.weight": 0.8071016,
+              "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight": 1.0443232
+            }
+          }
+        ],
+        "baseUnchanged": true,
+        "trainedPredictionSha256": "394dd753d348df3968c80fdfd2e32ffc446d0ef603019ccb42b4224b87e321fd",
+        "reconstructedTrainingPredictionExact": true,
+        "exportedAdapterFile": null
+      },
+      {
+        "bypassMode": true,
+        "targets": [
+          "out.2.weight",
+          "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight"
+        ],
+        "steps": [
+          {
+            "step": 1,
+            "loss": 1.1856257,
+            "gradientAbsoluteSums": {
+              "out.2.weight": 0.8038266,
+              "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight": 1.0467819
+            }
+          },
+          {
+            "step": 2,
+            "loss": 1.1848655,
+            "gradientAbsoluteSums": {
+              "out.2.weight": 0.80652404,
+              "input_blocks.1.1.transformer_blocks.0.attn1.to_q.weight": 1.0443294
+            }
+          }
+        ],
+        "baseUnchanged": true,
+        "trainedPredictionSha256": "a960ce8b939c51c8586cbef301f13d3e120c5876a28fe69a4c22297a7ac4341b",
+        "reconstructedTrainingPredictionExact": true,
+        "exportedAdapterFile": null
+      }
+    ],
+    "elapsedSeconds": 13.2612451
+  },
+  "remaining": [
+    "OFT inference loader and calculate_weight including source strength/DoRA/rescale differences",
+    "Fresh and resumed full SD training factory and provider order",
+    "Reduced-precision bypass and device transfers",
+    "Complete public TrainLoraNode and real-image workflow",
+    "Linux/CUDA and macOS/MPS qualification"
+  ],
+  "familyQualified": false,
+  "platformsQualified": [],
+  "releaseReady": false
+}

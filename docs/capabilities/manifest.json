@@ -34194,9 +34194,9 @@
       "kind": "weight-adapter",
       "scope": "local",
       "source": "https://github.com/comfy-org/ComfyUI/blob/1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a/comfy/weight_adapter/oft.py#L1",
-      "parametersStatus": "schema-review-required",
-      "implementation": "not-ported",
-      "unitTests": false,
+      "parametersStatus": "training-f32-leaves-weight-f32-f16-bf16-bypass-f32-partial",
+      "implementation": "partial",
+      "unitTests": true,
       "realWorkflow": false,
       "platforms": {
         "win-x64-cpu": false,
@@ -34206,7 +34206,8 @@
         "osx-arm64-cpu": false,
         "osx-arm64-mps": false
       },
-      "evidence": [],
+      "evidence": ["../OFT_TRAINING.md", "../qualification/oft-training.json"],
+      "limits": "OFTDiff weight and output rotations, gradients, captured constraint, rescale, snapshots and export. Source primitive fixtures and a two-target SD1.5 CPU training observation only. Fresh/resume factory, inference loading, reduced-precision bypass, full training workflows and all platform qualification remain open.",
       "scenario": "weight-adapter:oft:reference-workflow"
     },
     {

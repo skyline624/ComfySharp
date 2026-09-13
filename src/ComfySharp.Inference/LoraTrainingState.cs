@@ -68,6 +68,9 @@ public sealed class LoraTrainingState : IDisposable
                     case TrainableLokrPatch lokr when !bias:
                         foreach (var (key, value) in lokr.NamedParameters) Add(prefix + "." + key, value, 0, value.device);
                         break;
+                    case TrainableOftPatch oft when !bias:
+                        foreach (var (key, value) in oft.NamedParameters) Add(prefix + "." + key, value, 0, value.device);
+                        break;
                     default: throw new NotSupportedException("This adapter target is not a supported trainable weight or additive difference.");
                 }
             }

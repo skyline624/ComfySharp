@@ -252,3 +252,10 @@ the frozen `LoRAAdapter.h`, `LoHaAdapter.h` and bypass injection (same ComfyUI
 revision, contributors and GPLv3-or-later provenance). The separate collector
 `lora_loha_bypass_loading.py` omits only the one-time inefficiency warning while
 executing the actual arithmetic. See [scope](docs/LORA_LOHA_BYPASS_LOADING.md).
+
+`TrainableOftPatch` and its training bypass adapt `OFTDiff.__call__`, `h` and `g`
+from `comfy/weight_adapter/oft.py` at the same frozen ComfyUI revision
+`1d48d9cf7bcecb6022a87b3cb13e0fb435bf9b8a` (ComfyUI contributors, GPLv3-or-later).
+The laboratory collector `oft_training.py` executes those original definitions
+for synthetic reference outputs, gradients and updates. C# owns native resources,
+validation and persistence. See [partial training scope](docs/OFT_TRAINING.md).

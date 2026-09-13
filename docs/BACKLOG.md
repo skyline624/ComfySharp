@@ -1,5 +1,12 @@
 # Backlog de migration
 
+Lot 9 : les [primitives d'entraînement OFT](OFT_TRAINING.md) portent les rotations
+des poids et des sorties, leurs gradients, snapshots et exports. Le SD1.5 partagé
+est entraîné sur deux cibles dans les deux modes. Priorité suivante : fabrique
+OFT complète, reprise et chargement d'inférence avec les différences de calcul
+amont, puis chaîne publique `TrainLoraNode` et workflow sur images. Les tests
+réduits et ce diagnostic ne ferment aucune qualification de famille/plateforme.
+
 Lot 9 : la [validation des fichiers LoRA/LoHa en bypass](LORA_LOHA_BYPASS_LOADING.md)
 couvre les opérateurs et leur addition, avec 98 nouveaux tests. Priorité suivante :
 OFT et les options encore absentes de `TrainLoraNode`, puis le workflow public
